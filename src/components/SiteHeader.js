@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import TopNav from './components/TopNav';
+import React from 'react';
+import TopNav from './TopNav';
 
 
 class SiteHeader extends React.Component {
 
-  redner() {
+  render() {
 
     return (
       <header>
@@ -15,4 +15,4 @@ class SiteHeader extends React.Component {
   }
 }
 
-export default SideHeader;
+export default SiteHeader;

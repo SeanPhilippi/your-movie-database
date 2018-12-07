@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 class ListHeader extends React.Component {
 
@@ -6,7 +6,7 @@ class ListHeader extends React.Component {
 
     return (
       <header>
-        {listName} by {userName}
+        {/* {listName} by {userName} */}
       </header>
     )
   }

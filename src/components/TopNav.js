@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 class TopNav extends React.Component {
 
   render() {
 
     return (
-      
+      <nav>Top Nav</nav>
     )
   }
 }
