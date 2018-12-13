@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 // Connect to Mongo
 mongoose.connect(db)
-  .then(() => console.log('connect to MongoDB!'))
+  .then(() => console.log('connected to MongoDB!'))
   .catch(err => console.log(err));
 
 // Use routes

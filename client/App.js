@@ -9,6 +9,16 @@ import Footer from './components/Footer';
 // moviedb api key: db0fb828044fb9954101dd9eef659794
 
 class App extends Component {
+
+  state = {
+    results: [],
+    listItems: []
+  }
+
+  componentDidMount() {
+    fetch('/mov')
+  }
+
   render() {
     return (
       <div className="App">
