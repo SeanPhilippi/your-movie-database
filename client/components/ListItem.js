@@ -2,15 +2,17 @@ import React from 'react';
 
 class ListItem extends React.Component {
 
-  render() {
+  item =
 
-    return (
-      <div>
-        {/* <h1>{title}</h1>
+    render() {
+
+  return (
+    <div>
+      {/* <h1>{title}</h1>
         <span>{director}, {year}</span> */}
-      </div>
-    )
-  }
+    </div>
+  )
+}
 }
 
 export default ListItem;
