@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const movies = require('./routes/api/MovieRoutes');
 const app = express();
 // DB config
-const db = 'https://api.themoviedb.org/3/movie/550?api_key=db0fb828044fb9954101dd9eef659794';
+const db = 'http://www.omdbapi.com/?apikey=d5d74a24&';
+
 const port = 4300;
 
 app.use(bodyParser.json());

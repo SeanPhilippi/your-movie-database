@@ -6,7 +6,8 @@ const List = require('../../models/ListModel');
 // @desc    display movies?
 // @access  Public
 router.get('/movies/search/:query', (req, res) => {
-  res.send('you got a movie!');
+  // res.send('you got a movie!');
+
 })
 
 // @route   Post api/movies

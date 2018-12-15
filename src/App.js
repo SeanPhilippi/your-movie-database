@@ -5,6 +5,7 @@ import ListHeader from './components/ListHeader';
 import CommentColumn from './components/CommentColumn';
 import Footer from './components/Footer';
 import List from './components/List';
+import Search from './components/Search';
 
 // moviedb api key: db0fb828044fb9954101dd9eef659794
 
@@ -24,6 +25,7 @@ class App extends Component {
       <div className="App">
         <SiteHeader />
         <ListHeader />
+        <Search />
         <List />
         <CommentColumn />
         <Footer />
