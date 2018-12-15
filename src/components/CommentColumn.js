@@ -6,7 +6,7 @@ class CommentColumn extends React.Component {
 
     return (
       <div>
-        Comment Column
+        **Comment Column**
       </div>
     )
   }

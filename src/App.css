@@ -46,7 +46,7 @@
   overflow: hidden;
   transform-origin: 30% 50% 0px;
   padding-left: 20px;
-  background: white;
+  background: lightgrey;
   max-height: 100%;
 }
 .item .dragHandle {
@@ -66,7 +66,6 @@
   margin: 0;
 }
 .item .subtitle {
-  font-weight: bold;
 }
 
 ::-webkit-scrollbar {

@@ -1,5 +1,5 @@
 import React from 'react';
-import classnames from 'classnames';  //install npm i classnames?
+import classnames from 'classnames';
 import DraggableList from 'react-draggable-list'
 // import ListItem from './ListItem'; 
 // building class component within this file for ease of access
@@ -54,27 +54,13 @@ class ListItem extends React.Component<ListProps, ListState> {
         <div className="dragHandle" {...dragHandleProps} />
         <h2>{item.name}</h2>
         {item.subtitle &&
-          <div className="subtitle">This item has a subtitle visible while dragging</div>
+          <div className="subtitle">{item.director}, {item.year}</div>
         }
         <div>
-          year<br />
-          director<br />
-          country
+          background image
           {/* {year}<br />
           {director}<br />
           {country} */}
-        </div>
-        <div>
-          year<br />
-          director<br />
-          country
-          {/* {year}<br />
-          {director}<br />
-          {country} */}
-        </div>
-        <div>
-          State works and is retained during movement:
-          {' '}<input type="button" value={value} onClick={() => this._inc()} />
         </div>
       </div>
     )
@@ -92,14 +78,13 @@ export default class List extends React.Component<{}, ExampleState> {
   state = {
     useContainer: false,
     list: [
-      { name: 'Mercury' },
-      { name: 'Venus' },
-      { name: 'Earth', subtitle: true },
-      { name: 'Mars' },
-      { name: 'Jupiter' },
-      { name: 'Saturn', subtitle: true },
-      { name: 'Uranus', subtitle: true },
-      { name: 'Neptune' }
+      { name: '2001: A Space Odyssey', year: '1968', director: 'Stanley Kubrick', subtitle: true },
+      { name: 'Mulholland Drive', year: '2001', director: 'David Lynch', subtitle: true },
+      { name: 'Pickpocket', year: '1955', director: 'Robert Bresson', subtitle: true },
+      { name: 'Persona', year: '1966', director: 'Ingmar Bergman', subtitle: true },
+      { name: 'Solaris', year: '1972', director: 'Andrei Tarkovsky', subtitle: true },
+      { name: '2046', year: '2004', director: 'Wong Kar-Wai', subtitle: true },
+      { name: 'Three Colors: Blue', year: '1993', director: 'Krzysztof Kieslowski', subtitle: true },
     ]
   };
   // state = {
@@ -125,19 +110,6 @@ export default class List extends React.Component<{}, ExampleState> {
   //   ]
   // }
 
-  _togglePluto() {
-    const noPluto = this.state.list.filter(item => item.name !== 'Pluto');
-    if (noPluto.length !== this.state.list.length) {
-      this.setState({ list: noPluto });
-    } else {
-      this.setState({ list: this.state.list.concat([{ name: 'Pluto' }]) });
-    }
-  }
-
-  _toggleContainer() {
-    this.setState({ useContainer: !this.state.useContainer });
-  }
-
   _onListChange(newList: $ReadOnlyArray<Item>) {
     this.setState({ list: newList });
   }
@@ -148,25 +120,6 @@ export default class List extends React.Component<{}, ExampleState> {
     return (
 
       <div className="main">
-        <div className="intro">
-          <p>
-            This is a demonstration of the <a href="https://github.com/StreakYC/react-draggable-list">react-draggable-list</a> library.
-        </p>
-          <p>
-            Each item has a drag handle visible when the user hovers over them.
-            The items may have any height, and can each define their own height
-            to use while being dragged.
-        </p>
-          <p>
-            When the list is reordered, the page will
-            be scrolled if possible to keep the moved item visible and on the
-            same part of the screen.
-        </p>
-          <div>
-            <input type="button" value="Toggle Pluto" onClick={() => this._togglePluto()} />
-            <input type="button" value="Toggle Container" onClick={() => this._toggleContainer()} />
-          </div>
-        </div>
         <div
           className="list" ref={el => {
             if (el) this._container = el;
