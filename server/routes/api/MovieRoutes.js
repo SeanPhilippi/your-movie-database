@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Movie = require('../../models/MovieModel');
+const List = require('../../models/ListModel');
 
 // @route   Get api/movies
 // @desc    display movies?
@@ -30,7 +30,7 @@ router.delete('/movies/:user/list/:movieId', (req, res) => {
 // @desc    delete list
 // @access  Public
 router.delete('/movies/:user/list/:id', (req, res) => {
-  Movie.findByIdAndRemove(req.params.id).exec()
+  List.findByIdAndRemove(req.params.id).exec()
     .then(list => res.json(list))
     .catch(err => console.log(err));
 })

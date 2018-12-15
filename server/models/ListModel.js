@@ -1,22 +1,25 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-export default mongoose.model('List',
-  new mongoose.Schema({
-    list: {
-      name: {
-        type: String,
-        required: true
-      },
-      [{
-        // array of movie objects
-        title: {
-          type: String,
-          required: true
-        },
-        imdbURL: {
-          type: String,
-          required: true
-        }
-      }]
+const ListSchema = new Schema({
+  listName: {
+    type: String,
+    required: true
+  },
+  listId: {
+
+  },
+  movies: [{
+    // array of movie objects
+    title: {
+      type: String,
+      required: true
+    },
+    imdbURL: {
+      type: String,
+      required: true
     }
-  });
+  }]
+});
+
+module.exports = List = mongoose.model('List', ListSchema);
