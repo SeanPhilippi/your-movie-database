@@ -7,17 +7,26 @@ import Footer from './components/Footer';
 import List from './components/List';
 import Search from './components/Search';
 
-// moviedb api key: db0fb828044fb9954101dd9eef659794
-
 class App extends Component {
 
   state = {
     results: [],
-    listItems: []
+    list: []
   }
 
-  componentDidMount() {
-    fetch('/mov')
+  componentDidMount = () => {
+    fetch('/list')
+      .then(res => res.json())
+      .then(data => {
+        console.log('data', data);
+        this.setState({ list: data })
+      })
+      .catch(err => console.log(err));
+  }
+
+  handleAdd = () => {
+    this.setState({ results: [] });
+    // add functionality for adding another draggable item to draggableList
   }
 
   render() {
@@ -25,8 +34,8 @@ class App extends Component {
       <div className="App">
         <SiteHeader />
         <ListHeader />
-        <Search />
-        <List />
+        <Search add={this.handleAdd} />
+        <List add={this.handleAdd} list={this.state.list} />
         <CommentColumn />
         <Footer />
       </div>

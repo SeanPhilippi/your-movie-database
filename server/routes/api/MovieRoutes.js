@@ -10,6 +10,15 @@ router.get('/movies/search/:query', (req, res) => {
 
 })
 
+// @route   Get list
+// @desc    fetch user's existing list
+// @access  Public
+router.get('/list', (req, res) => {
+  List.find({}).then(data => {
+    res.json(data);
+  })
+});
+
 // @route   Post api/movies
 // @desc    save movie list to mlab
 // @access  Public

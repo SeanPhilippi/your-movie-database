@@ -5,7 +5,6 @@ const movies = require('./routes/api/MovieRoutes');
 const app = express();
 // DB config
 const db = 'http://www.omdbapi.com/?apikey=d5d74a24&';
-
 const port = 4300;
 
 app.use(bodyParser.json());

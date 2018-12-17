@@ -37,19 +37,13 @@ class Search extends React.Component {
       moviesArr.push(
         <div
           key={movie.imdbID}
-          onClick={() => this.handleAdd()}
-
+          onClick={() => this.props.add()}
         >
           {movie.Title} ({movie.Year})
         </div>
       )
     })
     this.setState({ results: moviesArr });
-  }
-
-  handleAdd = () => {
-    this.setState({ results: [] });
-    // add functionality for adding another draggable item to draggableList
   }
 
   onTextChange = e => {

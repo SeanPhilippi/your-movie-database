@@ -7,7 +7,8 @@ const ListSchema = new Schema({
     required: true
   },
   listId: {
-
+    type: String,
+    required: true
   },
   movies: [{
     // array of movie objects

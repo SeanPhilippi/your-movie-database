@@ -1,1 +1,10 @@
-put any images in public folder and link like this: src="image.png", don't use urls that could change
+- put any images in public folder and link like this: src="image.png", don't use urls that could change
+
+- try to redesign all functions so they manipulte the state.results in App.js.  
+- link DraggableList's list to state.list
+- put ${} values into DraggableList and fetch from api to fill those values
+- create fetch function with PUT method to update/add to an exist list and excute this function within
+an onClick event on searchResult component
+
+
+- get request for created list not working with Postman...
