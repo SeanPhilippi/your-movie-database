@@ -35,12 +35,21 @@ class Search extends React.Component {
     movies.forEach(movie => {
       console.log('item', movie)
       moviesArr.push(
-        <p key={movie.imdbID}>
+        <div
+          key={movie.imdbID}
+          onClick={() => this.handleAdd()}
+
+        >
           {movie.Title} ({movie.Year})
-        </p>
+        </div>
       )
     })
     this.setState({ results: moviesArr });
+  }
+
+  handleAdd = () => {
+    this.setState({ results: [] });
+    // add functionality for adding another draggable item to draggableList
   }
 
   onTextChange = e => {
