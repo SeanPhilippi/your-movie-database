@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const movies = require('./routes/api/MovieRoutes');
 const app = express();
 // DB config
-const db = 'http://www.omdbapi.com/?apikey=d5d74a24&';
+const db = require('./config/keys').mongoURI;
 const port = 4300;
 
 app.use(bodyParser.json());
@@ -15,7 +15,7 @@ mongoose.connect(db)
   .catch(err => console.log(err));
 
 // Use routes
-app.use(movies);
+app.use('/movies', movies);
 
 app.get('/express', (req, res) => {
   res.send({ express: 'Your express backend is connected to React!' })
