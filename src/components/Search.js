@@ -23,9 +23,24 @@ class Search extends React.Component {
     const { searchText, apiUrl, apiKey } = this.state;
     fetch(`${apiUrl}s=${searchText}&apikey=${apiKey}`)
       .then(res => res.json())
-      .then(res => this.setState({ results: res.Search }))
+      .then(res => {
+        const movies = this.createResults(res.Search);
+        console.log('movies', movies);
+      })
       .catch(err => console.error(err));
-    this.renderResults();
+  }
+
+  createResults = (movies) => {
+    const moviesArr = [];
+    movies.forEach(movie => {
+      console.log('item', movie)
+      moviesArr.push(
+        <p key={movie.imdbID}>
+          {movie.Title} ({movie.Year})
+        </p>
+      )
+    })
+    this.setState({ results: moviesArr });
   }
 
   onTextChange = e => {
@@ -38,17 +53,17 @@ class Search extends React.Component {
     }
   }
 
-  renderResults = () => {
-    const movieRows = this.state.results.map(movie => {
-      return (
-        <p key={movie.imdbID}>
-          {movie.Title} ({movie.Year})
-        </p>
-      )
-    })
-    this.state = { results: movieRows };
-    console.log('results2', this.state.results);
-  }
+  // renderResults = () => {
+  //   const movieRows = this.state.results.map(movie => {
+  //     return (
+  //       <p key={movie.imdbID}>
+  //         {movie.Title} ({movie.Year})
+  //       </p>
+  //     )
+  //   })
+  //   this.state = { results: movieRows };
+  //   console.log('results2', this.state.results);
+  // }
 
   render() {
     // if (this.state.results) {
@@ -69,7 +84,7 @@ class Search extends React.Component {
           onKeyUp={this.onKeyUp}
         />
         <div>
-          {this.renderResults}
+          {this.state.results}
         </div>
       </div>
     )
