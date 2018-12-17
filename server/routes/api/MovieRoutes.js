@@ -24,7 +24,14 @@ router.get('/list', (req, res) => {
 // @access  Public
 router.post('/:user/list', (req, res) => {
   // const user = get user name
+})
 
+// @route   PUT movies/add
+// @desc    add movie to exist list
+// @access  Public
+router.put('/add', (req, res) => {
+  // add movie object to currently existing list
+  List.findByIdAndUpdate()
 })
 
 // @route   Delete api/movies

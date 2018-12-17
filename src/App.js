@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    fetch('/list')
+    fetch('http://localhost:4300/list')
       .then(res => res.json())
       .then(data => {
         console.log('data', data);
