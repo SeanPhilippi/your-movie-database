@@ -3,11 +3,7 @@ import React from 'react';
 class Search extends React.Component {
 
   state = {
-    searchText: '',
-    apiUrl: 'http://www.omdbapi.com/?',
-    apiKey: 'd5d74a24&',
-    rows: [],
-    results: []
+    results: this.props.results
   }
 
   inputStyle = {
@@ -19,62 +15,13 @@ class Search extends React.Component {
     width: '42%'
   }
 
-  handleSearch = () => {
-    const { searchText, apiUrl, apiKey } = this.state;
-    fetch(`${apiUrl}s=${searchText}&apikey=${apiKey}`)
-      .then(res => res.json())
-      .then(res => {
-        const movies = this.createResults(res.Search);
-        console.log('movies', movies);
-      })
-      .catch(err => console.error(err));
-  }
-
-  createResults = (movies) => {
-    const moviesArr = [];
-    movies.forEach(movie => {
-      console.log('item', movie)
-      moviesArr.push(
-        <div
-          key={movie.imdbID}
-          onClick={() => this.props.add()}
-        >
-          {movie.Title} ({movie.Year})
-        </div>
-      )
-    })
-    this.setState({ results: moviesArr });
-  }
-
-  onTextChange = e => {
-    this.setState({ searchText: e.target.value });
-  }
-
-  onKeyUp = e => {
-    if (e.key === 'Enter') {
-      this.handleSearch();
-    }
-  }
-
-  // renderResults = () => {
-  //   const movieRows = this.state.results.map(movie => {
-  //     return (
-  //       <p key={movie.imdbID}>
-  //         {movie.Title} ({movie.Year})
-  //       </p>
-  //     )
-  //   })
-  //   this.state = { results: movieRows };
-  //   console.log('results2', this.state.results);
-  // }
-
   render() {
-    // if (this.state.results) {
-    //   resultsContent = this.state.results;
-    //   console.log('results content', resultsContent)
-    // } else {
-    //   resultsContent = null;
-    // }
+
+    const onKeyUp = e => {
+      if (e.key === 'Enter') {
+        this.props.search();
+      }
+    }
 
     return (
       <div className="Search">
@@ -83,11 +30,11 @@ class Search extends React.Component {
           placeholder="Add a film..."
           style={this.inputStyle}
           value={this.state.searchText}
-          onChange={this.onTextChange}
-          onKeyUp={this.onKeyUp}
+          onChange={this.props.textChange}
+          onKeyUp={onKeyUp}
         />
         <div>
-          {this.state.results}
+          {this.props.results}
         </div>
       </div>
     )

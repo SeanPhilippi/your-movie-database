@@ -77,38 +77,9 @@ export default class List extends React.Component<{}, ExampleState> {
 
   state = {
     useContainer: false,
-    list: [
-      { name: '2001: A Space Odyssey', year: '1968', director: 'Stanley Kubrick', subtitle: true },
-      { name: 'Mulholland Drive', year: '2001', director: 'David Lynch', subtitle: true },
-      { name: 'Pickpocket', year: '1955', director: 'Robert Bresson', subtitle: true },
-      { name: 'Persona', year: '1966', director: 'Ingmar Bergman', subtitle: true },
-      { name: 'Solaris', year: '1972', director: 'Andrei Tarkovsky', subtitle: true },
-      { name: '2046', year: '2004', director: 'Wong Kar-Wai', subtitle: true },
-      { name: 'Three Colors: Blue', year: '1993', director: 'Krzysztof Kieslowski', subtitle: true },
-    ]
+    list: this.props.list
   };
-  // state = {
-  //   list: [
-  //     {
-  //       id: 1,
-  //       title: 'movie1',
-  //       year: 1999,
-  //       director: 'Stanley Kubrick'
-  //     },
-  //     {
-  //       id: 2,
-  //       title: 'movie1',
-  //       year: 1969,
-  //       director: 'Luis Bunuel'
-  //     },
-  //     {
-  //       id: 3,
-  //       title: 'movie1',
-  //       year: 1982,
-  //       director: 'David Lynch'
-  //     },
-  //   ]
-  // }
+
 
   _onListChange(newList: $ReadOnlyArray<Item>) {
     this.setState({ list: newList });
@@ -119,7 +90,7 @@ export default class List extends React.Component<{}, ExampleState> {
 
     return (
 
-      <div className="main">
+      <div className="main" >
         <div
           className="list" ref={el => {
             if (el) this._container = el;
@@ -133,7 +104,7 @@ export default class List extends React.Component<{}, ExampleState> {
 
           <DraggableList
             itemKey="name"
-            list={this.state.list}
+            list={this.props.list}
             template={ListItem}
             onMoveEnd={newList => this._onListChange(newList)}
             container={() => useContainer ? this._container : document.body}

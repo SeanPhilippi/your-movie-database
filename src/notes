@@ -7,7 +7,7 @@
 an onClick event on searchResult component
 
 
-- fetch('/list') is not fetching from my '/list' GET route from my backend... 
-I think it is looking at Port 3000, which is my front end.  how to fix... 
+- put all functions that use setState into App.js and pass down, and have one state 
 
-- might be a CORS issue?  
+- work on handleAdd so clicking on a search result will add 
+that movie to state.list and render in DraggableList
