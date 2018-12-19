@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    fetch('http://localhost:4300/list')
+    fetch('/list')
       .then(res => res.json())
       .then(data => {
         console.log('data', data);
@@ -39,59 +39,64 @@ class App extends Component {
     this.setState({ searchText: e.target.value });
   }
 
-  render() {
+  componentDidUpdate = (prevProps) => {
+    console.log('component updated');
 
-    const handleAdd = (movie) => {
-      const { apiUrl, apiKey } = this.state;
-      const newMovie = {};
-      // add functionality for adding another draggable item to DraggableList
-      // fetch call to grab movie from api by id, then grab director and maybe country
-      // from that json object for creating newMovie to put into state.list
+  }
 
-      fetch(`${apiUrl}i=${movie.imdbID}&apikey=${apiKey}`)
-        .then(res => res.json())
-        .then(data => {
-          newMovie.name = movie.Title;
-          newMovie.year = movie.Year;
-          newMovie.director = data.Director;
-          newMovie.subtitle = true;
-        })
-      this.setState({
-        list: [
-          ...this.state.list,
-          newMovie
-        ]
+  handleAdd = (movie) => {
+    const { apiUrl, apiKey } = this.state;
+    const newMovie = {};
+    // add functionality for adding another draggable item to DraggableList
+    // fetch call to grab movie from api by id, then grab director and maybe country
+    // from that json object for creating newMovie to put into state.list
+
+    fetch(`${apiUrl}i=${movie.imdbID}&apikey=${apiKey}`)
+      .then(res => res.json())
+      .then(data => {
+        newMovie.name = movie.Title;
+        newMovie.year = movie.Year;
+        newMovie.director = data.Director;
+        newMovie.subtitle = true;
       })
-      // clear search results upon selecting a movie
-      this.setState({ results: [] });
-    }
+    this.setState({
+      list: [
+        ...this.state.list,
+        newMovie
+      ]
+    })
+    // clear search results upon selecting a movie
+    this.setState({ results: [] });
+  }
 
-    const createResults = (movies) => {
-      const moviesArr = [];
-      movies.forEach(movie => {
-        moviesArr.push(
-          <div
-            key={movie.imdbID}
-            onClick={() => handleAdd(movie)}
-          >
-            {movie.Title}({movie.Year})
+  createResults = (movies) => {
+    const moviesArr = [];
+    movies.forEach(movie => {
+      moviesArr.push(
+        <div
+          key={movie.imdbID}
+          onClick={() => this.handleAdd(movie)}
+        >
+          {movie.Title}({movie.Year})
         </div>
-        )
-      })
-      this.setState({ results: moviesArr });
-    }
+      )
+    })
+    this.setState({ results: moviesArr });
+  }
 
-    const handleSearch = () => {
-      const { searchText, apiUrl, apiKey } = this.state;
-      fetch(`${apiUrl}s=${searchText}&apikey=${apiKey}`)
-        .then(res => res.json())
-        .then(data => {
-          console.log('data', data.Search)
-          const movies = createResults(data.Search);
-          console.log('movies', movies);
-        })
-        .catch(err => console.error(err));
-    }
+  handleSearch = (fnc) => {
+    const { searchText, apiUrl, apiKey } = this.state;
+    fetch(`${apiUrl}s=${searchText}&apikey=${apiKey}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log('data', data.Search)
+        const movies = this.createResults(data.Search);
+        console.log('movies', movies);
+      })
+      .catch(err => console.error(err));
+  }
+
+  render() {
 
     return (
       <div className="App">
@@ -100,7 +105,7 @@ class App extends Component {
         <Search
           add={this.handleAdd}
           results={this.state.results}
-          search={handleSearch}
+          search={this.handleSearch}
           textChange={this.onTextChange}
         />
         <List add={this.handleAdd} list={this.state.list} />
