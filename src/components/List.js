@@ -1,8 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import DraggableList from 'react-draggable-list'
-// import ListItem from './ListItem'; 
-// building class component within this file for ease of access
 
 const cx = classnames;
 
@@ -57,10 +55,7 @@ class ListItem extends React.Component<ListProps, ListState> {
           <div className="subtitle">{item.director}, {item.year}</div>
         }
         <div>
-          background image
-          {/* {year}<br />
-          {director}<br />
-          {country} */}
+          **background image**
         </div>
       </div>
     )

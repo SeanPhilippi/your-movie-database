@@ -11,3 +11,8 @@ an onClick event on searchResult component
 
 - work on handleAdd so clicking on a search result will add 
 that movie to state.list and render in DraggableList
+
+- do fetch call within handleAdd that fetches that movie from omdb api by id and returns data that has 'director' value
+I can access for injecting into my movie object to put into state.list
+
+- incorporate PropTypes into my project

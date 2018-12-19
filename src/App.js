@@ -35,27 +35,36 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
-  handleAdd = (movie) => {
-    this.setState({ results: [] });
-    // add functionality for adding another draggable item to DraggableList
-    const newMovie = {};
-    newMovie.name = movie.Title;
-    newMovie.year = movie.Year;
-    newMovie.director = 'director';
-    newMovie.subtitle = true;
-    this.setState({
-      list: [
-        ...this.state.list,
-        newMovie
-      ]
-    })
-  }
-
   onTextChange = e => {
     this.setState({ searchText: e.target.value });
   }
 
   render() {
+
+    const handleAdd = (movie) => {
+      const { apiUrl, apiKey } = this.state;
+      const newMovie = {};
+      // add functionality for adding another draggable item to DraggableList
+      // fetch call to grab movie from api by id, then grab director and maybe country
+      // from that json object for creating newMovie to put into state.list
+
+      fetch(`${apiUrl}i=${movie.imdbID}&apikey=${apiKey}`)
+        .then(res => res.json())
+        .then(data => {
+          newMovie.name = movie.Title;
+          newMovie.year = movie.Year;
+          newMovie.director = data.Director;
+          newMovie.subtitle = true;
+        })
+      this.setState({
+        list: [
+          ...this.state.list,
+          newMovie
+        ]
+      })
+      // clear search results upon selecting a movie
+      this.setState({ results: [] });
+    }
 
     const createResults = (movies) => {
       const moviesArr = [];
@@ -63,7 +72,7 @@ class App extends Component {
         moviesArr.push(
           <div
             key={movie.imdbID}
-            onClick={() => this.handleAdd(movie)}
+            onClick={() => handleAdd(movie)}
           >
             {movie.Title}({movie.Year})
         </div>
