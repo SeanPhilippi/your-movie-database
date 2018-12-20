@@ -25,24 +25,31 @@ class App extends Component {
     apiKey: 'd5d74a24&'
   }
 
-  componentDidMount = () => {
-    fetch('/list')
-      .then(res => res.json())
-      .then(data => {
-        console.log('data', data);
-        // this.setState({ list: data })
-      })
-      .catch(err => console.log(err));
-  }
+  // componentDidMount = () => {
+  //   fetch('http://localhost:4300/list')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       console.log('data', data);
+  //       this.setState({ list: data })
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
   onTextChange = e => {
     this.setState({ searchText: e.target.value });
   }
 
-  componentDidUpdate = (prevProps) => {
-    console.log('component updated');
-
-  }
+  // componentDidUpdate = (prevState) => {
+  //   console.log('state', this.state);
+  //   console.log('prevstate', prevState)
+  //   if (prevState.list !== this.state.list) {
+  //     this.setState({
+  //       list: [
+  //         ...this.state.list
+  //       ]
+  //     })
+  //   }
+  // }
 
   handleAdd = (movie) => {
     const { apiUrl, apiKey } = this.state;
@@ -54,11 +61,13 @@ class App extends Component {
     fetch(`${apiUrl}i=${movie.imdbID}&apikey=${apiKey}`)
       .then(res => res.json())
       .then(data => {
+        console.log('data', data)
         newMovie.name = movie.Title;
         newMovie.year = movie.Year;
         newMovie.director = data.Director;
         newMovie.subtitle = true;
       })
+      .catch(err => console.log(err))
     this.setState({
       list: [
         ...this.state.list,
@@ -81,15 +90,16 @@ class App extends Component {
         </div>
       )
     })
+    console.log('resultsArr', moviesArr)
     this.setState({ results: moviesArr });
   }
 
-  handleSearch = (fnc) => {
+  handleSearch = () => {
     const { searchText, apiUrl, apiKey } = this.state;
     fetch(`${apiUrl}s=${searchText}&apikey=${apiKey}`)
       .then(res => res.json())
       .then(data => {
-        console.log('data', data.Search)
+        console.log('searchData', data.Search)
         const movies = this.createResults(data.Search);
         console.log('movies', movies);
       })

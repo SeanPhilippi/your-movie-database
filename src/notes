@@ -16,3 +16,6 @@ that movie to state.list and render in DraggableList
 I can access for injecting into my movie object to put into state.list
 
 - incorporate PropTypes into my project
+- add delete button to list items
+
+-reorganize project using Redux!!! rendering issue is a promise delay issue
