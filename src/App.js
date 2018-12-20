@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { Provider } from 'react-redux';
 import SiteHeader from './components/SiteHeader';
 import ListHeader from './components/ListHeader';
 import CommentColumn from './components/CommentColumn';
@@ -109,19 +110,21 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
-        <SiteHeader />
-        <ListHeader />
-        <Search
-          add={this.handleAdd}
-          results={this.state.results}
-          search={this.handleSearch}
-          textChange={this.onTextChange}
-        />
-        <List add={this.handleAdd} list={this.state.list} />
-        <CommentColumn />
-        <Footer />
-      </div>
+      <Provider>
+        <div className="App">
+          <SiteHeader />
+          <ListHeader />
+          <Search
+            add={this.handleAdd}
+            results={this.state.results}
+            search={this.handleSearch}
+            textChange={this.onTextChange}
+          />
+          <List add={this.handleAdd} list={this.state.list} />
+          <CommentColumn />
+          <Footer />
+        </div>
+      </Provider>
     );
   }
 }
