@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Search from '../components/Search';
-import { onKeyUp } from '../actions';
+// import { onKeyUp } from '../actions';
 
 function mapStateToProps(state) {
   return {
