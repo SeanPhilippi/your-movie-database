@@ -5,8 +5,8 @@ import SiteHeader from './components/SiteHeader';
 import ListHeader from './components/ListHeader';
 import CommentColumn from './components/CommentColumn';
 import Footer from './components/Footer';
-import List from './components/List';
-import Search from './components/Search';
+import ListContainer from './containers/ListContainer';
+import SearchContainer from './containers/SearchContainer';
 
 class App extends Component {
 
@@ -114,13 +114,13 @@ class App extends Component {
         <div className="App">
           <SiteHeader />
           <ListHeader />
-          <Search
+          <SearchContainer
             add={this.handleAdd}
             results={this.state.results}
             search={this.handleSearch}
             textChange={this.onTextChange}
           />
-          <List add={this.handleAdd} list={this.state.list} />
+          <ListContainer add={this.handleAdd} list={this.state.list} />
           <CommentColumn />
           <Footer />
         </div>
