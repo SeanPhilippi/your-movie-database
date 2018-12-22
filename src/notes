@@ -23,3 +23,6 @@ I can access for injecting into my movie object to put into state.list
 -watch a few videos on Thunk to understand it
 
 -- finish last 10 min or so of Traversy posts project
+
+-- where I left off: lots of boilerplate for Redux is in place, now how to 
+convert my current functions to Redux actions... 
