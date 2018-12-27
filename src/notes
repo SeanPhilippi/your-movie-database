@@ -26,3 +26,8 @@ I can access for injecting into my movie object to put into state.list
 
 -- where I left off: lots of boilerplate for Redux is in place, now how to 
 convert my current functions to Redux actions... 
+
+//
+
+- transfer handleAdd and handleSearch to actions, convert to redux
+- look at Andrew's ACAFlix for reference on how to organize stuff

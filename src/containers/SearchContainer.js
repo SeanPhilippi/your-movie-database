@@ -8,4 +8,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapDispatchToProps)(Search);
+export default connect(mapStateToProps)(Search);

@@ -14,7 +14,7 @@ function createResults(state = , action) {
   return state;
 }
 
-function handleAdd(state = , action) {
+function handleAdd(state = "", action) {
   if (action.type === HANDLE_ADD) {
     // return action.value;
   }

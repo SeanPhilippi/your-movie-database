@@ -8,4 +8,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapDispatchToProps)(List);
+export default connect(mapStateToProps)(List);
