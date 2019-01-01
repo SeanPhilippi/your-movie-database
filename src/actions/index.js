@@ -1,13 +1,35 @@
-export const HANDLE_SEARCH = 'HANDLE_SEARCH'
+export const LOAD_LIST = 'LOAD_LIST';
+export const HANDLE_SEARCH = 'HANDLE_SEARCH';
 export const CREATE_RESULTS = 'CREATE_RESULTS';
 export const HANDLE_ADD = 'HANDLE_ADD';
 export const CLEAR_RESULTS = 'CLEAR_RESULTS';
 export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
 
-export function handleSearch() {
-  return {
-    type: HANDLE_SEARCH,
-    value: ""
+// export function loadList(movies) {
+//   console.log('movies', movies);
+//   return function (dispatch) {
+//     dispatch({
+//       type: LOAD_LIST
+//     });
+//     fetch('/list')
+//       .then(res => {
+//         return res.json();
+//       }).then(movies => {
+
+//       })
+//   }
+// }
+
+export function handleSearch(searchText) {
+  return function (dispatch) {
+    fetch(`http://www.omdbapi.com/?s=${searchText}&apikey=d5d74a24&`)
+      .then(res => res.json())
+      .then(data => {
+        console.log('searchData', data.Search)
+        const movies = createResults(data.Search);
+        console.log('movies', movies);
+      })
+      .catch(err => console.error(err));
   }
 }
 

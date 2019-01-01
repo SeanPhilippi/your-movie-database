@@ -31,3 +31,6 @@ convert my current functions to Redux actions...
 
 - transfer handleAdd and handleSearch to actions, convert to redux
 - look at Andrew's ACAFlix for reference on how to organize stuff
+
+- working on handleSearch action
+- read and comprehend https://stackoverflow.com/questions/39419237/what-is-mapdispatchtoprops and articles linked within
