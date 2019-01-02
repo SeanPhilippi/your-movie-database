@@ -1,4 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import {
+  setSearchText,
+  getSearchResults
+} from '../redux/actions';
 
 class Search extends React.Component {
 
@@ -15,11 +21,23 @@ class Search extends React.Component {
     width: '42%'
   }
 
+  renderResults = () => {
+    return this.props.searchResults.map(movie =>
+      <div
+        key={movie.imdbID}
+        onClick={() => this.handleAdd(movie)}
+      >
+        {movie.Title}({movie.Year})
+      </div>
+    )
+  }
+
   render() {
+    const { searchText, handleSearchText, getResults } = this.props;
 
     const onKeyUp = e => {
       if (e.key === 'Enter') {
-        this.props.search();
+        getResults();
       }
     }
 
@@ -29,16 +47,26 @@ class Search extends React.Component {
           type="text"
           placeholder="Add a film..."
           style={this.inputStyle}
-          value={this.state.searchText}
-          onChange={this.props.textChange}
+          value={searchText}
+          onChange={e => handleSearchText(e.target.value)}
           onKeyUp={onKeyUp}
         />
         <div>
-          {this.props.results}
+          {this.renderResults()}
         </div>
       </div>
     )
   }
 }
 
-export default Search;
+const mapStateToProps = state => ({
+  searchText: state.searchText,
+  searchResults: state.searchResults
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleSearchText: text => dispatch(setSearchText(text)),
+  getResults: () => dispatch(getSearchResults())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

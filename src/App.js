@@ -25,23 +25,18 @@ class App extends Component {
     apiKey: 'd5d74a24&'
   }
 
-  componentDidMount = () => {
-    fetch('/list')
-      .then(res => res.json())
-      .then(data => {
-        console.log('data', data);
-        // this.setState({ list: data })
-      })
-      .catch(err => console.log(err));
-  }
+  // componentDidMount = () => {
+  //   fetch('/list')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       console.log('data', data);
+  //       // this.setState({ list: data })
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
   onTextChange = e => {
     this.setState({ searchText: e.target.value });
-  }
-
-  componentDidUpdate = (prevProps) => {
-    console.log('component updated');
-
   }
 
   handleAdd = (movie) => {
@@ -69,33 +64,6 @@ class App extends Component {
     this.setState({ results: [] });
   }
 
-  createResults = (movies) => {
-    const moviesArr = [];
-    movies.forEach(movie => {
-      moviesArr.push(
-        <div
-          key={movie.imdbID}
-          onClick={() => this.handleAdd(movie)}
-        >
-          {movie.Title}({movie.Year})
-        </div>
-      )
-    })
-    this.setState({ results: moviesArr });
-  }
-
-  handleSearch = (fnc) => {
-    const { searchText, apiUrl, apiKey } = this.state;
-    fetch(`${apiUrl}s=${searchText}&apikey=${apiKey}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log('data', data.Search)
-        const movies = this.createResults(data.Search);
-        console.log('movies', movies);
-      })
-      .catch(err => console.error(err));
-  }
-
   render() {
 
     return (
@@ -104,9 +72,6 @@ class App extends Component {
         <ListHeader />
         <Search
           add={this.handleAdd}
-          results={this.state.results}
-          search={this.handleSearch}
-          textChange={this.onTextChange}
         />
         <List add={this.handleAdd} list={this.state.list} />
         <CommentColumn />
