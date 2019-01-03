@@ -30,6 +30,10 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       list: [...state.list, payload.movie]
     };
+    case TYPES.CLEAR_SEARCH_RESULTS: return {
+      ...state,
+      searchResults: []
+    };
     default: return state;
   }
 }

@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {
   setSearchText,
   getSearchResults,
-  setMovieList
+  setMovieList,
+  clearSearchResults
 } from '../redux/actions';
 
 class Search extends React.Component {
@@ -34,11 +35,11 @@ class Search extends React.Component {
   }
 
   handleAdd = (movie) => {
-    const { apiUrl, apiKey, setList } = this.props;
+    const { apiUrl, apiKey, setList, clearResults } = this.props;
     const newMovie = {};
     // add functionality for adding another draggable item to DraggableList
     // fetch call to grab movie from api by id, then grab director and maybe country
-    // from that json object for creating newMovie to put into state.list
+    // from that create newMovie json object to put into state.list
 
     fetch(`${apiUrl}i=${movie.imdbID}&apikey=${apiKey}`)
       .then(res => res.json())
@@ -52,7 +53,8 @@ class Search extends React.Component {
     console.log('newMovie', newMovie)
     setList(newMovie);
     // clear search results upon selecting a movie
-    this.setState({ results: [] });
+    clearResults();
+    // this.setState({ results: [] });
   }
 
   render() {
@@ -95,7 +97,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   handleSearchText: text => dispatch(setSearchText(text)),
   getResults: () => dispatch(getSearchResults()),
-  setList: movie => dispatch(setMovieList(movie))
+  setList: movie => dispatch(setMovieList(movie)),
+  clearResults: () => dispatch(clearSearchResults())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
