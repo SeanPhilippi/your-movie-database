@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import classnames from 'classnames';
-import DraggableList from 'react-draggable-list'
+import DraggableList from 'react-draggable-list';
 
 const cx = classnames;
 
@@ -67,7 +68,7 @@ type ExampleState = {
   list: $ReadOnlyArray<Item>;
 }
 
-export default class List extends React.Component<{}, ExampleState> {
+class List extends React.Component<{}, ExampleState> {
   _container: HTMLElement;
 
   state = {
@@ -109,3 +110,10 @@ export default class List extends React.Component<{}, ExampleState> {
     )
   }
 };
+
+// mapping Redux global state to props
+const mapStateToProps = state => ({
+  list: state.list
+});
+
+export default connect(mapStateToProps)(List);

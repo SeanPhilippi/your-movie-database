@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import {
   setSearchText,
-  getSearchResults
+  getSearchResults,
+  setMovieList
 } from '../redux/actions';
 
 class Search extends React.Component {
@@ -30,6 +31,28 @@ class Search extends React.Component {
         {movie.Title}({movie.Year})
       </div>
     )
+  }
+
+  handleAdd = (movie) => {
+    const { apiUrl, apiKey, setList } = this.props;
+    const newMovie = {};
+    // add functionality for adding another draggable item to DraggableList
+    // fetch call to grab movie from api by id, then grab director and maybe country
+    // from that json object for creating newMovie to put into state.list
+
+    fetch(`${apiUrl}i=${movie.imdbID}&apikey=${apiKey}`)
+      .then(res => res.json())
+      .then(data => {
+        newMovie.name = movie.Title;
+        newMovie.year = movie.Year;
+        newMovie.director = data.Director;
+        newMovie.subtitle = true;
+      })
+    console.log('movie', movie);
+    console.log('newMovie', newMovie)
+    setList(newMovie);
+    // clear search results upon selecting a movie
+    this.setState({ results: [] });
   }
 
   render() {
@@ -59,14 +82,20 @@ class Search extends React.Component {
   }
 }
 
+// mapping Redux global state to props
 const mapStateToProps = state => ({
   searchText: state.searchText,
-  searchResults: state.searchResults
+  searchResults: state.searchResults,
+  list: state.list,
+  apiKey: state.apiKey,
+  apiUrl: state.apiUrl
 });
 
+// mapping dispatched actions to props
 const mapDispatchToProps = dispatch => ({
   handleSearchText: text => dispatch(setSearchText(text)),
-  getResults: () => dispatch(getSearchResults())
+  getResults: () => dispatch(getSearchResults()),
+  setList: movie => dispatch(setMovieList(movie))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

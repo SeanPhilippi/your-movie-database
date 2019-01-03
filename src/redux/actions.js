@@ -1,6 +1,7 @@
 export const TYPES = {
   SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
   SET_SEARCH_RESULTS: 'SET_SEARCH_RESULTS',
+  SET_MOVIE_LIST: 'SET_MOVIE_LIST'
 };
 
 export const setSearchText = text => ({
@@ -25,5 +26,12 @@ export const setSearchResults = data => ({
   type: TYPES.SET_SEARCH_RESULTS,
   payload: {
     data
+  }
+});
+
+export const setMovieList = movie => ({
+  type: TYPES.SET_MOVIE_LIST,
+  payload: {
+    movie
   }
 });
