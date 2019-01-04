@@ -44,17 +44,14 @@ class Search extends React.Component {
     fetch(`${apiUrl}i=${movie.imdbID}&apikey=${apiKey}`)
       .then(res => res.json())
       .then(data => {
-        newMovie.name = movie.Title;
-        newMovie.year = movie.Year;
-        newMovie.director = data.Director;
-        newMovie.subtitle = true;
-      })
-    console.log('movie', movie);
-    console.log('newMovie', newMovie)
-    setList(newMovie);
-    // clear search results upon selecting a movie
-    clearResults();
-    // this.setState({ results: [] });
+        setList({
+          name: movie.Title,
+          year: movie.Year,
+          director: data.Director,
+          subtitle: true
+        });
+        clearResults();
+      });
   }
 
   render() {
