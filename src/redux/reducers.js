@@ -6,13 +6,13 @@ const initialState = {
   searchText: '',
   searchResults: [],
   list: [
-    { name: '2001: A Space Odyssey', year: '1968', director: 'Stanley Kubrick', subtitle: true },
-    { name: 'Mulholland Drive', year: '2001', director: 'David Lynch', subtitle: true },
-    { name: 'Pickpocket', year: '1955', director: 'Robert Bresson', subtitle: true },
-    { name: 'Persona', year: '1966', director: 'Ingmar Bergman', subtitle: true },
-    { name: 'Solaris', year: '1972', director: 'Andrei Tarkovsky', subtitle: true },
-    { name: '2046', year: '2004', director: 'Wong Kar-Wai', subtitle: true },
-    { name: 'Three Colors: Blue', year: '1993', director: 'Krzysztof Kieslowski', subtitle: true }
+    { name: '2001: A Space Odyssey', year: '1968', director: 'Stanley Kubrick', id: 'tt0062622' },
+    { name: 'Mulholland Dr.', year: '2001', director: 'David Lynch', id: 'tt0166924' },
+    { name: 'Pickpocket', year: '1955', director: 'Robert Bresson', id: 'tt0053168' },
+    { name: 'Persona', year: '1966', director: 'Ingmar Bergman', id: 'tt0060827' },
+    { name: 'Solaris', year: '1972', director: 'Andrei Tarkovsky', id: 'tt0069293' },
+    { name: '2046', year: '2004', director: 'Wong Kar-Wai', id: 'tt0212712' },
+    { name: 'Three Colors: Blue', year: '1993', director: 'Krzysztof Kieslowski', id: 'tt0108394' }
   ]
 }
 
