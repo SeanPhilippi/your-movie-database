@@ -29,7 +29,7 @@ const SortableItem = SortableElement(({ movie }) => {
 const SortableList = SortableContainer(({ items }) => {
   // debugger;
   return (
-    <ul className="row" > //comment
+    <ul className="row" > 
       {
         items.map((movie, index) => {
           console.log('movie1', movie);
