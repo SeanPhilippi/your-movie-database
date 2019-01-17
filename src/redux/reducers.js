@@ -1,4 +1,5 @@
 import { TYPES } from './actions';
+import { arrayMove } from 'react-sortable-hoc';
 
 const initialState = {
   apiUrl: 'http://www.omdbapi.com/?',
@@ -6,6 +7,7 @@ const initialState = {
   searchText: '',
   searchResults: [],
   list: [
+    // dummy data
     { name: '2001: A Space Odyssey', year: '1968', director: 'Stanley Kubrick', id: 'tt0062622' },
     { name: 'Mulholland Dr.', year: '2001', director: 'David Lynch', id: 'tt0166924' },
     { name: 'Pickpocket', year: '1955', director: 'Robert Bresson', id: 'tt0053168' },
@@ -34,6 +36,10 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       searchResults: []
     };
+    case TYPES.REORDER_LIST: return {
+      ...state,
+      list: arrayMove(state.list, payload.oldIndex, payload.newIndex)
+    }
     default: return state;
   }
 }

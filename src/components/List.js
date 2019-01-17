@@ -1,14 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 
 class List extends React.Component {
 
   liStyle = {
-    fontSize: 15,
-    display: 'block',
-    paddingLeft: 16,
+    fontSize: '15px',
+    border: 'black solid 1px',
     margin: 'auto',
-    marginTop: 20,
+    paddingTop: '2px',
+    paddingBottom: '2px',
+    marginTop: '10px',
+    marginBottom: '10px',
+    display: 'block',
     width: '42%'
   }
 
@@ -18,7 +22,7 @@ class List extends React.Component {
 
     return (
       <div>
-        {this.props.list.map((movie) => (
+        {this.props.list.map(movie => (
           <div key={movie.id} style={this.liStyle}>
             <span style={{ fontSize: "20px" }}>{movie.name}</span>
             <br />
@@ -35,4 +39,10 @@ const mapStateToProps = state => ({
   list: state.list
 });
 
-export default connect(mapStateToProps)(List);
+const mapDispatchToProps = (dispatch, props) => ({
+  orderList: ({ oldIndex, newIndex }) => {
+    dispatch(listActions.orderList(oldIndex, newIndex))
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);

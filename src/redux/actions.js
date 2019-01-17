@@ -2,7 +2,8 @@ export const TYPES = {
   SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
   SET_SEARCH_RESULTS: 'SET_SEARCH_RESULTS',
   SET_MOVIE_LIST: 'SET_MOVIE_LIST',
-  CLEAR_SEARCH_RESULTS: 'CLEAR_SEARCH_RESULTS'
+  CLEAR_SEARCH_RESULTS: 'CLEAR_SEARCH_RESULTS',
+  REORDER_LIST: 'REORDER_LIST'
 };
 
 export const setSearchText = text => ({
@@ -39,4 +40,11 @@ export const setMovieList = movie => ({
 
 export const clearSearchResults = () => ({
   type: TYPES.CLEAR_SEARCH_RESULTS
+})
+
+export const orderList = (oldIndex, newIndex) => ({
+  type: TYPES.REORDER_LIST,
+  payload: {
+    oldIndex, newIndex
+  }
 })

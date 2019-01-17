@@ -4,7 +4,8 @@ import SiteHeader from './components/SiteHeader';
 import ListHeader from './components/ListHeader';
 import CommentColumn from './components/CommentColumn';
 import Footer from './components/Footer';
-import List from './components/List';
+import SortableComponent from './components/SortableComponent';
+// import List from './components/List';
 import Search from './components/Search';
 
 class App extends Component {
@@ -42,18 +43,23 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
+      <div className="App" >
         <SiteHeader />
         <ListHeader />
         <Search
           add={this.handleAdd}
         />
-        <List add={this.handleAdd} list={this.state.list} />
+        <SortableComponent data={this.props.list} onSortEnd={this.props.orderList} />
+        {/* <List add={this.handleAdd} list={this.state.list} /> */}
         <CommentColumn />
         <Footer />
-      </div>
+      </div >
     );
   }
 }
+
+const mapStateToProps = state => ({
+  list: state.list
+})
 
 export default App;

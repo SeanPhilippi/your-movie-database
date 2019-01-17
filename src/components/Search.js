@@ -20,7 +20,7 @@ class Search extends React.Component {
     paddingLeft: 16,
     margin: 'auto',
     marginTop: 20,
-    width: '42%'
+    width: '40%'
   }
 
   renderResults = () => {
