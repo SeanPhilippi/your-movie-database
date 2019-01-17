@@ -3,18 +3,32 @@ import { connect } from 'react-redux';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import { orderList } from '../redux/actions';
 
-const SortableItem = SortableElement(({ value }) =>
-  <li className="col-6 col-md-4 col-lg-3 mt-3 px-2">
-    <img className="image-item" src={value.imgUrl} />
-  </li>
+const liStyle = {
+  fontSize: '15px',
+  border: 'black solid 1px',
+  margin: 'auto',
+  paddingTop: '2px',
+  paddingBottom: '2px',
+  marginTop: '10px',
+  marginBottom: '10px',
+  display: 'block',
+  width: '42%'
+}
+
+const SortableItem = SortableElement((movie) =>
+  <div key={movie.id} style={liStyle}>
+    <span style={{ fontSize: "20px" }}>{movie.name}</span>
+    <br />
+    {movie.director}, {movie.year}
+  </div>
 )
 
-const SortableList = SortableContainer(({ items }) => {
+const SortableList = SortableContainer(({ this.props.list }) => {
   return (
     <ul className="row" >
       {
-        items.map((value, index) => (
-          <SortableItem key={`item-${value.id}`} index={index} value={value} />
+        this.props.list.map((movie, index) => (
+          <SortableItem key={`item-${movie.id}`} index={index} value={movie.Title} />
         ))
       }
     </ul>
@@ -22,8 +36,10 @@ const SortableList = SortableContainer(({ items }) => {
 })
 
 class SortableComponent extends Component {
+
   render() {
-    return <SortableList items={this.props.data} onSortEnd={this.props.onSortEnd} axis="xy" />;
+    const { list, onSortEnd } = this.props;
+    return <SortableList items={list} onSortEnd={onSortEnd} axis="xy" />;
   }
 }
 

@@ -7,6 +7,8 @@ import Footer from './components/Footer';
 import SortableComponent from './components/SortableComponent';
 // import List from './components/List';
 import Search from './components/Search';
+import { connect } from 'react-redux';
+import { orderList } from './redux/actions';
 
 class App extends Component {
 
@@ -49,7 +51,7 @@ class App extends Component {
         <Search
           add={this.handleAdd}
         />
-        <SortableComponent data={this.props.list} onSortEnd={this.props.orderList} />
+        <SortableComponent list={this.props.list} onSortEnd={this.props.orderList} />
         {/* <List add={this.handleAdd} list={this.state.list} /> */}
         <CommentColumn />
         <Footer />
@@ -60,6 +62,10 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   list: state.list
-})
+});
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  orderList: (oldIndex, newIndex) => dispatch(orderList(oldIndex, newIndex))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
