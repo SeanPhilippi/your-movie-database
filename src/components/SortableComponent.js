@@ -15,21 +15,26 @@ const liStyle = {
   width: '42%'
 }
 
-const SortableItem = SortableElement((movie) =>
-  <div key={movie.id} style={liStyle}>
-    <span style={{ fontSize: "20px" }}>{movie.name}</span>
-    <br />
-    {movie.director}, {movie.year}
-  </div>
+const SortableItem = SortableElement(({ movie }) => {
+  return (
+    <div key={movie.id} style={liStyle}>
+      <span style={{ fontSize: "20px" }}>{movie.name}</span>
+      <br />
+      {movie.director}, {movie.year}
+    </div>
+  )
+}
 )
 
-const SortableList = SortableContainer(({ this.props.list }) => {
+const SortableList = SortableContainer(({ items }) => {
+  // debugger;
   return (
-    <ul className="row" >
+    <ul className="row" > //comment
       {
-        this.props.list.map((movie, index) => (
-          <SortableItem key={`item-${movie.id}`} index={index} value={movie.Title} />
-        ))
+        items.map((movie, index) => {
+          console.log('movie1', movie);
+          return <SortableItem key={`item-${movie.id}`} index={index} movie={movie} />
+        })
       }
     </ul>
   )
