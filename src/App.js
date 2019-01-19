@@ -12,22 +12,6 @@ import { orderList } from './redux/actions';
 
 class App extends Component {
 
-  state = {
-    results: [],
-    // list: [
-    //   { name: '2001: A Space Odyssey', year: '1968', director: 'Stanley Kubrick', subtitle: true },
-    //   { name: 'Mulholland Drive', year: '2001', director: 'David Lynch', subtitle: true },
-    //   { name: 'Pickpocket', year: '1955', director: 'Robert Bresson', subtitle: true },
-    //   { name: 'Persona', year: '1966', director: 'Ingmar Bergman', subtitle: true },
-    //   { name: 'Solaris', year: '1972', director: 'Andrei Tarkovsky', subtitle: true },
-    //   { name: '2046', year: '2004', director: 'Wong Kar-Wai', subtitle: true },
-    //   { name: 'Three Colors: Blue', year: '1993', director: 'Krzysztof Kieslowski', subtitle: true }
-    // ],
-    searchText: '',
-    apiUrl: 'http://www.omdbapi.com/?',
-    apiKey: 'd5d74a24&'
-  }
-
   // componentDidMount = () => {
   //   fetch('/list')
   //     .then(res => res.json())

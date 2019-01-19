@@ -17,7 +17,8 @@ const liStyle = {
 
 const SortableItem = SortableElement(({ movie }) => {
   return (
-    <div key={movie.id} style={liStyle}>
+
+    <div key={movie.id} style={liStyle} >
       <span style={{ fontSize: "20px" }}>{movie.name}</span>
       <br />
       {movie.director}, {movie.year}
@@ -29,7 +30,7 @@ const SortableItem = SortableElement(({ movie }) => {
 const SortableList = SortableContainer(({ items }) => {
   // debugger;
   return (
-    <ul className="row" > 
+    <ul className="row" >
       {
         items.map((movie, index) => {
           console.log('movie1', movie);
@@ -44,7 +45,7 @@ class SortableComponent extends Component {
 
   render() {
     const { list, onSortEnd } = this.props;
-    return <SortableList items={list} onSortEnd={onSortEnd} axis="xy" />;
+    return <SortableList items={list} onSortEnd={onSortEnd} axis="y" />;
   }
 }
 
