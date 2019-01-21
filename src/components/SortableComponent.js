@@ -29,7 +29,7 @@ class SortableComponent extends Component {
 
   render() {
     console.log('props', this.props)
-    const { list, onSortEnd, deleteMovie } = this.props;
+    const { list, orderList, deleteMovie } = this.props;
 
     const SortableItem = SortableElement(({ movie }) => {
       return (
@@ -59,7 +59,7 @@ class SortableComponent extends Component {
       )
     })
 
-    return <SortableList items={list} onSortEnd={onSortEnd} axis="y" />;
+    return <SortableList items={list} onSortEnd={orderList} axis="y" />;
   }
 }
 
@@ -68,7 +68,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  orderList: (oldIndex, newIndex) => dispatch(orderList(oldIndex, newIndex)),
+  orderList: ({ oldIndex, newIndex }) => dispatch(orderList(oldIndex, newIndex)),
   deleteMovie: (movie) => dispatch(deleteMovie(movie))
 });
 
