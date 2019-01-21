@@ -5,6 +5,7 @@ import ListHeader from './components/ListHeader';
 import CommentColumn from './components/CommentColumn';
 import Footer from './components/Footer';
 import Description from './components/Description';
+import SaveDelete from './components/SaveDelete';
 import SortableComponent from './components/SortableComponent';
 // import List from './components/List';
 import Search from './components/Search';
@@ -33,6 +34,7 @@ class App extends Component {
         <ListHeader />
         <div className="main-container">
           <div className="left">
+            <SaveDelete />
             <Search
               add={this.handleAdd}
             />
