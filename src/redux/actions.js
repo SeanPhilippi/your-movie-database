@@ -4,7 +4,8 @@ export const TYPES = {
   SET_MOVIE_LIST: 'SET_MOVIE_LIST',
   CLEAR_SEARCH_RESULTS: 'CLEAR_SEARCH_RESULTS',
   REORDER_LIST: 'REORDER_LIST',
-  DELETE_MOVIE: 'DELETE_MOVIE'
+  DELETE_MOVIE: 'DELETE_MOVIE',
+  // SAVE_MOVIE_LIST: 'SAVE_MOVIE_LIST'
 };
 
 export const setSearchText = text => ({
@@ -56,3 +57,7 @@ export const deleteMovie = (movie) => ({
     movie
   }
 })
+
+// export const saveList = () => ({
+//   type: TYPES.SAVE_MOVIE_LIST
+// })

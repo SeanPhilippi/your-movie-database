@@ -20,24 +20,38 @@ router.get('/list', (req, res) => {
 });
 
 // @route   Post api/movies
-// @desc    save movie list to mlab
+// @desc    create and save movie list to mlab
 // @access  Public
 router.post('/:user/list', (req, res) => {
-  // const user = get user name
-})
+  const newList = new List();
+  // listName and listId required by model
+  // make sure req (list) has listName and listId
+  newList.listName = req.body.listName;
+  newList.listId = req.body.listId;
+  req.body.map(item => {
+    const movie = {};
+    movie.name = item.name;
+    movie.year = item.year;
+    movie.director = item.director;
+    movie.id = item.id;
+    newList.list.push(movie);
+  });
+  newList.save()
+    .catch(err => console.log('error', err));
+});
 
 // @route   PUT movies/add
-// @desc    add movie to exist list
+// @desc    update existing list
 // @access  Public
-router.put('/add', (req, res) => {
-  // add movie object to currently existing list
+router.put('/:user/:listId/update', (req, res) => {
+  // update list array of movie objects
   List.findByIdAndUpdate()
 })
 
 // @route   Delete api/movies
 // @desc    delete movies
 // @access  Public
-router.delete('/:user/list/:movieId', (req, res) => {
+router.delete('/:user/:listId/:movieId', (req, res) => {
   Movie.findByIdAndRemove(req.params.id).exec()
     .then(movie => res.json(movie))
     .catch(err => console.log(err));

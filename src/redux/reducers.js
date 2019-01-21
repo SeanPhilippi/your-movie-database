@@ -6,6 +6,8 @@ const initialState = {
   apiKey: 'd5d74a24&',
   searchText: '',
   searchResults: [],
+  listID: null,
+  listName: null,
   list: [
     // dummy data
     { name: '2001: A Space Odyssey', year: '1968', director: 'Stanley Kubrick', id: 'tt0062622' },
@@ -43,7 +45,7 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.DELETE_MOVIE: return {
       ...state,
       list: [...state.list.filter(movie => movie.id !== payload.movie.id)]
-    }
+    };
     default: return state;
   }
 }

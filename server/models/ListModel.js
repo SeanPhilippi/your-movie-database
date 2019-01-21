@@ -10,15 +10,21 @@ const ListSchema = new Schema({
     type: String,
     required: true
   },
-  movies: [{
+  list: [{
     // array of movie objects
-    title: {
-      type: String,
-      required: true
+    // removed required so an empty list could be created
+    // adding, removing, reordering can be an update (PUT) from there
+    name: {
+      type: String
     },
-    imdbURL: {
-      type: String,
-      required: true
+    year: {
+      type: String
+    },
+    director: {
+      type: String
+    },
+    id: {
+      type: String
     }
   }]
 });
