@@ -12,3 +12,42 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.movie-item {
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr;
+   font-size: 15px;
+  border: black solid 1px;
+  margin: auto;
+ /* padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: block;*/
+  width: 42%; 
+}
+
+.delete {
+  font-size: 18px;
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.numbers {
+  color: grey;
+  font-style: bolder;
+  font-size: 26px;
+  margin: auto;
+  margin-left: 13px;
+}
+
+.movie-info {
+  margin: 5px 0;
+}
+
+.dir-year {
+  margin-top: 2px;
+}
