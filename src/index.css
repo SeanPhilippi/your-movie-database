@@ -27,6 +27,25 @@ code {
   width: 42%; 
 }
 
+/* Between Header and Footer */
+/* .main-container {
+  display: grid;
+  grid-template-columns: 5.5fr 2fr;
+}
+
+.left {
+
+}
+
+.right {
+  border: 1px solid black;
+}
+
+.comments {
+  border: 1px solid black;
+} */
+
+/* Movie Items */
 .delete {
   font-size: 18px;
   background-color: Transparent;
@@ -51,3 +70,10 @@ code {
 .dir-year {
   margin-top: 2px;
 }
+
+/* Description */
+.textarea {
+  font-size: 14px;
+  padding-left: 5px;
+}
+

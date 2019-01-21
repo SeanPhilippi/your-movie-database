@@ -4,6 +4,7 @@ import SiteHeader from './components/SiteHeader';
 import ListHeader from './components/ListHeader';
 import CommentColumn from './components/CommentColumn';
 import Footer from './components/Footer';
+import Description from './components/Description';
 import SortableComponent from './components/SortableComponent';
 // import List from './components/List';
 import Search from './components/Search';
@@ -30,12 +31,19 @@ class App extends Component {
       <div className="App" >
         <SiteHeader />
         <ListHeader />
-        <Search
-          add={this.handleAdd}
-        />
-        <SortableComponent />
-        {/* <List add={this.handleAdd} list={this.state.list} /> */}
-        <CommentColumn />
+        <div className="main-container">
+          <div className="left">
+            <Search
+              add={this.handleAdd}
+            />
+            <SortableComponent />
+            {/* <List add={this.handleAdd} list={this.state.list} /> */}
+            <Description />
+          </div>
+          <div className="right">
+            <CommentColumn className="comments" />
+          </div>
+        </div>
         <Footer />
       </div >
     );
