@@ -28,6 +28,9 @@ class List extends React.Component {
             <br />
             {movie.director}, {movie.year}
           </div>
+          <div>
+            <button>button</button>
+          </div>
         ))}
       </div>
     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
-import { orderList } from '../redux/actions';
+import { orderList, deleteMovie } from '../redux/actions';
 
 const liStyle = {
   fontSize: '15px',
@@ -13,38 +13,52 @@ const liStyle = {
   marginBottom: '10px',
   display: 'block',
   width: '42%'
+};
+
+const buttonStyle = {
+  fontSize: '20px',
+  // border: 'black solid 2px',
+  float: 'right',
+  marginRight: '5px',
+  padding: '0 7px 3px 7px'
 }
 
-const SortableItem = SortableElement(({ movie }) => {
-  return (
 
-    <div key={movie.id} style={liStyle} >
-      <span style={{ fontSize: "20px" }}>{movie.name}</span>
-      <br />
-      {movie.director}, {movie.year}
-    </div>
-  )
-}
-)
-
-const SortableList = SortableContainer(({ items }) => {
-  // debugger;
-  return (
-    <ul className="row" >
-      {
-        items.map((movie, index) => {
-          console.log('movie1', movie);
-          return <SortableItem key={`item-${movie.id}`} index={index} movie={movie} />
-        })
-      }
-    </ul>
-  )
-})
 
 class SortableComponent extends Component {
 
   render() {
-    const { list, onSortEnd } = this.props;
+    console.log('props', this.props)
+    const { list, onSortEnd, deleteMovie } = this.props;
+
+    const SortableItem = SortableElement(({ movie }) => {
+      return (
+
+        <div key={movie.id} style={liStyle} >
+          <span style={{ fontSize: "20px" }}>{movie.name}</span>
+          {/* delete button */}
+          <button onClick={() => deleteMovie(movie)} style={buttonStyle}>x</button>
+          <br />
+          {movie.director}, {movie.year}
+        </div>
+      )
+    }
+    )
+
+    const SortableList = SortableContainer(({ items }) => {
+      // debugger;
+      return (
+        <ul className="row" >
+          {
+            items.map((movie, index) => {
+              console.log('movie1', movie);
+              return <SortableItem key={`item-${movie.id}`} index={index} movie={movie} />
+            })
+          }
+        </ul>
+      )
+    })
+
     return <SortableList items={list} onSortEnd={onSortEnd} axis="y" />;
   }
 }
@@ -54,7 +68,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  orderList: (oldIndex, newIndex) => dispatch(orderList(oldIndex, newIndex))
+  orderList: (oldIndex, newIndex) => dispatch(orderList(oldIndex, newIndex)),
+  deleteMovie: (movie) => dispatch(deleteMovie(movie))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SortableComponent);

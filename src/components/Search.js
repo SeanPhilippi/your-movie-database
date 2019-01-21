@@ -48,7 +48,7 @@ class Search extends React.Component {
           name: movie.Title,
           year: movie.Year,
           director: data.Director,
-          subtitle: true
+          id: data.imdbID
         });
         clearResults();
       });

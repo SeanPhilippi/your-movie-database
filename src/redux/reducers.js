@@ -39,6 +39,10 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.REORDER_LIST: return {
       ...state,
       list: arrayMove(state.list, payload.oldIndex, payload.newIndex)
+    };
+    case TYPES.DELETE_MOVIE: return {
+      ...state,
+      list: [...state.list.filter(movie => movie.id !== payload.movie.id)]
     }
     default: return state;
   }
