@@ -5,6 +5,8 @@ import { deleteList, saveList } from '../redux/actions';
 class SaveDelete extends Component {
 
   render() {
+    const { saveList, deleteList } = this.props;
+
     return (
       <div className="save-delete">
         <button c
@@ -29,8 +31,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteList: ({ oldIndex, newIndex }) => dispatch(orderList(oldIndex, newIndex)),
-  saveList: () => dispatch(deleteMovie(movie))
+  deleteList: () => dispatch(deleteList()),
+  saveList: () => dispatch(saveList())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);

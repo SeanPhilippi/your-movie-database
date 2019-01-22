@@ -51,7 +51,7 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.DELETE_MOVIE_LIST: return {
       ...state,
-      list: [];
+      list: []
     };
     default: return state;
   }
