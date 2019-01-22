@@ -36,11 +36,8 @@ class Search extends React.Component {
 
   handleAdd = (movie) => {
     const { apiUrl, apiKey, setList, clearResults } = this.props;
-    const newMovie = {};
-    // add functionality for adding another draggable item to DraggableList
-    // fetch call to grab movie from api by id, then grab director and maybe country
-    // from that create newMovie json object to put into state.list
 
+    // fetch call to grab movie from api by id, then grab director and maybe country
     fetch(`${apiUrl}i=${movie.imdbID}&apikey=${apiKey}`)
       .then(res => res.json())
       .then(data => {

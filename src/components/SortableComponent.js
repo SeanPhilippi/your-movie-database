@@ -6,19 +6,6 @@ import { orderList, deleteMovie } from '../redux/actions';
 
 class SortableComponent extends Component {
 
-  // save a list
-  handleSave = () => {
-    fetch('/:user/list', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.props.list)
-    })
-      .then(res => res.json())
-      .catch(err => console.log(err))
-  }
-
   // update a list
   handleChange = () => {
     fetch('/:user/:listId/update', {

@@ -46,9 +46,9 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       list: [...state.list.filter(movie => movie.id !== payload.movie.id)]
     };
-    case TYPES.SAVE_MOVIE_LIST: return {
+    // case TYPES.SAVE_MOVIE_LIST: return {
 
-    };
+    // };
     case TYPES.DELETE_MOVIE_LIST: return {
       ...state,
       list: []

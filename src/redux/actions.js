@@ -5,7 +5,7 @@ export const TYPES = {
   CLEAR_SEARCH_RESULTS: 'CLEAR_SEARCH_RESULTS',
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
-  SAVE_MOVIE_LIST: 'SAVE_MOVIE_LIST',
+  // SAVE_MOVIE_LIST: 'SAVE_MOVIE_LIST',
   DELETE_MOVIE_LIST: 'DELETE_MOVIE_LIST'
 };
 
@@ -59,9 +59,9 @@ export const deleteMovie = (movie) => ({
   }
 })
 
-export const saveList = () => ({
-  type: TYPES.SAVE_MOVIE_LIST
-})
+// export const saveList = () => ({
+//   type: TYPES.SAVE_MOVIE_LIST
+// })
 
 export const deleteList = () => ({
   type: TYPES.DELETE_MOVIE_LIST

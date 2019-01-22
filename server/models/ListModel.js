@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const ListSchema = new Schema({
   listName: {
     type: String,
-    required: true
+    // required: true
   },
   listId: {
     type: String,
-    required: true
+    // required: true
   },
   list: [{
     // array of movie objects

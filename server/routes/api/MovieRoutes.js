@@ -22,10 +22,11 @@ router.get('/list', (req, res) => {
 // @route   Post api/movies
 // @desc    create and save movie list to mlab
 // @access  Public
-router.post('/:user/list', (req, res) => {
+router.post('/list', (req, res) => {
   const newList = new List();
   // listName and listId required by model
   // make sure req (list) has listName and listId
+  console.log('req', req)
   newList.listName = req.body.listName;
   newList.listId = req.body.listId;
   req.body.map(item => {
