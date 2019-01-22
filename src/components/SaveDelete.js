@@ -24,4 +24,13 @@ class SaveDelete extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  list: state.list
+});
+
+const mapDispatchToProps = dispatch => ({
+  deleteList: ({ oldIndex, newIndex }) => dispatch(orderList(oldIndex, newIndex)),
+  saveList: () => dispatch(deleteMovie(movie))
+});
+
 export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);
