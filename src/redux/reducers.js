@@ -1,9 +1,10 @@
 import { TYPES } from './actions';
 import { arrayMove } from 'react-sortable-hoc';
+const key = require('../config/keys').apiKey;
 
 const initialState = {
   apiUrl: 'http://www.omdbapi.com/?',
-  apiKey: 'd5d74a24&',
+  apiKey: key,
   searchText: '',
   searchResults: [],
   listID: null,
