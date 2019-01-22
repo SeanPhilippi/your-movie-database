@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { orderList, deleteMovie } from '../redux/actions';
-
+import './Profile.css';
 
 class SortableComponent extends Component {
 
@@ -57,6 +57,7 @@ class SortableComponent extends Component {
               console.log('movie1', movie);
               return (
                 <SortableItem
+                  className="sortable-item"
                   key={`item-${movie.id}`}
                   sortIndex={index}
                   index={index}
@@ -69,7 +70,7 @@ class SortableComponent extends Component {
       )
     })
 
-    return <SortableList items={list} onSortEnd={orderList} axis="y" />;
+    return <SortableList className="sortable-list" items={list} onSortEnd={orderList} axis="y" />;
   }
 }
 
