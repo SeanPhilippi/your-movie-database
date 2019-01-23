@@ -4,7 +4,7 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { orderList, deleteMovie } from '../redux/actions';
 import './Profile.css';
 
-class SortableComponent extends Component {
+class SortableList extends Component {
 
   // update a list
   handleChange = () => {
@@ -51,13 +51,13 @@ class SortableComponent extends Component {
     const SortableList = SortableContainer(({ items }) => {
       // debugger;
       return (
-        <ul className="row" >
+        <div className="list-row" >
           {
             items.map((movie, index) => {
               console.log('movie1', movie);
               return (
                 <SortableItem
-                  className="sortable-item"
+                  // className="sortable-item"
                   key={`item-${movie.id}`}
                   sortIndex={index}
                   index={index}
@@ -66,18 +66,20 @@ class SortableComponent extends Component {
               )
             })
           }
-        </ul>
+        </div>
       )
     })
 
     return (
-      <SortableList
-        helperClass='sortableHelper'
-        // className="sortable-list" 
-        items={list}
-        onSortEnd={orderList}
-        axis="y"
-      />
+      <div className="list-container">
+        <SortableList
+          helperClass='sortableHelper'
+          // className="sortable-list" 
+          items={list}
+          onSortEnd={orderList}
+          axis="y"
+        />
+      </div>
     )
   }
 }
@@ -91,4 +93,4 @@ const mapDispatchToProps = dispatch => ({
   deleteMovie: (movie) => dispatch(deleteMovie(movie))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortableComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(SortableList);

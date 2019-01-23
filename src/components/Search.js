@@ -26,11 +26,22 @@ class Search extends React.Component {
   renderResults = () => {
     return this.props.searchResults.map(movie =>
       <div
-        key={movie.imdbID}
+        key={movie.imdbId}
+        className="result-item"
         onClick={() => this.handleAdd(movie)}
       >
-        {movie.Title}({movie.Year})
+        <div className="result-info">
+          <div style={{ fontSize: "15px" }}>
+            {movie.Title} ({movie.Year})
+          </div>
+        </div>
       </div>
+
+      // <div
+      //   
+      // >
+      //   {movie.Title}({movie.Year})
+      // </div>
     )
   }
 

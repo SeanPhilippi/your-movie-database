@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 
 class List extends React.Component {
 

@@ -13,20 +13,6 @@ code {
     monospace;
 }
 
-.movie-item {
-  display: grid;
-  grid-template-columns: 1fr 10fr 1fr;
-   font-size: 15px;
-  border: black solid 1px;
-  margin: auto;
- /* padding-top: 2px;
-  padding-bottom: 2px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: block;*/
-  width: 42%; 
-}
-
 /* SaveDelete */
 .save-delete {
   margin: 20px 0 10px 450px;
@@ -65,11 +51,53 @@ code {
   border: 1px solid black;
 } */
 
+/* Search Results */
+.result-item {
+  font-size: 15px;
+  height: 25px;
+  border-bottom: lightgrey solid 1px;
+  margin: auto;
+  width: 42%;
+}
+
+.result-info {
+  margin: 5px 0;
+}
+
+.result-year-director {
+  margin-top: 2px;
+}
+
+/* Sortable List */
+.list-container {
+  margin: 15px 0 20px 0;
+}
+
 /* Movie Items */
+.movie-item {
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr;
+  font-size: 15px;
+  border: black solid 1px;
+  margin: auto;
+  width: 42%; 
+}
+
+.movie-info {
+  margin: 5px 0;
+}
+
+.dir-year {
+  margin-top: 2px;
+}
+
+/* .sortable-item {
+  
+} */
+
 .sortableHelper {
   margin: auto;
   text-align: center;
-  
 }
 
 .delete {
@@ -87,14 +115,6 @@ code {
   font-size: 26px;
   margin: auto;
   margin-left: 13px;
-}
-
-.movie-info {
-  margin: 5px 0;
-}
-
-.dir-year {
-  margin-top: 2px;
 }
 
 /* Description */

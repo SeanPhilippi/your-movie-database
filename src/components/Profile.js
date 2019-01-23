@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import './Profile.css';
 import SiteHeader from './SiteHeader';
 import CommentColumn from './CommentColumn';
-import Footer from './Footer';
 import Description from './Description';
 import SaveDelete from './SaveDelete';
-import SortableComponent from './SortableComponent';
-// import List from './components/List';
+import SortableList from './SortableList';
 import Search from './Search';
 
 class Profile extends Component {
@@ -36,15 +34,13 @@ class Profile extends Component {
             <Search
               add={this.handleAdd}
             />
-            <SortableComponent />
-            {/* <List add={this.handleAdd} list={this.state.list} /> */}
+            <SortableList />
             <Description />
           </div>
           <div className="right">
             <CommentColumn className="comments" />
           </div>
         </div>
-        <Footer />
       </div >
     );
   }

@@ -26,9 +26,8 @@ class App extends Component {
             <Route exact={true} path="/register" component={Register} />
             <Route exact={true} path="/profile" component={Profile} />
           </Switch>
-        </BrowserRouter>
-      </div>
-
+        </div>
+      </BrowserRouter>
     );
   }
 }
