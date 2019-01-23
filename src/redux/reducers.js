@@ -9,6 +9,7 @@ const initialState = {
   searchResults: [],
   listID: null,
   listName: null,
+  username: 'kesto',
   list: [
     // dummy data
     { name: '2001: A Space Odyssey', year: '1968', director: 'Stanley Kubrick', id: 'tt0062622' },

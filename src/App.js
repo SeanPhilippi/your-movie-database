@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+import TopNav from './components/TopNav';
+import Home from './components/Home';
 import Profile from './components/Profile';
 import Login from './components/Login';
 import Register from './components/Register';
+// import react router
 import {
-  BrowserRouter,
   Route,
-  Switch
+  Switch,
+  BrowserRouter
 } from 'react-router-dom';
 
 class App extends Component {
@@ -15,15 +18,17 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div className="App" >
+        <div className="container">
+          <TopNav />
           <Switch>
-            <Route path="/profile" component={Profile} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/" component={} />
+            <Route exact={true} path="/" component={Home} />
+            <Route exact={true} path="/login" component={Login} />
+            <Route exact={true} path="/register" component={Register} />
+            <Route exact={true} path="/profile" component={Profile} />
           </Switch>
-        </div >
-      </BrowserRouter>
+        </BrowserRouter>
+      </div>
+
     );
   }
 }

@@ -70,7 +70,15 @@ class SortableComponent extends Component {
       )
     })
 
-    return <SortableList className="sortable-list" items={list} onSortEnd={orderList} axis="y" />;
+    return (
+      <SortableList
+        helperClass='sortableHelper'
+        // className="sortable-list" 
+        items={list}
+        onSortEnd={orderList}
+        axis="y"
+      />
+    )
   }
 }
 
