@@ -1,111 +1,50 @@
 import React from 'react';
-import classnames from 'classnames';
-import DraggableList from 'react-draggable-list'
+import { connect } from 'react-redux';
 
-const cx = classnames;
+class List extends React.Component {
 
-type Item = {
-  name: string;
-  subtitle?: boolean;
-};
-
-type ListProps = {
-  item: Item;
-  itemSelected: number;
-  dragHandleProps: Object;
-};
-
-type ListState = {
-  value: number;
-};
-
-class ListItem extends React.Component<ListProps, ListState> {
-  state = {
-    value: 0
-  };
-
-  _inc() {
-    this.setState({
-      value: this.state.value + 1
-    });
-  }
-
-  getDragHeight() {
-    return this.props.item.subtitle ? 47 : 28;
+  liStyle = {
+    fontSize: '15px',
+    border: 'black solid 1px',
+    margin: 'auto',
+    paddingTop: '2px',
+    paddingBottom: '2px',
+    marginTop: '10px',
+    marginBottom: '10px',
+    display: 'block',
+    width: '42%'
   }
 
   render() {
-    const { item, itemSelected, dragHandleProps } = this.props;
-    const { value } = this.state;
-    const scale = itemSelected * .05 + 1;
-    const shadow = itemSelected * 15 + 1;
-    const dragged = itemSelected !== 0;
+
+    console.log('list', this.props.list)
 
     return (
-      <div
-        className={cx('item', { dragged })}
-        style={{
-          transform: `scale(${scale})`,
-          boxShadow: `rgba(0, 0, 0, 0.3) 0px ${shadow}px ${2 * shadow}px 0px`
-        }}
-      >
-        <div className="dragHandle" {...dragHandleProps} />
-        <h2>{item.name}</h2>
-        {item.subtitle &&
-          <div className="subtitle">{item.director}, {item.year}</div>
-        }
-        <div>
-          **background image**
-        </div>
+      <div>
+        {this.props.list.map(movie => (
+          <div key={movie.id} style={this.liStyle}>
+            <span style={{ fontSize: "20px" }}>{movie.name}</span>
+            <br />
+            {movie.director}, {movie.year}
+          </div>
+          <div>
+            <button>button</button>
+          </div>
+        ))}
       </div>
     )
   }
 }
 
-type ExampleState = {
-  useContainer: boolean;
-  list: $ReadOnlyArray<Item>;
-}
+// mapping Redux global state to props
+const mapStateToProps = state => ({
+  list: state.list
+});
 
-export default class List extends React.Component<{}, ExampleState> {
-  _container: HTMLElement;
-
-  state = {
-    useContainer: false,
-    list: this.props.list
-  };
-
-
-  _onListChange(newList: $ReadOnlyArray<Item>) {
-    this.setState({ list: newList });
+const mapDispatchToProps = (dispatch, props) => ({
+  orderList: ({ oldIndex, newIndex }) => {
+    dispatch(listActions.orderList(oldIndex, newIndex))
   }
+});
 
-  render() {
-    const { useContainer } = this.state;
-
-    return (
-
-      <div className="main" >
-        <div
-          className="list" ref={el => {
-            if (el) this._container = el;
-          }}
-          style={{
-            overflow: useContainer ? 'auto' : '',
-            height: useContainer ? '200px' : '',
-            border: useContainer ? '1px solid gray' : ''
-          }}
-        >
-
-          <DraggableList
-            itemKey="name"
-            list={this.props.list}
-            template={ListItem}
-            onMoveEnd={newList => this._onListChange(newList)}
-            container={() => useContainer ? this._container : document.body}
-          />
-        </div>
-      </div>
-    )
-  }
-};
+export default connect(mapStateToProps, mapDispatchToProps)(List);

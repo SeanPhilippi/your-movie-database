@@ -4,21 +4,27 @@ const Schema = mongoose.Schema;
 const ListSchema = new Schema({
   listName: {
     type: String,
-    required: true
+    // required: true
   },
   listId: {
     type: String,
-    required: true
+    // required: true
   },
-  movies: [{
+  list: [{
     // array of movie objects
-    title: {
-      type: String,
-      required: true
+    // removed required so an empty list could be created
+    // adding, removing, reordering can be an update (PUT) from there
+    name: {
+      type: String
     },
-    imdbURL: {
-      type: String,
-      required: true
+    year: {
+      type: String
+    },
+    director: {
+      type: String
+    },
+    id: {
+      type: String
     }
   }]
 });
