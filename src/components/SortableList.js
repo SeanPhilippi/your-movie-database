@@ -77,7 +77,9 @@ class SortableList extends Component {
           // className="sortable-list" 
           items={list}
           onSortEnd={orderList}
-          axis="y"
+          lockAxis="y"
+          lockToContainerEdges={true}
+          helperContainer={document.body.getElementsByClassName('list-container')[0]}
         />
       </div>
     )
