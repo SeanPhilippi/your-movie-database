@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import './App.css';
+import './index.css';
 import TopNav from './components/TopNav';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import Login from './components/Login';
 import Register from './components/Register';
 // import react router
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 class App extends Component {
 
   render() {
 
     return (
-      <Router>
+      <BrowserRouter>
         <div className="container">
           <TopNav />
           <Switch>
@@ -23,7 +23,7 @@ class App extends Component {
             <Route exact path="/profile" component={Profile} />
           </Switch>
         </div>
-      </Router>
+      </BrowserRouter>
     );
   }
 }

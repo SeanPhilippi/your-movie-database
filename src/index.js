@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/Profile';
+import App from './App';
 // for connecting App to Redux store
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';

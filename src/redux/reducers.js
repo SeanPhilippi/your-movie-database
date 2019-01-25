@@ -7,8 +7,8 @@ const initialState = {
   apiKey: key,
   searchText: '',
   searchResults: [],
-  listID: null,
-  listName: null,
+  listID: '',
+  listName: '',
   username: 'kesto',
   list: [
     // dummy data
