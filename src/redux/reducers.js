@@ -9,6 +9,7 @@ const initialState = {
   searchResults: [],
   listID: '',
   listName: '',
+  listDescript: '',
   username: 'kesto',
   list: [
     // dummy data
