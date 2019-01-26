@@ -2,13 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ListSchema = new Schema({
-  listName: {
+  username: {
     type: String,
-    // required: true
-  },
-  listId: {
-    type: String,
-    // required: true
+    required: true
   },
   list: [{
     // array of movie objects

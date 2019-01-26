@@ -66,3 +66,29 @@ export const deleteMovie = (movie) => ({
 export const deleteList = () => ({
   type: TYPES.DELETE_MOVIE_LIST
 });
+
+export const fetchList = () => (dispatch, getState) => {
+  const { list, username } = getState();
+
+  fetch(`${username}/list`)
+    .then(res => res.json())
+    .then(data => {
+      console.log('data', data);
+
+    })
+    .catch(err => console.error(err));
+}
+
+// code below is probably wrong way to go about it, use route I made
+
+// export const fetchList = () => (dispatch, getState) => {
+//   const { dbuser, dbpassword, list } = getState();
+
+//   fetch(`mongodb://${dbuser}:${dbpassword}@ds157499.mlab.com:57499/aca-final-ymdb`)
+//     .then(res => res.json())
+//     .then(data => {
+//       console.log('data', data);
+
+//     })
+//     .catch(err => console.error(err));
+// }

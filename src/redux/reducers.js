@@ -1,14 +1,17 @@
 import { TYPES } from './actions';
 import { arrayMove } from 'react-sortable-hoc';
-const key = require('../config/keys').apiKey;
+// const key = require('../config/keys').apiKey;
+import { apiKey, dbuser, dbpassword } from '../config/keys';
 
 const initialState = {
   apiUrl: 'http://www.omdbapi.com/?',
-  apiKey: key,
+  apiKey,
+  dbuser,
+  dbpassword,
   searchText: '',
   searchResults: [],
-  listID: '',
-  listName: '',
+  // listID: '',
+  // listName: '',
   listDescript: '',
   username: 'kesto',
   list: [

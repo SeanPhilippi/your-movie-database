@@ -13,8 +13,8 @@ router.get('/search/:query', (req, res) => {
 // @route   Get list
 // @desc    fetch user's existing list
 // @access  Public
-router.get('/list', (req, res) => {
-  List.find({}).then(data => {
+router.get(':user/list', (req, res) => {
+  List.findOne({ user: user }).then(data => {
     res.json(data)
   })
 });
