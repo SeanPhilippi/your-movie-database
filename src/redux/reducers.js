@@ -13,7 +13,7 @@ const initialState = {
   // listID: '',
   // listName: '',
   listDescript: '',
-  username: 'kesto',
+  username: '',
   list: [
     // dummy data
     // { name: '2001: A Space Odyssey', year: '1968', director: 'Stanley Kubrick', id: 'tt0062622' },
@@ -36,10 +36,11 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       searchResults: payload.data,
     };
+    // set fetched movie list to state
     case TYPES.SET_MOVIE_LIST: return {
       ...state,
-      // username: payload.data.username,
-      list: payload.list.list
+      // username: payload.username,
+      list: [...payload.list]
     };
     case TYPES.ADD_TO_LIST: return {
       ...state,

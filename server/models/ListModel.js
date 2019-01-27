@@ -11,16 +11,20 @@ const ListSchema = new Schema({
     // removed required so an empty list could be created
     // adding, removing, reordering can be an update (PUT) from there
     name: {
-      type: String
+      type: String,
+      required: true
     },
     year: {
-      type: String
+      type: String,
+      required: true
     },
     director: {
-      type: String
+      type: String,
+      required: true
     },
     id: {
-      type: String
+      type: String,
+      required: true
     }
   }]
 });

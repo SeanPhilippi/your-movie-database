@@ -7,7 +7,7 @@ import './Profile.css';
 class SortableList extends Component {
 
   componentDidMount = () => {
-    this.props.fetchList(this.props.setList())
+    this.props.setList(this.props.fetchList())
     // fetch('/list')
     //   .then(res => res.json())
     //   .then(data => {

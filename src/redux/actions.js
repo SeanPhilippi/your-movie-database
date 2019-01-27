@@ -48,10 +48,10 @@ export const fetchList = () => (dispatch, getState) => {
     .catch(err => console.error(err));
 }
 
-export const setFetchedList = data => ({
+export const setFetchedList = list => ({
   type: TYPES.SET_MOVIE_LIST,
   payload: {
-    data
+    list
   }
 });
 
@@ -73,7 +73,7 @@ export const orderList = (oldIndex, newIndex) => ({
   }
 })
 
-export const deleteMovie = (movie) => ({
+export const deleteMovie = movie => ({
   type: TYPES.DELETE_MOVIE,
   payload: {
     movie
