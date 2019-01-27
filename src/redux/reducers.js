@@ -38,9 +38,9 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.SET_MOVIE_LIST: return {
       ...state,
-      username: payload.data.username,
-      list: payload.data.list
-    }
+      // username: payload.data.username,
+      list: payload.list.list
+    };
     case TYPES.ADD_TO_LIST: return {
       ...state,
       list: [...state.list, payload.movie]

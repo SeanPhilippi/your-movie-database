@@ -39,7 +39,7 @@ export const setSearchResults = data => ({
 export const fetchList = () => (dispatch, getState) => {
   const { username } = getState();
 
-  fetch(`${username}/list`)
+  fetch(`/${username}/list`)
     .then(res => res.json())
     .then(data => {
       console.log('data', data);

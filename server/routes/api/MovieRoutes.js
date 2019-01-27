@@ -13,12 +13,10 @@ router.get('/search/:query', (req, res) => {
 // @route   Get list
 // @desc    fetch user's existing list
 // @access  Public
-router.get(':username/list', (req, res) => {
-  List.findOne({ username: req.params.username }).then(data => {
+router.get('/:username/list', (req, res) => {
+  List.findOne({ username: req.params.username }).exec().then(data => {
     res.json(data)
-  }).catch(err => {
-    message.innerHTML = "Error: " + err + ".";
-  })
+  }).catch(err => console.log('error', err));
 });
 
 // @route   Post api/movies
