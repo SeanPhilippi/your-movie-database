@@ -46,13 +46,13 @@ class Search extends React.Component {
   }
 
   handleAdd = (movie) => {
-    const { apiUrl, apiKey, setList, clearResults } = this.props;
+    const { apiUrl, apiKey, addToList, clearResults } = this.props;
 
     // fetch call to grab movie from api by id, then grab director and maybe country
     fetch(`${apiUrl}i=${movie.imdbID}&apikey=${apiKey}`)
       .then(res => res.json())
       .then(data => {
-        setList({
+        addToList({
           name: movie.Title,
           year: movie.Year,
           director: data.Director,
