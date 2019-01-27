@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   setSearchText,
   getSearchResults,
-  setMovieList,
+  addToList,
   clearSearchResults
 } from '../redux/actions';
 
@@ -102,7 +102,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   handleSearchText: text => dispatch(setSearchText(text)),
   getResults: () => dispatch(getSearchResults()),
-  setList: movie => dispatch(setMovieList(movie)),
+  addToList: movie => dispatch(addToList(movie)),
   clearResults: () => dispatch(clearSearchResults())
 });
 

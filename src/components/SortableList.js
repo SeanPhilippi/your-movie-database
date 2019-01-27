@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { orderList, deleteMovie } from '../redux/actions';
+import { orderList, deleteMovie, fetchList, setFetchedList } from '../redux/actions';
 import './Profile.css';
 
 class SortableList extends Component {
+
+  componentDidMount = () => {
+    this.props.fetchList(this.props.setList())
+    // fetch('/list')
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     console.log('data', data);
+    // this.setState({ list: data })
+  }
+
+  // onTextChange = e => {
+  //   this.setState({ searchText: e.target.value });
+  // }
 
   // update a list
   handleChange = () => {
@@ -91,6 +104,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  setList: () => dispatch(setFetchedList()),
+  fetchList: (list) => dispatch(fetchList(list)),
   orderList: ({ oldIndex, newIndex }) => dispatch(orderList(oldIndex, newIndex)),
   deleteMovie: (movie) => dispatch(deleteMovie(movie))
 });

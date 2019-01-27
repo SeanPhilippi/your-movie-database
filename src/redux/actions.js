@@ -1,7 +1,9 @@
 export const TYPES = {
   SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
   SET_SEARCH_RESULTS: 'SET_SEARCH_RESULTS',
+  FETCH_MOVIE_LIST: 'FETCH_MOVIE_LIST',
   SET_MOVIE_LIST: 'SET_MOVIE_LIST',
+  ADD_TO_LIST: 'SET_MOVIE_LIST',
   CLEAR_SEARCH_RESULTS: 'CLEAR_SEARCH_RESULTS',
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
@@ -34,8 +36,27 @@ export const setSearchResults = data => ({
   }
 });
 
-export const setMovieList = movie => ({
+export const fetchList = () => (dispatch, getState) => {
+  const { username } = getState();
+
+  fetch(`${username}/list`)
+    .then(res => res.json())
+    .then(data => {
+      console.log('data', data);
+      dispatch(setFetchedList(data))
+    })
+    .catch(err => console.error(err));
+}
+
+export const setFetchedList = data => ({
   type: TYPES.SET_MOVIE_LIST,
+  payload: {
+    data
+  }
+});
+
+export const addToList = movie => ({
+  type: TYPES.ADD_TO_LIST,
   payload: {
     movie
   }
@@ -66,18 +87,6 @@ export const deleteMovie = (movie) => ({
 export const deleteList = () => ({
   type: TYPES.DELETE_MOVIE_LIST
 });
-
-export const fetchList = () => (dispatch, getState) => {
-  const { list, username } = getState();
-
-  fetch(`${username}/list`)
-    .then(res => res.json())
-    .then(data => {
-      console.log('data', data);
-
-    })
-    .catch(err => console.error(err));
-}
 
 // code below is probably wrong way to go about it, use route I made
 

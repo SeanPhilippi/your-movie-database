@@ -13,9 +13,11 @@ router.get('/search/:query', (req, res) => {
 // @route   Get list
 // @desc    fetch user's existing list
 // @access  Public
-router.get(':user/list', (req, res) => {
-  List.findOne({ user: user }).then(data => {
+router.get(':username/list', (req, res) => {
+  List.findOne({ username: req.params.username }).then(data => {
     res.json(data)
+  }).catch(err => {
+    message.innerHTML = "Error: " + err + ".";
   })
 });
 
@@ -27,14 +29,17 @@ router.post('/list', (req, res) => {
   // listName and listId required by model
   // make sure req (list) has listName and listId
   console.log('req', req)
-  newList.listName = req.body.listName;
-  newList.listId = req.body.listId;
+  // set username to redux state's username
+  newList.username = req.body.username;
+  // newList.listName = req.body.listName;
+  // newList.listId = req.body.listId;
   req.body.map(item => {
     const movie = {};
     movie.name = item.name;
     movie.year = item.year;
     movie.director = item.director;
     movie.id = item.id;
+    // push created movie objects to list array in newList object
     newList.list.push(movie);
   });
   newList.save()
