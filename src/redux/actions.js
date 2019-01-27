@@ -38,20 +38,21 @@ export const setSearchResults = data => ({
 
 export const fetchList = () => (dispatch, getState) => {
   const { username } = getState();
-
+  console.log('username', username)
   fetch(`/${username}/list`)
     .then(res => res.json())
     .then(data => {
+      console.log('username', username);
       console.log('data', data);
       dispatch(setFetchedList(data))
     })
     .catch(err => console.error(err));
 }
 
-export const setFetchedList = list => ({
+export const setFetchedList = data => ({
   type: TYPES.SET_MOVIE_LIST,
   payload: {
-    list
+    data
   }
 });
 
