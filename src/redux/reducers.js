@@ -34,7 +34,7 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.SET_SEARCH_RESULTS: return {
       ...state,
-      searchResults: payload.data,
+      searchResults: [...state.searchResults, ...payload.data],
     };
     // set fetched movie list to state
     case TYPES.SET_MOVIE_LIST: return {

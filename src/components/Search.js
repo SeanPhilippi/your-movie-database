@@ -63,11 +63,16 @@ class Search extends React.Component {
   }
 
   render() {
-    const { searchText, handleSearchText, getResults } = this.props;
+    const { searchText, handleSearchText, clearResults, getResults } = this.props;
 
     const onKeyUp = e => {
       if (e.key === 'Enter') {
-        getResults();
+        clearResults();
+        // 5 pages of results
+        const arr = [1, 2, 3, 4, 5];
+        arr.map(num => {
+          getResults(num);
+        })
       }
     }
 
@@ -101,7 +106,7 @@ const mapStateToProps = state => ({
 // mapping dispatched actions to props
 const mapDispatchToProps = dispatch => ({
   handleSearchText: text => dispatch(setSearchText(text)),
-  getResults: () => dispatch(getSearchResults()),
+  getResults: num => dispatch(getSearchResults(num)),
   addToList: movie => dispatch(addToList(movie)),
   clearResults: () => dispatch(clearSearchResults())
 });
