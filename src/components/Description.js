@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Description extends Component {
   render() {
+
     return (
       <div className="description">
         <textarea
@@ -11,6 +13,7 @@ class Description extends Component {
           cols="80"
           rows="20"
           placeholder="Write your description here..."
+        // value={this.props.listDescript}
         >
         </textarea>
       </div>
@@ -18,4 +21,8 @@ class Description extends Component {
   }
 }
 
-export default Description;
+const mapStateToProps = state => ({
+  listDescript: state.listDescript
+})
+
+export default connect(mapStateToProps)(Description);

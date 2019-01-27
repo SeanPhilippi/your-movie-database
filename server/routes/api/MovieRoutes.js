@@ -29,6 +29,7 @@ router.post('/list', (req, res) => {
   console.log('req', req)
   // set username to redux state's username
   newList.username = req.body.username;
+  newList.listDescript = req.body.listDescript;
   // newList.listName = req.body.listName;
   // newList.listId = req.body.listId;
   req.body.map(item => {

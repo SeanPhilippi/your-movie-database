@@ -6,6 +6,9 @@ const ListSchema = new Schema({
     type: String,
     required: true
   },
+  listDescript: {
+    type: String
+  },
   list: [{
     // array of movie objects
     // removed required so an empty list could be created
