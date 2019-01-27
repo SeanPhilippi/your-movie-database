@@ -21,7 +21,7 @@ export const setSearchText = text => ({
 export const getSearchResults = () => (dispatch, getState) => {
   const { apiUrl, apiKey, searchText } = getState();
 
-  fetch(`${apiUrl}s=${searchText}&apikey=${apiKey}`)
+  fetch(`${apiUrl}s=${searchText.trim()}&apikey=${apiKey}`)
     .then(res => res.json())
     .then(data => {
       dispatch(setSearchResults(data.Search))
