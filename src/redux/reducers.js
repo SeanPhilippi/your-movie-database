@@ -12,7 +12,7 @@ const initialState = {
   searchResults: [],
   // listID: '',
   // listName: '',
-  listDescript: 'flskjeflsjlekfse',
+  listDescript: '',
   username: 'kesto',
   list: [
     // dummy data
@@ -44,6 +44,7 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_MOVIE_LIST: return {
       ...state,
       username: payload.data.username,
+      listDescript: payload.data.listDescript,
       list: [...payload.data.list]
     };
     case TYPES.ADD_TO_LIST: return {

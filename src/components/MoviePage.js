@@ -8,7 +8,7 @@ import {
 class MoviePage extends React.Component {
 
   render() {
-    const { name, director, year } = this.props.location.state;
+    const { name, director, year } = this.props.history.location.state;
 
     return (
       <div className="MoviePage">
