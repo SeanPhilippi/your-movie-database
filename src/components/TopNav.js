@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class TopNav extends React.Component {
 
@@ -8,11 +8,11 @@ class TopNav extends React.Component {
 
     return (
       <div className="links">
-        <div>
-          <Link to="/" className="link">Home</Link>
-          <Link to="/register" className="link">Register</Link>
-          <Link to="/signin" className="link">Sign In</Link>
-          <Link to="/profile" className="link">{this.props.username}</Link>
+        <div className='nav-links'>
+          <NavLink to="/" className="navlink">Home</NavLink>
+          <NavLink to="/register" className="navlink">Register</NavLink>
+          <NavLink to="/login" className="navlink">Log In</NavLink>
+          <NavLink to="/profile" className="navlink">{this.props.username}</NavLink>
         </div>
       </div>
     )

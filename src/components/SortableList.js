@@ -40,7 +40,9 @@ class SortableList extends Component {
           <div className="movie-info">
             <div style={{ fontSize: "20px" }}>
               <Link
-                to='/movie'
+                to={{
+                  pathname: '/movie',
+                }}
                 // to={{
                 //   pathname: `/movie/${movie}`,
                 //   state: {

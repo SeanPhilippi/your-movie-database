@@ -13,6 +13,18 @@ code {
     monospace;
 }
 
+/* TopNav */
+.nav-links {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.navlink {
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+}
+
 /* SaveDelete */
 .save-delete {
   margin: 20px 0 10px 450px;
