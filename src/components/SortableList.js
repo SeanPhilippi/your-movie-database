@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { Link } from 'react-router-dom';
 import { orderList, deleteMovie, fetchList, setFetchedList } from '../redux/actions';
 import './Profile.css';
 
@@ -38,7 +39,21 @@ class SortableList extends Component {
           <div className="numbers">{sortIndex + 1} |</div>
           <div className="movie-info">
             <div style={{ fontSize: "20px" }}>
-              {movie.name}
+              <Link
+                to='/movie'
+                // to={{
+                //   pathname: `/movie/${movie}`,
+                //   state: {
+                //     id: movie.id,
+                //     name: movie.name,
+                //     director: movie.director,
+                //     year: movie.year,
+
+                //   }
+                // }}
+                className="movie-link">
+                {movie.name}
+              </Link>
             </div>
             <div className="dir-year">
               {movie.director}, {movie.year}

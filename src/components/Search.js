@@ -10,10 +10,6 @@ import {
 
 class Search extends React.Component {
 
-  state = {
-    results: this.props.results
-  }
-
   inputStyle = {
     fontSize: 22,
     display: 'block',

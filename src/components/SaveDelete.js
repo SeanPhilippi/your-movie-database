@@ -12,7 +12,7 @@ class SaveDelete extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(this.props.list)
+      body: JSON.stringify(this.props.state)
     })
       .then(res => res.json())
       .catch(err => console.log(err))
@@ -41,7 +41,7 @@ class SaveDelete extends Component {
 }
 
 const mapStateToProps = state => ({
-  list: state.list
+  state: state
 });
 
 const mapDispatchToProps = dispatch => ({
