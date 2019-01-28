@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {
   setSearchText,
-  getSearchResults,
+  getResults,
   addToList,
   clearSearchResults
 } from '../redux/actions';
@@ -63,7 +63,7 @@ class Search extends React.Component {
   }
 
   render() {
-    const { searchText, handleSearchText, clearResults, getResults } = this.props;
+    const { searchText, setSearchText, clearResults, getResults } = this.props;
 
     const onKeyUp = e => {
       if (e.key === 'Enter') {
@@ -83,7 +83,7 @@ class Search extends React.Component {
           placeholder="Add a film..."
           style={this.inputStyle}
           value={searchText}
-          onChange={e => handleSearchText(e.target.value)}
+          onChange={e => setSearchText(e.target.value)}
           onKeyUp={onKeyUp}
         />
         <div>
@@ -105,8 +105,8 @@ const mapStateToProps = state => ({
 
 // mapping dispatched actions to props
 const mapDispatchToProps = dispatch => ({
-  handleSearchText: text => dispatch(setSearchText(text)),
-  getResults: num => dispatch(getSearchResults(num)),
+  setSearchText: text => dispatch(setSearchText(text)),
+  getResults: num => dispatch(getResults(num)),
   addToList: movie => dispatch(addToList(movie)),
   clearResults: () => dispatch(clearSearchResults())
 });

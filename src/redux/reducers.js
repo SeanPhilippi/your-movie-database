@@ -12,7 +12,7 @@ const initialState = {
   searchResults: [],
   // listID: '',
   // listName: '',
-  listDescript: '',
+  listDescript: 'flskjeflsjlekfse',
   username: 'kesto',
   list: [
     // dummy data
@@ -28,6 +28,10 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case TYPES.SET_DESCRIPT: return {
+      ...state,
+      listDescript: payload.text
+    };
     case TYPES.SET_SEARCH_TEXT: return {
       ...state,
       searchText: payload.text,

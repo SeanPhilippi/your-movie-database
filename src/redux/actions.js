@@ -1,4 +1,5 @@
 export const TYPES = {
+  SET_DESCRIPT: 'SET_DESCRIPT',
   SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
   SET_SEARCH_RESULTS: 'SET_SEARCH_RESULTS',
   FETCH_MOVIE_LIST: 'FETCH_MOVIE_LIST',
@@ -7,9 +8,15 @@ export const TYPES = {
   CLEAR_SEARCH_RESULTS: 'CLEAR_SEARCH_RESULTS',
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
-  // SAVE_MOVIE_LIST: 'SAVE_MOVIE_LIST',
   DELETE_MOVIE_LIST: 'DELETE_MOVIE_LIST'
 };
+
+export const setDescript = text => ({
+  type: TYPES.SET_DESCRIPT,
+  payload: {
+    text
+  }
+})
 
 export const setSearchText = text => ({
   type: TYPES.SET_SEARCH_TEXT,
@@ -18,7 +25,7 @@ export const setSearchText = text => ({
   }
 });
 
-export const getSearchResults = (num) => (dispatch, getState) => {
+export const getResults = (num) => (dispatch, getState) => {
   const { apiUrl, apiKey, searchText } = getState();
 
   fetch(`${apiUrl}s=${searchText.trim()}&apikey=${apiKey}&page=${num}`)
@@ -81,24 +88,6 @@ export const deleteMovie = movie => ({
   }
 })
 
-// export const saveList = () => ({
-//   type: TYPES.SAVE_MOVIE_LIST
-// })
-
 export const deleteList = () => ({
   type: TYPES.DELETE_MOVIE_LIST
 });
-
-// code below is probably wrong way to go about it, use route I made
-
-// export const fetchList = () => (dispatch, getState) => {
-//   const { dbuser, dbpassword, list } = getState();
-
-//   fetch(`mongodb://${dbuser}:${dbpassword}@ds157499.mlab.com:57499/aca-final-ymdb`)
-//     .then(res => res.json())
-//     .then(data => {
-//       console.log('data', data);
-
-//     })
-//     .catch(err => console.error(err));
-// }
