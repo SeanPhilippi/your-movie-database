@@ -54,20 +54,11 @@ router.put('/:user/:listId/update', (req, res) => {
 })
 
 // @route   Delete api/movies
-// @desc    delete movies
-// @access  Public
-router.delete('/:user/:listId/:movieId', (req, res) => {
-  Movie.findByIdAndRemove(req.params.id).exec()
-    .then(movie => res.json(movie))
-    .catch(err => console.log(err));
-})
-
-// @route   Delete api/movies
 // @desc    delete list
 // @access  Public
-router.delete('/:user/list/:id', (req, res) => {
-  List.findByIdAndRemove(req.params.id).exec()
-    .then(list => res.json(list))
+router.delete('/:username/delete', (req, res) => {
+  List.findOneAndDelete({username: req.params.username})
+    .then(res => console.log(res))
     .catch(err => console.log(err));
 })
 

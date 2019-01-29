@@ -17,7 +17,7 @@ class SortableList extends Component {
 
   // update a list
   handleChange = () => {
-    fetch('/:user/:listId/update', {
+    fetch('/:user/update', {
       method: 'PUT',
       // to be continued
     })
@@ -112,7 +112,8 @@ class SortableList extends Component {
 }
 
 const mapStateToProps = state => ({
-  list: state.list
+  list: state.list,
+  username: state.username
 });
 
 const mapDispatchToProps = dispatch => ({

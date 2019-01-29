@@ -6,7 +6,7 @@ class SaveDelete extends Component {
 
   // save a list
   handleSave = () => {
-    console.log('saving...')
+    console.log('saving...');
     fetch('/list', {
       method: 'POST',
       headers: {
@@ -18,14 +18,25 @@ class SaveDelete extends Component {
       .catch(err => console.log(err))
   }
 
+  handleDelete = () => {
+    this.props.deleteList();
+    console.log('deleting...');
+    const {username} = this.props.state;
+    return fetch(`/${username}/delete`, {
+      method: 'DELETE'
+    })
+    .then(res => {
+      return res
+    }).catch(err => console.error(err))
+  }
+
   render() {
-    const { deleteList } = this.props;
 
     return (
       <div className="save-delete">
         <button c
           className="delete-list"
-          onClick={() => deleteList()}
+          onClick={() => this.handleDelete()}
         >
           Delete
         </button>
@@ -45,7 +56,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteList: () => dispatch(deleteList())
+  deleteList: () => dispatch(deleteList()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);

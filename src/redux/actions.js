@@ -8,7 +8,7 @@ export const TYPES = {
   CLEAR_SEARCH_RESULTS: 'CLEAR_SEARCH_RESULTS',
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
-  DELETE_MOVIE_LIST: 'DELETE_MOVIE_LIST'
+  DELETE_LIST: 'DELETE_LIST'
 };
 
 export const setDescript = text => ({
@@ -89,5 +89,5 @@ export const deleteMovie = movie => ({
 })
 
 export const deleteList = () => ({
-  type: TYPES.DELETE_MOVIE_LIST
+  type: TYPES.DELETE_LIST
 });
