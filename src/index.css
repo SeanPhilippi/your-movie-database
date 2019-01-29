@@ -88,6 +88,7 @@ code {
 /* Movie Items */
 .movie-item {
   display: grid;
+  /* position:  */
   grid-template-columns: 1fr 10fr 1fr;
   font-size: 15px;
   border: black solid 1px;
@@ -113,6 +114,8 @@ code {
 }
 
 .delete {
+  white-space: nowrap;
+  overflow: hidden;
   font-size: 18px;
   background-color: Transparent;
   border: none;
@@ -122,6 +125,8 @@ code {
 }
 
 .numbers {
+  white-space: nowrap;
+  overflow: hidden;
   color: grey;
   font-style: bolder;
   font-size: 26px;
