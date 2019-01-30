@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  setDescript
+  setDescript, 
+  fetchList
 } from '../redux/actions';
 
 class Description extends Component {
+
+    componentWillMount = () => {
+    this.props.fetchList();
+  }
+
   render() {
 
     return (
@@ -18,9 +24,8 @@ class Description extends Component {
           rows="20"
           placeholder="Write your description here..."
           onChange={e => this.props.setDescript(e.target.value)}
+          value={this.props.listDescript}
         >
-          {this.props.listDescript}
-
         </textarea>
       </div>
     )
@@ -32,6 +37,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  fetchList: list => dispatch(fetchList(list)),
   setDescript: text => dispatch(setDescript(text)),
 })
 
