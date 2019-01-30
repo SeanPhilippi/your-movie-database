@@ -7,6 +7,7 @@ class SaveDelete extends Component {
   // save a list
   handleSave = () => {
     console.log('saving...');
+    // if first save, POST, else PUT
     fetch('/list', {
       method: 'POST',
       headers: {
@@ -19,8 +20,10 @@ class SaveDelete extends Component {
   }
 
   handleDelete = () => {
+    // clearing redux list array
     this.props.deleteList();
     console.log('deleting...');
+    // deleting list document tied to user
     const {username} = this.props.state;
     return fetch(`/${username}/delete`, {
       method: 'DELETE'

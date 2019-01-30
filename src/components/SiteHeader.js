@@ -8,7 +8,9 @@ class SiteHeader extends React.Component {
 
     return (
       <header>
-        YMDB: Your Movie Database
+        <div className="logo">
+          YMDB: Your Movie Database
+        </div>
         <TopNav />
       </header>
     )
