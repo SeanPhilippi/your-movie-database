@@ -65,7 +65,7 @@ class Search extends React.Component {
       if (e.key === 'Enter') {
         clearResults();
         // add more pages later when scroll container is integrated
-        const arr = [1, 2, 3];
+        const arr = [1, 2];
         arr.map(num => {
           getResults(num);
         })

@@ -26,11 +26,14 @@ code {
 .nav-links {
   display: flex;
   justify-content: space-evenly;
+  width: 65%;
+  margin: auto;
+  height: 2rem
 }
 
 .navlink {
   text-decoration: none;
-  font-size: 18px;
+  font-size: 17px;
   color: black;
 }
 
@@ -113,13 +116,9 @@ code {
   margin-top: 2px;
 }
 
-/* .sortable-item {
-  
-} */
-
 .sortableHelper {
-  margin: auto;
   text-align: center;
+  right: 0px;
 }
 
 .delete {

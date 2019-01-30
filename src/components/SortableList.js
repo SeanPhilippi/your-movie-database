@@ -11,10 +11,6 @@ class SortableList extends Component {
     this.props.fetchList();
   }
 
-  // onTextChange = e => {
-  //   this.setState({ searchText: e.target.value });
-  // }
-
   // update a list
   handleChange = () => {
     fetch('/:user/update', {
@@ -74,7 +70,7 @@ class SortableList extends Component {
     )
 
     const SortableList = SortableContainer(({ items }) => {
-      // debugger;
+
       return (
         <div className="list-row" >
           {
@@ -82,9 +78,10 @@ class SortableList extends Component {
               console.log('movie1', movie);
               return (
                 <SortableItem
-                  // className="sortable-item"
+                  className="sortable-item"
                   key={`item-${movie.id}`}
                   sortIndex={index}
+                  lockToContainerEdges={true}
                   index={index}
                   movie={movie}
                 />
@@ -99,12 +96,10 @@ class SortableList extends Component {
       <div className="list-container">
         <SortableList
           helperClass='sortableHelper'
-          // className="sortable-list" 
           items={list}
           onSortEnd={orderList}
+          transitionDuration='300'
           lockAxis="y"
-          lockToContainerEdges={true}
-          helperContainer={document.body.getElementsByClassName('list-container')[0]}
         />
       </div>
     )
