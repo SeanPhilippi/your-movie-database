@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { sortableContainer, sortableElement, sortableHandle } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
 import { orderList, deleteMovie, fetchList, setFetchedList } from '../redux/actions';
 import './Profile.css';
+import img from '../images/grippy.png'
 
 class SortableList extends Component {
 
@@ -25,13 +26,22 @@ class SortableList extends Component {
     console.log('props', this.props)
     const { list, orderList, deleteMovie } = this.props;
 
-    const SortableItem = SortableElement(({ movie, sortIndex }) => {
+  const DragHandle = sortableHandle(() => {
+    return (
+        <img style={{width: '.4rem'}}src={img}></img>
+    )
+  });
+
+    const SortableItem = sortableElement(({ movie, sortIndex }) => {
       return (
 
         <div
           key={movie.id}
           className="movie-item"
         >
+          <div className='grip'>
+            <DragHandle />
+          </div>
           <div className="numbers">{sortIndex + 1} |</div>
           <div className="movie-info">
             <div style={{ fontSize: "20px" }}>
@@ -69,7 +79,7 @@ class SortableList extends Component {
     }
     )
 
-    const SortableList = SortableContainer(({ items }) => {
+    const SortableList = sortableContainer(({ items }) => {
 
       return (
         <div className="list-row" >
@@ -81,7 +91,7 @@ class SortableList extends Component {
                   className="sortable-item"
                   key={`item-${movie.id}`}
                   sortIndex={index}
-                  lockToContainerEdges={true}
+                  // lockToContainerEdges={true}
                   index={index}
                   movie={movie}
                 />
@@ -97,6 +107,7 @@ class SortableList extends Component {
         <SortableList
           helperClass='sortableHelper'
           items={list}
+          useDragHandle
           onSortEnd={orderList}
           transitionDuration='300'
           lockAxis="y"

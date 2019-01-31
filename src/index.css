@@ -101,11 +101,23 @@ code {
 .movie-item {
   display: grid;
   /* position:  */
-  grid-template-columns: 1fr 10fr 1fr;
+  grid-template-columns: 1fr 5fr 20fr 5fr;
   font-size: 15px;
   border: black solid 1px;
   margin: auto;
   width: 42%; 
+}
+
+.grip {
+  display: flex;
+  align-items: center;
+  padding-left: .2rem;
+  width: .8rem;
+  cursor: pointer;
+  /* white-space: nowrap;
+  overflow: hidden;
+  overflow: hidden;
+  outline: none; */
 }
 
 .movie-info {
