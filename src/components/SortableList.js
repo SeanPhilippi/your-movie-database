@@ -34,77 +34,77 @@ class SortableList extends Component {
     )
   });
 
-    const SortableItem = sortableElement(({ movie, sortIndex }) => {
-      return (
+  const SortableItem = sortableElement(({ movie, sortIndex }) => {
+    return (
 
-        <div
-          key={movie.id}
-          className="movie-item"
+      <div
+        key={movie.id}
+        className="movie-item"
+      >
+        <div className='grip'>
+          <DragHandle />
+        </div>
+        <div className="numbers">{sortIndex + 1} |</div>
+        <div className="movie-info">
+          <div style={{ fontSize: "20px" }}>
+            <Link
+              to={{
+                pathname: '/movie',
+                state: { movie: movie }
+              }}
+              // to={{
+              //   pathname: `/movie/${movie}`,
+              //   state: {
+              //     id: movie.id,
+              //     name: movie.name,
+              //     director: movie.director,
+              //     year: movie.year,
+
+              //   }
+              // }}
+              className="movie-link">
+              {movie.name}
+            </Link>
+          </div>
+          <div className="dir-year">
+            {movie.director}, {movie.year}
+          </div>
+        </div>
+        {/* delete button */}
+        <button
+          onClick={() => deleteMovie(movie)}
+          className="delete"
         >
-          <div className='grip'>
-            <DragHandle />
-          </div>
-          <div className="numbers">{sortIndex + 1} |</div>
-          <div className="movie-info">
-            <div style={{ fontSize: "20px" }}>
-              <Link
-                to={{
-                  pathname: '/movie',
-                }}
-                // to={{
-                //   pathname: `/movie/${movie}`,
-                //   state: {
-                //     id: movie.id,
-                //     name: movie.name,
-                //     director: movie.director,
-                //     year: movie.year,
-
-                //   }
-                // }}
-                className="movie-link">
-                {movie.name}
-              </Link>
-            </div>
-            <div className="dir-year">
-              {movie.director}, {movie.year}
-            </div>
-          </div>
-          {/* delete button */}
-          <button
-            onClick={() => deleteMovie(movie)}
-            className="delete"
-          >
-            ✕
-          </button>
-        </div>
-      )
-    }
+          ✕
+        </button>
+      </div>
     )
+  }
+  )
 
-    const SortableList = sortableContainer(({ items }) => {
-
-      return (
-        <div className="list-row" >
-          {
-            items.map((movie, index) => {
-              console.log('movie1', movie);
-              return (
-                <SortableItem
-                  className="sortable-item"
-                  key={`item-${movie.id}`}
-                  sortIndex={index}
-                  // lockToContainerEdges={true}
-                  index={index}
-                  movie={movie}
-                />
-              )
-            })
-          }
-        </div>
-      )
-    })
+  const SortableList = sortableContainer(({ items }) => {
 
     return (
+      <div className="list-row" >
+        {
+          items.map((movie, index) => {
+            console.log('movie1', movie);
+            return (
+              <SortableItem
+                className="sortable-item"
+                key={`item-${movie.id}`}
+                sortIndex={index}
+                index={index}
+                movie={movie}
+              />
+            )
+          })
+        }
+      </div>
+    )
+  })
+
+  return (
       <div className="list-container">
         <SortableList
           helperClass='sortableHelper'

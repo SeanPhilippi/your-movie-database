@@ -7,13 +7,36 @@ import {
 
 class MoviePage extends React.Component {
 
+  state = {};
+
+  componentWillMount = () => {
+    const {apiUrl, apiKey} = this.props;
+    const {movie} = this.props.location.state;
+    fetch(`${apiUrl}i=${movie.id}&apikey=${apiKey}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log('data', data);
+        const newMovie = {};
+        newMovie.name = data.Title;
+        newMovie.year = data.Year;
+        newMovie.released  = data.Released;
+        newMovie.director = data.Director;
+        newMovie.writer = data.Writer;
+        newMovie.country = data.Country;
+        newMovie.language = data.Language;
+        newMovie.imdbID = data.imdbID;
+        console.log('movie', newMovie);
+        this.setState({movie: newMovie});
+    })
+  }
+
   render() {
-    const { name, director, year } = this.props.history.location.state;
+    const { movie } = this.props.location.state;
 
     return (
       <div className="MoviePage">
-        <h1>{name}</h1>
-        <h2>{director}, {year}</h2>
+        <h1>{movie.name}</h1>
+        <h2>{movie.director}, {movie.year}</h2>
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur, quidem.
           Quod magni animi dolore pariatur perferendis hic perspiciatis numquam dolores fuga
@@ -24,12 +47,13 @@ class MoviePage extends React.Component {
   }
 }
 
-// const mapStateToProps = state => ({ 
-
-// });
+const mapStateToProps = state => ({ 
+  apiKey: state.apiKey,
+  apiUrl: state.apiUrl
+});
 
 // const mapDispatchToProps = dispatch => ({
 
 // });
 
-export default MoviePage;
+export default connect (mapStateToProps)(MoviePage);
