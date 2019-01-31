@@ -108,10 +108,14 @@ code {
   width: 42%; 
 }
 
+.grip-container {
+  padding: 0rem .5rem;
+}
+
 .grip {
   display: flex;
   align-items: center;
-  padding-left: .2rem;
+  padding-left: .1rem;
   width: .8rem;
   cursor: pointer;
   /* white-space: nowrap;

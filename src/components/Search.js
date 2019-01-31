@@ -5,7 +5,8 @@ import {
   setSearchText,
   getResults,
   addToList,
-  clearSearchResults
+  clearSearchResults,
+  clearSearchText
 } from '../redux/actions';
 
 class Search extends React.Component {
@@ -42,7 +43,7 @@ class Search extends React.Component {
   }
 
   handleAdd = (movie) => {
-    const { apiUrl, apiKey, addToList, clearResults } = this.props;
+    const { apiUrl, apiKey, addToList, clearResults, clearSearchText } = this.props;
 
     // fetch call to grab movie from api by id, then grab director and maybe country
     fetch(`${apiUrl}i=${movie.imdbID}&apikey=${apiKey}`)
@@ -55,6 +56,7 @@ class Search extends React.Component {
           id: data.imdbID
         });
         clearResults();
+        clearSearchText();
       });
   }
 
@@ -104,7 +106,8 @@ const mapDispatchToProps = dispatch => ({
   setSearchText: text => dispatch(setSearchText(text)),
   getResults: num => dispatch(getResults(num)),
   addToList: movie => dispatch(addToList(movie)),
-  clearResults: () => dispatch(clearSearchResults())
+  clearResults: () => dispatch(clearSearchResults()),
+  clearSearchText: () => dispatch(clearSearchText())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

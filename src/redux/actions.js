@@ -2,6 +2,7 @@ export const TYPES = {
   SET_DESCRIPT: 'SET_DESCRIPT',
   SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
   SET_SEARCH_RESULTS: 'SET_SEARCH_RESULTS',
+  CLEAR_SEARCH_TEXT: 'CLEAR_SEARCH_TEXT',
   FETCH_MOVIE_LIST: 'FETCH_MOVIE_LIST',
   SET_MOVIE_LIST: 'SET_MOVIE_LIST',
   ADD_TO_LIST: 'ADD_TO_LIST',
@@ -24,6 +25,10 @@ export const setSearchText = text => ({
     text
   }
 });
+
+export const clearSearchText = () => ({
+  type: TYPES.CLEAR_SEARCH_TEXT
+})
 
 export const getResults = (num) => (dispatch, getState) => {
   const { apiUrl, apiKey, searchText } = getState();
