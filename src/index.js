@@ -6,11 +6,9 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-// import {
-//   BrowserRouter
-// } from 'react-router-dom';
-
 import rootReducer from './redux/reducers';
+require('dotenv').config()
+
 // Redux store to be used in Provider component
 const store = createStore(
   rootReducer,

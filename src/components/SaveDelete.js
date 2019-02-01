@@ -7,13 +7,26 @@ class SaveDelete extends Component {
   // save a list
   handleSave = () => {
     console.log('saving...');
-    // if first save, POST, else PUT
+  // update a list
+  // search mlab ymdb collection for list by username
+  // if exists, this.handleChange()
+  // else POST request logic...
     fetch('/list', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(this.props.state)
+    })
+      .then(res => res.json())
+      .catch(err => console.log(err))
+  }
+
+
+  handleChange = () => {
+    fetch('/:user/update', {
+      method: 'PUT',
+      // to be continued
     })
       .then(res => res.json())
       .catch(err => console.log(err))

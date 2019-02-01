@@ -8,18 +8,8 @@ import img from '../images/grippy.png'
 
 class SortableList extends Component {
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     this.props.fetchList();
-  }
-
-  // update a list
-  handleChange = () => {
-    fetch('/:user/update', {
-      method: 'PUT',
-      // to be continued
-    })
-      .then(res => res.json())
-      .catch(err => console.log(err))
   }
 
   render() {

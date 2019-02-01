@@ -10,6 +10,7 @@ class MoviePage extends React.Component {
   state = {};
 
   componentWillMount = () => {
+    // maybe grab all this info and create this object in add function, instead of here.  
     const {apiUrl, apiKey} = this.props;
     const {movie} = this.props.location.state;
     fetch(`${apiUrl}i=${movie.id}&apikey=${apiKey}`)
@@ -32,11 +33,16 @@ class MoviePage extends React.Component {
 
   render() {
     const { movie } = this.props.location.state;
-
+    // const {movie} = this.state
     return (
       <div className="MoviePage">
         <h1>{movie.name}</h1>
         <h2>{movie.director}, {movie.year}</h2>
+        <div>{movie.year} <br/>
+        {/* {movie.released} <br/>
+        {movie.} */}
+        
+        </div>
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur, quidem.
           Quod magni animi dolore pariatur perferendis hic perspiciatis numquam dolores fuga
