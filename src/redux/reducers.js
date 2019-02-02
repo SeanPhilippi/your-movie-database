@@ -4,7 +4,6 @@ import { apiKey, dbuser, dbpassword } from '../config/keys';
 
 const initialState = {
   loggedIn: true,
-  apiUrl: 'http://www.omdbapi.com/?',
   apiKey,
   dbuser,
   dbpassword,

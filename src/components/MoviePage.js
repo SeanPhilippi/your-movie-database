@@ -11,9 +11,9 @@ class MoviePage extends React.Component {
 
   componentWillMount = () => {
     // maybe grab all this info and create this object in add function, instead of here.  
-    const {apiUrl, apiKey} = this.props;
+    const {apiKey} = this.props;
     const {movie} = this.props.location.state;
-    fetch(`${apiUrl}i=${movie.id}&apikey=${apiKey}`)
+    fetch(`http://www.omdbapi.com/?i=${movie.id}&apikey=${apiKey}`)
       .then(res => res.json())
       .then(data => {
         console.log('data', data);
@@ -54,8 +54,7 @@ class MoviePage extends React.Component {
 }
 
 const mapStateToProps = state => ({ 
-  apiKey: state.apiKey,
-  apiUrl: state.apiUrl
+  apiKey: state.apiKey
 });
 
 // const mapDispatchToProps = dispatch => ({

@@ -43,10 +43,10 @@ class Search extends React.Component {
   }
 
   handleAdd = (movie) => {
-    const { apiUrl, apiKey, addToList, clearResults, clearSearchText } = this.props;
+    const { apiKey, addToList, clearResults, clearSearchText } = this.props;
 
     // fetch call to grab movie from api by id, then grab director and maybe country
-    fetch(`${apiUrl}i=${movie.imdbID}&apikey=${apiKey}`)
+    fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`)
       .then(res => res.json())
       .then(data => {
         addToList({
@@ -97,8 +97,7 @@ const mapStateToProps = state => ({
   searchText: state.searchText,
   searchResults: state.searchResults,
   list: state.list,
-  apiKey: state.apiKey,
-  apiUrl: state.apiUrl
+  apiKey: state.apiKey
 });
 
 // mapping dispatched actions to props
