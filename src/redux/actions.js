@@ -31,9 +31,9 @@ export const clearSearchText = () => ({
 })
 
 export const getResults = (num) => (dispatch, getState) => {
-  const { apiUrl, apiKey, searchText } = getState();
+  const { apiKey, searchText } = getState();
 
-  fetch(`${apiUrl}s=${searchText.trim()}&apikey=${apiKey}&page=${num}`)
+  fetch(`http://www.omdbapi.com/?s=${searchText.trim()}&apikey=${apiKey}&page=${num}`)
     .then(res => res.json())
     .then(data => {
       dispatch(setSearchResults(data.Search))

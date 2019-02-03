@@ -53,7 +53,11 @@ class Search extends React.Component {
           name: movie.Title,
           year: movie.Year,
           director: data.Director,
-          id: data.imdbID
+          id: data.imdbID,
+          runtime: data.Runtime,
+          country: data.Country,
+          plot: data.Plot,
+          language: data.Language
         });
         clearResults();
         clearSearchText();

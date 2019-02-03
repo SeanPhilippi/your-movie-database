@@ -108,6 +108,11 @@ code {
   width: 42%; 
 }
 
+.movie-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .grip-container {
   padding: 0rem .5rem;
 }
