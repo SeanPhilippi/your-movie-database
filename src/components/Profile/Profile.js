@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './Profile.css';
-import SiteHeader from './SiteHeader';
-import CommentColumn from './CommentColumn';
-import Description from './Description';
-import SaveDelete from './SaveDelete';
-import SortableList from './SortableList';
-import Search from './Search';
+import SiteHeader from '../SiteHeader/SiteHeader';
+import CommentColumn from '../CommentColumn/CommentColumn';
+import Description from '../Description/Description';
+import SaveDelete from '../SaveDelete/SaveDelete';
+import SortableList from '../SortableList/SortableList';
+import Search from '../Search/Search';
 
 class Profile extends Component {
 

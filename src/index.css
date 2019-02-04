@@ -14,7 +14,7 @@ code {
 }
 
 /* TopNav */
-.logo {
+/* .logo {
   height: 100px;
   display: flex;
   align-items: center;
@@ -35,10 +35,10 @@ code {
   text-decoration: none;
   font-size: 17px;
   color: black;
-}
+} */
 
 /* SaveDelete */
-.save-delete {
+/* .save-delete {
   margin: 20px 0 10px 450px;
 }
 
@@ -54,7 +54,7 @@ code {
   margin: 5px;
   padding: 5px 5px;
   background-color: transparent;
-}
+} */
 
 
 /* Between Header and Footer */
@@ -76,7 +76,7 @@ code {
 } */
 
 /* Search Results */
-.result-item {
+/* .result-item {
   font-size: 15px;
   height: 25px;
   border-bottom: lightgrey solid 1px;
@@ -90,7 +90,7 @@ code {
 
 .result-year-director {
   margin-top: 2px;
-}
+} */
 
 /* Sortable List */
 .list-container {
@@ -98,9 +98,8 @@ code {
 }
 
 /* Movie Items */
-.movie-item {
+/* .movie-item {
   display: grid;
-  /* position:  */
   grid-template-columns: 1fr 5fr 20fr 5fr;
   font-size: 15px;
   border: black solid 1px;
@@ -123,10 +122,6 @@ code {
   padding-left: .1rem;
   width: .8rem;
   cursor: pointer;
-  /* white-space: nowrap;
-  overflow: hidden;
-  overflow: hidden;
-  outline: none; */
 }
 
 .movie-info {
@@ -161,11 +156,11 @@ code {
   font-size: 26px;
   margin: auto;
   margin-left: 13px;
-}
+} */
 
 /* Description */
-.textarea {
+/* .textarea {
   font-size: 14px;
   padding-left: 5px;
-}
+} */
 

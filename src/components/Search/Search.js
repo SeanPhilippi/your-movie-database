@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import './Search.css';
 
 import {
   setSearchText,
@@ -7,7 +8,7 @@ import {
   addToList,
   clearSearchResults,
   clearSearchText
-} from '../redux/actions';
+} from '../../redux/actions';
 
 class Search extends React.Component {
 

@@ -1,0 +1,68 @@
+.list-container {
+  margin: 15px 0 20px 0;
+}
+
+.movie-item {
+  display: grid;
+  /* position:  */
+  grid-template-columns: 1fr 5fr 20fr 5fr;
+  font-size: 15px;
+  border: black solid 1px;
+  margin: auto;
+  width: 42%; 
+}
+
+.movie-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.grip-container {
+  padding: 0rem .5rem;
+}
+
+.grip {
+  display: flex;
+  align-items: center;
+  padding-left: .1rem;
+  width: .8rem;
+  cursor: pointer;
+  /* white-space: nowrap;
+  overflow: hidden;
+  overflow: hidden;
+  outline: none; */
+}
+
+.movie-info {
+  margin: 5px 0;
+}
+
+.dir-year {
+  margin-top: 2px;
+}
+
+.sortableHelper {
+  text-align: center;
+  right: 0px;
+}
+
+.delete {
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 18px;
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.numbers {
+  white-space: nowrap;
+  overflow: hidden;
+  color: grey;
+  font-style: bolder;
+  font-size: 26px;
+  margin: auto;
+  margin-left: 13px;
+}

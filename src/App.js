@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './index.css';
-import Home from './components/Home';
-import Profile from './components/Profile';
-import Login from './components/Login';
-import Register from './components/Register';
-import MoviePage from './components/MoviePage';
+import Home from './components/Home/Home';
+import Profile from './components/Profile/Profile';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import MoviePage from './components/MoviePage/MoviePage';
 // import react router
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './Description.css';
 
 import {
   setDescript, 
   fetchList
-} from '../redux/actions';
+} from '../../redux/actions';
 
 class Description extends Component {
 

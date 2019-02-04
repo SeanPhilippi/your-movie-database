@@ -1,0 +1,15 @@
+.home-container {
+  margin: auto;
+  display: block;
+}
+
+.home {
+  margin: auto;
+  display: block;
+}
+
+h1 {
+  display: block;
+  width: 500px;
+  margin: 4rem auto;
+}

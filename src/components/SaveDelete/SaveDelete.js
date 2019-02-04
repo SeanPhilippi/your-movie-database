@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import './SaveDelete.css';
 import { connect } from 'react-redux';
-import { deleteList } from '../redux/actions';
+import { deleteList } from '../../redux/actions';
 
 class SaveDelete extends Component {
 

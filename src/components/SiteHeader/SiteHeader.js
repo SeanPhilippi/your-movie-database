@@ -1,5 +1,7 @@
 import React from 'react';
-import TopNav from './TopNav';
+import TopNav from '../TopNav/TopNav';
+import { NavLink } from 'react-router-dom';
+import './SiteHeader.css';
 
 
 class SiteHeader extends React.Component {
@@ -9,7 +11,7 @@ class SiteHeader extends React.Component {
     return (
       <header>
         <div className="logo">
-          YMDB: Your Movie Database
+          <NavLink to="/" className="logo-link">YMDB: Your Movie Database</NavLink>
         </div>
         <TopNav />
       </header>

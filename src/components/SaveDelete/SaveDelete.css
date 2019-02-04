@@ -1,0 +1,17 @@
+.save-delete {
+  margin: 20px 0 10px 450px;
+}
+
+.delete-list {
+  color: red;
+  margin: 5px;
+  padding: 5px 5px;
+  background-color: transparent;
+}
+
+.save-list {
+  color: green;
+  margin: 5px;
+  padding: 5px 5px;
+  background-color: transparent;
+} 

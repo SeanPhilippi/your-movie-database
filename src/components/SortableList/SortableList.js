@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sortableContainer, sortableElement, sortableHandle } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
-import { orderList, deleteMovie, fetchList, setFetchedList } from '../redux/actions';
-import './Profile.css';
-import img from '../images/grippy.png'
+import { orderList, deleteMovie, fetchList, setFetchedList } from '../../redux/actions';
+import './SortableList.css';
+import img from '../../images/grippy.png'
 
 class SortableList extends Component {
 
