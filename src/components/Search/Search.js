@@ -67,6 +67,7 @@ class Search extends React.Component {
           language: data.Language
         });
         this.clearResults();
+        console.log('clear text!')
         this.clearSearchText();
       });
   }
@@ -95,6 +96,7 @@ class Search extends React.Component {
 
   clearSearchText = () => {
     this.setState({searchText: ''});
+    // this.onTextChange();
   }
 
   render() {
@@ -102,7 +104,7 @@ class Search extends React.Component {
 
     const onKeyUp = e => {
       if (e.key === 'Enter') {
-        clearResults();
+        this.clearResults();
         // add more pages later when scroll container is integrated
         const arr = [1, 2];
         arr.map(num => {
@@ -124,9 +126,9 @@ class Search extends React.Component {
         <MuiThemeProvider>
         <TextField
           name="searchText"
-          value={this.props.searchText}
+          value={this.state.searchText}
           onChange={this.onTextChange}
-          onKeyUp={this.onKeyUp}
+          onKeyUp={onKeyUp}
           floatingLabelText="Search For Images"
         />
         </MuiThemeProvider>
