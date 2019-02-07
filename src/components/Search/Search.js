@@ -7,11 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 import {
-  // setSearchText,
-  // getResults,
   addToList,
-  clearSearchResults,
-  clearSearchText
 } from '../../redux/actions';
 
 class Search extends React.Component {
@@ -50,7 +46,7 @@ class Search extends React.Component {
   }
 
   handleAdd = (movie) => {
-    const { apiKey, addToList, clearResults, clearSearchText } = this.props;
+    const { apiKey, addToList } = this.props;
 
     // fetch call to grab movie from api by id, then grab director and maybe country
     fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`)
@@ -67,7 +63,6 @@ class Search extends React.Component {
           language: data.Language
         });
         this.clearResults();
-        console.log('clear text!')
         this.clearSearchText();
       });
   }
@@ -99,19 +94,17 @@ class Search extends React.Component {
     // this.onTextChange();
   }
 
-  render() {
-    const { searchText, setSearchText, clearResults, getResults } = this.props;
-
-    const onKeyUp = e => {
-      if (e.key === 'Enter') {
-        this.clearResults();
-        // add more pages later when scroll container is integrated
-        const arr = [1, 2];
-        arr.map(num => {
-          this.handleSearch(num);
-        })
-      }
+  onKeyUp = e => {
+    if (e.key === 'Enter') {
+      // add more pages later when scroll container is integrated
+      const arr = [1, 2];
+      arr.map(num => {
+        this.handleSearch(num);
+      })
     }
+  }
+
+  render() {
 
     return (
       <div className="Search">
@@ -128,8 +121,9 @@ class Search extends React.Component {
           name="searchText"
           value={this.state.searchText}
           onChange={this.onTextChange}
-          onKeyUp={onKeyUp}
-          floatingLabelText="Search For Images"
+          onKeyUp={this.onKeyUp}
+          floatingLabelText="Search For Films"
+          style={{width: '36rem'}}
         />
         </MuiThemeProvider>
         <div>
@@ -142,19 +136,13 @@ class Search extends React.Component {
 
 // mapping Redux global state to props
 const mapStateToProps = state => ({
-  searchText: state.searchText,
-  // searchResults: state.searchResults,
   list: state.list,
   apiKey: state.apiKey
 });
 
 // mapping dispatched actions to props
 const mapDispatchToProps = dispatch => ({
-  // setSearchText: text => dispatch(setSearchText(text)),
-  // getResults: num => dispatch(getResults(num)),
   addToList: movie => dispatch(addToList(movie)),
-  // clearResults: () => dispatch(clearSearchResults()),
-  // clearSearchText: () => dispatch(clearSearchText())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
