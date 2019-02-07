@@ -1,16 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './Search.css';
+import TextField from 'material-ui/TextField';
+import debounce from './debounce.js';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 import {
-  setSearchText,
-  getResults,
+  // setSearchText,
+  // getResults,
   addToList,
   clearSearchResults,
   clearSearchText
 } from '../../redux/actions';
 
 class Search extends React.Component {
+
+  state = {
+    searchText: '',
+    searchResults: [],
+  }
 
   inputStyle = {
     fontSize: 22,
@@ -22,25 +31,22 @@ class Search extends React.Component {
   }
 
   renderResults = () => {
-    return this.props.searchResults.map(movie =>
-      <div
-        key={movie.imdbId}
-        className="result-item"
-        onClick={() => this.handleAdd(movie)}
-      >
-        <div className="result-info">
-          <div style={{ fontSize: "15px" }}>
-            {movie.Title} ({movie.Year})
+    const { searchResults } = this.state;
+    if (searchResults) {
+      return searchResults.map(movie =>
+        <div
+          key={movie.imdbId}
+          className="result-item"
+          onClick={() => this.handleAdd(movie)}
+        >
+          <div className="result-info">
+            <div style={{ fontSize: "15px" }}>
+              {movie.Title} ({movie.Year})
+            </div>
           </div>
         </div>
-      </div>
-
-      // <div
-      //   
-      // >
-      //   {movie.Title}({movie.Year})
-      // </div>
-    )
+      )
+    }
   }
 
   handleAdd = (movie) => {
@@ -60,9 +66,35 @@ class Search extends React.Component {
           plot: data.Plot,
           language: data.Language
         });
-        clearResults();
-        clearSearchText();
+        this.clearResults();
+        this.clearSearchText();
       });
+  }
+
+  handleSearch = (num) => {
+    const { searchText } = this.state;
+    const { apiKey } = this.props;
+    fetch(`http://www.omdbapi.com/?s=${searchText.trim()}&apikey=${apiKey}&page=${num}`)
+    .then(res => res.json())
+    .then(data => {
+      this.setState({searchResults: data.Search})
+    })
+    .catch(err => console.error(err));
+  }
+
+  onTextChange = e => {
+    this.setState({searchText: e.target.value});
+    this.handleDelay();
+  }
+
+  handleDelay = debounce(this.handleSearch, 500);
+
+  clearResults = () => {
+    this.setState({searchResults: []});
+  }
+
+  clearSearchText = () => {
+    this.setState({searchText: ''});
   }
 
   render() {
@@ -74,21 +106,30 @@ class Search extends React.Component {
         // add more pages later when scroll container is integrated
         const arr = [1, 2];
         arr.map(num => {
-          getResults(num);
+          this.handleSearch(num);
         })
       }
     }
 
     return (
       <div className="Search">
-        <input
+        {/* <input
           type="text"
           placeholder="Add a film..."
           style={this.inputStyle}
           value={searchText}
           onChange={e => setSearchText(e.target.value)}
           onKeyUp={onKeyUp}
+        /> */}
+        <MuiThemeProvider>
+        <TextField
+          name="searchText"
+          value={this.props.searchText}
+          onChange={this.onTextChange}
+          onKeyUp={this.onKeyUp}
+          floatingLabelText="Search For Images"
         />
+        </MuiThemeProvider>
         <div>
           {this.renderResults()}
         </div>
@@ -100,18 +141,18 @@ class Search extends React.Component {
 // mapping Redux global state to props
 const mapStateToProps = state => ({
   searchText: state.searchText,
-  searchResults: state.searchResults,
+  // searchResults: state.searchResults,
   list: state.list,
   apiKey: state.apiKey
 });
 
 // mapping dispatched actions to props
 const mapDispatchToProps = dispatch => ({
-  setSearchText: text => dispatch(setSearchText(text)),
-  getResults: num => dispatch(getResults(num)),
+  // setSearchText: text => dispatch(setSearchText(text)),
+  // getResults: num => dispatch(getResults(num)),
   addToList: movie => dispatch(addToList(movie)),
-  clearResults: () => dispatch(clearSearchResults()),
-  clearSearchText: () => dispatch(clearSearchText())
+  // clearResults: () => dispatch(clearSearchResults()),
+  // clearSearchText: () => dispatch(clearSearchText())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

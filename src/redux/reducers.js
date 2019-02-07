@@ -7,7 +7,7 @@ const initialState = {
   apiKey,
   dbuser,
   dbpassword,
-  searchText: '',
+  // searchText: '',
   searchResults: [],
   listDescript: '',
   username: 'kesto',
@@ -20,18 +20,18 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       listDescript: payload.text
     };
-    case TYPES.SET_SEARCH_TEXT: return {
-      ...state,
-      searchText: payload.text,
-    };
+    // case TYPES.SET_SEARCH_TEXT: return {
+    //   ...state,
+    //   searchText: payload.text,
+    // };
     case TYPES.CLEAR_SEARCH_TEXT: return {
       ...state,
       searchText: []
     };
-    case TYPES.SET_SEARCH_RESULTS: return {
-      ...state,
-      searchResults: [...state.searchResults, ...payload.data],
-    };
+    // case TYPES.SET_SEARCH_RESULTS: return {
+    //   ...state,
+    //   searchResults: [...state.searchResults, ...payload.data],
+    // };
     // set fetched movie list to state
     case TYPES.SET_MOVIE_LIST: return {
       ...state,
