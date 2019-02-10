@@ -19,7 +19,7 @@ class SortableList extends Component {
   const DragHandle = sortableHandle(() => {
     return (
       <div className="grip-container">
-        <img style={{width: '.4rem'}}src={img}></img>
+        <img alt='grip handle' style={{width: '.4rem'}}src={img}></img>
       </div>
     )
   });

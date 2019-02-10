@@ -48,7 +48,7 @@ class Search extends React.Component {
   handleAdd = (movie) => {
     const { apiKey, addToList } = this.props;
 
-    // fetch call to grab movie from api by id, then grab director and maybe country
+    // fetch call to grab movie from api by id, then grab director 
     fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`)
       .then(res => res.json())
       .then(data => {
@@ -83,7 +83,7 @@ class Search extends React.Component {
     this.handleDelay();
   }
 
-  handleDelay = debounce(this.handleSearch, 500);
+  handleDelay = debounce(this.handleSearch, 300);
 
   clearResults = () => {
     this.setState({searchResults: []});
@@ -91,12 +91,11 @@ class Search extends React.Component {
 
   clearSearchText = () => {
     this.setState({searchText: ''});
-    // this.onTextChange();
   }
 
   onKeyUp = e => {
     if (e.key === 'Enter') {
-      // add more pages later when scroll container is integrated
+      // TODO: add more pages later when scroll container is integrated
       const arr = [1, 2];
       arr.map(num => {
         this.handleSearch(num);
@@ -108,6 +107,7 @@ class Search extends React.Component {
 
     return (
       <div className="Search">
+      {/* old search bar connected to redux with materialui and only rendering on 'enter' press */}
         {/* <input
           type="text"
           placeholder="Add a film..."
