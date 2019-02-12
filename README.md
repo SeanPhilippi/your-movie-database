@@ -2,13 +2,15 @@
 
 **YMDB** is a cinephile hobbyist site for people that love making lists, film discussion, and film exploration.
 
-The site is meant to be a minimalist competitor to sites like Mubi and Letterboxd that appeals to a nerdier audience and that is specifically tailored towards list making and film discussion.  The site will have well-thought out limitations that make users more deliberate in how they chose films for their one and only list, which they can name and describe in the description section however they like.  The site will encourage users to make a list of favorite films, not themed or best-of-decade lists and there will be a YMDB top films lists that aggragates film rankings from all user lists to make an overall YMDB community ranking, similar to what rateyourmusic.com has.  
+The site is meant to be a minimalist competitor to sites like Mubi and Letterboxd that appeals to a nerdier audience and that is specifically tailored towards list making and film discussion.  The site will have well-thought out limitations that make users more deliberate in how they chose films for their one and only list, which they can name and describe in the description section however they like.  The site will encourage users to make a list of favorite films, not themed or best-of-decade lists and there will be a YMDB top films list that aggragates film rankings from all user lists to make an overall YMDB community ranking, similar to what rateyourmusic.com has.  
 
 ## Build Tools
 
 YMDB is a full stack website built with React and Redux on the front-end, MongoDB and Express for the back-end. 
 
 ## Project Links
+
+Coming soon...
 
 <!-- Deployed site: 
 
