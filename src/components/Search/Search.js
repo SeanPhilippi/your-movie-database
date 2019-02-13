@@ -98,7 +98,7 @@ class Search extends React.Component {
       // TODO: add more pages later when scroll container is integrated
       const arr = [1, 2];
       arr.map(num => {
-        this.handleSearch(num);
+        return this.handleSearch(num);
       })
     }
   }
