@@ -16,60 +16,60 @@ class SortableList extends Component {
     console.log('props', this.props)
     const { list, orderList, deleteMovie } = this.props;
 
-  const DragHandle = sortableHandle(() => {
-    return (
-      <div className="grip-container">
-        <img alt='grip handle' style={{width: '.4rem'}}src={img}></img>
-      </div>
-    )
-  });
-
-  const SortableItem = sortableElement(({ movie, sortIndex }) => {
-    return (
-
-      <div
-        key={movie.id}
-        className="movie-item"
-      >
-        <div className='grip'>
-          <DragHandle />
+    const DragHandle = sortableHandle(() => {
+      return (
+        <div className="grip-container">
+          <img alt='grip handle' style={{width: '.4rem'}}src={img}></img>
         </div>
-        <div className="numbers">{sortIndex + 1} |</div>
-        <div className="movie-info">
-          <div style={{ fontSize: "20px" }}>
-            <Link
-              to={{
-                pathname: '/movie',
-                state: { movie: movie }
-              }}
-              // to={{
-              //   pathname: `/movie/${movie}`,
-              //   state: {
-              //     id: movie.id,
-              //     name: movie.name,
-              //     director: movie.director,
-              //     year: movie.year,
+      )
+    });
 
-              //   }
-              // }}
-              className="movie-link">
-              {movie.name}
-            </Link>
-          </div>
-          <div className="dir-year">
-            {movie.director}, {movie.year}
-          </div>
-        </div>
-        {/* delete button */}
-        <button
-          onClick={() => deleteMovie(movie)}
-          className="delete"
+    const SortableItem = sortableElement(({ movie, sortIndex }) => {
+      return (
+
+        <div
+          key={movie.id}
+          className="movie-item"
         >
-          ✕
-        </button>
-      </div>
-    )
-  }
+          <div className='grip'>
+            <DragHandle />
+          </div>
+          <div className="numbers">{sortIndex + 1} |</div>
+          <div className="movie-info">
+            <div style={{ fontSize: "20px" }}>
+              <Link
+                to={{
+                  pathname: '/movie',
+                  state: { movie: movie }
+                }}
+                // to={{
+                //   pathname: `/movie/${movie}`,
+                //   state: {
+                //     id: movie.id,
+                //     name: movie.name,
+                //     director: movie.director,
+                //     year: movie.year,
+
+                //   }
+                // }}
+                className="movie-link">
+                {movie.name}
+              </Link>
+            </div>
+            <div className="dir-year">
+              {movie.director}, {movie.year}
+            </div>
+          </div>
+          {/* delete button */}
+          <button
+            onClick={() => deleteMovie(movie)}
+            className="delete"
+          >
+            ✕
+          </button>
+        </div>
+      )
+    }
   )
 
   const SortableList = sortableContainer(({ items }) => {

@@ -1,5 +1,6 @@
 {
   "name": "aca-final-project",
+  "homepage" : "http://seanphilippi.github.io/ymdb",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
