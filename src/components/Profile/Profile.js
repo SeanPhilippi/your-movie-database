@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Profile.css';
-import SiteHeader from '../SiteHeader/SiteHeader';
+import TopNav from '../TopNav/TopNav';
 import CommentColumn from '../CommentColumn/CommentColumn';
 import Description from '../Description/Description';
 import SaveDelete from '../SaveDelete/SaveDelete';
@@ -13,7 +13,7 @@ class Profile extends Component {
 
     return (
       <div className="profile-wrapper" >
-        <SiteHeader />
+        <TopNav />
         <div className="main-container">
           <div className="left">
             <SaveDelete />

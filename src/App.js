@@ -16,7 +16,7 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div className="container">
+        <div>
           <Switch>
             <Route exact path="/home" render={() => (
               loggedIn ? (

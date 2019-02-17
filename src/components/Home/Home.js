@@ -1,11 +1,11 @@
 import React from 'react';
-import SiteHeader from '../SiteHeader/SiteHeader';
+import TopNav from '../TopNav/TopNav';
 import './Home.css';
 
 function Home(props) {
   return (
     <div className='home-container'>
-      <SiteHeader />
+      <TopNav />
       <div className='home'>
         <h1>Landing Page, coming soon...</h1>
       </div>
