@@ -51,7 +51,7 @@ class Search extends React.Component {
     const { addToList } = this.props;
 
     // fetch call to grab movie from api by id, then grab director 
-    fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`)
+    fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${this.apiKey}`)
       .then(res => res.json())
       .then(data => {
         addToList({
@@ -71,7 +71,7 @@ class Search extends React.Component {
 
   handleSearch = (num) => {
     const { searchText } = this.state;
-    fetch(`http://www.omdbapi.com/?s=${searchText.trim()}&apikey=${apiKey}&page=${num}`)
+    fetch(`http://www.omdbapi.com/?s=${searchText.trim()}&apikey=${this.apiKey}&page=${num}`)
     .then(res => res.json())
     .then(data => {
       this.setState({searchResults: data.Search})
