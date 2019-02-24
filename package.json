@@ -1,6 +1,6 @@
 {
   "name": "aca-final-project",
-  "homepage": "http://seanphilippi.github.io/ymdb",
+  "homepage": "http://seanphilippi.github.io",
   "version": "0.1.0",
   "engines": {
     "node": "8.12.0"
@@ -35,7 +35,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "postinstall": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
