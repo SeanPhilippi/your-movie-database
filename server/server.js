@@ -5,7 +5,6 @@ const movies = require('./routes/api/MovieRoutes');
 const app = express();
 const cors = require('cors');
 // DB config
-const db = require('./config/keys').mongoURI;
 const PORT = process.env.PORT || 4300;
 // core nodejs file
 const path = require('path');
@@ -23,7 +22,7 @@ app.get('*', (req, res) => {
 
 // Connect to Mongo
 mongoose.connect(
-  process.env.MONGO_URI || db
+  process.env.MONGO_URI
   )
   .then(() => console.log('connected to MongoDB!'))
   .catch(err => console.log(err));

@@ -25,6 +25,8 @@ class Search extends React.Component {
     marginTop: 20,
     width: '40%'
   }
+  
+  apiKey = process.env.API_KEY;
 
   renderResults = () => {
     const { searchResults } = this.state;
@@ -46,7 +48,7 @@ class Search extends React.Component {
   }
 
   handleAdd = (movie) => {
-    const { apiKey, addToList } = this.props;
+    const { addToList } = this.props;
 
     // fetch call to grab movie from api by id, then grab director 
     fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`)
@@ -69,7 +71,6 @@ class Search extends React.Component {
 
   handleSearch = (num) => {
     const { searchText } = this.state;
-    const { apiKey } = this.props;
     fetch(`http://www.omdbapi.com/?s=${searchText.trim()}&apikey=${apiKey}&page=${num}`)
     .then(res => res.json())
     .then(data => {
@@ -137,7 +138,6 @@ class Search extends React.Component {
 // mapping Redux global state to props
 const mapStateToProps = state => ({
   list: state.list,
-  apiKey: state.apiKey
 });
 
 // mapping dispatched actions to props

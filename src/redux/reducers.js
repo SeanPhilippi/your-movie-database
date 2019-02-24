@@ -1,12 +1,8 @@
 import { TYPES } from './actions';
 import { arrayMove } from 'react-sortable-hoc';
-import { apiKey, dbuser, dbpassword } from '../config/keys';
 
 const initialState = {
   loggedIn: true,
-  apiKey,
-  dbuser,
-  dbpassword,
   // searchText: '',
   searchResults: [],
   listDescript: '',
