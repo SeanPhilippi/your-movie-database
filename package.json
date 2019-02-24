@@ -1,6 +1,6 @@
 {
   "name": "aca-final-project",
-  "homepage": "http://seanphilippi.github.io/ymdb",
+  "homepage": "http://seanphilippi.github.io",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -32,7 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "echo Skip build on Heroku"
+    "postinstall": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
