@@ -47,6 +47,26 @@ class Search extends React.Component {
     }
   }
 
+  onTextChange = e => {
+    this.setState({searchText: e.target.value});
+    this.handleDelay();
+  }
+
+  handleDelay = debounce(this.handleSearch, 300);
+
+  // *search - add pagination
+  handleSearch = (num) => {
+    const { searchText } = this.state;
+    fetch(`/search/${searchText}/${num}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log('data', data);
+      this.setState({searchResults: data.Search})
+    })
+    .catch(err => console.log(err));
+  }
+
+  // !add not work
   handleAdd = (movie) => {
     const { addToList } = this.props;
 
@@ -68,24 +88,6 @@ class Search extends React.Component {
         this.clearSearchText();
       });
   }
-
-  handleSearch = (num) => {
-    const { searchText } = this.state;
-    fetch(`/search/${searchText}`)
-    .then(res => res.json())
-    .then(data => {
-      console.log('data', data);
-      this.setState({searchResults: data.Search})
-    })
-    .catch(err => console.log(err));
-  }
-
-  onTextChange = e => {
-    this.setState({searchText: e.target.value});
-    this.handleDelay();
-  }
-
-  handleDelay = debounce(this.handleSearch, 300);
 
   clearResults = () => {
     this.setState({searchResults: []});

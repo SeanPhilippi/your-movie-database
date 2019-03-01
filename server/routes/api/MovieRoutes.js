@@ -6,11 +6,11 @@ const fetch = require('node-fetch');
 // @route   Get api/movies
 // @desc    get search results
 // @access  Public
-router.get('/search/:query', (req, res) => {
+router.get('/search/:query/:num', (req, res) => {
   console.log('/search')
   const searchText = req.params.query;
   const apiKey = process.env.API_KEY;
-  const url = `http://www.omdbapi.com?s=${searchText.trim()}&apikey=${apiKey}`;
+  const url = `http://www.omdbapi.com?s=${searchText.trim()}&apikey=${apiKey}&page=${num}`;
   console.log('url', url)
   fetch(url)
   .then(res => res.json())
