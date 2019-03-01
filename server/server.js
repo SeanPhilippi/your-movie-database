@@ -9,16 +9,13 @@ const PORT = process.env.PORT || 4300;
 // core nodejs file
 const path = require('path');
 
+require('dotenv').config();
+
 app.use(bodyParser.json());
 app.use(cors());
 
 // Express will serve up production assets
 app.use(express.static('build'));
-
-// Express serve up index.html file if it doesn't recognize route
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
-});
 
 // Connect to Mongo
 mongoose.connect(
@@ -32,6 +29,11 @@ app.use(movies);
 
 app.get('/express', (req, res) => {
   res.send({ express: 'Your express backend is connected to React!' })
+});
+
+// Express serve up index.html file if it doesn't recognize route
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
 });
 
 app.listen(PORT, err => {

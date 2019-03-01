@@ -18,6 +18,7 @@
     "jwt-simple": "^0.5.5",
     "material-ui": "^0.20.2",
     "mongoose": "^5.3.16",
+    "node-fetch": "^2.3.0",
     "nodemon": "^1.18.7",
     "react": "^16.6.3",
     "react-bootstrap": "^1.0.0-beta.5",

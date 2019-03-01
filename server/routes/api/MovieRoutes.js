@@ -1,11 +1,31 @@
 const express = require('express');
 const router = express.Router();
 const List = require('../../models/ListModel');
+const fetch = require('node-fetch');
 
 // @route   Get api/movies
-// @desc    display movies?
+// @desc    get search results
 // @access  Public
 router.get('/search/:query', (req, res) => {
+  console.log('/search')
+  const searchText = req.params.query;
+  const apiKey = process.env.API_KEY;
+  const url = `http://www.omdbapi.com?s=${searchText.trim()}&apikey=${apiKey}`;
+  console.log('url', url)
+  fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    res.json(data);
+  })
+  .catch(err => console.log(err));
+});
+
+
+
+// @route   Get movie details
+// @desc    get movie details
+// @access  Public
+router.get('/movie/:', (req, res) => {
   // res.send('you got a movie!');
 
 })

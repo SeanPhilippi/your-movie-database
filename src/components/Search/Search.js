@@ -71,12 +71,13 @@ class Search extends React.Component {
 
   handleSearch = (num) => {
     const { searchText } = this.state;
-    fetch(`http://www.omdbapi.com/?s=${searchText.trim()}&apikey=${this.apiKey}&page=${num}`)
+    fetch(`/search/${searchText}`)
     .then(res => res.json())
     .then(data => {
+      console.log('data', data);
       this.setState({searchResults: data.Search})
     })
-    .catch(err => console.error(err));
+    .catch(err => console.log(err));
   }
 
   onTextChange = e => {
