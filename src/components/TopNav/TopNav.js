@@ -32,11 +32,11 @@ class TopNav extends React.Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <Nav.Link>
-              <NavLink to="/top-movies">Top Movie List</NavLink>
+              <NavLink to={loggedIn ? "/top-movies" : "/login"}>Top Movie List</NavLink>
             </Nav.Link>
 
             <Nav.Link>
-              <NavLink to="/profile">Your Top List</NavLink>
+              <NavLink to={loggedIn ? "/profile": "/login"}>Your Top List</NavLink>
             </Nav.Link>
 
             <Nav.Link>
@@ -47,7 +47,7 @@ class TopNav extends React.Component {
             </Nav.Link>
             
             <Nav.Link> 
-             <NavLink to="/profile">Profile</NavLink>
+             <NavLink to={loggedIn ? "/profile": "/login"}>Profile</NavLink>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

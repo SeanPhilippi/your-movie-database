@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import TopNav from '../TopNav/TopNav';
 
 class Login extends Component {
   render() {
     return (
       <div className="login">
+        <TopNav />
         Login Component
       </div>
     )
