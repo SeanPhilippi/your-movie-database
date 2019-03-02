@@ -3,34 +3,38 @@ const router = express.Router();
 const List = require('../../models/ListModel');
 const fetch = require('node-fetch');
 
-// @route   Get api/movies
+
+// ! ----working here----
+// @route   GET /search/:query/:num
 // @desc    get search results
 // @access  Public
-router.get('/search/:query/:num', (req, res) => {
-  console.log('/search')
-  const searchText = req.params.query;
+router.get('/search/:query', (req, res) => {
   const apiKey = process.env.API_KEY;
-  const url = `http://www.omdbapi.com?s=${searchText.trim()}&apikey=${apiKey}&page=${num}`;
-  console.log('url', url)
-  fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    res.json(data);
-  })
-  .catch(err => console.log(err));
+  const searchText = req.params.query;
+  fetch(`http://www.omdbapi.com?s=${searchText.trim()}&apikey=${apiKey}`)
+    .then(res => res.json())
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => console.log(err));
 });
 
 
-
-// @route   Get movie details
-// @desc    get movie details
+// @route   GET /addMovie/:id
+// @desc    fetch movie details to create movie object for handleAdd()
 // @access  Public
-router.get('/movie/:', (req, res) => {
-  // res.send('you got a movie!');
-
+router.get('/addMovie/:id', (req, res) => {
+  const apiKey = process.env.API_KEY;
+  const movieId = req.params.id;
+  fetch(`http://www.omdbapi.com/?i=${movieId}&apikey=${apiKey}`)
+    .then(res => res.json())
+    .then(data => {
+      res.json(data);
+    })
+    .catch(err => console.log(err));
 })
 
-// @route   Get list
+// @route   GET /:username/list
 // @desc    fetch user's existing list
 // @access  Public
 router.get('/:username/list', (req, res) => {
@@ -39,17 +43,15 @@ router.get('/:username/list', (req, res) => {
   }).catch(err => console.log('error', err));
 });
 
-// @route   Post api/movies
+// @route   POST /save/:username
 // @desc    create and save movie list to mlab
 // @access  Public
-router.post('/list', (req, res) => {
+router.post('/save/:username', (req, res) => {
   const newList = new List();
-  // listName and listId required by model
-  // make sure req (list) has listName and listId
-  console.log('req', req)
   // set username to redux state's username
   newList.username = req.body.username;
   newList.listDescript = req.body.listDescript;
+  // * one list per user for now
   // newList.listName = req.body.listName;
   // newList.listId = req.body.listId;
   req.body.list.map(item => {
@@ -65,18 +67,19 @@ router.post('/list', (req, res) => {
     .catch(err => console.log('error', err));
 });
 
-// @route   PUT movies/add
-// @desc    update existing list
+// @route   PUT /update/:username
+// @desc    update existing list attached to username
 // @access  Public
-router.put('/:user/:listId/update', (req, res) => {
+// TODO: finish, find proper method to find list by username and update
+router.put('/update/:username', (req, res) => {
   // update list array of movie objects
   List.findByIdAndUpdate()
 })
 
-// @route   Delete api/movies
-// @desc    delete list
+// @route   DELETE /delete/:username
+// @desc    delete list attached to username
 // @access  Public
-router.delete('/:username/delete', (req, res) => {
+router.delete('/delete/:username', (req, res) => {
   List.findOneAndDelete({username: req.params.username})
     .then(res => console.log(res))
     .catch(err => console.log(err));

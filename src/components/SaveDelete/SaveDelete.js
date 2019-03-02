@@ -9,10 +9,11 @@ class SaveDelete extends Component {
   handleSave = () => {
     console.log('saving...');
   // update a list
+  // TODO:
   // search mlab ymdb collection for list by username
   // if exists, this.handleChange()
   // else POST request logic...
-    fetch('/list', {
+    fetch(`/save/${this.props.state.username}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -23,11 +24,14 @@ class SaveDelete extends Component {
       .catch(err => console.log(err))
   }
 
-
+  //* not yet tested, look up put requests and check server-side setup
   handleChange = () => {
-    fetch('/:user/update', {
+    fetch(`/update/${this.props.state.username}`, {
       method: 'PUT',
-      // to be continued
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.props.state)
     })
       .then(res => res.json())
       .catch(err => console.log(err))

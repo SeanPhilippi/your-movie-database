@@ -26,8 +26,6 @@ class Search extends React.Component {
     width: '40%'
   }
   
-  apiKey = process.env.API_KEY;
-
   renderResults = () => {
     const { searchResults } = this.state;
     if (searchResults) {
@@ -47,31 +45,31 @@ class Search extends React.Component {
     }
   }
 
-  onTextChange = e => {
-    this.setState({searchText: e.target.value});
-    this.handleDelay();
-  }
-
-  handleDelay = debounce(this.handleSearch, 300);
-
-  // *search - add pagination
-  handleSearch = (num) => {
+  // TODO: search - add pagination
+  handleSearch = () => {
     const { searchText } = this.state;
-    fetch(`/search/${searchText}/${num}`)
+    fetch(`/search/${searchText}`)
     .then(res => res.json())
     .then(data => {
-      console.log('data', data);
       this.setState({searchResults: data.Search})
     })
     .catch(err => console.log(err));
   }
 
-  // !add not work
-  handleAdd = (movie) => {
+  handleDelay = debounce(this.handleSearch, 300);
+
+  onTextChange = e => {
+    this.setState({searchText: e.target.value});
+    // fire handle search through debounce function to reduce api calls with delay
+    this.handleDelay();
+  }
+
+  handleAdd = movie => {
     const { addToList } = this.props;
 
     // fetch call to grab movie from api by id, then grab director 
-    fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${this.apiKey}`)
+    // fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${this.apiKey}`)
+    fetch(`/addMovie/${movie.imdbID}`)
       .then(res => res.json())
       .then(data => {
         addToList({
@@ -97,15 +95,15 @@ class Search extends React.Component {
     this.setState({searchText: ''});
   }
 
-  onKeyUp = e => {
-    if (e.key === 'Enter') {
-      // TODO: add more pages later when scroll container is integrated
-      const arr = [1, 2];
-      arr.map(num => {
-        return this.handleSearch(num);
-      })
-    }
-  }
+  // onKeyUp = e => {
+  //   if (e.key === 'Enter') {
+  //     // TODO: add more pages later when scroll container is integrated
+  //     const arr = [1, 2];
+  //     arr.map(num => {
+  //       return this.handleSearch(num);
+  //     })
+  //   }
+  // }
 
   render() {
 

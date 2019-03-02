@@ -34,7 +34,7 @@ class Description extends Component {
 }
 
 const mapStateToProps = state => ({
-  listDescript: state.listDescript
+  listDescript: state.listDescript, 
 })
 
 const mapDispatchToProps = dispatch => ({
