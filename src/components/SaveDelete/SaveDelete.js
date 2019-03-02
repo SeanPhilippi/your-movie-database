@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './SaveDelete.css';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'
 import { connect } from 'react-redux';
 import { deleteList } from '../../redux/actions';
 
@@ -37,17 +39,43 @@ class SaveDelete extends Component {
       .catch(err => console.log(err))
   }
 
+  alertOptions = {
+    title: 'Are you sure?',
+    message: 'You are about to permanently delete your list.',
+    customUI: ({ onClose, title, message }) => {
+      return (
+        <div className='custom-ui'>
+          <h2>{title}</h2>
+          <p>{message}</p>
+          <button className='alert-button red' onClick={onClose}>No</button>
+          <button className='alert-button green' onClick={() => {
+            this.performDelete();
+            onClose();
+            }}>
+            Yes, delete it!
+          </button>
+        </div>
+      )
+    },
+    willUnmount: () => {},
+    onClickOutside: () => {},
+    onKeypressEscape: () => {}
+  }
+
   handleDelete = () => {
+    confirmAlert(this.alertOptions);
+  }
+
+  performDelete = () => {
     // clearing redux list array
     this.props.deleteList();
-    console.log('deleting...');
-    // deleting list document tied to user
+    // deleting list mlab document tied to user
     const {username} = this.props.state;
     return fetch(`/${username}/delete`, {
       method: 'DELETE'
     })
     .then(res => {
-      return res
+      console.log('successful delete')
     }).catch(err => console.error(err))
   }
 

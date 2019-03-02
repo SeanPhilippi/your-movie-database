@@ -17,3 +17,25 @@
   padding: .3rem 5px;
   background-color: transparent;
 } 
+
+.custom-ui {
+  border: grey 1px solid;
+  padding: 2rem 2.5rem 2.5rem 2.5rem;
+  border-radius: 4px;
+}
+
+.alert-button {
+  margin-right: .7rem;
+  border-radius: 4px;
+  font-weight: 600;
+  color: white;
+  border: black 1px solid;
+}
+
+.red {
+  background-color: #FF5F31;
+}
+
+.green {
+  background-color: #4CAE51;
+}
