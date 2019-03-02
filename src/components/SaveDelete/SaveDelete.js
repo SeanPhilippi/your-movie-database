@@ -55,17 +55,17 @@ class SaveDelete extends Component {
 
     return (
       <div className="save-delete">
-        <button c
+        <button 
           className="delete-list"
           onClick={() => this.handleDelete()}
         >
-          Delete
+          DELETE LIST
         </button>
         <button
           className="save-list"
           onClick={() => this.handleSave()}
         >
-          Save
+          SAVE
         </button>
       </div>
     )

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 // avoiding destructuring so I don't pull in the whole library and send signifcantly
 // less code to the client
 import Navbar from 'react-bootstrap/Navbar';
@@ -19,17 +19,20 @@ const styles = {
 class TopNav extends React.Component {
 
   render() {
+    const { loggedIn } = this.props;
 
     return (
       <Navbar style={styles.navbar} bg="light" expand="lg">
-        <Navbar.Brand  style={styles.brand} href="#home">
-          YMDB: Your Movie Database
+        <Navbar.Brand style={styles.brand} >
+          <NavLink to={loggedIn ? '/' : '/login'}>
+            YMDB: Your Movie Database
+          </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <Nav.Link>
-              <NavLink to="/">Top Movie List</NavLink>
+              <NavLink to="/top-movies">Top Movie List</NavLink>
             </Nav.Link>
 
             <Nav.Link>
@@ -65,7 +68,8 @@ class TopNav extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  username: state.username
+  username: state.username,
+  loggedIn: state.loggedIn,
 });
 
 export default connect(mapStateToProps)(TopNav)

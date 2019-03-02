@@ -10,15 +10,13 @@ YMDB is a full stack website built with React and Redux on the front-end, MongoD
 
 ## Project Links
 
-Coming soon...
+Deployed site: 
 
-<!-- Deployed site: 
+Heroku deployment: https://yourmoviedatabase.herokuapp.com/profile
 
 Github repo: https://github.com/SeanPhilippi/aca-final-project
 
 Project/Issue tracker: https://github.com/SeanPhilippi/aca-final-project/issues
-
-For project details including user stories and wireframes: https://github.com/ssfiero/killbase-app/blob/master/Instructions-README.md -->
 
 ## Project Start Commands
 
