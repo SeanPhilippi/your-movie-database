@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SaveDelete.css';
 import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { connect } from 'react-redux';
 import { deleteList } from '../../redux/actions';
 
@@ -13,7 +13,7 @@ class SaveDelete extends Component {
   // update a list
   // TODO:
   // search mlab ymdb collection for list by username
-  // if exists, this.handleChange()
+  // if exists, this.handleUpdate()
   // else POST request logic...
     fetch(`/save/${this.props.state.username}`, {
       method: 'POST',
@@ -22,21 +22,25 @@ class SaveDelete extends Component {
       },
       body: JSON.stringify(this.props.state)
     })
-      .then(res => res.json())
-      .catch(err => console.log(err))
+    .then(res => res.json())
+    .catch(err => console.log(err))
   }
 
   //* not yet tested, look up put requests and check server-side setup
-  handleChange = () => {
+  handleUpdate = () => {
+    console.log('in update');
     fetch(`/update/${this.props.state.username}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(this.props.state)
+      body: JSON.stringify({
+        list: this.props.state.list,
+        listDescript: this.props.state.listDescript
+      })
     })
-      .then(res => res.json())
-      .catch(err => console.log(err))
+    .then(res => res.json())
+    .catch(err => console.log(err))
   }
 
   alertOptions = {
@@ -74,9 +78,7 @@ class SaveDelete extends Component {
     return fetch(`/delete/${username}`, {
       method: 'DELETE'
     })
-    .then(res => {
-      console.log('successful delete')
-    }).catch(err => console.error(err))
+    .catch(err => console.error(err))
   }
 
   render() {
@@ -91,7 +93,7 @@ class SaveDelete extends Component {
         </button>
         <button
           className="save-list"
-          onClick={() => this.handleSave()}
+          onClick={() => this.props.state.list.length ? this.handleUpdate() : this.handleSave()}
         >
           SAVE
         </button>

@@ -70,7 +70,19 @@ router.post('/save/:username', (req, res) => {
 // TODO: finish, find proper method to find list by username and update
 router.put('/update/:username', (req, res) => {
   // update list array of movie objects
-  List.findByIdAndUpdate()
+  List.update(
+    {username: req.params.username}, 
+    {$set: {list: req.params.list, listDescript: req.params.listDescript}},
+    {upsert: true},
+    function(err, object) {
+      if (err){
+          console.warn(err.message);  // returns error if no matching object found
+      }else{
+          console.dir(object);
+      }
+    }
+  );
+  console.log('updated!!!')
 })
 
 
