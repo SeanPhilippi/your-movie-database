@@ -3,8 +3,6 @@ const router = express.Router();
 const List = require('../../models/ListModel');
 const fetch = require('node-fetch');
 
-
-// ! ----working here----
 // @route   GET /search/:query/:num
 // @desc    get search results
 // @access  Public
@@ -18,7 +16,6 @@ router.get('/search/:query', (req, res) => {
     })
     .catch(err => console.log(err));
 });
-
 
 // @route   GET /addMovie/:id
 // @desc    fetch movie details to create movie object for handleAdd()
@@ -76,11 +73,13 @@ router.put('/update/:username', (req, res) => {
   List.findByIdAndUpdate()
 })
 
+
+//! ----working here----
 // @route   DELETE /delete/:username
 // @desc    delete list attached to username
 // @access  Public
 router.delete('/delete/:username', (req, res) => {
-  List.findOneAndDelete({username: req.params.username})
+  List.deleteOne({username: req.params.username})
     .then(res => console.log(res))
     .catch(err => console.log(err));
 })

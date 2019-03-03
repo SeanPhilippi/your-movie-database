@@ -71,7 +71,7 @@ class SaveDelete extends Component {
     this.props.deleteList();
     // deleting list mlab document tied to user
     const {username} = this.props.state;
-    return fetch(`/${username}/delete`, {
+    return fetch(`/delete/${username}`, {
       method: 'DELETE'
     })
     .then(res => {
