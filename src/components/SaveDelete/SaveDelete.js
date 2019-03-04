@@ -34,10 +34,7 @@ class SaveDelete extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        list: this.props.state.list,
-        listDescript: this.props.state.listDescript
-      })
+      body: JSON.stringify(this.props.state)
     })
     .then(res => res.json())
     .catch(err => console.log(err))
@@ -93,7 +90,7 @@ class SaveDelete extends Component {
         </button>
         <button
           className="save-list"
-          onClick={() => this.props.state.list.length ? this.handleUpdate() : this.handleSave()}
+          onClick={() => this.handleUpdate()}
         >
           SAVE
         </button>

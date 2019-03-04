@@ -67,21 +67,23 @@ router.post('/save/:username', (req, res) => {
 // @route   PUT /update/:username
 // @desc    update existing list attached to username
 // @access  Public
-// TODO: finish, find proper method to find list by username and update
+// TODO: finish, maybe just find and delete list and replace with new one, so combo of PUT and DELETE fetch calls
 router.put('/update/:username', (req, res) => {
   // update list array of movie objects
-  List.update(
+  console.log('req', req.body.list)
+  List.updateOne(
     {username: req.params.username}, 
-    {$set: {list: req.params.list, listDescript: req.params.listDescript}},
-    {upsert: true},
-    function(err, object) {
-      if (err){
-          console.warn(err.message);  // returns error if no matching object found
-      }else{
-          console.dir(object);
-      }
+    {
+      $set: {
+      'list.$.name': req.body.list[0][name], 
+      'list.$.year': req.body.list[0][year],
+      'list.$.director': req.body.list[0][director],
+      'list.$.id': req.body.list[0][id],
+      // 'list': req.body.list,
+      'listDescript': req.params.listDescript
     }
-  );
+  }
+  ).catch(err => console.log(err));
   console.log('updated!!!')
 })
 
