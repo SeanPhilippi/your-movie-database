@@ -75,14 +75,14 @@ router.put('/update/:username', (req, res) => {
     {username: req.params.username}, 
     {
       $set: {
-      // 'list.$.name': req.body.list[0][name], 
-      // 'list.$.year': req.body.list[0][year],
-      // 'list.$.director': req.body.list[0][director],
-      // 'list.$.id': req.body.list[0][id],
+      'username': req.body.username,
       'list': req.body.list,
-      'listDescript': req.params.listDescript
+      'listDescript': req.body.listDescript,
+      }
+    },
+    {
+      upsert: 'true'
     }
-  }
   ).catch(err => console.log(err));
   console.log('updated!!!')
 })

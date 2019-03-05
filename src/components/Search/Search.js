@@ -35,6 +35,7 @@ class Search extends React.Component {
           className="result-item"
           onClick={() => this.handleAdd(movie)}
         >
+          {/* <MovieResult movie={movie} /> */}
           <div className="result-info">
             <div style={{ fontSize: "15px" }}>
               {movie.Title} ({movie.Year})
