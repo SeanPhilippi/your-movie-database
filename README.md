@@ -24,9 +24,13 @@ Front-end: ```npm start```
 
 Server: ```npm run server```
 
+Concurrently: ```npm run both```
+
 ## Current State
 
-The site is still very much under construction, though if you click on the hardcoded username "kesto" near the top right, it will take you to a profile page.  On this page, all CRUD (Create, Read, Update, Delete) actions are on full display.
+The Profile component is the most built out and functional component at the moment.  Full CRUD functionality is on display here, with data being fetched from OMDB's api, and saving, updating, and deleting functions making changes to an mlab document.  Currently there is only one hard-coded user.  Login and Register components will be built out very soon, as well as a visually pleasing Home Page, a more built-out User List page, and built out movie pages.  
+
+To view current progress and TODOs, feel free to visit my Trello board [here](https://trello.com/b/cQnlnnFP/ymdb).
 
 ## Future Goals
 
@@ -64,7 +68,7 @@ Movie Page
 
 <img src="/public/" alt="alt text" width="75%" height="75%">
 
-Login/Register Pages
+Log in/Register Pages
 
 <img src="/public/" alt="alt text" width="75%" height="75%">
 
