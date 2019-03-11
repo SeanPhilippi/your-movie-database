@@ -61,8 +61,8 @@ class Register extends Component {
   }
 }
 
-Register.propTypes = {
-  onRegister: PropTypes.func.isRequired,
-}
+// Register.propTypes = {
+//   onRegister: PropTypes.func.isRequired,
+// }
 
 export default Register;

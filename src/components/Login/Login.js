@@ -8,7 +8,31 @@ class LogIn extends Component {
   state = {
     username: '',
     password: '',
+    error: '',
+    authenticated: localStorage.getItem('token') || false
   }
+
+  // TODO: review localstorage and JSON.stringify
+  // handleLogIn(credentials) {
+  //   fetch('/login', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(credentials)
+  //   }).then(res => {
+  //     if (res.status === 401) {
+  //       this.setState({
+  //         error: 'Login is invalid'
+  //       })
+  //     } else res.json()
+  //   }).then(data => {
+  //     const { token } = data;
+  //     localStorage.setItem('token', token);
+  //     this.setState({
+  //       error: '',
+  //       authenticated: token
+  //     })
+  //   })
+  // }
 
   handlleSubmit(e) {
     e.preventDefault();
@@ -22,10 +46,11 @@ class LogIn extends Component {
         <form>
           <Form.Group>
             <Form.Label>Username</Form.Label>
-            <Form.Control
-              type="email"
+            <Form.Control 
               name="username"
-              // onChange={}
+              onChange={e => {
+                this.setState({[e.target.name]: e.target.value});
+              }}
               placeholder="Enter Username"
               value={this.state.username}
             />
@@ -36,6 +61,9 @@ class LogIn extends Component {
             <Form.Control
               type="password"
               name="password"
+              onChange={e => {
+                this.setState({[e.target.name]: e.target.value});
+              }}
               placeholder="Enter Password"
               value={this.state.password}
             />              
@@ -50,8 +78,8 @@ class LogIn extends Component {
   }
 }
 
-LogIn.propTypes = {
-  onLogIn: PropTypes.func.isRequired,
-}
+// LogIn.propTypes = {
+//   onLogIn: PropTypes.func.isRequired,
+// }
 
 export default LogIn;
