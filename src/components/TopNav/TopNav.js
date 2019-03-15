@@ -19,7 +19,7 @@ const styles = {
 class TopNav extends React.Component {
 
   render() {
-    const { loggedIn } = this.props;
+    const { loggedIn, showNavItems } = this.props;
 
     return (
       <Navbar style={styles.navbar} bg="light" expand="lg">
@@ -30,24 +30,26 @@ class TopNav extends React.Component {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto">
-            <Nav.Link>
-              <NavLink to={loggedIn ? "/top-movies" : "/login"}>Top Movie List</NavLink>
-            </Nav.Link>
+          {showNavItems &&
+            <Nav className="ml-auto" justify>
+              <Nav.Link>
+                <NavLink to="/top-movies">Top Movie List</NavLink>
+              </Nav.Link>
 
-            <Nav.Link>
-              <NavLink to={loggedIn ? "/profile": "/login"}>Your Top List</NavLink>
-            </Nav.Link>
-
+              <Nav.Link>
+                <NavLink to="/profile">Your Top List</NavLink>
+              </Nav.Link>
+            </Nav>
+            // <Nav.Link> 
+            //   <NavLink to={loggedIn ? "/profile": "/login"}>Profile</NavLink>
+            // </Nav.Link>
+          }
+          <Nav className="ml-auto" justify>
             <Nav.Link>
               <NavLink to="/register">Register</NavLink>
             </Nav.Link>
             <Nav.Link>
               <NavLink to="/login">Log In</NavLink>
-            </Nav.Link>
-            
-            <Nav.Link> 
-             <NavLink to={loggedIn ? "/profile": "/login"}>Profile</NavLink>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -70,6 +72,7 @@ class TopNav extends React.Component {
 const mapStateToProps = state => ({
   username: state.username,
   loggedIn: state.loggedIn,
+  showNavItems: state.showNavItems
 });
 
 export default connect(mapStateToProps)(TopNav)

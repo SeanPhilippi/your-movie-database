@@ -9,30 +9,31 @@ class LogIn extends Component {
     username: '',
     password: '',
     error: '',
-    authenticated: localStorage.getItem('token') || false
+    authenticated: localStorage.getItem('token') || false,
+    authError: '',
   }
 
   // TODO: review localstorage and JSON.stringify
-  // handleLogIn(credentials) {
-  //   fetch('/login', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(credentials)
-  //   }).then(res => {
-  //     if (res.status === 401) {
-  //       this.setState({
-  //         error: 'Login is invalid'
-  //       })
-  //     } else res.json()
-  //   }).then(data => {
-  //     const { token } = data;
-  //     localStorage.setItem('token', token);
-  //     this.setState({
-  //       error: '',
-  //       authenticated: token
-  //     })
-  //   })
-  // }
+  handleLogIn(credentials) {
+    fetch('/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials)
+    }).then(res => {
+      if (res.status === 401) {
+        this.setState({
+          authError: 'Login is invalid'
+        })
+      } else res.json()
+    }).then(data => {
+      const { token } = data;
+      localStorage.setItem('token', token);
+      this.setState({
+        authError: '',
+        authenticated: token
+      })
+    })
+  }
 
   handlleSubmit(e) {
     e.preventDefault();

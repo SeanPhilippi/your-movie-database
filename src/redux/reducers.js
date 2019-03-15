@@ -2,12 +2,13 @@ import { TYPES } from './actions';
 import { arrayMove } from 'react-sortable-hoc';
 
 const initialState = {
-  loggedIn: true,
+  loggedIn: true, // make false later for initial value
   // searchText: '',
   searchResults: [],
   listDescript: '',
   username: 'kesto',
   list: [],
+  showNavItems: true, // make false later for initial value
 }
 
 export default (state = initialState, { type, payload }) => {
