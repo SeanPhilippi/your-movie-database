@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
+import LoginRegister from './components/LoginRegister/LoginRegister';
+import TopNav from './components/TopNav/TopNav';
 import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import LogIn from './components/LogIn/LogIn';
@@ -10,19 +12,46 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 class App extends Component {
 
+  state = {
+    // authenticated: localStorage.getItem('token') || false, //* put this in redux global state?
+    authenticated: true
+  }
+
+  handleLogOut = () => {
+
+  }
+
+  renderSite() {
+    return (
+      <div>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          {/* <Route exact path="/login" component={LogIn} /> */}
+          <Route exact path="/top-movies" component={TopMovieList}/>
+          {/* <Route exact path="/register" component={Register} /> */}
+          <Route exact path="/profile" component={Profile} />
+          <Route path="/movie" component={MoviePage} />
+        </Switch>
+      </div>
+    )
+  }
+
   render() {
+    let whatToShow = '';
+    if (this.state.authenticated) {
+      whatToShow = this.renderSite();
+    } else {
+      whatToShow = this.render();
+    }
 
     return (
       <BrowserRouter>
-        <div>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={LogIn} />
-            <Route exact path="/top-movies" component={TopMovieList}/>
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/profile" component={Profile} />
-            <Route path="/movie" component={MoviePage} />
-          </Switch>
+        <div className="App">
+          <TopNav 
+            showNavItems={this.state.authenticated}
+            onLogOut={this.handleLogOut}
+          />
+          { whatToShow }
         </div>
       </BrowserRouter>
     );

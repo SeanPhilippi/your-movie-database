@@ -12,7 +12,8 @@ const styles = {
     fontSize: '1.4rem'
   },
   navbar: {
-
+    flex: 1,
+    justifyContent: 'flex-end'
   }
 }
 
@@ -31,7 +32,7 @@ class TopNav extends React.Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           {showNavItems &&
-            <Nav className="ml-auto" justify>
+            <Nav className="ml-auto" style={styles.navbar}>
               <Nav.Link>
                 <NavLink to="/top-movies">Top Movie List</NavLink>
               </Nav.Link>
@@ -44,7 +45,7 @@ class TopNav extends React.Component {
             //   <NavLink to={loggedIn ? "/profile": "/login"}>Profile</NavLink>
             // </Nav.Link>
           }
-          <Nav className="ml-auto" justify>
+          <Nav className="ml-auto" >
             <Nav.Link>
               <NavLink to="/register">Register</NavLink>
             </Nav.Link>

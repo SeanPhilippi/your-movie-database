@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
-import TopNav from '../TopNav/TopNav';
+// import TopNav from '../TopNav/TopNav';
 
 class LogIn extends Component {
 
   state = {
     username: '',
     password: '',
-    error: '',
-    authenticated: localStorage.getItem('token') || false,
-    authError: '',
+    authenticated: localStorage.getItem('token') || false, //* put this in the redux global state?
   }
 
-  // TODO: review localstorage and JSON.stringify
   handleLogIn(credentials) {
     fetch('/login', {
       method: 'POST',
@@ -43,7 +40,7 @@ class LogIn extends Component {
   render() {
     return (
       <div className="log-in">
-        <TopNav />
+        {/* <TopNav /> */}
         <form>
           <Form.Group>
             <Form.Label>Username</Form.Label>
