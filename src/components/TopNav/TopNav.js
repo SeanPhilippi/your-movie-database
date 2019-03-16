@@ -45,27 +45,16 @@ class TopNav extends React.Component {
             //   <NavLink to={loggedIn ? "/profile": "/login"}>Profile</NavLink>
             // </Nav.Link>
           }
-          <Nav className="ml-auto" >
+          {/* <Nav className="ml-auto" >
             <Nav.Link>
               <NavLink to="/register">Register</NavLink>
             </Nav.Link>
             <Nav.Link>
               <NavLink to="/login">Log In</NavLink>
             </Nav.Link>
-          </Nav>
+          </Nav> */}
         </Navbar.Collapse>
       </Navbar>
-
-
-
-      // <div className="links">
-      //   <div className='nav-links'>
-      //     <NavLink to="/" className="navlink">Home</NavLink>
-      //     <NavLink to="/register" className="navlink">Register</NavLink>
-      //     <NavLink to="/login" className="navlink">Log In</NavLink>
-      //     <NavLink to="/profile" className="navlink">{this.props.username}</NavLink>
-      //   </div>
-      // </div>
     )
   }
 }

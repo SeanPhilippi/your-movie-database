@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import TopNav from '../TopNav/TopNav';
-import { Form, Button } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 class Register extends Component {
 
@@ -19,7 +19,6 @@ class Register extends Component {
   render() {
     return (
       <div className="register">
-        {/* <TopNav /> */}
         <form style={{width: '50%', flex: 1, margin: '0 auto'}}>
           {this.props.error && this.renderError()}
           <Form.Group>

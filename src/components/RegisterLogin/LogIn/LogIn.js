@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button } from 'react-bootstrap';
-// import TopNav from '../TopNav/TopNav';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 class LogIn extends Component {
 
@@ -40,7 +40,6 @@ class LogIn extends Component {
   render() {
     return (
       <div className="log-in">
-        {/* <TopNav /> */}
         <form>
           <Form.Group>
             <Form.Label>Username</Form.Label>
