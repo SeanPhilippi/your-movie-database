@@ -40,7 +40,7 @@ class LogIn extends Component {
   render() {
     return (
       <div className="log-in">
-        <form>
+        <form style={{width: '65%', flex: 1, margin: '2rem auto'}}>
           <Form.Group>
             <Form.Label>Username</Form.Label>
             <Form.Control 

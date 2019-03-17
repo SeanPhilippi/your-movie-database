@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink, Redirect } from 'react-router-dom';
 // avoiding destructuring so I don't pull in the whole library and send signifcantly
 // less code to the client
+import NavLink from 'react-router-dom/NavLink';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 // import './TopNav.css';
@@ -41,18 +41,7 @@ class TopNav extends React.Component {
                 <NavLink to="/profile">Your Top List</NavLink>
               </Nav.Link>
             </Nav>
-            // <Nav.Link> 
-            //   <NavLink to={loggedIn ? "/profile": "/login"}>Profile</NavLink>
-            // </Nav.Link>
           }
-          {/* <Nav className="ml-auto" >
-            <Nav.Link>
-              <NavLink to="/register">Register</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink to="/login">Log In</NavLink>
-            </Nav.Link>
-          </Nav> */}
         </Navbar.Collapse>
       </Navbar>
     )

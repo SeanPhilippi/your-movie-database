@@ -5,6 +5,7 @@ import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
+import Container from 'react-bootstrap/Container';
 import Register from './Register/Register.js';
 import LogIn from './LogIn/LogIn.js';
 
@@ -24,14 +25,14 @@ class RegisterLogin extends Component {
 
   render() {
     return (
-      <Row>
-        <Col>
+      <Row style={{margin: "2rem auto", width: '60rem'}}>
+        <Col md={10} style={{margin: '0 auto'}}>
           {this.state.authError && this.renderError()}
-          <Tabs>
-            <Tab>
+          <Tabs defaultActiveKey="login">
+            <Tab eventKey="login" title="Log In">
               <Register />
             </Tab>
-            <Tab>
+            <Tab eventKey="register" title="Register">
               <LogIn />
             </Tab>
           </Tabs>
