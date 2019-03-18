@@ -5,7 +5,18 @@ const tokenForUser = require('../../services/token').tokenForUser;
 const bcrypt = require("bcrypt-nodejs");
 const passport = require('passport');
 
-router.post('/api/login', (req, res, done) => {
+router.post('/register', (req, res) => {
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (user) {
+        errors.email = 'Email already exists';
+        // 400 error for validation related errors
+        return res.status(400).json(errors);
+      }
+    })
+})
+
+router.post('/login', (req, res, done) => {
   const { username, password } = req.body;
 
   User.findOne({ username })
@@ -22,4 +33,4 @@ router.post('/api/login', (req, res, done) => {
     })
 })
 
-modeule.exports = router;
+module.exports = router;

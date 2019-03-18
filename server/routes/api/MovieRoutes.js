@@ -67,7 +67,6 @@ router.post('/save/:username', (req, res) => {
 // @route   PUT /update/:username
 // @desc    update existing list attached to username
 // @access  Public
-// TODO: finish, maybe just find and delete list and replace with new one, so combo of PUT and DELETE fetch calls
 router.put('/update/:username', (req, res) => {
   // update list array of movie objects
   console.log('req', req.body.list)
@@ -87,8 +86,6 @@ router.put('/update/:username', (req, res) => {
   console.log('updated!!!')
 })
 
-
-//! ----working here----
 // @route   DELETE /delete/:username
 // @desc    delete list attached to username
 // @access  Public

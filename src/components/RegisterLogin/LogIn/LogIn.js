@@ -8,11 +8,11 @@ class LogIn extends Component {
   state = {
     email: '',
     password: '',
-    authenticated: localStorage.getItem('token') || false, //* put this in the redux global state?
+    // authenticated: localStorage.getItem('token') || false, //* put this in the redux global state?
   }
 
   handleLogIn(credentials) {
-    fetch('/api/login', {
+    fetch('login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials)

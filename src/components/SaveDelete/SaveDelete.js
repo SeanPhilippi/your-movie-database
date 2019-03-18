@@ -15,7 +15,7 @@ class SaveDelete extends Component {
   // search mlab ymdb collection for list by username
   // if exists, this.handleUpdate()
   // else POST request logic...
-    fetch(`/save/${this.props.state.username}`, {
+    fetch(`save/${this.props.state.username}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ class SaveDelete extends Component {
   //* not yet tested, look up put requests and check server-side setup
   handleUpdate = () => {
     console.log('in update');
-    fetch(`/update/${this.props.state.username}`, {
+    fetch(`update/${this.props.state.username}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

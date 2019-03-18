@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const movies = require('./routes/api/MovieRoutes');
+const users = require('./routes/api/UserRoutes');
 const app = express();
 const cors = require('cors');
 // DB config
@@ -26,6 +27,8 @@ mongoose.connect(
 
 // Use routes
 app.use(movies);
+app.use(users);
+
 
 app.get('/express', (req, res) => {
   res.send({ express: 'Your express backend is connected to React!' })
