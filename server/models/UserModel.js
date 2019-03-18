@@ -4,12 +4,15 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   username: {
     type: String,
-    unique: true,
-    // so same username with different capitalization is not considered unique
+    // converts string to lowercase so different capitalization is not considered unique
     lowercase: true,
     required: true
   },
-
+  email: {
+    type: String,
+    lowercase: true,
+    requried: true
+  },
   password: {
     type: String,
     required: true
