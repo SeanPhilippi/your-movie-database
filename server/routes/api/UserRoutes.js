@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../../models/UserModel');
-const tokenForUser = require('../../services/token').tokenForUser;
-const bcrypt = require("bcrypt-nodejs");
+//! remove token.js? if using jsonwebtoken, prob don't need it
+// const tokenForUser = require('../../services/token').tokenForUser;
+const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
 const validateRegisterInput = require('../../validation/register');
@@ -25,10 +27,12 @@ router.post('/register', (req, res) => {
         // 400 error for validation related errors
         return res.status(400).json(errors);
       } else {
+        const { username, email, password } = req.body;
+
         const newUser = new User({
-          username: req.body.username,
-          email: req.body.email,
-          password: req.body.password
+          username,
+          email,
+          password
         });
 
         bcrypt.genSalt(10, (err, salt) => {
@@ -49,23 +53,44 @@ router.post('/register', (req, res) => {
 // @route   GET api/users/login
 // @desc    Login User / Returning JWT Token
 // @access  Public
-router.get('/login', (req, res, done) => {
+router.get('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
-  const { username, password } = req.body;
+  if (!isValid) return res.status(400).json(errors);
 
-  User.findOne({ username })
+  const { username, email, password } = req.body;
+  //* for future, allow for login with username OR email, and then search by username, then by email
+  User.findOne({ email })
     .then(user => {
       if (!user) {
-        console.log("No user found with this username", username);
-        return res.send("No user found with this username");
+        errors.email = 'User not found';
+        return res.status(404).json(errors);
       }
-      bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) return done(err);
-        if (!isMatch) return done(null, false);
 
-      })
+      bcrypt.compare(password, user.password).then(isMatch => {
+        if (isMatch) {
+          // JWT payload
+          const payload = { id: user.id, email: user.email };
+          // Sign token
+          jwt.sign(payload, keys.secretOrKey, { expiresIn: 10800 }, (err, token) => {
+            res.json({ success: true, token: 'Bearer ' + token })
+          });
+        } else {
+          errors.password = 'Password incorrect';
+          return res.status(400).json(errors);
+        }
+      });
+    });
+});
+
+router.get('/current', passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const { id, email } = req.user;
+    res.json({
+      id,
+      email
     })
-})
+  }
+)
 
 module.exports = router;
