@@ -7,8 +7,9 @@ class Register extends Component {
 
   state = {
     email: '',
+    username: '',
     password: '',
-    confirmPassword: '',
+    password2: '',
   }
 
   handlleSubmit(e) {
@@ -33,6 +34,17 @@ class Register extends Component {
           </Form.Group>
 
           <Form.Group>
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="username"
+              name="username"
+              // onChange={}
+              placeholder="Enter Username"
+              value={this.state.username}
+            />
+          </Form.Group>
+
+          <Form.Group>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
@@ -46,9 +58,9 @@ class Register extends Component {
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               type="password"
-              name="confirmPassword"
+              name="password2"
               placeholder="Confirm Password"
-              value={this.state.confirmPassword}
+              value={this.state.password2}
             />              
           </Form.Group>
 
