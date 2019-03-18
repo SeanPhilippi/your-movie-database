@@ -6,13 +6,13 @@ import Button from 'react-bootstrap/Button';
 class LogIn extends Component {
 
   state = {
-    username: '',
+    email: '',
     password: '',
     authenticated: localStorage.getItem('token') || false, //* put this in the redux global state?
   }
 
   handleLogIn(credentials) {
-    fetch('/login', {
+    fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials)
@@ -40,16 +40,16 @@ class LogIn extends Component {
   render() {
     return (
       <div className="log-in">
-        <form style={{width: '65%', flex: 1, margin: '2rem auto'}}>
+        <form style={{width: '65%', flex: 1, margin: '3rem auto'}}>
           <Form.Group>
-            <Form.Label>Username</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control 
-              name="username"
+              name="email"
               onChange={e => {
                 this.setState({[e.target.name]: e.target.value});
               }}
-              placeholder="Enter Username"
-              value={this.state.username}
+              placeholder="Enter Email"
+              value={this.state.email}
             />
           </Form.Group>
 

@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 class Register extends Component {
 
   state = {
-    username: '',
+    email: '',
     password: '',
     confirmPassword: '',
   }
@@ -19,16 +19,16 @@ class Register extends Component {
   render() {
     return (
       <div className="register">
-        <form style={{width: '65%', flex: 1, margin: '2rem auto'}}>
+        <form style={{width: '65%', flex: 1, margin: '3rem auto'}}>
           {this.props.error && this.renderError()}
           <Form.Group>
-            <Form.Label>Username</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              name="username"
+              name="email"
               // onChange={}
-              placeholder="Enter Username"
-              value={this.state.username}
+              placeholder="Enter Email"
+              value={this.state.email}
             />
           </Form.Group>
 

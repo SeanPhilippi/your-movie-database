@@ -25,15 +25,15 @@ class RegisterLogin extends Component {
 
   render() {
     return (
-      <Row style={{margin: "2rem auto", width: '60rem'}}>
+      <Row style={{margin: "3rem auto", width: '60rem'}}>
         <Col md={10} style={{margin: '0 auto'}}>
           {this.state.authError && this.renderError()}
           <Tabs defaultActiveKey="login">
             <Tab eventKey="login" title="Log In">
-              <Register />
+              <LogIn />
             </Tab>
             <Tab eventKey="register" title="Register">
-              <LogIn />
+              <Register />
             </Tab>
           </Tabs>
         </Col>

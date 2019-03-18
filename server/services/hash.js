@@ -1,9 +1,8 @@
 const bcrypt = require("bcrypt-nodejs");
 
-function hash(word,err,done) {
-
-    bcrypt.hash(word, null, null,function (hashErr, hashedWord) {
-      if(hashErr){
+const hash = (word, err, done) => {
+    bcrypt.hash(word, null, null, (hashErr, hashedWord) => {
+      if (hashErr) {
         console.log(hashErr);
       }
       if (hashErr && err) {
@@ -13,9 +12,4 @@ function hash(word,err,done) {
     });
 }
 
-function compare(word,hashedWord,done) {
-  bcrypt.compare(word, hashedWord,done);
-}
-
 exports.hash = hash;
-exports.compare = compare;
