@@ -11,26 +11,28 @@ const initialState = {
   showNavItems: true, // make false later for initial value
 }
 
+// destructured TYPES object imported from ./actions passed in to rootReducer function
+// slices of state to return if type === <case>
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case TYPES.SET_DESCRIPT: return {
       ...state,
       listDescript: payload.text
     };
-    // case TYPES.SET_SEARCH_TEXT: return {
-    //   ...state,
-    //   searchText: payload.text,
-    // };
+    case TYPES.SET_SEARCH_TEXT: return {
+      ...state,
+      searchText: payload.text,
+    };
     case TYPES.CLEAR_SEARCH_TEXT: return {
       ...state,
       searchText: []
     };
-    // case TYPES.SET_SEARCH_RESULTS: return {
-    //   ...state,
-    //   searchResults: [...state.searchResults, ...payload.data],
-    // };
+    case TYPES.SET_SEARCH_RESULTS: return {
+      ...state,
+      searchResults: [...state.searchResults, ...payload.data],
+    };
     // set fetched movie list to state
-    case TYPES.SET_MOVIE_LIST: return {
+    case TYPES.SET_PROFILE_DATA: return {
       ...state,
       username: payload.data.username,
       listDescript: payload.data.listDescript,

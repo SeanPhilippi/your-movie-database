@@ -39,7 +39,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
 });
 
-app.listen(PORT, err => {
-  if (err) console.log(err)
-  else console.log(`Server started on port ${PORT}`);
+app.listen((PORT, err) => {
+  return err ? console.log(err) :
+  console.log(`Server started on port ${PORT}`);
 })

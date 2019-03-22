@@ -1,10 +1,11 @@
+// exporting a TYPES object with keys assigned to strings so reducers.js has easy access to 
+// string values
 export const TYPES = {
   SET_DESCRIPT: 'SET_DESCRIPT',
   SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
   SET_SEARCH_RESULTS: 'SET_SEARCH_RESULTS',
   CLEAR_SEARCH_TEXT: 'CLEAR_SEARCH_TEXT',
-  FETCH_MOVIE_LIST: 'FETCH_MOVIE_LIST',
-  SET_MOVIE_LIST: 'SET_MOVIE_LIST',
+  SET_PROFILE_DATA: 'SET_PROFILE_DATA',
   ADD_TO_LIST: 'ADD_TO_LIST',
   CLEAR_SEARCH_RESULTS: 'CLEAR_SEARCH_RESULTS',
   REORDER_LIST: 'REORDER_LIST',
@@ -30,6 +31,10 @@ export const clearSearchText = () => ({
   type: TYPES.CLEAR_SEARCH_TEXT
 })
 
+// dispatch and getState are functions made allowable by redux-thunk
+// redux-thunk allows action objects returned by action-creators to return their own actions 
+// and perform actions such as api calls that will now be executed when they are processed
+// by the rootReducer
 export const getResults = (num) => (dispatch, getState) => {
   const { searchText } = getState();
   const apiKey = process.env.API_KEY;
@@ -57,13 +62,13 @@ export const fetchList = () => (dispatch, getState) => {
     .then(data => {
       console.log('username', username);
       console.log('data', data);
-      dispatch(setFetchedList(data))
+      dispatch(setProfileData(data))
     })
     .catch(err => console.error(err));
 }
 
-export const setFetchedList = data => ({
-  type: TYPES.SET_MOVIE_LIST,
+export const setProfileData = data => ({
+  type: TYPES.SET_PROFILE_DATA,
   payload: {
     data
   }

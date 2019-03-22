@@ -4,14 +4,9 @@ import './Description.css';
 
 import {
   setDescript, 
-  fetchList
 } from '../../redux/actions';
 
 class Description extends Component {
-
-    componentWillMount = () => {
-    this.props.fetchList();
-  }
 
   render() {
 
@@ -38,7 +33,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchList: list => dispatch(fetchList(list)),
   setDescript: text => dispatch(setDescript(text)),
 })
 

@@ -7,8 +7,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
-const validateRegisterInput = require('../../validation/register');
-const validateLoginInput = require('../../validation/login');
+const validateRegisterInput = require('../validation/register');
+const validateLoginInput = require('../validation/login');
 
 // @route   POST api/users/register
 // @desc    Register user

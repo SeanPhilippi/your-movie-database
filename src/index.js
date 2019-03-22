@@ -19,7 +19,7 @@ const store = createStore(
   )
 );
 
-// ** initialsState is stored in reducers.js **
+// ** initialState is stored in reducers.js **
 
 ReactDOM.render(
   <Provider store={store}>

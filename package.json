@@ -9,17 +9,20 @@
   "dependencies": {
     "@material-ui/core": "^3.9.1",
     "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
     "jwt-simple": "^0.5.5",
     "material-ui": "^0.20.2",
     "mongoose": "^5.3.16",
     "node-fetch": "^2.3.0",
     "nodemon": "^1.18.7",
+    "passport": "^0.4.0",
     "react": "^16.6.3",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-confirm-alert": "^2.3.0",
@@ -29,7 +32,8 @@
     "react-scripts": "^2.1.5",
     "react-sortable-hoc": "^1.4.0",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "validator": "^10.11.0"
   },
   "scripts": {
     "start": "react-scripts start",
