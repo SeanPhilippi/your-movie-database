@@ -6,7 +6,6 @@ const User = require('../../models/UserModel');
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 
@@ -72,7 +71,7 @@ router.get('/login', (req, res) => {
           // JWT payload
           const payload = { id: user.id, email: user.email };
           // Sign token
-          jwt.sign(payload, keys.secretOrKey, { expiresIn: 10800 }, (err, token) => {
+          jwt.sign(payload, null, { expiresIn: 10800 }, (err, token) => {
             res.json({ success: true, token: 'Bearer ' + token })
           });
         } else {

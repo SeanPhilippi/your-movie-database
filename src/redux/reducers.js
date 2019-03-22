@@ -11,8 +11,8 @@ const initialState = {
   showNavItems: true, // make false later for initial value
 }
 
-// destructured TYPES object imported from ./actions passed in to rootReducer function
-// slices of state to return if type === <case>
+// destructured action-creators imported from './actions' passed in to rootReducer function,
+// then state slices to return if type === <case>
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case TYPES.SET_DESCRIPT: return {
