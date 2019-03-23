@@ -14,18 +14,27 @@ class Register extends Component {
   }
 
   onChange = e => {
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({ [e.target.name]: e.target.value })
   }
 
-  handlleSubmit = e => {
+  handleSubmit = e => {
     e.preventDefault();
-
+    const newUser = {
+      email: this.state.email,
+      username: this.state.username,
+      password: this.state.password,
+      password2: this.state.password2
+    }
+    console.log(newUser)
   }
 
   render() {
     return (
       <div className="register">
-        <form style={{width: '65%', flex: 1, margin: '3rem auto'}}>
+        <form 
+          style={{width: '65%', flex: 1, margin: '3rem auto'}}
+          onSubmit={this.handleSubmit}  
+        >
           {this.props.error && this.renderError()}
           <Form.Group>
             <Form.Label>Email</Form.Label>
