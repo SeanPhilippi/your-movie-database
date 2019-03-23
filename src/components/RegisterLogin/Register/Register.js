@@ -10,9 +10,14 @@ class Register extends Component {
     username: '',
     password: '',
     password2: '',
+    errors: {}
   }
 
-  handlleSubmit(e) {
+  onChange = e => {
+    this.setState({[e.target.name]: e.target.value})
+  }
+
+  handlleSubmit = e => {
     e.preventDefault();
 
   }
@@ -27,9 +32,9 @@ class Register extends Component {
             <Form.Control
               type="email"
               name="email"
-              // onChange={}
               placeholder="Enter Email"
               value={this.state.email}
+              onChange={this.onChange}
             />
           </Form.Group>
 
@@ -38,9 +43,9 @@ class Register extends Component {
             <Form.Control
               type="username"
               name="username"
-              // onChange={}
               placeholder="Enter Username"
               value={this.state.username}
+              onChange={this.onChange}
             />
           </Form.Group>
 
@@ -51,6 +56,7 @@ class Register extends Component {
               name="password"
               placeholder="Enter Password"
               value={this.state.password}
+              onChange={this.onChange}
             />              
           </Form.Group>
 
@@ -61,6 +67,7 @@ class Register extends Component {
               name="password2"
               placeholder="Confirm Password"
               value={this.state.password2}
+              onChange={this.onChange}
             />              
           </Form.Group>
 

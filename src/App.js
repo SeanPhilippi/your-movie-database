@@ -12,7 +12,7 @@ class App extends Component {
 
   state = {
     // authenticated: localStorage.getItem('token') || false, //* put this in redux global state?
-    authenticated: true
+    authenticated: false
   }
 
   handleLogOut = () => {

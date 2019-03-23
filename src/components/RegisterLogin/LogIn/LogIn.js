@@ -32,7 +32,11 @@ class LogIn extends Component {
     })
   }
 
-  handlleSubmit(e) {
+  onChange = e => {
+    this.setState({[e.target.name]: e.target.value});
+  }
+
+  handlleSubmit = e => {
     e.preventDefault();
 
   }
@@ -45,9 +49,7 @@ class LogIn extends Component {
             <Form.Label>Email</Form.Label>
             <Form.Control 
               name="email"
-              onChange={e => {
-                this.setState({[e.target.name]: e.target.value});
-              }}
+              onChange={this.onChange}
               placeholder="Enter Email"
               value={this.state.email}
             />
@@ -58,9 +60,7 @@ class LogIn extends Component {
             <Form.Control
               type="password"
               name="password"
-              onChange={e => {
-                this.setState({[e.target.name]: e.target.value});
-              }}
+              onChange={this.onChange}
               placeholder="Enter Password"
               value={this.state.password}
             />              
