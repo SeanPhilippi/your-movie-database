@@ -3,7 +3,7 @@ import { arrayMove } from 'react-sortable-hoc';
 
 const initialState = {
   loggedIn: true, // make false later for initial value
-  // searchText: '',
+  errors: {},
   searchResults: [],
   listDescript: '',
   username: 'kesto',
@@ -11,10 +11,11 @@ const initialState = {
   showNavItems: true, // make false later for initial value
 }
 
-// destructured action-creators imported from './actions' passed in to rootReducer function,
+// destructured action parameter is desctructured and passed in to rootReducer function,
 // then state slices to return if type === <case>
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case TYPES.GET_ERRORS: return payload;
     case TYPES.SET_DESCRIPT: return {
       ...state,
       listDescript: payload.text

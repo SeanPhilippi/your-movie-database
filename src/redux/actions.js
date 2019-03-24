@@ -1,6 +1,7 @@
-// exporting a TYPES object with keys assigned to strings so reducers.js has easy access to 
-// string values
+import axios from 'axios';
+
 export const TYPES = {
+  GET_ERRORS: 'GET_ERRORS',
   SET_DESCRIPT: 'SET_DESCRIPT',
   SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
   SET_SEARCH_RESULTS: 'SET_SEARCH_RESULTS',
@@ -12,13 +13,40 @@ export const TYPES = {
   DELETE_MOVIE: 'DELETE_MOVIE',
   DELETE_LIST: 'DELETE_LIST'
 };
+// ! left off here, POST not found, wrong proxy of 3001, should be 4300
+export const onRegister = (userData, history) => dispatch => {
+  axios.post('api/users/register', userData)
+    .then(res => history.push('/login'))
+    .catch(err => 
+      dispatch({
+        type: TYPES.GET_ERRORS,
+        payload: err.response.data
+      })
+    )
+  // fetch('http://localhost:4300/api/users/register', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   // * unsure about this part
+  //   body: JSON.stringify(userData)
+  // })
+  // .then(res => res.json())
+  // .then(data => history.push('/login'))
+  // .catch(err => console.log('error', err)
+  //   dispatch({
+  //   type: TYPES.GET_ERRORS,
+  //   payload: err.response.data
+  // })
+  // )
+}
 
 export const setDescript = text => ({
   type: TYPES.SET_DESCRIPT,
   payload: {
     text
   }
-})
+});
 
 export const setSearchText = text => ({
   type: TYPES.SET_SEARCH_TEXT,
@@ -31,10 +59,9 @@ export const clearSearchText = () => ({
   type: TYPES.CLEAR_SEARCH_TEXT
 })
 
-// dispatch and getState are functions made allowable by redux-thunk
-// redux-thunk allows action objects returned by action-creators to return their own actions 
-// and perform actions such as api calls that will now be executed when they are processed
-// by the rootReducer
+// dispatch and getState are functions made allowable by redux-thunk redux-thunk allows action 
+// objects returned by action-creators to return their own actions and perform actions such as api 
+// calls that will now be executed when they are processed by the rootReducer
 export const getResults = (num) => (dispatch, getState) => {
   const { searchText } = getState();
   const apiKey = process.env.API_KEY;

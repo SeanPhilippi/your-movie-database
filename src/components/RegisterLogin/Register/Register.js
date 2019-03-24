@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { onRegister } from '../../../redux/actions';
 
 class Register extends Component {
 
@@ -25,7 +28,7 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2
     }
-    console.log(newUser)
+    this.props.onRegister(newUser, this.props.history);
   }
 
   render() {
@@ -91,6 +94,13 @@ class Register extends Component {
 
 // Register.propTypes = {
 //   onRegister: PropTypes.func.isRequired,
+//   auth: PropTypes.object.isRequired,
+//   errors: PropTypes.errors.isRequired
 // }
 
-export default Register;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+})
+// destructuring mapDispatchToProps for onRegister
+export default connect(mapStateToProps, { onRegister })(withRouter(Register));

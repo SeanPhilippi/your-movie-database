@@ -4,7 +4,6 @@ import './Search.css';
 import TextField from 'material-ui/TextField';
 import debounce from './debounce.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 import {
   addToList,
 } from '../../redux/actions';

@@ -23,9 +23,8 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.log(err));
 
 // Use routes
-app.use(movies);
-app.use(users);
-
+app.use('/api/movies', movies);
+app.use('/api/users', users);
 
 app.get('/express', (req, res) => {
   res.send({ express: 'Your express backend is connected to React!' })
