@@ -38,7 +38,7 @@ class Search extends React.Component {
   // TODO: search - add pagination
   handleSearch = () => {
     const { searchText } = this.state;
-    fetch(`/search/${searchText}`)
+    fetch(`api/movies/search/${searchText}`)
     .then(res => res.json())
     .then(data => {
       this.setState({searchResults: data.Search})
@@ -57,7 +57,7 @@ class Search extends React.Component {
   handleAdd = movie => {
     const { addToList } = this.props;
     // fetch call to grab movie from api by id, then grab director 
-    fetch(`/addMovie/${movie.imdbID}`)
+    fetch(`/api/movies/addMovie/${movie.imdbID}`)
       .then(res => res.json())
       .then(data => {
         addToList({

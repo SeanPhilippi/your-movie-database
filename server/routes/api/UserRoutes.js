@@ -14,7 +14,7 @@ const validateLoginInput = require('../validation/login');
 // @access  Public
 router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
-
+  console.log('err', errors, 'val', isValid)
   if (!isValid) return res.status(400).json(errors);
 
   //* for future, incorporate creating an avatar that accepts gravatar here

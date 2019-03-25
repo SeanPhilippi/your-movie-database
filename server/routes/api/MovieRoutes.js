@@ -40,36 +40,12 @@ router.get('/:username/list', (req, res) => {
   }).catch(err => console.log('error', err));
 });
 
-// @route   POST /save/:username
-// @desc    create and save movie list to mlab
-// @access  Public
-router.post('/save/:username', (req, res) => {
-  const newList = new List();
-  // set username to redux state's username
-  newList.username = req.body.username;
-  newList.listDescript = req.body.listDescript;
-  // * one list per user for now
-  // newList.listName = req.body.listName;
-  // newList.listId = req.body.listId;
-  req.body.list.map(item => {
-    const movie = {};
-    movie.name = item.name;
-    movie.year = item.year;
-    movie.director = item.director;
-    movie.id = item.id;
-    // push created movie objects to list array in newList object
-    newList.list.push(movie);
-  });
-  newList.save()
-    .catch(err => console.log('error', err));
-});
-
 // @route   PUT /update/:username
 // @desc    update existing list attached to username
 // @access  Public
-router.put('/update/:username', (req, res) => {
+router.put('/save/:username', (req, res) => {
   // update list array of movie objects
-  console.log('req', req.body.list)
+  console.log('update request')
   List.updateOne(
     {username: req.params.username}, 
     {
