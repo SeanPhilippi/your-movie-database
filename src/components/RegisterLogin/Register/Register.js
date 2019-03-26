@@ -16,6 +16,12 @@ class Register extends Component {
     errors: {}
   }
 
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.errors) {
+      this.setState({errors: nextProps.errors});
+    }
+  }
+
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -32,9 +38,12 @@ class Register extends Component {
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
       <div className="register">
         <form 
+          noValidate
           style={{width: '65%', flex: 1, margin: '3rem auto'}}
           onSubmit={this.handleSubmit}  
         >

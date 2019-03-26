@@ -49,6 +49,7 @@ class LogIn extends Component {
     return (
       <div className="log-in">
         <form 
+          noValidate
           style={{width: '65%', flex: 1, margin: '3rem auto'}}
           onSubmit={this.handleSubmit}  
         >

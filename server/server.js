@@ -38,7 +38,7 @@ app.get('/express', (req, res) => {
 
 // Express serve up index.html file if it doesn't recognize route
 // this needs to be after all other routes
-// used for when deoployed to Heroku
+// used for when deployed to Heroku
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
 });

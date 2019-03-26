@@ -13,6 +13,9 @@ const validateLoginInput = require('../validation/login');
 // @desc    Register user
 // @access  Public
 router.post('/register', (req, res) => {
+  // takes newUser object created on front-end and runs through validating function
+  // destructuring object that is returned which contains errors and isValid. isValid return 
+  // a boolean and wants an empty errors object
   const { errors, isValid } = validateRegisterInput(req.body);
   console.log('err', errors, 'val', isValid)
   if (!isValid) return res.status(400).json(errors);
@@ -27,13 +30,13 @@ router.post('/register', (req, res) => {
         return res.status(400).json(errors);
       } else {
         const { username, email, password } = req.body;
-
+        // create new user document to be posted to mlab
         const newUser = new User({
           username,
           email,
           password
         });
-
+        // encrypting password before saving to mlab
         bcrypt.genSalt(10, (err, salt) => {
           // throw salt in with password for hash
           bcrypt.hash(newUser.password, salt, (err, hash) => {

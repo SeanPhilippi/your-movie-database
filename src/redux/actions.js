@@ -84,7 +84,7 @@ export const setSearchResults = data => ({
 export const fetchList = () => (dispatch, getState) => {
   const { username } = getState();
   console.log('username', username)
-  fetch(`${username}/list`)
+  fetch(`api/movies/${username}/list`)
     .then(res => res.json())
     .then(data => {
       console.log('username', username);
