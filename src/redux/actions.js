@@ -102,28 +102,6 @@ export const clearSearchText = () => ({
   type: TYPES.CLEAR_SEARCH_TEXT
 })
 
-// dispatch and getState are functions made allowable by redux-thunk which allows action 
-// objects returned by action-creators to return their own actions and perform actions such as api 
-// calls that will now be executed when they are processed by the rootReducer
-export const getResults = (num) => (dispatch, getState) => {
-  const { searchText } = getState();
-  const apiKey = process.env.API_KEY;
-
-  fetch(`http://www.omdbapi.com/?s=${searchText.trim()}&apikey=${apiKey}&page=${num}`)
-    .then(res => res.json())
-    .then(data => {
-      dispatch(setSearchResults(data.Search))
-    })
-    .catch(err => console.error(err));
-}
-
-export const setSearchResults = data => ({
-  type: TYPES.SET_SEARCH_RESULTS,
-  payload: {
-    data
-  }
-});
-
 export const fetchList = () => (dispatch, getState) => {
   const { username } = getState();
   console.log('username', username)
