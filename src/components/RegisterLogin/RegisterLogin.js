@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import Register from './Register/Register.js';
-import LogIn from './LogIn/LogIn.js';
+import Login from './Login/Login.js';
 
 class RegisterLogin extends Component {
   
@@ -29,7 +29,7 @@ class RegisterLogin extends Component {
           {this.state.authError && this.renderError()}
           <Tabs defaultActiveKey="login">
             <Tab eventKey="login" title="Log In">
-              <LogIn />
+              <Login />
             </Tab>
             <Tab eventKey="register" title="Register">
               <Register />

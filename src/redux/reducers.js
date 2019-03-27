@@ -1,9 +1,13 @@
 import { TYPES } from './actions';
 import { arrayMove } from 'react-sortable-hoc';
+import isEmpty from '../is-empty';
 
 const initialState = {
-  loggedIn: true, // make false later for initial value
-  errors: {},
+  // loggedIn: true, 
+  isAuthenticated: false,
+  user: {},
+  auth: false,
+  authErrors: {},
   searchResults: [],
   listDescript: '',
   username: 'kesto',
@@ -15,7 +19,12 @@ const initialState = {
 // then state slices to return if type === <case>
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case TYPES.GET_ERRORS: return payload;
+    case TYPES.GET_ERRORS: return payload; // * look over this
+    case TYPES.SET_CURRENT_USER: return { // * look over this
+      ...state,
+      isAuthenticated: !isEmpty(payload),
+      username: payload
+    }
     case TYPES.SET_DESCRIPT: return {
       ...state,
       listDescript: payload.text

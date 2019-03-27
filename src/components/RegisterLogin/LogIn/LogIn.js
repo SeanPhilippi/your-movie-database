@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { withRouter } from 'react-router-dom';
+import { loginUser } from '../../../redux/actions'
+import { connect } from 'react-redux';
 
-class LogIn extends Component {
+class Login extends Component {
 
   state = {
     email: '',
     password: '',
-    // authenticated: localStorage.getItem('token') || false, //* put this in the redux global state?
+    errors: {}
   }
 
-  handleLogIn(credentials) {
+  handleLogin(credentials) {
     fetch('login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -85,8 +88,13 @@ class LogIn extends Component {
   }
 }
 
-// LogIn.propTypes = {
-//   onLogIn: PropTypes.func.isRequired,
+// Login.propTypes = {
+//   loginUser: PropTypes.func.isRequired,
 // }
 
-export default LogIn;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.authErrors
+});
+
+export default connect(mapStateToProps, { loginUser })(withRouter(Login));

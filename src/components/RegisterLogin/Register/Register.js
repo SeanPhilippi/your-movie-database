@@ -13,7 +13,13 @@ class Register extends Component {
     username: '',
     password: '',
     password2: '',
-    errors: {}
+    errors: { 
+      // testing
+      email: 'email error', 
+      username: 'username error',
+      password: 'pw error',
+      password2: 'pw2 error'
+    }
   }
 
   componentWillReceiveProps = nextProps => {
@@ -36,7 +42,7 @@ class Register extends Component {
     }
     this.props.onRegister(newUser, this.props.history);
   }
-
+// * left off: working on error feedback rendering
   render() {
     const { errors } = this.state;
 
@@ -57,6 +63,10 @@ class Register extends Component {
               value={this.state.email}
               onChange={this.onChange}
             />
+
+            <Form.Control.Feedback type="invalid">
+              {errors.email}
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group>
@@ -68,6 +78,10 @@ class Register extends Component {
               value={this.state.username}
               onChange={this.onChange}
             />
+
+            <Form.Control.Feedback type="invalid">
+              {errors.username}
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group>
@@ -78,7 +92,11 @@ class Register extends Component {
               placeholder="Enter Password"
               value={this.state.password}
               onChange={this.onChange}
-            />              
+            />
+
+            <Form.Control.Feedback type="invalid">
+              {errors.password}
+            </Form.Control.Feedback>              
           </Form.Group>
 
           <Form.Group>
@@ -89,7 +107,11 @@ class Register extends Component {
               placeholder="Confirm Password"
               value={this.state.password2}
               onChange={this.onChange}
-            />              
+            />
+
+            <Form.Control.Feedback type="invalid">
+              {errors.password2}
+            </Form.Control.Feedback>              
           </Form.Group>
 
           <Button type="submit">
