@@ -5,8 +5,8 @@ import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
-import Register from './Register/Register.js';
-import Login from './Login/Login.js';
+import Register from './Register/Register';
+import Login from './Login/Login';
 
 class RegisterLogin extends Component {
   
