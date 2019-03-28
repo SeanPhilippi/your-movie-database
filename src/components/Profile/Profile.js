@@ -22,7 +22,7 @@ class Profile extends Component {
             <Description />
           </div>
           <div className="right">
-            <CommentColumn className="comments" />
+            {/* <CommentColumn className="comments" /> */}
           </div>
         </div>
       </div >
