@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// avoiding destructuring so I don't pull in the whole library and send signifcantly
-// less code to the client
 import NavLink from 'react-router-dom/NavLink';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import { Alert } from 'reactstrap';
 // import './TopNav.css';
 
 const styles = {
@@ -19,11 +18,16 @@ const styles = {
 
 class TopNav extends React.Component {
 
+  showStatus() {
+    return <Alert><strong>List Updated!</strong></Alert>
+  }
+
   render() {
     const { loggedIn, showNavItems } = this.props;
 
     return (
       <Navbar style={styles.navbar} bg="light" expand="lg">
+        {this.props.update && this.showStatus()}
         <Navbar.Brand style={styles.brand} >
           <NavLink to={loggedIn ? '/' : '/login'}>
             YMDB: Your Movie Database

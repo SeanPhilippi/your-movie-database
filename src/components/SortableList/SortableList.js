@@ -4,7 +4,7 @@ import { sortableContainer, sortableElement, sortableHandle } from 'react-sortab
 import { Link } from 'react-router-dom';
 import { orderList, deleteMovie, fetchList, setProfileData } from '../../redux/actions';
 import './SortableList.css';
-import img from '../../images/grippy.png'
+import img from '../../images/grippy.png';
 
 class SortableList extends Component {
 
@@ -13,7 +13,6 @@ class SortableList extends Component {
   }
 
   render() {
-    console.log('props', this.props)
     const { list, orderList, deleteMovie } = this.props;
 
     const DragHandle = sortableHandle(() => {

@@ -12,6 +12,7 @@ const initialState = {
   listDescript: '',
   username: 'kesto',
   list: [],
+  update: false,
   showNavItems: true, // make false later for initial value
 }
 
@@ -24,7 +25,11 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       isAuthenticated: !isEmpty(payload),
       username: payload
-    }
+    };
+    case TYPES.SET_UPDATE_STATUS: return {
+      ...state,
+      update: true
+    };
     case TYPES.SET_DESCRIPT: return {
       ...state,
       listDescript: payload.text

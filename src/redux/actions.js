@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 export const TYPES = {
   GET_ERRORS: 'GET_ERRORS',
   SET_CURRENT_USER: 'SET_CURRENT_USER',
+  SET_UPDATE_STATUS: 'SET_UPDATE_STATUS',
   SET_DESCRIPT: 'SET_DESCRIPT',
   SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
   SET_SEARCH_RESULTS: 'SET_SEARCH_RESULTS',
@@ -63,13 +64,17 @@ export const loginUser = (user) => dispatch => {
       });
     });
 };
-
+// ! finish this, not being used yet
 export const setCurrentUser = decoded => {
   return {
     type: TYPES.SET_CURRENT_USER,
     payload: decoded
   };
 };
+
+export const setUpdateStatus = () => ({
+    type: TYPES.SET_UPDATE_STATUS
+});
 
 export const logoutUser = (history) => dispatch => {
   // remove JWT token from localStorage

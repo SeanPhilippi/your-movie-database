@@ -3,13 +3,12 @@ import './SaveDelete.css';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { connect } from 'react-redux';
-import { deleteList } from '../../redux/actions';
+import { deleteList, setUpdateStatus } from '../../redux/actions';
 
 class SaveDelete extends Component {
 
-  //* not yet tested, look up put requests and check server-side setup
   handleUpdate = () => {
-    console.log('in update');
+    this.props.setUpdateStatus();
     fetch(`/api/movies/save/${this.props.state.username}`, {
       method: 'PUT',
       headers: {
@@ -18,7 +17,7 @@ class SaveDelete extends Component {
       body: JSON.stringify(this.props.state)
     })
     .then(res => res.json())
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
   }
 
   alertOptions = {
@@ -86,6 +85,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   deleteList: () => dispatch(deleteList()),
+  setUpdateStatus: () => dispatch(setUpdateStatus())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);
