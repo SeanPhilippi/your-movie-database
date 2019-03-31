@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import NavLink from 'react-router-dom/NavLink';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { Alert } from 'reactstrap';
 // import './TopNav.css';
 
 const styles = {
@@ -19,7 +18,7 @@ const styles = {
 class TopNav extends React.Component {
 
   showStatus() {
-    return <Alert><strong>List Updated!</strong></Alert>
+    return 
   }
 
   render() {

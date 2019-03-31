@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import TopMovieList from './components/TopMovieList/TopMovieList';
 import MoviePage from './components/MoviePage/MoviePage';
+import UpdateBar from './components/UpdateBar/UpdateBar';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 class App extends Component {
@@ -53,6 +54,7 @@ class App extends Component {
             showNavItems={this.state.authenticated}
             onLogOut={this.handleLogOut}
           />
+          <UpdateBar/>
           { whatToShow }
         </div>
       </BrowserRouter>
