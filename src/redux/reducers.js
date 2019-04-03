@@ -20,7 +20,10 @@ const initialState = {
 // then state slices to return if type === <case>
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case TYPES.GET_ERRORS: return payload; // * look over this
+    case TYPES.GET_ERRORS: return {
+      ...state,
+      errors: payload.errors
+    } // * look over this
     case TYPES.SET_CURRENT_USER: return { // * look over this
       ...state,
       isAuthenticated: !isEmpty(payload),

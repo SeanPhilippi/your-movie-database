@@ -24,7 +24,7 @@ export const onRegister = (userData, history) => dispatch => {
     .catch(err => 
       dispatch({
         type: TYPES.GET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data // * look at this
       })
     )
   // fetch('http://localhost:4300/api/users/register', {
@@ -45,7 +45,7 @@ export const onRegister = (userData, history) => dispatch => {
   // )
 }
 
-export const loginUser = (user) => dispatch => {
+export const loginUser = user => dispatch => {
   axios.post('/api/users/login', user)
     .then(res => {
       const { token } = res.data;

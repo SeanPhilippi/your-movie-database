@@ -7,8 +7,8 @@ import './SortableList.css';
 import img from '../../images/grippy.png';
 
 class SortableList extends Component {
-
-  componentWillMount = () => {
+  // * should list be fetched and set upon user Login when auth is set? so in Home or App component?
+  componentDidMount = () => {
     this.props.fetchList();
   }
 
@@ -77,7 +77,6 @@ class SortableList extends Component {
       <div className="list-row" >
         {
           items.map((movie, index) => {
-            console.log('movie1', movie);
             return (
               <SortableItem
                 className="sortable-item"

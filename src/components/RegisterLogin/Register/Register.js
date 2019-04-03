@@ -22,7 +22,7 @@ class Register extends Component {
     }
   }
 
-  componentWillReceiveProps = nextProps => {
+  getDerivedStateFromProps = nextProps => {
     if (nextProps.errors) {
       this.setState({errors: nextProps.errors});
     }
@@ -42,6 +42,7 @@ class Register extends Component {
     }
     this.props.onRegister(newUser, this.props.history);
   }
+
 // * left off: working on error feedback rendering
   render() {
     const { errors } = this.state;
@@ -53,7 +54,7 @@ class Register extends Component {
           style={{width: '65%', flex: 1, margin: '3rem auto'}}
           onSubmit={this.handleSubmit}  
         >
-          {this.props.error && this.renderError()}
+          {this.props.errors && this.renderError()}
           <Form.Group>
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -63,10 +64,8 @@ class Register extends Component {
               value={this.state.email}
               onChange={this.onChange}
             />
-
-            <Form.Control.Feedback type="invalid">
-              {errors.email}
-            </Form.Control.Feedback>
+          
+            {errors.email && (<Form.Control.Feedback>{errors.email}</Form.Control.Feedback>)}
           </Form.Group>
 
           <Form.Group>
@@ -79,9 +78,7 @@ class Register extends Component {
               onChange={this.onChange}
             />
 
-            <Form.Control.Feedback type="invalid">
-              {errors.username}
-            </Form.Control.Feedback>
+            {errors.username && (<Form.Control.Feedback>{errors.username}</Form.Control.Feedback>)}
           </Form.Group>
 
           <Form.Group>
@@ -94,9 +91,7 @@ class Register extends Component {
               onChange={this.onChange}
             />
 
-            <Form.Control.Feedback type="invalid">
-              {errors.password}
-            </Form.Control.Feedback>              
+            {errors.password && (<Form.Control.Feedback>red{errors.password}</Form.Control.Feedback>)}
           </Form.Group>
 
           <Form.Group>
@@ -109,9 +104,7 @@ class Register extends Component {
               onChange={this.onChange}
             />
 
-            <Form.Control.Feedback type="invalid">
-              {errors.password2}
-            </Form.Control.Feedback>              
+            {errors.password2 && (<Form.Control.Feedback>{errors.password2}</Form.Control.Feedback>)}
           </Form.Group>
 
           <Button type="submit">

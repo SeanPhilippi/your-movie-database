@@ -4,14 +4,6 @@ import { connect } from 'react-redux';
 import { setUpdateStatus } from '../../redux/actions';
 
 class UpdateBar extends React.Component {
-  // state = {
-  //   // setting local state so handleClose can change state here. 
-  //   open: this.props.open
-  // };
-
-  // handleClose = () => {
-  //   this.props.close
-  // };
 
   render() {
     const { open, setUpdateStatus } = this.props;
