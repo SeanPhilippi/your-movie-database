@@ -23,7 +23,7 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.GET_ERRORS: return {
       ...state,
       authErrors: payload
-    } // * look over this
+    } 
     case TYPES.SET_CURRENT_USER: return { // * look over this
       ...state,
       isAuthenticated: !isEmpty(payload),
@@ -50,7 +50,7 @@ export default (state = initialState, { type, payload }) => {
       searchResults: [...state.searchResults, ...payload.data],
     };
     // set fetched movie list to state
-    case TYPES.SET_PROFILE_DATA: return {
+    case TYPES.SET_PROFILE_DATA: return {  // * soon to be dead code?
       ...state,
       username: payload.data.username,
       listDescript: payload.data.listDescript,

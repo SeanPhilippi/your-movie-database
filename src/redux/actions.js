@@ -45,10 +45,11 @@ export const onRegister = (userData, history) => dispatch => {
   // )
 }
 
-export const loginUser = user => dispatch => {
-  axios.post('/api/users/login', user)
+export const loginUser = userData => dispatch => {
+  axios.post('api/users/login', userData)
     .then(res => {
-      const { token } = res.data;
+      console.log('res2', res)
+      const { token } = res.data; // ! catching here, res is undefined
       // set token in localStorage
       localStorage.setItem('jwtToken', token);
       // set token to be in all axios headers
@@ -59,9 +60,10 @@ export const loginUser = user => dispatch => {
       dispatch(setCurrentUser(decoded));
     })
     .catch(err => {
+      console.log('err in loginUser action', err)
       dispatch({
         type: TYPES.GET_ERRORS,
-        payload: err.response.data
+        payload: err.message
       });
     });
 };
@@ -121,7 +123,7 @@ export const fetchList = () => (dispatch, getState) => {
     .catch(err => console.error(err));
 }
 
-export const setProfileData = data => ({
+export const setProfileData = data => ({ // * soon to be dead code?
   type: TYPES.SET_PROFILE_DATA,
   payload: {
     data

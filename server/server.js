@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const movies = require('./routes/api/MovieRoutes');
 const users = require('./routes/api/UserRoutes');
 const app = express();
+const passport = require('passport');
 const cors = require('cors');
 // core nodejs file
 const path = require('path');
@@ -13,6 +14,10 @@ require('dotenv').config();
 
 app.use(bodyParser.json());
 app.use(cors());
+// Passport middleware
+app.use(passport.initialize());
+// Passport Config
+require('./passport')(passport);
 
 // app.use(function(req, res, next) { 
 //   res.header("Access-Control-Allow-Origin", "*"); 

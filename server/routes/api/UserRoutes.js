@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../../models/UserModel');
-//! remove token.js? if using jsonwebtoken, prob don't need it
-// const tokenForUser = require('../../services/token').tokenForUser;
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
@@ -57,10 +55,11 @@ router.post('/register', (req, res) => {
 // @access  Public
 router.post('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
-
+  // ! not passing here
+  console.log('req.body', req.body)
   if (!isValid) return res.status(400).json(errors);
 
-  const { username, email, password } = req.body;
+  const { email, password } = req.body;
   //* for future, allow for login with username OR email, and then search by username, then by email
   User.findOne({ email })
     .then(user => {
@@ -68,11 +67,12 @@ router.post('/login', (req, res) => {
         errors.email = 'User not found';
         return res.status(404).json(errors);
       }
-
+      console.log('getting this far')
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
           // JWT payload
-          const payload = { id: user.id, email: user.email };
+          console.log('in isMatch, user:', user)
+          const payload = { id: user._id, email: user.email }; // ! token is undefined so error happening here? 
           // Sign token
           jwt.sign(payload, null, { expiresIn: 10800 }, (err, token) => {
             res.json({ success: true, token: 'Bearer ' + token })

@@ -5,10 +5,6 @@ import Register from './Register/Register';
 import Login from './Login/Login';
 
 class RegisterLogin extends Component {
-  
-  state = {
-    authError: '',
-  }
 
   renderError() {
     return (
@@ -22,7 +18,6 @@ class RegisterLogin extends Component {
     return (
       <Row style={{margin: "3rem auto", width: '60rem'}}>
         <Col md={10} style={{margin: '0 auto'}}>
-          {this.state.authError && this.renderError()}
           <Tabs defaultActiveKey="login">
             <Tab eventKey="login" title="Log In">
               <Login />

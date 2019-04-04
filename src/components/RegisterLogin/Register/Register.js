@@ -45,7 +45,7 @@ class Register extends Component {
     this.props.onRegister(newUser, this.props.history);
   }
 
-// * left off: working on error feedback rendering
+// * left off: seperate Login and Register to be their own pages to avoid sharing errors
   render() {
     const { errors } = this.state;
 

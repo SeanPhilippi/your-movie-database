@@ -39,7 +39,7 @@ class Login extends Component {
       password: this.state.password
     }
 
-    this.props.loginUser();
+    this.props.loginUser(user);
   }
 
   onChange = e => {
