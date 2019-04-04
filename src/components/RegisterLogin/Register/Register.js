@@ -16,6 +16,13 @@ class Register extends Component {
     password2: '',
     errors: {},
   }
+
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      this.props.history.push('/home')
+    }
+  }
+
   // * migrate to getDerivedStateToProps
   componentWillReceiveProps = nextProps => {
     if (nextProps.errors) {
@@ -40,7 +47,7 @@ class Register extends Component {
 
 // * left off: working on error feedback rendering
   render() {
-    const { errors } = this.props;
+    const { errors } = this.state;
 
     console.log('errors', errors)
 
@@ -51,8 +58,8 @@ class Register extends Component {
           style={{width: '65%', flex: 1, margin: '3rem auto'}}
           onSubmit={this.handleSubmit}  
         >
-          <h2>Sign Up</h2>
-          <p><strong>Create your YMDB account</strong></p>
+          <h2 style={{textAlign: 'center'}}>Sign Up</h2>
+          <p style={{textAlign: 'center'}}><strong>Create your YMDB account</strong></p>
           <Form.Group>
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -116,12 +123,12 @@ class Register extends Component {
 
 Register.propTypes = {
   onRegister: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  isAuthenticated: state.isAuthenticated,
   errors: state.authErrors
 })
 // destructuring mapDispatchToProps for onRegister

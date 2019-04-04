@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { withRouter } from 'react-router-dom';
 import { loginUser } from '../../../redux/actions'
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 
 class Login extends Component {
 
@@ -14,69 +15,73 @@ class Login extends Component {
     errors: {}
   }
 
-  handleLogin(credentials) {
-    fetch('login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(credentials)
-    }).then(res => {
-      if (res.status === 401) {
-        this.setState({
-          authError: 'Login is invalid'
-        })
-      } else res.json()
-    }).then(data => {
-      const { token } = data;
-      localStorage.setItem('token', token);
-      this.setState({
-        authError: '',
-        authenticated: token
-      })
-    })
+  componentDidMount() {
+    if (this.props.isAuthenticated) {
+      this.props.history.push('/home')
+    }
+  }
+
+  componentWillReceiveProps(nextProps) { // * deprecated, look into replacing
+    if (nextProps.isAuthenticated) {
+      this.props.history.push('/home');
+    }
+
+    if (nextProps.errors) {
+      this.setState({errors: nextProps.errors});
+    }
+  }
+
+  handleLogin = e => {
+    e.preventDefault(); 
+
+    const user = {
+      email: this.state.email,
+      password: this.state.password
+    }
+
+    this.props.loginUser();
   }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const user = {
-      email: this.state.email,
-      password: this.state.password,
-    }
-    console.log(user)
-  }
-
   render() {
+    const { errors } = this.state;
+
     return (
       <div className="log-in">
         <form 
           noValidate
           style={{width: '65%', flex: 1, margin: '3rem auto'}}
-          onSubmit={this.handleSubmit}  
+          onSubmit={this.handleLogin}  
         >
+          <h2 style={{textAlign: 'center'}}>Log In</h2>
+          <p style={{textAlign: 'center'}}><strong>Sign in to your YMDB account</strong></p>
           <Form.Group>
             <Form.Label>Email</Form.Label>
             <Form.Control 
               name="email"
+              // ! check this, understand this before using
+              // className={classnames('form-control form-control-lg', { 'is-invalid': errors.email})} 
               onChange={this.onChange}
-              submit={this.handleSubmit}
               placeholder="Enter Email"
               value={this.state.email}
             />
+            {errors.email && (<div style={{color: 'red'}}>{errors.email}</div>)}
           </Form.Group>
 
           <Form.Group>
             <Form.Label>Password</Form.Label>
             <Form.Control
-              type="password"
+              // className={classnames('form-control form-control-lg', { 'is-invalid': errors.email})}
               name="password"
+              type="password"
               onChange={this.onChange}
-              submit={this.handleSubmit}
               placeholder="Enter Password"
               value={this.state.password}
-            />              
+            />    
+            {errors.password && (<div style={{color: 'red'}}>{errors.password}</div>)}          
           </Form.Group>
 
           <Button type="submit">
@@ -88,12 +93,14 @@ class Login extends Component {
   }
 }
 
-// Login.propTypes = {
-//   loginUser: PropTypes.func.isRequired,
-// }
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  errors: PropTypes.object.isRequired
+}
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  isAuthenticated: state.isAuthenticated,
   errors: state.authErrors
 });
 
