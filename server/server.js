@@ -17,7 +17,7 @@ app.use(cors());
 // Passport middleware
 app.use(passport.initialize());
 // Passport Config
-require('./passport')(passport);
+require('./config/passport')(passport);
 
 // app.use(function(req, res, next) { 
 //   res.header("Access-Control-Allow-Origin", "*"); 

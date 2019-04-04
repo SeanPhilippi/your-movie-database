@@ -1,11 +1,12 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const mongoose = require('mongoose');
-const User = mongoose.model('users'); // * check this later, could be source of an issue
-// * may need secret key on options object? refer to dev connector
+const User = mongoose.model('User'); // * check this later, could be source of an issue
+const keys = require('../config/keys');
 
 const options = {};
 options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+options.secretOrKey = keys.secret;
 
 module.exports = passport => {
   passport.use(

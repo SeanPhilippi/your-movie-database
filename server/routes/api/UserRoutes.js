@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../../models/UserModel');
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
+const keys = require('../../config/keys');
 const passport = require('passport');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
@@ -73,8 +74,9 @@ router.post('/login', (req, res) => {
           // JWT payload
           console.log('in isMatch, user:', user)
           const payload = { id: user._id, email: user.email }; // ! token is undefined so error happening here? 
+          console.log('payload:', payload)
           // Sign token
-          jwt.sign(payload, null, { expiresIn: 10800 }, (err, token) => {
+          jwt.sign(payload, keys.secret, { expiresIn: 10800 }, (err, token) => {
             res.json({ success: true, token: 'Bearer ' + token })
           });
         } else {
