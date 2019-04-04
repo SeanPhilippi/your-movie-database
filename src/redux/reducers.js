@@ -22,7 +22,7 @@ export default (state = initialState, { type, payload }) => {
   switch (type) {
     case TYPES.GET_ERRORS: return {
       ...state,
-      errors: payload.errors
+      authErrors: payload
     } // * look over this
     case TYPES.SET_CURRENT_USER: return { // * look over this
       ...state,

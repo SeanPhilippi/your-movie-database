@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import FormControl from 'react-bootstrap/FormControl' 
 import { onRegister } from '../../../redux/actions';
 
 class Register extends Component {
@@ -13,16 +14,10 @@ class Register extends Component {
     username: '',
     password: '',
     password2: '',
-    errors: { 
-      // testing
-      email: 'email error', 
-      username: 'username error',
-      password: 'pw error',
-      password2: 'pw2 error'
-    }
+    errors: {},
   }
-
-  getDerivedStateFromProps = nextProps => {
+  // * migrate to getDerivedStateToProps
+  componentWillReceiveProps = nextProps => {
     if (nextProps.errors) {
       this.setState({errors: nextProps.errors});
     }
@@ -45,7 +40,9 @@ class Register extends Component {
 
 // * left off: working on error feedback rendering
   render() {
-    const { errors } = this.state;
+    const { errors } = this.props;
+
+    console.log('errors', errors)
 
     return (
       <div className="register">
@@ -54,7 +51,8 @@ class Register extends Component {
           style={{width: '65%', flex: 1, margin: '3rem auto'}}
           onSubmit={this.handleSubmit}  
         >
-          {this.props.errors && this.renderError()}
+          <h2>Sign Up</h2>
+          <p><strong>Create your YMDB account</strong></p>
           <Form.Group>
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -64,8 +62,8 @@ class Register extends Component {
               value={this.state.email}
               onChange={this.onChange}
             />
-          
-            {errors.email && (<Form.Control.Feedback>{errors.email}</Form.Control.Feedback>)}
+            {errors.email && (<div style={{color: 'red'}}>{errors.email}</div>)}
+            {/* {errors.email && (<FormControl.Feedback>{errors.email}</FormControl.Feedback>)} */}
           </Form.Group>
 
           <Form.Group>
@@ -77,8 +75,8 @@ class Register extends Component {
               value={this.state.username}
               onChange={this.onChange}
             />
-
-            {errors.username && (<Form.Control.Feedback>{errors.username}</Form.Control.Feedback>)}
+            {errors.username && (<div style={{color: 'red'}}>{errors.username}</div>)}
+            {/* {errors.username && (<FormControl.Feedback>{errors.username}</FormControl.Feedback>)} */}
           </Form.Group>
 
           <Form.Group>
@@ -90,8 +88,8 @@ class Register extends Component {
               value={this.state.password}
               onChange={this.onChange}
             />
-
-            {errors.password && (<Form.Control.Feedback>red{errors.password}</Form.Control.Feedback>)}
+            {errors.password && (<div style={{color: 'red'}}>{errors.password}</div>)}
+            {/* {errors.password && (<FormControl.Feedback>red{errors.password}</FormControl.Feedback>)} */}
           </Form.Group>
 
           <Form.Group>
@@ -103,8 +101,8 @@ class Register extends Component {
               value={this.state.password2}
               onChange={this.onChange}
             />
-
-            {errors.password2 && (<Form.Control.Feedback>{errors.password2}</Form.Control.Feedback>)}
+            {errors.password2 && (<div style={{color: 'red'}}>{errors.password2}</div>)}
+            {/* <Form.Control.Feedback>{errors.password2}lldfkd</Form.Control.Feedback> */}
           </Form.Group>
 
           <Button type="submit">
@@ -116,15 +114,15 @@ class Register extends Component {
   }
 }
 
-// Register.propTypes = {
-//   onRegister: PropTypes.func.isRequired,
-//   auth: PropTypes.object.isRequired,
-//   errors: PropTypes.errors.isRequired
-// }
+Register.propTypes = {
+  onRegister: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+}
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.authErrors
 })
 // destructuring mapDispatchToProps for onRegister
 export default connect(mapStateToProps, { onRegister })(withRouter(Register));
