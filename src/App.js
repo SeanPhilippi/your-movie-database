@@ -7,14 +7,10 @@ import Profile from './components/Profile/Profile';
 import TopMovieList from './components/TopMovieList/TopMovieList';
 import MoviePage from './components/MoviePage/MoviePage';
 import UpdateBar from './components/UpdateBar/UpdateBar';
+import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 class App extends Component {
-
-  state = {
-    // authenticated: localStorage.getItem('token') || false, //* put this in redux global state?
-    authenticated: false
-  }
 
   handleLogOut = () => {
 
@@ -41,7 +37,7 @@ class App extends Component {
 
   render() {
     let whatToShow = '';
-    if (this.state.authenticated) {
+    if (this.props.isAuthenticated) {
       whatToShow = this.renderSite();
     } else {
       whatToShow = this.renderRegisterLogin();
@@ -51,7 +47,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <TopNav 
-            showNavItems={this.state.authenticated}
+            showNavItems={this.props.isAuthenticated}
             onLogOut={this.handleLogOut}
           />
           <UpdateBar/>
@@ -62,4 +58,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isAuthenticated: state.isAuthenticated,
+})
+
+export default connect(mapStateToProps)(App);

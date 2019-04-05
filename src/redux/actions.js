@@ -24,32 +24,16 @@ export const onRegister = (userData, history) => dispatch => {
     .catch(err => 
       dispatch({
         type: TYPES.GET_ERRORS,
-        payload: err.response.data // * look at this
+        payload: err.message
       })
     )
-  // fetch('http://localhost:4300/api/users/register', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   // * unsure about this part
-  //   body: JSON.stringify(userData)
-  // })
-  // .then(res => res.json())
-  // .then(data => history.push('/login'))
-  // .catch(err => console.log('error', err)
-  //   dispatch({
-  //   type: TYPES.GET_ERRORS,
-  //   payload: err.response.data
-  // })
-  // )
 }
 
-export const loginUser = userData => dispatch => {
-  axios.post('api/users/login', userData)
+export const loginUser = user => dispatch => {
+  axios.post('api/users/login', user)
     .then(res => {
-      console.log('res2', res)
-      const { token } = res.data; // ! catching here, res is undefined
+      console.log('/login post res', res)
+      const { token } = res.data; 
       // set token in localStorage
       localStorage.setItem('jwtToken', token);
       // set token to be in all axios headers
@@ -67,7 +51,7 @@ export const loginUser = userData => dispatch => {
       });
     });
 };
-// ! finish this, not being used yet
+
 export const setCurrentUser = decoded => {
   return {
     type: TYPES.SET_CURRENT_USER,

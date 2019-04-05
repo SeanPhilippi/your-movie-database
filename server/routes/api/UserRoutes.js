@@ -16,7 +16,7 @@ router.post('/register', (req, res) => {
   // destructuring object that is returned which contains errors and isValid. isValid return 
   // a boolean and wants an empty errors object
   const { errors, isValid } = validateRegisterInput(req.body);
-  console.log('err', errors, 'val', isValid)
+
   if (!isValid) return res.status(400).json(errors);
 
   //* for future, incorporate creating an avatar that accepts gravatar here
@@ -56,8 +56,7 @@ router.post('/register', (req, res) => {
 // @access  Public
 router.post('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
-  // ! not passing here
-  console.log('req.body', req.body)
+
   if (!isValid) return res.status(400).json(errors);
 
   const { email, password } = req.body;
@@ -68,13 +67,11 @@ router.post('/login', (req, res) => {
         errors.email = 'User not found';
         return res.status(404).json(errors);
       }
-      console.log('getting this far')
+
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
           // JWT payload
-          console.log('in isMatch, user:', user)
-          const payload = { id: user._id, email: user.email }; // ! token is undefined so error happening here? 
-          console.log('payload:', payload)
+          const payload = { id: user._id, email: user.email }; 
           // Sign token
           jwt.sign(payload, keys.secret, { expiresIn: 10800 }, (err, token) => {
             res.json({ success: true, token: 'Bearer ' + token })

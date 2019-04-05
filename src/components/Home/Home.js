@@ -1,8 +1,8 @@
 import React from 'react';
 import HomeCard from '../HomeCard/HomeCard';
 import { Container, Row, Col, Card } from 'reactstrap';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './Home.css';
@@ -45,12 +45,4 @@ function Home(props) {
   )
 }
 
-Home.propTypes = {
-  auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;

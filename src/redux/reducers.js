@@ -6,7 +6,6 @@ const initialState = {
   // loggedIn: true, 
   isAuthenticated: false,
   user: {},
-  auth: false,
   authErrors: {},
   searchResults: [],
   listDescript: '',
