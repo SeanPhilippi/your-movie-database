@@ -57,7 +57,7 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.ADD_TO_LIST: return {
       ...state,
-      list: [...state.list, payload.movie]
+      list: [payload.movie, ...state.list]
     };
     case TYPES.CLEAR_SEARCH_RESULTS: return {
       ...state,
