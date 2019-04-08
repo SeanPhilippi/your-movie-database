@@ -23,25 +23,45 @@ class TopNav extends React.Component {
     e.preventDefault();
     this.props.logoutUser();
   }
-
-  showStatus() {
-    return 
-  }
+  
+  // showStatus() { 
+  //   return 
+  // }
 
   render() {
-    const { loggedIn, showNavItems } = this.props;
+    const { isAuthenticated, showNavItems } = this.props;
+
+    const authLinks = (
+      <Nav>
+        <Nav.Link onClick={this.onLogoutClick}>
+          <NavLink to="/">Logout</NavLink>
+        </Nav.Link>
+      </Nav>
+    )
+
+    const guestLinks = (
+      <Nav>
+        <Nav.Link>
+          <NavLink to="/login">Login</NavLink>
+        </Nav.Link>
+        <Nav.Link>
+          <NavLink to="/register">Register</NavLink>
+        </Nav.Link>
+      </Nav>
+      
+    )
 
     return (
       <Navbar style={styles.navbar} bg="light" expand="lg">
         {this.props.update && this.showStatus()}
         <Navbar.Brand style={styles.brand} >
-          <NavLink to={loggedIn ? '/' : '/login'}>
+          <NavLink to={isAuthenticated ? '/' : '/login'}>
             YMDB: Your Movie Database
           </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          {showNavItems &&
+          { showNavItems &&
             <Nav className="ml-auto" style={styles.navbar}>
               <Nav.Link>
                 <NavLink to="/top-movies">Top Movie List</NavLink>
@@ -50,6 +70,8 @@ class TopNav extends React.Component {
               <Nav.Link>
                 <NavLink to="/profile">Your Top List</NavLink>
               </Nav.Link>
+
+              { isAuthenticated ? authLinks : guestLinks }
             </Nav>
           }
         </Navbar.Collapse>
@@ -68,7 +90,6 @@ TopNav.propTypes = {
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
   username: state.username,
-  loggedIn: state.loggedIn,
   logoutUser: state.logoutUser,
   showNavItems: state.showNavItems
 });

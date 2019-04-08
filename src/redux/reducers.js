@@ -3,7 +3,6 @@ import { arrayMove } from 'react-sortable-hoc';
 import isEmpty from '../is-empty';
 
 const initialState = {
-  // loggedIn: true, 
   isAuthenticated: false,
   user: {},
   authErrors: {},
