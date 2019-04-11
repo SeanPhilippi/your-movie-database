@@ -41,7 +41,7 @@ class Search extends React.Component {
     fetch(`api/movies/search/${searchText}`)
     .then(res => res.json())
     .then(data => {
-      this.setState({searchResults: data.Search})
+      this.setState(() => ({searchResults: data.Search}))
     })
     .catch(err => console.log(err));
   }
@@ -49,7 +49,7 @@ class Search extends React.Component {
   handleDelay = debounce(this.handleSearch, 300);
 
   onTextChange = e => {
-    this.setState({searchText: e.target.value});
+    this.setState(() => ({searchText: e.target.value}));
     // fire handle search through debounce function to reduce api calls with delay
     this.handleDelay();
   }
@@ -76,11 +76,11 @@ class Search extends React.Component {
   }
 
   clearResults = () => {
-    this.setState({searchResults: []});
+    this.setState(() => ({searchResults: []}));
   }
 
   clearSearchText = () => {
-    this.setState({searchText: ''});
+    this.setState(() => ({searchText: ''}));
   }
 
   // onKeyUp = e => {

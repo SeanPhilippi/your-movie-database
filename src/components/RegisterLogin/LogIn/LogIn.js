@@ -27,7 +27,7 @@ class Login extends Component {
     }
 
     if (nextProps.errors) {
-      this.setState({errors: nextProps.errors});
+      this.setState(() => ({errors: nextProps.errors}));
     }
   }
 
@@ -43,7 +43,7 @@ class Login extends Component {
   }
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState(() => ({ [e.target.name]: e.target.value }));
   }
 
   render() {

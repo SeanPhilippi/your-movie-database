@@ -18,12 +18,12 @@ const styles = {
 }
 
 class TopNav extends React.Component {
-// ! split into auth and guest links
+
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
   }
-  
+
   // showStatus() { 
   //   return 
   // }

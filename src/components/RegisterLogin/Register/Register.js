@@ -26,12 +26,12 @@ class Register extends Component {
   // * migrate to getDerivedStateToProps
   componentWillReceiveProps = nextProps => {
     if (nextProps.errors) {
-      this.setState({errors: nextProps.errors});
+      this.setState(() => ({errors: nextProps.errors}));
     }
   }
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState(() => ({ [e.target.name]: e.target.value }))
   }
 
   handleSubmit = e => {
