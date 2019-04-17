@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
 import { connect } from 'react-redux';
 import { setUpdateStatus } from '../../redux/actions';
@@ -22,6 +23,11 @@ class UpdateBar extends React.Component {
       </div>
     );
   }
+}
+
+UpdateBar.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setUpdateStatus: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({

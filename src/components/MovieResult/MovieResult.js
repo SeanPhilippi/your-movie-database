@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const MovieResult = props => {
@@ -15,6 +16,10 @@ const MovieResult = props => {
       </div>
     </div>
   )
+}
+
+MovieResult.propTypes = {
+  movie: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { sortableContainer, sortableElement, sortableHandle } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
@@ -107,9 +108,17 @@ class SortableList extends Component {
   }
 }
 
+SortableList.propTypes = {
+  list: PropTypes.func.isRequired,
+  username: PropTypes.bool.isRequired,
+  orderList: PropTypes.func.isRequired,
+  fetchList: PropTypes.func.isRequired,
+  deleteMovie: PropTypes.func.isRequired,
+}
+
 const mapStateToProps = state => ({
   list: state.list,
-  username: state.username
+  username: state.username, 
 });
 
 const mapDispatchToProps = dispatch => ({

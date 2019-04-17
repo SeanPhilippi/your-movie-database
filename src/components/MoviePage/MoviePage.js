@@ -1,4 +1,5 @@
 import React from 'react';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './MoviePage.css';
 
@@ -31,6 +32,10 @@ class MoviePage extends React.Component {
     )
   }
 }
+
+// MoviePage.propTypes = {
+  
+// }
 
 const mapStateToProps = state => ({ 
 

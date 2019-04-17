@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './Description.css';
 
@@ -26,6 +27,11 @@ class Description extends Component {
       </div>
     )
   }
+}
+
+Description.propTypes = {
+  listDescript: PropTypes.string.isRequired,
+  setDescript: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({

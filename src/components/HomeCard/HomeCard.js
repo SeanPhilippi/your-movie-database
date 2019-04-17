@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import "./HomeCard.css";
 import { Card, CardText, CardBody, CardTitle, CardImg } from 'reactstrap';
 
@@ -26,6 +27,11 @@ const HomeCard = (props) => {
     </Card>
   );
 };
+
+HomeCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+}
 
 export default HomeCard;
 

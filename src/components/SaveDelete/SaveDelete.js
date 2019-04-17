@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './SaveDelete.css';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -77,6 +78,13 @@ class SaveDelete extends Component {
       </div>
     )
   }
+}
+
+SaveDelete.propTypes = {
+  state: PropTypes.object.isRequired,
+  deleteList: PropTypes.func.isRequired,
+  setUpdateStatus: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({

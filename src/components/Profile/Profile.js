@@ -15,9 +15,7 @@ class Profile extends Component {
         <div className="main-container">
           <div className="left">
             <SaveDelete />
-            <Search
-              add={this.handleAdd}
-            />
+            <Search />
             <SortableList />
             <Description />
           </div>
