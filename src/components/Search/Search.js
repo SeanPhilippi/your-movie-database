@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './Search.css';
 import TextField from 'material-ui/TextField';
@@ -113,6 +114,11 @@ class Search extends React.Component {
       </div>
     )
   }
+}
+
+Search.propTypes = {
+  list: PropTypes.array.isRequired,
+  addToList: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({

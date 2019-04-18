@@ -3,7 +3,6 @@ const isEmpty = require('./is-empty');
 
 const validateRegisterInput = data => {
   let errors = {};
-  console.log('data', data)
 
   data.username = !isEmpty(data.username) ? data.username : '';
   data.email = !isEmpty(data.email) ? data.email : '';

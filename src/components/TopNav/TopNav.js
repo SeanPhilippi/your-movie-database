@@ -84,7 +84,7 @@ TopNav.propTypes = {
   username: PropTypes.string.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
-  username: PropTypes.object.isRequired
+  username: PropTypes.string.isRequired
 }
 
 const mapStateToProps = state => ({

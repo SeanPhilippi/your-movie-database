@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './index.css';
 import RegisterLogin from './components/RegisterLogin/RegisterLogin';
 import TopNav from './components/TopNav/TopNav';
@@ -56,6 +57,10 @@ class App extends Component {
       </BrowserRouter>
     );
   }
+}
+
+App.propTypes = {
+  isAuthenicated: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({

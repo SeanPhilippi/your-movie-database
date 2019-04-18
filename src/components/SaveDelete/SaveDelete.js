@@ -80,12 +80,12 @@ class SaveDelete extends Component {
   }
 }
 
-SaveDelete.propTypes = {
-  state: PropTypes.object.isRequired,
-  deleteList: PropTypes.func.isRequired,
-  setUpdateStatus: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
-}
+// SaveDelete.propTypes = {
+//   state: PropTypes.object.isRequired,
+//   deleteList: PropTypes.func.isRequired,
+//   setUpdateStatus: PropTypes.func.isRequired,
+//   username: PropTypes.string.isRequired,
+// }
 
 const mapStateToProps = state => ({
   state: state
