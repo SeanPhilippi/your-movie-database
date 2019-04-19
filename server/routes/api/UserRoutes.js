@@ -24,13 +24,6 @@ router.post('/register', (req, res) => {
   // destructuring object that is returned which contains errors and isValid. isValid return 
   // a boolean and wants an empty errors object
   const { errors, isValid } = validateRegisterInput(req.body);
-  // TODO left off here
-  // const { ip } = req;
-  // console.log(ip);
-  // const reqip = ip.match(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/)[0];
-  // console.log(reqip)
-  // const geo = geoip.lookup(reqip);
-  // console.log('geo', geo)
 
   if (!isValid) return res.status(400).json(errors);
 
@@ -44,14 +37,20 @@ router.post('/register', (req, res) => {
         return res.status(400).json(errors);
       } else {
         const { username, email, password } = req.body;
-        // console.log('geo2', geo)
+        // grab ip address from req header
+        const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        // '207.97.227.239' dummy ip addy
+        // look up location via ip
+        const geo = geoip.lookup(ip);
         // create new user document to be posted to mlab
         const newUser = new User({
           username,
           email,
           password,
           date: formatDate(new Date()),
-          // TODO: location: `${geo.region}, ${geo.city} (${geo.ll})`
+          location: geo ? 
+            `${geo.city ? geo.city : 'n/a'}, ${geo.region ? geo.region : 'n/a'}, ${geo.country}, (lat: ${geo.ll[0]}, long: ${geo.ll[1]})` 
+            : 'n/a'
         });
         // encrypting password before saving to mlab
         bcrypt.genSalt(10, (err, salt) => {

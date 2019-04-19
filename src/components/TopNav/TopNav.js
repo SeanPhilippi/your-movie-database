@@ -9,7 +9,9 @@ import { logoutUser } from '../../redux/actions';
 
 const styles = {
   brand: {
-    fontSize: '1.4rem'
+    fontSize: '1.4rem',
+    textDecoration: 'none',
+    fontWeight: 500
   },
   navbar: {
     flex: 1,
@@ -55,7 +57,7 @@ class TopNav extends React.PureComponent {
       <Navbar style={styles.navbar} bg="light" expand="lg">
         {this.props.update && this.showStatus()}
         <Navbar.Brand style={styles.brand} >
-          <NavLink to={isAuthenticated ? '/' : '/login'}>
+          <NavLink style={{ textDecoration: 'none'}} to={isAuthenticated ? '/' : '/login'}>
             YMDB: Your Movie Database
           </NavLink>
         </Navbar.Brand>

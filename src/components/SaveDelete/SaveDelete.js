@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './SaveDelete.css';
-import { confirmAlert } from 'react-confirm-alert'; // Import
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { connect } from 'react-redux';
 import { deleteList, setUpdateStatus } from '../../redux/actions';
@@ -91,9 +91,4 @@ const mapStateToProps = state => ({
   state: state
 });
 
-const mapDispatchToProps = dispatch => ({
-  deleteList: () => dispatch(deleteList()),
-  setUpdateStatus: () => dispatch(setUpdateStatus())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);
+export default connect(mapStateToProps, { deleteList, setUpdateStatus })(SaveDelete);
