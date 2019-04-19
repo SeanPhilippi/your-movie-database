@@ -44,7 +44,6 @@ class Login extends PureComponent {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log('target', e.target)
   }
 
   render() {

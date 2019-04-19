@@ -21,7 +21,9 @@ class App extends PureComponent {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" 
+          // component={Home} 
+          />
           <Route exact path="/top-movies" component={TopMovieList}/>
           <Route exact path="/profile" component={Profile} />
           <Route path="/movie" component={MoviePage} />

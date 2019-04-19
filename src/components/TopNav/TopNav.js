@@ -65,6 +65,7 @@ class TopNav extends React.PureComponent {
         <Navbar.Collapse id="basic-navbar-nav">
           { showNavItems &&
             <Nav className="ml-auto" style={styles.navbar}>
+            
               <Nav.Link>
                 <NavLink to="/top-movies">Top Movie List</NavLink>
               </Nav.Link>
@@ -83,10 +84,9 @@ class TopNav extends React.PureComponent {
 }
 
 TopNav.propTypes = {
-  username: PropTypes.string.isRequired,
+  username: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired
 }
 
 const mapStateToProps = state => ({

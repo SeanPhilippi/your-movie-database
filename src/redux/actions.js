@@ -24,7 +24,7 @@ export const onRegister = (userData, history) => dispatch => {
     .catch(err => 
       dispatch({
         type: TYPES.GET_ERRORS,
-        payload: err.message
+        payload: err.response.data
       })
     )
 }
@@ -47,7 +47,7 @@ export const loginUser = user => dispatch => {
       console.log('err in loginUser action', err)
       dispatch({
         type: TYPES.GET_ERRORS,
-        payload: err.message
+        payload: err.response.data
       });
     });
 };
@@ -94,7 +94,7 @@ export const clearSearchText = () => ({
   type: TYPES.CLEAR_SEARCH_TEXT
 })
 
-export const fetchList = () => (dispatch, getState) => {
+export const fetchProfileData = () => (dispatch, getState) => {
   const { username } = getState();
   console.log('username', username)
   fetch(`api/movies/${username}/list`)
@@ -107,7 +107,7 @@ export const fetchList = () => (dispatch, getState) => {
     .catch(err => console.error(err));
 }
 
-export const setProfileData = data => ({ // * soon to be dead code?
+export const setProfileData = data => ({ 
   type: TYPES.SET_PROFILE_DATA,
   payload: {
     data

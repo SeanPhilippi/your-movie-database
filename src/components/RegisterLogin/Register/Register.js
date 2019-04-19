@@ -23,7 +23,6 @@ class Register extends PureComponent {
     }
   }
 
-  // * migrate to getDerivedStateToProps
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.errors) {
       return {errors: nextProps.errors};
@@ -45,7 +44,7 @@ class Register extends PureComponent {
     this.props.onRegister(newUser, this.props.history);
   }
 
-// * left off: seperate Login and Register to be their own pages to avoid sharing errors
+// ! left off: seperate Login and Register to be their own pages to avoid sharing errors
   render() {
     const { errors } = this.state;
 

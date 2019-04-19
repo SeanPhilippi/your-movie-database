@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { sortableContainer, sortableElement, sortableHandle } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
-import { orderList, deleteMovie, fetchList, setProfileData } from '../../redux/actions';
+import { orderList, deleteMovie, fetchProfileData } from '../../redux/actions';
 import './SortableList.css';
 import img from '../../images/grippy.png';
 
 class SortableList extends Component {
   // * should list be fetched and set upon user Login when auth is set? so in Home or App component?
   componentDidMount = () => {
-    this.props.fetchList();
+    this.props.fetchProfileData();
   }
 
   render() {
@@ -112,7 +112,7 @@ SortableList.propTypes = {
   list: PropTypes.func.isRequired,
   username: PropTypes.bool.isRequired,
   orderList: PropTypes.func.isRequired,
-  fetchList: PropTypes.func.isRequired,
+  fetchProfileData: PropTypes.func.isRequired,
   deleteMovie: PropTypes.func.isRequired,
 }
 
@@ -122,8 +122,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setList: () => dispatch(setProfileData()),
-  fetchList: (list) => dispatch(fetchList(list)),
+  fetchProfileData: (list) => dispatch(fetchProfileData(list)),
   orderList: ({ oldIndex, newIndex }) => dispatch(orderList(oldIndex, newIndex)),
   deleteMovie: (movie) => dispatch(deleteMovie(movie))
 });
