@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './SaveDelete.css';
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -6,7 +6,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { connect } from 'react-redux';
 import { deleteList, setUpdateStatus } from '../../redux/actions';
 
-class SaveDelete extends Component {
+class SaveDelete extends PureComponent {
 
   handleUpdate = () => {
     this.props.setUpdateStatus();
@@ -39,7 +39,7 @@ class SaveDelete extends Component {
         </div>
       )
     },
-    willUnmount: () => {},
+    PureUnmount: () => {},
     onClickOutside: () => {},
     onKeypressEscape: () => {}
   }

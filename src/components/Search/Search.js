@@ -9,7 +9,7 @@ import {
   addToList,
 } from '../../redux/actions';
 
-class Search extends React.Component {
+class Search extends React.PureComponent {
 
   state = {
     searchText: '',
@@ -50,7 +50,7 @@ class Search extends React.Component {
   handleDelay = debounce(this.handleSearch, 300);
 
   onTextChange = e => {
-    this.setState(() => ({searchText: e.target.value}));
+    this.setState({searchText: e.target.value});
     // fire handle search through debounce function to reduce api calls with delay
     this.handleDelay();
   }

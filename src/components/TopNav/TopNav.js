@@ -17,7 +17,7 @@ const styles = {
   }
 }
 
-class TopNav extends React.Component {
+class TopNav extends React.PureComponent {
 
   onLogoutClick = e => {
     e.preventDefault();

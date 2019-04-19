@@ -4,7 +4,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import { connect } from 'react-redux';
 import { setUpdateStatus } from '../../redux/actions';
 
-class UpdateBar extends React.Component {
+class UpdateBar extends React.PureComponent {
 
   render() {
     const { open, setUpdateStatus } = this.props;

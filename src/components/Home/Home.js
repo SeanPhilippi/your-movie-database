@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import './Home.css';
 
-function Home(props) {
+const Home = props => {
   return (
     <Container style={{ border: '1px solid black', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       {/* <Row>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl' 
 import { onRegister } from '../../../redux/actions';
 
-class Register extends Component {
+class Register extends PureComponent {
 
   state = {
     email: '',

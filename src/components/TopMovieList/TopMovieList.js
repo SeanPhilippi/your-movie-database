@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import './TopMovieList.css';
 
-class TopMovieList extends Component {
+class TopMovieList extends PureComponent {
   render() {
     return (
       <div className='top-movies-container'>

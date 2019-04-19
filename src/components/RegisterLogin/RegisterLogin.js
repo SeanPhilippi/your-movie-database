@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab, Row, Col, Alert } from 'react-bootstrap';
 import Register from './Register/Register';
 import Login from './Login/Login';
 
-class RegisterLogin extends Component {
+class RegisterLogin extends PureComponent {
 
   renderError() {
     return (

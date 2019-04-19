@@ -7,7 +7,7 @@ import {
 
 } from '../../redux/actions';
 
-class MoviePage extends React.Component {
+class MoviePage extends React.PureComponent {
 
   state = {};
 

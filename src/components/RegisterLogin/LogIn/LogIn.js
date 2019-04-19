@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,7 +7,7 @@ import { loginUser } from '../../../redux/actions'
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
-class Login extends Component {
+class Login extends PureComponent {
 
   state = {
     email: '',
