@@ -7,6 +7,7 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
+const formatDate = require('./formatDate');
 
 // @route   POST api/users/register
 // @desc    Register user
@@ -33,7 +34,8 @@ router.post('/register', (req, res) => {
         const newUser = new User({
           username,
           email,
-          password
+          password,
+          date: formatDate(new Date())
         });
         // encrypting password before saving to mlab
         bcrypt.genSalt(10, (err, salt) => {
