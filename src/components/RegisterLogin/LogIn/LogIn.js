@@ -21,13 +21,13 @@ class Login extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) { // * deprecated, look into replacing
+  static getDerivedStateFromProps(nextProps, prevState) { 
     if (nextProps.isAuthenticated) {
       this.props.history.push('/home');
     }
 
     if (nextProps.errors) {
-      this.setState(() => ({errors: nextProps.errors}));
+      return {errors: nextProps.errors};
     }
   }
 

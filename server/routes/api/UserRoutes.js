@@ -44,7 +44,7 @@ router.post('/register', (req, res) => {
         return res.status(400).json(errors);
       } else {
         const { username, email, password } = req.body;
-        console.log('geo2', geo)
+        // console.log('geo2', geo)
         // create new user document to be posted to mlab
         const newUser = new User({
           username,
