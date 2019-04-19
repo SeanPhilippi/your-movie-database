@@ -8,6 +8,13 @@ const passport = require('passport');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 const formatDate = require('./formatDate');
+const geoip = require('geoip-lite');
+const requestIp = require('request-ip');
+
+const ipMiddleware = function(req, res, next) {
+  const clientIp = requestIp.getClientIp(req); 
+  next();
+};
 
 // @route   POST api/users/register
 // @desc    Register user
@@ -17,6 +24,13 @@ router.post('/register', (req, res) => {
   // destructuring object that is returned which contains errors and isValid. isValid return 
   // a boolean and wants an empty errors object
   const { errors, isValid } = validateRegisterInput(req.body);
+  // TODO left off here
+  // const { ip } = req;
+  // console.log(ip);
+  // const reqip = ip.match(/\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/)[0];
+  // console.log(reqip)
+  // const geo = geoip.lookup(reqip);
+  // console.log('geo', geo)
 
   if (!isValid) return res.status(400).json(errors);
 
@@ -30,12 +44,14 @@ router.post('/register', (req, res) => {
         return res.status(400).json(errors);
       } else {
         const { username, email, password } = req.body;
+        console.log('geo2', geo)
         // create new user document to be posted to mlab
         const newUser = new User({
           username,
           email,
           password,
-          date: formatDate(new Date())
+          date: formatDate(new Date()),
+          // TODO: location: `${geo.region}, ${geo.city} (${geo.ll})`
         });
         // encrypting password before saving to mlab
         bcrypt.genSalt(10, (err, salt) => {
