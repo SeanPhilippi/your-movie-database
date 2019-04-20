@@ -104,6 +104,7 @@ class Search extends React.PureComponent {
           value={this.state.searchText}
           onChange={this.onTextChange}
           onKeyUp={this.onKeyUp}
+          autoComplete="off"
           floatingLabelText="Search For Films"
           style={{width: '36rem'}}
         />
