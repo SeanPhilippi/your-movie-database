@@ -8,15 +8,17 @@ The site is meant to be a minimalist competitor to sites like Mubi and Letterbox
 
 YMDB is a full stack website built with React and Redux on the front-end, MongoDB and Express for the back-end. 
 
+<!-- 
 ## Project Links
 
 Deployed site: 
 
-Heroku deployment: https://yourmoviedatabase.herokuapp.com
+Heroku deployment: https://yourmoviedatabase.herokuapp.com 
 
 Github repo: https://github.com/SeanPhilippi/your-movie-database
 
 Project/Issue tracker: https://github.com/SeanPhilippi/your-movie-database/issues
+-->
 
 ## Project Start Commands
 
