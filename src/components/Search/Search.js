@@ -15,7 +15,7 @@ class Search extends React.PureComponent {
     searchText: '',
     searchResults: [],
   }
-  
+
   renderResults = () => {
     const { searchResults } = this.state;
     if (searchResults) {
@@ -57,7 +57,7 @@ class Search extends React.PureComponent {
 
   handleAdd = movie => {
     const { addToList } = this.props;
-    // fetch call to grab movie from api by id, then grab director 
+    // fetch call to grab movie from api by id, then grab director
     fetch(`/api/movies/addMovie/${movie.imdbID}`)
       .then(res => res.json())
       .then(data => {
@@ -122,12 +122,8 @@ Search.propTypes = {
   addToList: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => ({
-  list: state.list,
-});
-
 const mapDispatchToProps = dispatch => ({
   addToList: movie => dispatch(addToList(movie)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(null, mapDispatchToProps)(Search);
