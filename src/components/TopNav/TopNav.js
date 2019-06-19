@@ -5,17 +5,14 @@ import NavLink from 'react-router-dom/NavLink';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { logoutUser } from '../../redux/actions';
-// import './TopNav.css';
+import './TopNav.css';
 
 const styles = {
   brand: {
-    fontSize: '1.4rem',
-    textDecoration: 'none',
-    fontWeight: 500
+
   },
   navbar: {
-    flex: 1,
-    justifyContent: 'flex-end'
+
   }
 }
 
@@ -26,15 +23,15 @@ class TopNav extends React.PureComponent {
     this.props.logoutUser();
   }
 
-  // showStatus() { 
-  //   return 
+  // showStatus() {
+  //   return
   // }
 
   render() {
     const { isAuthenticated, showNavItems } = this.props;
 
     const authLinks = (
-      <Nav>
+      <Nav className="p-0">
         <Nav.Link onClick={this.onLogoutClick}>
           <NavLink to="/">Logout</NavLink>
         </Nav.Link>
@@ -50,22 +47,23 @@ class TopNav extends React.PureComponent {
           <NavLink to="/register">Register</NavLink>
         </Nav.Link>
       </Nav>
-      
+
     )
 
     return (
-      <Navbar style={styles.navbar} bg="light" expand="lg">
+      <Navbar className="navbar mt-4" expand="lg">
         {this.props.update && this.showStatus()}
-        <Navbar.Brand style={styles.brand} >
+        <Navbar.Brand className="brand">
           <NavLink style={{ textDecoration: 'none'}} to={isAuthenticated ? '/' : '/login'}>
-            YMDB: Your Movie Database
+            <p className="site-title">YMDB:</p>
+            <p className="subtitle">Your Movie Database</p>
           </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           { showNavItems &&
-            <Nav className="ml-auto" style={styles.navbar}>
-            
+            <Nav className="ml-auto">
+
               <Nav.Link>
                 <NavLink to="/top-movies">Top Movie List</NavLink>
               </Nav.Link>

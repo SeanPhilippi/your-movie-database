@@ -1,11 +1,13 @@
 .card {
-
+  background-color: #DCCBA1;
 }
 
 .cardTitle {
-
+  background-color: #B20F07;
+  color: white;
 }
 
 .cardText {
-
+  color: black;
+  border-color: #DECDA4;
 }

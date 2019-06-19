@@ -18,11 +18,16 @@ const HomeCard = (props) => {
   // }
 
   return (
-    <Card className="card">
+    <Card className="card my-2">
       {/* {cardImg} */}
-      <CardBody>
-        <CardTitle className="cardTitle">{title}</CardTitle>
-        <CardText className="cardText">{description}</CardText>
+      <CardBody className="p-0">
+        <CardTitle className="cardTitle pt-2 pl-4 p-1">
+          {title}
+        </CardTitle>
+        <CardText className="cardText p-4">
+          {description}
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum quisquam alias quam?
+        </CardText>
       </CardBody>
     </Card>
   );

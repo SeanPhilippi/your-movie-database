@@ -1,18 +1,43 @@
-.logo {
-  height: 100px;
+.brand {
+  font-size: 1.4rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar {
+  margin: 0 4rem;
+  border: white solid 1px;
+  box-shadow: 0 2px 2px 0 black;
+  flex: 1;
+  padding: 0;
+  justify-content: flex-end;
+  background-color: #EB5018;
+}
+
+.site-title {
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  font-size: 35px;
+  font-weight: 900;
+  text-shadow: 0 0 4px #AF3211; /* horizontal-offset vertical-offset 'blur' colour */
+  -moz-text-shadow: 0 0 4px #AF3211;
+  -webkit-text-shadow: 0 0 4px #AF3211;
 }
 
+.subtitle {
+  color: white;
+  font-size: 16px;
+}
 
 .nav-links {
   display: flex;
   justify-content: space-evenly;
   width: 65%;
   margin: auto;
-  height: 2rem
+  height: 2rem;
+  color: white;
 }
 
 .navlink {

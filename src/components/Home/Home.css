@@ -1,6 +1,22 @@
-.home-container {
+body {
+  background-color: #AA925C;
+}
+
+.container {
   margin: auto;
-  display: block;
+  background-color: #E6D8B6;
+  border: 1px solid black;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner-container {
+  width: 80%;
+  height: 60rem;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .home {
