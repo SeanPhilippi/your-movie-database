@@ -55,8 +55,8 @@ class TopNav extends React.PureComponent {
         {this.props.update && this.showStatus()}
         <Navbar.Brand className="brand">
           <NavLink style={{ textDecoration: 'none'}} to={isAuthenticated ? '/' : '/login'}>
-            <p className="site-title">YMDB:</p>
-            <p className="subtitle">Your Movie Database</p>
+            <span className="site-title m-0 ml-4">YMDB</span>
+            <span className="subtitle ml-4">Your Movie Database</span>
           </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
