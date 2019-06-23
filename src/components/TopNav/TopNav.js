@@ -7,15 +7,6 @@ import Nav from 'react-bootstrap/Nav';
 import { logoutUser } from '../../redux/actions';
 import './TopNav.css';
 
-const styles = {
-  brand: {
-
-  },
-  navbar: {
-
-  }
-}
-
 class TopNav extends React.PureComponent {
 
   onLogoutClick = e => {
