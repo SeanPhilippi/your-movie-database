@@ -42,7 +42,7 @@ class TopNav extends React.PureComponent {
     )
 
     return (
-      <Navbar className="navbar mt-4" expand="lg">
+      <Navbar className="navbar mt-4">
         {this.props.update && this.showStatus()}
         <Navbar.Brand className="brand">
           <NavLink style={{ textDecoration: 'none'}} to={isAuthenticated ? '/' : '/login'}>

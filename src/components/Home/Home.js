@@ -18,8 +18,14 @@ class Home extends React.PureComponent {
     return (
       <Container className="container d-flex justify-content-center">
         <Col className="inner-container d-flex justify-content-center">
-          <HomeCard title='YMDB Top Movies' description=''/>
-          <HomeCard title='Most Visited Lists' description=''/>
+          <Col className="bg-white mt-4 p-4">
+            <Row className="greeting m-0">
+              Welcome to YMDB, Your Movie Database, the movie community where you can create your list of favorite movies,
+              discover other people's favorite movies, discuss about movies and favorite lists, ... YMDB is free and fun!
+            </Row>
+            <HomeCard title='Top Movie List' description=''/>
+            <HomeCard title='Most Visited Lists' description=''/>
+          </Col>
         </Col>
       </Container>
     )

@@ -4,6 +4,7 @@ import './index.css';
 import RegisterLogin from './components/RegisterLogin/RegisterLogin';
 import TopNav from './components/TopNav/TopNav';
 import Home from './components/Home/Home';
+import { Container } from 'reactstrap';
 import Profile from './components/Profile/Profile';
 import TopMovieList from './components/TopMovieList/TopMovieList';
 import MoviePage from './components/MoviePage/MoviePage';
@@ -47,12 +48,14 @@ class App extends PureComponent {
     return (
       <BrowserRouter>
         <div className="App">
-          <TopNav
-            showNavItems={this.props.isAuthenticated}
-            onLogOut={this.handleLogOut}
-          />
-          <UpdateBar/>
-          { whatToShow }
+          <Container className="px-0 border-0 bg-transparent">
+            <TopNav
+              showNavItems={this.props.isAuthenticated}
+              onLogOut={this.handleLogOut}
+            />
+            <UpdateBar/>
+            { whatToShow }
+          </Container>
         </div>
       </BrowserRouter>
     );
