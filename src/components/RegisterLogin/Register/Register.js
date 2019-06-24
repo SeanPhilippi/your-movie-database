@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import FormControl from 'react-bootstrap/FormControl' 
+import FormControl from 'react-bootstrap/FormControl'
 import { onRegister } from '../../../redux/actions';
 
 class Register extends PureComponent {
@@ -52,13 +52,13 @@ class Register extends PureComponent {
 
     return (
       <div className="register">
-        <form 
+        <form
           noValidate
           style={{width: '65%', flex: 1, margin: '3rem auto'}}
-          onSubmit={this.handleSubmit}  
+          onSubmit={this.handleSubmit}
         >
           <h2 style={{textAlign: 'center'}}>Sign Up</h2>
-          <p style={{textAlign: 'center'}}><strong>Create your YMDB account</strong></p>
+          <p style={{textAlign: 'center'}}><strong>Create your YMDb account</strong></p>
           <Form.Group>
             <Form.Label>Email</Form.Label>
             <Form.Control

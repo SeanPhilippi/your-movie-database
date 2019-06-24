@@ -21,7 +21,7 @@ class Login extends PureComponent {
     }
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) { 
+  static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.isAuthenticated) {
       this.props.history.push('/home');
     }
@@ -32,7 +32,7 @@ class Login extends PureComponent {
   }
 
   handleLogin = e => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const user = {
       email: this.state.email,
@@ -51,19 +51,19 @@ class Login extends PureComponent {
 
     return (
       <div className="log-in">
-        <form 
+        <form
           noValidate
           style={{width: '65%', flex: 1, margin: '3rem auto'}}
-          onSubmit={this.handleLogin}  
+          onSubmit={this.handleLogin}
         >
           <h2 style={{textAlign: 'center'}}>Log In</h2>
-          <p style={{textAlign: 'center'}}><strong>Sign in to your YMDB account</strong></p>
+          <p style={{textAlign: 'center'}}><strong>Sign in to your YMDb account</strong></p>
           <Form.Group>
             <Form.Label>Email</Form.Label>
-            <Form.Control 
+            <Form.Control
               name="email"
               // ! check this, understand this before using
-              // className={classnames('form-control form-control-lg', { 'is-invalid': errors.email})} 
+              // className={classnames('form-control form-control-lg', { 'is-invalid': errors.email})}
               onChange={this.onChange}
               placeholder="Enter Email"
               value={this.state.email}
@@ -80,8 +80,8 @@ class Login extends PureComponent {
               onChange={this.onChange}
               placeholder="Enter Password"
               value={this.state.password}
-            />    
-            {errors.password && (<div style={{color: 'red'}}>{errors.password}</div>)}          
+            />
+            {errors.password && (<div style={{color: 'red'}}>{errors.password}</div>)}
           </Form.Group>
 
           <Button type="submit">

@@ -9,8 +9,8 @@ const HomeCard = (props) => {
   const { title, description } = props;
 
   // let cardImg = "";
-  // if (props.title === "YMDB Top Movies") {
-  //   cardImg = <CardImg top src='' alt="YMDB Top Movies" width="100%" />;
+  // if (props.title === "Top Movie List") {
+  //   cardImg = <CardImg top src='' alt="Top Movie List" width="100%" />;
   // } else if (props.title === "Most Visited Lists") {
   //   cardImg = <CardImg top src='' alt="Most Visited Lists" width="100%" />;
   // } else if (props.title === "Numbers") {
