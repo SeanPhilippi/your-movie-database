@@ -43,8 +43,16 @@ body {
 
 }
 
+.login-title {
+
+}
+
 .login-box {
   background-color: white;
+}
+
+.input-labels {
+  /* width: 70px; */
 }
 
 .home {

@@ -27,13 +27,22 @@ class Home extends React.PureComponent {
             <HomeCard title='Most Visited Lists' description=''/>
           </Col>
           <Col className="ml-3 ">
-            <Row className="login-box d-flex flex-column p-2">
-              <span>Your login: </span> <input type="text"/>
-              <span>Password: </span> <input type="text"/>
-              <button>Send</button>
-              <p>
-                If you are not yet a registered user, <a href="">click here to register now for free</a> and discover all the interesting features for the members of YMDb.
-              </p>
+            <Row className="login-box d-flex flex-column">
+              <div className="login-title bg-red text-white m-0 p-2 pl-4">LOGIN</div>
+                <div className="login-main p-2 d-flex">
+                  <div className="input-labels flex-column d-flex pr-2">
+                    <span className="text-nowrap pb-2">Your login: </span>
+                    <span className="text-nowrap pt-2">Password: </span>
+                  </div>
+                  <div>
+                    <input className="mb-2" type="text"/>
+                    <input type="text"/>
+                  </div>
+                </div>
+                <button className="w-75 mx-auto my-3">Send</button>
+                <p className="px-2">
+                  If you are not yet a registered user, <a href="">click here to register now for free</a> and discover all the interesting features for the members of YMDb.
+                </p>
             </Row>
           </Col>
         </Col>

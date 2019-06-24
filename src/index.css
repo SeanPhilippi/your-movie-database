@@ -23,3 +23,34 @@ code {
     monospace;
 }
 
+/* global colors */
+
+.bg-lighter {
+  background-color: #E6D8B6;
+}
+
+.bg-light {
+  background-color: #DECDA4;
+}
+
+.bg-dark {
+  background-color: #AA925C;
+}
+
+.bg-light-orange {
+  background-color: #FE7C19;
+}
+
+.bg-orange {
+  background-color: #EF7C2D;
+}
+
+.bg-dark-orange {
+  background-color: #EB5018
+}
+
+.bg-red {
+  background-color: #B20E07;
+}
+
+
