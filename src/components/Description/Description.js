@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './Description.css';
 
 import {
-  setDescript, 
+  setDescript,
 } from '../../redux/actions';
 
 class Description extends Component {
@@ -16,7 +16,6 @@ class Description extends Component {
         <textarea
           className="textarea"
           name="description"
-          id=""
           cols="80"
           rows="20"
           placeholder="Write your description here..."
@@ -35,7 +34,7 @@ Description.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  listDescript: state.listDescript, 
+  listDescript: state.listDescript,
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -12,15 +12,15 @@ class Profile extends PureComponent {
 
     return (
       <div className="profile-wrapper" >
-        <div className="main-container">
-          <div className="left">
+        <div className="main-container mt-4">
+          <div className="left-col">
             <SaveDelete />
             <Search />
             <SortableList />
             <Description />
           </div>
-          <div className="right">
-            {/* <CommentColumn className="comments" /> */}
+          <div className="right-col">
+            <CommentColumn className="comments" />
           </div>
         </div>
       </div >

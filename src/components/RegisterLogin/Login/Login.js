@@ -7,6 +7,8 @@ import { loginUser } from '../../../redux/actions'
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
+import './Login.css';
+
 class Login extends PureComponent {
 
   state = {
@@ -56,8 +58,8 @@ class Login extends PureComponent {
           style={{width: '65%', flex: 1, margin: '3rem auto'}}
           onSubmit={this.handleLogin}
         >
-          <h2 style={{textAlign: 'center'}}>Log In</h2>
-          <p style={{textAlign: 'center'}}><strong>Sign in to your YMDb account</strong></p>
+          <h2 className="text-center">Log In</h2>
+          <p className="text-center"><strong>Sign in to your YMDb account</strong></p>
           <Form.Group>
             <Form.Label>Email</Form.Label>
             <Form.Control

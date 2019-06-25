@@ -1,0 +1,15 @@
+.comments-label {
+  height: 36px;
+  line-height: 36px;
+  color: white;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-radius: 5px 5px 0 0
+}
+
+.send {
+  width: 3rem;
+  font-size: .7rem;
+  font-weight: bold;
+  border-radius: 9px;
+}

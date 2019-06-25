@@ -12,6 +12,8 @@ import UpdateBar from './components/UpdateBar/UpdateBar';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
+import './App.css';
+
 class App extends PureComponent {
 
   handleLogOut = () => {
@@ -48,7 +50,7 @@ class App extends PureComponent {
     return (
       <BrowserRouter>
         <div className="App">
-          <Container className="px-0 border-0 bg-transparent">
+          <Container className="px-0 border-0 app-container">
             <TopNav
               showNavItems={this.props.isAuthenticated}
               onLogOut={this.handleLogOut}

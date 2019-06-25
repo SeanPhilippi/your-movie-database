@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl'
 import { onRegister } from '../../../redux/actions';
 
+import './Register.css';
+
 class Register extends PureComponent {
 
   state = {

@@ -1,13 +1,13 @@
 .card {
   background-color: #DCCBA1;
+  border-radius: 5px 5px 0 0;
 }
 
-.cardTitle {
-  background-color: #B20F07;
-  color: white;
+.card-title {
+  border-radius: 5px 5px 0 0;
 }
 
-.cardText {
+.card-text {
   color: black;
   border-color: #DECDA4;
 }
