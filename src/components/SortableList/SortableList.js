@@ -118,7 +118,7 @@ SortableList.propTypes = {
 
 const mapStateToProps = state => ({
   list: state.list,
-  username: state.username, 
+  username: state.username,
 });
 
 const mapDispatchToProps = dispatch => ({

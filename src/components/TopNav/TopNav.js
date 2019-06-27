@@ -22,7 +22,7 @@ class TopNav extends React.PureComponent {
     const { isAuthenticated, showNavItems } = this.props;
 
     const authLinks = (
-      <Nav className="p-0">
+      <Nav className="login-register-links p-0">
         <Nav.Link onClick={this.onLogoutClick}>
           <NavLink to="/">Logout</NavLink>
         </Nav.Link>
@@ -30,7 +30,7 @@ class TopNav extends React.PureComponent {
     )
 
     const guestLinks = (
-      <Nav>
+      <Nav className="login-register-links">
         <Nav.Link>
           <NavLink to="/login">Login</NavLink>
         </Nav.Link>
@@ -44,26 +44,31 @@ class TopNav extends React.PureComponent {
     return (
       <Navbar className="navbar mt-4">
         {this.props.update && this.showStatus()}
+        {/****** Logo *****/}
         <Navbar.Brand className="brand">
           <NavLink style={{ textDecoration: 'none'}} to={isAuthenticated ? '/' : '/login'}>
             <span className="site-title m-0 ml-4">YMDB</span>
             <span className="subtitle ml-4">Your Movie Database</span>
           </NavLink>
         </Navbar.Brand>
+        {/****** End Logo *****/}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           { showNavItems &&
-            <Nav className="ml-auto">
+            <Nav className="d-flex flex-column ml-auto">
 
-              <Nav.Link>
-                <NavLink to="/top-movies">Top Movie List</NavLink>
-              </Nav.Link>
+              <div className="ml-auto">
+                { isAuthenticated ? authLinks : guestLinks }
+              </div>
 
-              <Nav.Link>
-                <NavLink to="/profile">Your Top List</NavLink>
-              </Nav.Link>
-
-              { isAuthenticated ? authLinks : guestLinks }
+             <div className="main-links d-flex">
+                <Nav.Link>
+                  <NavLink to="/top-movies">Top Movie List</NavLink>
+                </Nav.Link>
+                <Nav.Link>
+                  <NavLink to="/profile">Your Top List</NavLink>
+                </Nav.Link>
+             </div>
             </Nav>
           }
         </Navbar.Collapse>
