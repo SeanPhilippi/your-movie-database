@@ -14,6 +14,11 @@
   background-color: #EB5018;
 }
 
+.login-register-links {
+  color: white !important;
+  font-size: .8rem;
+}
+
 .site-title {
   color: white;
   display: flex;
