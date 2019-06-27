@@ -55,6 +55,14 @@ body {
   /* width: 70px; */
 }
 
+.send-btn {
+  cursor: pointer;
+  width: 4rem;
+  border-radius: 5px;
+  font-size: .8rem;
+  background-color: white;
+}
+
 .home {
   margin: auto;
   display: block;

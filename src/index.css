@@ -23,6 +23,25 @@ code {
     monospace;
 }
 
+/* links */
+a {
+  color: #EF7C2D;
+  text-decoration: underline;
+}
+
+a:active {
+  color:
+}
+
+a:visited {
+  color: #9C640B;
+}
+
+a:hover {
+  color: #B20E07;
+  text-decoration: none;
+}
+
 /* global colors */
 
 .bg-lighter {

@@ -35,11 +35,13 @@ class Home extends React.PureComponent {
                     <span className="text-nowrap pt-2">Password: </span>
                   </div>
                   <div>
-                    <input className="mb-2" type="text"/>
-                    <input type="text"/>
+                    <div>
+                      <input className="mb-2" type="text"/>
+                      <input type="text"/>
+                    </div>
+                    <button className="pull-left send-btn my-3">Send</button>
                   </div>
                 </div>
-                <button className="w-75 mx-auto my-3">Send</button>
                 <p className="px-2">
                   <small>If you are not yet a registered user, <a href="">click here to register now for free</a> and discover all the interesting features for the members of YMDb.</small>
                 </p>
