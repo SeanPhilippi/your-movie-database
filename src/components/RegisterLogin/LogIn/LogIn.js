@@ -29,7 +29,7 @@ class Login extends PureComponent {
     }
 
     if (nextProps.errors) {
-      return {errors: nextProps.errors};
+      return { errors: nextProps.errors };
     }
   }
 
@@ -55,7 +55,7 @@ class Login extends PureComponent {
       <div className="log-in">
         <form
           noValidate
-          style={{width: '65%', flex: 1, margin: '3rem auto'}}
+          style={{ width: '65%', flex: 1, margin: '3rem auto' }}
           onSubmit={this.handleLogin}
         >
           <h2 className="text-center">Log In</h2>
@@ -70,7 +70,7 @@ class Login extends PureComponent {
               placeholder="Enter Email"
               value={this.state.email}
             />
-            {errors.email && (<div style={{color: 'red'}}>{errors.email}</div>)}
+            {errors.email && (<div style={{ color: 'red' }}>{errors.email}</div>)}
           </Form.Group>
 
           <Form.Group>
@@ -83,7 +83,7 @@ class Login extends PureComponent {
               placeholder="Enter Password"
               value={this.state.password}
             />
-            {errors.password && (<div style={{color: 'red'}}>{errors.password}</div>)}
+            {errors.password && (<div style={{ color: 'red' }}>{errors.password}</div>)}
           </Form.Group>
 
           <Button type="submit">

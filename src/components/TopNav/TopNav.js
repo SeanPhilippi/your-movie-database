@@ -24,18 +24,18 @@ class TopNav extends React.PureComponent {
     const authLinks = (
       <Nav className="login-register-links p-0">
         <Nav.Link onClick={this.onLogoutClick}>
-          <NavLink to="/">Logout</NavLink>
+          <NavLink className="text-white" to="/">LOGOUT</NavLink>
         </Nav.Link>
       </Nav>
     )
 
     const guestLinks = (
-      <Nav className="login-register-links">
+      <Nav className="login-register-links text-white">
         <Nav.Link>
-          <NavLink to="/login">Login</NavLink>
+          <NavLink className="text-white" to="/login">LOGIN</NavLink>
         </Nav.Link>
         <Nav.Link>
-          <NavLink to="/register">Register</NavLink>
+          <NavLink className="text-white" to="/register">REGISTER</NavLink>
         </Nav.Link>
       </Nav>
 
@@ -47,8 +47,8 @@ class TopNav extends React.PureComponent {
         {/****** Logo *****/}
         <Navbar.Brand className="brand">
           <NavLink style={{ textDecoration: 'none'}} to={isAuthenticated ? '/' : '/login'}>
-            <span className="site-title m-0 ml-4">YMDB</span>
-            <span className="subtitle ml-4">Your Movie Database</span>
+            <div className="site-title m-0 p-0 ml-4">YMDB</div>
+            <div className="subtitle m-0 p-0 ml-4">Your Movie Database</div>
           </NavLink>
         </Navbar.Brand>
         {/****** End Logo *****/}
@@ -63,10 +63,10 @@ class TopNav extends React.PureComponent {
 
              <div className="main-links d-flex">
                 <Nav.Link>
-                  <NavLink to="/top-movies">Top Movie List</NavLink>
+                  <NavLink className="text-white" to="/top-movies">Top Movie List</NavLink>
                 </Nav.Link>
                 <Nav.Link>
-                  <NavLink to="/profile">Your Top List</NavLink>
+                  <NavLink className="text-white" to="/profile">Your Top List</NavLink>
                 </Nav.Link>
              </div>
             </Nav>
