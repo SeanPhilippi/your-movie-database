@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import { withRouter } from 'react-router-dom';
 import { loginUser } from '../../../redux/actions'
 import { connect } from 'react-redux';
@@ -86,9 +85,9 @@ class Login extends PureComponent {
             {errors.password && (<div style={{ color: 'red' }}>{errors.password}</div>)}
           </Form.Group>
 
-          <Button type="submit">
+          <button class="login-btn" type="submit">
             Log In
-          </Button>
+          </button>
         </form>
       </div>
     )

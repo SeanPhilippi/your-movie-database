@@ -62,18 +62,18 @@ class SaveDelete extends PureComponent {
   render() {
 
     return (
-      <div className="save-delete">
-        <button 
-          className="delete-list"
-          onClick={() => this.handleDelete()}
-        >
-          DELETE LIST
-        </button>
+      <div className="save-delete d-flex">
         <button
           className="save-list"
           onClick={() => this.handleUpdate()}
         >
           SAVE
+        </button>
+        <button
+          className="delete-list"
+          onClick={() => this.handleDelete()}
+        >
+          DELETE LIST
         </button>
       </div>
     )

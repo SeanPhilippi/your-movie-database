@@ -1,4 +1,12 @@
 /* Search Results */
+.search {
+  width: 100%;
+}
+
+.search-text {
+  width: 100%;
+}
+
 .result-item {
   font-size: 15px;
   height: 25px;

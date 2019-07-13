@@ -14,8 +14,10 @@ class Profile extends PureComponent {
       <div className="profile-wrapper" >
         <div className="main-container bg-lighter mt-4">
           <div className="left-col bg-white">
-            <SaveDelete />
-            <Search />
+            <div className="search-btns-container">
+              <SaveDelete />
+              <Search />
+            </div>
             <SortableList />
             <Description />
           </div>

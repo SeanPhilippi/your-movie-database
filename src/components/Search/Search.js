@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './Search.css';
-import TextField from 'material-ui/TextField';
 import debounce from './debounce.js';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
   addToList,
 } from '../../redux/actions';
@@ -97,18 +95,17 @@ class Search extends React.PureComponent {
   render() {
 
     return (
-      <div className="Search">
-        <MuiThemeProvider>
-        <TextField
+      <div className="search">
+        <input
           name="searchText"
+          className="search-text"
+          placeholder="  Search for films..."
           value={this.state.searchText}
           onChange={this.onTextChange}
           onKeyUp={this.onKeyUp}
-          autoComplete="off"
-          floatingLabelText="Search For Films"
-          style={{width: '36rem'}}
-        />
-        </MuiThemeProvider>
+          style={{width: '32rem'}}
+        >
+        </input>
         <div>
           {this.renderResults()}
         </div>

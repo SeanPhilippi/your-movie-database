@@ -10,22 +10,19 @@
 
 .left-col {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-btns-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  width: 97%;
 }
 
 .right-col {
 
 }
-
-/* .sortable-item {
-  -webkit-user-drag: element;
-  -webkit-user-select:none;
-  margin: auto;
-  text-align: center;
-} */
-
-/* .sortable-list {
-  -webkit-user-drag: element;
-  -webkit-user-select:none;
-  margin: auto;
-  text-align: center;
-} */

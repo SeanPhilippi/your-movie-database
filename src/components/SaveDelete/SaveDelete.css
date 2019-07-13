@@ -1,22 +1,23 @@
 .save-delete {
-  margin: 20px 0 10px 450px;
+  display: flex;
+  justify-content: flex-end;
+  height: 2rem;
+  margin: .5rem 1.1rem 2rem 0;
 }
 
 .delete-list {
   color: red;
   font-size: .7rem;
-  margin: 5px;
-  padding: .3rem 5px;
+  margin: 0.2rem .2rem;
   background-color: transparent;
 }
 
 .save-list {
   color: green;
   font-size: .7rem;
-  margin: 5px;
-  padding: .3rem 5px;
+  margin: .2rem .2rem;
   background-color: transparent;
-} 
+}
 
 .custom-ui {
   border: grey 1px solid;

@@ -2,6 +2,10 @@
   margin: 15px 0 20px 0;
 }
 
+.list-item {
+  width: 100%;
+}
+
 .movie-item {
   display: grid;
   /* position:  */
@@ -9,7 +13,7 @@
   font-size: 15px;
   border: black solid 1px;
   margin: auto;
-  width: 42%;
+  width: 70%;
 }
 
 .movie-link {
