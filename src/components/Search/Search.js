@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import './Search.css';
 import debounce from './debounce.js';
-import {
-  addToList,
-} from '../../redux/actions';
+import { addToList } from '../../redux/actions';
+
+import './Search.css';
 
 class Search extends React.PureComponent {
 

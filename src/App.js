@@ -41,12 +41,12 @@ class App extends PureComponent {
   }
 
   render() {
-    let whatToShow = '';
-    if (this.props.isAuthenticated) {
-      whatToShow = this.renderSite();
-    } else {
-      whatToShow = this.renderRegisterLogin();
-    }
+    let whatToShow = this.renderSite();
+    // if (this.props.isAuthenticated) {
+    //   whatToShow = this.renderSite();
+    // } else {
+    //   whatToShow = this.renderRegisterLogin();
+    // }
 
     return (
       <BrowserRouter>

@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { sortableContainer, sortableElement, sortableHandle } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
 import { orderList, deleteMovie, fetchProfileData } from '../../redux/actions';
-import './SortableList.css';
 import img from '../../images/grippy.png';
+
+import './SortableList.css';
 
 class SortableList extends Component {
   // * should list be fetched and set upon user Login when auth is set? so in Home or App component?

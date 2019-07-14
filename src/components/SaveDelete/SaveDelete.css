@@ -9,14 +9,16 @@
   color: red;
   font-size: .7rem;
   margin: 0.2rem .2rem;
-  background-color: transparent;
+  border-radius: 3px;
+  background-color: white;
 }
 
 .save-list {
   color: green;
   font-size: .7rem;
   margin: .2rem .2rem;
-  background-color: transparent;
+  border-radius: 3px;
+  background-color: white;
 }
 
 .custom-ui {

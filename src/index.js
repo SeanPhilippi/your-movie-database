@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 // for connecting App to Redux store
 import { Provider } from 'react-redux';
@@ -11,6 +10,8 @@ import jwt_decode from 'jwt-decode';
 import { setCurrentUser, logoutUser } from "./redux/actions";
 import setAuthToken from './setAuthToken';
 require('dotenv').config();
+
+import './index.css';
 
 // Redux store to be used in Provider component
 const store = createStore(

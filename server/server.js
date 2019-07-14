@@ -19,13 +19,8 @@ app.use(passport.initialize());
 // Passport Config
 require('./config/passport')(passport);
 
-// app.use(function(req, res, next) { 
-//   res.header("Access-Control-Allow-Origin", "*"); 
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"); 
-//   next(); 
-// });
-
 // Express will serve up production assets
+// express.static is middleware that lets you serve up static files
 app.use(express.static('build'));
 
 // Connect to Mongo
@@ -41,14 +36,12 @@ app.get('/express', (req, res) => {
   res.send({ express: 'Your express backend is connected to React!' })
 });
 
-// Express serve up index.html file if it doesn't recognize route
-// this needs to be after all other routes
-// used for when deployed to Heroku
+// Express serve up index.html file if it doesn't recognize route this needs to be
+// after all other routes used for when deploying to Heroku as it is a fallback
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
 });
 
 app.listen(PORT, err => {
-  err ? console.log(err) :
-  console.log(`Server started on port ${PORT}`);
+  err ? console.log(err) : console.log(`Server started on port ${PORT}`);
 })

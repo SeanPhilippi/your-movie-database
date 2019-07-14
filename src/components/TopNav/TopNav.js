@@ -5,6 +5,7 @@ import NavLink from 'react-router-dom/NavLink';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { logoutUser } from '../../redux/actions';
+
 import './TopNav.css';
 
 class TopNav extends React.PureComponent {

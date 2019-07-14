@@ -8,6 +8,14 @@ html {
   }
 }
 
+/* removing focus border for inputs */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
 body {
   margin: 0;
   padding: 0;
