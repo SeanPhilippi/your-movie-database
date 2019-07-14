@@ -10,7 +10,7 @@ import './TopNav.css';
 
 class TopNav extends React.PureComponent {
 
-  onLogoutClick = e => {
+  handleLogout = e => {
     e.preventDefault();
     this.props.logoutUser();
   }
@@ -20,24 +20,30 @@ class TopNav extends React.PureComponent {
   // }
 
   render() {
-    const { isAuthenticated, showNavItems } = this.props;
+    const { isAuthenticated, showNavItems, user } = this.props;
 
     const authLinks = (
       <Nav className="login-register-links p-0">
-        <Nav.Link onClick={this.onLogoutClick}>
-          <NavLink className="text-white" to="/">LOGOUT</NavLink>
-        </Nav.Link>
+        <NavLink
+          className="text-white"
+          to="/settings"
+        >
+          {/* { user.name } */}
+        </NavLink>
+        <NavLink
+          onClick={this.handleLogout}
+          className="text-white"
+          to="/"
+        >
+          LOGOUT
+        </NavLink>
       </Nav>
     )
 
     const guestLinks = (
       <Nav className="login-register-links text-white">
-        <Nav.Link>
-          <NavLink className="text-white" to="/login">LOGIN</NavLink>
-        </Nav.Link>
-        <Nav.Link>
-          <NavLink className="text-white" to="/register">REGISTER</NavLink>
-        </Nav.Link>
+        <NavLink className="text-white mx-2" to="/register">REGISTER</NavLink> |
+        <NavLink className="text-white mx-2" to="/login">LOGIN</NavLink>
       </Nav>
 
     )
@@ -47,7 +53,7 @@ class TopNav extends React.PureComponent {
         {this.props.update && this.showStatus()}
         {/****** Logo *****/}
         <Navbar.Brand className="brand">
-          <NavLink style={{ textDecoration: 'none'}} to={isAuthenticated ? '/' : '/login'}>
+          <NavLink style={{ textDecoration: 'none'}} to='/'>
             <div className="site-title m-0 p-0 ml-4">YMDB</div>
             <div className="subtitle m-0 p-0 ml-4">Your Movie Database</div>
           </NavLink>
@@ -55,23 +61,17 @@ class TopNav extends React.PureComponent {
         {/****** End Logo *****/}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          { showNavItems &&
-            <Nav className="d-flex flex-column ml-auto">
+          <Nav className="d-flex flex-column ml-auto">
 
-              <div className="ml-auto">
-                { isAuthenticated ? authLinks : guestLinks }
-              </div>
+            <div className="ml-auto">
+              { isAuthenticated ? authLinks : guestLinks }
+            </div>
 
-             <div className="main-links d-flex">
-                <Nav.Link>
-                  <NavLink className="text-white" to="/top-movies">Top Movie List</NavLink>
-                </Nav.Link>
-                <Nav.Link>
-                  <NavLink className="text-white" to="/profile">Your Top List</NavLink>
-                </Nav.Link>
-             </div>
-            </Nav>
-          }
+          <div className="main-links d-flex">
+            <NavLink className="text-white mx-2" to="/top-movies">Top Movie List</NavLink>
+            <NavLink className="text-white mx-2" to="/profile">Your Top List</NavLink>
+          </div>
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     )
