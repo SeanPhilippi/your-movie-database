@@ -1,6 +1,7 @@
 import React from 'react';
 import HomeCard from '../HomeCard/HomeCard';
 import LoginBox from '../LoginBox/LoginBox';
+import NewRegisters from '../NewRegisters/NewRegisters';
 import { Container, Row, Col, Card } from 'reactstrap';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
@@ -31,6 +32,7 @@ class Home extends React.PureComponent {
             {
               this.props.isAuthenticated ? null : <LoginBox />
             }
+            <NewRegisters />
           </Col>
         </Col>
       </Container>
