@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './index.css';
-import RegisterLogin from './components/RegisterLogin/RegisterLogin';
 import TopNav from './components/TopNav/TopNav';
 import Home from './components/Home/Home';
 import { Container } from 'reactstrap';
@@ -20,34 +19,7 @@ class App extends PureComponent {
 
   }
 
-  renderSite() {
-    return (
-      <div>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          {/* <Route exact path="/login"  component={RegisterLogin} /> */}
-          <Route exact path="/top-movies" component={TopMovieList} />
-          <Route exact path="/profile" component={Profile} />
-          <Route path="/movie" component={MoviePage} />
-        </Switch>
-      </div>
-    )
-  }
-
-  renderRegisterLogin() {
-    return (
-      <RegisterLogin />
-    )
-  }
-
   render() {
-    let whatToShow = this.renderSite();
-    // if (this.props.isAuthenticated) {
-    //   whatToShow = this.renderSite();
-    // } else {
-    //   whatToShow = this.renderRegisterLogin();
-    // }
-
     return (
       <BrowserRouter>
         <div className="App">
@@ -57,7 +29,12 @@ class App extends PureComponent {
               onLogOut={this.handleLogOut}
             />
             <UpdateBar/>
-            { whatToShow }
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/top-movies" component={TopMovieList} />
+              <Route exact path="/profile" component={Profile} />
+              <Route path="/movie" component={MoviePage} />
+            </Switch>
           </Container>
         </div>
       </BrowserRouter>

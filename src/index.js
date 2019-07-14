@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-// for connecting App to Redux store
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './redux/reducers';
 import jwt_decode from 'jwt-decode';
-import { setCurrentUser, logoutUser } from "./redux/actions";
+import { setCurrentUser, logoutUser } from './redux/actions';
 import setAuthToken from './setAuthToken';
-require('dotenv').config();
 
 import './index.css';
+
+require('dotenv').config();
+
 
 // Redux store to be used in Provider component
 const store = createStore(

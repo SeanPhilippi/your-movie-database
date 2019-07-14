@@ -1,0 +1,52 @@
+.login-title {
+  border-radius: 5px 5px 0 0;
+}
+
+.login-box {
+
+}
+
+.login {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr;
+}
+
+.your-login {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.password {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr;
+}
+
+.btn-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.send-btn {
+  cursor: pointer;
+  width: 4rem;
+  border-radius: 5px;
+  font-size: .8rem;
+  background-color: white;
+}
+
+@media only screen and (max-width: 1000px) {
+  .login {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .password {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

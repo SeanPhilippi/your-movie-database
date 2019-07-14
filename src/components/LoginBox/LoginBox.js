@@ -4,7 +4,6 @@ import {Form, Row} from 'react-bootstrap/Form';
 import { withRouter } from 'react-router-dom';
 import { loginUser } from '../../redux/actions';
 import { connect } from 'react-redux';
-import classnames from 'classnames';
 
 import './LoginBox.css';
 
@@ -14,22 +13,6 @@ class LoginBox extends PureComponent {
     email: '',
     password: '',
     errors: {}
-  }
-
-  componentDidMount() {
-    if (this.props.isAuthenticated) {
-      this.props.history.push('/home')
-    }
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.isAuthenticated) {
-      this.props.history.push('/home');
-    }
-
-    if (nextProps.errors) {
-      return { errors: nextProps.errors };
-    }
   }
 
   handleLogin = e => {
@@ -43,7 +26,7 @@ class LoginBox extends PureComponent {
     this.props.loginUser(user);
   }
 
-  onChange = e => {
+  onTextChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -53,20 +36,49 @@ class LoginBox extends PureComponent {
     return (
       <Row className="login-box bg-white d-flex flex-column">
         <div className="login-title bg-red text-white m-0 p-2 pl-4">LOGIN</div>
-          <div className="login-main p-2 d-flex">
-            <div className="input-labels flex-column d-flex pr-2">
-              <span className="text-nowrap pb-2">Your login: </span>
-              <span className="text-nowrap pt-2">Password: </span>
-            </div>
-            <div>
-              <div>
-                <input className="mb-2" type="text"/>
-                <input type="text"/>
+          <form
+            className="login-main py-2 px-4"
+            noValidate
+            onSubmit={this.handleLogin}
+          >
+            <div className="login-pass">
+              <div className="login mb-2">
+                <div className="your-login">Your login: </div>
+                <input
+                  onChange={this.onTextChange}
+                  className=""
+                  type="text"
+                />
+                <div style={{ color: 'red', textAlign: 'center' }}>
+                  { errors.email && errors.email }
+                </div>
               </div>
-              <button className="pull-left send-btn my-3">Send</button>
+              <div className="password">
+                <div className="">Password: </div>
+                <input
+                  onChange={this.onTextChange}
+                  className=""
+                  type="password"
+                />
+                <div style={{ color: 'red', textAlign: 'center' }}>
+                  { errors.password && errors.password }
+                </div>
+              </div>
             </div>
-          </div>
-          <p className="px-2">
+            <div className="btn-container">
+              <div></div>
+              <div className="d-flex justify-content-end">
+                <button
+                  className="send-btn my-3"
+                  type="submit"
+                >
+                  Send
+                </button>
+              </div>
+              <div></div>
+            </div>
+          </form>
+          <p className="px-4">
             <small>If you are not yet a registered user, <a href="">click here to register now for free</a> and discover all the interesting features for the members of YMDb.</small>
           </p>
       </Row>

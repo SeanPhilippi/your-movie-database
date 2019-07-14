@@ -28,10 +28,9 @@ class Home extends React.PureComponent {
             <HomeCard title='Most Visited Lists' description=''/>
           </Col>
           <Col className="ml-3 ">
-            {/* login box */}
-            {this.props.isAuthenticated ? null : <LoginBox />
+            {
+              this.props.isAuthenticated ? null : <LoginBox />
             }
-            {/* end login */}
           </Col>
         </Col>
       </Container>

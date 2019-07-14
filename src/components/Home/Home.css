@@ -43,26 +43,6 @@ body {
 
 }
 
-.login-title {
-  border-radius: 5px 5px 0 0;
-}
-
-.login-box {
-
-}
-
-.input-labels {
-  /* width: 70px; */
-}
-
-.send-btn {
-  cursor: pointer;
-  width: 4rem;
-  border-radius: 5px;
-  font-size: .8rem;
-  background-color: white;
-}
-
 .home {
   margin: auto;
   display: block;
