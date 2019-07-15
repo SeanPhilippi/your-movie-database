@@ -3,18 +3,12 @@ import HomeCard from '../HomeCard/HomeCard';
 import LoginBox from '../LoginBox/LoginBox';
 import NewRegisters from '../NewRegisters/NewRegisters';
 import { Container, Row, Col, Card } from 'reactstrap';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import './Home.css';
 
 class Home extends React.PureComponent {
-  // componentDidMount() {
-  //   if (this.props.isAuthenticated) {
-  //     this.props.history.push('/home')
-  //   }
-  // }
 
   render() {
     return (
@@ -40,4 +34,12 @@ class Home extends React.PureComponent {
   }
 }
 
-export default Home;
+Home.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired
+}
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Home);

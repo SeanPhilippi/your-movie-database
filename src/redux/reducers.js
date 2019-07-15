@@ -11,6 +11,7 @@ const initialState = {
   username: 'kesto',
   list: [],
   open: false,
+  whatToShow: 'home'
 }
 
 // destructured action parameter is desctructured and passed in to rootReducer function,

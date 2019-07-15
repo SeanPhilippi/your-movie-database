@@ -8,6 +8,9 @@ import Profile from './components/Profile/Profile';
 import TopMovieList from './components/TopMovieList/TopMovieList';
 import MoviePage from './components/MoviePage/MoviePage';
 import UpdateBar from './components/UpdateBar/UpdateBar';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+import Account from './components/Account/Account';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -24,6 +27,9 @@ class App extends PureComponent {
             <UpdateBar/>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/account" component={Account} />
               <Route exact path="/top-movies" component={TopMovieList} />
               <Route exact path="/profile" component={Profile} />
               <Route path="/movie" component={MoviePage} />

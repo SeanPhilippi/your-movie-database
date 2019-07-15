@@ -21,7 +21,7 @@ class Register extends PureComponent {
 
   componentDidMount() {
     if (this.props.isAuthenticated) {
-      this.props.history.push('/home')
+      this.props.history.push('/')
     }
   }
 

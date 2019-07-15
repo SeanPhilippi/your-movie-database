@@ -18,7 +18,7 @@ export const TYPES = {
   DELETE_LIST: 'DELETE_LIST'
 };
 // convert back to fetch, or convert other fetches to axios
-export const onRegister = (userData, history) => dispatch => {
+export const registerUser = (userData, history) => dispatch => {
   axios.post('api/users/register', userData)
     .then(res => history.push('/login'))
     .catch(err =>
@@ -29,7 +29,7 @@ export const onRegister = (userData, history) => dispatch => {
     )
 }
 
-export const loginUser = user => dispatch => {
+export const loginUser = (user, history) => dispatch => {
   console.log('user', user)
   axios.post('api/users/login', user)
     .then(res => {
@@ -43,6 +43,8 @@ export const loginUser = user => dispatch => {
       const decoded = jwt_decode(token);
       // set current user
       dispatch(setCurrentUser(decoded));
+      // ! left off here, why doesn't this work?
+      // history.push('/');
     })
     .catch(err => {
       dispatch({

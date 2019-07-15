@@ -18,13 +18,13 @@ class Login extends PureComponent {
 
   componentDidMount() {
     if (this.props.isAuthenticated) {
-      this.props.history.push('/home')
+      this.props.history.push('/')
     }
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.isAuthenticated) {
-      this.props.history.push('/home');
+      this.props.history.push('/');
     }
 
     if (nextProps.errors) {
