@@ -27,7 +27,7 @@ const store = createStore(
 // ** initialState is stored in reducers.js **
 
 // when app starts, check localStorage if jwtToken is set, if so, setCurrentUser
-// then check jwtToken expiration date, if expired, then logout user, redirect to /login
+// then check jwtToken expiration date, if expired, then logout user, redirect to '/'
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
@@ -38,7 +38,7 @@ if (localStorage.jwtToken) {
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
     store.dispatch(logoutUser());
-    window.location.href = '/login';
+    window.location.href = '/';
   }
 }
 

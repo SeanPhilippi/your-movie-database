@@ -45,6 +45,7 @@ class LoginBox extends PureComponent {
               <div className="login mb-2">
                 <div className="your-login">Your login: </div>
                 <input
+                  name="email"
                   onChange={this.onTextChange}
                   className=""
                   type="text"
@@ -56,6 +57,7 @@ class LoginBox extends PureComponent {
               <div className="password">
                 <div className="">Password: </div>
                 <input
+                  name="password"
                   onChange={this.onTextChange}
                   className=""
                   type="password"

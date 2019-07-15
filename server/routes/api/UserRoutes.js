@@ -15,7 +15,7 @@ const geoip = require('geoip-lite');
 // @access  Public
 router.post('/register', (req, res) => {
   // takes newUser object created on front-end and runs through validating function
-  // destructuring object that is returned which contains errors and isValid. isValid return 
+  // destructuring object that is returned which contains errors and isValid. isValid return
   // a boolean and wants an empty errors object
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -42,8 +42,8 @@ router.post('/register', (req, res) => {
           email,
           password,
           date: formatDate(new Date()),
-          location: geo ? 
-            `${geo.city ? geo.city : 'n/a'}, ${geo.region ? geo.region : 'n/a'}, ${geo.country}, (lat: ${geo.ll[0]}, long: ${geo.ll[1]})` 
+          location: geo ?
+            `${geo.city ? geo.city : 'n/a'}, ${geo.region ? geo.region : 'n/a'}, ${geo.country}, (lat: ${geo.ll[0]}, long: ${geo.ll[1]})`
             : 'n/a'
         });
         // encrypting password before saving to mlab
@@ -84,7 +84,7 @@ router.post('/login', (req, res) => {
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
           // JWT payload
-          const payload = { id: user._id, email: user.email }; 
+          const payload = { id: user._id, email: user.email };
           // Sign token
           jwt.sign(payload, keys.secret, { expiresIn: 10800 }, (err, token) => {
             res.json({ success: true, token: 'Bearer ' + token })

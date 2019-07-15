@@ -15,19 +15,12 @@ import './App.css';
 
 class App extends PureComponent {
 
-  handleLogOut = () => {
-
-  }
-
   render() {
     return (
       <BrowserRouter>
         <div className="App">
           <Container className="px-0 border-0 app-container">
-            <TopNav
-              showNavItems={this.props.isAuthenticated}
-              onLogOut={this.handleLogOut}
-            />
+            <TopNav/>
             <UpdateBar/>
             <Switch>
               <Route exact path="/" component={Home} />

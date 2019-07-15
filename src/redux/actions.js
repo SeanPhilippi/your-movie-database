@@ -21,7 +21,7 @@ export const TYPES = {
 export const onRegister = (userData, history) => dispatch => {
   axios.post('api/users/register', userData)
     .then(res => history.push('/login'))
-    .catch(err => 
+    .catch(err =>
       dispatch({
         type: TYPES.GET_ERRORS,
         payload: err.response.data
@@ -30,10 +30,11 @@ export const onRegister = (userData, history) => dispatch => {
 }
 
 export const loginUser = user => dispatch => {
+  console.log('user', user)
   axios.post('api/users/login', user)
     .then(res => {
       console.log('/login post res', res)
-      const { token } = res.data; 
+      const { token } = res.data;
       // set token in localStorage
       localStorage.setItem('jwtToken', token);
       // set token to be in all axios headers
@@ -52,6 +53,7 @@ export const loginUser = user => dispatch => {
 };
 
 export const setCurrentUser = decoded => {
+  console.log('decoded in setCurrentUser action', decoded)
   return {
     type: TYPES.SET_CURRENT_USER,
     payload: decoded
@@ -95,18 +97,17 @@ export const clearSearchText = () => ({
 
 export const fetchProfileData = () => (dispatch, getState) => {
   const { username } = getState();
-  console.log('username', username)
   fetch(`api/movies/${username}/list`)
     .then(res => res.json())
     .then(data => {
-      console.log('username', username);
+      console.log('username in fetchProfileData', username);
       console.log('data', data);
       dispatch(setProfileData(data))
     })
     .catch(err => console.error(err));
 }
 
-export const setProfileData = data => ({ 
+export const setProfileData = data => ({
   type: TYPES.SET_PROFILE_DATA,
   payload: {
     data

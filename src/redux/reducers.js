@@ -11,7 +11,6 @@ const initialState = {
   username: 'kesto',
   list: [],
   open: false,
-  showNavItems: true, // make false later for initial value
 }
 
 // destructured action parameter is desctructured and passed in to rootReducer function,
@@ -21,11 +20,13 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.GET_ERRORS: return {
       ...state,
       authErrors: payload
-    } 
-    case TYPES.SET_CURRENT_USER: return { // * look over this
+    }
+    case TYPES.SET_CURRENT_USER: return {
       ...state,
+      // if token exists, true, else false
       isAuthenticated: !isEmpty(payload),
-      username: payload
+      // token
+      username: payload.email
     };
     case TYPES.SET_UPDATE_STATUS: return {
       ...state,
@@ -48,7 +49,7 @@ export default (state = initialState, { type, payload }) => {
       searchResults: [...state.searchResults, ...payload.data],
     };
     // set fetched movie list to state
-    case TYPES.SET_PROFILE_DATA: return {  
+    case TYPES.SET_PROFILE_DATA: return {
       ...state,
       username: payload.data.username,
       listDescript: payload.data.listDescript,
