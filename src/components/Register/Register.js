@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Col } from 'reactstrap';
+import { Container, Col, Row } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RegisterBox from '../RegisterBox/RegisterBox';
@@ -11,11 +11,11 @@ class Register extends React.PureComponent {
   render() {
     return (
       <Container className="container d-flex border-0 justify-content-center">
-        <Col className="inner-container mt-4 mx-4 p-0">
-          <Col className="main bg-white pt-2">
+        <Row className="mt-4 mx-4 p-0">
+          <Col className="bg-white pt-2 col-7">
             <RegisterBox />
           </Col>
-          <Col className="">
+          <Col className="col-5">
             <div className="advantages">
               <div className="text-white">
                 Advantages
@@ -41,7 +41,7 @@ class Register extends React.PureComponent {
               </div>
             </div>
           </Col>
-        </Col>
+        </Row>
       </Container>
     )
   }

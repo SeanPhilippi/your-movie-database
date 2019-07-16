@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Form, Row} from 'react-bootstrap/Form';
+import { Row } from 'react-bootstrap/Form';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../../redux/actions';
 import { connect } from 'react-redux';
@@ -108,7 +108,7 @@ class RegisterBox extends PureComponent {
           {/* send btn */}
           <div className="">
             <div></div>
-            <div className="d-flex justify-content-end">
+            <div className="">
               <button
                 className="register-btn my-3"
                 type="submit"
@@ -116,7 +116,6 @@ class RegisterBox extends PureComponent {
                 Register
               </button>
             </div>
-            <div></div>
           </div>
         </form>
       </Row>
