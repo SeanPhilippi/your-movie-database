@@ -34,55 +34,91 @@ class RegisterBox extends PureComponent {
     const { errors } = this.state;
 
     return (
-      <Row className="login-box bg-white d-flex flex-column">
-        <div className="login-title bg-red text-white m-0 p-2 pl-4">REGISTER</div>
-          <form
-            className="login-main py-2 px-4"
-            noValidate
-            onSubmit={this.handleLogin}
-          >
-            <div className="login-pass">
-              <div className="login mb-2">
-                <div className="your-login">Your login: </div>
-                <input
-                  name="email"
-                  onChange={this.onTextChange}
-                  className=""
-                  type="text"
-                />
-                <div style={{ color: 'red', textAlign: 'center' }}>
-                  { errors.email && errors.email }
-                </div>
+      <Row className="register-box bg-white d-flex flex-column">
+        <div className="register-title bg-red text-white m-0 p-2 pl-4">
+          REGISTER
+        </div>
+        <form
+          className="py-2 px-4"
+          noValidate
+          onSubmit={this.handleLogin}
+        >
+          <div className="register-inputs">
+            {/* username */}
+            <div className="username mb-2">
+              <div className="your-login">
+                Your login/username:
               </div>
-              <div className="password">
-                <div className="">Password: </div>
-                <input
-                  name="password"
-                  onChange={this.onTextChange}
-                  className=""
-                  type="password"
-                />
-                <div style={{ color: 'red', textAlign: 'center' }}>
-                  { errors.password && errors.password }
-                </div>
+              <input
+                name="username"
+                onChange={this.onTextChange}
+                className=""
+                type="text"
+              />
+              <div style={{ color: 'red', textAlign: 'center' }}>
+                { errors.username && errors.username }
               </div>
             </div>
-            <div className="btn-container">
-              <div></div>
-              <div className="d-flex justify-content-end">
-                <button
-                  className="send-btn my-3"
-                  type="submit"
-                >
-                  Send
-                </button>
+            {/* email */}
+            <div className="email mb-2">
+              <div className="email-label">
+                Your email:
               </div>
-              <div></div>
+              <input
+                name="email"
+                onChange={this.onTextChange}
+                className=""
+                type="text"
+              />
+              <div style={{ color: 'red', textAlign: 'center' }}>
+                { errors.email && errors.email }
+              </div>
             </div>
-          </form>
-          <p className="px-4">
-            <small>If you are not yet a registered user, <a href="">click here to register now for free</a> and discover all the interesting features for the members of YMDb.</small>
-          </p>
+            {/* password */}
+            <div className="register-password mb-2">
+              <div className="password-label">
+                Password:
+              </div>
+              <input
+                name="password"
+                onChange={this.onTextChange}
+                className=""
+                type="password"
+              />
+              <div style={{ color: 'red', textAlign: 'center' }}>
+                { errors.password && errors.password }
+              </div>
+            </div>
+            {/* confirm password */}
+            <div className="password2">
+              <div className="password2-label">
+                Retype password:
+              </div>
+              <input
+                name="password2"
+                onChange={this.onTextChange}
+                className=""
+                type="password2"
+              />
+              <div style={{ color: 'red', textAlign: 'center' }}>
+                { errors.password2 && errors.password2 }
+              </div>
+            </div>
+          </div>
+          {/* send btn */}
+          <div className="">
+            <div></div>
+            <div className="d-flex justify-content-end">
+              <button
+                className="register-btn my-3"
+                type="submit"
+              >
+                Register
+              </button>
+            </div>
+            <div></div>
+          </div>
+        </form>
       </Row>
     )
 
