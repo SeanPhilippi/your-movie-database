@@ -11,30 +11,42 @@ class Register extends React.PureComponent {
   render() {
     return (
       <Container className="container d-flex border-0 justify-content-center">
-        <Row className="mt-4 mx-4 p-0">
-          <Col className="bg-white pt-2 col-7">
+        <Row className="mt-4 p-0">
+          <Col className="bg-white1 pt-2 col-7">
+            <div className="mx-3">
+              <p className="">
+                To fully enjoy the YMDb site, you just have to register for free with the following form. This information
+                will mainly be used to identify you within the user community but will not be used for commercial purposes.
+                If you want to know why we need specific data you can find <a href="">more detailed information here</a>.
+              </p>
+              <p>
+                <strong>Important : one registration only per person!</strong> The additional lists will be deleted.
+              </p>
+            </div>
             <RegisterBox />
           </Col>
           <Col className="col-5">
-            <div className="advantages">
-              <div className="text-white">
-                Advantages
+            <div className="">
+              <div className="shadow advantages">
+                <div className="text-white shadow bg-red advantages-label m-0 p-2 pl-4 font-weight-bold">
+                  ADVANTAGES
+                </div>
+                <div className="bg-white1 px-4 py-2">
+                  Here are the advantages of being a registered user:<br/>
+                    >	Create your own Top Movie List.<br/>
+                    >	Discuss movies with other users.<br/>
+                    >	Write comments on other user's Top List.<br/>
+                    >	Receive the monthly newsletter containing :<br/>
+                    {"\u00a0"} -	updates & news about the site<br/>
+                    {"\u00a0"} -	the number of visitors on Your Top Movie list<br/>
+                    {"\u00a0"} -	the number of messages from other users on Your Top Movie list
+                </div>
               </div>
-              <div>
-                Here are the advantages of being a registered user:<br/>
-                  >	Create your own Top Movie List.<br/>
-                  >	Discuss movies with other users.<br/>
-                  >	Write comments on other user's Top List.<br/>
-                  >	Receive the monthly newsletter containing :<br/>
-                    -	updates & news about the site<br/>
-                    -	the number of visitors on Your Top Movie list<br/>
-                    -	the number of messages from other users on Your Top Movie list
-              </div>
-              <div className="privacy-statement">
-                <div className="privacy-label text-white">
+              <div className="privacy-statement mt-3 shadow">
+                <div className="text-white bg-red privacy-label m-0 p-2 pl-4 font-weight-bold">
                   Privacy Statement
                 </div>
-                <div className="statement">
+                <div className="bg-white1 px-4 py-2">
                   We respect your privacy. It's simple: we do not share your personal
                   data with other companies or organisations, ever!
                 </div>

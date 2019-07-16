@@ -36,9 +36,9 @@ a {
   color: #EF7C2D;
 }
 
-a:active {
+/* a:active {
   color:
-}
+} */
 
 a:visited {
   color: #9C640B;
@@ -55,11 +55,11 @@ a:hover {
   color: #EB5018;
 }
 
-.bg-lighter {
+.bg-light2 {
   background-color: #E6D8B6;
 }
 
-.bg-light {
+.bg-light1 {
   background-color: #DECDA4;
 }
 
@@ -83,7 +83,7 @@ a:hover {
   background-color: #B20E07;
 }
 
-.bg-white {
+.bg-white1 {
   background: rgb(255,255,255); /* Old browsers */
   background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* Chrome10-25,Safari5.1-6 */

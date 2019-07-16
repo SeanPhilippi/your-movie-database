@@ -12,7 +12,7 @@ class Login extends React.PureComponent {
     return (
       <Container className="container d-flex border-0 justify-content-center">
         <Col className="inner-container mt-4 mx-4 p-0">
-          <Col className="main bg-white pt-2">
+          <Col className="bg-white1 pt-2">
             <LoginBox />
           </Col>
         </Col>

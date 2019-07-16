@@ -14,7 +14,7 @@ class Home extends React.PureComponent {
     return (
       <Container className="container d-flex border-0 justify-content-center">
         <Col className="inner-container mt-4 mx-4 p-0">
-          <Col className="main bg-white pt-2">
+          <Col className="main bg-white1 pt-2">
             <Row className="greeting m-0">
               Welcome to YMDb, Your Movie Database, the movie community where you can create your list of favorite movies,
               discover other people's favorite movies, discuss about movies and favorite lists, ... YMDb is free and fun!

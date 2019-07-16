@@ -9,7 +9,7 @@ class CommentColumn extends React.Component {
     return (
       <div className="mx-4">
         <div className="bg-red comments-label">Comments</div>
-        <div className="comments-container bg-white d-flex flex-column p-2">
+        <div className="comments-container bg-white1 d-flex flex-column p-2">
           <div className="p-4 text-left">Write a comment</div>
           <textarea
             className="comments"
