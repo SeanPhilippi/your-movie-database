@@ -23,7 +23,7 @@ class LoginBox extends PureComponent {
       password: this.state.password
     }
 
-    this.props.loginUser(user);
+    this.props.loginUser(user, this.props.history);
   }
 
   onTextChange = e => {
@@ -31,7 +31,7 @@ class LoginBox extends PureComponent {
   }
 
   render() {
-    const { errors } = this.state;
+    const { errors } = this.props;
 
     return (
       <Row className="login-box bg-white d-flex flex-column">
@@ -50,7 +50,7 @@ class LoginBox extends PureComponent {
                   className=""
                   type="text"
                 />
-                <div style={{ color: 'red', textAlign: 'center' }}>
+                <div className="errors">
                   { errors.email && errors.email }
                 </div>
               </div>
@@ -62,7 +62,7 @@ class LoginBox extends PureComponent {
                   className=""
                   type="password"
                 />
-                <div style={{ color: 'red', textAlign: 'center' }}>
+                <div className="errors">
                   { errors.password && errors.password }
                 </div>
               </div>

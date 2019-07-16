@@ -21,6 +21,12 @@
   grid-template-columns: 2fr 3fr 2fr;
 }
 
+.errors {
+  color: red;
+  text-align: center;
+  font-size: .6rem;
+}
+
 .btn-container {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;

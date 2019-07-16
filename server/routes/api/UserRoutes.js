@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 const validateRegisterInput = require('../validation/register');
-const validateLoginInput = require('../validation/login');
 const formatDate = require('./formatDate');
 const geoip = require('geoip-lite');
 
@@ -66,19 +65,14 @@ router.post('/register', (req, res) => {
 // @desc    Login User / Returning JWT Token
 // @access  Public
 router.post('/login', (req, res) => {
-  const { errors, isValid } = validateLoginInput(req.body);
-  console.log('login errors', errors);
-  console.log('login isValid', isValid);
-
-  if (!isValid) return res.status(400).json(errors);
-
+  const errors = {};
   const { email, password } = req.body;
   //* for future, allow for login with username OR email, and then search by username, then by email
   User.findOne({ email })
     .then(user => {
       if (!user) {
         errors.email = 'User not found';
-        return res.status(404).json(errors); // ! how to get access to this res on the front end to display as error message
+        return res.status(404).json(errors);
       }
 
       bcrypt.compare(password, user.password).then(isMatch => {
@@ -91,7 +85,7 @@ router.post('/login', (req, res) => {
           });
         } else {
           errors.password = 'Password incorrect';
-          return res.status(400).json(errors); // ! how to get access to this res on the front end to display as error message
+          return res.status(400).json(errors);
         }
       });
     });

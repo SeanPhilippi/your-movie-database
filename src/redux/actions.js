@@ -30,7 +30,6 @@ export const registerUser = (userData, history) => dispatch => {
 }
 
 export const loginUser = (user, history) => dispatch => {
-  console.log('user', user)
   axios.post('api/users/login', user)
     .then(res => {
       console.log('/login post res', res)
@@ -43,15 +42,28 @@ export const loginUser = (user, history) => dispatch => {
       const decoded = jwt_decode(token);
       // set current user
       dispatch(setCurrentUser(decoded));
-      // ! left off here, why doesn't this work?
-      // history.push('/');
+      history.push('/');
     })
     .catch(err => {
+      console.log('err', err.response.data)
       dispatch({
         type: TYPES.GET_ERRORS,
         payload: err.response.data
       });
     });
+};
+
+export const logoutUser = history => dispatch => {
+  // remove JWT token from localStorage
+  localStorage.removeItem('jwtToken');
+  // remove JWT token from axios Authorization headers
+  setAuthToken(false);
+  // set current user back to empty object
+  dispatch(setCurrentUser({}));
+  // redirect to login page
+  if (history) {
+    history.push('/login');
+  }
 };
 
 export const setCurrentUser = decoded => {
@@ -65,19 +77,6 @@ export const setCurrentUser = decoded => {
 export const setUpdateStatus = () => ({
     type: TYPES.SET_UPDATE_STATUS
 });
-
-export const logoutUser = (history) => dispatch => {
-  // remove JWT token from localStorage
-  localStorage.removeItem('jwtToken');
-  // remove JWT token from axios Authorization headers
-  setAuthToken(false);
-  // set current user back to empty object
-  dispatch(setCurrentUser({}));
-  // redirect to login page
-  if (history) {
-    history.push('/login');
-  }
-};
 
 export const setDescript = text => ({
   type: TYPES.SET_DESCRIPT,

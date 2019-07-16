@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl'
-import { onRegister } from '../../../redux/actions';
+import { registerUser } from '../../../redux/actions';
 
 import './Register.css';
 
@@ -43,7 +43,7 @@ class Register extends PureComponent {
       password: this.state.password,
       password2: this.state.password2
     }
-    this.props.onRegister(newUser, this.props.history);
+    this.props.registerUser(newUser, this.props.history);
   }
 
 // ! left off: seperate Login and Register to be their own pages to avoid sharing errors
@@ -123,7 +123,7 @@ class Register extends PureComponent {
 }
 
 Register.propTypes = {
-  onRegister: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   errors: PropTypes.object.isRequired
 }
@@ -132,5 +132,5 @@ const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
   errors: state.authErrors
 })
-// destructuring mapDispatchToProps for onRegister
-export default connect(mapStateToProps, { onRegister })(withRouter(Register));
+// destructuring mapDispatchToProps for registerUser
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

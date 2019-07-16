@@ -2,7 +2,7 @@ import React from 'react';
 import HomeCard from '../HomeCard/HomeCard';
 import LoginBox from '../LoginBox/LoginBox';
 import NewRegisters from '../NewRegisters/NewRegisters';
-import { Container, Row, Col, Card } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
