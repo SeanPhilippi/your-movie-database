@@ -55,7 +55,7 @@ class RegisterBox extends PureComponent {
               {/* username */}
               <div className="username mb-2">
                 <div className="your-login font-weight-bold">
-                  Your login/username:
+                  Login/username*
                 </div>
                 <input
                   name="username"
@@ -70,7 +70,7 @@ class RegisterBox extends PureComponent {
               {/* email */}
               <div className="email mb-2">
                 <div className="email-label font-weight-bold">
-                  Your email:
+                  Email*
                 </div>
                 <input
                   name="email"
@@ -85,7 +85,7 @@ class RegisterBox extends PureComponent {
               {/* password */}
               <div className="register-password mb-2">
                 <div className="password-label font-weight-bold">
-                  Password:
+                  Password*
                 </div>
                 <input
                   name="password"
@@ -100,7 +100,7 @@ class RegisterBox extends PureComponent {
               {/* confirm password */}
               <div className="password2">
                 <div className="password2-label font-weight-bold">
-                  Retype password:
+                  Retype password*
                 </div>
                 <input
                   name="password2"
@@ -138,7 +138,7 @@ class RegisterBox extends PureComponent {
     //       onSubmit={this.handleSubmit}
     //     >
     //       <h2 style={{textAlign: 'center'}}>Sign Up</h2>
-    //       <p style={{textAlign: 'center'}}><strong>Create your YMDb account</strong></p>
+    //       <p style={{textAlign: 'center'}}><strong>Create YMDb account</strong></p>
     //       <Form.Group>
     //         <Form.Label>Email</Form.Label>
     //         <Form.Control

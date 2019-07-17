@@ -4,6 +4,7 @@ import jwt_decode from 'jwt-decode';
 
 export const TYPES = {
   GET_ERRORS: 'GET_ERRORS',
+  SET_NEW_USERS: 'SET_NEW_USERS',
   SET_CURRENT_USER: 'SET_CURRENT_USER',
   SET_UPDATE_STATUS: 'SET_UPDATE_STATUS',
   SET_DESCRIPT: 'SET_DESCRIPT',
@@ -22,7 +23,7 @@ export const registerUser = (userData, history) => dispatch => {
   axios.post('api/users/register', userData)
     .then(res => history.push('/login'))
     .catch(err => {
-      console.log('register err', err)
+      console.log('register err', err.response.data)
       dispatch({
         type: TYPES.GET_ERRORS,
         payload: err.response.data
@@ -59,7 +60,7 @@ export const logoutUser = history => dispatch => {
   localStorage.removeItem('jwtToken');
   // remove JWT token from axios Authorization headers
   setAuthToken(false);
-  // set current user back to empty object
+  // set current user back to empty object, passing in empty object will toggle isAuthenticated to false
   dispatch(setCurrentUser({}));
   // redirect to login page
   if (history) {
@@ -74,6 +75,13 @@ export const setCurrentUser = decoded => {
     payload: decoded
   };
 };
+
+export const setNewUsers = users => ({
+  type: TYPES.SET_NEW_USERS,
+  payload: {
+    users
+  }
+})
 
 export const setUpdateStatus = () => ({
     type: TYPES.SET_UPDATE_STATUS
@@ -98,10 +106,10 @@ export const clearSearchText = () => ({
 })
 
 export const fetchProfileData = () => (dispatch, getState) => {
-  const { username } = getState();
-  axios(`api/movies/${username}/list`)
+  const { user } = getState();
+  axios(`api/movies/${user.username}/list`)
     .then(data => {
-      console.log('username in fetchProfileData', username);
+      console.log('username in fetchProfileData', user);
       console.log('data', data);
       dispatch(setProfileData(data))
     })

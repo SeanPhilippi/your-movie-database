@@ -1,21 +1,22 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Form, Row} from 'react-bootstrap/Form';
+import {Row} from 'react-bootstrap/Form';
+import { connect } from 'react-redux';
 
 import './NewRegisters.css';
 
 class NewRegisters extends PureComponent {
 
-  state = {
-    // ! replace dummy data
-    users: [
-      {
-        name: 'Sean Philippi',
-        register_date: 'Jun 21, 2019',
-        id: '30jf3jf2'
-      }
-    ]
-  }
+  // state = {
+  //   // ! replace dummy data
+  //   users: [
+  //     {
+  //       name: 'Sean Philippi',
+  //       register_date: 'Jun 21, 2019',
+  //       id: '30jf3jf2'
+  //     }
+  //   ]
+  // }
 
   render() {
     return (
@@ -30,17 +31,17 @@ class NewRegisters extends PureComponent {
             </div>
             <div className="text-orange">
               {
-                this.state.users.map(user => {
+                this.props.newUsers.map(user => {
                   return (
                     <div
                       className="d-flex justify-content-between"
-                      key={user.id}
+                      // key={user.id}
                     >
                       <div>
-                        {user.name}
+                        {user.username}
                       </div>
                       <div>
-                        {user.register_date}
+                        {/* {user.register_date} */}
                       </div>
                     </div>
                   )
@@ -62,4 +63,8 @@ NewRegisters.propTypes = {
 
 }
 
-export default NewRegisters;
+const mapStateToProps = state => ({
+  newUsers: state.newUsers
+});
+
+export default connect(mapStateToProps)(NewRegisters);

@@ -21,10 +21,9 @@ router.post('/register', (req, res) => {
   if (!isValid) return res.status(400).json(errors);
 
   //* for future, incorporate creating an avatar that accepts gravatar here
-
+  // ! figure out $or operator so I can give an error for finding a matching username as well
   User.findOne({ email: req.body.email })
     .then(user => {
-      console.log('this far')
       if (user) {
         errors.email = 'You already have an account. Click "Forgot password" if you need to reset your password.';
         // 400 error for validation related errors
@@ -92,6 +91,17 @@ router.post('/login', (req, res) => {
       });
     });
 });
+
+// @route   GET api/users/recent-registers
+// @desc    Return last 50 registered users
+// @access  Public
+router.get('/new-registers', (req, res) => {
+  User.find({}, (err, users) => {
+    console.log('users fefef', users)
+    // ! grab all users and return to front-end by fetching from /new-registers
+    // switch to a limit of the most recent 50 eventually
+  })
+})
 
 // @route   GET api/users/current
 // @desc    Return current user

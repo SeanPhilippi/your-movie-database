@@ -10,6 +10,10 @@ import './Home.css';
 
 class Home extends React.PureComponent {
 
+  // componentDidMount() {
+  //   this.fetchNewUsers =
+  // }
+
   render() {
     return (
       <Container className="container d-flex border-0 justify-content-center">

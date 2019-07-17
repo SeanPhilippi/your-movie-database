@@ -20,7 +20,7 @@ class TopNav extends React.PureComponent {
   }
 
   render() {
-    const { isAuthenticated, username } = this.props;
+    const { isAuthenticated, user } = this.props;
 
     const authLinks = (
       <Nav className="login-register-links p-0">
@@ -28,7 +28,7 @@ class TopNav extends React.PureComponent {
           className="text-white"
           to="/account"
         >
-          { username }
+          { user.username }
         </NavLink>
         <NavLink
           onClick={this.handleLogout}
@@ -79,14 +79,14 @@ class TopNav extends React.PureComponent {
 }
 
 TopNav.propTypes = {
-  username: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
-  username: state.username,
+  user: state.user,
 });
 
 export default connect(mapStateToProps, { logoutUser })(TopNav)

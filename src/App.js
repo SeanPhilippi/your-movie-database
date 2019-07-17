@@ -13,10 +13,20 @@ import Login from './components/Login/Login';
 import Account from './components/Account/Account';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import axios from 'axios';
+import { setNewUsers } from './redux/actions';
 
 import './App.css';
 
 class App extends PureComponent {
+
+  componentDidMount() {
+    axios('api/users/new-registers')
+      .then(users => {
+        this.props.setNewUsers(users);
+      })
+      .catch(err => console.log(err));
+  }
 
   render() {
     return (
@@ -49,4 +59,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
 })
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { setNewUsers })(App);

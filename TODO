@@ -20,6 +20,7 @@ create with how they utilize it
 
 To do list:
 - no duplicate usernames, make an error message for it and put in register validation function
+- pass userData into NewRegisters component
 - give users an id for React key
 - give users a register_date and last_login date
 - allow for emojis when making comments
