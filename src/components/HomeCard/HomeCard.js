@@ -12,7 +12,7 @@ const HomeCard = (props) => {
       <div className="card-title1 w-100 m-0 bg-red text-white pt-2 pl-4 p-1">
         {title}
       </div>
-      <div className="bg-light1">
+      <div className="bg-light1 w-100">
         <p className="card-text1 p-4">
           {description}
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum quisquam alias quam?

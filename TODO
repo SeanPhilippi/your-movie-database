@@ -2,7 +2,6 @@ Heroku deployment:
 $ git push heroku master
 
 Vision:
-
 - minimalist cinephile site
 - similar to reddit, old ymdb, and rateyourmusic, site for nerds that like lists
 - primary focus is to have one list of up to 20 films per user, encourages 'favorite of
@@ -20,6 +19,9 @@ create with how they utilize it
 
 
 To do list:
+- no duplicate usernames, make an error message for it and put in register validation function
+- give users an id for React key
+- give users a register_date and last_login date
 - allow for emojis when making comments
 - fix white gradient, make it more prominent/work.  Currently doing nothing?
 - remove or turn login page into login card on home page and make home page default

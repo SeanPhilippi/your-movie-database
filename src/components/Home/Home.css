@@ -24,21 +24,16 @@ body {
   flex-direction: column;
   justify-content: space-between;
   display: grid;
-  grid-template-areas:
-    "m m m m s s"
-    "m m m m s s"
-    "m m m m s s"
-    "m m m m s s"
-    "m m m m s s";
+  grid-template-columns: 4fr 3fr;
   /* grid-gap: 1rem; */
 }
 
 .main {
-  grid-area: m;
+  /* grid-area: m; */
 }
 
 .side-container {
-  grid-area: s;
+  /* grid-area: s; */
   background-color: #E6D8B6;
 
 }
