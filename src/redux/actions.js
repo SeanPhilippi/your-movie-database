@@ -17,16 +17,17 @@ export const TYPES = {
   DELETE_MOVIE: 'DELETE_MOVIE',
   DELETE_LIST: 'DELETE_LIST'
 };
-// convert back to fetch, or convert other fetches to axios
+
 export const registerUser = (userData, history) => dispatch => {
   axios.post('api/users/register', userData)
     .then(res => history.push('/login'))
-    .catch(err =>
+    .catch(err => {
+      console.log('register err', err)
       dispatch({
         type: TYPES.GET_ERRORS,
         payload: err.response.data
       })
-    )
+    })
 }
 
 export const loginUser = (user, history) => dispatch => {
@@ -98,8 +99,7 @@ export const clearSearchText = () => ({
 
 export const fetchProfileData = () => (dispatch, getState) => {
   const { username } = getState();
-  fetch(`api/movies/${username}/list`)
-    .then(res => res.json())
+  axios(`api/movies/${username}/list`)
     .then(data => {
       console.log('username in fetchProfileData', username);
       console.log('data', data);

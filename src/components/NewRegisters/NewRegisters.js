@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import {Form, Row} from 'react-bootstrap/Form';
 
 import './NewRegisters.css';
-import { userInfo } from 'os';
 
 class NewRegisters extends PureComponent {
 
   state = {
+    // ! replace dummy data
     users: [
       {
         name: 'Sean Philippi',
-        register_date: 'Jun 21, 2019'
+        register_date: 'Jun 21, 2019',
+        id: '30jf3jf2'
       }
     ]
   }
@@ -19,7 +20,9 @@ class NewRegisters extends PureComponent {
   render() {
     return (
       <Row className="login-box d-flex flex-column mt-2 shadow">
-        <div className="login-title bg-red text-white m-0 p-2 pl-4">SPOTLIGHT ON A USER</div>
+        <div className="login-title bg-red text-white m-0 p-2 pl-4">
+          SPOTLIGHT ON A USER
+        </div>
         <div className="bg-white1">
           <div className="py-2 px-4 bg-white1">
             <div className="mb-2">
@@ -29,9 +32,16 @@ class NewRegisters extends PureComponent {
               {
                 this.state.users.map(user => {
                   return (
-                    <div className="d-flex justify-content-between">
-                      <div>{user.name}</div>
-                      <div>{user.register_date}</div>
+                    <div
+                      className="d-flex justify-content-between"
+                      key={user.id}
+                    >
+                      <div>
+                        {user.name}
+                      </div>
+                      <div>
+                        {user.register_date}
+                      </div>
                     </div>
                   )
                 })

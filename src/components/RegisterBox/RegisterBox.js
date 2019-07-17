@@ -10,20 +10,24 @@ import './RegisterBox.css';
 class RegisterBox extends PureComponent {
 
   state = {
+    username: '',
     email: '',
     password: '',
-    errors: {}
+    password2: '',
+    errors: {},
   }
 
   handleRegister = e => {
     e.preventDefault();
 
     const user = {
+      username: this.state.username,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      password2: this.state.password2
     }
 
-    this.props.registerUser(user);
+    this.props.registerUser(user, this.props.history);
   }
 
   onTextChange = e => {
@@ -31,7 +35,7 @@ class RegisterBox extends PureComponent {
   }
 
   render() {
-    const { errors } = this.state;
+    const { errors } = this.props;
 
     return (
       <Row className="register-box shadow bg-white1 d-flex flex-column mb-4 mx-3">
@@ -45,7 +49,7 @@ class RegisterBox extends PureComponent {
           <form
             className="py-2 px-4"
             noValidate
-            onSubmit={this.handleLogin}
+            onSubmit={this.handleRegister}
           >
             <div className="register-inputs">
               {/* username */}
@@ -198,12 +202,10 @@ class RegisterBox extends PureComponent {
 
 RegisterBox.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
   errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.isAuthenticated,
   errors: state.authErrors
 });
 

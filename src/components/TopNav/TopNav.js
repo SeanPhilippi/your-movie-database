@@ -79,7 +79,7 @@ class TopNav extends React.PureComponent {
 }
 
 TopNav.propTypes = {
-  username: PropTypes.object.isRequired,
+  username: PropTypes.string.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
 }

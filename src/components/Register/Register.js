@@ -44,7 +44,7 @@ class Register extends React.PureComponent {
               </div>
               <div className="privacy-statement mt-3 shadow">
                 <div className="text-white bg-red privacy-label m-0 p-2 pl-4 font-weight-bold">
-                  Privacy Statement
+                  PRIVACY STATEMENT
                 </div>
                 <div className="bg-white1 px-4 py-2">
                   We respect your privacy. It's simple: we do not share your personal

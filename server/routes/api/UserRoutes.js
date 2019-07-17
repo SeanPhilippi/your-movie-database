@@ -24,12 +24,14 @@ router.post('/register', (req, res) => {
 
   User.findOne({ email: req.body.email })
     .then(user => {
+      console.log('this far')
       if (user) {
-        errors.email = 'Email already exists';
+        errors.email = 'You already have an account. Click "Forgot password" if you need to reset your password.';
         // 400 error for validation related errors
         return res.status(400).json(errors);
       } else {
         const { username, email, password } = req.body;
+        console.log('req body in /register', req.body)
         // grab ip address from req header
         const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         // '207.97.227.239' dummy ip addy
