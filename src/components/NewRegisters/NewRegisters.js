@@ -35,13 +35,14 @@ class NewRegisters extends PureComponent {
                   return (
                     <div
                       className="d-flex justify-content-between"
-                      // key={user.id}
+                      key={user._id}
                     >
                       <div>
                         {user.username}
                       </div>
                       <div>
-                        {/* {user.register_date} */}
+                        {/* change to register_date, modify Model and userroutes.js */}
+                        {user.date}
                       </div>
                     </div>
                   )

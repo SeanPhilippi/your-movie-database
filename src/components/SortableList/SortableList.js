@@ -101,7 +101,7 @@ class SortableList extends Component {
           items={list}
           useDragHandle
           onSortEnd={orderList}
-          transitionDuration='300'
+          transitionDuration={300}
           lockAxis="y"
         />
       </div>
@@ -110,7 +110,7 @@ class SortableList extends Component {
 }
 
 SortableList.propTypes = {
-  list: PropTypes.func.isRequired,
+  list: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
   orderList: PropTypes.func.isRequired,
   fetchProfileData: PropTypes.func.isRequired,

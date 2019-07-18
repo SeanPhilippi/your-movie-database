@@ -114,7 +114,6 @@ class Search extends React.PureComponent {
 }
 
 Search.propTypes = {
-  list: PropTypes.array.isRequired,
   addToList: PropTypes.func.isRequired,
 }
 

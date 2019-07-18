@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Form, Row} from 'react-bootstrap/Form';
-import { withRouter } from 'react-router-dom';
+import { Row } from 'react-bootstrap/Form';
+import { withRouter, NavLink } from 'react-router-dom';
 import { loginUser } from '../../redux/actions';
 import { connect } from 'react-redux';
 
@@ -84,53 +84,14 @@ class LoginBox extends PureComponent {
             </div>
           </form>
           <p className="px-4">
-            <small>If you are not yet a registered user, <a href="">click here to register now for free</a> and discover all the interesting features for the members of YMDb.</small>
+            <small>
+              If you are not yet a registered user, <NavLink to="/register">click here to register
+              now for free</NavLink> and discover all the interesting features for the members of YMDb.
+            </small>
           </p>
         </div>
       </Row>
     )
-
-    // return (
-    //   <div className="log-in">
-    //     <form
-    //       noValidate
-    //       style={{ width: '65%', flex: 1, margin: '3rem auto' }}
-    //       onSubmit={this.handleLogin}
-    //     >
-    //       <h2 className="text-center">Log In</h2>
-    //       <p className="text-center"><strong>Sign in to your YMDb account</strong></p>
-    //       <Form.Group>
-    //         <Form.Label>Email</Form.Label>
-    //         <Form.Control
-    //           name="email"
-    //           // ! check this, understand this before using
-    //           // className={classnames('form-control form-control-lg', { 'is-invalid': errors.email})}
-    //           onChange={this.onChange}
-    //           placeholder="Enter Email"
-    //           value={this.state.email}
-    //         />
-    //         {errors.email && (<div style={{ color: 'red' }}>{errors.email}</div>)}
-    //       </Form.Group>
-
-    //       <Form.Group>
-    //         <Form.Label>Password</Form.Label>
-    //         <Form.Control
-    //           // className={classnames('form-control form-control-lg', { 'is-invalid': errors.email})}
-    //           name="password"
-    //           type="password"
-    //           onChange={this.onChange}
-    //           placeholder="Enter Password"
-    //           value={this.state.password}
-    //         />
-    //         {errors.password && (<div style={{ color: 'red' }}>{errors.password}</div>)}
-    //       </Form.Group>
-
-    //       <button class="login-btn" type="submit">
-    //         Log In
-    //       </button>
-    //     </form>
-    //   </div>
-    // )
   }
 }
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import NavLink from 'react-router-dom/NavLink';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
+import { NavLink } from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { logoutUser } from '../../redux/actions';
 
 import './TopNav.css';
@@ -68,8 +68,21 @@ class TopNav extends React.PureComponent {
             </div>
 
           <div className="main-links d-flex">
-            <NavLink className="text-white mx-2" to="/top-movies">Top Movie List</NavLink>
-            <NavLink className="text-white mx-2" to="/profile">Your Top List</NavLink>
+            <NavLink className="text-white mx-2" to="/">
+              HOME
+            </NavLink>
+            <NavLink className="text-white mx-2"  to="/top-movies">
+              TOP MOVIE LIST
+            </NavLink>
+            <NavLink className="text-white mx-2" to="/profile">
+              YOUR TOP LIST
+            </NavLink>
+            <NavLink className="text-white mx-2" to="/users-index">
+              USERS' INDEX
+            </NavLink>
+            <NavLink className="text-white mx-2" to="/movies">
+              ALL THE MOVIES
+            </NavLink>
           </div>
           </Nav>
         </Navbar.Collapse>

@@ -53,7 +53,7 @@ class SaveDelete extends PureComponent {
     // clearing redux list array
     this.props.deleteList();
     // deleting list mlab document tied to user
-    const {username} = this.props.state;
+    const { username } = this.props.user;
     return fetch(`/delete/${username}`, {
       method: 'DELETE'
     })
@@ -81,15 +81,14 @@ class SaveDelete extends PureComponent {
   }
 }
 
-// SaveDelete.propTypes = {
-//   state: PropTypes.object.isRequired,
-//   deleteList: PropTypes.func.isRequired,
-//   setUpdateStatus: PropTypes.func.isRequired,
-//   username: PropTypes.string.isRequired,
-// }
+SaveDelete.propTypes = {
+  deleteList: PropTypes.func.isRequired,
+  setUpdateStatus: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+}
 
 const mapStateToProps = state => ({
-  state: state
+  user: state.user
 });
 
 export default connect(mapStateToProps, { deleteList, setUpdateStatus })(SaveDelete);
