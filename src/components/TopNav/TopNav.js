@@ -25,7 +25,7 @@ class TopNav extends React.PureComponent {
     const authLinks = (
       <Nav className="login-register-links p-0">
         <NavLink
-          className="text-white"
+          className="text-white font-weight-bold"
           to="/account"
         >
           { user.username }
@@ -35,7 +35,7 @@ class TopNav extends React.PureComponent {
           className="text-white mx-2"
           to="/"
         >
-          LOGOUT
+          | {"\u00a0"}LOGOUT
         </NavLink>
       </Nav>
     )

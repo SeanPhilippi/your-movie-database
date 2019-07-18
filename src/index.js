@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './redux/reducers';
 import jwt_decode from 'jwt-decode';
-import { setCurrentUser, logoutUser } from './redux/actions';
+import { setToken, logoutUser } from './redux/actions';
 import setAuthToken from './setAuthToken';
 
 import './index.css';
@@ -26,12 +26,12 @@ const store = createStore(
 
 // ** initialState is stored in reducers.js **
 
-// when app starts, check localStorage if jwtToken is set, if so, setCurrentUser
+// when app starts, check localStorage if jwtToken is set, if so, setToken
 // then check jwtToken expiration date, if expired, then logout user, redirect to '/'
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
-  store.dispatch(setCurrentUser(decoded));
+  store.dispatch(setToken(decoded));
 
   // check if token is expired
   // if so, redirect to login

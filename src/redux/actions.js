@@ -4,8 +4,9 @@ import jwt_decode from 'jwt-decode';
 
 export const TYPES = {
   GET_ERRORS: 'GET_ERRORS',
-  SET_NEW_USERS: 'SET_NEW_USERS',
   SET_CURRENT_USER: 'SET_CURRENT_USER',
+  SET_NEW_USERS: 'SET_NEW_USERS',
+  SET_TOKEN: 'SET_TOKEN',
   SET_UPDATE_STATUS: 'SET_UPDATE_STATUS',
   SET_DESCRIPT: 'SET_DESCRIPT',
   SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
@@ -29,7 +30,7 @@ export const registerUser = (userData, history) => dispatch => {
         payload: err.response.data
       })
     })
-}
+};
 
 export const loginUser = (user, history) => dispatch => {
   axios.post('api/users/login', user)
@@ -43,7 +44,7 @@ export const loginUser = (user, history) => dispatch => {
       // decode the token
       const decoded = jwt_decode(token);
       // set current user
-      dispatch(setCurrentUser(decoded));
+      dispatch(setToken(decoded));
       history.push('/');
     })
     .catch(err => {
@@ -61,27 +62,32 @@ export const logoutUser = history => dispatch => {
   // remove JWT token from axios Authorization headers
   setAuthToken(false);
   // set current user back to empty object, passing in empty object will toggle isAuthenticated to false
-  dispatch(setCurrentUser({}));
+  dispatch(setToken({}));
   // redirect to login page
   if (history) {
     history.push('/login');
   }
 };
 
-export const setCurrentUser = decoded => {
-  console.log('decoded in setCurrentUser action', decoded)
+export const setToken = decoded => {
+  console.log('decoded in setToken action', decoded)
   return {
-    type: TYPES.SET_CURRENT_USER,
+    type: TYPES.SET_TOKEN,
     payload: decoded
   };
 };
+
+export const setCurrentUser = user => ({
+  type: TYPES.SET_CURRENT_USER,
+  payload: user.data
+});
 
 export const setNewUsers = users => ({
   type: TYPES.SET_NEW_USERS,
   payload: {
     users
   }
-})
+});
 
 export const setUpdateStatus = () => ({
     type: TYPES.SET_UPDATE_STATUS
@@ -103,7 +109,7 @@ export const setSearchText = text => ({
 
 export const clearSearchText = () => ({
   type: TYPES.CLEAR_SEARCH_TEXT
-})
+});
 
 export const fetchProfileData = () => (dispatch, getState) => {
   const { user } = getState();
@@ -114,7 +120,7 @@ export const fetchProfileData = () => (dispatch, getState) => {
       dispatch(setProfileData(data))
     })
     .catch(err => console.error(err));
-}
+};
 
 export const setProfileData = data => ({
   type: TYPES.SET_PROFILE_DATA,
@@ -132,21 +138,21 @@ export const addToList = movie => ({
 
 export const clearSearchResults = () => ({
   type: TYPES.CLEAR_SEARCH_RESULTS
-})
+});
 
 export const orderList = (oldIndex, newIndex) => ({
   type: TYPES.REORDER_LIST,
   payload: {
     oldIndex, newIndex
   }
-})
+});
 
 export const deleteMovie = movie => ({
   type: TYPES.DELETE_MOVIE,
   payload: {
     movie
   }
-})
+});
 
 export const deleteList = () => ({
   type: TYPES.DELETE_LIST

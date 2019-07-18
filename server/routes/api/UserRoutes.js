@@ -41,7 +41,7 @@ router.post('/register', (req, res) => {
           username,
           email,
           password,
-          date: formatDate(new Date()),
+          register_date: formatDate(new Date()),
           location: geo ?
             `${geo.city ? geo.city : 'n/a'}, ${geo.region ? geo.region : 'n/a'}, ${geo.country}, (lat: ${geo.ll[0]}, long: ${geo.ll[1]})`
             : 'n/a'
@@ -79,7 +79,10 @@ router.post('/login', (req, res) => {
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
           // JWT payload
-          const payload = { id: user._id, email: user.email };
+          const payload = {
+            id: user._id,
+            email: user.email
+          };
           // Sign token
           jwt.sign(payload, keys.secret, { expiresIn: 10800 }, (err, token) => {
             res.json({ success: true, token: 'Bearer ' + token })
@@ -107,11 +110,10 @@ router.get('/new-registers', (req, res) => {
 // @access  Private
 router.get('/current', passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const { id, email } = req.user;
+    console.log('req.user in /current', req.user)
     res.json({
-      id,
-      email
-    })
+      user: req.user
+    });
   }
 )
 

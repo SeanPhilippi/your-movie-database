@@ -19,6 +19,7 @@ create with how they utilize it
 
 
 To do list:
+- setting current user, but still an unauthorized error sometimes.  so maybe token is not being cleared upon logout?
 - import icons
 - no duplicate usernames, make an error message for it and put in register validation function
 - pass userData into NewRegisters component

@@ -4,6 +4,7 @@ import isEmpty from '../is-empty';
 
 const initialState = {
   isAuthenticated: false,
+  user_token: {},
   user: {},
   authErrors: {},
   searchResults: [],
@@ -18,6 +19,10 @@ const initialState = {
 // then state slices to return if type === <case>
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case TYPES.SET_CURRENT_USER: return {
+      ...state,
+      user: payload.user
+    }
     case TYPES.SET_NEW_USERS: return {
       ...state,
       newUsers: payload.users
@@ -26,12 +31,12 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       authErrors: payload
     }
-    case TYPES.SET_CURRENT_USER: return {
+    case TYPES.SET_TOKEN: return {
       ...state,
       // if token exists, true, else false
       isAuthenticated: !isEmpty(payload),
       // token
-      user: payload
+      user_token: payload
     };
     case TYPES.SET_UPDATE_STATUS: return {
       ...state,

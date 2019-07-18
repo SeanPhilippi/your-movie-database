@@ -31,8 +31,7 @@ class NewRegisters extends PureComponent {
                         {user.username}
                       </div>
                       <div>
-                        {/* change to register_date, modify Model and userroutes.js */}
-                        {user.date}
+                        {user.register_date}
                       </div>
                     </div>
                   )

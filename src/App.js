@@ -14,7 +14,7 @@ import Account from './components/Account/Account';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import axios from 'axios';
-import { setNewUsers } from './redux/actions';
+import { setCurrentUser, setNewUsers } from './redux/actions';
 
 import './App.css';
 
@@ -26,7 +26,14 @@ class App extends PureComponent {
         this.props.setNewUsers(users.data);
       })
       .catch(err => console.log(err));
-  }
+      console.log('here')
+    axios('api/users/current')
+      .then(user => {
+        console.log('here2')
+        this.props.setCurrentUser(user);
+      })
+      .catch(err => console.log(err));
+    }
 
   render() {
     return (
@@ -59,4 +66,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
 })
 
-export default connect(mapStateToProps, { setNewUsers })(App);
+export default connect(mapStateToProps, { setCurrentUser, setNewUsers })(App);
