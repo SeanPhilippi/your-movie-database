@@ -23,7 +23,7 @@ class App extends PureComponent {
   componentDidMount() {
     axios('api/users/new-registers')
       .then(users => {
-        this.props.setNewUsers(users);
+        this.props.setNewUsers(users.data);
       })
       .catch(err => console.log(err));
   }

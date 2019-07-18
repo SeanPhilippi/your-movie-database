@@ -1,22 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {Row} from 'react-bootstrap/Form';
+import { Row } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './NewRegisters.css';
 
 class NewRegisters extends PureComponent {
-
-  // state = {
-  //   // ! replace dummy data
-  //   users: [
-  //     {
-  //       name: 'Sean Philippi',
-  //       register_date: 'Jun 21, 2019',
-  //       id: '30jf3jf2'
-  //     }
-  //   ]
-  // }
 
   render() {
     return (
@@ -51,7 +41,9 @@ class NewRegisters extends PureComponent {
             </div>
             <hr/>
             <p>
-              <a href="">Go to the list of the last 50 users</a>
+              <NavLink to="/new-users">
+                Go to the list of the last 50 users
+              </NavLink>
             </p>
           </div>
         </div>
@@ -61,7 +53,7 @@ class NewRegisters extends PureComponent {
 }
 
 NewRegisters.propTypes = {
-
+  newUsers: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({

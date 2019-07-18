@@ -96,11 +96,10 @@ router.post('/login', (req, res) => {
 // @desc    Return last 50 registered users
 // @access  Public
 router.get('/new-registers', (req, res) => {
-  User.find({}, (err, users) => {
-    console.log('users fefef', users)
-    // ! grab all users and return to front-end by fetching from /new-registers
-    // switch to a limit of the most recent 50 eventually
-  })
+  // switch to a limit of the most recent 50 eventually
+  User.find({}).exec().then(data => {
+    res.json(data);
+  }).catch(err => console.log('error', err));
 })
 
 // @route   GET api/users/current

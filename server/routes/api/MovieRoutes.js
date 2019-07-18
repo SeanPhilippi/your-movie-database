@@ -36,7 +36,7 @@ router.get('/addMovie/:id', (req, res) => {
 // @access  Public
 router.get('/:username/list', (req, res) => {
   List.findOne({ username: req.params.username }).exec().then(data => {
-    res.json(data)
+    res.json(data);
   }).catch(err => console.log('error', err));
 });
 
@@ -47,7 +47,7 @@ router.put('/save/:username', (req, res) => {
   // update list array of movie objects
   console.log('update request')
   List.updateOne(
-    {username: req.params.username}, 
+    {username: req.params.username},
     {
       $set: {
       'username': req.body.username,
