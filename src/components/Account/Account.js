@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Container, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import './Account.css';
 
-class Account extends React.PureComponent {
+class Account extends PureComponent {
 
   render() {
     return (

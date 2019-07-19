@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import LoginBox from '../LoginBox/LoginBox';
 import { Container, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import './Login.css';
 
-class Login extends React.PureComponent {
+class Login extends PureComponent {
 
   render() {
     return (

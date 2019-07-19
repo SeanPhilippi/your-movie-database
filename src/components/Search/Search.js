@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import debounce from './debounce.js';
@@ -6,7 +6,7 @@ import { addToList } from '../../redux/actions';
 
 import './Search.css';
 
-class Search extends React.PureComponent {
+class Search extends PureComponent {
 
   state = {
     searchText: '',

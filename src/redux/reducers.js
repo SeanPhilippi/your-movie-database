@@ -59,11 +59,10 @@ export default (state = initialState, { type, payload }) => {
       searchResults: [...state.searchResults, ...payload.data],
     };
     // set fetched movie list to state
-    case TYPES.SET_PROFILE_DATA: return {
+    case TYPES.SET_LIST: return {
       ...state,
-      user: payload.data.user,
-      listDescript: payload.data.listDescript,
-      list: [...payload.data.list]
+      listDescript: payload.listDescript,
+      list: [...payload.list]
     };
     case TYPES.ADD_TO_LIST: return {
       ...state,

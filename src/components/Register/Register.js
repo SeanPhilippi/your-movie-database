@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Container, Col, Row } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -6,7 +6,7 @@ import RegisterBox from '../RegisterBox/RegisterBox';
 
 import './Register.css';
 
-class Register extends React.PureComponent {
+class Register extends PureComponent {
 
   render() {
     return (

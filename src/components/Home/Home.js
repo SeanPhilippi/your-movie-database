@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import HomeCard from '../HomeCard/HomeCard';
 import LoginBox from '../LoginBox/LoginBox';
 import NewRegisters from '../NewRegisters/NewRegisters';
@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 import './Home.css';
 
-class Home extends React.PureComponent {
+class Home extends PureComponent {
 
   // componentDidMount() {
   //   this.fetchNewUsers =

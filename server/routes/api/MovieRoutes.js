@@ -47,10 +47,10 @@ router.put('/save/:username', (req, res) => {
   // update list array of movie objects
   console.log('update request')
   List.updateOne(
-    {username: req.params.username},
+    {username: req.params.user.username},
     {
       $set: {
-      'username': req.body.username,
+      'username': req.body.user.username,
       'list': req.body.list,
       'listDescript': req.body.listDescript,
       }

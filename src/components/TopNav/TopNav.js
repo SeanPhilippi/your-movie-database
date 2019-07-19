@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { logoutUser } from '../../redux/actions';
 
 import './TopNav.css';
 
-class TopNav extends React.PureComponent {
+class TopNav extends PureComponent {
 
   handleLogout = e => {
     e.preventDefault();

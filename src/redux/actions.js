@@ -12,7 +12,7 @@ export const TYPES = {
   SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
   SET_SEARCH_RESULTS: 'SET_SEARCH_RESULTS',
   CLEAR_SEARCH_TEXT: 'CLEAR_SEARCH_TEXT',
-  SET_PROFILE_DATA: 'SET_PROFILE_DATA',
+  SET_LIST: 'SET_LIST',
   ADD_TO_LIST: 'ADD_TO_LIST',
   CLEAR_SEARCH_RESULTS: 'CLEAR_SEARCH_RESULTS',
   REORDER_LIST: 'REORDER_LIST',
@@ -111,19 +111,19 @@ export const clearSearchText = () => ({
   type: TYPES.CLEAR_SEARCH_TEXT
 });
 
-export const fetchProfileData = () => (dispatch, getState) => {
+export const fetchList = () => (dispatch, getState) => {
   const { user } = getState();
+  console.log('username in fetchList', user.username);
   axios(`api/movies/${user.username}/list`)
-    .then(data => {
-      console.log('username in fetchProfileData', user);
-      console.log('data', data);
-      dispatch(setProfileData(data))
+    .then(list => {
+      console.log('list', list.data.list);
+      dispatch(setList(list.data))
     })
     .catch(err => console.error(err));
 };
 
-export const setProfileData = data => ({
-  type: TYPES.SET_PROFILE_DATA,
+export const setList = data => ({
+  type: TYPES.SET_LIST,
   payload: {
     data
   }

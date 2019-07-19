@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './MoviePage.css';
@@ -7,7 +7,7 @@ import {
 
 } from '../../redux/actions';
 
-class MoviePage extends React.PureComponent {
+class MoviePage extends PureComponent {
 
   state = {};
 
@@ -23,7 +23,7 @@ class MoviePage extends React.PureComponent {
         {movie.country} <br/>
         {movie.language} <br/>
         {movie.runtime}
-        
+
         </div>
         <p>
           {movie.plot}
@@ -34,10 +34,10 @@ class MoviePage extends React.PureComponent {
 }
 
 // MoviePage.propTypes = {
-  
+
 // }
 
-const mapStateToProps = state => ({ 
+const mapStateToProps = state => ({
 
 });
 

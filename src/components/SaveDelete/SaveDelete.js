@@ -11,12 +11,12 @@ class SaveDelete extends PureComponent {
 
   handleUpdate = () => {
     this.props.setUpdateStatus();
-    fetch(`/api/movies/save/${this.props.state.username}`, {
+    fetch(`/api/movies/save/${this.props.user.username}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(this.props.state)
+      body: JSON.stringify(this.props.user)
     })
     .then(res => res.json())
     .catch(err => console.log(err));

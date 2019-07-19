@@ -3,16 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { sortableContainer, sortableElement, sortableHandle } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
-import { orderList, deleteMovie, fetchProfileData } from '../../redux/actions';
+import { orderList, deleteMovie } from '../../redux/actions';
 import img from '../../images/grippy.png';
 
 import './SortableList.css';
 
 class SortableList extends Component {
-  // * should list be fetched and set upon user Login when auth is set? so in Home or App component?
-  componentDidMount = () => {
-    this.props.fetchProfileData();
-  }
 
   render() {
     const { list, orderList, deleteMovie } = this.props;
@@ -20,7 +16,12 @@ class SortableList extends Component {
     const DragHandle = sortableHandle(() => {
       return (
         <div className="grip-container">
-          <img alt='grip handle' style={{width: '.4rem'}} src={img}></img>
+          <img
+            alt='grip handle'
+            style={{ width: '.4rem' }}
+            src={img}
+          >
+          </img>
         </div>
       )
     });
@@ -113,7 +114,7 @@ SortableList.propTypes = {
   list: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
   orderList: PropTypes.func.isRequired,
-  fetchProfileData: PropTypes.func.isRequired,
+  fetchList: PropTypes.func.isRequired,
   deleteMovie: PropTypes.func.isRequired,
 }
 
@@ -123,7 +124,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchProfileData: (list) => dispatch(fetchProfileData(list)),
   orderList: ({ oldIndex, newIndex }) => dispatch(orderList(oldIndex, newIndex)),
   deleteMovie: (movie) => dispatch(deleteMovie(movie))
 });
