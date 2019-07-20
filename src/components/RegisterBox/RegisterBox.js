@@ -8,34 +8,47 @@ import { connect } from 'react-redux';
 import './RegisterBox.css';
 
 class RegisterBox extends PureComponent {
-
   state = {
     username: '',
     email: '',
     password: '',
     password2: '',
     errors: {},
-  }
+  };
 
   handleRegister = e => {
+    const {
+      username,
+      email,
+      password,
+      password2,
+    } = this.state;
+
     e.preventDefault();
 
     const user = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      password2: this.state.password2
-    }
+      username,
+      email,
+      password,
+      password2,
+    };
 
     this.props.registerUser(user, this.props.history);
-  }
+  };
 
-  onTextChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+  onTextChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+  };
 
   render() {
-    const { errors } = this.props;
+    const {
+      errors: {
+        email: emailErrors,
+        password: passwordErrors,
+        password2: password2Errors,
+        username: usernameErrors,
+      },
+    } = this.props;
 
     return (
       <Row className="register-box shadow bg-white1 d-flex flex-column mb-4 mx-3">
@@ -64,7 +77,7 @@ class RegisterBox extends PureComponent {
                   type="text"
                 />
                 <div style={{ color: 'red', textAlign: 'center' }}>
-                  { errors.username && errors.username }
+                  { usernameErrors }
                 </div>
               </div>
               {/* email */}
@@ -79,7 +92,7 @@ class RegisterBox extends PureComponent {
                   type="text"
                 />
                 <div style={{ color: 'red', textAlign: 'center' }}>
-                  { errors.email && errors.email }
+                  { emailErrors }
                 </div>
               </div>
               {/* password */}
@@ -94,7 +107,7 @@ class RegisterBox extends PureComponent {
                   type="password"
                 />
                 <div style={{ color: 'red', textAlign: 'center' }}>
-                  { errors.password && errors.password }
+                  { passwordErrors }
                 </div>
               </div>
               {/* confirm password */}
@@ -109,7 +122,7 @@ class RegisterBox extends PureComponent {
                   type="password2"
                 />
                 <div style={{ color: 'red', textAlign: 'center' }}>
-                  { errors.password2 && errors.password2 }
+                  { password2Errors }
                 </div>
               </div>
             </div>
@@ -135,10 +148,14 @@ class RegisterBox extends PureComponent {
 RegisterBox.propTypes = {
   registerUser: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps = state => ({
   errors: state.authErrors
 });
 
-export default connect(mapStateToProps, { registerUser })(withRouter(RegisterBox));
+const mapDispatchToProps = dispatch => ({
+  registerUser: user => dispatch(registerUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterBox));

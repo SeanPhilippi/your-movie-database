@@ -7,11 +7,12 @@ import Login from './Login/Login';
 import './RegisterLogin.css';
 
 class RegisterLogin extends PureComponent {
-
   renderError() {
     return (
       <Alert>
-        <strong>{this.state.authError}</strong>
+        <strong>
+          { this.state.authError }
+        </strong>
       </Alert>
     )
   }

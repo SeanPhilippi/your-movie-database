@@ -1,4 +1,4 @@
-const debounce = (func, wait, immediate) => {
+export default (func, wait, immediate) => {
   let timeout;
 
   return function executeFunction() {
@@ -9,7 +9,7 @@ const debounce = (func, wait, immediate) => {
       timeout = null;
 
       if (!immediate) func.apply(context, args);
-    }
+    };
 
     const callNow = immediate && !timeout;
 
@@ -19,6 +19,4 @@ const debounce = (func, wait, immediate) => {
 
     if (callNow) func.apply(context, args);
   }
-}
-
-export default debounce;
+};

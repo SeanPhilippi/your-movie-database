@@ -1,5 +1,7 @@
-function PasswordRevealer({ value }) {
-  const [shown, setShown] = React.useState(false);
+import React, { useState } from 'react';
+
+export const PasswordRevealer = ({ value }) => {
+  const [shown, setShown] = useState(false);
 
   return (
     <div>
@@ -8,7 +10,9 @@ function PasswordRevealer({ value }) {
         value={value}
         onChange={() => {}}
       />
-      <button onClick={() => setShown(!shown)}>Show/Hide</button>
+      <button onClick={() => setShown(!shown)}>
+        Show/Hide
+      </button>
     </div>
   );
-}
+};

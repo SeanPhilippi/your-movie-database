@@ -1,11 +1,8 @@
 import React, { PureComponent } from 'react';
-
 import './CommentColumn.css';
 
-class CommentColumn extends PureComponent {
-
+export default class CommentColumn extends PureComponent {
   render() {
-
     return (
       <div className="mx-4 shadow">
         <div className="bg-red comments-label">
@@ -29,5 +26,3 @@ class CommentColumn extends PureComponent {
     )
   }
 }
-
-export default CommentColumn;

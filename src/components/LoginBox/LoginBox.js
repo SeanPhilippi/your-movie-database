@@ -4,34 +4,49 @@ import { Row } from 'react-bootstrap';
 import { withRouter, NavLink } from 'react-router-dom';
 import { loginUser } from '../../redux/actions';
 import { connect } from 'react-redux';
-
 import './LoginBox.css';
 
 class LoginBox extends PureComponent {
-
   state = {
     email: '',
     password: '',
     errors: {}
-  }
+  };
 
   handleLogin = e => {
+    const {
+      loginUser,
+      history,
+    } = this.props;
+
+    const {
+      email,
+      password,
+    } = this.state;
+
     e.preventDefault();
 
     const user = {
-      email: this.state.email,
-      password: this.state.password
-    }
+      email,
+      password,
+    };
 
-    this.props.loginUser(user, this.props.history);
-  }
+    loginUser(user, history);
+  };
 
-  onTextChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  }
+  onTextChange = ({ target: { name, value } }) => {
+    this.setState({
+      [name]: value
+    });
+  };
 
   render() {
-    const { errors } = this.props;
+    const {
+      errors: {
+        email: emailErrors,
+        password: passwordErrors,
+      },
+    } = this.props;
 
     return (
       <Row className="login-box d-flex flex-column shadow">
@@ -54,7 +69,7 @@ class LoginBox extends PureComponent {
                   type="text"
                 />
                 <div className="errors">
-                  { errors.email && errors.email }
+                  { emailErrors }
                 </div>
               </div>
               <div className="password">
@@ -66,7 +81,7 @@ class LoginBox extends PureComponent {
                   type="password"
                 />
                 <div className="errors">
-                  { errors.password && errors.password }
+                  { passwordErrors }
                 </div>
               </div>
             </div>
@@ -98,10 +113,14 @@ class LoginBox extends PureComponent {
 LoginBox.propTypes = {
   loginUser: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps = state => ({
   errors: state.authErrors
 });
 
-export default connect(mapStateToProps, { loginUser })(withRouter(LoginBox));
+const mapDispatchToProps = dispatch => ({
+  loginUser: (user, history) => dispatch(loginUser(user, history)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginBox));

@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import './Account.css';
 
 class Account extends PureComponent {
-
   render() {
     return (
       <Container className="container d-flex border-0 justify-content-center">
@@ -22,7 +21,7 @@ class Account extends PureComponent {
 
 Account.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
-}
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,

@@ -4,53 +4,68 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import FormControl from 'react-bootstrap/FormControl'
 import { registerUser } from '../../../redux/actions';
 
 import './Register.css';
 
 class Register extends PureComponent {
-
   state = {
     email: '',
     username: '',
     password: '',
     password2: '',
     errors: {},
-  }
+  };
 
   componentDidMount() {
-    if (this.props.isAuthenticated) {
-      this.props.history.push('/')
+    const {
+      isAuthenticated,
+      history,
+    } = this.props;
+
+    if (isAuthenticated) {
+      history.push('/')
     }
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.errors) {
-      return {errors: nextProps.errors};
-    }
+  static getDerivedStateFromProps({ errors }) {
+    if (errors) return { errors };
   }
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+  onChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value })
+  };
 
   handleSubmit = e => {
     e.preventDefault();
-    const newUser = {
-      email: this.state.email,
-      username: this.state.username,
-      password: this.state.password,
-      password2: this.state.password2
-    }
-    this.props.registerUser(newUser, this.props.history);
-  }
+
+    const {
+      registerUser,
+      history,
+    } = this.props;
+
+    const {
+      errors,
+      ...newUser,
+    } = this.state;
+
+    registerUser(newUser, history);
+  };
 
 // ! left off: seperate Login and Register to be their own pages to avoid sharing errors
   render() {
-    const { errors } = this.state;
+    const {
+      email,
+      password,
+      errors: {
+        email: emailErrors,
+        username: usernameErrors,
+        password: passwordErrors,
+        password2: password2Errors,
+      },
+    } = this.state;
 
-    console.log('errors:', errors)
+    console.log('errors:', errors);
 
     return (
       <div className="register">
@@ -59,23 +74,36 @@ class Register extends PureComponent {
           style={{width: '65%', flex: 1, margin: '3rem auto'}}
           onSubmit={this.handleSubmit}
         >
-          <h2 style={{textAlign: 'center'}}>Sign Up</h2>
-          <p style={{textAlign: 'center'}}><strong>Create your YMDb account</strong></p>
+          <h2 style={{textAlign: 'center'}}>
+            Sign Up
+          </h2>
+          <p style={{textAlign: 'center'}}>
+            <strong>
+              Create your YMDb account
+            </strong>
+          </p>
           <Form.Group>
-            <Form.Label>Email</Form.Label>
+            <Form.Label>
+              Email
+            </Form.Label>
             <Form.Control
               type="email"
               name="email"
               placeholder="Enter Email"
-              value={this.state.email}
+              value={email}
               onChange={this.onChange}
             />
-            {errors.email && (<div style={{color: 'red'}}>{errors.email}</div>)}
+            {emailErrors && (
+              <div style={{color: 'red'}}>
+                { emailErrors }
+              </div>
+            )}
             {/* {errors.email && (<FormControl.Feedback>{errors.email}</FormControl.Feedback>)} */}
           </Form.Group>
-
           <Form.Group>
-            <Form.Label>Username</Form.Label>
+            <Form.Label>
+              Username
+            </Form.Label>
             <Form.Control
               type="username"
               name="username"
@@ -83,12 +111,17 @@ class Register extends PureComponent {
               value={this.state.username}
               onChange={this.onChange}
             />
-            {errors.username && (<div style={{color: 'red'}}>{errors.username}</div>)}
+            {usernameErrors && (
+              <div style={{color: 'red'}}>
+                { usernameErrors }
+              </div>
+            )}
             {/* {errors.username && (<FormControl.Feedback>{errors.username}</FormControl.Feedback>)} */}
           </Form.Group>
-
           <Form.Group>
-            <Form.Label>Password</Form.Label>
+            <Form.Label>
+              Password
+            </Form.Label>
             <Form.Control
               type="password"
               name="password"
@@ -96,23 +129,30 @@ class Register extends PureComponent {
               value={this.state.password}
               onChange={this.onChange}
             />
-            {errors.password && (<div style={{color: 'red'}}>{errors.password}</div>)}
-            {/* {errors.password && (<FormControl.Feedback>red{errors.password}</FormControl.Feedback>)} */}
+            {passwordErrors && (
+              <div style={{color: 'red'}}>
+                { passwordErrors }
+              </div>
+            )}
           </Form.Group>
-
           <Form.Group>
-            <Form.Label>Confirm Password</Form.Label>
+            <Form.Label>
+              Confirm Password
+            </Form.Label>
             <Form.Control
               type="password"
               name="password2"
               placeholder="Confirm Password"
-              value={this.state.password2}
+              value={password2}
               onChange={this.onChange}
             />
-            {errors.password2 && (<div style={{color: 'red'}}>{errors.password2}</div>)}
+            {password2Errors && (
+              <div style={{color: 'red'}}>
+                { password2Errors }
+              </div>
+            )}
             {/* <Form.Control.Feedback>{errors.password2}lldfkd</Form.Control.Feedback> */}
           </Form.Group>
-
           <Button type="submit">
             Register
           </Button>
@@ -126,11 +166,15 @@ Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   errors: PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
   errors: state.authErrors
-})
-// destructuring mapDispatchToProps for registerUser
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+});
+
+const mapDispatchToProps = dispatch => ({
+  registerUser: (userdata, history) => dispatch(registerUser(user, history)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Register));

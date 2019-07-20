@@ -60,7 +60,7 @@ router.post('/register', (req, res) => {
         })
       }
     })
-})
+});
 
 // @route   POST api/users/login
 // @desc    Login User / Returning JWT Token
@@ -103,20 +103,16 @@ router.get('/new-registers', (req, res) => {
   User.find({}).exec().then(data => {
     res.json(data);
   }).catch(err => console.log('error', err));
-})
+});
 
 // @route   GET api/users/current
 // @desc    Return current user
 // @access  Private
-router.get('/current'
-// , passport.authenticate('jwt', { session: false }
-),
-  (req, res) => {
-    User.findOne()
-    res.json({
-      user: req.user
-    });
-  }
-)
+router.get('/current', (req, res) => {
+  User.findOne();
+  res.json({
+    user: req.user
+  });
+});
 
 module.exports = router;

@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import debounce from './debounce.js';
 import { addToList } from '../../redux/actions';
-
 import './Search.css';
 
 class Search extends PureComponent {
-
   state = {
     searchText: '',
     searchResults: [],
-  }
+  };
 
   renderResults = () => {
     const { searchResults } = this.state;
@@ -36,13 +34,14 @@ class Search extends PureComponent {
   // TODO: search - add pagination
   handleSearch = () => {
     const { searchText } = this.state;
+
     fetch(`api/movies/search/${searchText}`)
-    .then(res => res.json())
-    .then(data => {
-      this.setState(() => ({searchResults: data.Search}))
-    })
-    .catch(err => console.log(err));
-  }
+      .then(res => res.json())
+      .then(({ Search: searchResults }) => {
+        this.setState(() => ({ searchResults }))
+      })
+      .catch(err => console.log(err));
+  };
 
   handleDelay = debounce(this.handleSearch, 300);
 
@@ -50,7 +49,7 @@ class Search extends PureComponent {
     this.setState({searchText: e.target.value});
     // fire handle search through debounce function to reduce api calls with delay
     this.handleDelay();
-  }
+  };
 
   handleAdd = movie => {
     const { addToList } = this.props;
@@ -74,25 +73,14 @@ class Search extends PureComponent {
   }
 
   clearResults = () => {
-    this.setState(() => ({searchResults: []}));
-  }
+    this.setState(() => ({ searchResults: [] }));
+  };
 
   clearSearchText = () => {
-    this.setState(() => ({searchText: ''}));
-  }
-
-  // onKeyUp = e => {
-  //   if (e.key === 'Enter') {
-  //     // TODO: add more pages later when scroll container is integrated
-  //     const arr = [1, 2];
-  //     arr.map(num => {
-  //       return this.handleSearch(num);
-  //     })
-  //   }
-  // }
+    this.setState(() => ({ searchText: '' }));
+  };
 
   render() {
-
     return (
       <div className="search">
         <input
@@ -106,7 +94,7 @@ class Search extends PureComponent {
         >
         </input>
         <div>
-          {this.renderResults()}
+          { this.renderResults() }
         </div>
       </div>
     )
@@ -115,7 +103,7 @@ class Search extends PureComponent {
 
 Search.propTypes = {
   addToList: PropTypes.func.isRequired,
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   addToList: movie => dispatch(addToList(movie)),
