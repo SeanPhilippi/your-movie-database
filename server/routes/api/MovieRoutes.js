@@ -46,6 +46,7 @@ router.get('/:username/list', (req, res) => {
 router.put('/save/:username', (req, res) => {
   // update list array of movie objects
   console.log('update request')
+  console.log('req.params in /save/:username', req.params)
   List.updateOne(
     {username: req.params.user.username},
     {

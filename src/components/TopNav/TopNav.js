@@ -68,19 +68,34 @@ class TopNav extends PureComponent {
             </div>
 
           <div className="main-links d-flex">
-            <NavLink className="text-white mx-2" to="/">
+            <NavLink
+              className="text-white mx-2"
+              to="/"
+            >
               HOME
             </NavLink>
-            <NavLink className="text-white mx-2"  to="/top-movies">
+            <NavLink
+              className="text-white mx-2"
+              to="/top-movies"
+            >
               TOP MOVIE LIST
             </NavLink>
-            <NavLink className="text-white mx-2" to="/profile">
+            <NavLink
+              className="text-white mx-2"
+              to={ isAuthenticated ? "/profile" : "/login"}
+            >
               YOUR TOP LIST
             </NavLink>
-            <NavLink className="text-white mx-2" to="/users-index">
+            <NavLink
+              className="text-white mx-2"
+              to="/users-index"
+            >
               USERS' INDEX
             </NavLink>
-            <NavLink className="text-white mx-2" to="/movies">
+            <NavLink
+              className="text-white mx-2"
+              to="/movies"
+            >
               ALL THE MOVIES
             </NavLink>
           </div>

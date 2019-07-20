@@ -26,17 +26,17 @@ class App extends PureComponent {
         this.props.setNewUsers(users.data);
       })
       .catch(err => console.log(err));
-      console.log('here')
-    axios('api/users/current')
-      .then(user => {
-        console.log('here2')
-        this.props.setCurrentUser(user);
-      })
-      .then(() => {
-        this.props.fetchList();
-        console.log('here3')
-      })
-      .catch(err => console.log(err));
+    //   console.log('here')
+    // axios('api/users/current')
+    //   .then(user => {
+    //     console.log('here2')
+    //     this.props.setCurrentUser(user);
+    //   })
+    //   .then(() => {
+    //     this.props.fetchList();
+    //     console.log('here3')
+    //   })
+    //   .catch(err => console.log(err));
     }
 
   render() {
@@ -51,7 +51,7 @@ class App extends PureComponent {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/account" component={Account} />
-              <Route exact path="/top-movies" component={TopMovieList} />
+              <Route exact path="/top-movies" render={TopMovieList} />
               <Route exact path="/profile" component={Profile} />
               <Route path="/movie" component={MoviePage} />
             </Switch>

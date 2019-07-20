@@ -11,6 +11,8 @@ class SaveDelete extends PureComponent {
 
   handleUpdate = () => {
     this.props.setUpdateStatus();
+    console.log('user in handleUpdate', this.props.user)
+    console.log('user in handleUpdate', this.props.user.username)
     fetch(`/api/movies/save/${this.props.user.username}`, {
       method: 'PUT',
       headers: {

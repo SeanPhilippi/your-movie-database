@@ -11,7 +11,6 @@ const initialState = {
   listDescript: '',
   list: [],
   open: false,
-  whatToShow: 'home',
   newUsers: []
 }
 

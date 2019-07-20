@@ -33,7 +33,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 export const loginUser = (user, history) => dispatch => {
-  axios.post('api/users/login', user)
+  axios.post('api/users/login', user) // ! should this be a GET?
     .then(res => {
       console.log('/login post res', res)
       const { token } = res.data;
@@ -54,6 +54,12 @@ export const loginUser = (user, history) => dispatch => {
         payload: err.response.data
       });
     });
+
+  axios('api/users/current')
+  .then(user => {
+    console.log('here2')
+    this.props.setCurrentUser(user);
+  })
 };
 
 export const logoutUser = history => dispatch => {
@@ -61,9 +67,10 @@ export const logoutUser = history => dispatch => {
   localStorage.removeItem('jwtToken');
   // remove JWT token from axios Authorization headers
   setAuthToken(false);
-  // set current user back to empty object, passing in empty object will toggle isAuthenticated to false
+  // set token back to empty object, passing in empty object will toggle isAuthenticated to false
   dispatch(setToken({}));
-  // redirect to login page
+  // ! set current user back to empty object
+  // dispatch(setCurrentUser({}));
   if (history) {
     history.push('/login');
   }

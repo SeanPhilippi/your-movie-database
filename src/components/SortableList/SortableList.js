@@ -112,15 +112,12 @@ class SortableList extends Component {
 
 SortableList.propTypes = {
   list: PropTypes.array.isRequired,
-  user: PropTypes.object.isRequired,
   orderList: PropTypes.func.isRequired,
-  fetchList: PropTypes.func.isRequired,
   deleteMovie: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   list: state.list,
-  user: state.user,
 });
 
 const mapDispatchToProps = dispatch => ({

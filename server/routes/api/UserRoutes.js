@@ -65,7 +65,7 @@ router.post('/register', (req, res) => {
 // @route   POST api/users/login
 // @desc    Login User / Returning JWT Token
 // @access  Public
-router.post('/login', (req, res) => {
+router.post('/login', (req, res) => { // ! should this be a get request?
   const errors = {};
   const { email, password } = req.body;
   //* for future, allow for login with username OR email, and then search by username, then by email
@@ -108,9 +108,11 @@ router.get('/new-registers', (req, res) => {
 // @route   GET api/users/current
 // @desc    Return current user
 // @access  Private
-router.get('/current', passport.authenticate('jwt', { session: false }),
+router.get('/current'
+// , passport.authenticate('jwt', { session: false }
+),
   (req, res) => {
-    console.log('req.user in /current', req.user)
+    User.findOne()
     res.json({
       user: req.user
     });

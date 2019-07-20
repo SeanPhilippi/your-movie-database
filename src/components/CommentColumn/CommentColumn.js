@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 
 import './CommentColumn.css';
 
-class CommentColumn extends React.Component {
+class CommentColumn extends PureComponent {
 
   render() {
 
