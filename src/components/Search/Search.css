@@ -5,12 +5,12 @@
 
 .search-text {
   height: 2.5rem;
-  width: 90%;
+  width: 100%;
 }
 
 .result-scroll {
   width: 90%;
-  height: 14rem;
+  max-height: 14rem;
   overflow: auto;
 }
 

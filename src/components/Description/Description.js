@@ -13,12 +13,11 @@ class Description extends Component {
   render() {
 
     return (
-      <div className="description">
+      <div className="description d-flex flex-column align-items-center">
         <textarea
           className="textarea"
           name="description"
-          cols="80"
-          rows="20"
+          rows="10"
           placeholder="Write your description here..."
           onChange={e => this.props.setDescript(e.target.value)}
           value={this.props.listDescript}

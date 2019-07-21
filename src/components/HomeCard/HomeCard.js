@@ -9,7 +9,7 @@ const HomeCard = (props) => {
 
   return (
     <Row className="my-2 shadow mx-1">
-      <div className="card-title1 w-100 m-0 bg-red text-white pt-2 pl-4 p-1">
+      <div className="card-title">
         {title}
       </div>
       <div className="bg-light1 w-100">

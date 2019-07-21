@@ -79,7 +79,7 @@ class Search extends PureComponent {
   render() {
 
     return (
-      <div className="search">
+      <div className="search d-flex flex-column align-items-center">
         <input
           name="searchText"
           className="search-text"

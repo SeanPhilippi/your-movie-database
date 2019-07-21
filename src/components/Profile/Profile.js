@@ -15,18 +15,25 @@ class Profile extends PureComponent {
       <div className="profile-wrapper" >
         <div className="main-container bg-light2 mt-4">
           <div className="left-col bg-white1">
-            <div className="search-btns-container">
-              <SaveDelete />
+            <div className="edit-list-container bg-light1 mt-4 shadow">
+              <div className="card-title">
+                USER TOP MOVIES
+              </div>
+              <div className="edit-list-inner-container d-flex flex-column align-items-center">
+                <div className="search-btns-container">
+                  <SaveDelete />
+                </div>
+                <Search />
+                <SortableList />
+                <Description />
+              </div>
             </div>
-            <Search />
-            <SortableList />
-            <Description />
           </div>
           <div className="right-col">
             <CommentColumn className="comments" />
           </div>
         </div>
-      </div >
+      </div>
     );
   }
 }

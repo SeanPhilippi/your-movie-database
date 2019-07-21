@@ -1,5 +1,4 @@
 .profile-wrapper {
-  text-align: center;
   height: 100vh;
 }
 
@@ -15,12 +14,24 @@
   align-items: center;
 }
 
+.edit-list-container {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2.5rem;
+}
+
+.edit-list-inner-container {
+  width: 90%;
+}
+
 .search-btns-container {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  width: 97%;
+  width: 100%;
 }
 
 .right-col {

@@ -1,5 +1,8 @@
+.description {
+  width: 100%;
+}
+
 .textarea {
-  font-size: 14px;
-  padding-left: 5px;
-  width: 90%;
+  font-size: 1rem;
+  width: 100%;
 }

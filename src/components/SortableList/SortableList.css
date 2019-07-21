@@ -9,7 +9,6 @@
 
 .movie-item {
   display: grid;
-  /* position:  */
   grid-template-columns: 1fr 5fr 20fr 5fr;
   font-size: 15px;
   border: black solid 1px;
