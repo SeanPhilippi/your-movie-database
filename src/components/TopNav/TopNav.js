@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 import { Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { logoutUser } from '../../redux/actions';
-
 import './TopNav.css';
 
 class TopNav extends PureComponent {
@@ -13,14 +12,18 @@ class TopNav extends PureComponent {
   handleLogout = e => {
     e.preventDefault();
     this.props.logoutUser();
-  }
+  };
 
-  handleLogin = () => {
-
-  }
+  handleLogin = () => { };
 
   render() {
-    const { isAuthenticated, user } = this.props;
+    const {
+      isAuthenticated,
+      user: {
+        username,
+      },
+      update,
+    } = this.props;
 
     const authLinks = (
       <Nav className="login-register-links p-0">
@@ -28,7 +31,7 @@ class TopNav extends PureComponent {
           className="text-white font-weight-bold"
           to="/account"
         >
-          {/* { user.username } */}
+          { username }
         </NavLink>
         <NavLink
           onClick={this.handleLogout}
@@ -38,19 +41,23 @@ class TopNav extends PureComponent {
           | {"\u00a0"}LOGOUT
         </NavLink>
       </Nav>
-    )
+    );
 
     const guestLinks = (
       <Nav className="login-register-links text-white">
-        <NavLink className="text-white mx-2" to="/register">REGISTER</NavLink> |
-        <NavLink className="text-white mx-2" to="/login">LOGIN</NavLink>
+        <NavLink className="text-white mx-2" to="/register">
+          REGISTER
+        </NavLink>
+        {' | '}
+        <NavLink className="text-white mx-2" to="/login">
+          LOGIN
+        </NavLink>
       </Nav>
-
-    )
+    );
 
     return (
       <Navbar className="navbar mt-4">
-        {this.props.update && this.showStatus()}
+        {update && this.showStatus()}
         {/****** Logo *****/}
         <Navbar.Brand className="brand">
           <NavLink style={{ textDecoration: 'none'}} to='/'>
@@ -110,11 +117,15 @@ TopNav.propTypes = {
   user: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
-}
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
   user: state.user,
 });
 
-export default connect(mapStateToProps, { logoutUser })(TopNav)
+const mapDispatchToProps = dispatch => ({
+  logoutUser: history => dispatch(logoutUser(history)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopNav)

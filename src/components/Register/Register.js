@@ -3,11 +3,9 @@ import { Container, Col, Row } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RegisterBox from '../RegisterBox/RegisterBox';
-
 import './Register.css';
 
 class Register extends PureComponent {
-
   render() {
     return (
       <Container className="container d-flex border-0 justify-content-center">
@@ -61,7 +59,7 @@ class Register extends PureComponent {
 
 Register.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
-}
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,

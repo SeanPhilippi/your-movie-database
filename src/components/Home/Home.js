@@ -1,18 +1,18 @@
 import React, { PureComponent } from 'react';
-import HomeCard from '../HomeCard/HomeCard';
-import LoginBox from '../LoginBox/LoginBox';
-import NewRegisters from '../NewRegisters/NewRegisters';
 import { Container, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import HomeCard from '../HomeCard/HomeCard';
+import LoginBox from '../LoginBox/LoginBox';
+import NewRegisters from '../NewRegisters/NewRegisters';
 import './Home.css';
 
 class Home extends PureComponent {
-
-  // componentDidMount() {
-  //   this.fetchNewUsers =
-  // }
+  renderLoginBox() {
+    return this.props.isAuthenticated
+      ? null
+      : <LoginBox />;
+  }
 
   render() {
     return (
@@ -23,13 +23,11 @@ class Home extends PureComponent {
               Welcome to YMDb, Your Movie Database, the movie community where you can create your list of favorite movies,
               discover other people's favorite movies, discuss about movies and favorite lists, ... YMDb is free and fun!
             </Row>
-            <HomeCard title='Top Movie List' description=''/>
-            <HomeCard title='Most Visited Lists' description=''/>
+            <HomeCard title='Top Movie List'/>
+            <HomeCard title='Most Visited Lists'/>
           </Col>
           <Col className="ml-3 ">
-            {
-              this.props.isAuthenticated ? null : <LoginBox />
-            }
+            { this.renderLoginBox() }
             <NewRegisters />
           </Col>
         </Col>
@@ -40,7 +38,7 @@ class Home extends PureComponent {
 
 Home.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
-}
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,

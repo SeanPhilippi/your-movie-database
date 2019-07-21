@@ -1,6 +1,6 @@
 import { TYPES } from './actions';
 import { arrayMove } from 'react-sortable-hoc';
-import isEmpty from '../is-empty';
+import isEmpty from '../utils/helpers/is-empty';
 
 const initialState = {
   isAuthenticated: false,

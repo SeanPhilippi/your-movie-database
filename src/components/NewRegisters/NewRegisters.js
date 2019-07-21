@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import './NewRegisters.css';
 
 class NewRegisters extends PureComponent {
-
   render() {
+    const {
+      newUsers,
+    } = this.props;
+
     return (
       <Row className="login-box d-flex flex-column mt-2 shadow">
         <div className="card-title1">
@@ -21,17 +23,17 @@ class NewRegisters extends PureComponent {
             </div>
             <div className="text-orange">
               {
-                this.props.newUsers.map(user => {
+                newUsers.map(({ _id, username, register_date }) => {
                   return (
                     <div
                       className="d-flex justify-content-between"
-                      key={user._id}
+                      key={_id}
                     >
                       <div>
-                        {user.username}
+                        {username}
                       </div>
                       <div>
-                        {user.register_date}
+                        {register_date}
                       </div>
                     </div>
                   )
@@ -53,7 +55,7 @@ class NewRegisters extends PureComponent {
 
 NewRegisters.propTypes = {
   newUsers: PropTypes.array.isRequired
-}
+};
 
 const mapStateToProps = state => ({
   newUsers: state.newUsers

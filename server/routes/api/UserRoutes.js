@@ -20,7 +20,6 @@ router.post('/register', (req, res) => {
 
   if (!isValid) return res.status(400).json(errors);
 
-  //* for future, incorporate creating an avatar that accepts gravatar here
   // ! figure out $or operator so I can give an error for finding a matching username as well
   User.findOne({ email: req.body.email })
     .then(user => {
@@ -60,12 +59,12 @@ router.post('/register', (req, res) => {
         })
       }
     })
-})
+});
 
 // @route   POST api/users/login
 // @desc    Login User / Returning JWT Token
 // @access  Public
-router.post('/login', (req, res) => { // ! should this be a get request?
+router.post('/login', (req, res) => {
   const errors = {};
   const { email, password } = req.body;
   //* for future, allow for login with username OR email, and then search by username, then by email
@@ -103,23 +102,18 @@ router.get('/new-registers', (req, res) => {
   User.find({}).exec().then(data => {
     res.json(data);
   }).catch(err => console.log('error', err));
-})
+});
 
 // @route   GET api/users/current
 // @desc    Return current user
 // @access  Private
 router.get('/current',
 // passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    console.log('fffff', req)
-    User.findOne({ email: req.body.email })
-      .then(user => {
-        console.log('lfkld', user)
-        res.json({
-          user: user
-        });
-      })
-  }
-)
+(req, res) => {
+  User.findOne();
+  res.json({
+    user: req.user
+  });
+});
 
 module.exports = router;

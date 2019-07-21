@@ -1,28 +1,36 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 import { connect } from 'react-redux';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { deleteList, setUpdateStatus } from '../../redux/actions';
-
 import './SaveDelete.css';
 
 class SaveDelete extends PureComponent {
-
   handleUpdate = () => {
-    this.props.setUpdateStatus();
-    console.log('user in handleUpdate', this.props.user)
-    console.log('user in handleUpdate', this.props.user.username)
-    fetch(`/api/movies/save/${this.props.user.username}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
+    const {
+      setUpdateStatus,
+      user,
+      user: {
+        username,
       },
-      body: JSON.stringify(this.props.user)
-    })
-    .then(res => res.json())
-    .catch(err => console.log(err));
-  }
+    } = this.props;
+
+    setUpdateStatus();
+
+    console.log('user in handleUpdate', user);
+    console.log('user in handleUpdate', username);
+
+    fetch(`/api/movies/save/${username}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+      .then(res => res.json())
+      .catch(console.log);
+  };
 
   alertOptions = {
     title: 'Are you sure?',
@@ -30,13 +38,25 @@ class SaveDelete extends PureComponent {
     customUI: ({ onClose, title, message }) => {
       return (
         <div className='custom-ui'>
-          <h2>{title}</h2>
-          <p>{message}</p>
-          <button className='alert-button red' onClick={onClose}>No</button>
-          <button className='alert-button green' onClick={() => {
-            this.performDelete();
-            onClose();
-            }}>
+          <h2>
+            { title }
+          </h2>
+          <p>
+            { message }
+          </p>
+          <button
+            className='alert-button red'
+            onClick={onClose}
+          >
+            No
+          </button>
+          <button
+            className='alert-button green'
+            onClick={() => {
+              this.performDelete();
+              onClose();
+            }}
+          >
             Yes, delete it!
           </button>
         </div>
@@ -45,36 +65,41 @@ class SaveDelete extends PureComponent {
     PureUnmount: () => {},
     onClickOutside: () => {},
     onKeypressEscape: () => {}
-  }
+  };
 
   handleDelete = () => {
     confirmAlert(this.alertOptions);
-  }
+  };
 
   performDelete = () => {
+    const {
+      deleteList,
+      user: {
+        username,
+      },
+    } = this.props;
     // clearing redux list array
-    this.props.deleteList();
+    deleteList();
     // deleting list mlab document tied to user
-    const { username } = this.props.user;
+
     return fetch(`/delete/${username}`, {
       method: 'DELETE'
     })
-    .catch(err => console.error(err))
-  }
+    .catch(console.error)
+  };
 
   render() {
-
     return (
       <div className="save-delete d-flex">
         <button
           className="save-list"
-          onClick={() => this.handleUpdate()}
+          onClick={this.handleUpdate}
         >
           SAVE
         </button>
         <button
           className="delete-list"
-          onClick={() => this.handleDelete()}
+          onClick={this.handleDelete}
         >
           DELETE LIST
         </button>
@@ -87,10 +112,15 @@ SaveDelete.propTypes = {
   deleteList: PropTypes.func.isRequired,
   setUpdateStatus: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-}
+};
 
 const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps, { deleteList, setUpdateStatus })(SaveDelete);
+const mapDispatchToProps = dispatch => ({
+  deleteList: () => dispatch(deleteList()),
+  setUpdateStatus: () => dispatch(setUpdateStatus()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);

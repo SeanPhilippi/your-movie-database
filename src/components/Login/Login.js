@@ -3,11 +3,9 @@ import LoginBox from '../LoginBox/LoginBox';
 import { Container, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import './Login.css';
 
 class Login extends PureComponent {
-
   render() {
     return (
       <Container className="container d-flex border-0 justify-content-center">
@@ -23,7 +21,7 @@ class Login extends PureComponent {
 
 Login.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
-}
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,

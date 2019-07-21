@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import logoUrl from './logoUrl';
 
-class Footer extends React.Component {
-
+export default class Footer extends Component {
   render() {
     return (
       <footer style={{ paddingTop: "20px" }}>
-        <img src="https://www.themoviedb.org/assets/1/v4/logos/408x161-powered-by-rectangle-blue-10d3d41d2a0af9ebcb85f7fb62ffb6671c15ae8ea9bc82a2c6941f223143409e.png"
+        <img
+          src={logoUrl}
           alt=""
-          style={{ width: "130px", height: "auto" }} />
+          style={{ width: "130px", height: "auto" }}
+        />
       </footer>
     )
   }
 }
-
-export default Footer;

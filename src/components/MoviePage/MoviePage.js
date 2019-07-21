@@ -1,44 +1,44 @@
 import React, { PureComponent } from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './MoviePage.css';
 
-import {
+const MoviePage = ({
+  location: {
+    state: {
+      movie: {
+        name,
+        director,
+        year,
+        country,
+        language,
+        runtime,
+        plot,
+      },
+    },
+  },
+}) => (
+  <div className="MoviePage">
+    <h1>
+      { name }
+    </h1>
+    <h2>
+      { director }, {year}
+    </h2>
+    <div>
+      { year }
+      <br/>
+      { country }
+      <br/>
+      { language }
+      <br/>
+      { runtime }
+    </div>
+    <p>
+      { plot }
+    </p>
+  </div>
+);
 
-} from '../../redux/actions';
+const mapStateToProps = state => ({});
 
-class MoviePage extends PureComponent {
-
-  state = {};
-
-  render() {
-    const { movie } = this.props.location.state;
-    console.log('movie obj', movie)
-    // const {movie} = this.state
-    return (
-      <div className="MoviePage">
-        <h1>{movie.name}</h1>
-        <h2>{movie.director}, {movie.year}</h2>
-        <div>{movie.year} <br/>
-        {movie.country} <br/>
-        {movie.language} <br/>
-        {movie.runtime}
-
-        </div>
-        <p>
-          {movie.plot}
-        </p>
-      </div>
-    )
-  }
-}
-
-// MoviePage.propTypes = {
-
-// }
-
-const mapStateToProps = state => ({
-
-});
-
-export default connect (mapStateToProps)(MoviePage);
+export default connect(mapStateToProps)(MoviePage);

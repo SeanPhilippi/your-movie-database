@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { sortableContainer, sortableElement, sortableHandle } from 'react-sortable-hoc';
+import {
+  sortableContainer,
+  sortableElement,
+  sortableHandle,
+} from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
 import { orderList, deleteMovie } from '../../redux/actions';
 import img from '../../images/grippy.png';
-
 import './SortableList.css';
 
 class SortableList extends Component {
-
   render() {
     const { list, orderList, deleteMovie } = this.props;
 
@@ -27,44 +29,41 @@ class SortableList extends Component {
     });
 
     const SortableItem = sortableElement(({ movie, sortIndex }) => {
-      return (
+      const {
+        id,
+        name,
+        director,
+        year,
+      } = movie;
 
+      return (
         <div
-          key={movie.id}
-          className="movie-item bg-white text-center"
+          key={id}
+          className="movie-item"
         >
           <div className='grip'>
             <DragHandle />
           </div>
-          <div className="numbers">{sortIndex + 1} |</div>
+          <div className="numbers">
+            { sortIndex + 1 } |
+          </div>
           <div className="movie-info">
             <div style={{ fontSize: "20px" }}>
               <Link
                 to={{
                   pathname: '/movie',
-                  state: { movie: movie }
+                  state: { movie }
                 }}
-                // to={{
-                //   pathname: `/movie/${movie}`,
-                //   state: {
-                //     id: movie.id,
-                //     name: movie.name,
-                //     director: movie.director,
-                //     year: movie.year,
-
-                //   }
-                // }}
                 className="movie-link">
-                {movie.name}
+                { name }
               </Link>
             </div>
             <div className="dir-year">
-              {movie.director}, {movie.year}
+              { director }, { year }
             </div>
           </div>
-          {/* delete button */}
           <button
-            onClick={() => deleteMovie(movie)}
+            onClick={ () => deleteMovie(movie) }
             className="delete"
           >
             ✕
@@ -72,41 +71,38 @@ class SortableList extends Component {
         </div>
       )
     }
-  )
+  );
 
-  const SortableList = sortableContainer(({ items }) => {
-
-    return (
+    const SortableList = sortableContainer(({ items }) =>  (
       <div className="list-item" >
         {
           items.map((movie, index) => {
             return (
               <SortableItem
                 className="sortable-item"
-                key={`item-${movie.id}`}
-                sortIndex={index}
-                index={index}
-                movie={movie}
+                key={ `item-${movie.id}` }
+                sortIndex={ index }
+                index={ index }
+                movie={ movie }
               />
             )
           })
         }
       </div>
-    )
-  })
+    ));
 
-  return (
+    return (
       <div className="list-container">
         <SortableList
           helperClass='sortableHelper'
-          items={list}
+          items={ list }
           useDragHandle
-          onSortEnd={orderList}
+          onSortEnd={ orderList }
           transitionDuration={300}
           lockAxis="y"
         />
       </div>
-    )
+    );
   }
 }
 
@@ -114,7 +110,7 @@ SortableList.propTypes = {
   list: PropTypes.array.isRequired,
   orderList: PropTypes.func.isRequired,
   deleteMovie: PropTypes.func.isRequired,
-}
+};
 
 const mapStateToProps = state => ({
   list: state.list,

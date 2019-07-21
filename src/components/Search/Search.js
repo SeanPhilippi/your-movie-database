@@ -4,15 +4,13 @@ import SearchResult from '../SearchResult/SearchResult';
 import { connect } from 'react-redux';
 import debounce from './debounce.js';
 import { addToList } from '../../redux/actions';
-
 import './Search.css';
 
 class Search extends PureComponent {
-
   state = {
     searchText: '',
     searchResults: [],
-  }
+  };
 
   handleAdd = movie => {
     const { addToList } = this.props;
@@ -70,14 +68,13 @@ class Search extends PureComponent {
 
   clearResults = () => {
     this.setState(() => ({ searchResults: [] }));
-  }
+  };
 
   clearSearchText = () => {
     this.setState(() => ({ searchText: '' }));
-  }
+  };
 
   render() {
-
     return (
       <div className="search d-flex flex-column align-items-center">
         <input
@@ -97,7 +94,7 @@ class Search extends PureComponent {
 
 Search.propTypes = {
   addToList: PropTypes.func.isRequired,
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   addToList: movie => dispatch(addToList(movie)),

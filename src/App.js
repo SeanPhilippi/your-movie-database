@@ -1,9 +1,14 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import './index.css';
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import { Container } from 'reactstrap';
 import TopNav from './components/TopNav/TopNav';
 import Home from './components/Home/Home';
-import { Container } from 'reactstrap';
 import Profile from './components/Profile/Profile';
 import TopMovieList from './components/TopMovieList/TopMovieList';
 import MoviePage from './components/MoviePage/MoviePage';
@@ -13,32 +18,22 @@ import Login from './components/Login/Login';
 import Account from './components/Account/Account';
 import UsersIndex from './components/UsersIndex/UsersIndex';
 import UnderConstruction from './components/UnderConstruction/UnderConstruction';
-import { connect } from 'react-redux';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import axios from 'axios';
-import { setCurrentUser, setNewUsers, fetchList } from './redux/actions';
-
+import {
+  setCurrentUser,
+  setNewUsers,
+  fetchList,
+} from './redux/actions';
+import http from './utils/http';
 import './App.css';
 
 class App extends PureComponent {
-
   componentDidMount() {
-    axios('api/users/new-registers')
-      .then(users => {
-        this.props.setNewUsers(users.data);
+    http.users.get.newRegisters()
+      .then(({ data }) => {
+        this.props.setNewUsers(data);
       })
-      .catch(err => console.log(err));
-    //   console.log('here')
-    // axios('api/users/current')
-    //   .then(user => {
-    //     console.log('here2')
-    //     this.props.setCurrentUser(user);
-    //   })
-    //   .then(() => {
-    //     this.props.fetchList();
-    //     console.log('here3')
-    //   })
-    //   .catch(err => console.log(err));
+      .catch(console.log);
   }
 
   pageNotFound = () => (
@@ -75,10 +70,16 @@ class App extends PureComponent {
 
 App.propTypes = {
   isAuthenicated: PropTypes.bool,
-}
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
-})
+});
 
-export default connect(mapStateToProps, { setCurrentUser, setNewUsers, fetchList })(App);
+const mapDispatchToProps = {
+  setCurrentUser,
+  setNewUsers,
+  fetchList,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
