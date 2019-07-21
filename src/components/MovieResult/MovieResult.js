@@ -1,18 +1,16 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-const MovieResult = props => {
+const MovieResult = ({ movie, handleAdd }) => {
+  const { imdbId, Year, Title } = movie;
   return (
     <div
-      key={props.movie.imdbId}
+      key={ imdbId }
       className="result-item"
-      onClick={() => this.handleAdd(props.movie)}
+      onClick={() => handleAdd(movie)}
     >
       <div className="result-info">
-        <div style={{ fontSize: "15px" }}>
-          {props.movie.Title} ({props.movie.Year})
-        </div>
+        { Title } ({ Year })
       </div>
     </div>
   )
@@ -20,10 +18,7 @@ const MovieResult = props => {
 
 MovieResult.propTypes = {
   movie: PropTypes.object.isRequired,
+  handleAdd: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({
-  list: state.list,
-});
-
-export default connect(mapStateToProps)(MovieResult);
+export default MovieResult;

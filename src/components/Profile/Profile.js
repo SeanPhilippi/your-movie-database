@@ -17,8 +17,8 @@ class Profile extends PureComponent {
           <div className="left-col bg-white1">
             <div className="search-btns-container">
               <SaveDelete />
-              <Search />
             </div>
+            <Search />
             <SortableList />
             <Description />
           </div>

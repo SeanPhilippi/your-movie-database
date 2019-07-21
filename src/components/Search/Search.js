@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import MovieResult from '../MovieResult/MovieResult';
 import { connect } from 'react-redux';
 import debounce from './debounce.js';
 import { addToList } from '../../redux/actions';
@@ -11,45 +12,6 @@ class Search extends PureComponent {
   state = {
     searchText: '',
     searchResults: [],
-  }
-
-  renderResults = () => {
-    const { searchResults } = this.state;
-    if (searchResults) {
-      return searchResults.map(movie =>
-        <div
-          key={movie.imdbId}
-          className="result-item"
-          onClick={() => this.handleAdd(movie)}
-        >
-          {/* <MovieResult movie={movie} /> */}
-          <div className="result-info">
-            <div style={{ fontSize: "15px" }}>
-              {movie.Title} ({movie.Year})
-            </div>
-          </div>
-        </div>
-      )
-    }
-  }
-
-  // TODO: search - add pagination
-  handleSearch = () => {
-    const { searchText } = this.state;
-    fetch(`api/movies/search/${searchText}`)
-    .then(res => res.json())
-    .then(data => {
-      this.setState(() => ({searchResults: data.Search}))
-    })
-    .catch(err => console.log(err));
-  }
-
-  handleDelay = debounce(this.handleSearch, 300);
-
-  onTextChange = e => {
-    this.setState({searchText: e.target.value});
-    // fire handle search through debounce function to reduce api calls with delay
-    this.handleDelay();
   }
 
   handleAdd = movie => {
@@ -72,6 +34,33 @@ class Search extends PureComponent {
         this.clearSearchText();
       });
   }
+
+  renderResults = () => {
+    const { searchResults } = this.state;
+    if (searchResults) {
+      return searchResults.map(movie => <MovieResult movie={movie} handleAdd={ this.handleAdd } />)
+    }
+  }
+
+  // TODO: search - add pagination
+  handleSearch = () => {
+    const { searchText } = this.state;
+    fetch(`api/movies/search/${searchText}`)
+    .then(res => res.json())
+    .then(data => {
+      this.setState(() => ({searchResults: data.Search}))
+    })
+    .catch(err => console.log(err));
+  }
+
+  handleDelay = debounce(this.handleSearch, 300);
+
+  onTextChange = e => {
+    this.setState({searchText: e.target.value});
+    // fire handle search through debounce function to reduce api calls with delay
+    this.handleDelay();
+  }
+
 
   clearResults = () => {
     this.setState(() => ({searchResults: []}));
@@ -102,7 +91,6 @@ class Search extends PureComponent {
           value={this.state.searchText}
           onChange={this.onTextChange}
           onKeyUp={this.onKeyUp}
-          style={{width: '32rem'}}
         >
         </input>
         <div>

@@ -4,19 +4,22 @@
 }
 
 .search-text {
-  width: 100%;
+  height: 2.5rem;
+  width: 90%;
 }
 
 .result-item {
   font-size: 15px;
-  height: 25px;
+  /* height: 25px; */
   border-bottom: lightgrey solid 1px;
   margin: auto;
-  width: 42%;
+  width: 90%;
+  height: 3.5rem;
 }
 
 .result-info {
   margin: 5px 0;
+  vertical-align: middle;
 }
 
 .result-year-director {

@@ -108,14 +108,17 @@ router.get('/new-registers', (req, res) => {
 // @route   GET api/users/current
 // @desc    Return current user
 // @access  Private
-router.get('/current'
-// , passport.authenticate('jwt', { session: false }
-),
+router.get('/current',
+// passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    User.findOne()
-    res.json({
-      user: req.user
-    });
+    console.log('fffff', req)
+    User.findOne({ email: req.body.email })
+      .then(user => {
+        console.log('lfkld', user)
+        res.json({
+          user: user
+        });
+      })
   }
 )
 

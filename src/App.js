@@ -51,7 +51,7 @@ class App extends PureComponent {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/account" component={Account} />
-              <Route exact path="/top-movies" render={TopMovieList} />
+              <Route exact path="/top-movies" component={TopMovieList} />
               <Route exact path="/profile" component={Profile} />
               <Route path="/movie" component={MoviePage} />
             </Switch>

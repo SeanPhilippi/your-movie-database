@@ -54,11 +54,12 @@ export const loginUser = (user, history) => dispatch => {
         payload: err.response.data
       });
     });
+    console.log('here?')
 
-  axios('api/users/current')
+  axios('api/users/current', user)
   .then(user => {
     console.log('here2')
-    this.props.setCurrentUser(user);
+    dispatch(setCurrentUser(user));
   })
 };
 

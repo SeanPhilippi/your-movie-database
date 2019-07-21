@@ -28,7 +28,7 @@ class TopNav extends PureComponent {
           className="text-white font-weight-bold"
           to="/account"
         >
-          { user.username }
+          {/* { user.username } */}
         </NavLink>
         <NavLink
           onClick={this.handleLogout}
