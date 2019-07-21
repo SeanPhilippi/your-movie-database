@@ -7,7 +7,6 @@ const initialState = {
   user_token: {},
   user: {},
   authErrors: {},
-  searchResults: [],
   listDescript: '',
   list: [],
   open: false,
@@ -45,18 +44,6 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       listDescript: payload.text
     };
-    case TYPES.SET_SEARCH_TEXT: return {
-      ...state,
-      searchText: payload.text,
-    };
-    case TYPES.CLEAR_SEARCH_TEXT: return {
-      ...state,
-      searchText: []
-    };
-    case TYPES.SET_SEARCH_RESULTS: return {
-      ...state,
-      searchResults: [...state.searchResults, ...payload.data],
-    };
     // set fetched movie list to state
     case TYPES.SET_LIST: return {
       ...state,
@@ -66,10 +53,6 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.ADD_TO_LIST: return {
       ...state,
       list: [payload.movie, ...state.list]
-    };
-    case TYPES.CLEAR_SEARCH_RESULTS: return {
-      ...state,
-      searchResults: []
     };
     case TYPES.REORDER_LIST: return {
       ...state,

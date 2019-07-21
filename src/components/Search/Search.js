@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import MovieResult from '../MovieResult/MovieResult';
+import SearchResult from '../SearchResult/SearchResult';
 import { connect } from 'react-redux';
 import debounce from './debounce.js';
 import { addToList } from '../../redux/actions';
@@ -38,20 +38,26 @@ class Search extends PureComponent {
   renderResults = () => {
     const { searchResults } = this.state;
     if (searchResults) {
-      return searchResults.map(movie => <MovieResult movie={movie} handleAdd={ this.handleAdd } />)
+      return (
+        <div className="result-scroll">
+          { searchResults.map(movie => <SearchResult movie={movie} handleAdd={ this.handleAdd } />) }
+        </div>
+      )
     }
   }
 
-  // TODO: search - add pagination
   handleSearch = () => {
+    const pageNums = [1, 2, 3];
     const { searchText } = this.state;
-    fetch(`api/movies/search/${searchText}`)
-    .then(res => res.json())
-    .then(data => {
-      this.setState(() => ({searchResults: data.Search}))
-    })
-    .catch(err => console.log(err));
-  }
+    pageNums.forEach(num => {
+      fetch(`api/movies/search/${searchText}/${num}`)
+        .then(res => res.json())
+        .then(data => {
+          this.setState((prevState) => ({ searchResults: [...prevState.searchResults, ...data.Search] }));
+        })
+        .catch(err => console.log(err));
+      });
+  };
 
   handleDelay = debounce(this.handleSearch, 300);
 
@@ -70,16 +76,6 @@ class Search extends PureComponent {
     this.setState(() => ({searchText: ''}));
   }
 
-  // onKeyUp = e => {
-  //   if (e.key === 'Enter') {
-  //     // TODO: add more pages later when scroll container is integrated
-  //     const arr = [1, 2];
-  //     arr.map(num => {
-  //       return this.handleSearch(num);
-  //     })
-  //   }
-  // }
-
   render() {
 
     return (
@@ -93,7 +89,7 @@ class Search extends PureComponent {
           onKeyUp={this.onKeyUp}
         >
         </input>
-        <div>
+        <div className="d-flex flex-column align-items-center">
           {this.renderResults()}
         </div>
       </div>

@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './SearchResult.css';
 
-const MovieResult = ({ movie, handleAdd }) => {
+const SearchResult = ({ movie, handleAdd }) => {
   const { imdbId, Year, Title } = movie;
   return (
     <div
       key={ imdbId }
       className="result-item"
-      onClick={() => handleAdd(movie)}
+      onClick={ () => handleAdd(movie) }
     >
       <div className="result-info">
         { Title } ({ Year })
@@ -16,9 +17,9 @@ const MovieResult = ({ movie, handleAdd }) => {
   )
 }
 
-MovieResult.propTypes = {
+SearchResult.propTypes = {
   movie: PropTypes.object.isRequired,
   handleAdd: PropTypes.func.isRequired
 }
 
-export default MovieResult;
+export default SearchResult;

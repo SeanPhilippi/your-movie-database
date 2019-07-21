@@ -8,21 +8,9 @@
   width: 90%;
 }
 
-.result-item {
-  font-size: 15px;
-  /* height: 25px; */
-  border-bottom: lightgrey solid 1px;
-  margin: auto;
+.result-scroll {
   width: 90%;
-  height: 3.5rem;
-}
-
-.result-info {
-  margin: 5px 0;
-  vertical-align: middle;
-}
-
-.result-year-director {
-  margin-top: 2px;
+  height: 14rem;
+  overflow: auto;
 }
 

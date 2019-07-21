@@ -85,7 +85,7 @@ class Login extends PureComponent {
             {errors.password && (<div style={{ color: 'red' }}>{errors.password}</div>)}
           </Form.Group>
 
-          <button class="login-btn" type="submit">
+          <button className="login-btn" type="submit">
             Log In
           </button>
         </form>

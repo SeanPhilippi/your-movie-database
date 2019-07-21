@@ -9,12 +9,8 @@ export const TYPES = {
   SET_TOKEN: 'SET_TOKEN',
   SET_UPDATE_STATUS: 'SET_UPDATE_STATUS',
   SET_DESCRIPT: 'SET_DESCRIPT',
-  SET_SEARCH_TEXT: 'SET_SEARCH_TEXT',
-  SET_SEARCH_RESULTS: 'SET_SEARCH_RESULTS',
-  CLEAR_SEARCH_TEXT: 'CLEAR_SEARCH_TEXT',
   SET_LIST: 'SET_LIST',
   ADD_TO_LIST: 'ADD_TO_LIST',
-  CLEAR_SEARCH_RESULTS: 'CLEAR_SEARCH_RESULTS',
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
   DELETE_LIST: 'DELETE_LIST'
@@ -108,17 +104,6 @@ export const setDescript = text => ({
   }
 });
 
-export const setSearchText = text => ({
-  type: TYPES.SET_SEARCH_TEXT,
-  payload: {
-    text
-  }
-});
-
-export const clearSearchText = () => ({
-  type: TYPES.CLEAR_SEARCH_TEXT
-});
-
 export const fetchList = () => (dispatch, getState) => {
   const { user } = getState();
   console.log('username in fetchList', user.username);
@@ -142,10 +127,6 @@ export const addToList = movie => ({
   payload: {
     movie
   }
-});
-
-export const clearSearchResults = () => ({
-  type: TYPES.CLEAR_SEARCH_RESULTS
 });
 
 export const orderList = (oldIndex, newIndex) => ({
