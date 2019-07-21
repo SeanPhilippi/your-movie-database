@@ -11,6 +11,8 @@ import UpdateBar from './components/UpdateBar/UpdateBar';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import Account from './components/Account/Account';
+import UsersIndex from './components/UsersIndex/UsersIndex';
+import UnderConstruction from './components/UnderConstruction/UnderConstruction';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import axios from 'axios';
@@ -37,7 +39,13 @@ class App extends PureComponent {
     //     console.log('here3')
     //   })
     //   .catch(err => console.log(err));
-    }
+  }
+
+  pageNotFound = () => (
+    <h1 className="text-white">
+      Page not found
+    </h1>
+  );
 
   render() {
     return (
@@ -47,13 +55,16 @@ class App extends PureComponent {
             <TopNav/>
             <UpdateBar/>
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/account" component={Account} />
-              <Route exact path="/top-movies" component={TopMovieList} />
-              <Route exact path="/profile" component={Profile} />
-              <Route path="/movie" component={MoviePage} />
+              <Route exact path="/" component={ Home } />
+              <Route exact path="/login" component={ Login } />
+              <Route exact path="/register" component={ Register } />
+              <Route exact path="/account" component={ UnderConstruction } />
+              <Route exact path="/top-movies" component={ UnderConstruction } />
+              <Route exact path="/profile" component={ Profile } />
+              <Route path="/users-index" component={ UnderConstruction } />
+              <Route path="/users-index" component={ UnderConstruction } />
+              <Route path="/all-movies" component={ UnderConstruction } />
+              <Route render={ this.pageNotFound() } />
             </Switch>
           </Container>
         </div>

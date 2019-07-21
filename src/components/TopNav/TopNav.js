@@ -94,7 +94,7 @@ class TopNav extends PureComponent {
             </NavLink>
             <NavLink
               className="text-white mx-2"
-              to="/movies"
+              to="/all-movies"
             >
               ALL THE MOVIES
             </NavLink>
