@@ -16,7 +16,7 @@ class Profile extends PureComponent {
         <div className="main-container bg-light2 mt-4">
           <div className="left-col bg-white1">
             <div className="edit-list-container bg-light1 mt-4 shadow">
-              <div className="card-title">
+              <div className="card-title1">
                 USER TOP MOVIES
               </div>
               <div className="edit-list-inner-container d-flex flex-column align-items-center">
@@ -25,9 +25,9 @@ class Profile extends PureComponent {
                 </div>
                 <Search />
                 <SortableList />
-                <Description />
               </div>
             </div>
+            <Description />
           </div>
           <div className="right-col">
             <CommentColumn className="comments" />

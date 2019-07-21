@@ -39,7 +39,7 @@ class Search extends PureComponent {
     const { searchResults } = this.state;
     if (searchResults) {
       return (
-        <div className="result-scroll">
+        <div className="bg-white1 result-scroll">
           { searchResults.map(movie => <SearchResult movie={movie} handleAdd={ this.handleAdd } />) }
         </div>
       )
@@ -62,18 +62,18 @@ class Search extends PureComponent {
   handleDelay = debounce(this.handleSearch, 300);
 
   onTextChange = e => {
-    this.setState({searchText: e.target.value});
+    this.setState({ searchText: e.target.value });
     // fire handle search through debounce function to reduce api calls with delay
     this.handleDelay();
   }
 
 
   clearResults = () => {
-    this.setState(() => ({searchResults: []}));
+    this.setState(() => ({ searchResults: [] }));
   }
 
   clearSearchText = () => {
-    this.setState(() => ({searchText: ''}));
+    this.setState(() => ({ searchText: '' }));
   }
 
   render() {
@@ -89,9 +89,7 @@ class Search extends PureComponent {
           onKeyUp={this.onKeyUp}
         >
         </input>
-        <div className="d-flex flex-column align-items-center">
-          {this.renderResults()}
-        </div>
+        { this.renderResults() }
       </div>
     )
   }

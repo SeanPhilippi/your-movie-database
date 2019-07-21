@@ -9,7 +9,8 @@
 }
 
 .result-scroll {
-  width: 90%;
+  width: 100%;
+  /* background-color: rgb(245, 245, 245); */
   max-height: 14rem;
   overflow: auto;
 }

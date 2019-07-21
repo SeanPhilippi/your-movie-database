@@ -8,8 +8,8 @@ class CommentColumn extends PureComponent {
 
     return (
       <div className="mx-4 shadow">
-        <div className="card-title">
-          Comments
+        <div className="card-title1">
+          COMMENTS
         </div>
         <div className="comments-container bg-white1 d-flex flex-column p-2">
           <div className="p-4 text-left">

@@ -11,7 +11,7 @@ class NewRegisters extends PureComponent {
   render() {
     return (
       <Row className="login-box d-flex flex-column mt-2 shadow">
-        <div className="card-title">
+        <div className="card-title1">
           SPOTLIGHT ON A USER
         </div>
         <div className="bg-white1">

@@ -1,9 +1,10 @@
 .card {
   border-radius: 5px 5px 0 0;
 }
-
-.card-title {
+/* this is so I don't inherit properties from the bootstrap class of the same name, will address later */
+.card-title1 {
   border-radius: 5px 5px 0 0;
+  text-transform: uppercase;
   width: 100%;
   margin: 0;
   padding: .5rem;
