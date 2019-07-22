@@ -19,9 +19,9 @@ class SortableList extends Component {
       return (
         <div className="grip-container">
           <img
-            alt='grip handle'
+            alt="grip handle"
             style={{ width: '.4rem' }}
-            src={img}
+            src={ img }
           >
           </img>
         </div>
@@ -38,8 +38,8 @@ class SortableList extends Component {
 
       return (
         <div
-          key={id}
-          className="movie-item"
+          key={ id }
+          className="movie-item bg-white1"
         >
           <div className='grip'>
             <DragHandle />
@@ -48,7 +48,7 @@ class SortableList extends Component {
             { sortIndex + 1 } |
           </div>
           <div className="movie-info">
-            <div style={{ fontSize: "20px" }}>
+            <div>
               <Link
                 to={{
                   pathname: '/movie',
@@ -74,7 +74,7 @@ class SortableList extends Component {
   );
 
     const SortableList = sortableContainer(({ items }) =>  (
-      <div className="list-item" >
+      <div className="list-items text-center bg-light1" >
         {
           items.map((movie, index) => {
             return (

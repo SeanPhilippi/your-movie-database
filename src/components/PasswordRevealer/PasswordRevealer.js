@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-export const passwordRevealer = ({ value }) => {
+import './PasswordRevealer.css';
+
+const PasswordRevealer = ({ value }) => {
   const [shown, setShown] = useState(false);
 
   return (
@@ -16,3 +18,5 @@ export const passwordRevealer = ({ value }) => {
     </div>
   );
 };
+
+export default PasswordRevealer;

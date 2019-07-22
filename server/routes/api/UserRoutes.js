@@ -54,7 +54,7 @@ router.post('/register', (req, res) => {
             newUser.password = hash;
             newUser.save()
               .then(user => res.json(user))
-              .catch(err => console.log(err));
+              .catch(console.log);
           })
         })
       }
@@ -101,7 +101,7 @@ router.get('/new-registers', (req, res) => {
   // switch to a limit of the most recent 50 eventually
   User.find({}).exec().then(data => {
     res.json(data);
-  }).catch(err => console.log('error', err));
+  }).catch(console.log);
 });
 
 // @route   GET api/users/current

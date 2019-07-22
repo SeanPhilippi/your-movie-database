@@ -3,20 +3,20 @@
   width: 100%;
 }
 
-.list-item {
+.list-items {
   width: 100%;
 }
 
 .movie-item {
   display: grid;
   grid-template-columns: 1fr 5fr 20fr 5fr;
-  font-size: 15px;
   border: black solid 1px;
   margin: auto;
   width: 100%;
 }
 
 .movie-link {
+  font-size: 1.3rem;
   text-decoration: none;
   color: inherit;
 }
@@ -31,10 +31,6 @@
   padding-left: .1rem;
   width: .8rem;
   cursor: pointer;
-  /* white-space: nowrap;
-  overflow: hidden;
-  overflow: hidden;
-  outline: none; */
 }
 
 .movie-info {
@@ -42,12 +38,12 @@
 }
 
 .dir-year {
-  margin-top: 2px;
+  font-size: .9rem;
+  margin-top: .05rem;
 }
 
 .sortableHelper {
   text-align: center;
-  /* right: 0px; */
 }
 
 .delete {

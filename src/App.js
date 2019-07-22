@@ -32,7 +32,7 @@ class App extends PureComponent {
   componentDidMount() {
     http.users.get.newRegisters()
       .then(({ data }) => {
-        this.props.setNewUsers(data);
+        this.props.setNewUsers(data.reverse());
       })
       .catch(console.log);
   }
@@ -56,6 +56,7 @@ class App extends PureComponent {
               <Route path="/users-index" component={ UnderConstruction } />
               <Route path="/users-index" component={ UnderConstruction } />
               <Route path="/all-movies" component={ UnderConstruction } />
+              <Route path="/new-users" component={ UnderConstruction } />
               <Route render={ this.pageNotFound } />
             </Switch>
           </Container>

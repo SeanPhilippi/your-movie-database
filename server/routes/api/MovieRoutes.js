@@ -16,7 +16,7 @@ router.get('/search/:query/:num', ({ params }, res) => {
     .then(data => {
       res.json(data);
     })
-    .catch(err => console.log(err));
+    .catch(console.log);
 });
 
 // @route   GET /addMovie/:id
@@ -30,7 +30,7 @@ router.get('/addMovie/:id', (req, res) => {
     .then(data => {
       res.json(data);
     })
-    .catch(err => console.log(err));
+    .catch(console.log);
 })
 
 // @route   GET /:username/list
@@ -39,16 +39,13 @@ router.get('/addMovie/:id', (req, res) => {
 router.get('/:username/list', (req, res) => {
   List.findOne({ username: req.params.username }).exec().then(data => {
     res.json(data);
-  }).catch(err => console.log('error', err));
+  }).catch(console.log);
 });
 
 // @route   PUT /update/:username
 // @desc    update existing list attached to username
 // @access  Public
 router.put('/save/:username', (req, res) => {
-  // update list array of movie objects
-  console.log('update request')
-  console.log('req.params in /save/:username', req.params)
   List.updateOne(
     { username: req.params.username },
     {
@@ -61,8 +58,7 @@ router.put('/save/:username', (req, res) => {
     {
       upsert: 'true'
     }
-  ).catch(err => console.log(err));
-  console.log('updated!!!')
+  ).catch(console.log);
 })
 
 // @route   DELETE /delete/:username
@@ -71,7 +67,7 @@ router.put('/save/:username', (req, res) => {
 router.delete('/delete/:username', (req, res) => {
   List.deleteOne({username: req.params.username})
     .then(res => console.log(res))
-    .catch(err => console.log(err));
+    .catch(console.log);
 })
 
 module.exports = router;

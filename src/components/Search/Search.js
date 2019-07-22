@@ -13,24 +13,29 @@ class Search extends PureComponent {
   };
 
   handleAdd = movie => {
-    const { addToList } = this.props;
+    const { addToList, list } = this.props;
     // fetch call to grab movie from api by id, then grab director
     fetch(`/api/movies/addMovie/${movie.imdbID}`)
       .then(res => res.json())
       .then(data => {
-        addToList({
-          name: movie.Title,
-          year: movie.Year,
-          director: data.Director,
-          id: data.imdbID,
-          runtime: data.Runtime,
-          country: data.Country,
-          plot: data.Plot,
-          language: data.Language
-        });
-        this.clearResults();
-        this.clearSearchText();
-      });
+        let titles = list.map(item => item.name);
+        if (!titles.includes(movie.Title)) {
+          if (list.length < 20) {
+            addToList({
+              name: movie.Title,
+              year: movie.Year,
+              director: data.Director,
+              id: data.imdbID,
+              runtime: data.Runtime,
+              country: data.Country,
+              plot: data.Plot,
+              language: data.Language
+            });
+          }
+          this.clearResults();
+          this.clearSearchText();
+        };
+      })
   }
 
   renderResults = () => {
@@ -53,7 +58,7 @@ class Search extends PureComponent {
         .then(data => {
           this.setState((prevState) => ({ searchResults: [...prevState.searchResults, ...data.Search] }));
         })
-        .catch(err => console.log(err));
+        .catch(console.log);
       });
   };
 
@@ -96,8 +101,12 @@ Search.propTypes = {
   addToList: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = state => ({
+  list: state.list,
+})
+
 const mapDispatchToProps = dispatch => ({
   addToList: movie => dispatch(addToList(movie)),
 });
 
-export default connect(null, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

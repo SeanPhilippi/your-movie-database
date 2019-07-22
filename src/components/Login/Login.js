@@ -3,6 +3,7 @@ import LoginBox from '../LoginBox/LoginBox';
 import { Container, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import './Login.css';
 
 class Login extends PureComponent {

@@ -3,7 +3,7 @@ $ git push heroku master
 
 Vision:
 - minimalist cinephile site
-- similar to reddit, old ymdb, and rateyourmusic, site for nerds that like lists
+- similar to reddit, old ymdb, and rateyourmusic, site for nerds that like lists and data
 - primary focus is to have one list of up to 20 films per user, encourages 'favorite of
 all time' lists
 - comments column on individuals lists
@@ -19,30 +19,21 @@ create with how they utilize it
 
 
 To do list:
-- list data is being fetched but setList isn't putting data in Redux state for some reason
-- /profile is still reachable when use is logged out, why?  Also logging out while on /profile does not redirect user to /login, why?
-- setting current user, but still an unauthorized error sometimes.  so maybe token is not being cleared upon logout?
+- fix Search
+- look at and fix updateStatus()
+- /profile is still reachable when user is logged out, why?  Also logging out while on /profile does not redirect user to /login, why?
+  - read about and understand how history api works
+- incorporate Stu's http api and do some clean up in actions.js
 - import icons
+- add YMDB logo graphic in place of 'Home' nav link
+- add YMDB graphic icons
 - no duplicate usernames, make an error message for it and put in register validation function
 - pass userData into NewRegisters component
-- give users an id for React key
 - give users a register_date and last_login date
 - allow for emojis when making comments
 - fix white gradient, make it more prominent/work.  Currently doing nothing?
-- remove or turn login page into login card on home page and make home page default
-- disallow adding of duplicates for movies.
-- use PropTypes
-- prevent adding of movies twice
-- make movie results stateless component, named SearchResult, then map those in Search.js
-- comment my code well, make sure I understand everything that is going on
-- add authentication and login
 - make profiles
 - make actions (setList, orderList, deleteMovie) also save the updates to mlab automatically
-- add ability to name list
-- maybe make a create list page where it just asks for a list name initially, and upon
-submission, a list is saved to mlab via POST method, then it can be updated from there
-via PUT method
-- incorporate signin components from advanced-final-project
 - make site mobile friendly / responsive
 - make button to switch between list view and edit view.  dragging, editing description, etc, only
   functional in edit view
@@ -51,40 +42,12 @@ via PUT method
 - display highlighted, annimated drop down banner 'List updated' whenever user clicks outside
   an editing box or a change in state.list is detected.
 - look at Steven Fiero's github and copy his readme.MD formatting, create a comprehensive README.MD
-- add scroll to search results element so more results can be displayed
 - long movie titles cause text to bleed out of element, fix css
-- model header and register and login after mLab's layout
 - improve UX for site and build out README so it is easy to know how to use it.
-- add YMDB logo graphic in place of 'Home' nav link
 - responsive design - change px to rem throughout app, I have root px being changed via media query in index.css
 
 Left off:
 
-- build out Login, Register, and Home
-- incorporate fetching of username if possible in componentDidMount
-  (maybe set the username upon authorization)
-- start working on user register and login page
-- modify delete action so a prompt pops up warning user of what they are about to do
-  - also make delete list, delete their description?
-  - "Are you sure you want to clear your list? Your list won't be recoverable."
-  - http://minutemailer.github.io/react-popup/
-  - https://www.npmjs.com/package/react-popup
-- modify save action so that if a list under that name already exists, a PUT request
-  is done to update that user's list, vs creating a new list.
-- find a way to make num(of pages) work with onTextChange search
-- imported authentication routes from devconnector, retype it all from scratch and understand it, make it my own
-  - same with user model and hash.js and token.js
-
-- build out pages using material-ui or other styled components
-
-- RULE: if you ever have a React component that just has a render method, it should be a functional (stateless) component
-  as lifecycle methods aren't being used, and there isn't enough going on to justify a class.  makes your code more readable
-  and better organized.  functionality is easy to see.
-
-- transfer fetchList and getResults in actions.js to backend fetches so keys aren't exposed on front-end
+- make names of newUsers and users in users'index clickable, directing to /profile/${username} and fetching their list and statement for a presentation list pag
 
 https://stackoverflow.com/questions/40677764/how-to-fetch-data-over-multiple-pages
-
-
-- for update functionality, probably best to just find list and delete and replace with new list upon firing of handleUpdate()
-- update Current State part of README.md and get things functional enough to update my heroku deploymed version of site

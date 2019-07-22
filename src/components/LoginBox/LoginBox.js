@@ -4,6 +4,8 @@ import { Row } from 'react-bootstrap';
 import { withRouter, NavLink } from 'react-router-dom';
 import { loginUser } from '../../redux/actions';
 import { connect } from 'react-redux';
+// import PasswordRevealer from '../PasswordRevealer/PasswordRevealer';
+
 import './LoginBox.css';
 
 class LoginBox extends PureComponent {
