@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const PasswordRevealer = ({ value }) => {
+export const passwordRevealer = ({ value }) => {
   const [shown, setShown] = useState(false);
 
   return (

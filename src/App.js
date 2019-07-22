@@ -17,6 +17,7 @@ import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import Account from './components/Account/Account';
 import UsersIndex from './components/UsersIndex/UsersIndex';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 import UnderConstruction from './components/UnderConstruction/UnderConstruction';
 import axios from 'axios';
 import {
@@ -36,11 +37,7 @@ class App extends PureComponent {
       .catch(console.log);
   }
 
-  pageNotFound = () => (
-    <h1 className="text-white">
-      Page not found
-    </h1>
-  );
+  pageNotFound = () => <PageNotFound />;
 
   render() {
     return (
