@@ -41,7 +41,7 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       open: !state.open
     };
-    case TYPES.SET_DESCRIPT: return {
+    case TYPES.SET_STATEMENT: return {
       ...state,
       statement: payload.text
     };

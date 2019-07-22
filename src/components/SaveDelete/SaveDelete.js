@@ -22,9 +22,7 @@ class SaveDelete extends PureComponent {
       list: [...list],
       statement
     }
-    console.log('list obj in handleUpdate', listObj)
     setUpdateStatus();
-    console.log('username in handleUpdate', username);
 
     fetch(`/api/movies/save/${ username }`, {
         method: 'PUT',

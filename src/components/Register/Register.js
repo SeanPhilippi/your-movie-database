@@ -26,8 +26,8 @@ class Register extends PureComponent {
           <Col className="col-5">
             <div className="">
               <div className="shadow advantages">
-                <div className="text-white shadow bg-red advantages-label m-0 p-2 pl-4 font-weight-bold">
-                  ADVANTAGES
+                <div className="card-title1">
+                  Advantages
                 </div>
                 <div className="bg-white1 px-4 py-2">
                   Here are the advantages of being a registered user:<br/>
@@ -41,8 +41,8 @@ class Register extends PureComponent {
                 </div>
               </div>
               <div className="privacy-statement mt-3 shadow">
-                <div className="text-white bg-red privacy-label m-0 p-2 pl-4 font-weight-bold">
-                  PRIVACY STATEMENT
+                <div className="card-title1">
+                  Privacy Statement
                 </div>
                 <div className="bg-white1 px-4 py-2">
                   We respect your privacy. It's simple: we do not share your personal

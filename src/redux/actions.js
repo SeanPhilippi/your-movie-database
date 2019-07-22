@@ -9,7 +9,7 @@ export const TYPES = {
   SET_NEW_USERS: 'SET_NEW_USERS',
   SET_TOKEN: 'SET_TOKEN',
   SET_UPDATE_STATUS: 'SET_UPDATE_STATUS',
-  SET_DESCRIPT: 'SET_DESCRIPT',
+  SET_STATEMENT: 'SET_STATEMENT',
   SET_LIST: 'SET_LIST',
   ADD_TO_LIST: 'ADD_TO_LIST',
   REORDER_LIST: 'REORDER_LIST',
@@ -37,8 +37,8 @@ export const setUpdateStatus = () => ({
   type: TYPES.SET_UPDATE_STATUS
 });
 
-export const setDescript = text => ({
-  type: TYPES.SET_DESCRIPT,
+export const setStatement = text => ({
+  type: TYPES.SET_STATEMENT,
   payload: {
     text
   }
@@ -88,7 +88,7 @@ export const setCurrentUser = user => dispatch => {
   if (user.email) {
     dispatch(fetchList());
   } else {
-    // setCurrentUser is called on logout, user is be an empty object
+    // setCurrentUser is called on logout, user should be set to an empty object
     // if empty object, clear user data
     dispatch(
       setList({

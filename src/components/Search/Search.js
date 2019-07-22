@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import SearchResult from '../SearchResult/SearchResult';
 import { connect } from 'react-redux';
-import debounce from './debounce.js';
+import debounce from '../../utils/helpers/debounce.js/index.js';
 import { addToList } from '../../redux/actions';
 import './Search.css';
 

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setDescript } from '../../redux/actions';
+import { setStatement } from '../../redux/actions';
 import './Description.css';
 
 class Description extends Component {
   render() {
     const {
-      setDescript,
+      setStatement,
       statement,
     } = this.props;
 
@@ -21,7 +21,7 @@ class Description extends Component {
           name="description"
           rows="10"
           placeholder="Write your statement here..."
-          onChange={ e => setDescript(e.target.value) }
+          onChange={ e => setStatement(e.target.value) }
           value={ statement }
         >
         </textarea>
@@ -32,7 +32,7 @@ class Description extends Component {
 
 Description.propTypes = {
   statement: PropTypes.string.isRequired,
-  setDescript: PropTypes.func.isRequired,
+  setStatement: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -40,7 +40,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setDescript: text => dispatch(setDescript(text)),
+  setStatement: text => dispatch(setStatement(text)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Description);

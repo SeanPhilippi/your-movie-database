@@ -59,7 +59,7 @@ class App extends PureComponent {
               <Route path="/users-index" component={ UnderConstruction } />
               <Route path="/users-index" component={ UnderConstruction } />
               <Route path="/all-movies" component={ UnderConstruction } />
-              <Route render={ this.pageNotFound() } />
+              <Route render={ this.pageNotFound } />
             </Switch>
           </Container>
         </div>
