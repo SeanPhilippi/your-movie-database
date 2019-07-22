@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { logoutUser } from '../../redux/actions';
+
 import './TopNav.css';
 
 class TopNav extends PureComponent {
@@ -128,4 +129,4 @@ const mapDispatchToProps = dispatch => ({
   logoutUser: history => dispatch(logoutUser(history)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopNav)
+export default connect(mapStateToProps, mapDispatchToProps)(TopNav);

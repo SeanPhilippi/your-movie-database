@@ -74,17 +74,17 @@ router.post('/login', (req, res) => {
         errors.email = 'User not found';
         return res.status(404).json(errors);
       }
-
+      const { _id, email, username } = user;
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
           // JWT payload
           const payload = {
-            id: user._id,
-            email: user.email
+            id: _id,
+            email: email
           };
           // Sign token
           jwt.sign(payload, keys.secret, { expiresIn: 10800 }, (err, token) => {
-            res.json({ success: true, token: 'Bearer ' + token })
+            res.json({ success: true, token: 'Bearer ' + token, user: { email, id: _id, username } })
           });
         } else {
           errors.password = 'Password incorrect';
@@ -108,11 +108,10 @@ router.get('/new-registers', (req, res) => {
 // @desc    Return current user
 // @access  Private
 router.get('/current',
-// passport.authenticate('jwt', { session: false }),
+passport.authenticate('jwt', { session: false }),
 (req, res) => {
-  User.findOne();
   res.json({
-    user: req.user
+    user: {email: req.user.email, id: req.user._id, username: req.user.username}
   });
 });
 

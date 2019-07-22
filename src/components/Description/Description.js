@@ -8,12 +8,12 @@ class Description extends Component {
   render() {
     const {
       setDescript,
-      listDescript,
+      statement,
     } = this.props;
 
     return (
       <div className="description bg-light1 my-2 d-flex flex-column align-items-center">
-        <div class="card-title1">
+        <div className="card-title1">
           User Statement
         </div>
         <textarea
@@ -22,7 +22,7 @@ class Description extends Component {
           rows="10"
           placeholder="Write your statement here..."
           onChange={ e => setDescript(e.target.value) }
-          value={ listDescript }
+          value={ statement }
         >
         </textarea>
       </div>
@@ -31,12 +31,12 @@ class Description extends Component {
 }
 
 Description.propTypes = {
-  listDescript: PropTypes.string.isRequired,
+  statement: PropTypes.string.isRequired,
   setDescript: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  listDescript: state.listDescript,
+  statement: state.statement,
 });
 
 const mapDispatchToProps = dispatch => ({

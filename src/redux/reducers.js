@@ -7,7 +7,7 @@ const initialState = {
   user_token: {},
   user: {},
   authErrors: {},
-  listDescript: '',
+  statement: '',
   list: [],
   open: false,
   newUsers: []
@@ -16,10 +16,11 @@ const initialState = {
 // destructured action parameter is desctructured and passed in to rootReducer function,
 // then state slices to return if type === <case>
 export default (state = initialState, { type, payload }) => {
+  console.log('reducer', type, payload);
   switch (type) {
     case TYPES.SET_CURRENT_USER: return {
       ...state,
-      user: payload.user
+      user: payload
     }
     case TYPES.SET_NEW_USERS: return {
       ...state,
@@ -42,13 +43,13 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.SET_DESCRIPT: return {
       ...state,
-      listDescript: payload.text
+      statement: payload.text
     };
-    // set fetched movie list to state
     case TYPES.SET_LIST: return {
       ...state,
-      listDescript: payload.listDescript,
-      list: [...payload.list]
+      user: { ...state.user, username: payload.listData.username },
+      statement: payload.listData.statement,
+      list: [...payload.listData.list]
     };
     case TYPES.ADD_TO_LIST: return {
       ...state,

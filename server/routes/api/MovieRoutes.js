@@ -50,12 +50,12 @@ router.put('/save/:username', (req, res) => {
   console.log('update request')
   console.log('req.params in /save/:username', req.params)
   List.updateOne(
-    {username: req.params.user.username},
+    { username: req.params.username },
     {
       $set: {
-      'username': req.body.user.username,
+      'username': req.body.username,
       'list': req.body.list,
-      'listDescript': req.body.listDescript,
+      'statement': req.body.statement,
       }
     },
     {

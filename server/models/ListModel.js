@@ -6,7 +6,7 @@ const ListSchema = new Schema({
     type: String,
     required: true
   },
-  listDescript: {
+  statement: {
     type: String
   },
   list: [{

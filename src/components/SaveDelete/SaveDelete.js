@@ -10,23 +10,28 @@ class SaveDelete extends PureComponent {
   handleUpdate = () => {
     const {
       setUpdateStatus,
-      user,
       user: {
         username,
       },
+      list,
+      statement
     } = this.props;
 
+    const listObj = {
+      username,
+      list: [...list],
+      statement
+    }
+    console.log('list obj in handleUpdate', listObj)
     setUpdateStatus();
+    console.log('username in handleUpdate', username);
 
-    console.log('user in handleUpdate', user);
-    console.log('user in handleUpdate', username);
-
-    fetch(`/api/movies/save/${username}`, {
+    fetch(`/api/movies/save/${ username }`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify(listObj)
       })
       .then(res => res.json())
       .catch(console.log);
@@ -112,10 +117,14 @@ SaveDelete.propTypes = {
   deleteList: PropTypes.func.isRequired,
   setUpdateStatus: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
+  list: PropTypes.array.isRequired,
+  statement: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  list: state.list,
+  statement: state.statement
 });
 
 const mapDispatchToProps = dispatch => ({

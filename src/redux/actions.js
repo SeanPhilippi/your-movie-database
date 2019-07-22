@@ -1,5 +1,6 @@
 import jwt_decode from 'jwt-decode';
 import http from '../utils/http';
+import axios from 'axios';
 import setAuthToken from '../utils/auth/setAuthToken';
 
 export const TYPES = {
@@ -25,11 +26,6 @@ export const setToken = decoded => {
   };
 };
 
-export const setCurrentUser = user => ({
-  type: TYPES.SET_CURRENT_USER,
-  payload: user.data
-});
-
 export const setNewUsers = users => ({
   type: TYPES.SET_NEW_USERS,
   payload: {
@@ -48,10 +44,10 @@ export const setDescript = text => ({
   }
 });
 
-export const setList = data => ({
+export const setList = listData => ({
   type: TYPES.SET_LIST,
   payload: {
-    data
+    listData
   }
 });
 
@@ -82,35 +78,86 @@ export const deleteList = () => ({
 });
 
 //thunk actions
-export const registerUser = (userData, history) => dispatch => {
-  http.users.post.register(userData)
-    .then(() => history.push('/login'))
-    .catch(({ response: { data } }) => {
-      console.log('register err', data);
-      dispatch({
-        type: TYPES.GET_ERRORS,
-        payload: data
+export const setCurrentUser = user => dispatch => {
+  console.log('setCurrentUser', user);
+  dispatch({
+    type: TYPES.SET_CURRENT_USER,
+    payload: user
+  });
+
+  if (user.email) {
+    dispatch(fetchList());
+  } else {
+    // setCurrentUser is called on logout, user is be an empty object
+    // if empty object, clear user data
+    dispatch(
+      setList({
+        username: '',
+        list: [],
+        statement: ''
       })
-    })
-  };
+    );
+  }
+};
 
 // export const registerUser = (userData, history) => dispatch => {
-//   axios.post('api/users/register', userData)
-//     .then(res => history.push('/login'))
+//   http.users.post.register(userData)
+//   .then(() => history.push('/login'))
+//   .catch(({ response: { data } }) => {
+//     console.log('register err', data);
+//     dispatch({
+//       type: TYPES.GET_ERRORS,
+//       payload: data
+//     })
+//     })
+//   };
+
+  export const registerUser = (userData, history) => dispatch => {
+    axios.post('api/users/register', userData)
+      .then(res => history.push('/login'))
+      .catch(err => {
+        console.log('register err', err.response.data)
+        dispatch({
+          type: TYPES.GET_ERRORS,
+          payload: err.response.data
+      })
+    })
+};
+
+// export const loginUser = (user, history) => dispatch => {
+//   http.users.post.login(user)
+//     .then(res => {
+//       console.log('/login post res', res);
+//       const { token } = res.data;
+//       // set token in localStorage
+//       localStorage.setItem('jwtToken', token);
+//       // set token to be in all axios headers
+//       setAuthToken(token);
+//       // decode the token
+//       const decoded = jwt_decode(token);
+//       // set current user
+//       dispatch(setToken(decoded));
+//       history.push('/');
+//     })
 //     .catch(err => {
-//       console.log('register err', err.response.data)
+//       console.log('err', err.response.data);
 //       dispatch({
 //         type: TYPES.GET_ERRORS,
 //         payload: err.response.data
-//       })
-//     })
+//       });
+//     });
+//   http.users.get.current()
+//   .then(user => {
+//     console.log('here2');
+//     this.props.setCurrentUser(user);
+//   })
 // };
 
 export const loginUser = (user, history) => dispatch => {
-  http.users.post.login(user)
+  axios.post('api/users/login', user)
     .then(res => {
-      console.log('/login post res', res);
-      const { token } = res.data;
+      console.log('/login post res', res)
+      const { token, user } = res.data;
       // set token in localStorage
       localStorage.setItem('jwtToken', token);
       // set token to be in all axios headers
@@ -119,49 +166,53 @@ export const loginUser = (user, history) => dispatch => {
       const decoded = jwt_decode(token);
       // set current user
       dispatch(setToken(decoded));
+      // dispatch setUser
+      dispatch(setCurrentUser(user));
       history.push('/');
     })
     .catch(err => {
-      console.log('err', err.response.data);
+      console.log('err', err.response.data)
       dispatch({
         type: TYPES.GET_ERRORS,
         payload: err.response.data
       });
     });
-  http.users.get.current()
-  .then(user => {
-    console.log('here2');
-    this.props.setCurrentUser(user); // what I had before: dispatch(setCurrentUser(user))
-  })
 };
 
-export const fetchList = () => (dispatch, getState) => {
-  const {
-    user: {
-      username,
-    },
-  } = getState();
-
-  console.log('username in fetchList', username);
-
-  http.movies.get.userList(username)
+export const fetchCurrentUser = () => dispatch => {
+  axios('api/users/current')
     .then(({ data }) => {
-      console.log('list', data.list);
-      dispatch(setList(data))
+      console.log('user in fetchCurrentUser', data.user)
+      dispatch(setCurrentUser(data.user));
     })
-    .catch(console.error);
-};
+}
 
 // export const fetchList = () => (dispatch, getState) => {
-//   const { user } = getState();
-//   console.log('username in fetchList', user.username);
-//   axios(`api/movies/${user.username}/list`)
-//   .then(list => {
-//     console.log('list', list.data.list);
-//     dispatch(setList(list.data))
-//   })
-//   .catch(err => console.error(err));
+//   const {
+//     user: {
+//       username,
+//     },
+//   } = getState();
+
+//   console.log('username in fetchList', username);
+
+//   http.movies.get.userList(username)
+//     .then(({ data }) => {
+//       console.log('list', data.list);
+//       dispatch(setList(data))
+//     })
+//     .catch(console.error);
 // };
+
+export const fetchList = () => (dispatch, getState) => {
+  const { user } = getState();
+  axios(`api/movies/${user.username}/list`)
+    .then(res => {
+      console.log('axios res in fetchList', res);
+      if (res.data) dispatch(setList(res.data));
+    })
+    .catch(err => console.error(err));
+};
 
 export const logoutUser = history => dispatch => {
   // remove JWT token from localStorage
@@ -171,7 +222,7 @@ export const logoutUser = history => dispatch => {
   // set token back to empty object, passing in empty object will toggle isAuthenticated to false
   dispatch(setToken({}));
   // ! set current user back to empty object
-  // dispatch(setCurrentUser({}));
+  dispatch(setCurrentUser({}))
   if (history) {
     history.push('/login');
   }
