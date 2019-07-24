@@ -20,6 +20,7 @@ create with how they utilize it
 
 To do list:
 - fix Search
+- set up routing for movie pages
 - look at and fix updateStatus()
 - fix list styling, 20 movies viewable in screen with room to spare
 - visual signifiers or notification message or displayed count so movies can't be added after 20 cap
