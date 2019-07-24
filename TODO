@@ -21,6 +21,8 @@ create with how they utilize it
 To do list:
 - fix Search
 - look at and fix updateStatus()
+- fix list styling, 20 movies viewable in screen with room to spare
+- visual signifiers or notification message or displayed count so movies can't be added after 20 cap
 - make movies added to list persist by storing in localStorage upon add/reorder, or by PUT request to mongodb for any change
 - /profile is still reachable when user is logged out, why?  Also logging out while on /profile does not redirect user to /login, why?
   - read about and understand how history api works
@@ -32,6 +34,7 @@ To do list:
 - work on edit/presentation view
 - Layout.js and Card.js wrapper components
 - update README and upload pics on Portfolio
+- add to beginning/end toggle button
 - no duplicate usernames, make an error message for it and put in register validation function
 - pass userData into NewRegisters component
 - give users a register_date and last_login date

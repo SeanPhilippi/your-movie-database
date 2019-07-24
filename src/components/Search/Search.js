@@ -48,15 +48,31 @@ class Search extends PureComponent {
       )
     }
   }
+  // ! this is working, but need a timeout to also clear results if use pauses when typing
+  // this way results don't continue to concatenate to results array
+  // also maybe completely refresh search results as more characters are entered since
+  // a search should continuously filter out more as the input query value length increases
+  onKeyUp = e => {
+    if (e.key === 'Backspace') {
+      this.clearResults();
+      this.handleDelay();
+    }
+  }
 
   handleSearch = () => {
+    console.log('firing');
+    this.clearResults();
     const pageNums = [1, 2, 3];
     const { searchText } = this.state;
     pageNums.forEach(num => {
       fetch(`api/movies/search/${searchText}/${num}`)
         .then(res => res.json())
         .then(data => {
-          this.setState((prevState) => ({ searchResults: [...prevState.searchResults, ...data.Search] }));
+          if (data.Search) {
+            console.log('data.Search', data.Search)
+            this.setState((prevState) => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
+            this.renderResults();
+          }
         })
         .catch(console.log);
       });
@@ -66,8 +82,11 @@ class Search extends PureComponent {
 
   onTextChange = e => {
     this.setState({ searchText: e.target.value });
-    // fire handle search through debounce function to reduce api calls with delay
-    this.handleDelay();
+    // ! temp solution, prob not ideal, look up best practices
+    if (this.state.searchText && this.state.searchText.length > 1) {
+      // fire handle search through debounce function to reduce api calls with delay
+      this.handleDelay();
+    }
   }
 
 
