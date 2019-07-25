@@ -22,7 +22,7 @@ class Search extends PureComponent {
         if (!titles.includes(movie.Title)) {
           if (list.length < 20) {
             addToList({
-              name: movie.Title,
+              title: movie.Title,
               year: movie.Year,
               director: data.Director,
               id: data.imdbID,

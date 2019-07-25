@@ -19,6 +19,25 @@ router.get('/search/:query/:num', ({ params }, res) => {
     .catch(console.log);
 });
 
+// @route   GET /movies/:slug
+// @desc    get movie data to populate MoviePage.js
+// @access  Public
+router.get('/movies/:slug/', ({ params }, res) => {
+  const apiKey = process.env.API_KEY;
+  let { slug } = params;
+  // if there is a '-' and 4 numbers at the end, slice out
+
+  // then replace all '-'s with ' '
+  let title = slug.replace('-', ' ')
+  // use this title to grab that movie's info from omdb
+  fetch(`http://www.omdbapi.com?...`)
+    .then(res => res.json())
+    .then(data => {
+      res.json(data);
+    })
+    .catch(console.log);
+});
+
 // @route   GET /addMovie/:id
 // @desc    fetch movie details to create movie object for handleAdd()
 // @access  Public

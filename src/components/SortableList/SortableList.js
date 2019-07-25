@@ -31,7 +31,7 @@ class SortableList extends Component {
     const SortableItem = sortableElement(({ movie, sortIndex }) => {
       const {
         id,
-        name,
+        title,
         director,
         year,
       } = movie;
@@ -51,11 +51,11 @@ class SortableList extends Component {
             <div>
               <Link
                 to={{
-                  pathname: `/movies/${movie.name.concat('-', movie.year).split(' ').join('-')}`,
+                  pathname: `/movies/${movie.title.concat('-', movie.year).split(' ').join('-')}`,
                   state: { movie }
                 }}
                 className="movie-link">
-                { name }
+                { title }
               </Link>
             </div>
             <div className="dir-year">

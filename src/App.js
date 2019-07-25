@@ -57,6 +57,7 @@ class App extends PureComponent {
               <Route exact path="/all-movies" component={ UnderConstruction } />
               <Route exact path="/new-users" component={ UnderConstruction } />
               <Route path="/movies" component={ MoviePage } />
+              {/* <Route path="/movies/:slug" component={ MoviePage } /> */}
               <Route render={ this.pageNotFound } />
             </Switch>
           </Container>
