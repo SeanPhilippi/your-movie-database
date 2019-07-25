@@ -29,7 +29,8 @@ class Search extends PureComponent {
               runtime: data.Runtime,
               country: data.Country,
               plot: data.Plot,
-              language: data.Language
+              language: data.Language,
+              poster: data.Poster
             });
           }
           this.clearResults();
@@ -43,7 +44,7 @@ class Search extends PureComponent {
     if (searchResults) {
       return (
         <div className="bg-white1 result-scroll">
-          { searchResults.map(movie => <SearchResult movie={movie} handleAdd={ this.handleAdd } />) }
+          { searchResults.map(movie => <SearchResult movie={ movie } handleAdd={ this.handleAdd } />) }
         </div>
       )
     }

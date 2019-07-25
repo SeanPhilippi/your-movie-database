@@ -21,7 +21,7 @@ class TopNav extends PureComponent {
     const {
       isAuthenticated,
       user: {
-        username,
+        username
       },
       update,
     } = this.props;
