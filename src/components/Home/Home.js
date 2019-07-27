@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import HomeCard from '../HomeCard/HomeCard';
+import CardWrapper from '../CardWrapper/CardWrapper';
 import LoginBox from '../LoginBox/LoginBox';
 import NewRegisters from '../NewRegisters/NewRegisters';
 import './Home.css';
@@ -23,12 +23,14 @@ class Home extends PureComponent {
               Welcome to YMDb, Your Movie Database, the movie community where you can create your list of favorite movies,
               discover other people's favorite movies, discuss about movies and favorite lists, ... YMDb is free and fun!
             </Row>
-            <HomeCard title='Top Movie List'/>
-            <HomeCard title='Most Visited Lists'/>
+            <CardWrapper color="tan" title='Top Movie List'/>
+            <CardWrapper title='Most Visited Lists'/>
           </Col>
           <Col className="ml-3 ">
             { this.renderLoginBox() }
-            <NewRegisters />
+            <CardWrapper title="Spotlight on a user">
+              <NewRegisters />
+            </CardWrapper>
           </Col>
         </Col>
       </Container>

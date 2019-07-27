@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Row, Col, Container } from 'reactstrap';
 import CommentColumn from '../CommentColumn/CommentColumn';
 import axios from 'axios';
 
@@ -32,7 +34,6 @@ class MoviePage extends PureComponent {
     const { match: { params } } = this.props;
     let slug = params.slug;
 
-
     axios.get(`/movies/${slug}`)
 
   }
@@ -59,129 +60,75 @@ class MoviePage extends PureComponent {
           </h2>
         </div>
 
-        <div className="border bg-white">
-          Statistics
-        </div>
-        <div>
-          <div>
-            <div>
-              Overall ranking:
-            </div>
-            <div>
-              #184
-            </div>
+        <div className="w-50">
+          <div className="border">
+            Statistics
           </div>
-          <div>
+          <div className="d-flex justify-content-between bg-white border">
             <div>
-              Number of points
+              <div>
+                Overall ranking:
+              </div>
+              <div>
+                Number of points:
+              </div>
+              <div>
+                Number of users that ranked this movie:
+              </div>
+              <div>
+                Average Ranking in the users lists:
+              </div>
             </div>
-            <div>
-              4219
-            </div>
-          </div>
-          <div>
-            <div>
-              Number of users that ranked this movie
-            </div>
-            <div>
-              362
-            </div>
-          </div>
-          <div>
-            <div>
-              Average ranking in the users list
-            </div>
-            <div>
-              #9
+            <div className="text-right">
+              <div>
+                #184
+              </div>
+              <div>
+                4219
+              </div>
+              <div>
+                362
+              </div>
+              <div>
+                #9
+              </div>
             </div>
           </div>
         </div>
 
-        <div>
-          <div>
+        <Row>
+          <Row>
             Reviews
-          </div>
+          </Row>
           <p>
             Currently, there is no review for this movie.
           </p>
-          <div>
+          <Row>
             <span>>></span><a href="">Click here to add a review</a>
-          </div>
-          <div className="review-box">
+          </Row>
+          <Row className="review-box">
 
-          </div>
-        </div>
+          </Row>
+        </Row>
 
-        <div>
-          <div>
-            Voters
-          </div>
-          <div>
-            Users that ranked { title }
-          </div>
-          <div className="user-list-rankings">
-            <div>
-              Rory Carson
-            </div>
-            <div>
-              #5 in the list
-            </div>
-            <div>
-              Rory Carson
-            </div>
-            <div>
-              #5 in the list
-            </div>
-            <div>
-              Rory Carson
-            </div>
-            <div>
-              #5 in the list
-            </div>
-            <div>
-              Rory Carson
-            </div>
-            <div>
-              #5 in the list
-            </div>
-            <div>
-              Rory Carson
-            </div>
-            <div>
-              #5 in the list
-            </div>
-            <div>
-              Rory Carson
-            </div>
-            <div>
-              #5 in the list
-            </div>
-            <div>
-              Rory Carson
-            </div>
-            <div>
-              #5 in the list
-            </div>
-            <div>
-              Rory Carson
-            </div>
-            <div>
-              #5 in the list
-            </div>
-            <div>
-              Rory Carson
-            </div>
-            <div>
-              #5 in the list
-            </div>
-            <div>
-              Rory Carson
-            </div>
-            <div>
-              #5 in the list
-            </div>
-          </div>
-        </div>
+        {/* <Container clasName="voters-container">
+          <Col className="voters">
+            // { this.props.users.map(user => {
+              return <Link>user.username</Link>
+            }) }
+          </Col>
+          <Col className="rank">
+            {
+              this.props.rankings.map(user => {
+                return (
+                  <span> // search this user's list array, then use indexOf(state.title) on Object.values of that user's list?
+
+                  </span>
+                )
+              })
+            }
+          </Col>
+        </Container> */}
 
         {/* <div>
           { year } <br/>

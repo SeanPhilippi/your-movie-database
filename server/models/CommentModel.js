@@ -22,10 +22,13 @@ const CommentSchema = new Schema({
     type: String,
     required: true
   },
-  page_id: {
+  movie_id: {
     // m_# or u_# or h_# to differentiate movie, user, or home page?
     type: String,
     required: true
+  },
+  list_id: {
+
   }
 });
 

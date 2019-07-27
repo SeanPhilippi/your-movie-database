@@ -12,11 +12,8 @@ class NewRegisters extends PureComponent {
     } = this.props;
 
     return (
-      <Row className="login-box d-flex flex-column mt-2 shadow">
-        <div className="card-title1">
-          SPOTLIGHT ON A USER
-        </div>
-        <div className="bg-white1">
+      <Row className="login-box d-flex flex-column bg-white1">
+        <div>
           <div className="py-2 px-4 bg-white1">
             <div className="mb-2">
               Most recently registered users on YMDb:

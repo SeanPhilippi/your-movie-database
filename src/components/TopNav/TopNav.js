@@ -62,8 +62,12 @@ class TopNav extends PureComponent {
         {/****** Logo *****/}
         <Navbar.Brand className="brand">
           <NavLink style={{ textDecoration: 'none'}} to='/'>
-            <div className="site-title m-0 p-0 ml-4">YMDB</div>
-            <div className="subtitle m-0 p-0 ml-4">Your Movie Database</div>
+            <div className="site-title m-0 p-0 ml-4">
+              YMDB
+            </div>
+            <div className="subtitle m-0 p-0 ml-4">
+              Your Movie Database
+            </div>
           </NavLink>
         </Navbar.Brand>
         {/****** End Logo *****/}
