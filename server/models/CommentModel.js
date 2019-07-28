@@ -22,14 +22,9 @@ const CommentSchema = new Schema({
     type: String,
     required: true
   },
-  movie_id: {
-    // m_# or u_# or h_# to differentiate movie, user, or home page?
-    type: String,
-    required: true
-  },
-  list_id: {
-
-  }
+  movie_id: String,
+  list_id: String,
+  top_movie_list: Boolean
 });
 
 module.exports = Comment = mongoose.model("Comment", CommentSchema);

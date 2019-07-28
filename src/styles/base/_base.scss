@@ -1,0 +1,14 @@
+// if I want to make 1rem equivalent to 10px later
+// html {
+//   font-size: 62.5%;
+// }
+
+body {
+  font-size: $m-size;
+  font-family: Helvetica, Arial, sans-serif;
+  background: $dark;
+}
+
+h1 {
+  font-size: 1rem;
+}

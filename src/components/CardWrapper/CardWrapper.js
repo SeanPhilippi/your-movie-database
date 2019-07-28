@@ -9,7 +9,7 @@ const CardWrapper = ({
   color,
   children
 }) => (
-  <div className={`card shadow bg-${color}`}>
+  <div className="card-wrapper">
     <div className="wrapper-icon">
       { icon }
     </div>

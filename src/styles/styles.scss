@@ -1,3 +1,6 @@
+@import './base/settings';
+@import './base/base';
+
 @import './components/account';
 @import './components/affinities';
 @import './components/cardwrapper';
@@ -15,7 +18,6 @@
 @import './components/registerbox';
 @import './components/savedelete';
 @import './components/search';
-@import './components/searchresult';
 @import './components/topmovielist';
 @import './components/topnav';
 @import './components/underconstruction';

@@ -12,7 +12,7 @@ class Description extends Component {
     } = this.props;
 
     return (
-      <div className="description bg-light1 my-2 d-flex flex-column align-items-center">
+      <div className="description my-2 d-flex flex-column align-items-center">
         <div className="card-title1">
           User Statement
         </div>

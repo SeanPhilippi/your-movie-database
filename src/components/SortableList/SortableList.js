@@ -74,7 +74,7 @@ class SortableList extends Component {
   );
 
     const SortableList = sortableContainer(({ items }) =>  (
-      <div className="list-items text-center bg-light1" >
+      <div className="list-items text-center" >
         {
           items.map((movie, index) => {
             return (

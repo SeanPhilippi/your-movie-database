@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import App from './App';
 import store from './redux/store';
 import setJwtToken from './utils/auth/setJwtToken';
+import './styles/styles.scss';
 import './index.css';
 
 dotenv.config();

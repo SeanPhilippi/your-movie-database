@@ -11,7 +11,7 @@ class Home extends PureComponent {
   renderLoginBox() {
     return this.props.isAuthenticated
       ? null
-      : <LoginBox />;
+      : <CardWrapper title="Login"><LoginBox /></CardWrapper>;
   }
 
   render() {
@@ -21,7 +21,7 @@ class Home extends PureComponent {
           <Col className="main bg-white1 pt-2">
             <Row className="greeting m-0">
               Welcome to YMDb, Your Movie Database, the movie community where you can create your list of favorite movies,
-              discover other people's favorite movies, discuss about movies and favorite lists, ... YMDb is free and fun!
+              discover other people's favorite movies, `discuss about movies and favorite lists, ... YMDb is free and fun!
             </Row>
             <CardWrapper color="tan" title='Top Movie List'/>
             <CardWrapper title='Most Visited Lists'/>

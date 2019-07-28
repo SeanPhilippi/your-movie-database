@@ -5,6 +5,7 @@
 
 .list-items {
   width: 100%;
+  color: $light;
 }
 
 .movie-item {

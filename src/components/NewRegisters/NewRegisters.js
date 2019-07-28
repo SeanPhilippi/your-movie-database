@@ -12,9 +12,9 @@ class NewRegisters extends PureComponent {
     } = this.props;
 
     return (
-      <Row className="login-box d-flex flex-column bg-white1">
+      <Row className="login-box d-flex flex-column">
         <div>
-          <div className="py-2 px-4 bg-white1">
+          <div className="py-2 px-4">
             <div className="mb-2">
               Most recently registered users on YMDb:
             </div>
