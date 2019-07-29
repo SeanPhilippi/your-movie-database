@@ -51,11 +51,8 @@ class LoginBox extends PureComponent {
     } = this.props;
 
     return (
-      <Row className="login-box d-flex flex-column shadow">
-        <div className="login-title bg-red text-white m-0 p-2 pl-4">
-          LOGIN
-        </div>
-        <div className="bg-white1">
+      <Row className="login-box d-flex flex-column">
+        <div>
           <form
             className="login-main py-2 px-4"
             noValidate

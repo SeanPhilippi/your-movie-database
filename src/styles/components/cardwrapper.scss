@@ -1,7 +1,27 @@
 .card-wrapper {
+  border-radius: 5px 5px 0 0;
   background: $white;
+  margin: .5rem 0;
+  padding: 0;
+}
+
+.wrapper-title {
+  border-radius: 5px 5px 0 0;
+  text-transform: uppercase;
+  width: 100%;
+  margin: 0;
+  padding: .5rem;
+  padding-left: 1.5rem;
+  color: white;
+  background-color: $red;
+  font-weight: bold;
+}
+
+.wrapper-icon {
+
 }
 
 .wrapper-body {
   color: black;
+  padding: .2rem;
 }
