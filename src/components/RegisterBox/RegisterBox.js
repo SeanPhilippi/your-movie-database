@@ -52,11 +52,8 @@ class RegisterBox extends PureComponent {
     } = this.props;
 
     return (
-      <Row className="register-box shadow bg-white1 d-flex flex-column mb-4 mx-3">
-        <div className="register-title bg-red text-white m-0 p-2 pl-4 font-weight-bold">
-          REGISTER
-        </div>
-        <div className="bg-light1">
+      <Row className="register-box d-flex flex-column">
+        <div>
           <span className="font-weight-bold px-4 py-2">
             * = mandatory
           </span>

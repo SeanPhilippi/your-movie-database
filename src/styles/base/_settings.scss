@@ -1,6 +1,7 @@
 // Colors
 $text-orange: #EB5018;
 
+
 $light: #DECDA4;
 $light2: #E6D8B6;
 $dark: #AA925C;
@@ -10,6 +11,13 @@ $dark-orange: #EB5018;
 $red: #B20E07;
 $white: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%);
 
+.white {
+  background: $white;
+}
+
+.tan {
+  background: $light;
+}
 // rgb(255,255,255); /* Old browsers */
 // background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%); /* FF3.6-15 */
 // background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* Chrome10-25,Safari5.1-6 */

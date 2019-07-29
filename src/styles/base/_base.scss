@@ -1,12 +1,41 @@
-// if I want to make 1rem equivalent to 10px later
-// html {
-//   font-size: 62.5%;
-// }
+html {
+  font-size: 12px;
+}
+
+@media only screen and (max-width:991px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* removing focus border for inputs */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
 
 body {
   font-size: $m-size;
   font-family: Helvetica, Arial, sans-serif;
   background: $dark;
+  font-weight: 500;
 }
 
 // .container {

@@ -9,14 +9,14 @@ const CardWrapper = ({
   color,
   children
 }) => (
-  <div className="card-wrapper">
+  <div className={`card-wrapper ${color}`}>
     <div className="wrapper-icon">
       { icon }
     </div>
     <div className="wrapper-title">
       { title }
     </div>
-    <div className="wrapper-body w-100 p-4">
+    <div className="wrapper-body w-100">
       { children }
     </div>
   </div>

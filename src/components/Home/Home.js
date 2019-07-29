@@ -11,7 +11,7 @@ class Home extends PureComponent {
   renderLoginBox() {
     return this.props.isAuthenticated
       ? null
-      : <CardWrapper title="Login"><LoginBox /></CardWrapper>;
+      : <CardWrapper title="Login" color="white"><LoginBox /></CardWrapper>;
   }
 
   render() {
@@ -24,11 +24,11 @@ class Home extends PureComponent {
               discover other people's favorite movies, `discuss about movies and favorite lists, ... YMDb is free and fun!
             </Row>
             <CardWrapper color="tan" title='Top Movie List'/>
-            <CardWrapper title='Most Visited Lists'/>
+            <CardWrapper color="tan" title='Most Visited Lists'/>
           </Col>
           <Col className="ml-3 ">
             { this.renderLoginBox() }
-            <CardWrapper title="Spotlight on a user">
+            <CardWrapper title="Spotlight on a user" color="white">
               <NewRegisters />
             </CardWrapper>
           </Col>

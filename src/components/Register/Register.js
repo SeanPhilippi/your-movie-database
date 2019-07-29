@@ -3,6 +3,8 @@ import { Container, Col, Row } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RegisterBox from '../RegisterBox/RegisterBox';
+import CardWrapper from '../CardWrapper/CardWrapper';
+
 import './Register.css';
 
 class Register extends PureComponent {
@@ -21,34 +23,34 @@ class Register extends PureComponent {
                 <strong>Important : one registration only per person!</strong> The additional lists will be deleted.
               </p>
             </div>
-            <RegisterBox />
+            <CardWrapper title="Register" color="tan">
+              <RegisterBox />
+            </CardWrapper>
           </Col>
           <Col className="col-5">
             <div className="">
-              <div className="shadow advantages">
-                <div className="card-title1">
-                  Advantages
+              <CardWrapper title="Advantages" color="white">
+                <div className="advantages">
+                  <div>
+                    Here are the advantages of being a registered user:<br/>
+                      >	Create your own Top Movie List.<br/>
+                      >	Discuss movies with other users.<br/>
+                      >	Write comments on other user's Top List.<br/>
+                      >	Receive the monthly newsletter containing :<br/>
+                      {"\u00a0"} -	updates & news about the site<br/>
+                      {"\u00a0"} -	the number of visitors on Your Top Movie list<br/>
+                      {"\u00a0"} -	the number of messages from other users on Your Top Movie list
+                  </div>
                 </div>
-                <div className="bg-white1 px-4 py-2">
-                  Here are the advantages of being a registered user:<br/>
-                    >	Create your own Top Movie List.<br/>
-                    >	Discuss movies with other users.<br/>
-                    >	Write comments on other user's Top List.<br/>
-                    >	Receive the monthly newsletter containing :<br/>
-                    {"\u00a0"} -	updates & news about the site<br/>
-                    {"\u00a0"} -	the number of visitors on Your Top Movie list<br/>
-                    {"\u00a0"} -	the number of messages from other users on Your Top Movie list
+              </CardWrapper>
+              <CardWrapper title="Privacy Statement" color="white">
+                <div>
+                  <div>
+                    We respect your privacy. It's simple: we do not share your personal
+                    data with other companies or organisations, ever!
+                  </div>
                 </div>
-              </div>
-              <div className="privacy-statement mt-3 shadow">
-                <div className="card-title1">
-                  Privacy Statement
-                </div>
-                <div className="bg-white1 px-4 py-2">
-                  We respect your privacy. It's simple: we do not share your personal
-                  data with other companies or organisations, ever!
-                </div>
-              </div>
+              </CardWrapper>
             </div>
           </Col>
         </Row>
