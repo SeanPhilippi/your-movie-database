@@ -8,6 +8,14 @@ import CardWrapper from '../CardWrapper/CardWrapper';
 import './Register.css';
 
 class Register extends PureComponent {
+
+  componentDidMount() {
+    // if user is logged in, redirect user to / (home) when they try to visit /register
+    if (this.props.isAuthenticated) {
+      this.props.history.push('/');
+    }
+  }
+
   render() {
     return (
       <Container className="container d-flex border-0 justify-content-center">

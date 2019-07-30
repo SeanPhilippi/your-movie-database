@@ -100,58 +100,17 @@ export const setCurrentUser = user => dispatch => {
   }
 };
 
-// export const registerUser = (userData, history) => dispatch => {
-//   http.users.post.register(userData)
-//   .then(() => history.push('/login'))
-//   .catch(({ response: { data } }) => {
-//     console.log('register err', data);
-//     dispatch({
-//       type: TYPES.GET_ERRORS,
-//       payload: data
-//     })
-//     })
-//   };
-
-  export const registerUser = (userData, history) => dispatch => {
-    axios.post('api/users/register', userData)
-      .then(res => history.push('/login'))
-      .catch(err => {
-        console.log('register err', err.response.data)
-        dispatch({
-          type: TYPES.GET_ERRORS,
-          payload: err.response.data
+export const registerUser = (userData, history) => dispatch => {
+  axios.post('api/users/register', userData)
+    .then(() => history.push('/login'))
+    .catch(err => {
+      console.log('register err', err.response.data)
+      dispatch({
+        type: TYPES.GET_ERRORS,
+        payload: err.response.data
       })
     })
 };
-
-// export const loginUser = (user, history) => dispatch => {
-//   http.users.post.login(user)
-//     .then(res => {
-//       console.log('/login post res', res);
-//       const { token } = res.data;
-//       // set token in localStorage
-//       localStorage.setItem('jwtToken', token);
-//       // set token to be in all axios headers
-//       setAuthToken(token);
-//       // decode the token
-//       const decoded = jwt_decode(token);
-//       // set current user
-//       dispatch(setToken(decoded));
-//       history.push('/');
-//     })
-//     .catch(err => {
-//       console.log('err', err.response.data);
-//       dispatch({
-//         type: TYPES.GET_ERRORS,
-//         payload: err.response.data
-//       });
-//     });
-//   http.users.get.current()
-//   .then(user => {
-//     console.log('here2');
-//     this.props.setCurrentUser(user);
-//   })
-// };
 
 export const loginUser = (user, history) => dispatch => {
   axios.post('api/users/login', user)
@@ -186,23 +145,6 @@ export const fetchCurrentUser = () => dispatch => {
       dispatch(setCurrentUser(data.user));
     })
 }
-
-// export const fetchList = () => (dispatch, getState) => {
-//   const {
-//     user: {
-//       username,
-//     },
-//   } = getState();
-
-//   console.log('username in fetchList', username);
-
-//   http.movies.get.userList(username)
-//     .then(({ data }) => {
-//       console.log('list', data.list);
-//       dispatch(setList(data))
-//     })
-//     .catch(console.error);
-// };
 
 export const fetchList = () => (dispatch, getState) => {
   const { user } = getState();
