@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import "./CardWrapper.css";
 
@@ -7,6 +8,7 @@ const CardWrapper = ({
   icon,
   title,
   color,
+  link,
   children
 }) => (
   <div className={`card-wrapper ${color}`}>
@@ -14,7 +16,7 @@ const CardWrapper = ({
       { icon }
     </div>
     <div className="wrapper-title">
-      { title }
+      { link ? <Link to={`/${link}`}> { title } </Link> :  title }
     </div>
     <div className="wrapper-body w-100">
       { children }
@@ -25,7 +27,8 @@ const CardWrapper = ({
 CardWrapper.propTypes = {
   icon: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  bgColor: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
+  // link: PropTypes.string
 };
 
 export default CardWrapper;
