@@ -19,6 +19,7 @@ create with how they utilize it
 
 
 To do list:
+- how to add
 - fix Registration, new users are posting but history.push('/login') doesn't work, study react-router-dom and history module
 - set up routing for movie pages
 - fix hyperlink colors on sortablelist, visited gold, neutral black?

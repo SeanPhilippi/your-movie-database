@@ -86,30 +86,30 @@ class TopNav extends PureComponent {
             >
               HOME
             </NavLink>
-            <NavLink
+            {/* <NavLink
               className="text-white mx-2"
               to="/top-movies"
             >
               TOP MOVIE LIST
-            </NavLink>
+            </NavLink> */}
             <NavLink
               className="text-white mx-2"
               to={ isAuthenticated ? "/profile" : "/login"}
             >
               YOUR TOP LIST
             </NavLink>
-            <NavLink
+            {/* <NavLink
               className="text-white mx-2"
               to="/users-index"
             >
               USERS' INDEX
-            </NavLink>
-            <NavLink
+            </NavLink> */}
+            {/* <NavLink
               className="text-white mx-2"
               to="/all-movies"
             >
               ALL THE MOVIES
-            </NavLink>
+            </NavLink> */}
           </div>
           </Nav>
         </Navbar.Collapse>
