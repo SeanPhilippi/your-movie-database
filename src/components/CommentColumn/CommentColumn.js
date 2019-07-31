@@ -4,24 +4,20 @@ import './CommentColumn.css';
 export default class CommentColumn extends PureComponent {
   render() {
     return (
-      <div className="mx-4 shadow">
-        <div className="card-title1">
-          COMMENTS
+      <div className="d-flex flex-column p-2">
+        <div className="pb-1 font-weight-bold text-left">
+          Write a comment
         </div>
-        <div className="comments-container bg-white1 d-flex flex-column p-2">
-          <div className="p-4 text-left">
-            Write a comment
-          </div>
-          <textarea
-            className="comments"
-            type="text"
-            name="comments"
-          >
-          </textarea>
-          <button className="send mt-1">
-            Send
-          </button>
-        </div>
+        <textarea
+          className="comments-box"
+          type="text"
+          name="comments"
+          rows="4"
+        >
+        </textarea>
+        <button className="send mt-1">
+          Send
+        </button>
       </div>
     )
   }
