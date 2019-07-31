@@ -1,6 +1,6 @@
 import React from 'react';
 import CommentColumn from '../CommentColumn/CommentColumn';
-import Description from '../Description/Description';
+import UserStatement from '../UserStatement/UserStatement';
 import SaveDelete from '../SaveDelete/SaveDelete';
 import SortableList from '../SortableList/SortableList';
 import CardWrapper from '../CardWrapper/CardWrapper';
@@ -12,7 +12,7 @@ const Profile = () =>  (
   <div className="profile-wrapper" >
     <div className="main-container bg-light2 mt-4">
       <div className="left-col bg-white1">
-        <div className="px-4 py-4 w-100">
+        <div className="px-4 pt-4 w-100">
           <CardWrapper title="User Top Movies" color="tan">
             <div className="search-btns-container">
               <SaveDelete />
@@ -21,9 +21,11 @@ const Profile = () =>  (
             <SortableList />
           </CardWrapper>
         </div>
-        <CardWrapper title="Statement" color="tan">
-          <Description />
-        </CardWrapper>
+        <div className="px-4 w-100">
+          <CardWrapper title="user statement" color="tan">
+            <UserStatement />
+          </CardWrapper>
+        </div>
       </div>
       <div className="right-col">
         <div className="m-4">

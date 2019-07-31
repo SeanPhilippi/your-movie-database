@@ -11,6 +11,9 @@
   margin: 0.2rem 0 .2rem .2rem;
   border-radius: 3px;
   background-color: white;
+  line-height: 18px;
+  height: 20px;
+  vertical-align: middle;
 }
 
 .save-list {
@@ -19,6 +22,9 @@
   margin: .2rem .2rem;
   border-radius: 3px;
   background-color: white;
+  line-height: 18px;
+  height: 20px;
+  vertical-align: middle;
 }
 
 .custom-ui {

@@ -11,7 +11,7 @@ const CardWrapper = ({
   link,
   children
 }) => (
-  <div className={`card-wrapper ${color}`}>
+  <div className={`card-wrapper shadow ${color}`}>
     <div className="wrapper-icon">
       { icon }
     </div>
