@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Container, Col, Row } from 'reactstrap';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RegisterBox from '../RegisterBox/RegisterBox';
@@ -75,4 +76,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps)(withRouter(Register));

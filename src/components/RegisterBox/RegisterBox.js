@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import { registerUser } from '../../redux/actions';
 import { connect } from 'react-redux';
 // import PasswordRevealer from '../PasswordRevealer/PasswordRevealer';
@@ -55,7 +55,7 @@ class RegisterBox extends PureComponent {
       <Row className="register-box d-flex flex-column">
         <div>
           <span className="font-weight-bold px-4 py-2">
-            * = mandatory
+            <span style={{ color: 'red' }}>* = mandatory</span>
           </span>
           <form
             className="py-2 px-4"
@@ -66,7 +66,7 @@ class RegisterBox extends PureComponent {
               {/* username */}
               <div className="username mb-2">
                 <div className="your-login font-weight-bold">
-                  Login/username*
+                  Login/username <span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
                   name="username"
@@ -74,14 +74,14 @@ class RegisterBox extends PureComponent {
                   className=""
                   type="text"
                 />
-                <div style={{ color: 'red', textAlign: 'center' }}>
+                <div className="text-left" style={{ color: 'red', textAlign: 'center' }}>
                   { usernameErrors }
                 </div>
               </div>
               {/* email */}
               <div className="email mb-2">
                 <div className="email-label font-weight-bold">
-                  Email*
+                  Email <span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
                   name="email"
@@ -89,14 +89,14 @@ class RegisterBox extends PureComponent {
                   className=""
                   type="text"
                 />
-                <div style={{ color: 'red', textAlign: 'center' }}>
+                <div className="text-left" style={{ color: 'red', textAlign: 'center' }}>
                   { emailErrors }
                 </div>
               </div>
               {/* password */}
               <div className="register-password mb-2">
                 <div className="password-label font-weight-bold">
-                  Password*
+                  Password <span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
                   name="password"
@@ -104,22 +104,22 @@ class RegisterBox extends PureComponent {
                   className=""
                   type="password"
                 />
-                <div style={{ color: 'red', textAlign: 'center' }}>
+                <div className="text-left" style={{ color: 'red', textAlign: 'center' }}>
                   { passwordErrors }
                 </div>
               </div>
               {/* confirm password */}
               <div className="password2">
                 <div className="password2-label font-weight-bold">
-                  Retype password*
+                  Retype password <span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
                   name="password2"
                   onChange={this.onTextChange}
                   className=""
-                  type="password2"
+                  type="password"
                 />
-                <div style={{ color: 'red', textAlign: 'center' }}>
+                <div className="text-left" style={{ color: 'red', textAlign: 'center' }}>
                   { password2Errors }
                 </div>
               </div>
@@ -153,7 +153,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  registerUser: user => dispatch(registerUser(user)),
+  registerUser: (user, history) => dispatch(registerUser(user, history)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterBox));

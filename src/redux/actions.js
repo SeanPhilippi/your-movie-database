@@ -102,9 +102,10 @@ export const setCurrentUser = user => dispatch => {
 
 export const registerUser = (userData, history) => dispatch => {
   axios.post('api/users/register', userData)
-    .then(() => history.push('/login'))
+    .then(() => {
+      history.push('/login')
+    })
     .catch(err => {
-      console.log('register err', err.response.data)
       dispatch({
         type: TYPES.GET_ERRORS,
         payload: err.response.data
