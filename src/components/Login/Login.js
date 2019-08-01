@@ -10,7 +10,7 @@ import './Login.css';
 class Login extends PureComponent {
   render() {
     return (
-      <Container className="container d-flex border-0 justify-content-center">
+      <Container className="d-flex border-0 justify-content-center">
         <Col className="inner-container mt-4 mx-4 p-0">
           <Col className="bg-white1 pt-2">
             <CardWrapper title="Login" color="tan">

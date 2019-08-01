@@ -19,6 +19,7 @@ create with how they utilize it
 
 
 To do list:
+- make scss container narrower
 - fix LoginBox send button positioning
 - allow login with username OR email, currently only email which isn't intuitive
 - adjust fontsize to Mead way, so I can have more granularity while sticking with rems

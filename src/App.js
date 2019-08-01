@@ -43,7 +43,7 @@ class App extends PureComponent {
     return (
       <BrowserRouter>
         <div className="App">
-          <Container className="px-0 border-0">
+          <Container className="container-scss px-0 border-0">
             <TopNav/>
             <UpdateBar/>
             <Switch>
