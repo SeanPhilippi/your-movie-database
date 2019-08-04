@@ -49,7 +49,7 @@ class Search extends PureComponent {
       )
     }
   }
-  // ! this is working, but need a timeout to also clear results if use pauses when typing
+  // ! this is working, but need a timeout to also clear results if user pauses when typing
   // this way results don't continue to concatenate to results array
   // also maybe completely refresh search results as more characters are entered since
   // a search should continuously filter out more as the input query value length increases

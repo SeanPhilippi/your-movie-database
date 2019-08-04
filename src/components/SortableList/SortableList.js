@@ -49,14 +49,14 @@ class SortableList extends Component {
           </div>
           <div className="movie-info">
             <div>
-              {/* <Link
+              <Link
                 to={{
                   pathname: `/movies/${movie.title.concat('-', movie.year).split(' ').join('-')}`,
                   state: { movie }
                 }}
-                className="movie-link"> */}
+                className="movie-link">
                 { title }
-              {/* </Link> */}
+              </Link>
             </div>
             <div className="dir-year">
               { director }, { year }

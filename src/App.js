@@ -21,7 +21,6 @@ import PageNotFound from './components/PageNotFound/PageNotFound';
 import UnderConstruction from './components/UnderConstruction/UnderConstruction';
 import axios from 'axios';
 import {
-  setCurrentUser,
   setNewUsers,
   fetchList,
 } from './redux/actions';
@@ -78,7 +77,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setCurrentUser,
   setNewUsers,
   fetchList,
 };

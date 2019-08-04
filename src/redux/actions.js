@@ -114,6 +114,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 export const loginUser = (user, history) => dispatch => {
+  console.log('logging in...')
   axios.post('api/users/login', user)
     .then(res => {
       console.log('/login post res', res)
@@ -158,6 +159,7 @@ export const fetchList = () => (dispatch, getState) => {
 };
 
 export const logoutUser = history => dispatch => {
+  console.log('logging out...')
   // remove JWT token from localStorage
   localStorage.removeItem('jwtToken');
   // remove JWT token from axios Authorization headers

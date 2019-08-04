@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Row, Col, Container } from 'reactstrap';
 import CommentColumn from '../CommentColumn/CommentColumn';
+import CardWrapper from '../CardWrapper/CardWrapper';
 import axios from 'axios';
 
 import './MoviePage.css';
@@ -45,71 +46,59 @@ class MoviePage extends PureComponent {
     const { poster, title, director, year, country, language, runtime, plot } = this.state.movie
 
     return (
-      <div className="movie-page">
-        <div
-          className="poster-img"
-          style={{ backgroundImage: `url(${ poster })` }}
-        >
-        </div>
-        <div className="movie-info">
-          <h1>
-            { title }
-          </h1>
-            <h2>
-            { director }, { year }
-          </h2>
-        </div>
-
-        <div className="w-50">
-          <div className="border">
-            Statistics
-          </div>
-          <div className="d-flex justify-content-between bg-white border">
+      <div className="w-50">
+        <CardWrapper title="Movie Details" color="tan">
+          <div className="movie-page d-flex">
+            <div
+              className="poster-img"
+              style={{ backgroundImage: `url(${ poster })` }}
+            >
+            </div>
             <div>
-              <div>
-                Overall ranking:
+              <div className="title-year">
+                { title } ({ year })
               </div>
               <div>
-                Number of points:
-              </div>
-              <div>
-                Number of users that ranked this movie:
-              </div>
-              <div>
-                Average Ranking in the users lists:
-              </div>
-            </div>
-            <div className="text-right">
-              <div>
-                #184
-              </div>
-              <div>
-                4219
-              </div>
-              <div>
-                362
-              </div>
-              <div>
-                #9
+                { director }
               </div>
             </div>
           </div>
+          <div className="w-50">
+            <div className="font-weight-bold">
+              Statistics
+            </div>
+            <div className="bg-white">
+              <div className="d-flex justify-content-between">
+                <div className="bd-light col-10">Overall Ranking:</div>
+                <div className="bd-light col-2 text-right">rank</div>
+              </div>
+              <div className="d-flex justify-content-between">
+                <div className="bd-light col-10">Number of points:</div>
+                <div className="bd-light col-2 text-right">points</div>
+              </div>
+              <div className="d-flex justify-content-between">
+                <div className="bd-light col-10">Number of users that ranked this movie:</div>
+                <div className="bd-light col-2 text-right">number</div>
+              </div>
+              <div className="d-flex justify-content-between">
+                <div className="bd-light col-10">Average ranking in the user's list:</div>
+                <div className="bd-light col-2 text-right">avgRank</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="font-weight-bold">
+              Reviews
+            </div>
+            <div>
+              Currently there is no review for this movie
+            </div>
+            <div>
+              >> <a href="">Click here to add a review.</a>
+            </div>
         </div>
-
-        <Row>
-          <Row>
-            Reviews
-          </Row>
-          <p>
-            Currently, there is no review for this movie.
-          </p>
-          <Row>
-            <span>>></span><a href="">Click here to add a review</a>
-          </Row>
-          <Row className="review-box">
-
-          </Row>
-        </Row>
+      </CardWrapper>
 
         {/* <Container clasName="voters-container">
           <Col className="voters">
