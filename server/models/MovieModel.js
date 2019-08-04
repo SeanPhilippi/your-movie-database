@@ -18,18 +18,26 @@ const MovieSchema = new Schema({
     type: String,
     required: true
   },
-  languages: {
-    type: Array,
-    required: true
-  },
   country: {
     type: Array,
     required: true
   },
-  imdb_url: {
+  poster_url: {
     type: String,
     required: false
   },
+  imdb_id: {
+    type: String,
+    required: false
+  },
+  plot: {
+    type: String,
+    required: false
+  },
+  runtime: {
+    type: String,
+    required: true
+  }
   stats: {
     overall_ranking: {
       type: Number,

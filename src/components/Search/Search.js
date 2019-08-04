@@ -29,7 +29,6 @@ class Search extends PureComponent {
               runtime: data.Runtime,
               country: data.Country,
               plot: data.Plot,
-              language: data.Language,
               poster: data.Poster
             });
           }

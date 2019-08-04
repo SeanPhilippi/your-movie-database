@@ -22,15 +22,16 @@ router.get('/search/:query/:num', ({ params }, res) => {
 // @route   GET /movies/:slug
 // @desc    get movie data to populate MoviePage.js
 // @access  Public
-router.get('/movies/:slug/', ({ params }, res) => {
+router.get('/id/:id', (req, res) => {
   const apiKey = process.env.API_KEY;
-  let { slug } = params;
+  console.log('id in route', req.params.id)
+  let { slug, id } = req.params;
   // if there is a '-' and 4 numbers at the end, slice out
 
   // then replace all '-'s with ' '
-  let title = slug.replace('-', ' ')
+  // let title = slug.replace('-', ' ')
   // use this title to grab that movie's info from omdb
-  fetch(`http://www.omdbapi.com?...`)
+  fetch(`http://www.omdbapi.com/?i=${id}&apikey=${apiKey}`)
     .then(res => res.json())
     .then(data => {
       res.json(data);

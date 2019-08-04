@@ -14,28 +14,55 @@ import {
 } from '../../redux/actions';
 
 class MoviePage extends PureComponent {
-
   state = {
     movie: {
-      title: 'Eraserhead',
-      director: 'David Lynch',
-      year: '1977',
-      ranking: '#184',
-      points: 32345,
-      numOfUsers: 232,
-      languages: ['English'],
-      imdb_url: 'http://www.imdb.com/title/tt0074486/',
-      poster: 'https://m.media-amazon.com/images/M/MV5BMTQyNjMwMzA1MV5BMl5BanBnXkFtZTcwMzQyNDAxNg@@._V1_SX300.jpg'
+      title: '',
+      year: '',
+      poster: '',
+      director: '',
+      release_date: '',
+      country: '',
+      imdb_id: '',
+      runtime: '',
+      plot: '',
     }
-  };
+  }
+
+  // dummy data
+  // state = {
+  //   movie: {
+  //     title: 'Eraserhead',
+  //     director: 'David Lynch',
+  //     year: '1977',
+  //     ranking: '#184',
+  //     points: 32345,
+  //     numOfUsers: 232,
+  //     imdb_url: 'http://www.imdb.com/title/tt0074486/',
+  //     poster: 'https://m.media-amazon.com/images/M/MV5BMTQyNjMwMzA1MV5BMl5BanBnXkFtZTcwMzQyNDAxNg@@._V1_SX300.jpg'
+  //   }
+  // };
 
   componentDidMount() {
     // want a visible movie title slug in url for users
     // maybe don't need this for calls to server or calls to omdb api
-    const { match: { params } } = this.props;
-    let slug = params.slug;
-
-    axios.get(`/movies/${slug}`)
+    const { location: { state: { movie } } } = this.props;
+    console.log('movie', movie, 'id', movie.id)
+    fetch(`/api/movies/id/${movie.id}`)
+      .then(res => res.json())
+      .then(data => {
+        const fetchedMovie = {
+          title: data.Title,
+          year: data.Year,
+          poster: data.Poster,
+          director: data.Director,
+          release_date: data.Released,
+          country: data.Country,
+          imdb_id: data.imdbID,
+          runtime: data.Runtime,
+          plot: data.Plot
+        }
+        this.setState({ movie: fetchedMovie });
+      })
 
   }
 
@@ -43,7 +70,7 @@ class MoviePage extends PureComponent {
     // * how I was bringing in movie data for this page (via Link on SortableItem)
     // const { movie } = this.props.location.state;
     // * dummy data for development
-    const { poster, title, director, year, country, language, runtime, plot } = this.state.movie
+    const { poster, title, director, year, country, runtime, plot } = this.state.movie
 
     return (
       <div className="w-50">
@@ -55,15 +82,24 @@ class MoviePage extends PureComponent {
             >
             </div>
             <div>
-              <div className="title-year">
-                { title } ({ year })
+              <div className="title">
+                { title }
+              </div>
+              <div className="director">
+                <small>directed by</small> { director }
               </div>
               <div>
-                { director }
+                { country }, { year }
+              </div>
+              <div>
+                { runtime }
+              </div>
+              <div>
+                { plot }
               </div>
             </div>
           </div>
-          <div className="w-50">
+          <div>
             <div className="font-weight-bold">
               Statistics
             </div>
@@ -99,37 +135,8 @@ class MoviePage extends PureComponent {
             </div>
         </div>
       </CardWrapper>
-
-        {/* <Container clasName="voters-container">
-          <Col className="voters">
-            // { this.props.users.map(user => {
-              return <Link>user.username</Link>
-            }) }
-          </Col>
-          <Col className="rank">
-            {
-              this.props.rankings.map(user => {
-                return (
-                  <span> // search this user's list array, then use indexOf(state.title) on Object.values of that user's list?
-
-                  </span>
-                )
-              })
-            }
-          </Col>
-        </Container> */}
-
-        {/* <div>
-          { year } <br/>
-          { country } <br/>
-          { language } <br/>
-          { runtime }
-        </div> */}
-        <p>
-          { plot }
-        </p>
-        <CommentColumn />
-      </div>
+      <CommentColumn />
+    </div>
     )
   }
 }
