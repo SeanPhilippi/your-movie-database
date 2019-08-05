@@ -2,11 +2,16 @@
 
 }
 
-.poster-img {
-  width: 5rem;
-  height: 8rem;
-  background-size: cover;
+.poster {
+  width: 14rem;
+  margin-right: 1.5rem;
+  margin-bottom: 1.5rem;
+}
 
+.poster-img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .title {

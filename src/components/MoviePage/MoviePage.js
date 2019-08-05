@@ -69,73 +69,90 @@ class MoviePage extends PureComponent {
     const { poster, title, director, year, country, runtime, plot } = this.state.movie
 
     return (
-      <div className="d-flex">
-        <div className="w-50">
-          <CardWrapper title="Movie Details" color="tan">
-            <div className="movie-page d-flex">
-              <div
-                className="poster-img"
-                style={{ backgroundImage: `url(${ poster })` }}
-              >
-              </div>
-              <div>
-                <div className="title">
-                  { title }
-                </div>
-                <div className="director">
-                  <small>directed by</small> { director }
+      <div className="profile-wrapper" >
+        <div className="main-container bg-light2 mt-4">
+          <div className="left-col bg-white1">
+            <div className="px-4 pt-4 w-100">
+              <CardWrapper title="Movie Details" color="tan">
+                <div className="movie-page d-flex">
+                  <div className="poster">
+                    <img
+                      width={300}
+                      height={600}
+                      className="poster-img"
+                      src={ poster }
+                      alt={ title }
+                    />
+                  </div>
+                  {/* <div
+                    className="poster-img"
+                    style={{ backgroundImage: `url(${ poster })` }}
+                  >
+                  </div> */}
+                  <div>
+                    <div className="title">
+                      { title }
+                    </div>
+                    <div className="director">
+                      <small>directed by</small> { director }
+                    </div>
+                    <div>
+                      { country }, { year }
+                    </div>
+                    <div>
+                      { runtime }
+                    </div>
+                    <div>
+                      { plot }
+                    </div>
+                  </div>
                 </div>
                 <div>
-                  { country }, { year }
+                  <div className="font-weight-bold mb-1">
+                    Statistics
+                  </div>
+                  <div className="bg-white">
+                    <div className="d-flex justify-content-between">
+                      <div className="bd-light col-10">Overall Ranking:</div>
+                      <div className="bd-light col-2 text-right">rank</div>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <div className="bd-light col-10">Number of points:</div>
+                      <div className="bd-light col-2 text-right">points</div>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <div className="bd-light col-10">Number of users that ranked this movie:</div>
+                      <div className="bd-light col-2 text-right">number</div>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                      <div className="bd-light col-10">Average ranking in the user's list:</div>
+                      <div className="bd-light col-2 text-right">avgRank</div>
+                    </div>
+                  </div>
                 </div>
+                {/* Review Box */}
                 <div>
-                  { runtime }
+                  <div className="font-weight-bold">
+                    Reviews
+                  </div>
+                  <div>
+                    Currently there is no review for this movie
+                  </div>
+                  <div>
+                    >> <a href="">Click here to add a review.</a>
+                  </div>
                 </div>
-                <div>
-                  { plot }
-                </div>
-              </div>
+              </CardWrapper>
             </div>
-            <div>
-              <div className="font-weight-bold">
-                Statistics
-              </div>
-              <div className="bg-white">
-                <div className="d-flex justify-content-between">
-                  <div className="bd-light col-10">Overall Ranking:</div>
-                  <div className="bd-light col-2 text-right">rank</div>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <div className="bd-light col-10">Number of points:</div>
-                  <div className="bd-light col-2 text-right">points</div>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <div className="bd-light col-10">Number of users that ranked this movie:</div>
-                  <div className="bd-light col-2 text-right">number</div>
-                </div>
-                <div className="d-flex justify-content-between">
-                  <div className="bd-light col-10">Average ranking in the user's list:</div>
-                  <div className="bd-light col-2 text-right">avgRank</div>
-                </div>
-              </div>
+          </div>
+          <div className="right-col">
+            <div className="m-4">
+              <CardWrapper title="comments" color="white">
+                <CommentColumn className="comments" />
+              </CardWrapper>
             </div>
-            // Review Box
-            <div>
-              <div className="font-weight-bold">
-                Reviews
-              </div>
-              <div>
-                Currently there is no review for this movie
-              </div>
-              <div>
-                >> <a href="">Click here to add a review.</a>
-              </div>
-            </div>
-          </CardWrapper>
+          </div>
         </div>
-        <CardWrapper title="Comments" color="white">
-          <CommentColumn />
-        </CardWrapper>
       </div>
     )
   }
