@@ -93,7 +93,7 @@ export const setCurrentUser = user => dispatch => {
     dispatch(
       setList({
         username: '',
-        list: [],
+        items: [],
         statement: ''
       })
     );

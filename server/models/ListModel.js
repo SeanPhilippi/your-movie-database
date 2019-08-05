@@ -9,11 +9,11 @@ const ListSchema = new Schema({
   statement: {
     type: String
   },
-  list: [{
+  items: [{
     // array of movie objects
     // removed required so an empty list could be created
     // adding, removing, reordering can be an update (PUT) from there
-    name: {
+    title: {
       type: String,
       required: true
     },

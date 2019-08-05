@@ -8,7 +8,7 @@ const initialState = {
   user: {},
   authErrors: {},
   statement: '',
-  list: [],
+  items: [],
   open: false,
   newUsers: []
 }
@@ -49,23 +49,23 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       user: { ...state.user, username: payload.listData.username },
       statement: payload.listData.statement,
-      list: [...payload.listData.list]
+      items: [...payload.listData.items]
     };
     case TYPES.ADD_TO_LIST: return {
       ...state,
-      list: [payload.movie, ...state.list]
+      items: [payload.movie, ...state.items]
     };
     case TYPES.REORDER_LIST: return {
       ...state,
-      list: arrayMove(state.list, payload.oldIndex, payload.newIndex)
+      items: arrayMove(state.items, payload.oldIndex, payload.newIndex)
     };
     case TYPES.DELETE_MOVIE: return {
       ...state,
-      list: [...state.list.filter(movie => movie.id !== payload.movie.id)]
+      items: [...state.items.filter(movie => movie.id !== payload.movie.id)]
     };
     case TYPES.DELETE_LIST: return {
       ...state,
-      list: []
+      items: []
     };
     default: return state;
   }

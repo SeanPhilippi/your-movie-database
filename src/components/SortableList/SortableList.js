@@ -13,7 +13,7 @@ import './SortableList.css';
 
 class SortableList extends Component {
   render() {
-    const { list, orderList, deleteMovie } = this.props;
+    const { items, orderList, deleteMovie } = this.props;
 
     const DragHandle = sortableHandle(() => {
       return (
@@ -49,9 +49,10 @@ class SortableList extends Component {
           </div>
           <div className="movie-info">
             <div>
+            {/* paste this to end of pathname after debugging disappearing movie titles: /${movie.title.concat('-', movie.year).split(' ').join('-')} */}
               <Link
                 to={{
-                  pathname: `/movies/${movie.title.concat('-', movie.year).split(' ').join('-')}`,
+                  pathname: `/movies`,
                   state: { movie }
                 }}
                 className="movie-link">
@@ -74,7 +75,7 @@ class SortableList extends Component {
   );
 
     const SortableList = sortableContainer(({ items }) =>  (
-      <div className="list-items text-center" >
+      <div className="list-items text-center">
         {
           items.map((movie, index) => {
             return (
@@ -95,7 +96,7 @@ class SortableList extends Component {
       <div className="list-container">
         <SortableList
           helperClass='sortableHelper'
-          items={ list }
+          items={ items }
           useDragHandle
           onSortEnd={ orderList }
           transitionDuration={300}
@@ -107,13 +108,13 @@ class SortableList extends Component {
 }
 
 SortableList.propTypes = {
-  list: PropTypes.array.isRequired,
+  items: PropTypes.array.isRequired,
   orderList: PropTypes.func.isRequired,
   deleteMovie: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  list: state.list,
+  items: state.items,
 });
 
 const mapDispatchToProps = dispatch => ({

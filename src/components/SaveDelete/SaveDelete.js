@@ -13,13 +13,13 @@ class SaveDelete extends PureComponent {
       user: {
         username,
       },
-      list,
+      items,
       statement
     } = this.props;
 
     const listObj = {
       username,
-      list: [...list],
+      items: [...items],
       statement
     }
     setUpdateStatus();
@@ -115,13 +115,13 @@ SaveDelete.propTypes = {
   deleteList: PropTypes.func.isRequired,
   setUpdateStatus: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  list: PropTypes.array.isRequired,
+  items: PropTypes.array.isRequired,
   statement: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
   user: state.user,
-  list: state.list,
+  items: state.items,
   statement: state.statement
 });
 

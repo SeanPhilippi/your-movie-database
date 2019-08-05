@@ -13,14 +13,15 @@ class Search extends PureComponent {
   };
 
   handleAdd = movie => {
-    const { addToList, list } = this.props;
+    const { addToList, items } = this.props;
     // fetch call to grab movie from api by id, then grab director
     fetch(`/api/movies/addMovie/${movie.imdbID}`)
       .then(res => res.json())
       .then(data => {
-        let titles = list.map(item => item.name);
+        let titles = items.map(item => item.title);
+        console.log('titles', titles)
         if (!titles.includes(movie.Title)) {
-          if (list.length < 20) {
+          if (items.length < 20) {
             addToList({
               title: movie.Title,
               year: movie.Year,
@@ -121,7 +122,7 @@ Search.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  list: state.list,
+  items: state.items,
 })
 
 const mapDispatchToProps = dispatch => ({
