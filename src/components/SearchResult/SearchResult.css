@@ -3,6 +3,7 @@
   border-bottom: lightgrey solid 1px;
   width: 100%;
   height: 2.1rem;
+  cursor: pointer;
 }
 
 .result-info {
