@@ -1,11 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Row, Col, Container } from 'reactstrap';
 import CommentColumn from '../CommentColumn/CommentColumn';
 import CardWrapper from '../CardWrapper/CardWrapper';
-import axios from 'axios';
 
 import './MoviePage.css';
 
@@ -46,7 +43,6 @@ class MoviePage extends PureComponent {
     // want a visible movie title slug in url for users
     // maybe don't need this for calls to server or calls to omdb api
     const { location: { state: { movie } } } = this.props;
-    console.log('movie', movie, 'id', movie.id)
     fetch(`/api/movies/id/${movie.id}`)
       .then(res => res.json())
       .then(data => {
@@ -73,80 +69,84 @@ class MoviePage extends PureComponent {
     const { poster, title, director, year, country, runtime, plot } = this.state.movie
 
     return (
-      <div className="w-50">
-        <CardWrapper title="Movie Details" color="tan">
-          <div className="movie-page d-flex">
-            <div
-              className="poster-img"
-              style={{ backgroundImage: `url(${ poster })` }}
-            >
-            </div>
-            <div>
-              <div className="title">
-                { title }
-              </div>
-              <div className="director">
-                <small>directed by</small> { director }
+      <div className="d-flex">
+        <div className="w-50">
+          <CardWrapper title="Movie Details" color="tan">
+            <div className="movie-page d-flex">
+              <div
+                className="poster-img"
+                style={{ backgroundImage: `url(${ poster })` }}
+              >
               </div>
               <div>
-                { country }, { year }
+                <div className="title">
+                  { title }
+                </div>
+                <div className="director">
+                  <small>directed by</small> { director }
+                </div>
+                <div>
+                  { country }, { year }
+                </div>
+                <div>
+                  { runtime }
+                </div>
+                <div>
+                  { plot }
+                </div>
               </div>
-              <div>
-                { runtime }
-              </div>
-              <div>
-                { plot }
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="font-weight-bold">
-              Statistics
-            </div>
-            <div className="bg-white">
-              <div className="d-flex justify-content-between">
-                <div className="bd-light col-10">Overall Ranking:</div>
-                <div className="bd-light col-2 text-right">rank</div>
-              </div>
-              <div className="d-flex justify-content-between">
-                <div className="bd-light col-10">Number of points:</div>
-                <div className="bd-light col-2 text-right">points</div>
-              </div>
-              <div className="d-flex justify-content-between">
-                <div className="bd-light col-10">Number of users that ranked this movie:</div>
-                <div className="bd-light col-2 text-right">number</div>
-              </div>
-              <div className="d-flex justify-content-between">
-                <div className="bd-light col-10">Average ranking in the user's list:</div>
-                <div className="bd-light col-2 text-right">avgRank</div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div className="font-weight-bold">
-              Reviews
             </div>
             <div>
-              Currently there is no review for this movie
+              <div className="font-weight-bold">
+                Statistics
+              </div>
+              <div className="bg-white">
+                <div className="d-flex justify-content-between">
+                  <div className="bd-light col-10">Overall Ranking:</div>
+                  <div className="bd-light col-2 text-right">rank</div>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <div className="bd-light col-10">Number of points:</div>
+                  <div className="bd-light col-2 text-right">points</div>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <div className="bd-light col-10">Number of users that ranked this movie:</div>
+                  <div className="bd-light col-2 text-right">number</div>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <div className="bd-light col-10">Average ranking in the user's list:</div>
+                  <div className="bd-light col-2 text-right">avgRank</div>
+                </div>
+              </div>
             </div>
+            // Review Box
             <div>
-              >> <a href="">Click here to add a review.</a>
+              <div className="font-weight-bold">
+                Reviews
+              </div>
+              <div>
+                Currently there is no review for this movie
+              </div>
+              <div>
+                >> <a href="">Click here to add a review.</a>
+              </div>
             </div>
+          </CardWrapper>
         </div>
-      </CardWrapper>
-      <CommentColumn />
-    </div>
+        <CardWrapper title="Comments" color="white">
+          <CommentColumn />
+        </CardWrapper>
+      </div>
     )
   }
 }
 
 MoviePage.propTypes = {
-
+  movie: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
 
 });
 
-export default connect (mapStateToProps)(MoviePage);
+export default connect(mapStateToProps)(MoviePage);

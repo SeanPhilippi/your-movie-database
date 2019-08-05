@@ -24,7 +24,6 @@ router.get('/search/:query/:num', ({ params }, res) => {
 // @access  Public
 router.get('/id/:id', (req, res) => {
   const apiKey = process.env.API_KEY;
-  console.log('id in route', req.params.id)
   let { slug, id } = req.params;
   // if there is a '-' and 4 numbers at the end, slice out
 
