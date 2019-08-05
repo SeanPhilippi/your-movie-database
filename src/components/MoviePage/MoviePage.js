@@ -93,8 +93,8 @@ class MoviePage extends PureComponent {
                     <div className="title">
                       { title }
                     </div>
-                    <div className="director">
-                      <small>directed by</small> { director }
+                    <div className="font-weight-bold">
+                      directed by <span className="director">{ director }</span>
                     </div>
                     <div>
                       { country }, { year }
