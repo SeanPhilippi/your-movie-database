@@ -13,6 +13,13 @@
   justify-content: flex-end;
   background-color: #EB5018;
 }
+
+.login-register-links {
+  font-size: .8rem;
+  margin-bottom: .2rem;
+  font-weight: 600;
+}
+
 // ! try this again
 /* .nav-sqaure {
   background-color: #e66c01;
@@ -33,7 +40,9 @@
   height: 3.5rem;
   line-height: 5rem;
   border-radius: .2rem;
-  background-color: $red
+  background-color: $red;
+  margin: 0 .4rem 0 0 !important;
+  // ! add shadow
 }
 
 .site-title {
