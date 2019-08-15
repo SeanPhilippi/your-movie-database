@@ -1,0 +1,67 @@
+.brand {
+  font-size: 1.4rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar {
+  width: 100%;
+  border: white solid 1px;
+  box-shadow: 0 2px 2px 0 black;
+  flex: 1;
+  padding: 0;
+  justify-content: flex-end;
+  background-color: #EB5018;
+}
+// ! try this again
+/* .nav-sqaure {
+  background-color: #e66c01;
+  background-image: url("https://www.transparenttextures.com/patterns/graphy.png");
+  width: 20rem;
+  font-size: 10rem;
+} */
+
+.nav-links {
+  font-size: .8rem;
+}
+
+.nav-block {
+  font-size: .9rem;
+  border: 1px solid white;
+  width: 9rem;
+  padding-left: .4rem;
+  height: 3.5rem;
+  line-height: 5rem;
+  border-radius: .2rem;
+  background-color: $red
+}
+
+.site-title {
+  color: white;
+  display: flex;
+  font-size: 45px;
+  font-weight: 900;
+  text-shadow: 0 0 4px #AF3211; /* horizontal-offset vertical-offset 'blur' colour */
+  -moz-text-shadow: 0 0 4px #AF3211;
+  -webkit-text-shadow: 0 0 4px #AF3211;
+}
+
+.subtitle {
+  color: white;
+  font-size: 14px;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-evenly;
+  width: 65%;
+  margin: auto;
+  height: 2rem;
+  color: white;
+}
+
+.navlink {
+  text-decoration: none;
+  font-size: 17px;
+  color: black;
+}

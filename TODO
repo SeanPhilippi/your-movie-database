@@ -19,8 +19,8 @@ create with how they utilize it
 
 
 To do list:
-- **update/saveList function is erasing names of movies from movie objects in items array!!! wtf, why??
-- *switch name to title for movie objects
+- improve styling of Nav
+- import icons
 - fix LoginBox send button positioning
 - allow login with username OR email, currently only email which isn't intuitive
 - adjust fontsize to Mead way, so I can have more granularity while sticking with rems

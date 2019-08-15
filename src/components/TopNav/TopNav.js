@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom';
 import { Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { logoutUser } from '../../redux/actions';
+import logo from '../../images/icons/logo_header.gif';
+
 
 import './TopNav.css';
 
@@ -81,31 +83,31 @@ class TopNav extends PureComponent {
 
           <div className="main-links d-flex">
             <NavLink
-              className="text-white mx-2"
+              className="text-white mx-2 nav-block"
               to="/"
             >
               HOME
             </NavLink>
             {/* <NavLink
-              className="text-white mx-2"
+              className="text-white mx-2 nav-block"
               to="/top-movies"
             >
               TOP MOVIE LIST
             </NavLink> */}
             <NavLink
-              className="text-white mx-2"
+              className="text-white mx-2 nav-block"
               to={ isAuthenticated ? "/profile" : "/login"}
             >
               YOUR TOP LIST
             </NavLink>
             {/* <NavLink
-              className="text-white mx-2"
+              className="text-white mx-2 nav-block"
               to="/users-index"
             >
               USERS' INDEX
             </NavLink> */}
             {/* <NavLink
-              className="text-white mx-2"
+              className="text-white mx-2 nav-block"
               to="/all-movies"
             >
               ALL THE MOVIES

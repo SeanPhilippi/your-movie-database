@@ -53,7 +53,7 @@
   font-size: 18px;
   background-color: Transparent;
   border: none;
-  cursor: pointer;
+  cursor: grab;
   overflow: hidden;
   outline: none;
 }
