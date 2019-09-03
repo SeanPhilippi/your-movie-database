@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import RegisterBox from '../RegisterBox/RegisterBox';
 import CardWrapper from '../CardWrapper/CardWrapper';
 
-import './Register.css';
-
 class Register extends PureComponent {
 
   componentDidMount() {
@@ -76,4 +74,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(withRouter(Register));
+export default withRouter(connect(mapStateToProps)(Register));

@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
 
-import "./HomeCard.css";
-
 const HomeCard = ({
   title,
   description = '',

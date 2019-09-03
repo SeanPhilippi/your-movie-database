@@ -20,14 +20,6 @@
   font-weight: 600;
 }
 
-// ! try this again
-/* .nav-sqaure {
-  background-color: #e66c01;
-  background-image: url("https://www.transparenttextures.com/patterns/graphy.png");
-  width: 20rem;
-  font-size: 10rem;
-} */
-
 .nav-links {
   font-size: .8rem;
 }
@@ -41,8 +33,24 @@
   line-height: 5rem;
   border-radius: .2rem;
   background-color: $red;
+  background-image: url("https://www.transparenttextures.com/patterns/inflicted.png");
   margin: 0 .4rem 0 0 !important;
-  // ! add shadow
+  box-shadow: .2rem .2rem black;
+}
+
+.nav-block:active,
+.nav-block.active {
+  font-size: .9rem;
+  border: 1px solid white;
+  width: 9rem;
+  padding-left: .4rem;
+  height: 3.5rem;
+  line-height: 5rem;
+  border-radius: .2rem;
+  background-color: $light-orange;
+  background-image: url("https://www.transparenttextures.com/patterns/inflicted.png");
+  margin: 0 .4rem 0 0 !important;
+  box-shadow: .2rem .2rem black;
 }
 
 .site-title {

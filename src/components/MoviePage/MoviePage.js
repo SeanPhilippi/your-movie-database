@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import CommentColumn from '../CommentColumn/CommentColumn';
 import CardWrapper from '../CardWrapper/CardWrapper';
 
-import './MoviePage.css';
-
 import {
 
 } from '../../redux/actions';

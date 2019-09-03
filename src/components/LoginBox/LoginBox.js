@@ -123,4 +123,4 @@ const mapDispatchToProps = dispatch => ({
   loginUser: (user, history) => dispatch(loginUser(user, history)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginBox));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginBox));

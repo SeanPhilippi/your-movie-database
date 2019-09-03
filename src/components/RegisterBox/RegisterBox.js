@@ -6,8 +6,6 @@ import { registerUser } from '../../redux/actions';
 import { connect } from 'react-redux';
 // import PasswordRevealer from '../PasswordRevealer/PasswordRevealer';
 
-import './RegisterBox.css';
-
 class RegisterBox extends PureComponent {
   state = {
     username: '',
@@ -62,11 +60,11 @@ class RegisterBox extends PureComponent {
             noValidate
             onSubmit={this.handleRegister}
           >
-            <div className="register-inputs">
+            <div>
               {/* username */}
-              <div className="username mb-2">
+              <div className="mb-2">
                 <div className="your-login font-weight-bold">
-                  Login/username <span style={{ color: 'red' }}>*</span>
+                  Login/Username&nbsp;<span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
                   name="username"
@@ -74,7 +72,7 @@ class RegisterBox extends PureComponent {
                   className=""
                   type="text"
                 />
-                <div className="text-left" style={{ color: 'red', textAlign: 'center' }}>
+                <div style={{ color: 'red' }}>
                   { usernameErrors }
                 </div>
               </div>
@@ -89,7 +87,7 @@ class RegisterBox extends PureComponent {
                   className=""
                   type="text"
                 />
-                <div className="text-left" style={{ color: 'red', textAlign: 'center' }}>
+                <div style={{ color: 'red' }}>
                   { emailErrors }
                 </div>
               </div>
@@ -104,14 +102,14 @@ class RegisterBox extends PureComponent {
                   className=""
                   type="password"
                 />
-                <div className="text-left" style={{ color: 'red', textAlign: 'center' }}>
+                <div style={{ color: 'red' }}>
                   { passwordErrors }
                 </div>
               </div>
               {/* confirm password */}
-              <div className="password2">
+              <div>
                 <div className="password2-label font-weight-bold">
-                  Retype password <span style={{ color: 'red' }}>*</span>
+                  Retype Password <span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
                   name="password2"
@@ -119,7 +117,7 @@ class RegisterBox extends PureComponent {
                   className=""
                   type="password"
                 />
-                <div className="text-left" style={{ color: 'red', textAlign: 'center' }}>
+                <div style={{ color: 'red' }}>
                   { password2Errors }
                 </div>
               </div>
@@ -156,4 +154,4 @@ const mapDispatchToProps = dispatch => ({
   registerUser: (user, history) => dispatch(registerUser(user, history)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterBox));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterBox));

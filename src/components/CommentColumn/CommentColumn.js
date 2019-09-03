@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import './CommentColumn.css';
 
 export default class CommentColumn extends PureComponent {
   render() {

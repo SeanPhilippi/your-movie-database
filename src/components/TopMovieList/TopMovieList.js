@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 // import ReactPaginate from 'react-paginate';
 
-import './TopMovieList.css';
-
 class TopMovieList extends PureComponent {
   render() {
     return (

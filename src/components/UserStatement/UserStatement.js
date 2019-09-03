@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setStatement } from '../../redux/actions';
-import './UserStatement.css';
 
 class UserStatement extends Component {
   render() {

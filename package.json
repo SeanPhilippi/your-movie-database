@@ -30,6 +30,7 @@
     "react-confirm-alert": "^2.3.0",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
+    "react-router": "^5.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.5",
     "react-sortable-hoc": "^1.4.0",

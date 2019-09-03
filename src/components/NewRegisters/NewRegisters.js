@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import './NewRegisters.css';
 
 class NewRegisters extends PureComponent {
   render() {
