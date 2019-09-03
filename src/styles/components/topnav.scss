@@ -6,7 +6,7 @@
 
 .navbar {
   width: 100%;
-  border: white solid 1px;
+  border: lightgrey solid 1px;
   box-shadow: 0 2px 2px 0 black;
   flex: 1;
   padding: 0;
@@ -25,32 +25,24 @@
 }
 
 .nav-block {
-  font-size: .9rem;
-  border: 1px solid white;
+  font-family: 'Michroma', sans-serif;
+  font-weight: bold;
+  font-size: .7rem;
+  border: 1px solid lightgrey;
   width: 9rem;
   padding-left: .4rem;
   height: 3.5rem;
   line-height: 5rem;
   border-radius: .2rem;
   background-color: $red;
-  background-image: url("https://www.transparenttextures.com/patterns/inflicted.png");
+  background-image: url("https://www.transparenttextures.com/patterns/subtle-carbon.png");
   margin: 0 .4rem 0 0 !important;
   box-shadow: .2rem .2rem black;
 }
 
 .nav-block:active,
 .nav-block.active {
-  font-size: .9rem;
-  border: 1px solid white;
-  width: 9rem;
-  padding-left: .4rem;
-  height: 3.5rem;
-  line-height: 5rem;
-  border-radius: .2rem;
   background-color: $light-orange;
-  background-image: url("https://www.transparenttextures.com/patterns/inflicted.png");
-  margin: 0 .4rem 0 0 !important;
-  box-shadow: .2rem .2rem black;
 }
 
 .site-title {

@@ -137,7 +137,7 @@ class MoviePage extends PureComponent {
                     Currently there is no review for this movie
                   </div>
                   <div>
-                    >> <a href="">Click here to add a review.</a>
+                    >> <a href="#">Click here to add a review.</a>
                   </div>
                 </div>
               </CardWrapper>

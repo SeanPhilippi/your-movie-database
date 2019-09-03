@@ -1,6 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Container, Col } from 'reactstrap';
-import PropTypes from 'prop-types';
 
 class UsersIndex extends PureComponent {
 
@@ -11,10 +9,6 @@ class UsersIndex extends PureComponent {
       </div>
     )
   }
-}
-
-UsersIndex.propTypes = {
-
 }
 
 export default UsersIndex;

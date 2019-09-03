@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { loginUser } from '../../redux/actions';
 import { connect } from 'react-redux';

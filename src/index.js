@@ -7,6 +7,13 @@ import store from './redux/store';
 import setJwtToken from './utils/auth/setJwtToken';
 import './styles/styles.scss';
 import './index.css';
+import WebFont from 'webfontloader';
+
+WebFont.load({
+  google: {
+    families: ['Michroma']
+  }
+});
 
 dotenv.config();
 
