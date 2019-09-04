@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CommentColumn from '../CommentColumn/CommentColumn';
 import CardWrapper from '../CardWrapper/CardWrapper';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import {
-
-} from '../../redux/actions';
+library.add(faChevronRight);
 
 class MoviePage extends PureComponent {
   state = {
@@ -137,7 +138,7 @@ class MoviePage extends PureComponent {
                     Currently there is no review for this movie
                   </div>
                   <div>
-                    >> <a href="#">Click here to add a review.</a>
+                    <FontAwesomeIcon icon={faChevronRight}/> <a href="#">Click here to add a review.</a>
                   </div>
                 </div>
               </CardWrapper>

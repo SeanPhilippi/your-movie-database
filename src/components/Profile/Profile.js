@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import CommentColumn from '../CommentColumn/CommentColumn';
 import UserStatement from '../UserStatement/UserStatement';
 import SaveDelete from '../SaveDelete/SaveDelete';
@@ -8,12 +10,12 @@ import Search from '../Search/Search';
 
 import './Profile.css';
 
-const Profile = () =>  (
+const Profile = props =>  (
   <div className="profile-wrapper" >
     <div className="main-container bg-light2 mt-4">
       <div className="left-col bg-white1">
         <div className="px-4 pt-4 w-100">
-          <CardWrapper title="User Top Movies" color="tan">
+          <CardWrapper title={`${props.user.username || 'User'}'s Top Movies`} color="tan">
             <div className="search-btns-container">
               <SaveDelete />
             </div>
@@ -38,4 +40,12 @@ const Profile = () =>  (
   </div>
 );
 
-export default Profile;
+Profile.propTypes = {
+  movie: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps)(Profile);

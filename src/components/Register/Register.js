@@ -5,6 +5,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RegisterBox from '../RegisterBox/RegisterBox';
 import CardWrapper from '../CardWrapper/CardWrapper';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+library.add(faChevronRight);
 
 class Register extends PureComponent {
 
@@ -26,9 +31,6 @@ class Register extends PureComponent {
                 will mainly be used to identify you within the user community but will not be used for commercial purposes.
                 If you want to know why we need specific data you can find <a href="">more detailed information here</a>.
               </p>
-              <p>
-                <strong>Important : one registration only per person!</strong> The additional lists will be deleted.
-              </p>
             </div>
             <CardWrapper title="Register" color="tan">
               <RegisterBox />
@@ -40,13 +42,9 @@ class Register extends PureComponent {
                 <div className="advantages">
                   <div>
                     Here are the advantages of being a registered user:<br/>
-                      >	Create your own Top Movie List.<br/>
-                      >	Discuss movies with other users.<br/>
-                      >	Write comments on other user's Top List.<br/>
-                      >	Receive the monthly newsletter containing :<br/>
-                      {"\u00a0"} -	updates & news about the site<br/>
-                      {"\u00a0"} -	the number of visitors on Your Top Movie list<br/>
-                      {"\u00a0"} -	the number of messages from other users on Your Top Movie list
+                    <FontAwesomeIcon icon={faChevronRight} />	Create your own Top Movie List.<br/>
+                    <FontAwesomeIcon icon={faChevronRight} />	Discuss movies with other users.<br/>
+                    <FontAwesomeIcon icon={faChevronRight} />	Write comments on other user's Top List.<br/>
                   </div>
                 </div>
               </CardWrapper>
@@ -54,7 +52,7 @@ class Register extends PureComponent {
                 <div>
                   <div>
                     We respect your privacy. It's simple: we do not share your personal
-                    data with other companies or organisations, ever!
+                    data with other companies or organizations, ever!
                   </div>
                 </div>
               </CardWrapper>

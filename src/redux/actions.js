@@ -129,7 +129,7 @@ export const loginUser = (user, history) => dispatch => {
       dispatch(setToken(decoded));
       // dispatch setUser
       dispatch(setCurrentUser(user));
-      history.push('/');
+      history.push('/profile');
     })
     .catch(err => {
       console.log('err', err.response.data)
@@ -166,10 +166,10 @@ export const logoutUser = history => dispatch => {
   setAuthToken(false);
   // set token back to empty object, passing in empty object will toggle isAuthenticated to false
   dispatch(setToken({}));
-  // ! set current user back to empty object
-  dispatch(setCurrentUser({}))
+  // set current user back to empty object
+  dispatch(setCurrentUser({}));
   if (history) {
     history.push('/login');
-  }
+  };
 };
 

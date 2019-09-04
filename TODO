@@ -19,13 +19,13 @@ create with how they utilize it
 
 
 To do list:
-- improve styling of Nav
+- improve styling of Nav, make nav links look like animated buttons
 - import icons
-- fix LoginBox send button positioning
+- change all links to styled buttons
+- look into emailing a password reset link
 - allow login with username OR email, currently only email which isn't intuitive
 - adjust fontsize to Mead way, so I can have more granularity while sticking with rems
 - **how to collect visitor count for user lists, need to do that ASAP so I can populate home page with most visited lists
-- rename list array to items or something
 - set up routing for movie pages
 - fix hyperlink colors on sortablelist, visited gold, neutral black?
 - build movie page boiler plate (look at mockup!)

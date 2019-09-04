@@ -9,7 +9,6 @@ import {
 import { Link } from 'react-router-dom';
 import { orderList, deleteMovie } from '../../redux/actions';
 import img from '../../images/grippy.png';
-import './SortableList.css';
 
 class SortableList extends Component {
   render() {
@@ -71,8 +70,7 @@ class SortableList extends Component {
           </button>
         </div>
       )
-    }
-  );
+    });
 
     const SortableList = sortableContainer(({ items }) =>  (
       <div className="list-items text-center">
