@@ -26,16 +26,16 @@ class Profile extends PureComponent  {
     if (this.props.match.params.username) {
       console.log('fetching listData in Profile...')
       fetch(`/api/movies/${ this.props.match.params.username }/list`)
-        .then(res => {
-          console.log('res in profile', res)
-          return res.json()})
+        .then(res => res.json())
         .then(data => {
-          const fetchedListData = {
-            username: data.username,
-            items: data.items,
-            statement: data.statement
-          };
-          this.setState({ listData: fetchedListData })
+          if (data) {
+            const fetchedListData = {
+              username: data.username,
+              items: data.items,
+              statement: data.statement
+            };
+            this.setState({ listData: fetchedListData });
+          }
         })
     }
   }
@@ -46,9 +46,9 @@ class Profile extends PureComponent  {
         <div className="main-container bg-light2 mt-4">
           <div className="left-col white">
             <div className="px-4 pt-4 w-100">
-              <CardWrapper title={`${this.props.user.username || this.props.match.params.username}'s Top Movies`} color="tan">
+              <CardWrapper title={`${this.props.match.params.username || this.props.user.username}'s Top Movies`} color="tan">
                 {
-                  this.props.isAuthenticated
+                  !this.props.match.params.username
                   ? (
                     <div>
                       <div className="search-btns-container">

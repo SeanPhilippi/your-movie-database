@@ -19,10 +19,20 @@ class ViewableList extends Component {
       </div>
     );
 
+    const NoList = () => (
+      <div>
+        This user hasn't added any movies yet.
+      </div>
+    );
+
     return (
       <div>
         <div>
-          { this.props.items.map((item, idx) => <ViewableItem movie={item} idx={idx} key={item.imdb_id}/>) }
+          {
+            this.props.items.length
+            ? this.props.items.map((item, idx) => <ViewableItem movie={item} idx={idx} key={item._id}/>)
+            : <NoList />
+          }
         </div>
       </div>
     )
