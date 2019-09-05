@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-class NewRegisters extends PureComponent {
+class NewRegistersBox extends PureComponent {
   render() {
     const {
       newUsers,
@@ -23,13 +23,15 @@ class NewRegisters extends PureComponent {
                   return (
                     <div
                       className="d-flex justify-content-between"
-                      key={_id}
+                      key={ _id }
                     >
                       <div>
-                        {username}
+                        <Link to={`/profile/${ username }`}>
+                          { username }
+                        </Link>
                       </div>
                       <div>
-                        {register_date}
+                        { register_date }
                       </div>
                     </div>
                   )
@@ -38,9 +40,9 @@ class NewRegisters extends PureComponent {
             </div>
             <hr/>
             <p>
-              <NavLink to="/new-users">
+              <Link to="/new-users">
                 Go to the list of the last 50 users
-              </NavLink>
+              </Link>
             </p>
           </div>
         </div>
@@ -49,7 +51,7 @@ class NewRegisters extends PureComponent {
   }
 }
 
-NewRegisters.propTypes = {
+NewRegistersBox.propTypes = {
   newUsers: PropTypes.array.isRequired
 };
 
@@ -57,4 +59,4 @@ const mapStateToProps = state => ({
   newUsers: state.newUsers
 });
 
-export default connect(mapStateToProps)(NewRegisters);
+export default connect(mapStateToProps)(NewRegistersBox);

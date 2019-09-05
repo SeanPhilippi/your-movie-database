@@ -70,7 +70,7 @@ class MoviePage extends PureComponent {
     return (
       <div className="profile-wrapper" >
         <div className="main-container bg-light2 mt-4">
-          <div className="left-col bg-white1">
+          <div className="left-col white">
             <div className="px-4 pt-4 w-100">
               <CardWrapper title="Movie Details" color="tan">
                 <div className="movie-page d-flex">
@@ -110,7 +110,7 @@ class MoviePage extends PureComponent {
                   <div className="font-weight-bold mb-1">
                     Statistics
                   </div>
-                  <div className="bg-white">
+                  <div className="white">
                     <div className="d-flex justify-content-between">
                       <div className="bd-light col-10">Overall Ranking:</div>
                       <div className="bd-light col-2 text-right">rank</div>

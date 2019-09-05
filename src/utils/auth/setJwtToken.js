@@ -1,6 +1,6 @@
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './setAuthToken';
-import { setToken, logoutUser, fetchCurrentUser, setCurrentUser } from '../../redux/actions';
+import { setToken, logoutUser, fetchCurrentUser } from '../../redux/actions';
 import store from '../../redux/store';
 
 export default () => {

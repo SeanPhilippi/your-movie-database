@@ -98,7 +98,7 @@ router.post('/login', (req, res) => {
 // @desc    Return last 50 registered users
 // @access  Public
 router.get('/new-registers', (req, res) => {
-  // switch to a limit of the most recent 50 eventually
+  // switch to a limit of the 50 most recent eventually
   User.find({}).exec().then(data => {
     res.json(data);
   }).catch(console.log);
@@ -113,6 +113,15 @@ passport.authenticate('jwt', { session: false }),
   res.json({
     user: {email: req.user.email, id: req.user._id, username: req.user.username}
   });
+});
+
+// @route   GET api/users/visited-profile
+// @desc    Return user and list data for visited profile
+// @access  Public
+router.get('/visited-profile', (req, res) => {
+  User.findOne({ username }).exec().then(data => {
+    res.json(data);
+  }).catch(console.log);
 });
 
 module.exports = router;

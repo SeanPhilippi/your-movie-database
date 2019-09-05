@@ -3,7 +3,7 @@ const router = express.Router();
 const List = require('../../models/ListModel');
 const fetch = require('node-fetch');
 
-// @route   GET /search/:query/:num
+// @route   GET api/movies/search/:query/:num
 // @desc    get search results
 // @access  Public
 router.get('/search/:query/:num', ({ params }, res) => {
@@ -19,7 +19,7 @@ router.get('/search/:query/:num', ({ params }, res) => {
     .catch(console.log);
 });
 
-// @route   GET /movies/:slug
+// @route   GET api/movies/movies/:slug
 // @desc    get movie data to populate MoviePage.js
 // @access  Public
 router.get('/id/:id', (req, res) => {
@@ -38,7 +38,7 @@ router.get('/id/:id', (req, res) => {
     .catch(console.log);
 });
 
-// @route   GET /addMovie/:id
+// @route   GET api/movies/addMovie/:id
 // @desc    fetch movie details to create movie object for handleAdd()
 // @access  Public
 router.get('/addMovie/:id', (req, res) => {
@@ -52,7 +52,7 @@ router.get('/addMovie/:id', (req, res) => {
     .catch(console.log);
 })
 
-// @route   GET /:username/list
+// @route   GET api/movies/:username/list
 // @desc    fetch user's existing list
 // @access  Public
 router.get('/:username/list', (req, res) => {
@@ -61,7 +61,7 @@ router.get('/:username/list', (req, res) => {
   }).catch(console.log);
 });
 
-// @route   PUT /update/:username
+// @route   PUT api/movies/update/:username
 // @desc    update existing list attached to username
 // @access  Public
 router.put('/save/:username', (req, res) => {
@@ -80,7 +80,7 @@ router.put('/save/:username', (req, res) => {
   ).catch(console.log);
 })
 
-// @route   DELETE /delete/:username
+// @route   DELETE api/movies/delete/:username
 // @desc    delete list attached to username
 // @access  Public
 router.delete('/delete/:username', (req, res) => {

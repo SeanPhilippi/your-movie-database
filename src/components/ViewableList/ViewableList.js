@@ -22,7 +22,7 @@ class ViewableList extends Component {
     return (
       <div>
         <div>
-          { this.props.visitedItems.map((item, idx) => <ViewableItem movie={item} idx={idx} />) }
+          { this.props.items.map((item, idx) => <ViewableItem movie={item} idx={idx} key={item.imdb_id}/>) }
         </div>
       </div>
     )
@@ -37,9 +37,9 @@ ViewableList.propTypes = {
 
 const mapStateToProps = state => ({
   // only passing in items, since this only needs items.  visitedUsername and visitedStatement will be passed into different components
-  visitedItems: state.visitedItems,
+  // visitedItems: state.visitedItems,
   // passing in items for when the current user wants to see their viewableList
-  items: state.items,
+  // items: state.items,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CommentColumn from '../CommentColumn/CommentColumn';
@@ -11,48 +11,81 @@ import ViewableList from '../ViewableList/ViewableList';
 
 import './Profile.css';
 
-const Profile = props =>  (
-  <div className="profile-wrapper" >
-    <div className="main-container bg-light2 mt-4">
-      <div className="left-col bg-white1">
-        <div className="px-4 pt-4 w-100">
-          <CardWrapper title={`${props.user.username || 'User'}'s Top Movies`} color="tan">
-            <div className="search-btns-container">
-              <SaveDelete />
+class Profile extends PureComponent  {
+  state = {
+    listData: {
+      username: '',
+      items: [],
+      statement: '',
+    }
+  }
+
+  componentDidMount() {
+    console.log('here')
+    console.log(this.props.match.params.username)
+    if (this.props.match.params.username) {
+      console.log('fetching listData in Profile...')
+      fetch(`/api/movies/${ this.props.match.params.username }/list`)
+        .then(res => {
+          console.log('res in profile', res)
+          return res.json()})
+        .then(data => {
+          const fetchedListData = {
+            username: data.username,
+            items: data.items,
+            statement: data.statement
+          };
+          this.setState({ listData: fetchedListData })
+        })
+    }
+  }
+
+  render() {
+    return (
+      <div className="profile-wrapper" >
+        <div className="main-container bg-light2 mt-4">
+          <div className="left-col white">
+            <div className="px-4 pt-4 w-100">
+              <CardWrapper title={`${this.props.user.username || this.props.match.params.username}'s Top Movies`} color="tan">
+                {
+                  this.props.isAuthenticated
+                  ? (
+                    <div>
+                      <div className="search-btns-container">
+                        <SaveDelete />
+                      </div>
+                      <Search />
+                      <SortableList />
+                    </div>
+                  )
+                  : <div>
+                      <ViewableList items={ this.state.listData.items }/>
+                    </div>
+                }
+              </CardWrapper>
             </div>
-            {
-              props.isAuthenticated
-              ? (
-                <div>
-                  <Search />
-                  <SortableList />
-                </div>
-              )
-              : <div>
-                  <ViewableList/>
-                </div>
-            }
-          </CardWrapper>
-        </div>
-        <div className="px-4 w-100">
-          <CardWrapper title="user statement" color="tan">
-            <UserStatement />
-          </CardWrapper>
+            <div className="px-4 w-100">
+              <CardWrapper title="user statement" color="tan">
+                <UserStatement />
+              </CardWrapper>
+            </div>
+          </div>
+          <div className="right-col">
+            <div className="m-4">
+              <CardWrapper title="comments" color="white">
+                <CommentColumn className="comments" />
+              </CardWrapper>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="right-col">
-        <div className="m-4">
-          <CardWrapper title="comments" color="white">
-            <CommentColumn className="comments" />
-          </CardWrapper>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+    );
+  }
+}
 
 Profile.propTypes = {
-  movie: PropTypes.object.isRequired,
+  user: PropTypes.object,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({

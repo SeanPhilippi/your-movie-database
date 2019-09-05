@@ -19,12 +19,11 @@ create with how they utilize it
 
 
 To do list:
-- fetch and set visited user data upon clicking on username links
+- work on edit/presentation view
 - improve styling of Nav, make nav links look like animated buttons
 - find fontAwesome icons or other icons to put into header components for cards!!
 - change all links to styled buttons
-- fix hyperlink colors on sortablelist, visited gold, neutral black?
-- work on edit/presentation view
+- fix hyperlink visited/neutral color, might have to store data in localStorage?
 - make white background width of the container on home page
 - /profile is still reachable when user is logged out, why?  Also logging out while on /profile does not redirect user to /login, why?
   - read about and understand how history api works
@@ -49,7 +48,6 @@ To do list:
 - update README and upload pics on Portfolio
 - add to beginning/end toggle button
 - no duplicate usernames, make an error message for it and put in register validation function
-- pass userData into NewRegisters component
 - give users a register_date and last_login date
 - allow for emojis when making comments
 - fix white gradient, make it more prominent/work.  Currently doing nothing?

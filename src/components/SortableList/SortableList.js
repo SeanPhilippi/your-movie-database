@@ -38,7 +38,7 @@ class SortableList extends Component {
       return (
         <div
           key={ id }
-          className="movie-item bg-white1"
+          className="movie-item white"
         >
           <div className='grip'>
             <DragHandle />

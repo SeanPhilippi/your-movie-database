@@ -52,6 +52,7 @@ class App extends PureComponent {
               <Route exact path="/account" component={ UnderConstruction } />
               <Route exact path="/top-movies" component={ UnderConstruction } />
               <Route exact path="/profile" component={ Profile } />
+              <Route exact path="/profile/:username" component={ Profile } />
               <Route exact path="/users-index" component={ UnderConstruction } />
               <Route exact path="/all-movies" component={ UnderConstruction } />
               <Route exact path="/new-users" component={ UnderConstruction } />
