@@ -5,12 +5,24 @@ import isEmpty from '../utils/helpers/is-empty';
 const initialState = {
   isAuthenticated: false,
   user_token: {},
-  user: {},
+  user: {}, // object containing email, id, username
   authErrors: {},
   statement: '',
   items: [],
   open: false,
-  newUsers: []
+  newUsers: [],
+  visitedItems: [
+    {
+      title: 'The Thin Red Line',
+      director: 'Terrence Malick',
+      year: '1998'
+    },
+    {
+      title: 'Fascination',
+      director: 'Jean Rollin',
+      year: '1979'
+    },
+  ]
 }
 
 // destructured action parameter is desctructured and passed in to rootReducer function,

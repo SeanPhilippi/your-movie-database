@@ -20,8 +20,18 @@ const Profile = props =>  (
             <div className="search-btns-container">
               <SaveDelete />
             </div>
-            <Search />
-            <SortableList />
+            {
+              props.isAuthenticated
+              ? (
+                <div>
+                  <Search />
+                  <SortableList />
+                </div>
+              )
+              : <div>
+                  <ViewableList/>
+                </div>
+            }
           </CardWrapper>
         </div>
         <div className="px-4 w-100">
@@ -47,6 +57,7 @@ Profile.propTypes = {
 
 const mapStateToProps = state => ({
   user: state.user,
+  isAuthenticated: state.isAuthenticated,
 });
 
 export default connect(mapStateToProps)(Profile);

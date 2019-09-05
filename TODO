@@ -19,6 +19,7 @@ create with how they utilize it
 
 
 To do list:
+- fetch and set visited user data upon clicking on username links
 - improve styling of Nav, make nav links look like animated buttons
 - find fontAwesome icons or other icons to put into header components for cards!!
 - change all links to styled buttons
