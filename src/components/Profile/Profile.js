@@ -7,6 +7,7 @@ import SaveDelete from '../SaveDelete/SaveDelete';
 import SortableList from '../SortableList/SortableList';
 import CardWrapper from '../CardWrapper/CardWrapper';
 import Search from '../Search/Search';
+import ViewableList from '../ViewableList/ViewableList';
 
 import './Profile.css';
 

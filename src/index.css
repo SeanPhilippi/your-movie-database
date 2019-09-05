@@ -1,4 +1,8 @@
 /* links */
+a:visited {
+  color: #9C640B;
+}
+
 a {
   color: #EF7C2D;
 }
@@ -7,9 +11,6 @@ a {
   color:
 } */
 
-a:visited {
-  color: #9C640B;
-}
 
 a:hover {
   color: #B20E07;

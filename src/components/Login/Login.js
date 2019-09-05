@@ -8,15 +8,15 @@ import { connect } from 'react-redux';
 class Login extends PureComponent {
   render() {
     return (
-      <Container className="d-flex border-0 justify-content-center">
-        <Col className="inner-container mt-4 mx-4 p-0">
+      <div className="d-flex border-0 justify-content-center">
+        <div className="inner-container mt-4 mx-4 p-0">
           <Col className="bg-white1 pt-2">
             <CardWrapper title="Login" color="tan">
               <LoginBox />
             </CardWrapper>
           </Col>
-        </Col>
-      </Container>
+        </div>
+      </div>
     )
   }
 }

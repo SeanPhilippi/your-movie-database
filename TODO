@@ -20,28 +20,31 @@ create with how they utilize it
 
 To do list:
 - improve styling of Nav, make nav links look like animated buttons
-- import icons
+- find fontAwesome icons or other icons to put into header components for cards!!
 - change all links to styled buttons
+- fix hyperlink colors on sortablelist, visited gold, neutral black?
+- work on edit/presentation view
+- make white background width of the container on home page
+- /profile is still reachable when user is logged out, why?  Also logging out while on /profile does not redirect user to /login, why?
+  - read about and understand how history api works
+- create another substantial card component and populate with dummy data
+- make sortable list background high of the page
+- make the delete lightbox on brand
+- display next to save/delete list buttons the number of movies in user list, and display a message when their list is full
 - look into emailing a password reset link
 - allow login with username OR email, currently only email which isn't intuitive
 - adjust fontsize to Mead way, so I can have more granularity while sticking with rems
+- incorporate Stu's http api and do some clean up in actions.js
 - **how to collect visitor count for user lists, need to do that ASAP so I can populate home page with most visited lists
 - set up routing for movie pages
-- fix hyperlink colors on sortablelist, visited gold, neutral black?
 - build movie page boiler plate (look at mockup!)
 - fix list styling, 20 movies viewable in screen with room to spare
 - visual signifiers or notification message or displayed count so movies can't be added after 20 cap
 - look at and fix updateStatus()
 - make movies added to list persist by storing in localStorage upon add/reorder, or by PUT request to mongodb for any change
-- /profile is still reachable when user is logged out, why?  Also logging out while on /profile does not redirect user to /login, why?
-  - read about and understand how history api works
-- incorporate Stu's http api and do some clean up in actions.js
-- import icons
 - add YMDB logo graphic in place of 'Home' nav link
 - make new mlab collections, movies and comments
 - set up global styling root colors and variables
-- work on edit/presentation view
-- Layout.js and Card.js wrapper components
 - update README and upload pics on Portfolio
 - add to beginning/end toggle button
 - no duplicate usernames, make an error message for it and put in register validation function

@@ -111,7 +111,7 @@ class TopNav extends PureComponent {
               className="text-white mx-2 nav-block"
               exact
               to={ isAuthenticated ? "/profile" : "/login"}
-              activeClassName={ isAuthenticated && "active" }
+              activeClassName={ isAuthenticated ? "active" : "" }
             >
               YOUR TOP LIST
             </NavLink>

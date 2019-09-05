@@ -2,23 +2,14 @@
   border-radius: 5px 5px 0 0;
 }
 
-.login-box {
-
-}
-
 .login {
   display: grid;
-  grid-template-columns: 2fr 3fr 2fr;
-}
-
-.your-login {
-  display: flex;
-  flex-wrap: nowrap;
+  grid-template-columns: 2fr 5fr 3fr;
 }
 
 .password {
   display: grid;
-  grid-template-columns: 2fr 3fr 2fr;
+  grid-template-columns: 2fr 5fr 3fr;
 }
 
 .errors {
@@ -29,7 +20,7 @@
 
 .btn-container {
   display: grid;
-  grid-template-columns: 2fr 3fr 2fr;
+  grid-template-columns: 2fr 5fr 3fr;
 }
 
 .send-btn {

@@ -52,20 +52,19 @@ class LoginBox extends PureComponent {
     } = this.props;
 
     return (
-      <Row className="login-box d-flex flex-column">
+      <Row className="d-flex flex-column">
         <div>
           <form
             className="login-main py-2 px-4"
             noValidate
             onSubmit={this.handleLogin}
           >
-            <div className="login-pass">
+            <div>
               <div className="login mb-2">
-                <div className="your-login">Your login: </div>
+                <div>Your login: </div>
                 <input
                   name="email"
                   onChange={this.onTextChange}
-                  className=""
                   type="text"
                 />
                 <div className="errors">
@@ -73,11 +72,10 @@ class LoginBox extends PureComponent {
                 </div>
               </div>
               <div className="password">
-                <div className="">Password: </div>
+                <div>Password: </div>
                 <input
                   name="password"
                   onChange={this.onTextChange}
-                  className=""
                   type="password"
                 />
                 <div className="errors">
