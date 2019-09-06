@@ -25,6 +25,7 @@ To do list:
 - improve styling of Nav, make nav links look like animated buttons
 - find fontAwesome icons or other icons to put into header components for cards!!
 - change all links to styled buttons
+- was able to add 3 of the same movie, not good...
 - use CLEAR_ERRORS action when visiting any component that has login or registerbox visible, look into history.listen()
 - fix hyperlink visited/neutral color, might have to store data in localStorage?
 - make white background width of the container on home page
@@ -32,6 +33,7 @@ To do list:
   - read about and understand how history api works
 - create another substantial card component and populate with dummy data
 - make the delete lightbox on brand
+- make some tests for site using Jest or Selenium
 - display next to save/delete list buttons the number of movies in user list, and display a message when their list is full
 - look into emailing a password reset link
 - allow login with username OR email, currently only email which isn't intuitive

@@ -61,16 +61,17 @@ router.get('/:username/list', (req, res) => {
   }).catch(console.log);
 });
 
-// @route   PUT api/movies/update/:username
+// @route   PUT api/movies/save/:username
 // @desc    update existing list attached to username
 // @access  Public
 router.put('/save/:username', (req, res) => {
+  console.log('req body in movies/save', req.body)
   List.updateOne(
     { username: req.params.username },
     {
       $set: {
       'username': req.body.username,
-      'list': req.body.list,
+      'items': req.body.items,
       'statement': req.body.statement,
       }
     },
