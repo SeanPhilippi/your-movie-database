@@ -12,7 +12,7 @@ class TopNav extends PureComponent {
 
   handleLogout = e => {
     e.preventDefault();
-    this.props.logoutUser();
+    this.props.logoutUser(this.props.history);
   };
 
   handleLogin = () => { };

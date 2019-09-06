@@ -23,6 +23,8 @@ To do list:
   - look into creating history.js and swapping BrowserRouter with Router wrapper
   - https://stackoverflow.com/questions/42701129/how-to-push-to-history-in-react-router-v4?rq=1
 - new registers keep disappearing!?
+- finish account page, make an MVP
+  - https://toolset.com/documentation/user-guides/building-the-my-account-page/
 - "Are you sure you want to discard your changes?"  <discard> <keep editing> pop up when user tries to leave SortableList
 - scrape IMDB urls, look into other apis or scraping tools
 - improve styling of Nav, make nav links look like animated buttons
