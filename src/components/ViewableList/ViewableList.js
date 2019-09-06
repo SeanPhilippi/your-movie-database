@@ -7,21 +7,28 @@ import {  } from '../../redux/actions';
 class ViewableList extends Component {
   render() {
     const ViewableItem = ({ movie, idx }) => (
-      <div className="d-flex">
-        <div>
-          { idx + 1 } |&nbsp;
+      <div className="d-flex white justify-content-between" style={{ lineHeight: '2rem' }}>
+        <div className="d-flex">
+          <div className="text-right" style={{ width: '2.2rem' }}>
+            { idx + 1 } |&nbsp;
+          </div>
+          <div className="mr-2">
+            <Link to={{
+                pathname: '/movies',
+                state: { movie }
+              }}
+            >
+              { movie.title }
+            </Link>
+          </div>
+          <div>
+            ({ movie.director }, { movie.year })
+          </div>
         </div>
-        <div className="mr-2">
-          <Link to={{
-              pathname: '/movies',
-              state: { movie }
-            }}
-          >
-            { movie.title }
-          </Link>
-        </div>
-        <div>
-          ({ movie.director }, { movie.year })
+        <div className="align-self-end mr-2">
+          {/* <a href={`http://www.imdb.com/title/${movie._id}/`}>
+            IMDB
+          </a> */}
         </div>
       </div>
     );

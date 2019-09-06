@@ -14,7 +14,8 @@ export const TYPES = {
   ADD_TO_LIST: 'ADD_TO_LIST',
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
-  DELETE_LIST: 'DELETE_LIST'
+  DELETE_LIST: 'DELETE_LIST',
+  CLEAR_ERRORS: 'CLEAR_ERRORS'
 };
 
 // action creators
@@ -35,6 +36,10 @@ export const setNewUsers = users => ({
 
 export const setUpdateStatus = () => ({
   type: TYPES.SET_UPDATE_STATUS
+});
+
+export const onRouteChange = () => ({
+  type: TYPES.CLEAR_ERRORS
 });
 
 export const setStatement = text => ({

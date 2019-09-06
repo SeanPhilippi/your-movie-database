@@ -8,7 +8,7 @@ export default class CommentColumn extends PureComponent {
           Write a comment
         </div>
         <textarea
-          className="comments-box"
+          className="comments-box w-100"
           type="text"
           name="comments"
           rows="4"

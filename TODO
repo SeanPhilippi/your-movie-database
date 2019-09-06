@@ -17,18 +17,20 @@ create with how they utilize it
 - home page for site would have ranking of top movies according to ymdb users
 - home page would have ranking of most frequented user lists
 
-
 To do list:
 - work on edit/presentation view
+- new registers keep disappearing!
+- "Are you sure you want to discard your changes?"  <discard> <keep editing> pop up when user tries to leave SortableList
+- scrape IMDB urls, look into other apis or scraping tools
 - improve styling of Nav, make nav links look like animated buttons
 - find fontAwesome icons or other icons to put into header components for cards!!
 - change all links to styled buttons
+- use CLEAR_ERRORS action when visiting any component that has login or registerbox visible, look into history.listen()
 - fix hyperlink visited/neutral color, might have to store data in localStorage?
 - make white background width of the container on home page
 - /profile is still reachable when user is logged out, why?  Also logging out while on /profile does not redirect user to /login, why?
   - read about and understand how history api works
 - create another substantial card component and populate with dummy data
-- make sortable list background high of the page
 - make the delete lightbox on brand
 - display next to save/delete list buttons the number of movies in user list, and display a message when their list is full
 - look into emailing a password reset link
@@ -36,22 +38,18 @@ To do list:
 - adjust fontsize to Mead way, so I can have more granularity while sticking with rems
 - incorporate Stu's http api and do some clean up in actions.js
 - **how to collect visitor count for user lists, need to do that ASAP so I can populate home page with most visited lists
-- set up routing for movie pages
-- build movie page boiler plate (look at mockup!)
 - fix list styling, 20 movies viewable in screen with room to spare
 - visual signifiers or notification message or displayed count so movies can't be added after 20 cap
 - look at and fix updateStatus()
 - make movies added to list persist by storing in localStorage upon add/reorder, or by PUT request to mongodb for any change
 - add YMDB logo graphic in place of 'Home' nav link
-- make new mlab collections, movies and comments
 - set up global styling root colors and variables
-- update README and upload pics on Portfolio
+- update README and add pics of site
 - add to beginning/end toggle button
-- no duplicate usernames, make an error message for it and put in register validation function
+- make errors clear upon navigating to a new page so they don't transfer to another element on page that renders from errors object
 - give users a register_date and last_login date
 - allow for emojis when making comments
 - fix white gradient, make it more prominent/work.  Currently doing nothing?
-- make profiles
 - make actions (setList, orderList, deleteMovie) also save the updates to mlab automatically
 - make site mobile friendly / responsive
 - make button to switch between list view and edit view.  dragging, editing description, etc, only

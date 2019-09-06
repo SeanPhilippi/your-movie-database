@@ -10,19 +10,7 @@ const initialState = {
   statement: '',
   items: [],
   open: false,
-  newUsers: [],
-  visitedItems: [
-    {
-      title: 'The Thin Red Line',
-      director: 'Terrence Malick',
-      year: '1998'
-    },
-    {
-      title: 'Fascination',
-      director: 'Jean Rollin',
-      year: '1979'
-    },
-  ]
+  newUsers: []
 }
 
 // destructured action parameter is desctructured and passed in to rootReducer function,
@@ -33,15 +21,19 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_CURRENT_USER: return {
       ...state,
       user: payload
-    }
+    };
     case TYPES.SET_NEW_USERS: return {
       ...state,
       newUsers: payload.users
-    }
+    };
     case TYPES.GET_ERRORS: return {
       ...state,
       authErrors: payload
-    }
+    };
+    case TYPES.CLEAR_ERRORS: return {
+      ...state,
+      authErrors: {}
+    };
     case TYPES.SET_TOKEN: return {
       ...state,
       // if token exists, true, else false

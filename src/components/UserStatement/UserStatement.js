@@ -1,40 +1,28 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { setStatement } from '../../redux/actions';
 
-class UserStatement extends Component {
+class UserStatement extends PureComponent {
+
+  noStatement = () => <div>This user hasn't added a statement yet.</div>;
+
   render() {
-    const {
-      setStatement,
-      statement,
-    } = this.props;
+    const { username, statement } = this.props;
 
     return (
-      <textarea
-        className="w-100 my-3"
-        name="user statement"
-        rows="10"
-        placeholder="Write your statement here..."
-        onChange={ e => setStatement(e.target.value) }
-        value={ statement }
-      >
-      </textarea>
+      <div>
+        <p className="font-weight-bold">
+          { username }:
+        </p>
+        <p>
+          { statement }
+        </p>
+      </div>
     )
   }
 }
 
 UserStatement.propTypes = {
-  statement: PropTypes.string.isRequired,
-  setStatement: PropTypes.func.isRequired,
+
 };
 
-const mapStateToProps = state => ({
-  statement: state.statement,
-});
-
-const mapDispatchToProps = dispatch => ({
-  setStatement: text => dispatch(setStatement(text)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserStatement);
+export default UserStatement;

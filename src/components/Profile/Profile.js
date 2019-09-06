@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CommentColumn from '../CommentColumn/CommentColumn';
+import EditableStatement from '../EditableStatement/EditableStatement';
 import UserStatement from '../UserStatement/UserStatement';
 import SaveDelete from '../SaveDelete/SaveDelete';
 import SortableList from '../SortableList/SortableList';
@@ -66,7 +67,11 @@ class Profile extends PureComponent  {
             </div>
             <div className="px-4 w-100">
               <CardWrapper title="user statement" color="tan">
-                <UserStatement />
+                {
+                  !this.props.match.params.username
+                  ? <EditableStatement />
+                  : <UserStatement username={ this.props.match.params.username } statement={ this.state.listData.statement }/>
+                }
               </CardWrapper>
             </div>
           </div>
