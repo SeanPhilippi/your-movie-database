@@ -51,10 +51,11 @@ class SortableList extends Component {
             {/* paste this to end of pathname after debugging disappearing movie titles: /${movie.title.concat('-', movie.year).split(' ').join('-')} */}
               <Link
                 to={{
-                  pathname: `/movies`,
+                  pathname: '/movies',
                   state: { movie }
                 }}
-                className="movie-link">
+                className="movie-link"
+              >
                 { title }
               </Link>
             </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {  } from '../../redux/actions';
 
 class ViewableList extends Component {
@@ -11,7 +12,13 @@ class ViewableList extends Component {
           { idx + 1 } |&nbsp;
         </div>
         <div className="mr-2">
-          { movie.title }
+          <Link to={{
+              pathname: '/movies',
+              state: { movie }
+            }}
+          >
+            { movie.title }
+          </Link>
         </div>
         <div>
           ({ movie.director }, { movie.year })
