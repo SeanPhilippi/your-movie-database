@@ -19,7 +19,10 @@ create with how they utilize it
 
 To do list:
 - work on edit/presentation view
-- new registers keep disappearing!
+- fix history, so history.push works.  might have to deal with react-router-dom v4
+  - look into creating history.js and swapping BrowserRouter with Router wrapper
+  - https://stackoverflow.com/questions/42701129/how-to-push-to-history-in-react-router-v4?rq=1
+- new registers keep disappearing!?
 - "Are you sure you want to discard your changes?"  <discard> <keep editing> pop up when user tries to leave SortableList
 - scrape IMDB urls, look into other apis or scraping tools
 - improve styling of Nav, make nav links look like animated buttons
@@ -34,6 +37,7 @@ To do list:
 - create another substantial card component and populate with dummy data
 - make the delete lightbox on brand
 - make some tests for site using Jest or Selenium
+- make a global button class.  most buttons should look roughly the same...
 - display next to save/delete list buttons the number of movies in user list, and display a message when their list is full
 - look into emailing a password reset link
 - allow login with username OR email, currently only email which isn't intuitive

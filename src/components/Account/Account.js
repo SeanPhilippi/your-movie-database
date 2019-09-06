@@ -1,18 +1,43 @@
 import React, { PureComponent } from 'react';
-import { Container, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { Container, Col } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
+import CardWrapper from '../CardWrapper/CardWrapper';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { logoutUser } from '../../redux/actions';
+
 class Account extends PureComponent {
+
+  handleLogout = e => {
+    e.preventDefault();
+    this.props.logoutUser();
+  };
+
   render() {
     return (
-      <Container className="d-flex border-0 justify-content-center">
+      <div className="d-flex border-0 justify-content-center">
         <Col className="inner-container mt-4 mx-4 p-0">
           <Col className="white pt-2">
-            build Account box here
+            <CardWrapper title="My Account" color="tan">
+              <div className="d-flex justify-content-between">
+                <p>
+                  You are logged in as { this.props.user.username }
+                </p>
+                <button className="log-out-btn">
+                  <NavLink
+                    to="/"
+                    onClick={ this.handleLogout }
+                  >
+                    Log out
+                  </NavLink>
+                </button>
+              </div>
+            </CardWrapper>
           </Col>
         </Col>
-      </Container>
+      </div>
     )
   }
 }
@@ -23,6 +48,11 @@ Account.propTypes = {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
+  user: state.user,
 });
 
-export default connect(mapStateToProps)(Account);
+const mapDispatchToProps = dispatch => ({
+  logoutUser: history => dispatch(logoutUser(history)),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Account));

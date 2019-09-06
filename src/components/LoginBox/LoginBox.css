@@ -28,7 +28,7 @@
   width: 4rem;
   border-radius: 5px;
   font-size: .8rem;
-  background-color: white;
+  font-weight: 600;
 }
 
 @media only screen and (max-width: 1000px) {
