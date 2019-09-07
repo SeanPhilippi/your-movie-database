@@ -9,15 +9,17 @@ const CardWrapper = ({
   title,
   color,
   link,
-  children
+  children,
+  rotate,
+  marginTopNone
 }) => (
-  <div className={`card-wrapper shadow ${color}`}>
+  <div className={`card-wrapper shadow ${color} ${ marginTopNone ? 'mt-0' : '' }`}>
     <div className="wrapper-header d-flex align-items-center">
       {
         !(title === 'spotlight on a user')
         ? <FontAwesomeIcon
             icon={ icon }
-            transform={ title === 'most visited lists' ? { rotate: 30 } : { rotate: -5 } }
+            transform={ rotate ? { rotate } : '' }
             className="wrapper-icon mr-3"
           />
         : <IoIosFlashlight className="wrapper-icon-ion mr-2" />

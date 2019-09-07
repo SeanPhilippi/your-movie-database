@@ -15,6 +15,7 @@ class Home extends PureComponent {
           icon={ faSignInAlt }
           title="login"
           color="white"
+          marginTopNone={ true }
         >
           <LoginBox />
         </CardWrapper>;
@@ -31,16 +32,18 @@ class Home extends PureComponent {
             </Row>
             <CardWrapper
               icon={ faListAlt }
+              rotate={ -5 }
               color="tan"
               title='top movie list'
             />
             <CardWrapper
               icon={ faShoePrints }
+              rotate={ 30 }
               color="tan"
               title='most visited lists'
             />
           </Col>
-          <Col className="ml-3 ">
+          <Col className="ml-3 pt-0">
             { this.renderLoginBox() }
             <CardWrapper
               title="spotlight on a user"

@@ -29,6 +29,8 @@ To do list:
 - find fontAwesome icons or other icons to put into header components for cards!!
 - change all links to styled buttons
 - was able to add 3 of the same movie, not good...
+- fix up MoviePage styling, find some fonts
+- populate data for MoviePage chart, should be challenging...
 - use CLEAR_ERRORS action when visiting any component that has login or registerbox visible, look into history.listen()
 - fix hyperlink visited/neutral color, might have to store data in localStorage?
 - make white background width of the container on home page

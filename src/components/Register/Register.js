@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import RegisterBox from '../RegisterBox/RegisterBox';
 import CardWrapper from '../CardWrapper/CardWrapper';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faSignature, faAward } from "@fortawesome/free-solid-svg-icons";
+import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 library.add(faChevronRight);
@@ -32,13 +33,22 @@ class Register extends PureComponent {
                 If you want to know why we need specific data you can find <a href="">more detailed information here</a>.
               </p>
             </div>
-            <CardWrapper title="Register" color="tan">
+            <CardWrapper
+              icon={ faSignature }
+              title="Register"
+              color="tan"
+            >
               <RegisterBox />
             </CardWrapper>
           </Col>
           <Col className="col-5">
             <div className="">
-              <CardWrapper title="Advantages" color="white">
+              <CardWrapper
+                icon={ faAward }
+                rotate={ -5 }
+                title="Advantages"
+                color="white"
+              >
                 <div className="advantages">
                   <div>
                     Here are the advantages of being a registered user:<br/>
@@ -48,7 +58,12 @@ class Register extends PureComponent {
                   </div>
                 </div>
               </CardWrapper>
-              <CardWrapper title="Privacy Statement" color="white">
+              <CardWrapper
+                icon={ faFileAlt }
+                rotate={ -5 }
+                title="Privacy Statement"
+                color="white"
+              >
                 <div>
                   <div>
                     We respect your privacy. It's simple: we do not share your personal

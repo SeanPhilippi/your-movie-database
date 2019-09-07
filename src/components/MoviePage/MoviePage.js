@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import CommentColumn from '../CommentColumn/CommentColumn';
 import CardWrapper from '../CardWrapper/CardWrapper';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faFilm, faComments } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 library.add(faChevronRight);
@@ -72,7 +72,12 @@ class MoviePage extends PureComponent {
         <div className="main-container bg-light2 mt-4">
           <div className="left-col white">
             <div className="px-4 pt-4 w-100">
-              <CardWrapper title="Movie Details" color="tan">
+              <CardWrapper
+                icon={ faFilm }
+                rotate={ -5 }
+                title="Movie Details"
+                color="tan"
+              >
                 <div className="movie-page d-flex">
                   <div className="poster">
                     <img
@@ -106,7 +111,7 @@ class MoviePage extends PureComponent {
                     </div>
                   </div>
                 </div>
-                <div>
+                <div className="mt-4">
                   <div className="font-weight-bold mb-1">
                     Statistics
                   </div>
@@ -131,14 +136,14 @@ class MoviePage extends PureComponent {
                 </div>
                 {/* Review Box */}
                 <div>
-                  <div className="font-weight-bold">
+                  <div className="font-weight-bold mt-2">
                     Reviews
                   </div>
                   <div>
-                    Currently there is no review for this movie
+                    Currently there are no reviews for this movie.
                   </div>
                   <div>
-                    <FontAwesomeIcon icon={faChevronRight}/> <a href="#">Click here to add a review.</a>
+                    <FontAwesomeIcon icon={faChevronRight}/> &nbsp;<a href="#">Click here to add a review.</a>
                   </div>
                 </div>
               </CardWrapper>
@@ -146,7 +151,11 @@ class MoviePage extends PureComponent {
           </div>
           <div className="right-col">
             <div className="m-4">
-              <CardWrapper title="comments" color="white">
+              <CardWrapper
+                icon={ faComments }
+                title="comments"
+                color="white"
+              >
                 <CommentColumn className="comments" />
               </CardWrapper>
             </div>

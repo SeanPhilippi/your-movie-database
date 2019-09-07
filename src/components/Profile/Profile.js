@@ -50,9 +50,10 @@ class Profile extends PureComponent  {
           <div className="left-col white">
             <div className="px-4 pt-4 w-100">
               <CardWrapper
+                icon={ faListAlt }
+                rotate={ -5 }
                 title={`${this.props.match.params.username || this.props.user.username}'s Top Movies`}
                 color="tan"
-                icon={ faListAlt }
               >
                 {
                   !this.props.match.params.username
@@ -74,6 +75,7 @@ class Profile extends PureComponent  {
             <div className="px-4 w-100">
               <CardWrapper
                 icon={ faFileAlt }
+                rotate={ -5 }
                 title="user statement"
                 color="tan"
               >
