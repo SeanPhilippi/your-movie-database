@@ -5,6 +5,9 @@ import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faListOl } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { logoutUser } from '../../redux/actions';
 import logo from '../../images/icons/logo_header.gif';
 
@@ -33,7 +36,7 @@ class TopNav extends PureComponent {
           to="/account"
           activeClassName="active"
         >
-          { username }
+          <FontAwesomeIcon icon={ faUser }/> { username }
         </NavLink>
         <NavLink
           onClick={this.handleLogout}

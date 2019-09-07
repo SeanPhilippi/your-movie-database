@@ -19,15 +19,13 @@ create with how they utilize it
 
 To do list:
 - work on edit/presentation view
-- fix history, so history.push works.  might have to deal with react-router-dom v4
-  - look into creating history.js and swapping BrowserRouter with Router wrapper
-  - https://stackoverflow.com/questions/42701129/how-to-push-to-history-in-react-router-v4?rq=1
 - new registers keep disappearing!?
 - finish account page, make an MVP
   - https://toolset.com/documentation/user-guides/building-the-my-account-page/
 - "Are you sure you want to discard your changes?"  <discard> <keep editing> pop up when user tries to leave SortableList
 - scrape IMDB urls, look into other apis or scraping tools
 - improve styling of Nav, make nav links look like animated buttons
+- deploy on paid heroku plan, google for a discount
 - find fontAwesome icons or other icons to put into header components for cards!!
 - change all links to styled buttons
 - was able to add 3 of the same movie, not good...

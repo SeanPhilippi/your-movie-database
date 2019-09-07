@@ -8,6 +8,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-regular-svg-icons": "^5.10.2",
     "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@material-ui/core": "^3.9.1",
@@ -32,6 +33,8 @@
     "react-bootstrap": "^1.0.0-beta.5",
     "react-confirm-alert": "^2.3.0",
     "react-dom": "^16.6.3",
+    "react-icons": "^3.7.0",
+    "react-ionicons": "^3.0.1",
     "react-redux": "^6.0.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",

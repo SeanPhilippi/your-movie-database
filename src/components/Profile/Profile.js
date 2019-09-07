@@ -9,6 +9,7 @@ import SortableList from '../SortableList/SortableList';
 import CardWrapper from '../CardWrapper/CardWrapper';
 import Search from '../Search/Search';
 import ViewableList from '../ViewableList/ViewableList';
+import { faListOl, faComments, faFileAlt } from "@fortawesome/free-solid-svg-icons";
 
 import './Profile.css';
 
@@ -47,7 +48,11 @@ class Profile extends PureComponent  {
         <div className="main-container bg-light2 mt-4">
           <div className="left-col white">
             <div className="px-4 pt-4 w-100">
-              <CardWrapper title={`${this.props.match.params.username || this.props.user.username}'s Top Movies`} color="tan">
+              <CardWrapper
+                title={`${this.props.match.params.username || this.props.user.username}'s Top Movies`}
+                color="tan"
+                icon={ faListOl }
+              >
                 {
                   !this.props.match.params.username
                   ? (
@@ -66,7 +71,11 @@ class Profile extends PureComponent  {
               </CardWrapper>
             </div>
             <div className="px-4 w-100">
-              <CardWrapper title="user statement" color="tan">
+              <CardWrapper
+                icon={ faFileAlt }
+                title="user statement"
+                color="tan"
+              >
                 {
                   !this.props.match.params.username
                   ? <EditableStatement />
@@ -77,7 +86,11 @@ class Profile extends PureComponent  {
           </div>
           <div className="right-col">
             <div className="m-4">
-              <CardWrapper title="comments" color="white">
+              <CardWrapper
+                icon={ faComments }
+                title="comments"
+                color="white"
+              >
                 <CommentColumn className="comments" />
               </CardWrapper>
             </div>

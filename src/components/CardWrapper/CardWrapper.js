@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IoIosFlashlight } from 'react-icons/io'
 
 const CardWrapper = ({
   icon,
@@ -10,11 +12,22 @@ const CardWrapper = ({
   children
 }) => (
   <div className={`card-wrapper shadow ${color}`}>
-    <div className="wrapper-icon">
-      { icon }
-    </div>
-    <div className="wrapper-title">
-      { link ? <Link to={`/${link}`}> { title } </Link> :  title }
+    <div className="wrapper-header d-flex align-items-center">
+      {
+        !(title === 'spotlight on a user')
+        ? <FontAwesomeIcon
+            icon={ icon }
+            transform={ title === 'most visited lists' ? { rotate: 30 } : '' }
+            className="wrapper-icon mr-3"
+          />
+        : <IoIosFlashlight className="wrapper-icon-ion mr-2" />
+
+    }
+      {
+        link
+        ? <div><Link to={`/${link}`}> { title } </Link></div>
+        :  <div>{ title }</div>
+      }
     </div>
     <div className="wrapper-body w-100">
       { children }

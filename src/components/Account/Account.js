@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Col } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import { Col } from 'reactstrap';
 import CardWrapper from '../CardWrapper/CardWrapper';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -25,13 +24,11 @@ class Account extends PureComponent {
                 <p>
                   You are logged in as { this.props.user.username }
                 </p>
-                <button className="log-out-btn">
-                  <NavLink
-                    to="/"
-                    onClick={ this.handleLogout }
-                  >
-                    Log out
-                  </NavLink>
+                <button
+                  className="log-out-btn"
+                  onClick={ this.handleLogout }
+                >
+                  Log out
                 </button>
               </div>
             </CardWrapper>

@@ -5,12 +5,17 @@ import { connect } from 'react-redux';
 import CardWrapper from '../CardWrapper/CardWrapper';
 import LoginBox from '../LoginBox/LoginBox';
 import NewRegistersBox from '../NewRegistersBox/NewRegistersBox';
+import { faListAlt, faShoePrints, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 
 class Home extends PureComponent {
   renderLoginBox() {
     return this.props.isAuthenticated
       ? null
-      : <CardWrapper title="Login" color="white">
+      : <CardWrapper
+          icon={ faSignInAlt }
+          title="login"
+          color="white"
+        >
           <LoginBox />
         </CardWrapper>;
   }
@@ -24,12 +29,23 @@ class Home extends PureComponent {
               Welcome to YMDb, Your Movie Database, the movie community where you can create your list of favorite movies,
               discover other people's favorite movies, and discuss movies and favorite lists. YMDb is free and fun!
             </Row>
-            <CardWrapper color="tan" title='Top Movie List'/>
-            <CardWrapper color="tan" title='Most Visited Lists'/>
+            <CardWrapper
+              icon={ faListAlt }
+              color="tan"
+              title='top movie list'
+            />
+            <CardWrapper
+              icon={ faShoePrints }
+              color="tan"
+              title='most visited lists'
+            />
           </Col>
           <Col className="ml-3 ">
             { this.renderLoginBox() }
-            <CardWrapper title="Spotlight on a user" color="white">
+            <CardWrapper
+              title="spotlight on a user"
+              color="white"
+            >
               <NewRegistersBox />
             </CardWrapper>
           </Col>

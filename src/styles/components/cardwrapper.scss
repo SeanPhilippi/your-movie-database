@@ -5,7 +5,7 @@
   padding: 0;
 }
 
-.wrapper-title {
+.wrapper-header {
   border-radius: 5px 5px 0 0;
   text-transform: uppercase;
   width: 100%;
@@ -18,7 +18,16 @@
 }
 
 .wrapper-icon {
+  color: $white;
+  width: 1.5rem !important;
+  height: 1.5rem;
+}
 
+.wrapper-icon-ion {
+  color: $white;
+  width: 1.5rem !important;
+  height: 1.5rem;
+  transform: rotate(150deg);
 }
 
 .wrapper-body {
