@@ -9,7 +9,8 @@ import SortableList from '../SortableList/SortableList';
 import CardWrapper from '../CardWrapper/CardWrapper';
 import Search from '../Search/Search';
 import ViewableList from '../ViewableList/ViewableList';
-import { faListOl, faComments, faFileAlt } from "@fortawesome/free-solid-svg-icons";
+import { faComments, faFileAlt } from "@fortawesome/free-solid-svg-icons";
+import { faListAlt } from "@fortawesome/free-regular-svg-icons";
 
 import './Profile.css';
 
@@ -51,7 +52,7 @@ class Profile extends PureComponent  {
               <CardWrapper
                 title={`${this.props.match.params.username || this.props.user.username}'s Top Movies`}
                 color="tan"
-                icon={ faListOl }
+                icon={ faListAlt }
               >
                 {
                   !this.props.match.params.username
