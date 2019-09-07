@@ -17,7 +17,7 @@ const CardWrapper = ({
         !(title === 'spotlight on a user')
         ? <FontAwesomeIcon
             icon={ icon }
-            transform={ title === 'most visited lists' ? { rotate: 30 } : '' }
+            transform={ title === 'most visited lists' ? { rotate: 30 } : { rotate: -5 } }
             className="wrapper-icon mr-3"
           />
         : <IoIosFlashlight className="wrapper-icon-ion mr-2" />

@@ -18,9 +18,12 @@
 }
 
 .wrapper-icon {
-  color: $white;
+  color: white;
   width: 1.5rem !important;
   height: 1.5rem;
+  // why no worky?
+  -webkit-text-stroke: 2px blue !important;
+  -webkit-text-fill-color: cyan !important;
 }
 
 .wrapper-icon-ion {
