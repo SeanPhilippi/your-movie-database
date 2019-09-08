@@ -2,6 +2,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faShoePrints,
   faSignInAlt,
+  faSignOutAlt,
   faChevronRight,
   faSignature,
   faComments,
@@ -22,6 +23,7 @@ const fontAwesome = library.add(
   faShoePrints,
   faListAlt,
   faSignInAlt,
+  faSignOutAlt,
   faChevronRight,
   faComments,
   faFileContract,
