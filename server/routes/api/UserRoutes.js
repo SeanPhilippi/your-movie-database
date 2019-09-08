@@ -66,12 +66,19 @@ router.post('/register', (req, res) => {
 // @access  Public
 router.post('/login', (req, res) => {
   const errors = {};
-  const { email, password } = req.body;
+  const { login, password } = req.body;
+  let data;
   //* for future, allow for login with username OR email, and then search by username, then by email
-  User.findOne({ email })
+  // ! check for login against email in database, then check against username
+  if (login.slice(-4) === '.com' && login.includes('@')) {
+    data = { email: login };
+  } else {
+    data = { username: login };
+  }
+  User.findOne(data)
     .then(user => {
       if (!user) {
-        errors.email = 'User not found';
+        errors.login = 'User not found';
         return res.status(404).json(errors);
       }
       const { _id, email, username } = user;

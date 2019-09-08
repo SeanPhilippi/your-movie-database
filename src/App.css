@@ -1,13 +1,13 @@
 #app {
-  height: 100vh;
+  height: 100%;
 }
 
 [data-reactroot] {
-  height: 100vh !important;
+  height: 100% !important;
 }
 
 body > #root > div {
-  height: 100vh !important;
+  height: 100% !important;
 }
 
 html {
@@ -15,9 +15,9 @@ html {
 }
 
 html, body, #root {
-  height: 100vh !important;
+  height: 100% !important;
 }
 
 #app, #app > div {
-  height: 100vh !important;
+  height: 100% !important;
 }

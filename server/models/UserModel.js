@@ -6,11 +6,13 @@ const UserSchema = new Schema({
     type: String,
     // converts string to lowercase so different capitalization is not considered unique
     lowercase: true,
+    unique: true,
     required: true
   },
   email: {
     type: String,
     lowercase: true,
+    unique: true,
     requried: true
   },
   password: {

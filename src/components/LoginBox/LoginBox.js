@@ -11,7 +11,7 @@ import './LoginBox.css';
 
 class LoginBox extends PureComponent {
   state = {
-    email: '',
+    login: '',
     password: '',
     errors: {}
   };
@@ -23,14 +23,14 @@ class LoginBox extends PureComponent {
     } = this.props;
 
     const {
-      email,
+      login,
       password,
     } = this.state;
 
     e.preventDefault();
 
     const user = {
-      email,
+      login,
       password,
     };
 
@@ -46,7 +46,7 @@ class LoginBox extends PureComponent {
   render() {
     const {
       errors: {
-        email: emailErrors,
+        login: loginErrors,
         password: passwordErrors,
       },
     } = this.props;
@@ -64,12 +64,12 @@ class LoginBox extends PureComponent {
                 <div>Your login: </div>
                 <input
                   autoFocus
-                  name="email"
+                  name="login"
                   onChange={this.onTextChange}
                   type="text"
                 />
                 <div className="errors">
-                  { emailErrors }
+                  { loginErrors }
                 </div>
               </div>
               <div className="password">
