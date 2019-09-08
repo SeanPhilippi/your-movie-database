@@ -9,7 +9,7 @@ class Login extends PureComponent {
   render() {
     return (
       <div className="d-flex border-0 justify-content-center">
-        <div className="inner-container mt-4 mx-4 p-0">
+        <div className="inner-container mt-4 p-0">
           <Col className="bg-white pt-2">
             <CardWrapper
               icon="sign-in-alt"

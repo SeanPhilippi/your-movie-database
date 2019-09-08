@@ -24,7 +24,7 @@ class Home extends PureComponent {
   render() {
     return (
       <div className="d-flex border-0 justify-content-center h-100">
-        <div className="inner-container mt-4 mx-4 p-0 h-100">
+        <div className="inner-container mt-4 p-0 h-100">
           <Col className="bg-white pt-2">
             <Row className="greeting m-0">
               Welcome to YMDb, Your Movie Database, the movie community where you can create your list of favorite movies,
@@ -43,7 +43,7 @@ class Home extends PureComponent {
               title='most visited lists'
             />
           </Col>
-          <Col className="ml-3 pt-0 h-100">
+          <Col className="pt-0 h-100">
             { this.renderLoginBox() }
             <CardWrapper
               title="spotlight on a user"

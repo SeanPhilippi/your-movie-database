@@ -16,7 +16,7 @@ class Account extends PureComponent {
   render() {
     return (
       <div className="d-flex border-0 justify-content-center">
-        <Col className="inner-container mt-4 mx-4 p-0">
+        <Col className="inner-container mt-4 p-0">
           <Col className="bg-white pt-2">
             <CardWrapper
               icon="user-circle"

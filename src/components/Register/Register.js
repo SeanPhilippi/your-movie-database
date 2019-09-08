@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Container, Col, Row } from 'reactstrap';
+import { Col } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -18,16 +18,14 @@ class Register extends PureComponent {
 
   render() {
     return (
-      <Container className="container d-flex border-0 justify-content-center">
-        <Row className="mt-4 p-0">
-          <Col className="bg-white pt-2 col-7">
-            <div className="mx-3">
-              <p className="">
-                To fully enjoy the YMDb site, you just have to register for free with the following form. This information
-                will mainly be used to identify you within the user community but will not be used for commercial purposes.
-                If you want to know why we need specific data you can find <a href="">more detailed information here</a>.
-              </p>
-            </div>
+      <div className="d-flex border-0 justify-content-center">
+        <div className="inner-container mt-4 p-0">
+          <Col className="bg-white pt-2">
+            <p className="">
+              To fully enjoy the YMDb site, you just have to register for free with the following form. This information
+              will mainly be used to identify you within the user community but will not be used for commercial purposes.
+              If you want to know why we need specific data you can find <a href="">more detailed information here</a>.
+            </p>
             <CardWrapper
               icon="signature"
               title="Register"
@@ -36,13 +34,14 @@ class Register extends PureComponent {
               <RegisterBox />
             </CardWrapper>
           </Col>
-          <Col className="col-5">
+          <Col className="">
             <div className="">
               <CardWrapper
                 icon="award"
                 rotate={ -5 }
-                title="Advantages"
+                title="advantages"
                 color="white"
+                marginTopVal="0"
               >
                 <div className="advantages">
                   <div>
@@ -54,7 +53,7 @@ class Register extends PureComponent {
                 </div>
               </CardWrapper>
               <CardWrapper
-                icon="FileAlt"
+                icon="file-alt"
                 rotate={ -5 }
                 title="Privacy Statement"
                 color="white"
@@ -68,8 +67,8 @@ class Register extends PureComponent {
               </CardWrapper>
             </div>
           </Col>
-        </Row>
-      </Container>
+        </div>
+      </div>
     )
   }
 }
