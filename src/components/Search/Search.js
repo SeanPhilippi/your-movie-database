@@ -44,7 +44,7 @@ class Search extends PureComponent {
     if (searchResults) {
       return (
         <div className="white result-scroll">
-          { searchResults.map(movie => <SearchResult movie={ movie } handleAdd={ this.handleAdd } />) }
+          { searchResults.map(movie => <SearchResult movie={ movie } handleAdd={ this.handleAdd } key={ movie.imdbID } />) }
         </div>
       )
     }
@@ -103,6 +103,7 @@ class Search extends PureComponent {
     return (
       <div className="search d-flex flex-column align-items-center">
         <input
+          autoFocus
           name="searchText"
           className="search-text"
           placeholder="  Search for films..."

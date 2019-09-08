@@ -19,19 +19,21 @@ create with how they utilize it
 
 To do list:
 - work on edit/presentation view
-- new registers keep disappearing!?
 - finish account page, make an MVP
   - https://toolset.com/documentation/user-guides/building-the-my-account-page/
 - "Are you sure you want to discard your changes?"  <discard> <keep editing> pop up when user tries to leave SortableList
 - scrape IMDB urls, look into other apis or scraping tools
 - improve styling of Nav, make nav links look like animated buttons
 - deploy on paid heroku plan, google for a discount
-- find fontAwesome icons or other icons to put into header components for cards!!
 - change all links to styled buttons
+- allow UserStatement textfield to take markdown syntax and render emojis and some formatting github style
+- save button in UserStatement, make UpdateBar status say 'Profile saved'
+- set up email confirming service upon registration
 - was able to add 3 of the same movie, not good...
 - fix up MoviePage styling, find some fonts
 - populate data for MoviePage chart, should be challenging...
 - use CLEAR_ERRORS action when visiting any component that has login or registerbox visible, look into history.listen()
+- add more UpdateBar messages, like error
 - fix hyperlink visited/neutral color, might have to store data in localStorage?
 - make white background width of the container on home page
 - /profile is still reachable when user is logged out, why?  Also logging out while on /profile does not redirect user to /login, why?

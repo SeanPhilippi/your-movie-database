@@ -21,13 +21,12 @@ class Profile extends PureComponent  {
       items: [],
       statement: '',
     }
-  }
+  };
 
   componentDidMount() {
-    console.log('here')
-    console.log(this.props.match.params.username)
+    console.log('visited list?', this.props.match.params.username ? true : false)
     if (this.props.match.params.username) {
-      console.log('fetching listData in Profile...')
+      console.log('fetching visited listData in Profile...')
       fetch(`/api/movies/${ this.props.match.params.username }/list`)
         .then(res => res.json())
         .then(data => {
@@ -54,6 +53,7 @@ class Profile extends PureComponent  {
                 rotate={ -5 }
                 title={`${this.props.match.params.username || this.props.user.username}'s Top Movies`}
                 color="tan"
+                marginTopVal='0'
               >
                 {
                   !this.props.match.params.username

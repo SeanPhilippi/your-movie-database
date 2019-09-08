@@ -79,7 +79,7 @@ router.put('/save/:username', (req, res) => {
       upsert: 'true'
     }
   ).catch(console.log);
-})
+});
 
 // @route   DELETE api/movies/delete/:username
 // @desc    delete list attached to username
@@ -88,6 +88,13 @@ router.delete('/delete/:username', (req, res) => {
   List.deleteOne({username: req.params.username})
     .then(res => console.log(res))
     .catch(console.log);
-})
+});
+
+// @route
+// @desc    grab lists, calculate similarity to current user list
+// @access
+router.put('/', (req, res) => {
+
+});
 
 module.exports = router;

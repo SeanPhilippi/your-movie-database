@@ -15,7 +15,7 @@ class Home extends PureComponent {
           icon={ faSignInAlt }
           title="login"
           color="white"
-          marginTopNone={ true }
+          marginTopVal='0'
         >
           <LoginBox />
         </CardWrapper>;
@@ -48,6 +48,7 @@ class Home extends PureComponent {
             <CardWrapper
               title="spotlight on a user"
               color="white"
+              marginTopVal={ this.props.isAuthenticated ? '0' : null }
             >
               <NewRegistersBox />
             </CardWrapper>

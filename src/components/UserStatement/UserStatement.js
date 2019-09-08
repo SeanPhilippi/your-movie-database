@@ -13,7 +13,7 @@ class UserStatement extends PureComponent {
         <p className="font-weight-bold">
           { username }:
         </p>
-        <p>
+        <p className="textarea">
           { statement }
         </p>
       </div>
@@ -22,7 +22,8 @@ class UserStatement extends PureComponent {
 }
 
 UserStatement.propTypes = {
-
+  username: PropTypes.string.isRequired,
+  statement: PropTypes.string,
 };
 
 export default UserStatement;

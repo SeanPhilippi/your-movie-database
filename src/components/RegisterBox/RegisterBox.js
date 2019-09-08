@@ -67,6 +67,7 @@ class RegisterBox extends PureComponent {
                   Login/Username&nbsp;<span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
+                  autoFocus
                   name="username"
                   onChange={this.onTextChange}
                   className=""

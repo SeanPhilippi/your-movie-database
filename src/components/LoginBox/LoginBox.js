@@ -63,6 +63,7 @@ class LoginBox extends PureComponent {
               <div className="login mb-2">
                 <div>Your login: </div>
                 <input
+                  autoFocus
                   name="email"
                   onChange={this.onTextChange}
                   type="text"
