@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 export default class Footer extends Component {
   render() {
     return (
-      <footer className="bg-orange">
-        Sean Philippi ©2019
+      <footer className="bg-dark-orange py-1 pl-4 mb-4">
+        Sean Philippi © 2019
       </footer>
     )
   }

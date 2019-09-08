@@ -19,6 +19,7 @@ import UsersIndex from './components/UsersIndex/UsersIndex';
 import NewRegisters from './components/NewRegisters/NewRegisters';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import UnderConstruction from './components/UnderConstruction/UnderConstruction';
+import Footer from './components/Footer/Footer';
 import {
   setNewUsers,
   fetchList,
@@ -62,6 +63,7 @@ class App extends PureComponent {
               {/* <Route path="/movies/:slug" component={ MoviePage } /> */}
               <Route render={ this.pageNotFound } />
             </Switch>
+            <Footer />
           </div>
         </div>
       </BrowserRouter>
