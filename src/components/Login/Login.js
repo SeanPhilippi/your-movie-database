@@ -4,7 +4,6 @@ import CardWrapper from '../CardWrapper/CardWrapper';
 import { Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 
 class Login extends PureComponent {
   render() {
@@ -13,7 +12,7 @@ class Login extends PureComponent {
         <div className="inner-container mt-4 mx-4 p-0">
           <Col className="white pt-2">
             <CardWrapper
-              icon={ faSignInAlt }
+              icon="sign-in-alt"
               title="Login"
               color="tan"
             >

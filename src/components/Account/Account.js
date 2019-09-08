@@ -4,8 +4,6 @@ import { Col } from 'reactstrap';
 import CardWrapper from '../CardWrapper/CardWrapper';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
-
 import { logoutUser } from '../../redux/actions';
 
 class Account extends PureComponent {
@@ -21,8 +19,8 @@ class Account extends PureComponent {
         <Col className="inner-container mt-4 mx-4 p-0">
           <Col className="white pt-2">
             <CardWrapper
-              icon={ faUserCircle }
-              rotate={ -5 }
+              icon="user-circle"
+              rotate={ 0 }
               title="my account"
               color="tan"
             >

@@ -5,12 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RegisterBox from '../RegisterBox/RegisterBox';
 import CardWrapper from '../CardWrapper/CardWrapper';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronRight, faSignature, faAward } from "@fortawesome/free-solid-svg-icons";
-import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-library.add(faChevronRight);
 
 class Register extends PureComponent {
 
@@ -34,7 +29,7 @@ class Register extends PureComponent {
               </p>
             </div>
             <CardWrapper
-              icon={ faSignature }
+              icon="signature"
               title="Register"
               color="tan"
             >
@@ -44,7 +39,7 @@ class Register extends PureComponent {
           <Col className="col-5">
             <div className="">
               <CardWrapper
-                icon={ faAward }
+                icon="award"
                 rotate={ -5 }
                 title="Advantages"
                 color="white"
@@ -52,14 +47,14 @@ class Register extends PureComponent {
                 <div className="advantages">
                   <div>
                     Here are the advantages of being a registered user:<br/>
-                    <FontAwesomeIcon icon={faChevronRight} />	Create your own Top Movie List.<br/>
-                    <FontAwesomeIcon icon={faChevronRight} />	Discuss movies with other users.<br/>
-                    <FontAwesomeIcon icon={faChevronRight} />	Write comments on other user's Top List.<br/>
+                    <FontAwesomeIcon icon="chevron-right" />	Create your own Top Movie List.<br/>
+                    <FontAwesomeIcon icon="chevron-right" />	Discuss movies with other users.<br/>
+                    <FontAwesomeIcon icon="chevron-right" />	Write comments on other user's Top List.<br/>
                   </div>
                 </div>
               </CardWrapper>
               <CardWrapper
-                icon={ faFileAlt }
+                icon="FileAlt"
                 rotate={ -5 }
                 title="Privacy Statement"
                 color="white"

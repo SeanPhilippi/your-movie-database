@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import NewRegistersBox from '../NewRegistersBox/NewRegistersBox';
 import CardWrapper from '../CardWrapper/CardWrapper';
-import { faFileContract } from "@fortawesome/free-solid-svg-icons";
 import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
@@ -14,7 +13,7 @@ class NewRegisters extends PureComponent {
           <Col className="white pt-2">
             <CardWrapper
               title="new registers"
-              icon={ faFileContract }
+              icon="file-contract"
               rotate={ -5 }
               color="tan"
               marginTopVal='0'

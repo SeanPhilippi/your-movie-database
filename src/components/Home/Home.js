@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import CardWrapper from '../CardWrapper/CardWrapper';
 import LoginBox from '../LoginBox/LoginBox';
 import NewRegistersBox from '../NewRegistersBox/NewRegistersBox';
-import { faListAlt, faShoePrints, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
+// import fontAwesome from './utils';
 
 class Home extends PureComponent {
   renderLoginBox() {
     return this.props.isAuthenticated
       ? null
       : <CardWrapper
-          icon={ faSignInAlt }
+          icon="sign-in-alt"
           title="login"
           color="white"
           marginTopVal='0'
@@ -31,13 +31,13 @@ class Home extends PureComponent {
               discover other people's favorite movies, and discuss movies and favorite lists. YMDb is free and fun!
             </Row>
             <CardWrapper
-              icon={ faListAlt }
+              icon={["far", "list-alt"]}
               rotate={ -5 }
               color="tan"
               title='top movie list'
             />
             <CardWrapper
-              icon={ faShoePrints }
+              icon="shoe-prints"
               rotate={ 30 }
               color="tan"
               title='most visited lists'

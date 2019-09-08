@@ -36,14 +36,14 @@ class TopNav extends PureComponent {
           to="/account"
           activeClassName="active"
         >
-          <FontAwesomeIcon icon={ faUser }/> { username }
+          <FontAwesomeIcon icon="user"/> { username }
         </NavLink>
         <NavLink
           onClick={this.handleLogout}
           className="text-white mx-2"
           to="/"
         >
-          | {"\u00a0"}<FontAwesomeIcon icon={ faSignOutAlt }/> LOGOUT
+          | {"\u00a0"}<FontAwesomeIcon icon="sign-out-alt" /> LOGOUT
         </NavLink>
       </Nav>
     );

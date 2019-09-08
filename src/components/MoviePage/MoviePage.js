@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CommentColumn from '../CommentColumn/CommentColumn';
 import CardWrapper from '../CardWrapper/CardWrapper';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronRight, faFilm, faComments } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-library.add(faChevronRight);
 
 class MoviePage extends PureComponent {
   state = {
@@ -22,21 +18,7 @@ class MoviePage extends PureComponent {
       runtime: '',
       plot: '',
     }
-  }
-
-  // dummy data
-  // state = {
-  //   movie: {
-  //     title: 'Eraserhead',
-  //     director: 'David Lynch',
-  //     year: '1977',
-  //     ranking: '#184',
-  //     points: 32345,
-  //     numOfUsers: 232,
-  //     imdb_url: 'http://www.imdb.com/title/tt0074486/',
-  //     poster: 'https://m.media-amazon.com/images/M/MV5BMTQyNjMwMzA1MV5BMl5BanBnXkFtZTcwMzQyNDAxNg@@._V1_SX300.jpg'
-  //   }
-  // };
+  };
 
   componentDidMount() {
     // want a visible movie title slug in url for users
@@ -57,9 +39,8 @@ class MoviePage extends PureComponent {
           plot: data.Plot
         }
         this.setState({ movie: fetchedMovie });
-      })
-
-  }
+      });
+  };
 
   render() {
     // * how I was bringing in movie data for this page (via Link on SortableItem)
@@ -73,7 +54,7 @@ class MoviePage extends PureComponent {
           <div className="left-col white">
             <div className="px-4 pt-4 w-100">
               <CardWrapper
-                icon={ faFilm }
+                icon="film"
                 rotate={ -5 }
                 title="Movie Details"
                 color="tan"
@@ -143,7 +124,7 @@ class MoviePage extends PureComponent {
                     Currently there are no reviews for this movie.
                   </div>
                   <div>
-                    <FontAwesomeIcon icon={faChevronRight}/> &nbsp;<a href="#">Click here to add a review.</a>
+                    <FontAwesomeIcon icon="chevron-right" /> &nbsp;<a href="#">Click here to add a review.</a>
                   </div>
                 </div>
               </CardWrapper>
@@ -152,7 +133,7 @@ class MoviePage extends PureComponent {
           <div className="right-col">
             <div className="m-4">
               <CardWrapper
-                icon={ faComments }
+                icon="comments"
                 title="comments"
                 color="white"
               >
