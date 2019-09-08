@@ -41,7 +41,7 @@ class App extends PureComponent {
   render() {
     return (
       <BrowserRouter>
-        <div className="App">
+        <div id="app">
           <Container className="container-scss px-0 border-0">
             <TopNav/>
             <UpdateBar/>

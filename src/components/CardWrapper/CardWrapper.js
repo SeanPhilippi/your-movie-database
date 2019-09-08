@@ -38,7 +38,10 @@ const CardWrapper = ({
 );
 
 CardWrapper.propTypes = {
-  icon: PropTypes.object,
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   title: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   children: PropTypes.object,

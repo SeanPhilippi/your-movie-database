@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-  background-color: #E6D8B6;
+  background-color: $light2;
 }
 
 .greeting {
@@ -15,17 +15,13 @@ body {
 }
 
 .inner-container {
-  height: 60rem;
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
   display: grid;
   grid-template-columns: 4fr 3fr;
   margin-left: 0;
-}
-
-.side-container {
-  background-color: #E6D8B6;
+  height: 100vh !important;
 }
 
 .home {
