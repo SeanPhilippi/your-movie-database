@@ -12,6 +12,8 @@ class Search extends PureComponent {
     searchResults: [],
   };
 
+  focusInput = React.createRef();
+
   handleAdd = movie => {
     const { addToList, items } = this.props;
     // fetch call to grab movie from api by id, then grab director
@@ -32,6 +34,7 @@ class Search extends PureComponent {
               plot: data.Plot,
               poster: data.Poster
             });
+            this.focusInput.current.focus();
           }
           this.clearResults();
           this.clearSearchText();
@@ -103,13 +106,14 @@ class Search extends PureComponent {
     return (
       <div className="search d-flex flex-column align-items-center">
         <input
+          ref={ this.focusInput }
           autoFocus
           name="searchText"
           className="search-text"
           placeholder="  Search for films..."
-          value={this.state.searchText}
-          onChange={this.onTextChange}
-          onKeyUp={this.onKeyUp}
+          value={ this.state.searchText }
+          onChange={ this.onTextChange }
+          onKeyUp={ this.onKeyUp }
         >
         </input>
         { this.renderResults() }
