@@ -20,7 +20,7 @@ class Register extends PureComponent {
     return (
       <Container className="container d-flex border-0 justify-content-center">
         <Row className="mt-4 p-0">
-          <Col className="white pt-2 col-7">
+          <Col className="bg-white pt-2 col-7">
             <div className="mx-3">
               <p className="">
                 To fully enjoy the YMDb site, you just have to register for free with the following form. This information

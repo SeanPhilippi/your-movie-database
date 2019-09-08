@@ -48,7 +48,7 @@ class Search extends PureComponent {
     const { searchResults } = this.state;
     if (searchResults) {
       return (
-        <div className="white result-scroll">
+        <div className="bg-white result-scroll">
           { searchResults.map(movie => <SearchResult movie={ movie } handleAdd={ this.handleAdd } key={ movie.imdbID } />) }
         </div>
       )

@@ -51,7 +51,7 @@ class MoviePage extends PureComponent {
     return (
       <div className="profile-wrapper" >
         <div className="main-container bg-light2 mt-4">
-          <div className="left-col white">
+          <div className="left-col bg-white">
             <div className="px-4 pt-4 w-100">
               <CardWrapper
                 icon="film"
@@ -96,7 +96,7 @@ class MoviePage extends PureComponent {
                   <div className="font-weight-bold mb-1">
                     Statistics
                   </div>
-                  <div className="white">
+                  <div className="bg-white">
                     <div className="d-flex justify-content-between">
                       <div className="bd-light col-10">Overall Ranking:</div>
                       <div className="bd-light col-2 text-right">rank</div>

@@ -13,7 +13,7 @@ const CardWrapper = ({
   rotate,
   marginTopVal
 }) => (
-  <div className={`card-wrapper shadow ${color} ${ marginTopVal && `mt-${marginTopVal}` }`}>
+  <div className={`card-wrapper shadow bg-${color} ${ marginTopVal && `mt-${marginTopVal}` }`}>
     <div className="wrapper-header d-flex align-items-center">
       {
         !(title === 'spotlight on a user')

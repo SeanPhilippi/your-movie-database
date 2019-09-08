@@ -25,7 +25,7 @@ class Home extends PureComponent {
     return (
       <div className="d-flex border-0 justify-content-center h-100">
         <div className="inner-container mt-4 mx-4 p-0 h-100">
-          <Col className="white pt-2">
+          <Col className="bg-white pt-2">
             <Row className="greeting m-0">
               Welcome to YMDb, Your Movie Database, the movie community where you can create your list of favorite movies,
               discover other people's favorite movies, and discuss movies and favorite lists. YMDb is free and fun!

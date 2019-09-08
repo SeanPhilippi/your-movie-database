@@ -7,7 +7,7 @@ import {  } from '../../redux/actions';
 class ViewableList extends Component {
   render() {
     const ViewableItem = ({ movie, idx }) => (
-      <div className="d-flex white justify-content-between" style={{ lineHeight: '2rem' }}>
+      <div className="d-flex bg-white justify-content-between" style={{ lineHeight: '2rem' }}>
         <div className="d-flex">
           <div className="text-right" style={{ width: '2.2rem' }}>
             { idx + 1 } |&nbsp;

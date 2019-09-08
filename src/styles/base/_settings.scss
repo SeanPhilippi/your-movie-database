@@ -11,13 +11,42 @@ $dark-orange: #EB5018;
 $red: #B20E07;
 $white: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%);
 
-.white {
-  background: $white;
+.bg-white {
+  background: $white !important;
 }
 
-.tan {
-  background: $light;
+.bg-tan {
+  background: $light !important;
 }
+
+.bg-orange {
+  background: $orange !important;
+}
+
+.bg-light-orange {
+  background: $light-orange !important;
+}
+
+.bg-dark-orange {
+  background: $dark-orange !important;
+}
+
+.bg-dark {
+  background: $dark !important;
+}
+
+.bg-light {
+  background: $light !important;
+}
+
+.bg-light2 {
+  background: $light2 !important;
+}
+
+.bg-red {
+  background: $red !important;
+}
+
 // rgb(255,255,255); /* Old browsers */
 // background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%); /* FF3.6-15 */
 // background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* Chrome10-25,Safari5.1-6 */

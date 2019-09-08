@@ -44,7 +44,7 @@ class Profile extends PureComponent  {
     return (
       <div className="profile-wrapper" >
         <div className="main-container bg-light2 mt-4">
-          <div className="left-col white">
+          <div className="left-col bg-white">
             <div className="px-4 pt-4 w-100">
               <CardWrapper
                 icon={["far", "list-alt"]}

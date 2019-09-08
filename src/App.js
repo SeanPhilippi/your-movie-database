@@ -6,7 +6,6 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import { Container } from 'reactstrap';
 import TopNav from './components/TopNav/TopNav';
 import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
@@ -42,7 +41,7 @@ class App extends PureComponent {
     return (
       <BrowserRouter>
         <div id="app">
-          <Container className="container-scss px-0 border-0">
+          <div className="container-scss px-0 border-0">
             <TopNav/>
             <UpdateBar/>
             <Switch>
@@ -63,7 +62,7 @@ class App extends PureComponent {
               {/* <Route path="/movies/:slug" component={ MoviePage } /> */}
               <Route render={ this.pageNotFound } />
             </Switch>
-          </Container>
+          </div>
         </div>
       </BrowserRouter>
     );
