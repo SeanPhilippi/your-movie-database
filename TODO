@@ -31,9 +31,12 @@ To do list:
 - set up email confirming service upon registration
 - was able to add 3 of the same movie, not good...
 - fix up MoviePage styling, find some fonts
+- fix Search so movies like '8 1/2' and 'M' can be searched for...
+- finish addErrors idea, error for duplicate movie add attempt, error for trying to add 21st movie
 - populate data for MoviePage chart, should be challenging...
 - use CLEAR_ERRORS action when visiting any component that has login or registerbox visible, look into history.listen()
 - add more UpdateBar messages, like error
+- give authError for username that contains any spaces?
 - fix hyperlink visited/neutral color, might have to store data in localStorage?
 - make white background width of the container on home page
 - /profile is still reachable when user is logged out, why?  Also logging out while on /profile does not redirect user to /login, why?

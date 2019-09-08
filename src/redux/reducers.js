@@ -59,6 +59,10 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       items: [payload.movie, ...state.items]
     };
+    // case TYPES.SET_ADD_ERROR: return {
+    //   ...state,
+    //   addErrors: payload
+    // };
     case TYPES.REORDER_LIST: return {
       ...state,
       items: arrayMove(state.items, payload.oldIndex, payload.newIndex)

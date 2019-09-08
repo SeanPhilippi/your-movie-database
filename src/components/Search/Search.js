@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SearchResult from '../SearchResult/SearchResult';
 import { connect } from 'react-redux';
 import debounce from '../../utils/helpers/debounce.js';
-import { addToList } from '../../redux/actions';
+import { addToList, setAddError } from '../../redux/actions';
 import './Search.css';
 
 class Search extends PureComponent {
@@ -35,6 +35,8 @@ class Search extends PureComponent {
               poster: data.Poster
             });
             this.focusInput.current.focus();
+          } else {
+            this.props.setAddError('maxed');
           }
           this.clearResults();
           this.clearSearchText();
@@ -64,7 +66,6 @@ class Search extends PureComponent {
   }
 
   handleSearch = () => {
-    console.log('firing');
     this.clearResults();
     const pageNums = [1, 2, 3];
     const { searchText } = this.state;
@@ -132,6 +133,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addToList: movie => dispatch(addToList(movie)),
+  // setAddError: errorKey => dispatch(setAddError(errorKey)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
