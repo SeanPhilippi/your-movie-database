@@ -8,6 +8,8 @@ class NewRegistersBox extends PureComponent {
   render() {
     const {
       newUsers,
+      num,
+      registerPage
     } = this.props;
 
     return (
@@ -15,22 +17,30 @@ class NewRegistersBox extends PureComponent {
         <div>
           <div className="py-2 px-4">
             <div className="mb-2">
-              Most recently registered users on YMDb:
-            </div>
-            <div className="text-orange">
               {
-                newUsers.map(({ _id, username, register_date }) => {
+                !registerPage
+                ? 'Most recent registered users on YMDb:'
+                : <span>
+                    Last { newUsers.length > 50 ? 50 : newUsers.length } registered users on
+                    YMDB out of { newUsers.length }.<br/>
+                    You can search for a user on the <Link to='/new-users'>User's Index Page</Link>.
+                  </span>
+              }
+            </div>
+            <div>
+              {
+                newUsers.slice(0, num).map(({ _id, username, register_date }) => {
                   return (
                     <div
                       className="d-flex justify-content-between"
                       key={ _id }
                     >
-                      <div>
+                      <div className="text-orange">
                         <Link to={`/profile/${ username }`}>
                           { username }
                         </Link>
                       </div>
-                      <div>
+                      <div className="text-black">
                         { register_date }
                       </div>
                     </div>
@@ -38,12 +48,17 @@ class NewRegistersBox extends PureComponent {
                 })
               }
             </div>
-            <hr/>
-            <p>
-              <Link to="/new-users">
-                Go to the list of the last 50 users
-              </Link>
-            </p>
+            {
+              !this.props.registerPage &&
+                <div>
+                  <hr/>
+                  <span>
+                    <Link to="/new-registers">
+                      Go to list of the last 50 users
+                    </Link>
+                  </span>
+                </div>
+            }
           </div>
         </div>
       </Row>

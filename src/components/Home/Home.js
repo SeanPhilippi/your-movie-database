@@ -50,7 +50,7 @@ class Home extends PureComponent {
               color="white"
               marginTopVal={ this.props.isAuthenticated ? '0' : null }
             >
-              <NewRegistersBox />
+              <NewRegistersBox num={10} />
             </CardWrapper>
           </Col>
         </div>

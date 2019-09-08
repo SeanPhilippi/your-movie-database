@@ -17,6 +17,7 @@ import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import Account from './components/Account/Account';
 import UsersIndex from './components/UsersIndex/UsersIndex';
+import NewRegisters from './components/NewRegisters/NewRegisters';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import UnderConstruction from './components/UnderConstruction/UnderConstruction';
 import {
@@ -57,7 +58,7 @@ class App extends PureComponent {
               <Route exact path="/all-movies" component={ UnderConstruction } />
               <Route exact path="/new-users" component={ UnderConstruction } />
               <Route exact path="/most-visited" component={ UnderConstruction } />
-              <Route exact path="/new-registers" component={ UnderConstruction } />
+              <Route exact path="/new-registers" component={ NewRegisters } />
               <Route path="/movies" component={ MoviePage } />
               {/* <Route path="/movies/:slug" component={ MoviePage } /> */}
               <Route render={ this.pageNotFound } />
