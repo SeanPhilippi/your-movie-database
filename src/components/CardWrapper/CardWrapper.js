@@ -13,7 +13,7 @@ const CardWrapper = ({
   rotate,
   marginTopVal
 }) => (
-  <div className={`card-wrapper shadow bg-${color} ${ marginTopVal && `mt-${marginTopVal}` }`}>
+  <div className={`card-wrapper mb-3 shadow bg-${ color } ${ marginTopVal && `mt-${marginTopVal}` }`}>
     <div className="wrapper-header d-flex align-items-center">
       {
         !(title === 'spotlight on a user')
@@ -27,7 +27,7 @@ const CardWrapper = ({
     }
       {
         link
-        ? <div><Link to={`/${link}`}> { title } </Link></div>
+        ? <div><Link to={`/${ link }`}> { title } </Link></div>
         :  <div>{ title }</div>
       }
     </div>
@@ -45,7 +45,7 @@ CardWrapper.propTypes = {
   title: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   children: PropTypes.object,
-  rotate:  PropTypes.number,
+  rotate: PropTypes.number,
   marginTopVal: PropTypes.string,
   // link: PropTypes.string
 };

@@ -49,13 +49,12 @@ class App extends PureComponent {
               <Route exact path="/login" component={ Login } />
               <Route exact path="/register" component={ Register } />
               <Route exact path="/account" component={ Account } />
-              <Route exact path="/top-movies" component={ UnderConstruction } />
+              <Route exact path="/top-movies" component={ TopMovieList } />
               <Route exact path="/profile" component={ Profile } />
               {/* render conditionally only if user is found, else 404 page */}
               <Route exact path="/profile/:username" component={ Profile } />
-              <Route exact path="/users-index" component={ UnderConstruction } />
+              <Route exact path="/users-index" component={ UsersIndex } />
               <Route exact path="/all-movies" component={ UnderConstruction } />
-              <Route exact path="/new-users" component={ UnderConstruction } />
               <Route exact path="/most-visited" component={ UnderConstruction } />
               <Route exact path="/new-registers" component={ NewRegisters } />
               <Route path="/movies" component={ MoviePage } />

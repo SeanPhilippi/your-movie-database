@@ -1,25 +1,25 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-const SearchResult = ({
-  movie,
-  movie: {
-    imdbId,
-    Title,
-    Year,
-  },
-  handleAdd
-}) => (
-  <div
-    key={ imdbId }
-    className="result-item"
-    onClick={ () => handleAdd(movie) }
-  >
-    <div className="result-info">
-      { Title } ({ Year })
+class SearchResult extends PureComponent {
+
+  render() {
+    // const { movie, movie: { imdbId, Title, Year }, user: { username, _id }, handleAdd } = this.props;
+    const { movie, user, handleAdd } = this.props;
+    return (
+      <div
+        key={ movie ? movie.imdbId : user._id }
+        className="result-item"
+        onClick={ () => handleAdd(movie) }
+      >
+      <div className="result-info">
+        { movie ? movie.Title : user.username } { movie && `(${ movie.Year })` }
+      </div>
     </div>
-  </div>
-)
+    )
+  }
+}
+
 
 SearchResult.propTypes = {
   movie: PropTypes.object.isRequired,

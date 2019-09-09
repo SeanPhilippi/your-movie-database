@@ -16,7 +16,6 @@ class NewRegisters extends PureComponent {
               icon="file-contract"
               rotate={ -5 }
               color="tan"
-              marginTopVal='0'
             >
               <NewRegistersBox registerPage num={50} />
             </CardWrapper>

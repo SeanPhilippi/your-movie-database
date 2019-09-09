@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import SearchResult from '../SearchResult/SearchResult';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import debounce from '../../utils/helpers/debounce.js';
 import { addToList, setAddError } from '../../redux/actions';
@@ -45,11 +46,16 @@ class Search extends PureComponent {
 
   renderResults = () => {
     const { searchResults } = this.state;
+    const { users } = this.props;
     if (searchResults) {
       return (
-        <div className="bg-white result-scroll">
-          { searchResults.map(movie => <SearchResult movie={ movie } handleAdd={ this.handleAdd } key={ movie.imdbID } />) }
-        </div>
+        users
+        ? <div className="bg-white result-scroll">
+            { users.map(user => <SearchResult user={ user } key={ user._id } />) }
+          </div>
+        : <div className="bg-white result-scroll">
+            { searchResults.map(movie => <SearchResult movie={ movie } handleAdd={ this.handleAdd } key={ movie.imdbID } />) }
+          </div>
       )
     }
   }
@@ -91,7 +97,7 @@ class Search extends PureComponent {
       // fire handle search through debounce function to reduce api calls with delay
       this.handleDelay();
     }
-  }
+  };
 
 
   clearResults = () => {
@@ -104,13 +110,13 @@ class Search extends PureComponent {
 
   render() {
     return (
-      <div className="search d-flex flex-column align-items-center">
+      <div className={`d-flex flex-column align-items-center mt-${ this.props.marginTopVal }`}>
         <input
           ref={ this.focusInput }
           autoFocus
           name="searchText"
-          className="search-text pl-3"
-          placeholder="  Search for films..."
+          className="search-text pl-3 w-100"
+          placeholder={ !this.props.users ? "  Search for films..." : "Type a member's name..." }
           value={ this.state.searchText }
           onChange={ this.onTextChange }
           onKeyUp={ this.onKeyUp }
@@ -127,8 +133,8 @@ Search.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  items: state.items,
-})
+  items: state.items
+});
 
 const mapDispatchToProps = dispatch => ({
   addToList: movie => dispatch(addToList(movie)),

@@ -100,14 +100,16 @@ class TopNav extends PureComponent {
             >
               HOME
             </NavLink>
+
             {/* <NavLink
               className="text-white mx-2 nav-block"
               exact
               to="/top-movies"
               activeClassName="active"
-              >
+            >
               TOP MOVIE LIST
             </NavLink> */}
+
             <NavLink
               className="text-white mx-2 nav-block"
               exact
@@ -116,6 +118,7 @@ class TopNav extends PureComponent {
             >
               YOUR TOP LIST
             </NavLink>
+
             {/* <NavLink
               className="text-white mx-2 nav-block"
               exact
@@ -124,6 +127,7 @@ class TopNav extends PureComponent {
             >
               USERS' INDEX
             </NavLink> */}
+
             {/* <NavLink
               className="text-white mx-2 nav-block"
               exact

@@ -18,65 +18,65 @@ create with how they utilize it
 - home page would have ranking of most frequented user lists
 
 To do list:
+- create another substantial card component and populate with dummy data
 - work on edit/presentation view
 - add pictures and expand on technologies used for project in README
 - finish account page, make an MVP
   - https://toolset.com/documentation/user-guides/building-the-my-account-page/
+- fix hyperlink colors
 - "Are you sure you want to discard your changes?"  <discard> <keep editing> pop up when user tries to leave SortableList
 - scrape IMDB urls, look into other apis or scraping tools
+- fix list styling, 20 movies viewable in screen with room to spare
 - improve styling of Nav, make nav links look like animated buttons
-- deploy on paid heroku plan, google for a discount
+- deploy on paid heroku plan, google for ag discount
+- **how to collect visitor count for user lists, need to do that ASAP so I can populate home page with most visited lists
 - change all links to styled buttons
 - clear SearchResults upon refocus, clicking outside of results
 - allow UserStatement textfield to take markdown syntax and render emojis and some formatting github style
 - save button in UserStatement, make UpdateBar status say 'Profile saved'
+- make the delete lightbox on brand
 - set up email confirming service upon registration
+- improve YMDB logo
 - was able to add 3 of the same movie, not good...
+- make site mobile friendly / responsive
+  functional in edit view
 - fix up MoviePage styling, find some fonts
 - make a loading icon screen
-- fix Search so movies like '8 1/2' and 'M' can be searched for...
+- give users a register_date and last_login date
 - finish addErrors idea, error for duplicate movie add attempt, error for trying to add 21st movie
 - populate data for MoviePage chart, should be challenging...
 - use CLEAR_ERRORS action when visiting any component that has login or registerbox visible, look into history.listen()
+- make button to switch between list view and edit view.  dragging, editing description, etc, only
+- add to beginning/end toggle button for adding to list
 - add more UpdateBar messages, like error
 - give authError for username that contains any spaces?
+- turn 'Spotlight on a user' title into a link with pointer (hyperlink text is super dated feeling)
 - set up global styling root colors and variables
 - fix hyperlink visited/neutral color, might have to store data in localStorage?
-- make white background width of the container on home page
-- /profile is still reachable when user is logged out, why?  Also logging out while on /profile does not redirect user to /login, why?
-  - read about and understand how history api works
-- create another substantial card component and populate with dummy data
-- make the delete lightbox on brand
 - make some tests for site using Jest or Selenium
 - make a global button class.  most buttons should look roughly the same...
-- display next to save/delete list buttons the number of movies in user list, and display a message when their list is full
+- make errors clear upon navigating to a new page so they don't transfer to another element on page that renders from errors object
+- display next to save/delete list buttons the number of movies in user list, and display a message when their list is full, or make the indicator turn red
 - look into emailing a password reset link
-- allow login with username OR email, currently only email which isn't intuitive
+- fix white gradient, make it more prominent/work.  Currently doing nothing?
 - adjust fontsize to Mead way, so I can have more granularity while sticking with rems
 - incorporate Stu's http api and do some clean up in actions.js
-- **how to collect visitor count for user lists, need to do that ASAP so I can populate home page with most visited lists
-- fix list styling, 20 movies viewable in screen with room to spare
 - visual signifiers or notification message or displayed count so movies can't be added after 20 cap
-- look at and fix updateStatus()
 - make movies added to list persist by storing in localStorage upon add/reorder, or by PUT request to mongodb for any change
-- add YMDB logo graphic in place of 'Home' nav link
 - update README and add pics of site
-- add to beginning/end toggle button
-- make errors clear upon navigating to a new page so they don't transfer to another element on page that renders from errors object
-- give users a register_date and last_login date
 - allow for emojis when making comments
-- fix white gradient, make it more prominent/work.  Currently doing nothing?
 - make actions (setList, orderList, deleteMovie) also save the updates to mlab automatically
-- make site mobile friendly / responsive
-- make button to switch between list view and edit view.  dragging, editing description, etc, only
-  functional in edit view
 - add director info in search results!  **warning** pain in the ass
-- how to put a cap of 20 movies for list?
+- imdb link fetching/scraping for MoviePage
+- allow posting of reviews connected to MoviePages
+- add blurb/status that can maybe display next to the username on Profile
+- add to list button attached to every MoviePage
 - display highlighted, annimated drop down banner 'List updated' whenever user clicks outside
   an editing box or a change in state.list is detected.
 - look at Steven Fiero's github and copy his readme.MD formatting, create a comprehensive README.MD
-- long movie titles cause text to bleed out of element, fix css
+- long movie titles cause text to bleed out of element, fix css, use an ellipses?
 - improve UX for site and build out README so it is easy to know how to use it.
+- fix Search so movies like '8 1/2' and 'M' can be searched for...
 - responsive design - change px to rem throughout app, I have root px being changed via media query in index.css
 
 Left off:
