@@ -43,6 +43,7 @@ Concurrently: ```npm run both```
 * Implement user visits and movie ranking data for display on home page preview windows.
 * Add pictures of website to this repo README.md.
 
+<!--
 Home Page
 
 <img src="/public/" alt="alt text" width="75%" height="75%">
@@ -63,4 +64,5 @@ Log in/Register Pages
 
 <img src="/public/" alt="alt text" width="75%" height="75%">
 
-<img src="/public/" alt="alt text" width="75%" height="75%"> -->
+<img src="/public/" alt="alt text" width="75%" height="75%">
+-->
