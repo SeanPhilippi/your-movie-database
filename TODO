@@ -28,6 +28,7 @@ To do list:
 - scrape IMDB urls, look into other apis or scraping tools
 - fix list styling, 20 movies viewable in screen with room to spare
 - improve styling of Nav, make nav links look like animated buttons
+- movie titles in pathnames
 - deploy on paid heroku plan, google for ag discount
 - **how to collect visitor count for user lists, need to do that ASAP so I can populate home page with most visited lists
 - change all links to styled buttons

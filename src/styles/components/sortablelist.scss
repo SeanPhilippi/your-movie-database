@@ -20,6 +20,9 @@
   font-size: 1.3rem;
   text-decoration: none;
   color: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .grip-container {

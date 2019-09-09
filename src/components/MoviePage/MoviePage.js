@@ -49,8 +49,8 @@ class MoviePage extends PureComponent {
     const { poster, title, director, year, country, runtime, plot } = this.state.movie
 
     return (
-      <div className="profile-wrapper" >
-        <div className="main-container bg-light2 mt-4">
+      <div className="d-flex border-0 justify-content-center">
+        <div className="bg-light2 inner-container mt-4">
           <div className="left-col bg-white">
             <div className="px-4 pt-4 w-100">
               <CardWrapper
@@ -58,6 +58,7 @@ class MoviePage extends PureComponent {
                 rotate={ -5 }
                 title="Movie Details"
                 color="tan"
+                marginTopVal="0"
               >
                 <div className="movie-page d-flex">
                   <div className="poster">

@@ -9,19 +9,23 @@ class ViewableList extends Component {
     const ViewableItem = ({ movie, idx }) => (
       <div className="d-flex bg-white justify-content-between" style={{ lineHeight: '2rem' }}>
         <div className="d-flex">
-          <div className="text-right" style={{ width: '2.2rem' }}>
+          <div className="text-right" style={{ width: '2.4rem' }}>
             { idx + 1 } |&nbsp;
           </div>
-          <div className="mr-2">
-            <Link to={{
+          <div
+            tltle={`${ movie.title } (${ movie.director }, ${ movie.year })`}
+            className="d-inline-block text-truncate"
+            style={{ maxWidth: '516px' }}
+          >
+            <Link
+              className=""
+              to={{
                 pathname: '/movies',
                 state: { movie }
               }}
             >
-              { movie.title }
+              { movie.title }&nbsp;
             </Link>
-          </div>
-          <div>
             ({ movie.director }, { movie.year })
           </div>
         </div>

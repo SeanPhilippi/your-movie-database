@@ -23,7 +23,7 @@ class NewRegistersBox extends PureComponent {
                 : <span>
                     Last { newUsers.length > 50 ? 50 : newUsers.length } registered users on
                     YMDB out of { newUsers.length }.<br/>
-                    You can search for a user on the <Link to='/new-users'>User's Index Page</Link>.
+                    You can search for a user on the <Link to='/users-index'>User's Index Page</Link>.
                   </span>
               }
             </div>
