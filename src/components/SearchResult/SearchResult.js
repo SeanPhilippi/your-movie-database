@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './SearchResult.css';
 
 const SearchResult = ({
   movie,

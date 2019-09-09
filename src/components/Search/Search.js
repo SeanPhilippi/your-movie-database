@@ -4,7 +4,6 @@ import SearchResult from '../SearchResult/SearchResult';
 import { connect } from 'react-redux';
 import debounce from '../../utils/helpers/debounce.js';
 import { addToList, setAddError } from '../../redux/actions';
-import './Search.css';
 
 class Search extends PureComponent {
   state = {
@@ -110,7 +109,7 @@ class Search extends PureComponent {
           ref={ this.focusInput }
           autoFocus
           name="searchText"
-          className="search-text"
+          className="search-text pl-3"
           placeholder="  Search for films..."
           value={ this.state.searchText }
           onChange={ this.onTextChange }

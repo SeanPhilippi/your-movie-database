@@ -27,6 +27,7 @@ To do list:
 - improve styling of Nav, make nav links look like animated buttons
 - deploy on paid heroku plan, google for a discount
 - change all links to styled buttons
+- clear SearchResults upon refocus, clicking outside of results
 - allow UserStatement textfield to take markdown syntax and render emojis and some formatting github style
 - save button in UserStatement, make UpdateBar status say 'Profile saved'
 - set up email confirming service upon registration

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
 import { connect } from 'react-redux';
 import { setUpdateStatus } from '../../redux/actions';
-import './UpdateBar.css';
 
 class UpdateBar extends PureComponent {
   render() {

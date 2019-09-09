@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 
-import './PageNotFound.css';
-
 class PageNotFound extends PureComponent {
   render() {
     return (

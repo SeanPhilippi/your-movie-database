@@ -1,0 +1,11 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 60% 40%;
+}
+
+.search-btns-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 2.2rem;
+}

@@ -25,7 +25,6 @@ import {
   fetchList,
 } from './redux/actions';
 import http from './utils/http';
-import './App.css';
 
 class App extends PureComponent {
   componentDidMount() {
