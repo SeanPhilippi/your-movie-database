@@ -9,3 +9,16 @@
   justify-content: center;
   height: 2.2rem;
 }
+
+.edit-btn {
+  font-size: .7rem;
+  margin: .2rem .2rem;
+  border-radius: 3px;
+  background-color: white;
+  line-height: 16px;
+  height: 20px;
+}
+
+.edit-btn:hover {
+  color: $orange;
+}

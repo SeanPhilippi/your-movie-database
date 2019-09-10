@@ -10,6 +10,7 @@ import SortableList from './SortableList';
 import CardWrapper from './CardWrapper';
 import Search from './Search';
 import ViewableList from './ViewableList';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { setEditing } from '../redux/actions';
 
@@ -88,9 +89,13 @@ class Profile extends PureComponent  {
                   </div>
                 )
                 : <div>
-                    <div className="search-btns-container">
-                      <button onClick={ this.handleEdit }>
-                        Edit
+                    <div className="d-flex justify-content-end">
+                      <button
+                        className="edit-btn mb-2"
+                        style={{ fontSize: '.9rem' }}
+                        onClick={ this.handleEdit }
+                      >
+                        <FontAwesomeIcon icon={["far","edit"]} /> Edit
                       </button>
                     </div>
                     <ViewableList items={ this.state.listData.items }/>
