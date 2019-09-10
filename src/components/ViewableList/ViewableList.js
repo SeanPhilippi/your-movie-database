@@ -7,9 +7,16 @@ import {  } from '../../redux/actions';
 class ViewableList extends Component {
   render() {
     const ViewableItem = ({ movie, idx }) => (
-      <div className="d-flex bg-white justify-content-between" style={{ lineHeight: '2rem' }}>
+      <div
+        key={ movie._id }
+        className="d-flex bg-white justify-content-between"
+        style={{ lineHeight: '2rem' }}
+      >
         <div className="d-flex">
-          <div className="text-right" style={{ width: '2.4rem' }}>
+          <div
+            className="text-right"
+            style={{ width: '2.4rem' }}
+          >
             { idx + 1 } |&nbsp;
           </div>
           <div

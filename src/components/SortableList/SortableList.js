@@ -14,15 +14,22 @@ class SortableList extends Component {
   render() {
     const { items, orderList, deleteMovie } = this.props;
 
-    const DragHandle = sortableHandle(() => {
+    const DragHandle = sortableHandle(props => {
       return (
-        <div className="grip-container">
+        <div
+          className="grip d-flex align-items-center justify-content-between mr-2"
+          style={{ width: '3.3rem' }}
+        >
           <img
+            className="mx-2"
             alt="grip handle"
-            style={{ width: '.4rem' }}
+            style={{ width: '.4rem', height: '1.2rem' }}
             src={ img }
           >
           </img>
+          <div className="text-right">
+            { props.sortIndex + 1 } |
+          </div>
         </div>
       )
     });
@@ -38,43 +45,45 @@ class SortableList extends Component {
       return (
         <div
           key={ id }
-          className="movie-item bg-white"
+          className="bg-white"
+          style={{ lineHeight: '2rem' }}
         >
-          <div className='grip'>
-            <DragHandle />
-          </div>
-          <div className="numbers">
-            { sortIndex + 1 } |
-          </div>
-          <div className="movie-info">
-            <div>
-            {/* paste this to end of pathname after debugging disappearing movie titles: /${movie.title.concat('-', movie.year).split(' ').join('-')} */}
-              <Link
-                to={{
-                  pathname: '/movies',
-                  state: { movie }
-                }}
-                className="movie-link"
+          <div className="d-flex justify-content-between">
+            <div className="d-flex">
+              <DragHandle sortIndex={ sortIndex } />
+              <div
+                title={`${ title } (${ director }, ${ year })`}
+                className="d-inline-block text-truncate"
+                style={{ maxWidth: '510px' }}
               >
-                { title }
-              </Link>
+                {/* paste this to end of pathname after debugging disappearing movie titles: /${movie.title.concat('-', movie.year).split(' ').join('-')} */}
+                <Link
+                  to={{
+                    pathname: '/movies',
+                    state: { movie }
+                  }}
+                  className="movie-link"
+                >
+                  { title }&nbsp;
+                </Link>
+                ({ director }, { year })
+              </div>
             </div>
-            <div className="dir-year">
-              { director }, { year }
-            </div>
+            <button
+              onClick={ () => deleteMovie(movie) }
+              className="delete"
+            >
+              ✕
+            </button>
           </div>
-          <button
-            onClick={ () => deleteMovie(movie) }
-            className="delete"
-          >
-            ✕
-          </button>
         </div>
       )
     });
 
+
+
     const SortableList = sortableContainer(({ items }) =>  (
-      <div className="list-items text-center">
+      <div>
         {
           items.map((movie, index) => {
             return (

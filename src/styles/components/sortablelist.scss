@@ -3,11 +3,6 @@
   width: 100%;
 }
 
-.list-items {
-  width: 100%;
-  color: $light;
-}
-
 .movie-item {
   display: grid;
   grid-template-columns: 1fr 5fr 20fr 5fr;
@@ -17,7 +12,6 @@
 }
 
 .movie-link {
-  font-size: 1.3rem;
   text-decoration: none;
   color: inherit;
   white-space: nowrap;
@@ -25,20 +19,8 @@
   text-overflow: ellipsis;
 }
 
-.grip-container {
-  padding: 0rem .5rem;
-}
-
 .grip {
-  display: flex;
-  align-items: center;
-  padding-left: .1rem;
-  width: .8rem;
   cursor: grab;
-}
-
-.movie-info {
-  margin: 5px 0;
 }
 
 .dir-year {

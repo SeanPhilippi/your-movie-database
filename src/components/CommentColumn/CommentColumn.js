@@ -14,7 +14,7 @@ export default class CommentColumn extends PureComponent {
           rows="4"
         >
         </textarea>
-        <button className="send mt-1">
+        <button className="send mt-3">
           Send
         </button>
       </div>
