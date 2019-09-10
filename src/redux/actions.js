@@ -183,7 +183,7 @@ export const logoutUser = history => dispatch => {
   // set current user back to empty object
   dispatch(setCurrentUser({}));
   if (history) {
-    history.push('/login');
+    history.push('/');
   };
 };
 

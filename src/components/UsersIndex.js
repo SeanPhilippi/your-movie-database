@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import CardWrapper from '../../components/CardWrapper/CardWrapper';
-import Search from '../../components/Search/Search';
+import CardWrapper from './CardWrapper';
+import Search from './Search';
 import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-import { registerUser } from '../../redux/actions';
+import { registerUser } from '../redux/actions';
 import { connect } from 'react-redux';
 // import PasswordRevealer from '../PasswordRevealer/PasswordRevealer';
 

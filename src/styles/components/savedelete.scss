@@ -1,0 +1,55 @@
+.save-delete {
+  display: flex;
+  justify-content: flex-end;
+  height: 2rem;
+  margin: .5rem 0 2rem 0;
+}
+
+.delete-list {
+  color: $red;
+  font-size: .7rem;
+  margin: 0.2rem 0 .2rem .2rem;
+  border-radius: 3px;
+  line-height: 16px;
+  height: 20px;
+}
+
+.delete-list:hover {
+  color: red;
+}
+
+.save-list {
+  color: rgba(0, 58, 0, 0.996);
+  font-size: .7rem;
+  margin: .2rem .2rem;
+  border-radius: 3px;
+  background-color: white;
+  line-height: 16px;
+  height: 20px;
+}
+
+.save-list:hover {
+  color: green;
+}
+
+.custom-ui {
+  border: grey 1px solid;
+  padding: 2rem 2.5rem 2.5rem 2.5rem;
+  border-radius: 4px;
+}
+
+.alert-button {
+  margin-right: .7rem;
+  border-radius: 4px;
+  font-weight: 600;
+  color: white;
+  border: black 1px solid;
+}
+
+.red {
+  background-color: #FF5F31;
+}
+
+.green {
+  background-color: #4CAE51;
+}

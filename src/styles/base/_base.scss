@@ -47,3 +47,18 @@ button:focus {
 .textarea {
   white-space: pre-line;
 }
+
+// button animation
+button {
+  background-color: $white;
+}
+
+button:hover {
+  cursor: pointer;
+  background: white;
+}
+
+button:active {
+  position: relative;
+  top: 2px;
+}

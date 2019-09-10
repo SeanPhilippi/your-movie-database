@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { confirmAlert } from 'react-confirm-alert';
 import { connect } from 'react-redux';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { deleteList, setUpdateStatus } from '../../redux/actions';
-import './SaveDelete.css';
+import { deleteList, setUpdateStatus } from '../redux/actions';
 
 class SaveDelete extends PureComponent {
   handleUpdate = () => {

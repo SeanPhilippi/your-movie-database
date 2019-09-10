@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'reactstrap';
-import CardWrapper from '../CardWrapper/CardWrapper';
+import CardWrapper from './CardWrapper';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logoutUser } from '../../redux/actions';
+import { logoutUser } from '../redux/actions';
 
 class Account extends PureComponent {
 

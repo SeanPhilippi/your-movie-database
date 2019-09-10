@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import { Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import CardWrapper from '../CardWrapper/CardWrapper';
-import LoginBox from '../LoginBox/LoginBox';
-import NewRegistersBox from '../NewRegistersBox/NewRegistersBox';
+import CardWrapper from './CardWrapper';
+import LoginBox from './LoginBox';
+import NewRegistersBox from './NewRegistersBox';
 // import fontAwesome from './utils';
 
 class Home extends PureComponent {

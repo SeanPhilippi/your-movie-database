@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import CommentColumn from '../CommentColumn/CommentColumn';
-import CardWrapper from '../CardWrapper/CardWrapper';
+import CommentColumn from './CommentColumn';
+import CardWrapper from './CardWrapper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class MoviePage extends PureComponent {

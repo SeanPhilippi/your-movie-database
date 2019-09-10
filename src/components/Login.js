@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import LoginBox from '../LoginBox/LoginBox';
-import CardWrapper from '../CardWrapper/CardWrapper';
+import LoginBox from './LoginBox';
+import CardWrapper from './CardWrapper';
 import { Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

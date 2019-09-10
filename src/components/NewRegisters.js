@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import NewRegistersBox from '../NewRegistersBox/NewRegistersBox';
-import CardWrapper from '../CardWrapper/CardWrapper';
+import NewRegistersBox from './NewRegistersBox';
+import CardWrapper from './CardWrapper';
 import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 

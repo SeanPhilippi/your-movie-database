@@ -6,20 +6,20 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import TopNav from './components/TopNav/TopNav';
-import Home from './components/Home/Home';
-import Profile from './components/Profile/Profile';
-import TopMovieList from './components/TopMovieList/TopMovieList';
-import MoviePage from './components/MoviePage/MoviePage';
-import UpdateBar from './components/UpdateBar/UpdateBar';
-import Register from './components/Register/Register';
-import Login from './components/Login/Login';
-import Account from './components/Account/Account';
-import UsersIndex from './components/UsersIndex/UsersIndex';
-import NewRegisters from './components/NewRegisters/NewRegisters';
-import PageNotFound from './components/PageNotFound/PageNotFound';
-import UnderConstruction from './components/UnderConstruction/UnderConstruction';
-import Footer from './components/Footer/Footer';
+import TopNav from './components/TopNav';
+import Home from './components/Home';
+import Profile from './components/Profile';
+import TopMovieList from './components/TopMovieList';
+import MoviePage from './components/MoviePage';
+import UpdateBar from './components/UpdateBar';
+import Register from './components/Register';
+import Login from './components/Login';
+import Account from './components/Account';
+import UsersIndex from './components/UsersIndex';
+import NewRegisters from './components/NewRegisters';
+import PageNotFound from './components/PageNotFound';
+import UnderConstruction from './components/UnderConstruction';
+import Footer from './components/Footer';
 import {
   setNewUsers,
   fetchList,

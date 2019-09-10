@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import CommentColumn from '../CommentColumn/CommentColumn';
-import EditableStatement from '../EditableStatement/EditableStatement';
-import UserStatement from '../UserStatement/UserStatement';
-import SaveDelete from '../SaveDelete/SaveDelete';
-import SortableList from '../SortableList/SortableList';
-import CardWrapper from '../CardWrapper/CardWrapper';
-import Search from '../Search/Search';
-import ViewableList from '../ViewableList/ViewableList';
+import CommentColumn from './CommentColumn';
+import EditableStatement from './EditableStatement';
+import UserStatement from './UserStatement';
+import SaveDelete from './SaveDelete';
+import SortableList from './SortableList';
+import CardWrapper from './CardWrapper';
+import Search from './Search';
+import ViewableList from './ViewableList';
 
 class Profile extends PureComponent  {
   state = {

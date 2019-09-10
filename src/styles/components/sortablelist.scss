@@ -36,12 +36,16 @@
 .delete {
   white-space: nowrap;
   overflow: hidden;
-  font-size: 18px;
+  font-size: 1.3rem;
   background-color: Transparent;
   border: none;
   cursor: pointer;
   overflow: hidden;
   outline: none;
+}
+
+.delete:hover {
+  color: $red;
 }
 
 .numbers {

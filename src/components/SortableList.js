@@ -7,8 +7,8 @@ import {
   sortableHandle,
 } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
-import { orderList, deleteMovie } from '../../redux/actions';
-import img from '../../images/grippy.png';
+import { orderList, deleteMovie } from '../redux/actions';
+import img from '../images/grippy.png';
 
 class SortableList extends Component {
   render() {

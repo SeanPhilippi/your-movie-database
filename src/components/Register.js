@@ -3,8 +3,8 @@ import { Col } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import RegisterBox from '../RegisterBox/RegisterBox';
-import CardWrapper from '../CardWrapper/CardWrapper';
+import RegisterBox from './RegisterBox';
+import CardWrapper from './CardWrapper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Register extends PureComponent {
