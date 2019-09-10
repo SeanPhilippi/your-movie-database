@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import SearchResult from './SearchResult';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import debounce from '../utils/helpers/debounce.js';
 import { addToList, setAddError } from '../redux/actions';

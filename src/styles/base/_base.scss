@@ -48,7 +48,26 @@ button:focus {
   white-space: pre-line;
 }
 
-// button animation
+// links
+a, .link {
+  color: #EF7C2D;
+}
+
+a:visited {
+  color: #9C640B;
+}
+
+/* a:active {
+  color:
+} */
+
+
+a:hover {
+  color: #B20E07;
+  text-decoration: none;
+}
+
+// buttons
 button {
   background-color: $white;
 }

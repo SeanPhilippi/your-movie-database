@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {  } from '../redux/actions';
 
 class ViewableList extends Component {
@@ -24,7 +24,7 @@ class ViewableList extends Component {
             className="d-inline-block text-truncate"
             style={{ maxWidth: '516px' }}
           >
-            <Link
+            <NavLink className="link"
               className=""
               to={{
                 pathname: '/movies',
@@ -32,7 +32,7 @@ class ViewableList extends Component {
               }}
             >
               { movie.title }&nbsp;
-            </Link>
+            </NavLink>
             ({ movie.director }, { movie.year })
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class PageNotFound extends PureComponent {
   render() {
@@ -10,7 +10,7 @@ class PageNotFound extends PureComponent {
         <div className="page-not-found-text pb-4">
           <div className="font-weight-bold">Page Not Found</div>
           <p style={{ fontSize: '1rem' }}>
-            There is nothing here.  Click <Link to="/"><b>here</b></Link> to return to the home page.
+            There is nothing here.  Click <NavLink className="link" to="/"><b>here</b></NavLink> to return to the home page.
           </p>
         </div>
       </div>

@@ -6,7 +6,7 @@ import {
   sortableElement,
   sortableHandle,
 } from 'react-sortable-hoc';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { orderList, deleteMovie } from '../redux/actions';
 import img from '../images/grippy.png';
 
@@ -57,15 +57,15 @@ class SortableList extends Component {
                 style={{ maxWidth: '510px' }}
               >
                 {/* paste this to end of pathname after debugging disappearing movie titles: /${movie.title.concat('-', movie.year).split(' ').join('-')} */}
-                <Link
+                <NavLink
+                  className="link movie-link"
                   to={{
                     pathname: '/movies',
                     state: { movie }
                   }}
-                  className="movie-link"
                 >
                   { title }&nbsp;
-                </Link>
+                </NavLink>
                 ({ director }, { year })
               </div>
             </div>

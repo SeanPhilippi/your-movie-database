@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class NewRegistersBox extends PureComponent {
@@ -23,7 +23,7 @@ class NewRegistersBox extends PureComponent {
                 : <span>
                     Last { newUsers.length > 50 ? 50 : newUsers.length } registered users on
                     YMDB out of { newUsers.length }.<br/>
-                    You can search for a user on the <Link to='/users-index'>User's Index Page</Link>.
+                    You can search for a user on the <NavLink className="link" to='/users-index'>User's Index Page</NavLink>.
                   </span>
               }
             </div>
@@ -36,9 +36,9 @@ class NewRegistersBox extends PureComponent {
                       key={ _id }
                     >
                       <div className="text-orange">
-                        <Link to={`/profile/${ username }`}>
+                        <NavLink className="link" to={`/profile/${ username }`}>
                           { username }
-                        </Link>
+                        </NavLink>
                       </div>
                       <div className="text-black">
                         { register_date }
@@ -53,9 +53,9 @@ class NewRegistersBox extends PureComponent {
                 <div>
                   <hr/>
                   <span>
-                    <Link to="/new-registers">
+                    <NavLink className="link" to="/new-registers">
                       Go to list of the last 50 users
-                    </Link>
+                    </NavLink>
                   </span>
                 </div>
             }
