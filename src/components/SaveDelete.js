@@ -99,14 +99,14 @@ class SaveDelete extends PureComponent {
           { this.props.items.length } / 20
         </div>
         <div>
-          <button
-            className="save-list"
-            onClick={this.handleUpdate}
-          >
-            <NavLink className="link" to={`/profile/${ this.props.user.username }`}>
-              SAVE
-            </NavLink>
-          </button>
+          <NavLink className="link" to={`/profile/${ this.props.user.username }`}>
+            <button
+              className="save-list"
+              onClick={this.handleUpdate}
+            >
+                SAVE
+            </button>
+          </NavLink>
           <button
             className="delete-list"
             onClick={this.handleDelete}

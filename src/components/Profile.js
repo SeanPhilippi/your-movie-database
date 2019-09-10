@@ -100,7 +100,7 @@ class Profile extends PureComponent  {
                             style={{ fontSize: '.9rem' }}
                             onClick={ this.handleEdit }
                           >
-                            <FontAwesomeIcon icon={["far","edit"]} /> Edit
+                            <FontAwesomeIcon icon={["far","edit"]} />
                           </button>
                       }
                     </div>

@@ -27,7 +27,7 @@ const CardWrapper = ({
     }
       {
         link
-        ? <div><NavLink className="link" to={`/${ link }`}> { title } </NavLink></div>
+        ? <NavLink className="link" to={`/${ link }`}><div className="text-white"> { title } </div></NavLink>
         :  <div>{ title }</div>
       }
     </div>

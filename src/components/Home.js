@@ -48,6 +48,7 @@ class Home extends PureComponent {
             <CardWrapper
               title="spotlight on a user"
               color="white"
+              link="new-registers"
               marginTopVal={ this.props.isAuthenticated ? '0' : null }
             >
               <NewRegistersBox num={10} />
