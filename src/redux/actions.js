@@ -13,7 +13,7 @@ export const TYPES = {
   SET_STATEMENT: 'SET_STATEMENT',
   SET_LIST: 'SET_LIST',
   ADD_TO_LIST: 'ADD_TO_LIST',
-  // SET_ADD_ERROR: 'SET_ADD_ERROR',
+  SET_ADD_ERROR: 'SET_ADD_ERROR',
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
   DELETE_LIST: 'DELETE_LIST',
@@ -72,10 +72,10 @@ export const addToList = movie => ({
   }
 });
 
-// export const setAddError = errorKey => ({
-//   type: TYPES.SET_ADD_ERROR,
-//   payload: errorKey
-// });
+export const setAddError = errorKey => ({
+  type: TYPES.SET_ADD_ERROR,
+  payload: errorKey
+});
 
 export const orderList = (oldIndex, newIndex) => ({
   type: TYPES.REORDER_LIST,

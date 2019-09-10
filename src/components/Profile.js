@@ -25,7 +25,6 @@ class Profile extends PureComponent  {
 
   componentDidMount() {
     console.log('visited list?', this.props.match.params.username ? true : false)
-    console.log('username param', this.props.match.params.username)
     if (this.props.match.params.username) {
       console.log('fetching visited listData in Profile...')
       fetch(`/api/movies/${ this.props.match.params.username }/list`)
@@ -90,13 +89,16 @@ class Profile extends PureComponent  {
                 )
                 : <div>
                     <div className="d-flex justify-content-end">
-                      <button
-                        className="edit-btn mb-2"
-                        style={{ fontSize: '.9rem' }}
-                        onClick={ this.handleEdit }
-                      >
-                        <FontAwesomeIcon icon={["far","edit"]} /> Edit
-                      </button>
+                      {
+                        this.props.user.username === this.props.match.params.username
+                        && <button
+                            className="edit-btn mb-2"
+                            style={{ fontSize: '.9rem' }}
+                            onClick={ this.handleEdit }
+                          >
+                            <FontAwesomeIcon icon={["far","edit"]} /> Edit
+                          </button>
+                      }
                     </div>
                     <ViewableList items={ this.state.listData.items }/>
                   </div>
@@ -143,7 +145,8 @@ const mapStateToProps = state => ({
   user: state.user,
   isAuthenticated: state.isAuthenticated,
   open: state.open,
-  editing: state.editing
+  editing: state.editing,
+  addError: state.addError,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -94,21 +94,26 @@ class SaveDelete extends PureComponent {
   render() {
     console.log('in save', this.props.user.username)
     return (
-      <div className="save-delete d-flex">
-        <button
-          className="save-list"
-          onClick={this.handleUpdate}
-        >
-          <NavLink className="link" to={`/profile/${ this.props.user.username }`}>
-            SAVE
-          </NavLink>
-        </button>
-        <button
-          className="delete-list"
-          onClick={this.handleDelete}
-        >
-          DELETE LIST
-        </button>
+      <div className="save-delete d-flex justify-content-between">
+        <div className="count">
+          { this.props.items.length } / 20
+        </div>
+        <div>
+          <button
+            className="save-list"
+            onClick={this.handleUpdate}
+          >
+            <NavLink className="link" to={`/profile/${ this.props.user.username }`}>
+              SAVE
+            </NavLink>
+          </button>
+          <button
+            className="delete-list"
+            onClick={this.handleDelete}
+          >
+            DELETE LIST
+          </button>
+        </div>
       </div>
     )
   }

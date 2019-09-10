@@ -19,16 +19,18 @@ create with how they utilize it
 
 To do list:
 - create another substantial card component and populate with dummy data
-- work on edit/presentation view
 - add pictures and expand on technologies used for project in README
+- fire and floppy icons for save and delete buttons
+- set a class on class 'count', fading red text upon trying to add more than 20 movies
+- do I need state.editing?  other ways to use it.  make sure use is authenticated so they can't edit other lists
 - finish account page, make an MVP
   - https://toolset.com/documentation/user-guides/building-the-my-account-page/
 - fix hyperlink colors
 - "Are you sure you want to discard your changes?"  <discard> <keep editing> pop up when user tries to leave SortableList
 - scrape IMDB urls, look into other apis or scraping tools
-- fix list styling, 20 movies viewable in screen with room to spare
 - improve styling of Nav, make nav links look like animated buttons
 - movie titles in pathnames
+- fix site breaking upon navigating back to a visited profile (username undefined error)
 - deploy on paid heroku plan, google for ag discount
 - **how to collect visitor count for user lists, need to do that ASAP so I can populate home page with most visited lists
 - change all links to styled buttons

@@ -36,7 +36,8 @@ class Search extends PureComponent {
             });
             this.focusInput.current.focus();
           } else {
-            this.props.setAddError('maxed');
+            this.props.setAddError(true);
+
           }
           this.clearResults();
           this.clearSearchText();
@@ -130,6 +131,7 @@ class Search extends PureComponent {
 
 Search.propTypes = {
   addToList: PropTypes.func.isRequired,
+  setAddError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -138,7 +140,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addToList: movie => dispatch(addToList(movie)),
-  // setAddError: errorKey => dispatch(setAddError(errorKey)),
+  setAddError: bool => dispatch(setAddError(bool)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
