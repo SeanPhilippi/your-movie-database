@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import { connect } from 'react-redux';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { deleteList, setUpdateStatus } from '../redux/actions';
+import { deleteList, setUpdateStatus, setEditing } from '../redux/actions';
 
 class SaveDelete extends PureComponent {
   handleUpdate = () => {
@@ -91,13 +92,16 @@ class SaveDelete extends PureComponent {
   };
 
   render() {
+    console.log('in save', this.props.user.username)
     return (
       <div className="save-delete d-flex">
         <button
           className="save-list"
           onClick={this.handleUpdate}
         >
-          SAVE
+          <NavLink className="link" to={`/profile/${ this.props.user.username }`}>
+            SAVE
+          </NavLink>
         </button>
         <button
           className="delete-list"
@@ -121,12 +125,13 @@ SaveDelete.propTypes = {
 const mapStateToProps = state => ({
   user: state.user,
   items: state.items,
-  statement: state.statement
+  statement: state.statement,
 });
 
 const mapDispatchToProps = dispatch => ({
   deleteList: () => dispatch(deleteList()),
   setUpdateStatus: () => dispatch(setUpdateStatus()),
+  setEditing: () => dispatch(setEditing()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);

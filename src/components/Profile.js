@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { NavLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CommentColumn from './CommentColumn';
 import EditableStatement from './EditableStatement';
@@ -9,6 +10,8 @@ import SortableList from './SortableList';
 import CardWrapper from './CardWrapper';
 import Search from './Search';
 import ViewableList from './ViewableList';
+
+import { setEditing } from '../redux/actions';
 
 class Profile extends PureComponent  {
   state = {
@@ -21,6 +24,7 @@ class Profile extends PureComponent  {
 
   componentDidMount() {
     console.log('visited list?', this.props.match.params.username ? true : false)
+    console.log('username param', this.props.match.params.username)
     if (this.props.match.params.username) {
       console.log('fetching visited listData in Profile...')
       fetch(`/api/movies/${ this.props.match.params.username }/list`)
@@ -36,6 +40,28 @@ class Profile extends PureComponent  {
           }
         })
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.open !== this.props.open) {
+      fetch(`/api/movies/${ this.props.match.params.username }/list`)
+        .then(res => res.json())
+        .then(data => {
+          if (data) {
+            const fetchedListData = {
+              username: data.username,
+              items: data.items,
+              statement: data.statement
+            };
+            this.setState({ listData: fetchedListData });
+          }
+        })
+    }
+  };
+
+  handleEdit = () => {
+    this.props.setEditing();
+    this.props.history.push('/profile');
   }
 
   render() {
@@ -62,6 +88,11 @@ class Profile extends PureComponent  {
                   </div>
                 )
                 : <div>
+                    <div className="search-btns-container">
+                      <button onClick={ this.handleEdit }>
+                        Edit
+                      </button>
+                    </div>
                     <ViewableList items={ this.state.listData.items }/>
                   </div>
               }
@@ -100,11 +131,18 @@ class Profile extends PureComponent  {
 Profile.propTypes = {
   user: PropTypes.object,
   isAuthenticated: PropTypes.bool.isRequired,
+  open: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   user: state.user,
   isAuthenticated: state.isAuthenticated,
+  open: state.open,
+  editing: state.editing
 });
 
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = dispatch => ({
+  setEditing: () => dispatch(setEditing()),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));

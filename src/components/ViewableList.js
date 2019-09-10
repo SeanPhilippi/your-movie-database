@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import {  } from '../redux/actions';
+import { } from '../redux/actions';
 
 class ViewableList extends Component {
   render() {

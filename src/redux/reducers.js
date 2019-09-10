@@ -10,7 +10,8 @@ const initialState = {
   statement: '',
   items: [],
   open: false,
-  newUsers: []
+  newUsers: [],
+  editing: true
 }
 
 // destructured action parameter is desctructured and passed in to rootReducer function,
@@ -40,6 +41,10 @@ export default (state = initialState, { type, payload }) => {
       isAuthenticated: !isEmpty(payload),
       // token
       user_token: payload
+    };
+    case TYPES.SET_EDITING: return {
+      ...state,
+      editing: !state.editing
     };
     case TYPES.SET_UPDATE_STATUS: return {
       ...state,

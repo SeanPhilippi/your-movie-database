@@ -9,6 +9,7 @@ export const TYPES = {
   SET_NEW_USERS: 'SET_NEW_USERS',
   SET_TOKEN: 'SET_TOKEN',
   SET_UPDATE_STATUS: 'SET_UPDATE_STATUS',
+  SET_EDITING: 'SET_EDITING',
   SET_STATEMENT: 'SET_STATEMENT',
   SET_LIST: 'SET_LIST',
   ADD_TO_LIST: 'ADD_TO_LIST',
@@ -40,6 +41,10 @@ export const setNewUsers = users => {
 
 export const setUpdateStatus = () => ({
   type: TYPES.SET_UPDATE_STATUS
+});
+
+export const setEditing = () => ({
+  type: TYPES.SET_EDITING
 });
 
 export const onRouteChange = () => ({
