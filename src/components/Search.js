@@ -34,6 +34,7 @@ class Search extends PureComponent {
               plot: data.Plot,
               poster: data.Poster
             });
+            // refocuses selector in search bar after add
             this.focusInput.current.focus();
           } else {
             this.props.setAddError(true);
@@ -110,17 +111,21 @@ class Search extends PureComponent {
   };
 
   render() {
+    const { marginTopVal, users } = this.props;
+    const { searchText } = this.state;
+
     return (
-      <div className={`d-flex flex-column align-items-center mt-${ this.props.marginTopVal }`}>
+      <div className={`d-flex flex-column align-items-center mt-${ marginTopVal }`}>
         <input
           ref={ this.focusInput }
           autoFocus
           name="searchText"
           className="search-text pl-3 w-100"
-          placeholder={ !this.props.users ? "  Search for films..." : "Type a member's name..." }
-          value={ this.state.searchText }
+          placeholder={ !users ? "  Search for films..." : "Type a member's name..." }
+          value={ searchText }
           onChange={ this.onTextChange }
           onKeyUp={ this.onKeyUp }
+          onBlur={ this.clearResults }
         >
         </input>
         { this.renderResults() }

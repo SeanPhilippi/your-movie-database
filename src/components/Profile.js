@@ -24,10 +24,11 @@ class Profile extends PureComponent  {
   };
 
   componentDidMount() {
-    console.log('visited list?', this.props.match.params.username ? true : false)
-    if (this.props.match.params.username) {
+    const { username } = this.props.match.params;
+    console.log('visited list?', username ? true : false)
+    if (username) {
       console.log('fetching visited listData in Profile...')
-      fetch(`/api/movies/${ this.props.match.params.username }/list`)
+      fetch(`/api/movies/${ username }/list`)
         .then(res => res.json())
         .then(data => {
           if (data) {
@@ -43,8 +44,9 @@ class Profile extends PureComponent  {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.open !== this.props.open) {
-      fetch(`/api/movies/${ this.props.match.params.username }/list`)
+    const { open, match } = this.props;
+    if (prevProps.open !== open) {
+      fetch(`/api/movies/${ match.params.username }/list`)
         .then(res => res.json())
         .then(data => {
           if (data) {
@@ -60,11 +62,13 @@ class Profile extends PureComponent  {
   };
 
   handleEdit = () => {
-    this.props.setEditing();
-    this.props.history.push('/profile');
+    const { setEditing, history } = this.props;
+    setEditing();
+    history.push('/profile');
   }
 
   render() {
+    const { match, user } = this.props;
     return (
       <div className="grid-container bg-light2 mt-4">
         <div className="bg-white">
@@ -72,12 +76,12 @@ class Profile extends PureComponent  {
             <CardWrapper
               icon={["far", "list-alt"]}
               rotate={ -5 }
-              title={`${this.props.match.params.username || this.props.user.username}'s Top Movies`}
+              title={`${match.params.username || user.username}'s Top Movies`}
               color="tan"
               marginTopVal='0'
             >
               {
-                !this.props.match.params.username
+                !match.params.username
                 ? (
                   <div>
                     <div className="search-btns-container">
@@ -90,7 +94,7 @@ class Profile extends PureComponent  {
                 : <div>
                     <div className="d-flex justify-content-end">
                       {
-                        this.props.user.username === this.props.match.params.username
+                        user.username === match.params.username
                         && <button
                             className="edit-btn mb-2"
                             style={{ fontSize: '.9rem' }}
@@ -113,9 +117,9 @@ class Profile extends PureComponent  {
               color="tan"
             >
               {
-                !this.props.match.params.username
+                !match.params.username
                 ? <EditableStatement />
-                : <UserStatement username={ this.props.match.params.username } statement={ this.state.listData.statement }/>
+                : <UserStatement username={ match.params.username } statement={ this.state.listData.statement }/>
               }
             </CardWrapper>
           </div>
@@ -139,6 +143,8 @@ Profile.propTypes = {
   user: PropTypes.object,
   isAuthenticated: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
+  editing: PropTypes.bool.isRequired,
+  addError: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

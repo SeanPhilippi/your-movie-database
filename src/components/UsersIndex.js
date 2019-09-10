@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 
 class UsersIndex extends PureComponent {
 
-
-
   render() {
     return (
       <div className="d-flex border-0 justify-content-center">

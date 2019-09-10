@@ -21,6 +21,7 @@ To do list:
 - create another substantial card component and populate with dummy data
 - add pictures and expand on technologies used for project in README
 - fire and floppy icons for save and delete buttons
+- make edit button more subtle, users want to be able to easily edit but it shouldn't mess up the beauty of their presentation view
 - set a class on class 'count', fading red text upon trying to add more than 20 movies
 - do I need state.editing?  other ways to use it.  make sure use is authenticated so they can't edit other lists
 - finish account page, make an MVP
@@ -30,6 +31,12 @@ To do list:
 - scrape IMDB urls, look into other apis or scraping tools
 - improve styling of Nav, make nav links look like animated buttons
 - movie titles in pathnames
+- collpase searchbars upon clicking outside them
+- shadow for sortableItem upon lift
+- theme for website changeable / dark mode in a settings page
+- FocusMate inspired questionaire that can be filled out in account, and guests can click on username in Profile header
+  to view thier answers to these account questions
+- contact in footer that directs to a page with a form where users can report bugs or contact the developer (me :))
 - fix site breaking upon navigating back to a visited profile (username undefined error)
 - deploy on paid heroku plan, google for ag discount
 - **how to collect visitor count for user lists, need to do that ASAP so I can populate home page with most visited lists
@@ -40,6 +47,9 @@ To do list:
 - make the delete lightbox on brand
 - set up email confirming service upon registration
 - improve YMDB logo
+- make some admin features that only conditionally render when a certain user is logged in and authenticated.
+  - have a dashboard in the navigation where I can see the most recently logged in users, where they are from, demographic
+    of userbase information based on their locations displayed in a graph
 - was able to add 3 of the same movie, not good...
 - make site mobile friendly / responsive
   functional in edit view
