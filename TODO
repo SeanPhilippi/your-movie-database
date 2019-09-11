@@ -21,6 +21,7 @@ To do list:
 - create another substantial card component and populate with dummy data
 - add pictures and expand on technologies used for project in README
 - fire and floppy icons for save and delete buttons
+- validEmail function, use it
 - make edit button more subtle, users want to be able to easily edit but it shouldn't mess up the beauty of their presentation view
 - set a class on class 'count', fading red text upon trying to add more than 20 movies
 - do I need state.editing?  other ways to use it.  make sure use is authenticated so they can't edit other lists
@@ -29,6 +30,9 @@ To do list:
 - fix hyperlink colors
 - "Are you sure you want to discard your changes?"  <discard> <keep editing> pop up when user tries to leave SortableList
 - scrape IMDB urls, look into other apis or scraping tools
+- make some basic tests using Jest.  Start up my app and do a simple flow with a dummy accont and make sure everything runs
+  smoothly, then just run with a script or have it run everytime I push up or something.  I want to treat this site like it's
+  legit.
 - improve styling of Nav, make nav links look like animated buttons
 - movie titles in pathnames
 - shadow for sortableItem upon lift
