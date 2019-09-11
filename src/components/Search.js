@@ -36,7 +36,7 @@ class Search extends PureComponent {
               poster: data.Poster
             });
             // refocuses selector in search bar after add
-            // this.focusInput.current.focus();
+            this.focusInput.current.focus();
           } else {
             this.props.setAddError(true);
 

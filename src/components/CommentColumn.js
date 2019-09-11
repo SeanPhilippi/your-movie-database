@@ -18,22 +18,22 @@ class CommentColumn extends PureComponent {
   }
 
   // ! find a differnt way to do this.  don't call this in the return!
-  // renderComments = () => (
-  //   <div>
-  //     {
-  //       this.comments.map(comment =>
-  //         <div className="border">
-  //           <div>
-  //             <NavLink to={`/profile/${ comment.username }`}>{ comment.username }</NavLink> wrote on { comment.post_date }
-  //           </div>
-  //           <p className="comment">
-  //             { comment.text }
-  //           </p>
-  //         </div>
-  //       )
-  //     }
-  //   </div>
-  // )
+  renderComments = () => (
+    <div>
+      {
+        this.comments.map(comment =>
+          <div className="border">
+            <div>
+              <NavLink to={`/profile/${ comment.username }`}>{ comment.username }</NavLink> wrote on { comment.post_date }
+            </div>
+            <p className="comment">
+              { comment.text }
+            </p>
+          </div>
+        )
+      }
+    </div>
+  )
 
   render() {
     return (
