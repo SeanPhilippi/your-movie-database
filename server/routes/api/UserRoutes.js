@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 const validateRegisterInput = require('../validation/register');
+const Validator = require('validator');
 const formatDate = require('./formatDate');
 const geoip = require('geoip-lite');
 
@@ -70,7 +71,7 @@ router.post('/login', (req, res) => {
   let data;
   //* for future, allow for login with username OR email, and then search by username, then by email
   // ! check for login against email in database, then check against username
-  if (login.slice(-4) === '.com' && login.includes('@')) {
+  if (Validator.isEmail(login)) {
     data = { email: login };
   } else {
     data = { username: login };
@@ -120,15 +121,6 @@ passport.authenticate('jwt', { session: false }),
   res.json({
     user: {email: req.user.email, id: req.user._id, username: req.user.username}
   });
-});
-
-// @route   GET api/users/visited-profile
-// @desc    Return user and list data for visited profile
-// @access  Public
-router.get('/visited-profile', (req, res) => {
-  User.findOne({ username }).exec().then(data => {
-    res.json(data);
-  }).catch(console.log);
 });
 
 module.exports = router;

@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import SearchResult from './SearchResult';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import debounce from '../utils/helpers/debounce.js';
 import { addToList, setAddError } from '../redux/actions';
@@ -16,10 +15,12 @@ class Search extends PureComponent {
 
   handleAdd = movie => {
     const { addToList, items } = this.props;
+    console.log('no here')
     // fetch call to grab movie from api by id, then grab director
     fetch(`/api/movies/addMovie/${movie.imdbID}`)
       .then(res => res.json())
       .then(data => {
+        console.log('here')
         let titles = items.map(item => item.title);
         console.log('titles', titles)
         if (!titles.includes(movie.Title)) {
@@ -35,7 +36,7 @@ class Search extends PureComponent {
               poster: data.Poster
             });
             // refocuses selector in search bar after add
-            this.focusInput.current.focus();
+            // this.focusInput.current.focus();
           } else {
             this.props.setAddError(true);
 
@@ -121,11 +122,11 @@ class Search extends PureComponent {
           autoFocus
           name="searchText"
           className="search-text pl-3 w-100"
-          placeholder={ !users ? "  Search for films..." : "Type a member's name..." }
+          placeholder={ !users ? "Search for films..." : "Type a member's name..." }
           value={ searchText }
           onChange={ this.onTextChange }
           onKeyUp={ this.onKeyUp }
-          onBlur={ this.clearResults }
+          onFocusOut={ this.clearResults }
         >
         </input>
         { this.renderResults() }

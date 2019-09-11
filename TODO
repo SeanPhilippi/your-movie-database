@@ -21,6 +21,7 @@ To do list:
 - create another substantial card component and populate with dummy data
 - add pictures and expand on technologies used for project in README
 - fire and floppy icons for save and delete buttons
+- fix ellipsis, fixed with is too wide and not responsive, it's bleeding out of element already
 - make edit button more subtle, users want to be able to easily edit but it shouldn't mess up the beauty of their presentation view
 - set a class on class 'count', fading red text upon trying to add more than 20 movies
 - do I need state.editing?  other ways to use it.  make sure use is authenticated so they can't edit other lists
@@ -31,7 +32,6 @@ To do list:
 - scrape IMDB urls, look into other apis or scraping tools
 - improve styling of Nav, make nav links look like animated buttons
 - movie titles in pathnames
-- shadow for sortableItem upon lift
 - if text is in search input, render a clickable x to the right, upon click of this x, the searchText and searchResults will clear
 - theme for website changeable / dark mode in a settings page
 - FocusMate inspired questionaire that can be filled out in account, and guests can click on username in Profile header
