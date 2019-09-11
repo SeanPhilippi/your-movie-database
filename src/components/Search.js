@@ -125,7 +125,7 @@ class Search extends PureComponent {
           value={ searchText }
           onChange={ this.onTextChange }
           onKeyUp={ this.onKeyUp }
-          onBlur={ this.clearResults }
+          // onBlur={ this.clearResults }
         >
         </input>
         { this.renderResults() }
