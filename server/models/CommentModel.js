@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
-  username: {
+  author: {
     type: String,
     lowercase: true,
     required: true
@@ -16,7 +16,7 @@ const CommentSchema = new Schema({
     required: true
   },
   movie_id: String,
-  list_id: String,
+  user: String,
   top_movie_list: Boolean
 });
 

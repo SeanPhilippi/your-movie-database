@@ -20,6 +20,7 @@ class Profile extends PureComponent  {
       username: '',
       items: [],
       statement: '',
+      comments: []
     }
   };
 
@@ -38,6 +39,14 @@ class Profile extends PureComponent  {
               statement: data.statement
             };
             this.setState({ listData: fetchedListData });
+          }
+        }).catch(console.log);
+
+      fetch(`/api/comments/${ username }`)
+        .then(res => res.json())
+        .then(data => {
+          if (data) {
+            this.setState({ comments: data })
           }
         })
     }
@@ -69,6 +78,7 @@ class Profile extends PureComponent  {
 
   render() {
     const { match, user } = this.props;
+    const { listData, comments } = this.state;
     return (
       <div className="grid-container bg-light2 mt-4">
         <div className="bg-white">
@@ -104,7 +114,7 @@ class Profile extends PureComponent  {
                           </button>
                       }
                     </div>
-                    <ViewableList items={ this.state.listData.items }/>
+                    <ViewableList items={ listData.items }/>
                   </div>
               }
             </CardWrapper>
@@ -119,7 +129,7 @@ class Profile extends PureComponent  {
               {
                 !match.params.username
                 ? <EditableStatement />
-                : <UserStatement username={ match.params.username } statement={ this.state.listData.statement }/>
+                : <UserStatement username={ match.params.username } statement={ listData.statement }/>
               }
             </CardWrapper>
           </div>
@@ -131,7 +141,7 @@ class Profile extends PureComponent  {
             color="white"
             marginTopVal="0"
           >
-            <CommentColumn />
+            <CommentColumn comments={ comments }/>
           </CardWrapper>
         </div>
       </div>

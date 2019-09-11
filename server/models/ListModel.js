@@ -29,6 +29,21 @@ const ListSchema = new Schema({
       type: String,
       required: true
     }
+  }],
+  comments: [{
+    author: {
+      type: String,
+      lowercase: true,
+      required: true
+    },
+    text: {
+      type: String,
+      requried: true
+    },
+    post_date: {
+      type: String,
+      required: true
+    }
   }]
 });
 
