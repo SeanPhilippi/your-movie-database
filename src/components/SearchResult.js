@@ -20,7 +20,6 @@ class SearchResult extends PureComponent {
   }
 }
 
-
 SearchResult.propTypes = {
   movie: PropTypes.object.isRequired,
   handleAdd: PropTypes.func.isRequired

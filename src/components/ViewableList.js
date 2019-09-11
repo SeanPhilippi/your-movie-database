@@ -24,7 +24,7 @@ class ViewableList extends Component {
             className="d-inline-block text-truncate"
             style={{ maxWidth: '516px' }}
           >
-            <NavLink className="link"
+            <NavLink
               className=""
               to={{
                 pathname: '/movies',
