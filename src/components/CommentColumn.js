@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import Comment from './Comment';
 import moment from 'moment';
 
@@ -12,7 +12,7 @@ class CommentColumn extends PureComponent {
       {
         author: 'daniel glassman',
         text: 'wassup buddy',
-        post_date: 'September 9, 2019',
+        post_date: '2 September 2019',
         username: 'kesto'
       }
     ],
@@ -23,7 +23,7 @@ class CommentColumn extends PureComponent {
     const { value } = e.target;
     const newComment = {
       author: this.props.user.username,
-      post_date: moment().format('LL'),
+      post_date: moment().format('DD MMMM YYYY'),
       username: this.props.match.params.username || this.props.user.username,
       text: value
     };
@@ -71,7 +71,7 @@ class CommentColumn extends PureComponent {
       <div className="d-flex flex-column p-2">
         {
           this.props.isAuthenticated
-          && <React.Fragment>
+          ? <React.Fragment>
               <div className="pb-1 font-weight-bold text-left">
                 Write a comment
               </div>
@@ -90,6 +90,9 @@ class CommentColumn extends PureComponent {
                 Send
               </button>
             </React.Fragment>
+          : <div className="ml-1 mb-1">
+              Create an account <NavLink to="/register">here</NavLink> or <NavLink to="/login">log in</NavLink> to make a comment.
+            </div>
         }
         { this.renderComments() }
       </div>
