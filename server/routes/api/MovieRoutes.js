@@ -65,7 +65,6 @@ router.get('/:username/list', (req, res) => {
 // @desc    update existing list attached to username
 // @access  Public
 router.put('/save/:username', (req, res) => {
-  console.log('req body in movies/save', req.body)
   List.updateOne(
     { username: req.params.username },
     {

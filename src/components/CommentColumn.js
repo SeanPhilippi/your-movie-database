@@ -1,66 +1,110 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import Comment from './Comment';
+import moment from 'moment';
 
 class CommentColumn extends PureComponent {
 
-  comments = [
-    {
-      username: 'daniel glassman',
-      text: 'wassup buddy',
-      post_date: Date.now(),
-      list_id: '5d3509473d393ebfa132e80b'
-    }
-  ]
+  state = {
+    comments: [
+      {
+        author: 'daniel glassman',
+        text: 'wassup buddy',
+        post_date: 'September 9, 2019',
+        username: 'kesto'
+      }
+    ],
+    comment: {}
+  }
 
-  onComment = () => {
+  handleFieldChange = e => {
+    const { value } = e.target;
+    const newComment = {
+      author: this.props.user.username,
+      post_date: moment().format('LL'),
+      username: this.props.match.params.username || this.props.user.username,
+      text: value
+    };
+    this.setState({
+      ...this.state,
+      comment: newComment
+    });
+    console.log('new comment', newComment)
+  }
+
+  // clearTextField = () => {
+  //   this.setState({
+  //     ...this.state,
+  //     comment: [],
+  //   });
+  // }
+
+  handleComment = e => {
+    console.log('comment')
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      comments: [
+        this.state.comment,
+        ...this.state.comments
+      ]
+    })
+    console.log('rendering')
     this.renderComments();
+    // this.clearTextField();
   }
 
   // ! find a differnt way to do this.  don't call this in the return!
   renderComments = () => (
     <div>
       {
-        this.comments.map(comment =>
-          <div className="border">
-            <div>
-              <NavLink to={`/profile/${ comment.username }`}>{ comment.username }</NavLink> wrote on { comment.post_date }
-            </div>
-            <p className="comment">
-              { comment.text }
-            </p>
-          </div>
-        )
+        this.state.comments.map(comment => <Comment comment={ comment } />)
       }
     </div>
   )
 
   render() {
+
     return (
       <div className="d-flex flex-column p-2">
-        <div className="pb-1 font-weight-bold text-left">
-          Write a comment
-        </div>
-        <textarea
-          className="comments-box w-100"
-          type="text"
-          name="comments"
-          rows="4"
-        >
-        </textarea>
-        <button
-          onClick={ this.onComment }
-          className="send mt-3"
-        >
-          Send
-        </button>
+        {
+          this.props.isAuthenticated
+          && <React.Fragment>
+              <div className="pb-1 font-weight-bold text-left">
+                Write a comment
+              </div>
+              <textarea
+                className="comments-box w-100"
+                type="text"
+                name="comments"
+                rows="4"
+                onChange={ this.handleFieldChange }
+              >
+              </textarea>
+              <button
+                onClick={ this.handleComment }
+                className="send mt-3"
+              >
+                Send
+              </button>
+            </React.Fragment>
+        }
+        { this.renderComments() }
       </div>
     )
   }
 }
 
+CommentColumn.propTypes = {
+  user: PropTypes.object,
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
 const mapStateToProps = state => ({
-  comments: state.comments,
+  user: state.user,
+  isAuthenticated: state.isAuthenticated
 });
 
-export default connect(mapStateToProps)(CommentColumn);
+export default withRouter(connect(mapStateToProps)(CommentColumn));

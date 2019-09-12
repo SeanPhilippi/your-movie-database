@@ -16,7 +16,7 @@ const CommentSchema = new Schema({
     required: true
   },
   movie_id: String,
-  user: String,
+  username: String,
   top_movie_list: Boolean
 });
 
