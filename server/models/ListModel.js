@@ -30,21 +30,21 @@ const ListSchema = new Schema({
       required: true
     }
   }],
-  comments: [{
-    author: {
-      type: String,
-      lowercase: true,
-      required: true
-    },
-    text: {
-      type: String,
-      requried: true
-    },
-    post_date: {
-      type: String,
-      required: true
-    }
-  }]
+  // comments: [{
+  //   author: {
+  //     type: String,
+  //     lowercase: true,
+  //     required: true
+  //   },
+  //   text: {
+  //     type: String,
+  //     requried: true
+  //   },
+  //   post_date: {
+  //     type: String,
+  //     required: true
+  //   }
+  // }]
 });
 
 module.exports = List = mongoose.model('List', ListSchema);

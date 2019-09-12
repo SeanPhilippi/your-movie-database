@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Comment = require('../../models/CommentModel');
+const Comments = require('../../models/CommentsModel');
 const User = require('../../models/UserModel');
 const fetch = require('node-fetch');
 
@@ -21,11 +21,19 @@ router.get('/:username', (req, res) => {
 // @access  Public
 // ! would I use the same route for posting on user lists, top movie list, and movie pages?
 // ! or separate routes?
-router.post('/:author/:owner', (req, res) => {
-  const newComment = new Comment({
-    author,
-    text,
-    post_date,
-    user
-  })
+router.put('/:author/:username', (req, res) => {
+  console.log('inside put comments:', req.body)
+  Comments.updateOne(
+    { username: req.params.username },
+    {
+      $set: {
+        'comments': req.body
+      }
+    },
+    {
+      upsert: 'true'
+    }
+  ).catch(console.log);
 });
+
+module.exports = router;

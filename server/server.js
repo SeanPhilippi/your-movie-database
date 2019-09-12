@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const movies = require('./routes/api/MovieRoutes');
 const users = require('./routes/api/UserRoutes');
+const comments = require('./routes/api/CommentRoutes');
 const app = express();
 const passport = require('passport');
 const cors = require('cors');
@@ -31,6 +32,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true })
 // Use routes
 app.use('/api/movies', movies);
 app.use('/api/users', users);
+app.use('/api/comments', comments);
 
 app.get('/express', (req, res) => {
   res.send({ express: 'Your express backend is connected to React!' })

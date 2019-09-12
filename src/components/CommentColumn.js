@@ -10,10 +10,9 @@ class CommentColumn extends PureComponent {
   state = {
     comments: [
       {
-        author: 'daniel glassman',
+        username: 'daniel glassman',
         text: 'wassup buddy',
-        post_date: '2 September 2019',
-        username: 'kesto'
+        post_date: 'September 2 2019',
       }
     ],
     comment: {}
@@ -22,9 +21,8 @@ class CommentColumn extends PureComponent {
   handleFieldChange = e => {
     const { value } = e.target;
     const newComment = {
-      author: this.props.user.username,
-      post_date: moment().format('DD MMMM YYYY'),
-      username: this.props.match.params.username || this.props.user.username,
+      username: this.props.user.username,
+      post_date: moment().format('LL'),
       text: value
     };
     this.setState({
@@ -42,16 +40,28 @@ class CommentColumn extends PureComponent {
   // }
 
   handleComment = e => {
-    console.log('comment')
+    const { user: { username }, match } = this.props;
+    const { comments, comment } = this.state;
     e.preventDefault();
     this.setState({
       ...this.state,
       comments: [
-        this.state.comment,
-        ...this.state.comments
+        comment,
+        ...comments
       ]
-    })
+    });
     console.log('rendering')
+    fetch(`/api/comments/${ username }/${ match.params.username || username }`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(comments)
+      }
+    )
+      .then(res => res.json)
+      .catch(console.log);
     this.renderComments();
     // this.clearTextField();
   }
