@@ -45,17 +45,17 @@ class Profile extends PureComponent  {
           }
         }).catch(console.log);
 
-      fetch(`/api/comments/${ username || this.props.user.username }`)
-        .then(res => res.json())
-        .then(data => {
-          console.log('comment data on mount', data)
-          if (data) {
-            this.setState({
-              ...this.state,
-              comments: [...data.comments]
-            });
-          }
-        })
+      // fetch(`/api/comments/${ username || this.props.user.username }`)
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     console.log('comment data on mount', data)
+      //     if (data) {
+      //       this.setState({
+      //         ...this.state,
+      //         comments: [...data.comments]
+      //       });
+      //     }
+      //   })
     }
   }
 
