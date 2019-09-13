@@ -21,14 +21,14 @@ To do list:
 - be able to visit a Profile from clicking on username in comment, list currently doesn't load properly
 - movies transferring to other profiles when you click on their name in comment sometimes, why??
 - spinny loader for any fetched data
-- make registerbox input width look like loginbox
+- clear comment input after hitting send
+- make RegisterBox and LoginBox look way more alike, lots of styling differences
 - make NewRegisters more responsive
 - create another substantial card component and populate with dummy data
 - add pictures and expand on technologies used for project in README
 - fire and floppy icons for save and delete buttons
 - populate the rest of the lists, even if it's gibberish.  need this site to have an illussion of activity and a good user experience.
 - fix ellipsis, fixed width is too wide and not responsive, it's bleeding out of element already
-- make edit button more subtle, users want to be able to easily edit but it shouldn't mess up the beauty of their presentation view
 - set a class on class 'count', fading red text upon trying to add more than 20 movies
 - do I need state.editing?  other ways to use it.  make sure use is authenticated so they can't edit other lists
 - finish account page, make an MVP
