@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CardWrapper from './CardWrapper';
@@ -24,12 +23,12 @@ class Home extends PureComponent {
   render() {
     return (
       <div className="d-flex border-0 justify-content-center h-100">
-        <div className="inner-container mt-4 p-0 h-100">
-          <Col className="bg-white pt-2">
-            <Row className="greeting m-0">
+        <div className="inner-container mt-4 p-0">
+          <div className="bg-white pt-2 col">
+            <div className="greeting m-0 row">
               Welcome to YMDb, Your Movie Database, the movie community where you can create your list of favorite movies,
               discover other people's favorite movies, and discuss movies and favorite lists. YMDb is free and fun!
-            </Row>
+            </div>
             <CardWrapper
               icon={["far", "list-alt"]}
               rotate={ -5 }
@@ -42,8 +41,8 @@ class Home extends PureComponent {
               color="tan"
               title='most visited lists'
             />
-          </Col>
-          <Col className="pt-0 h-100">
+          </div>
+          <div className="pt-0 col">
             { this.renderLoginBox() }
             <CardWrapper
               title="spotlight on a user"
@@ -53,7 +52,7 @@ class Home extends PureComponent {
             >
               <NewRegistersBox num={10} />
             </CardWrapper>
-          </Col>
+          </div>
         </div>
       </div>
     )

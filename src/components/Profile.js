@@ -19,9 +19,9 @@ class Profile extends PureComponent  {
     listData: {
       username: '',
       items: [],
-      statement: '',
-      comments: []
-    }
+      statement: ''
+    },
+    comments: []
   };
 
   componentDidMount() {
@@ -38,15 +38,22 @@ class Profile extends PureComponent  {
               items: data.items,
               statement: data.statement
             };
-            this.setState({ listData: fetchedListData });
+            this.setState({
+              ...this.state,
+              listData: { ...fetchedListData }
+            });
           }
         }).catch(console.log);
 
-      fetch(`/api/comments/${ username }`)
+      fetch(`/api/comments/${ username || this.props.user.username }`)
         .then(res => res.json())
         .then(data => {
+          console.log('comment data on mount', data)
           if (data) {
-            this.setState({ comments: data })
+            this.setState({
+              ...this.state,
+              comments: [...data.comments]
+            });
           }
         })
     }

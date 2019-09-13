@@ -18,6 +18,8 @@ create with how they utilize it
 - home page would have ranking of most frequented user lists
 
 To do list:
+- spinny loader for any fetched data
+- make registerbox input width look like loginbox
 - create another substantial card component and populate with dummy data
 - add pictures and expand on technologies used for project in README
 - fire and floppy icons for save and delete buttons

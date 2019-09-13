@@ -9,11 +9,7 @@ class CommentColumn extends PureComponent {
 
   state = {
     comments: [
-      {
-        username: 'daniel glassman',
-        text: 'wassup buddy',
-        post_date: 'September 2 2019',
-      }
+
     ],
     comment: {}
   }
@@ -70,7 +66,7 @@ class CommentColumn extends PureComponent {
   renderComments = () => (
     <div>
       {
-        this.state.comments.map(comment => <Comment comment={ comment } />)
+        [...this.state.comments, ...this.props.comments].map(comment => <Comment comment={ comment } />)
       }
     </div>
   )
