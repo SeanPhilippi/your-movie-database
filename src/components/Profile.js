@@ -44,7 +44,19 @@ class Profile extends PureComponent  {
           }
         }).catch(console.log);
 
-      fetch(`/api/comments/${ username || this.props.user.username }`)
+      }
+    if (!username || username === this.props.user.username) {
+      fetch(`/api/comments/${ this.props.user.username }`)
+        .then(res => res.json())
+        .then(data => {
+          if (data) {
+            this.props.setComments(data.comments);
+          } else {
+            this.props.setComments([]);
+          }
+        })
+    } else {
+      fetch(`/api/comments/${ username }`)
         .then(res => res.json())
         .then(data => {
           if (data) {
