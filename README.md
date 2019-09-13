@@ -34,7 +34,7 @@ Concurrently: ```npm run both```
 * Comments are currently in the works. Comments are posting and successfully being fetched for the correct profiles, but there are some bugs still being worked out.  
 * Site is mostly responsive, some minor bugs to work out. 
 
-## Future Goals (truncated)
+## Future Goals
 * User affinity stats: Users will be able to see the top 5 best list matches towards the bottom of their profile.
 * Top Movie List aggregating rankings from all member lists.
 * Commenting system expanded to Movie Pages and the Top Movies Page.
