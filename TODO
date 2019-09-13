@@ -20,11 +20,12 @@ create with how they utilize it
 To do list:
 - spinny loader for any fetched data
 - make registerbox input width look like loginbox
+- make NewRegisters more responsive
 - create another substantial card component and populate with dummy data
 - add pictures and expand on technologies used for project in README
 - fire and floppy icons for save and delete buttons
 - populate the rest of the lists, even if it's gibberish.  need this site to have an illussion of activity and a good user experience.
-- fix ellipsis, fixed with is too wide and not responsive, it's bleeding out of element already
+- fix ellipsis, fixed width is too wide and not responsive, it's bleeding out of element already
 - make edit button more subtle, users want to be able to easily edit but it shouldn't mess up the beauty of their presentation view
 - set a class on class 'count', fading red text upon trying to add more than 20 movies
 - do I need state.editing?  other ways to use it.  make sure use is authenticated so they can't edit other lists
@@ -57,7 +58,6 @@ To do list:
   - have a dashboard in the navigation where I can see the most recently logged in users, where they are from, demographic
     of userbase information based on their locations displayed in a graph
 - was able to add 3 of the same movie, not good...
-- make site mobile friendly / responsive
   functional in edit view
 - fix up MoviePage styling, find some fonts
 - make a loading icon screen

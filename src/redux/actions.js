@@ -12,6 +12,8 @@ export const TYPES = {
   SET_EDITING: 'SET_EDITING',
   SET_STATEMENT: 'SET_STATEMENT',
   SET_LIST: 'SET_LIST',
+  SET_COMMENTS: 'SET_COMMENTS',
+  POST_COMMENT: 'POST_COMMENT',
   ADD_TO_LIST: 'ADD_TO_LIST',
   SET_ADD_ERROR: 'SET_ADD_ERROR',
   REORDER_LIST: 'REORDER_LIST',
@@ -62,6 +64,13 @@ export const setList = listData => ({
   type: TYPES.SET_LIST,
   payload: {
     listData
+  }
+});
+
+export const setComments = comments => ({
+  type: TYPES.SET_COMMENTS,
+  payload: {
+    comments
   }
 });
 
@@ -175,6 +184,21 @@ export const fetchList = () => (dispatch, getState) => {
       if (res.data) dispatch(setList(res.data));
     })
     .catch(err => console.error(err));
+};
+
+export const postComment = (comment, author, username) => (dispatch, getState) => {
+  dispatch({
+    type: TYPES.POST_COMMENT,
+    payload: {
+      comment
+    }
+  });
+  setTimeout(() => {
+    const { comments } = getState();
+    axios.put(`/api/comments/${ author }/${ username }`, comments)
+      .then(res => res.json)
+      .catch(console.log);
+  }, 1000);
 };
 
 export const logoutUser = history => dispatch => {

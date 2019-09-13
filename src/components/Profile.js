@@ -12,7 +12,7 @@ import Search from './Search';
 import ViewableList from './ViewableList';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { setEditing } from '../redux/actions';
+import { setEditing, setComments } from '../redux/actions';
 
 class Profile extends PureComponent  {
   state = {
@@ -20,8 +20,7 @@ class Profile extends PureComponent  {
       username: '',
       items: [],
       statement: ''
-    },
-    comments: []
+    }
   };
 
   componentDidMount() {
@@ -45,17 +44,15 @@ class Profile extends PureComponent  {
           }
         }).catch(console.log);
 
-      // fetch(`/api/comments/${ username || this.props.user.username }`)
-      //   .then(res => res.json())
-      //   .then(data => {
-      //     console.log('comment data on mount', data)
-      //     if (data) {
-      //       this.setState({
-      //         ...this.state,
-      //         comments: [...data.comments]
-      //       });
-      //     }
-      //   })
+      fetch(`/api/comments/${ username || this.props.user.username }`)
+        .then(res => res.json())
+        .then(data => {
+          if (data) {
+            this.props.setComments(data.comments);
+          } else {
+            this.props.setComments([]);
+          }
+        })
     }
   }
 
@@ -84,8 +81,8 @@ class Profile extends PureComponent  {
   }
 
   render() {
-    const { match, user } = this.props;
-    const { listData, comments } = this.state;
+    const { match, user, comments } = this.props;
+    const { listData } = this.state;
     return (
       <div className="grid-container bg-light2 mt-4">
         <div className="bg-white">
@@ -161,7 +158,8 @@ Profile.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
   editing: PropTypes.bool.isRequired,
-  addError: PropTypes.bool.isRequired
+  addError: PropTypes.bool.isRequired,
+  comments: PropTypes.array
 };
 
 const mapStateToProps = state => ({
@@ -170,10 +168,12 @@ const mapStateToProps = state => ({
   open: state.open,
   editing: state.editing,
   addError: state.addError,
+  comments: state.comments
 });
 
 const mapDispatchToProps = dispatch => ({
   setEditing: () => dispatch(setEditing()),
+  setComments: comments => dispatch(setComments(comments))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));

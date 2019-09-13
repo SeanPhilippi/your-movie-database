@@ -12,7 +12,9 @@ const initialState = {
   open: false,
   newUsers: [],
   editing: true,
-  addError: false
+  addError: false,
+  // current page comments
+  comments: []
 }
 
 // destructured action parameter is desctructured and passed in to rootReducer function,
@@ -60,6 +62,14 @@ export default (state = initialState, { type, payload }) => {
       user: { ...state.user, username: payload.listData.username },
       statement: payload.listData.statement,
       items: [...payload.listData.items]
+    };
+    case TYPES.SET_COMMENTS: return {
+      ...state,
+      comments: [...payload.comments]
+    };
+    case TYPES.POST_COMMENT: return {
+      ...state,
+      comments: [payload.comment, ...state.comments]
     };
     case TYPES.ADD_TO_LIST: return {
       ...state,

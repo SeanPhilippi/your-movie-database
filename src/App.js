@@ -20,10 +20,7 @@ import NewRegisters from './components/NewRegisters';
 import PageNotFound from './components/PageNotFound';
 import UnderConstruction from './components/UnderConstruction';
 import Footer from './components/Footer';
-import {
-  setNewUsers,
-  fetchList,
-} from './redux/actions';
+import { setNewUsers } from './redux/actions';
 import http from './utils/http';
 
 class App extends PureComponent {
@@ -79,8 +76,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setNewUsers,
-  fetchList,
+  setNewUsers
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

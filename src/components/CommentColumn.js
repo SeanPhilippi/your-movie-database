@@ -4,29 +4,25 @@ import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import Comment from './Comment';
 import moment from 'moment';
+import { postComment } from '../redux/actions';
 
 class CommentColumn extends PureComponent {
 
   state = {
-    comments: [
-
-    ],
     comment: {}
   }
 
-  // handleFieldChange = e => {
-  //   const { value } = e.target;
-  //   const newComment = {
-  //     username: this.props.user.username,
-  //     post_date: moment().format('LL'),
-  //     text: value
-  //   };
-  //   this.setState({
-  //     ...this.state,
-  //     comment: newComment
-  //   });
-  //   console.log('new comment', newComment)
-  // }
+  handleFieldChange = e => {
+    const { value } = e.target;
+    const newComment = {
+      username: this.props.user.username,
+      post_date: moment().format('LL'),
+      text: value
+    };
+    this.setState({
+      comment: newComment
+    });
+  }
 
   // clearTextField = () => {
   //   this.setState({
@@ -35,41 +31,23 @@ class CommentColumn extends PureComponent {
   //   });
   // }
 
-  // handleComment = e => {
-  //   const { user: { username }, match } = this.props;
-  //   const { comments, comment } = this.state;
-  //   e.preventDefault();
-  //   this.setState({
-  //     ...this.state,
-  //     comments: [
-  //       comment,
-  //       ...comments
-  //     ]
-  //   });
-  //   console.log('rendering')
-  //   fetch(`/api/comments/${ username }/${ match.params.username || username }`,
-  //     {
-  //       method: 'PUT',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(comments)
-  //     }
-  //   )
-  //     .then(res => res.json)
-  //     .catch(console.log);
-  //   this.renderComments();
-  //   // this.clearTextField();
-  // }
+  handleComment = e => {
+    const { user: { username }, match, postComment, comments } = this.props;
+    const { comment } = this.state;
+    e.preventDefault();
+    postComment(comment, username, match.params.username || username, comments);
+    this.renderComments();
+    // this.clearTextField();
+  }
 
   // ! find a differnt way to do this.  don't call this in the return!
-  // renderComments = () => (
-  //   <div>
-  //     {
-  //       [...this.state.comments, ...this.props.comments].map(comment => <Comment comment={ comment } />)
-  //     }
-  //   </div>
-  // )
+  renderComments = () => (
+    <div>
+      {
+        this.props.comments.map(comment => <Comment comment={ comment } />)
+      }
+    </div>
+  )
 
   render() {
 
@@ -100,7 +78,7 @@ class CommentColumn extends PureComponent {
               Create an account <NavLink to="/register">here</NavLink> or <NavLink to="/login">log in</NavLink> to make a comment.
             </div>
         }
-        {/* { this.renderComments() } */}
+        { this.renderComments() }
       </div>
     )
   }
@@ -111,9 +89,14 @@ CommentColumn.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
-  isAuthenticated: state.isAuthenticated
+const mapDispatchToProps = dispatch => ({
+  postComment: (comment, author, username, comments) => dispatch(postComment(comment, author, username, comments)),
 });
 
-export default withRouter(connect(mapStateToProps)(CommentColumn));
+const mapStateToProps = state => ({
+  user: state.user,
+  isAuthenticated: state.isAuthenticated,
+  comments: state.comments
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CommentColumn));
