@@ -3,6 +3,13 @@
   grid-template-columns: 60% 40%;
 }
 
+@media only screen and (max-width: 600px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+}
+
 .search-btns-container {
   display: flex;
   flex-direction: column;
