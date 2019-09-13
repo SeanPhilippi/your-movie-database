@@ -18,6 +18,8 @@ create with how they utilize it
 - home page would have ranking of most frequented user lists
 
 To do list:
+- be able to visit a Profile from clicking on username in comment, list currently doesn't load properly
+- movies transferring to other profiles when you click on their name in comment sometimes, why??
 - spinny loader for any fetched data
 - make registerbox input width look like loginbox
 - make NewRegisters more responsive

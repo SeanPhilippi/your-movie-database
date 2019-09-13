@@ -6,17 +6,8 @@ html {
   font-size: 12px;
 }
 
-html, body {
-  height: 100% !important;
-}
-
-#app {
-  height: 100% !important;
-}
-
 @media only screen and (max-width:991px) {
   html {
-    height: 100% !important;
     font-size: 10px;
   }
 }

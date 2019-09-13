@@ -70,7 +70,7 @@ class RegisterBox extends PureComponent {
                   autoFocus
                   name="username"
                   onChange={this.onTextChange}
-                  className="w-50"
+                  className="input-width"
                   type="text"
                 />
                 <div style={{ color: 'red' }}>
@@ -85,7 +85,7 @@ class RegisterBox extends PureComponent {
                 <input
                   name="email"
                   onChange={this.onTextChange}
-                  className="w-50"
+                  className="input-width"
                   type="text"
                 />
                 <div style={{ color: 'red' }}>
@@ -100,7 +100,7 @@ class RegisterBox extends PureComponent {
                 <input
                   name="password"
                   onChange={this.onTextChange}
-                  className="w-50"
+                  className="input-width"
                   type="password"
                 />
                 <div style={{ color: 'red' }}>
@@ -115,7 +115,7 @@ class RegisterBox extends PureComponent {
                 <input
                   name="password2"
                   onChange={this.onTextChange}
-                  className="w-50"
+                  className="input-width"
                   type="password"
                 />
                 <div style={{ color: 'red' }}>
