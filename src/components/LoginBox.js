@@ -53,7 +53,7 @@ class LoginBox extends PureComponent {
       <Row className="d-flex flex-column">
         <div>
           <form
-            className="login-main py-2 px-4"
+            className="login-main py-2 px-4 w-75 w-md-100"
             noValidate
             onSubmit={this.handleLogin}
           >

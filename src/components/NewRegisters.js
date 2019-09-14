@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import NewRegistersBox from './NewRegistersBox';
 import CardWrapper from './CardWrapper';
-import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 class NewRegisters extends PureComponent {
@@ -10,7 +9,7 @@ class NewRegisters extends PureComponent {
     return (
       <div className="d-flex border-0 justify-content-center">
         <div className="inner-container mt-4 mx-4 p-0">
-          <Col className="bg-white pt-2">
+          <div className="bg-white pt-2 col">
             <CardWrapper
               title="new registers"
               icon="file-contract"
@@ -19,7 +18,7 @@ class NewRegisters extends PureComponent {
             >
               <NewRegistersBox registerPage num={50} />
             </CardWrapper>
-          </Col>
+          </div>
         </div>
       </div>
     )

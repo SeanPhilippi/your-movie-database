@@ -22,6 +22,7 @@ To do list:
 - movies transferring to other profiles when you click on their name in comment sometimes, why??
 - spinny loader for any fetched data
 - clear comment input after hitting send
+- add a blurb field to ListModel, limit it to 20 characters or something
 - make RegisterBox and LoginBox look way more alike, lots of styling differences
 - make NewRegisters more responsive
 - create another substantial card component and populate with dummy data
