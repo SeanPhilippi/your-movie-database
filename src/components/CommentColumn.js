@@ -11,7 +11,6 @@ class CommentColumn extends PureComponent {
 
   state = {
     comment: {},
-    loading: true
   }
 
   handleFieldChange = e => {
@@ -36,26 +35,27 @@ class CommentColumn extends PureComponent {
     this.commentTextArea.value = '';
   }
 
-  componentDidMount() {
-    this.setState({ loading: false });
+  // ! find a differnt way to do this.  don't call this in the return!
+  renderComments = () => {
+    if (this.props.match.path !== '/movies') {
+      return (
+        <div>
+          {
+            this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } />)
+          }
+        </div>
+      )
+    }
   }
 
-  // ! find a differnt way to do this.  don't call this in the return!
-  renderComments = () => (
-    <div>
-      {
-        this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } />)
-      }
-    </div>
-  )
 
   render() {
-    if (this.state.loading) return <Spinner />;
+    const { isAuthenticated, loading, match } = this.props;
 
     return (
       <div className="d-flex flex-column p-2">
         {
-          this.props.isAuthenticated
+          isAuthenticated
           ? <React.Fragment>
               <div className="pb-1 font-weight-bold text-left">
                 Write a comment
@@ -80,7 +80,7 @@ class CommentColumn extends PureComponent {
               Create an account <Link to="/register">here</Link> or <Link to="/login">log in</Link> to make a comment.
             </div>
         }
-        { this.props.loading ? <Spinner /> : this.renderComments() }
+        { loading ? <Spinner /> : this.renderComments() }
       </div>
     )
   }
