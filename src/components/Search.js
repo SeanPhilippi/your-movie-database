@@ -119,6 +119,7 @@ class Search extends PureComponent {
       <div className={`d-flex flex-column align-items-center mt-${ marginTopVal }`}>
         <input
           ref={ this.focusInput }
+          autoComplete="off"
           autoFocus
           name="searchText"
           className="search-text pl-3 w-100"

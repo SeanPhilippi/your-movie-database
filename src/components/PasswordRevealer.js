@@ -8,6 +8,7 @@ const PasswordRevealer = ({ value }) => {
   return (
     <div>
       <input
+        autoComplete="off"
         type={shown ? "text" : "password"}
         value={value}
         onChange={() => {}}
