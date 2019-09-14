@@ -24,12 +24,6 @@ class CommentColumn extends PureComponent {
     });
   }
 
-  // clearTextField = () => {
-  //   this.setState({
-  //     ...this.state,
-  //     comment: [],
-  //   });
-  // }
 
   handleComment = e => {
     const { user: { username }, match, postComment, comments } = this.props;
@@ -37,7 +31,7 @@ class CommentColumn extends PureComponent {
     e.preventDefault();
     postComment(comment, username, match.params.username || username, comments);
     this.renderComments();
-    // this.clearTextField();
+    this.commentTextArea.value = '';
   }
 
   // ! find a differnt way to do this.  don't call this in the return!
@@ -60,6 +54,7 @@ class CommentColumn extends PureComponent {
                 Write a comment
               </div>
               <textarea
+                ref={ ref => this.commentTextArea = ref }
                 className="comments-box w-100"
                 type="text"
                 name="comments"
