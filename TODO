@@ -21,6 +21,8 @@ To do list:
 - be able to visit a Profile from clicking on username in comment, list currently doesn't load properly
 - movies transferring to other profiles when you click on their name in comment sometimes, why??
 - spinny loader for any fetched data
+- should I collapse ViewableList and SortableList?  They share a lot of the same code.  Profile has a lot of conditional logic already to create different views, should
+  SortableList just render ViewableItem vs SortableItem?
 - add a blurb field to ListModel, limit it to 20 characters or something
 - make RegisterBox and LoginBox look way more alike, lots of styling differences
 - create another substantial card component and populate with dummy data

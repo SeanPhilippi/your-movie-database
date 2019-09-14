@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import { connect } from 'react-redux';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -99,14 +99,14 @@ class SaveDelete extends PureComponent {
           { this.props.items.length } / 20
         </div>
         <div>
-          <NavLink className="link" to={`/profile/${ this.props.user.username }`}>
+          <Link to={`/profile/${ this.props.user.username }`}>
             <button
               className="save-list"
               onClick={this.handleUpdate}
             >
                 SAVE
             </button>
-          </NavLink>
+          </Link>
           <button
             className="delete-list"
             onClick={this.handleDelete}

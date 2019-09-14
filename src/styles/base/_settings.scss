@@ -1,9 +1,8 @@
 // Colors
-$text-orange: #EB5018;
-
 $light: #DECDA4;
 $light2: #E6D8B6;
-$dark: #AA925C;
+$gold: #AA925C;
+$dark-gold: #9C640B;
 $light-orange: #FE7C19;
 $orange: #EF7C2D;
 $dark-orange: #EB5018;
@@ -31,7 +30,7 @@ $white: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47
 }
 
 .bg-dark {
-  background: $dark !important;
+  background: $gold !important;
 }
 
 .bg-light {

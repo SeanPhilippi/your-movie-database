@@ -45,6 +45,12 @@
   background-color: $light-orange;
 }
 
+.nav-block:active {
+  position: relative;
+  top: 2px;
+  box-shadow: none;
+}
+
 .site-title {
   color: white;
   display: flex;

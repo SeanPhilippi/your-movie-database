@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Comment from './Comment';
 import moment from 'moment';
 import { postComment } from '../redux/actions';
@@ -70,7 +70,7 @@ class CommentColumn extends PureComponent {
               </button>
             </React.Fragment>
           : <div className="ml-1 mb-1">
-              Create an account <NavLink to="/register">here</NavLink> or <NavLink to="/login">log in</NavLink> to make a comment.
+              Create an account <Link to="/register">here</Link> or <Link to="/login">log in</Link> to make a comment.
             </div>
         }
         { this.renderComments() }

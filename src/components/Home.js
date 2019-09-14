@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import CardWrapper from './CardWrapper';
 import LoginBox from './LoginBox';
 import NewRegistersBox from './NewRegistersBox';
-// import fontAwesome from './utils';
+import ViewableList from './ViewableList';
+// import TopMovieList from './TopMovieList';
 
 class Home extends PureComponent {
   renderLoginBox() {
@@ -33,14 +35,24 @@ class Home extends PureComponent {
               icon={["far", "list-alt"]}
               rotate={ -5 }
               color="tan"
-              title='top movie list'
-            />
+              link="top-movies"
+              title="top movie list"
+            >
+              <div className="pb-2">
+                Top movies based on the favorites of { this.props.newUsers.length } registered users.
+              </div>
+              <ViewableList />
+              <hr className="mt-4"/>
+              <Link to="/top-movies">Go to the complete Top Movie List</Link>
+            </CardWrapper>
             <CardWrapper
               icon="shoe-prints"
               rotate={ 30 }
               color="tan"
-              title='most visited lists'
-            />
+              title="most visited lists"
+            >
+
+            </CardWrapper>
           </div>
           <div className="pt-0 col">
             { this.renderLoginBox() }
@@ -65,6 +77,7 @@ Home.propTypes = {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
+  newUsers: state.newUsers,
 });
 
 export default connect(mapStateToProps)(Home);

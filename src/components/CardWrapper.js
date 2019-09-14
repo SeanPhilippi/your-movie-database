@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IoIosFlashlight } from 'react-icons/io';
 
@@ -27,7 +27,7 @@ const CardWrapper = ({
     }
       {
         link
-        ? <NavLink className="link" to={`/${ link }`}><div className="text-white"> { title } </div></NavLink>
+        ? <Link to={`/${ link }`}><div className="text-white"> { title } </div></Link>
         :  <div>{ title }</div>
       }
     </div>
@@ -47,7 +47,7 @@ CardWrapper.propTypes = {
   children: PropTypes.object,
   rotate: PropTypes.number,
   marginTopVal: PropTypes.string,
-  // link: PropTypes.string
+  link: PropTypes.string
 };
 
 export default CardWrapper;
