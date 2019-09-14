@@ -27,19 +27,20 @@ Concurrently: ```npm run both```
 ## Current State
 
 * Authentication is fully functional with login and register errors.  Users can login using either their email or username.  * Users can add, remove, and reorder movies, as well as write a profile statement and everything persists for the user session and can be saved which posts it to a database. 
+* Saving transitions to a presentation view smoothly, and clicking the edit button transitions back to an edit view. 
 * User data is cleared upon log out and log out happens automatically after a certain amount of time due to an expiring session.  
 * Member lists can be visited, pages populate with their saved data.
 * Newly registered users populate a dedicated component, that also has its own page.
-* User affinity stats, Top Movie List aggregating rankings from all lists, and  is currently in the works.  Comments will come after.
+* Comments are currently in the works. Comments are posting and successfully being fetched for the correct profiles, but there are some bugs still being worked out.  
+* Site is mostly responsive, some minor bugs to work out. 
 
 ## Future Goals
-* User affinity stats
-* Top Movie List aggregating rankings from all member lists
-* Commenting system for Movie Pages and Profile pages, then Top Movie Page
-* Users Index page with a search bar
-* Make a button that allows switching between a more polished/published list view and an edit view
-* Make site mobile-friendly and fully responsive
-* Have movie pages fetch poster image, imdb link, reviews, other data, and have add movie to list button.
+* User affinity stats: Users will be able to see the top 5 best list matches towards the bottom of their profile.
+* Top Movie List aggregating rankings from all member lists.
+* Commenting system expanded to Movie Pages and the Top Movies Page.
+* Users Index page with a search bar. This is partially done.
+* Flesh out movie pages: There will be an ability to add a movie to your list from the movie's page, as well as on the most recent lists the movie was added to and what rank it has in that list. Points and position in the Top Movies List will also be displayed. 
+* IMDB links on Movie Pages. 
 * Implement user visits and movie ranking data for display on home page preview windows.
 * Add pictures of website to this repo README.md.
 
