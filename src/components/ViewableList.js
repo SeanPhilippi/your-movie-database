@@ -98,7 +98,14 @@ class ViewableList extends Component {
     }
   ];
 
+  componentDidMount() {
+    fetch('/api/movies/top-movies')
+      .then()
+  }
+
   render() {
+    const { items } = this.props;
+
     const ViewableItem = ({ movie, idx }) => (
       <div
         key={ movie._id }
@@ -141,18 +148,17 @@ class ViewableList extends Component {
         This user hasn't added any movies yet.
       </div>
     );
-    console.log('viewable items', this.props.items)
 
     return (
       <div>
         {
-          !this.props.items
-          ? this.dummyData.slice(0, 5).map((item, idx) => <ViewableItem movie={item} idx={idx} key={item._id}/>)
+          !items
+          ? this.dummyData.slice(0, 10).map((item, idx) => <ViewableItem movie={item} idx={idx} key={item._id}/>)
           :
           <div>
             {
-              this.props.items.length
-              ? this.props.items.map((item, idx) => <ViewableItem movie={item} idx={idx} key={item._id}/>)
+              items.length
+              ? items.map((item, idx) => <ViewableItem movie={item} idx={idx} key={item._id}/>)
               : <NoList />
             }
           </div>
@@ -164,15 +170,10 @@ class ViewableList extends Component {
 
 ViewableList.propTypes = {
   items: PropTypes.array,
-  visitedUsername: PropTypes.string,
-  visitedItems: PropTypes.array,
 };
 
 const mapStateToProps = state => ({
-  // only passing in items, since this only needs items.  visitedUsername and visitedStatement will be passed into different components
-  // visitedItems: state.visitedItems,
-  // passing in items for when the current user wants to see their viewableList
-  // items: state.items,
+
 });
 
 const mapDispatchToProps = dispatch => ({

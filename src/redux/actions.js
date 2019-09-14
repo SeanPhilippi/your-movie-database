@@ -45,10 +45,6 @@ export const setUpdateStatus = () => ({
   type: TYPES.SET_UPDATE_STATUS
 });
 
-export const setEditing = () => ({
-  type: TYPES.SET_EDITING
-});
-
 export const onRouteChange = () => ({
   type: TYPES.CLEAR_ERRORS
 });

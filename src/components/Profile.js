@@ -10,9 +10,10 @@ import SortableList from './SortableList';
 import CardWrapper from './CardWrapper';
 import Search from './Search';
 import ViewableList from './ViewableList';
+import Spinner from './Spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { setEditing, setComments } from '../redux/actions';
+import { setComments } from '../redux/actions';
 
 class Profile extends PureComponent  {
   state = {
@@ -20,7 +21,9 @@ class Profile extends PureComponent  {
       username: '',
       items: [],
       statement: ''
-    }
+    },
+    listDataLoading: true,
+    commentsLoading: true
   };
 
   componentDidMount() {
@@ -40,7 +43,8 @@ class Profile extends PureComponent  {
             };
             this.setState({
               ...this.state,
-              listData: { ...fetchedListData }
+              listData: { ...fetchedListData },
+              listDataLoading: false
             });
           }
         }).catch(console.log);
@@ -55,6 +59,7 @@ class Profile extends PureComponent  {
           } else {
             this.props.setComments([]);
           }
+          this.setState({ commentsLoading: false });
         })
     } else {
       fetch(`/api/comments/${ username }`)
@@ -65,29 +70,29 @@ class Profile extends PureComponent  {
           } else {
             this.props.setComments([]);
           }
+          this.setState({ commentsLoading: false });
         })
     }
     // * Affinity Matching!
     let movieIds;
     // delay to watch for listData to be fetched for visited list
-    setTimeout(() => {
-      if (username) {
-        movieIds = fetchedListData.items.map(item => item.id);
-      } else {
-        movieIds = this.props.items.map(item => item.id);
-      };
-      fetch(`/api/movies/affinity`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(movieIds)
-      })
-        .then(res => res.json)
-        .then(data => console.log(data))
-    }, 2000);
-  }
-
+    // setTimeout(() => {
+    //   if (username) {
+    //     movieIds = fetchedListData.items.map(item => item.id);
+    //   } else {
+    //     movieIds = this.props.items.map(item => item.id);
+    //   };
+    //   fetch(`/api/movies/affinity`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(movieIds)
+    //   })
+    //     .then(res => res.json)
+    //     .then(data => console.log(data))
+    // }, 3000);
+  };
 
   componentDidUpdate(prevProps) {
     const { open, match } = this.props;
@@ -101,21 +106,63 @@ class Profile extends PureComponent  {
               items: data.items,
               statement: data.statement
             };
-            this.setState({ listData: fetchedListData });
+            this.setState({
+              ...this.state,
+              listData: fetchedListData,
+              listDataLoading: false
+            });
           }
         })
     }
   };
 
   handleEdit = () => {
-    const { setEditing, history } = this.props;
-    setEditing();
-    history.push('/profile');
+    this.props.history.push('/profile');
   }
 
   render() {
     const { match, user, comments } = this.props;
-    const { listData } = this.state;
+    const { listData, listDataLoading, commentsLoading } = this.state;
+
+    const EditButton = () => (
+      <button
+        className="edit-btn mb-2"
+        style={{ fontSize: '.9rem' }}
+        onClick={ this.handleEdit }
+      >
+        <FontAwesomeIcon icon={["far","edit"]} />
+      </button>
+    )
+
+    const List = () => {
+      if (!match.params.username) {
+        return (
+          <div>
+            <div className="search-btns-container">
+              <SaveDelete />
+            </div>
+            <Search />
+            <SortableList />
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <div className="d-flex justify-content-end">
+              {
+                user.username === match.params.username && <EditButton />
+              }
+            </div>
+            <ViewableList items={ listData.items }/>
+          </div>
+        )
+      }
+    }
+
+    const Statement = () => !match.params.username
+      ? <EditableStatement />
+      : <UserStatement username={ match.params.username } statement={ listData.statement }/>
+
     return (
       <div className="grid-container bg-light2 mt-4">
         <div className="bg-white">
@@ -128,31 +175,9 @@ class Profile extends PureComponent  {
               marginTopVal='0'
             >
               {
-                !match.params.username
-                ? (
-                  <div>
-                    <div className="search-btns-container">
-                      <SaveDelete />
-                    </div>
-                    <Search />
-                    <SortableList />
-                  </div>
-                )
-                : <div>
-                    <div className="d-flex justify-content-end">
-                      {
-                        user.username === match.params.username
-                        && <button
-                            className="edit-btn mb-2"
-                            style={{ fontSize: '.9rem' }}
-                            onClick={ this.handleEdit }
-                          >
-                            <FontAwesomeIcon icon={["far","edit"]} />
-                          </button>
-                      }
-                    </div>
-                    <ViewableList items={ listData.items }/>
-                  </div>
+                match.params.username && listDataLoading
+                ? <Spinner />
+                : <List />
               }
             </CardWrapper>
           </div>
@@ -164,9 +189,9 @@ class Profile extends PureComponent  {
               color="tan"
             >
               {
-                !match.params.username
-                ? <EditableStatement />
-                : <UserStatement username={ match.params.username } statement={ listData.statement }/>
+                match.params.username && listDataLoading
+                ? <Spinner />
+                : <Statement />
               }
             </CardWrapper>
           </div>
@@ -178,7 +203,7 @@ class Profile extends PureComponent  {
             color="white"
             marginTopVal="0"
           >
-            <CommentColumn comments={ comments }/>
+            <CommentColumn comments={ comments } loading={ commentsLoading }/>
           </CardWrapper>
         </div>
       </div>
@@ -190,7 +215,6 @@ Profile.propTypes = {
   user: PropTypes.object,
   isAuthenticated: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
-  editing: PropTypes.bool.isRequired,
   addError: PropTypes.bool.isRequired,
   comments: PropTypes.array
 };
@@ -199,14 +223,12 @@ const mapStateToProps = state => ({
   user: state.user,
   isAuthenticated: state.isAuthenticated,
   open: state.open,
-  editing: state.editing,
   addError: state.addError,
   items: state.items,
   comments: state.comments
 });
 
 const mapDispatchToProps = dispatch => ({
-  setEditing: () => dispatch(setEditing()),
   setComments: comments => dispatch(setComments(comments))
 });
 

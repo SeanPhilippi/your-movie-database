@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import Comment from './Comment';
+import Spinner from './Spinner';
 import moment from 'moment';
 import { postComment } from '../redux/actions';
 
 class CommentColumn extends PureComponent {
 
   state = {
-    comment: {}
+    comment: {},
+    loading: true
   }
 
   handleFieldChange = e => {
@@ -34,6 +36,10 @@ class CommentColumn extends PureComponent {
     this.commentTextArea.value = '';
   }
 
+  componentDidMount() {
+    this.setState({ loading: false });
+  }
+
   // ! find a differnt way to do this.  don't call this in the return!
   renderComments = () => (
     <div>
@@ -44,6 +50,7 @@ class CommentColumn extends PureComponent {
   )
 
   render() {
+    if (this.state.loading) return <Spinner />;
 
     return (
       <div className="d-flex flex-column p-2">
@@ -73,7 +80,7 @@ class CommentColumn extends PureComponent {
               Create an account <Link to="/register">here</Link> or <Link to="/login">log in</Link> to make a comment.
             </div>
         }
-        { this.renderComments() }
+        { this.props.loading ? <Spinner /> : this.renderComments() }
       </div>
     )
   }

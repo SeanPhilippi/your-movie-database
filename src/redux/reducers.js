@@ -11,7 +11,6 @@ const initialState = {
   items: [],
   open: false,
   newUsers: [],
-  editing: true,
   addError: false,
   // current page comments
   comments: []
@@ -44,10 +43,6 @@ export default (state = initialState, { type, payload }) => {
       isAuthenticated: !isEmpty(payload),
       // token
       user_token: payload
-    };
-    case TYPES.SET_EDITING: return {
-      ...state,
-      editing: !state.editing
     };
     case TYPES.SET_UPDATE_STATUS: return {
       ...state,

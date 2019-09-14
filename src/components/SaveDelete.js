@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import { connect } from 'react-redux';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { deleteList, setUpdateStatus, setEditing } from '../redux/actions';
+import { deleteList, setUpdateStatus } from '../redux/actions';
 
 class SaveDelete extends PureComponent {
   handleUpdate = () => {
@@ -136,7 +136,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   deleteList: () => dispatch(deleteList()),
   setUpdateStatus: () => dispatch(setUpdateStatus()),
-  setEditing: () => dispatch(setEditing()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);
