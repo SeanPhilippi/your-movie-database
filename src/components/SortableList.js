@@ -21,7 +21,7 @@ class SortableList extends Component {
           style={{ width: '3.3rem' }}
         >
           <img
-            className="mx-2"
+            className="ml-2"
             alt="grip handle"
             style={{ width: '.4rem', height: '1.2rem' }}
             src={ img }
@@ -49,7 +49,7 @@ class SortableList extends Component {
           style={{ lineHeight: '2rem' }}
         >
           <div className="d-flex justify-content-between">
-            <div className="d-flex">
+            <div className="d-flex overflow-hidden">
               <DragHandle sortIndex={ sortIndex } />
               <div
                 title={`${ title } (${ director }, ${ year })`}
@@ -107,7 +107,7 @@ class SortableList extends Component {
           items={ items }
           useDragHandle
           onSortEnd={ orderList }
-          transitionDuration={300}
+          transitionDuration={ 300 }
           lockAxis="y"
         />
       </div>

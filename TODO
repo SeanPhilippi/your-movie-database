@@ -20,8 +20,6 @@ create with how they utilize it
 To do list:
 - be able to visit a Profile from clicking on username in comment, list currently doesn't load properly
 - movies transferring to other profiles when you click on their name in comment sometimes, why??
-- yank out editing logic from Profile, pretty sure it's not being utilized, was an unfinished idea that it turns out I don't need
-- spinny loader for any fetched data
 - stop comments from transferring to movie pages
 - should I collapse ViewableList and SortableList?  They share a lot of the same code.  Profile has a lot of conditional logic already to create different views, should
   SortableList just render ViewableItem vs SortableItem?

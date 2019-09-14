@@ -112,7 +112,7 @@ class ViewableList extends Component {
         className="d-flex bg-white justify-content-between"
         style={{ lineHeight: '2rem' }}
       >
-        <div className="d-flex">
+        <div className="d-flex overflow-hidden">
           <div
             className="text-right"
             style={{ width: '2.4rem' }}
