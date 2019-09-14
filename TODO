@@ -21,12 +21,11 @@ To do list:
 - be able to visit a Profile from clicking on username in comment, list currently doesn't load properly
 - movies transferring to other profiles when you click on their name in comment sometimes, why??
 - spinny loader for any fetched data
-- clear comment input after hitting send
 - add a blurb field to ListModel, limit it to 20 characters or something
 - make RegisterBox and LoginBox look way more alike, lots of styling differences
-- make NewRegisters more responsive
 - create another substantial card component and populate with dummy data
 - add pictures and expand on technologies used for project in README
+- make nav box tiles taller
 - fire and floppy icons for save and delete buttons
 - populate the rest of the lists, even if it's gibberish.  need this site to have an illussion of activity and a good user experience.
 - fix ellipsis, fixed width is too wide and not responsive, it's bleeding out of element already

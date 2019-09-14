@@ -26,13 +26,14 @@ class Profile extends PureComponent  {
   componentDidMount() {
     const { username } = this.props.match.params;
     console.log('visited list?', username ? true : false)
+    let fetchedListData;
     if (username) {
       console.log('fetching visited listData in Profile...')
       fetch(`/api/movies/${ username }/list`)
         .then(res => res.json())
         .then(data => {
           if (data) {
-            const fetchedListData = {
+            fetchedListData = {
               username: data.username,
               items: data.items,
               statement: data.statement
@@ -43,8 +44,8 @@ class Profile extends PureComponent  {
             });
           }
         }).catch(console.log);
-
       }
+
     if (!username || username === this.props.user.username) {
       fetch(`/api/comments/${ this.props.user.username }`)
         .then(res => res.json())
@@ -66,7 +67,27 @@ class Profile extends PureComponent  {
           }
         })
     }
+    // * Affinity Matching!
+    let movieIds;
+    // delay to watch for listData to be fetched for visited list
+    setTimeout(() => {
+      if (username) {
+        movieIds = fetchedListData.items.map(item => item.id);
+      } else {
+        movieIds = this.props.items.map(item => item.id);
+      };
+      fetch(`/api/movies/affinity`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(movieIds)
+      })
+        .then(res => res.json)
+        .then(data => console.log(data))
+    }, 2000);
   }
+
 
   componentDidUpdate(prevProps) {
     const { open, match } = this.props;
@@ -180,6 +201,7 @@ const mapStateToProps = state => ({
   open: state.open,
   editing: state.editing,
   addError: state.addError,
+  items: state.items,
   comments: state.comments
 });
 

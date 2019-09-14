@@ -38,7 +38,7 @@ class CommentColumn extends PureComponent {
   renderComments = () => (
     <div>
       {
-        this.props.comments.map(comment => <Comment comment={ comment } />)
+        this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } />)
       }
     </div>
   )

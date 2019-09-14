@@ -89,11 +89,53 @@ router.delete('/delete/:username', (req, res) => {
     .catch(console.log);
 });
 
-// @route
+// @route   POST api/movies/affinity/:username
 // @desc    grab lists, calculate similarity to current user list
-// @access
-router.put('/', (req, res) => {
+// @access  Public
+router.post('/affinity', (req, res) => {
+  // store current user's movie ids from state.list in a variable
+  console.log('req body in affinity', req.body)
+  const movieIds = [...req.body];
+  let aggregateQuery = [
+    {
+      $match: {
+        items: {
+          $elemMatch: {
+            id: {
+              $in: movieIds
+            }
+          }
+        }
+      }
+    },
+    {
+      $project: {
+        numberOfMatches: {
+          $size: {
+            $filter: {
+              input: '$items',
+              as: 'i',
+              cond: {
+                $in: ['$$i.id', movieIds]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      $sort: {
+        numberOfMatches: -1,
+      }
+    },
+    {
+      $limit: 5
+    }
+  ];
 
+  List.aggregate(aggregateQuery)
+    .then(result => console.log('result', result))
+    .catch(console.log);
 });
 
 module.exports = router;
