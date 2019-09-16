@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Comment = ({ comment }) => (
   <div className="border my-1 px-2 py-1">
     <div>
-      <Link to={`/profile/${ comment.username }`}>{ comment.username }</Link> wrote on { comment.post_date }
+      <Link to={`/profile/${ comment.author }`}>{ comment.author }</Link> wrote on { comment.post_date }
     </div>
     <p className="comment">
       { comment.text }
