@@ -8,11 +8,22 @@ const fetch = require('node-fetch');
 // @access  Public
 router.get('/:username', (req, res) => {
   console.log('inside GET comments')
-  Comment.find({
-      username: req.params.username
-  }).exec().then(data => {
-    return res.json(data.reverse());
-  }).catch(console.log);
+  Comment.aggregate([
+    {
+      $match: {
+        username: req.params.username
+      }
+    },
+    {
+      $project: {
+        author: 1,
+        username: 1,
+        text: 1,
+        post_date: 1
+      }
+    }
+  ]).then(data =>  res.json(data.reverse())
+  ).catch(console.log);
 });
 
 // @route   POST api/comments/

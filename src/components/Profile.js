@@ -43,7 +43,6 @@ class Profile extends PureComponent  {
       .then(res => res.json())
       .then(data => {
         if (data) {
-          console.log('comment data', data)
           this.setState({ comments: data });
         }
         this.setState({ commentsLoading: false });
