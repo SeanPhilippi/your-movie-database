@@ -56,7 +56,6 @@ class CommentColumn extends PureComponent {
     }
   }
 
-
   render() {
     const { isAuthenticated, loading } = this.props;
 

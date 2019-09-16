@@ -25,31 +25,7 @@ class Profile extends PureComponent  {
     comments: []
   };
 
-  getAffinity = movieIds => {
-    console.log('getAffinity');
-    return fetch('/api/movies/affinity', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(movieIds)
-    }).then(res => {
-      return res.json();
-    });
-  };
-
-  getComments = username => {
-    return fetch(`/api/comments/${ username }`)
-      .then(res => res.json())
-      .then(data => {
-        if (data) {
-          this.setState({ comments: data });
-        }
-        this.setState({ commentsLoading: false });
-      }).catch(console.log);
-  }
-
-  componentDidMount() {
+  getListData = () => {
     const { username } = this.props.match.params;
     console.log('visited list?', username ? true : false)
     let fetchedListData;
@@ -86,6 +62,35 @@ class Profile extends PureComponent  {
               .catch(console.log)
         })
       }
+  }
+
+  getAffinity = movieIds => {
+    console.log('getAffinity');
+    return fetch('/api/movies/affinity', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(movieIds)
+    }).then(res => {
+      return res.json();
+    });
+  };
+
+  getComments = username => {
+    return fetch(`/api/comments/${ username }`)
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          this.setState({ comments: data });
+        }
+        this.setState({ commentsLoading: false });
+      }).catch(console.log);
+  };
+
+  componentDidMount() {
+    const { username } = this.props.match.params;
+    this.getListData();
     // fetch comments
     let user;
     if (!username || username === this.props.user.username) {
@@ -96,6 +101,14 @@ class Profile extends PureComponent  {
     this.getComments(user);
   };
 
+  componentDidUpdate(prevProps) {
+    const { match, user } = this.props;
+    if (prevProps.match.path !== match.path) {
+      this.getListData();
+      this.getComments(match.params.username || user.username);
+      this.getAffinity();
+    }
+  };
   // componentDidUpdate(prevProps) {
   //   const { open, match } = this.props;
   //   if (prevProps.open !== open) {
@@ -123,7 +136,7 @@ class Profile extends PureComponent  {
   }
 
   render() {
-    const { match, user } = this.props;
+    const { match, user, items } = this.props;
     const { listData, listDataLoading, commentsLoading, comments } = this.state;
 
     const EditButton = () => (
@@ -143,7 +156,7 @@ class Profile extends PureComponent  {
             <div className="search-btns-container">
               <SaveDelete />
             </div>
-            <Search />
+            <Search itemsCount={ items.length }/>
             <SortableList />
           </div>
         )

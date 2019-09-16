@@ -115,11 +115,11 @@ class Search extends PureComponent {
   };
 
   render() {
-    const { marginTopVal, users } = this.props;
+    const { marginTopVal, users, items } = this.props;
     const { searchText } = this.state;
 
     return (
-      <div className={`d-flex flex-column align-items-center mt-${ marginTopVal }`}>
+      <div className={`${ items.length > 19 ? 'd-none' : 'd=flex' } flex-column align-items-center mt-${ marginTopVal }`}>
         <input
           ref={ this.focusInput }
           autoComplete="off"

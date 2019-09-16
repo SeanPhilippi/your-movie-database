@@ -21,6 +21,8 @@ Comments Refactor:
 - switch some of my .then promise logic into async/await syntax for practice
 
 To do list:
+- remove setAddError?
+- list doesn't load when I click on the name attached to my own comment on my own list
 - think about comment deletion... what data do I need to look up a comment that I want to delete?
 - be able to visit a Profile from clicking on username in comment, list currently doesn't load properly
 - movies transferring to other profiles when you click on their name in comment sometimes, why??

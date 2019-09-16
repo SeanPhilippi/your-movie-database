@@ -28,8 +28,8 @@ class LoginBox extends PureComponent {
     e.preventDefault();
 
     const user = {
-      login,
-      password,
+      login: login.trim(),
+      password: password.trim(),
     };
 
     loginUser(user, history);

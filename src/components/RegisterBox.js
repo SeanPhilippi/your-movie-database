@@ -26,10 +26,10 @@ class RegisterBox extends PureComponent {
     e.preventDefault();
 
     const user = {
-      username,
-      email,
-      password,
-      password2,
+      username: username.trim(),
+      email: email.trim(),
+      password: password.trim(),
+      password2: password2.trim(),
     };
 
     this.props.registerUser(user, this.props.history);
