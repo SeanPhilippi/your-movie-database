@@ -5,7 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 import Comment from './Comment';
 import Spinner from './Spinner';
 import moment from 'moment';
-import { postComment } from '../redux/actions';
+import axios from 'axios';
 
 class CommentColumn extends PureComponent {
 
@@ -15,8 +15,10 @@ class CommentColumn extends PureComponent {
 
   handleFieldChange = e => {
     const { value } = e.target;
+    const { match, user } = this.props;
     const newComment = {
-      username: this.props.user.username,
+      username: match.params.username || user.username,
+      author: user.username,
       post_date: moment().format('LL'),
       text: value
     };
@@ -27,11 +29,17 @@ class CommentColumn extends PureComponent {
 
 
   handleComment = e => {
-    const { user: { username }, match, postComment, comments } = this.props;
+    const { postComment, user, match } = this.props;
     const { comment } = this.state;
     e.preventDefault();
-    postComment(comment, username, match.params.username || username, comments);
-    this.renderComments();
+    axios.post('/api/comments/', comment)
+      .then(res => res.json)
+      .then(() => {
+        this.props.getComments(match.params.username || user.username);
+      }).then(() => {
+        this.renderComments();
+      })
+      .catch(console.log);
     this.commentTextArea.value = '';
   }
 
@@ -50,7 +58,7 @@ class CommentColumn extends PureComponent {
 
 
   render() {
-    const { isAuthenticated, loading, match } = this.props;
+    const { isAuthenticated, loading } = this.props;
 
     return (
       <div className="d-flex flex-column p-2">
@@ -92,13 +100,12 @@ CommentColumn.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  postComment: (comment, author, username, comments) => dispatch(postComment(comment, author, username, comments)),
+
 });
 
 const mapStateToProps = state => ({
   user: state.user,
   isAuthenticated: state.isAuthenticated,
-  comments: state.comments
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CommentColumn));

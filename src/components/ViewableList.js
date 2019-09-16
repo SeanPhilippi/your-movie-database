@@ -98,11 +98,6 @@ class ViewableList extends Component {
     }
   ];
 
-  componentDidMount() {
-    fetch('/api/movies/top-movies')
-      .then()
-  }
-
   render() {
     const { items } = this.props;
 

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CommentColumn from './CommentColumn';
 import EditableStatement from './EditableStatement';
@@ -13,8 +13,6 @@ import ViewableList from './ViewableList';
 import Spinner from './Spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { setComments } from '../redux/actions';
-
 class Profile extends PureComponent  {
   state = {
     listData: {
@@ -23,8 +21,33 @@ class Profile extends PureComponent  {
       statement: ''
     },
     listDataLoading: true,
-    commentsLoading: true
+    commentsLoading: true,
+    comments: []
   };
+
+  getAffinity = movieIds => {
+    console.log('getAffinity');
+    return fetch('/api/movies/affinity', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(movieIds)
+    }).then(res => {
+      return res.json();
+    });
+  };
+
+  getComments = username => {
+    return fetch(`/api/comments/${ username }`)
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          this.setState({ comments: data });
+        }
+        this.setState({ commentsLoading: false });
+      }).catch(console.log);
+  }
 
   componentDidMount() {
     const { username } = this.props.match.params;
@@ -47,82 +70,61 @@ class Profile extends PureComponent  {
               listDataLoading: false
             });
           }
-        }).catch(console.log);
-      }
-
-    if (!username || username === this.props.user.username) {
-      fetch(`/api/comments/${ this.props.user.username }`)
-        .then(res => res.json())
-        .then(data => {
-          if (data) {
-            this.props.setComments(data.comments);
-          } else {
-            this.props.setComments([]);
-          }
-          this.setState({ commentsLoading: false });
-        })
-    } else {
-      fetch(`/api/comments/${ username }`)
-        .then(res => res.json())
-        .then(data => {
-          if (data) {
-            this.props.setComments(data.comments);
-          } else {
-            this.props.setComments([]);
-          }
-          this.setState({ commentsLoading: false });
-        })
-    }
-    // * Affinity Matching!
-    let movieIds;
-    // delay to watch for listData to be fetched for visited list
-    // setTimeout(() => {
-    //   if (username) {
-    //     movieIds = fetchedListData.items.map(item => item.id);
-    //   } else {
-    //     movieIds = this.props.items.map(item => item.id);
-    //   };
-    //   fetch(`/api/movies/affinity`, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(movieIds)
-    //   })
-    //     .then(res => res.json)
-    //     .then(data => console.log(data))
-    // }, 3000);
-  };
-
-  componentDidUpdate(prevProps) {
-    const { open, match } = this.props;
-    if (prevProps.open !== open) {
-      fetch(`/api/movies/${ match.params.username }/list`)
-        .then(res => res.json())
-        .then(data => {
-          if (data) {
-            const fetchedListData = {
-              username: data.username,
-              items: data.items,
-              statement: data.statement
+        }) // fetch affinity data
+        .then(() => {
+          let movieIds;
+          // * Affinity Matching
+            if (username) {
+              movieIds = fetchedListData.items.map(item => item.id);
+            } else {
+              movieIds = this.props.items.map(item => item.id);
             };
-            this.setState({
-              ...this.state,
-              listData: fetchedListData,
-              listDataLoading: false
-            });
-          }
+            console.log('*****Affinity Data****')
+
+            this.getAffinity(movieIds)
+              .then(data => console.log('data in affinity', data))
+              .catch(console.log)
         })
+      }
+    // fetch comments
+    let user;
+    if (!username || username === this.props.user.username) {
+      user = this.props.user.username;
+    } else {
+      user = username;
     }
+    this.getComments(user);
   };
+
+  // componentDidUpdate(prevProps) {
+  //   const { open, match } = this.props;
+  //   if (prevProps.open !== open) {
+  //     fetch(`/api/movies/${ match.params.username }/list`)
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         if (data) {
+  //           const fetchedListData = {
+  //             username: data.username,
+  //             items: data.items,
+  //             statement: data.statement
+  //           };
+  //           this.setState({
+  //             ...this.state,
+  //             listData: fetchedListData,
+  //             listDataLoading: false
+  //           });
+  //         }
+  //       })
+  //   }
+  // };
 
   handleEdit = () => {
     this.props.history.push('/profile');
   }
 
   render() {
-    const { match, user, comments } = this.props;
-    const { listData, listDataLoading, commentsLoading } = this.state;
+    const { match, user } = this.props;
+    const { listData, listDataLoading, commentsLoading, comments } = this.state;
 
     const EditButton = () => (
       <button
@@ -203,7 +205,11 @@ class Profile extends PureComponent  {
             color="white"
             marginTopVal="0"
           >
-            <CommentColumn comments={ comments } loading={ commentsLoading }/>
+            <CommentColumn
+              comments={ comments }
+              getComments={ this.getComments }
+              loading={ commentsLoading }
+            />
           </CardWrapper>
         </div>
       </div>
@@ -225,11 +231,10 @@ const mapStateToProps = state => ({
   open: state.open,
   addError: state.addError,
   items: state.items,
-  comments: state.comments
 });
 
 const mapDispatchToProps = dispatch => ({
-  setComments: comments => dispatch(setComments(comments))
+
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));

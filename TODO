@@ -17,7 +17,11 @@ create with how they utilize it
 - home page for site would have ranking of top movies according to ymdb users
 - home page would have ranking of most frequented user lists
 
+Comments Refactor:
+- switch some of my .then promise logic into async/await syntax for practice
+
 To do list:
+- think about comment deletion... what data do I need to look up a comment that I want to delete?
 - be able to visit a Profile from clicking on username in comment, list currently doesn't load properly
 - movies transferring to other profiles when you click on their name in comment sometimes, why??
 - stop comments from transferring to movie pages

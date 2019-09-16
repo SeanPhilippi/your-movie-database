@@ -110,6 +110,8 @@ router.post('/affinity', (req, res) => {
     },
     {
       $project: {
+        username: '$username',
+        items: '$items',
         numberOfMatches: {
           $size: {
             $filter: {
@@ -134,7 +136,10 @@ router.post('/affinity', (req, res) => {
   ];
 
   List.aggregate(aggregateQuery)
-    .then(result => console.log('result', result))
+    .then(result => {
+      console.log('result', result)
+      return res.json(result)
+    })
     .catch(console.log);
 });
 
