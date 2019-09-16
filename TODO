@@ -17,6 +17,9 @@ create with how they utilize it
 - home page for site would have ranking of top movies according to ymdb users
 - home page would have ranking of most frequented user lists
 
+Comments Refactor:
+- sort comments and render them in order
+
 To do list:
 - be able to visit a Profile from clicking on username in comment, list currently doesn't load properly
 - movies transferring to other profiles when you click on their name in comment sometimes, why??

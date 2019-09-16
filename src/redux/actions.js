@@ -182,21 +182,6 @@ export const fetchList = () => (dispatch, getState) => {
     .catch(err => console.error(err));
 };
 
-export const postComment = (comment, author, username) => (dispatch, getState) => {
-  dispatch({
-    type: TYPES.POST_COMMENT,
-    payload: {
-      comment
-    }
-  });
-  setTimeout(() => {
-    const { comments } = getState();
-    axios.put(`/api/comments/${ author }/${ username }`, comments)
-      .then(res => res.json)
-      .catch(console.log);
-  }, 1000);
-};
-
 export const logoutUser = history => dispatch => {
   console.log('logging out...')
   // remove JWT token from localStorage
