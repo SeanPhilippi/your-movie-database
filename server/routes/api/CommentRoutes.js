@@ -9,10 +9,10 @@ const fetch = require('node-fetch');
 router.get('/:username', (req, res) => {
   console.log('inside GET comments')
   Comment.find({
-    username: req.params.username
+      username: req.params.username
   }).exec().then(data => {
-      return res.json(data);
-    }).catch(console.log);
+    return res.json(data.reverse());
+  }).catch(console.log);
 });
 
 // @route   POST api/comments/
