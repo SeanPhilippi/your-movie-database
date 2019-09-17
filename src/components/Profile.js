@@ -55,17 +55,17 @@ class Profile extends PureComponent  {
               movieIds = this.props.items.map(item => item.id);
             };
             console.log('*****Affinity Data****')
-
-            this.getAffinity(movieIds)
+            console.log('username for movieIds: ', username)
+            this.getAffinities(movieIds)
               .then(data => console.log('data in affinity', data))
               .catch(console.log)
         })
       }
   }
 
-  getAffinity = movieIds => {
-    console.log('getAffinity');
-    return fetch('/api/movies/affinity', {
+  getAffinities = movieIds => {
+    console.log('getAffinities');
+    return fetch('/api/movies/affinities', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -74,7 +74,8 @@ class Profile extends PureComponent  {
     }).then(res => res.json())
       .then(matches => {
       console.log('affinity matches', matches)
-      this.setState({ matches })
+      this.setState({ matches });
+      return matches;
     });
   };
 

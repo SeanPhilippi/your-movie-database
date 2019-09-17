@@ -89,13 +89,13 @@ router.delete('/delete/:username', (req, res) => {
     .catch(console.log);
 });
 
-// @route   POST api/movies/affinity/:username
+// @route   POST api/movies/affinities/:username
 // @desc    grab lists, calculate similarity to current user list
 // @access  Public
-router.post('/affinity', (req, res) => {
+router.post('/affinities', (req, res) => {
   // store current user's movie ids from state.list in a variable
   console.log('req body in affinity', req.body)
-  const movieIds = [...req.body];
+  const movieIds = req.body;
 
   let aggregateQuery = [
     {
@@ -164,10 +164,10 @@ router.post('/affinity', (req, res) => {
         // count points for each matching movieId by getitng difference between indexes, adding 20
         let points = docs[i].matchingItems.map(item => {
           console.log(item)
-          return Math.abs(Number(item.idx) - Number(item.idxInComparedList)) + 20;
+          return Math.abs(item.idx - item.idxInComparedList) + 20;
         });
         console.log('pts', points);
-        const score = points.reduce((ac, cv) => ac + cv) / 400;
+        const score = (points.reduce((ac, cv) => ac + cv) / (movieIds.length * 20)) * 100;
         const match = {
           username: docs[i].username,
           score: score.toFixed(2)

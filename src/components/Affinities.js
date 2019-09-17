@@ -12,7 +12,7 @@ class Affinities extends PureComponent {
               match => (
                 <div className="d-flex justify-content-between">
                   <div className="bd-light col-10">
-                    { match.username }
+                    <Link to={`/profile/${ match.username }`}>{ match.username }</Link>
                   </div>
                   <div className="bd-light col-2 text-right">
                     { match.score }%

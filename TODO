@@ -28,6 +28,8 @@ To do list:
 - remove setAddError?
 - incorporate Stu's api idea
 - responsive top margins in mobile
+- correct for math for Affinities, it is definitely inaccurate at the moment.  should be comparing to the compared list's # of items x 20 and diving
+  points by that number.
 - list doesn't load when I click on the name attached to my own comment on my own list
 - think about comment deletion... what data do I need to look up a comment that I want to delete?
 - be able to visit a Profile from clicking on username in comment, list currently doesn't load properly

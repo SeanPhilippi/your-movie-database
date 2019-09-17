@@ -7,7 +7,44 @@
 - divide those pts by 400 (total pts) for the % score
 - THEN sorts lists, highest percentage first, so I have an array I can map over to display the usernames and % match with links
 
-[
+other math considerations:
+- list could have less than 20 movies
+- whatever math I do, it has to work with lists that are also less than 20 movies
+  if there is a 100% match for an 8 movie list, it needs to be 100% obviously.
+- so top points for exact match (movieId and index) is still 20 and goes down from there depending on
+  the index difference
+- the number I divide the total by just needs to be 20 x the number of movies in that list.  the max possible
+  points depends on the # of movies in the compared list, so 20 x comparedList.length
+
+lskfdl 0
+lsdkflsk 1
+sfjldkfs 2
+dsjf 3
+dskflskdf * 4
+sdkflsdkfs 5
+dfklsd 6
+
+// same list
+lskfdl 0
+lsdkflsk 1
+sfjldkfs 2
+dsjf 3
+dskflskdf * 4
+sdkflsdkfs 5
+dfklsd 6
+
+// different list
+lsdlfsd 0
+dskflskdf * 1
+lsdkflsk 2
+ldkfsldk 3
+kdlsfjkld 4
+ldkslfjkd 5
+
+
+if 18 movies, possible points is actually 18 x 18?
+
+let aggregateQuery = [
     {
       // only match list objects in the lists collection that contain some of the movie ids
       $match: { // best to place $match into pipeline as early as possible since limits the total number of ducments in the aggregation pipeline
