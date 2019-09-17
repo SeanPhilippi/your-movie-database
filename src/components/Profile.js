@@ -10,6 +10,7 @@ import SortableList from './SortableList';
 import CardWrapper from './CardWrapper';
 import Search from './Search';
 import ViewableList from './ViewableList';
+import Affinities from './Affinities';
 import Spinner from './Spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -22,7 +23,8 @@ class Profile extends PureComponent  {
     },
     listDataLoading: true,
     commentsLoading: true,
-    comments: []
+    comments: [],
+    matches: []
   };
 
   getListData = username => {
@@ -69,8 +71,10 @@ class Profile extends PureComponent  {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(movieIds)
-    }).then(res => {
-      return res.json();
+    }).then(res => res.json())
+      .then(matches => {
+      console.log('affinity matches', matches)
+      this.setState({ matches })
     });
   };
 
@@ -135,7 +139,7 @@ class Profile extends PureComponent  {
 
   render() {
     const { match, user, items } = this.props;
-    const { listData, listDataLoading, commentsLoading, comments } = this.state;
+    const { listData, listDataLoading, commentsLoading, comments, matches } = this.state;
 
     const EditButton = () => (
       <button
@@ -214,6 +218,14 @@ class Profile extends PureComponent  {
                 ? <Spinner />
                 : <Statement />
               }
+            </CardWrapper>
+          </div>
+          <div className="px-4">
+            <CardWrapper
+              title="affinities"
+              color="tan"
+            >
+              <Affinities matches={ matches }/>
             </CardWrapper>
           </div>
         </div>

@@ -170,11 +170,11 @@ router.post('/affinity', (req, res) => {
         const score = points.reduce((ac, cv) => ac + cv) / 400;
         const match = {
           username: docs[i].username,
-          score: score
+          score: score.toFixed(2)
         };
         matches.push(match);
       };
-      const sortedMatches = matches.sort((a, b) => a - b);
+      const sortedMatches = matches.sort((a, b) => b.score - a.score);
       console.log('sortedMatches', sortedMatches)
       return res.json(sortedMatches);
     })

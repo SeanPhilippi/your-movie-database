@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { } from '../redux/actions';
 
-class ViewableList extends Component {
+class ViewableList extends PureComponent {
   dummyData = [
     {
       "title": "The Big Lebowski",
