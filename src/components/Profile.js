@@ -25,12 +25,9 @@ class Profile extends PureComponent  {
     comments: []
   };
 
-  getListData = () => {
-    const { username } = this.props.match.params;
-    console.log('visited list?', username ? true : false)
+  getListData = username => {
     let fetchedListData;
     if (username) {
-      console.log('fetching visited listData in Profile...')
       fetch(`/api/movies/${ username }/list`)
         .then(res => res.json())
         .then(data => {
@@ -90,7 +87,7 @@ class Profile extends PureComponent  {
 
   componentDidMount() {
     const { username } = this.props.match.params;
-    this.getListData();
+    this.getListData(username);
     // fetch comments
     let user;
     if (!username || username === this.props.user.username) {
@@ -102,13 +99,14 @@ class Profile extends PureComponent  {
   };
 
   componentDidUpdate(prevProps) {
+    console.log('props in profile', prevProps, this.props)
     const { match, user } = this.props;
-    if (prevProps.match.path !== match.path) {
+    if (prevProps.match.url !== match.url) {
       this.getListData();
       this.getComments(match.params.username || user.username);
-      this.getAffinity();
     }
   };
+
   // componentDidUpdate(prevProps) {
   //   const { open, match } = this.props;
   //   if (prevProps.open !== open) {
@@ -150,6 +148,7 @@ class Profile extends PureComponent  {
     )
 
     const List = () => {
+      console.log('params username', match.params.username)
       if (!match.params.username) {
         return (
           <div>
@@ -168,7 +167,10 @@ class Profile extends PureComponent  {
                 user.username === match.params.username && <EditButton />
               }
             </div>
-            <ViewableList items={ listData.items }/>
+            <ViewableList
+              items={ listData.items }
+              getListData={ this.getListData }
+            />
           </div>
         )
       }
@@ -176,7 +178,11 @@ class Profile extends PureComponent  {
 
     const Statement = () => !match.params.username
       ? <EditableStatement />
-      : <UserStatement username={ match.params.username } statement={ listData.statement }/>
+      : <UserStatement
+          username={ match.params.username }
+          statement={ listData.statement }
+          getListData={ this.getListData }
+        />
 
     return (
       <div className="grid-container bg-light2 mt-4">

@@ -1,0 +1,56 @@
+- create an aggregate (pipeline) query
+- $match at the top, and only match list objs in the lists collection that contain some of the movie ids
+- $project a new list of the matched $_ids and their index in the array
+- attach the username to this list of matched ids with index
+- return the list, then on the server side, compare the indexes with the indexes in my movieIds array.
+- same index = 20, so get the difference between the indexes and + 20 for the pts
+- divide those pts by 400 (total pts) for the % score
+- THEN sorts lists, highest percentage first, so I have an array I can map over to display the usernames and % match with links
+
+[
+    {
+      // only match list objects in the lists collection that contain some of the movie ids
+      $match: { // best to place $match into pipeline as early as possible since limits the total number of ducments in the aggregation pipeline
+        items: {
+          // $elemMatch filters so only the first match in an array field for a given query is returned
+          $elemMatch: {
+            id: {
+              // checks and returns a boolean for whether the value can be found in given array (movieIds)
+              $in: movieIds
+            }
+          }
+        }
+      }
+    },
+    // rather than returning the list document, we "project" a new document
+    // that will have the list id (_id) and a numberOfMatches field
+    {
+      $project: {
+        // _id (list id) will be automatically projected
+        username: '$username',
+        numberOfMatches: {
+          // get the count of matching items, equivalent to arr.length
+          $size: {
+            $filter: {
+              // filter (match) items in my movie list
+              input: '$items',
+              as: 'i',
+              cond: {
+                $in: ['$$i.id', movieIds]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      // sort the results in descending (-1) order
+      $sort: {
+        numberOfMatches: -1,
+      }
+    },
+    {
+      // only return the top 5
+      $limit: 5
+    }
+  ];

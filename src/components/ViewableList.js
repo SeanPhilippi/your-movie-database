@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { } from '../redux/actions';
 
 class ViewableList extends Component {
@@ -98,6 +98,15 @@ class ViewableList extends Component {
     }
   ];
 
+  // componentDidUpdate = (prevProps) => {
+  //   console.log('props in viewablelist', prevProps, this.props)
+  //   const { username } = this.props.match.params;
+  //   console.log('params username in viewablelist', username)
+  //   if (prevProps.match.params.username !== username) {
+  //     this.props.getListData(username);
+  //   }
+  // }
+
   render() {
     const { items } = this.props;
 
@@ -175,4 +184,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewableList);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ViewableList));

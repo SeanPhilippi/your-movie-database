@@ -31,15 +31,12 @@ export const setToken = decoded => {
   };
 };
 
-export const setNewUsers = users => {
-  // window.sessionStorage.setItem("registerUsers", JSON.stringify(users));
-  return {
-    type: TYPES.SET_NEW_USERS,
-    payload: {
-      users
-    }
+export const setNewUsers = users => ({
+  type: TYPES.SET_NEW_USERS,
+  payload: {
+    users
   }
-};
+});
 
 export const setUpdateStatus = () => ({
   type: TYPES.SET_UPDATE_STATUS

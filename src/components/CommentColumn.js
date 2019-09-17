@@ -56,6 +56,14 @@ class CommentColumn extends PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { username } = this.props.match.params;
+    console.log('params username in comments', username)
+    if (prevProps.match.params.username !== username) {
+      this.props.getComments(username);
+    }
+  }
+
   render() {
     const { isAuthenticated, loading } = this.props;
 

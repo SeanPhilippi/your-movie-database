@@ -1,7 +1,17 @@
 import React, { PureComponent } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class UserStatement extends PureComponent {
+
+  // componentDidUpdate(prevProps) {
+  //   console.log('props in userstatement', prevProps, this.props)
+  //   const { username } = this.props.match.params;
+  //   console.log('params username in userstatement', username)
+  //   if (prevProps.match.params.username !== username) {
+  //     this.props.getListData(username);
+  //   }
+  // }
 
   noStatement = () => <div>This user hasn't added a statement yet.</div>;
 
@@ -26,4 +36,4 @@ UserStatement.propTypes = {
   statement: PropTypes.string,
 };
 
-export default UserStatement;
+export default withRouter(UserStatement);

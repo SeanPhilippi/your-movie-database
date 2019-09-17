@@ -96,6 +96,7 @@ router.post('/affinity', (req, res) => {
   // store current user's movie ids from state.list in a variable
   console.log('req body in affinity', req.body)
   const movieIds = [...req.body];
+
   let aggregateQuery = [
     {
       $match: {
@@ -111,14 +112,32 @@ router.post('/affinity', (req, res) => {
     {
       $project: {
         username: '$username',
-        items: '$items',
+        matchingItems: {
+          $map: {
+            input: {
+              $filter: {
+                input: '$items',
+                as: 'item',
+                cond: {
+                  $in: ['$$item.id', movieIds],
+                }
+              }
+            },
+            as: 'item',
+            in: {
+              id: '$$item.id',
+              idx: { $indexOfArray: ['$items.id', '$$item.id'] },
+              idxInComparedList: { $indexOfArray: [movieIds, '$$item.id'] }
+            }
+          }
+        },
         numberOfMatches: {
           $size: {
             $filter: {
               input: '$items',
-              as: 'i',
+              as: 'item',
               cond: {
-                $in: ['$$i.id', movieIds]
+                $in: ['$$item.id', movieIds]
               }
             }
           }
@@ -131,14 +150,33 @@ router.post('/affinity', (req, res) => {
       }
     },
     {
-      $limit: 5
+      $limit: 15
     }
   ];
 
   List.aggregate(aggregateQuery)
     .then(result => {
-      console.log('result', result)
-      return res.json(result)
+      const matches = [];
+      console.log('docs', result.slice(1));
+      let docs = result.slice(1);
+      // for each document with any matches
+      for (let i = 0; i < docs.length; i++) {
+        // count points for each matching movieId by getitng difference between indexes, adding 20
+        let points = docs[i].matchingItems.map(item => {
+          console.log(item)
+          return Math.abs(Number(item.idx) - Number(item.idxInComparedList)) + 20;
+        });
+        console.log('pts', points);
+        const score = points.reduce((ac, cv) => ac + cv) / 400;
+        const match = {
+          username: docs[i].username,
+          score: score
+        };
+        matches.push(match);
+      };
+      const sortedMatches = matches.sort((a, b) => a - b);
+      console.log('sortedMatches', sortedMatches)
+      return res.json(sortedMatches);
     })
     .catch(console.log);
 });
