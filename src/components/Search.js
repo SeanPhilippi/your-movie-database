@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SearchResult from './SearchResult';
 import { connect } from 'react-redux';
 import debounce from '../utils/helpers/debounce.js';
-import { addToList, setAddError } from '../redux/actions';
+import { addToList } from '../redux/actions';
 
 class Search extends PureComponent {
   state = {
@@ -39,9 +39,6 @@ class Search extends PureComponent {
             if (this.focusInput.current) {
               this.focusInput.current.focus();
             }
-          } else {
-            this.props.setAddError(true);
-
           }
           this.clearResults();
           this.clearSearchText();
@@ -86,7 +83,7 @@ class Search extends PureComponent {
           if (data.Search) {
             console.log('data.Search', data.Search)
             this.setState((prevState) => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
-            this.renderResults();
+            // this.renderResults(); ! probably not doing anything, since this just returns jsx and jsx can't do anything outside render method's return
           }
         })
         .catch(console.log);
@@ -142,8 +139,7 @@ class Search extends PureComponent {
 }
 
 Search.propTypes = {
-  addToList: PropTypes.func.isRequired,
-  setAddError: PropTypes.func.isRequired,
+  addToList: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -152,7 +148,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addToList: movie => dispatch(addToList(movie)),
-  setAddError: bool => dispatch(setAddError(bool)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

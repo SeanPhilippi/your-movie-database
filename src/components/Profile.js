@@ -253,7 +253,6 @@ Profile.propTypes = {
   user: PropTypes.object,
   isAuthenticated: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
-  addError: PropTypes.bool.isRequired,
   comments: PropTypes.array
 };
 
@@ -261,7 +260,6 @@ const mapStateToProps = state => ({
   user: state.user,
   isAuthenticated: state.isAuthenticated,
   open: state.open,
-  addError: state.addError,
   items: state.items,
 });
 

@@ -15,7 +15,6 @@ export const TYPES = {
   SET_COMMENTS: 'SET_COMMENTS',
   POST_COMMENT: 'POST_COMMENT',
   ADD_TO_LIST: 'ADD_TO_LIST',
-  SET_ADD_ERROR: 'SET_ADD_ERROR',
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
   DELETE_LIST: 'DELETE_LIST',
@@ -72,11 +71,6 @@ export const addToList = movie => ({
   payload: {
     movie
   }
-});
-
-export const setAddError = errorKey => ({
-  type: TYPES.SET_ADD_ERROR,
-  payload: errorKey
 });
 
 export const orderList = (oldIndex, newIndex) => ({

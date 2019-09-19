@@ -8,10 +8,8 @@ const fetch = require('node-fetch');
 // @access  Public
 router.get('/search/:query/:num', ({ params }, res) => {
   const apiKey = process.env.API_KEY;
-  let { query, num } = params;
-  let searchText = query;
-  let pageNum = num;
-  fetch(`http://www.omdbapi.com?s=${searchText.trim()}&apikey=${apiKey}&page=${pageNum}`)
+  const { query, num } = params;
+  fetch(`http://www.omdbapi.com?s=${query.trim()}&apikey=${apiKey}&page=${num}`)
     .then(res => res.json())
     .then(data => {
       res.json(data);
@@ -69,9 +67,9 @@ router.put('/save/:username', (req, res) => {
     { username: req.params.username },
     {
       $set: {
-      'username': req.body.username,
-      'items': req.body.items,
-      'statement': req.body.statement,
+        'username': req.body.username,
+        'items': req.body.items,
+        'statement': req.body.statement,
       }
     },
     {
@@ -158,11 +156,11 @@ router.post('/affinities', (req, res) => {
     .then(result => {
       const matches = [];
       console.log('docs', result.slice(1));
-      let docs = result.slice(1);
+      const docs = result.slice(1);
       // for each document with any matches
       for (let i = 0; i < docs.length; i++) {
         // count points for each matching movieId by getitng difference between indexes, adding 20
-        let points = docs[i].matchingItems.map(item => {
+        const points = docs[i].matchingItems.map(item => {
           console.log(item)
           return Math.abs(item.idx - item.idxInComparedList) + 20;
         });

@@ -11,7 +11,6 @@ const initialState = {
   items: [],
   open: false,
   newUsers: [],
-  addError: false
 }
 
 // destructured action parameter is desctructured and passed in to rootReducer function,
@@ -59,10 +58,6 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.ADD_TO_LIST: return {
       ...state,
       items: [payload.movie, ...state.items]
-    };
-    case TYPES.SET_ADD_ERROR: return {
-      ...state,
-      addErrors: payload
     };
     case TYPES.REORDER_LIST: return {
       ...state,

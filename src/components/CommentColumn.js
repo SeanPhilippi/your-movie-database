@@ -11,6 +11,7 @@ class CommentColumn extends PureComponent {
 
   state = {
     comment: {},
+    commentText: ''
   }
 
   handleFieldChange = e => {
@@ -37,7 +38,7 @@ class CommentColumn extends PureComponent {
       .then(() => {
         this.props.getComments(match.params.username || user.username);
       }).then(() => {
-        this.renderComments();
+        this.renderComments(); // ! not doing anything
       })
       .catch(console.log);
     this.commentTextArea.value = '';
