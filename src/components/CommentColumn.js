@@ -10,38 +10,30 @@ import axios from 'axios';
 class CommentColumn extends PureComponent {
 
   state = {
-    comment: {},
     commentText: ''
   }
 
   handleFieldChange = e => {
-    const { value } = e.target;
-    const { match, user } = this.props;
-    const newComment = {
-      username: match.params.username || user.username,
-      author: user.username,
-      post_date: moment().format('LL'),
-      text: value
-    };
-    this.setState({
-      comment: newComment
-    });
+    this.setState({ commentText: e.target.value });
   }
 
 
   handleComment = e => {
     const { postComment, user, match } = this.props;
-    const { comment } = this.state;
     e.preventDefault();
-    axios.post('/api/comments/', comment)
+    const newComment = {
+      username: match.params.username || user.username,
+      author: user.username,
+      post_date: moment().format('LL'),
+      text: this.state.commentText
+    };
+    axios.post('/api/comments/', newComment)
       .then(res => res.json)
       .then(() => {
         this.props.getComments(match.params.username || user.username);
-      }).then(() => {
-        this.renderComments(); // ! not doing anything
       })
       .catch(console.log);
-    this.commentTextArea.value = '';
+    this.setState({ commentText: '' });
   }
 
   // ! find a differnt way to do this.  don't call this in the return!
@@ -66,6 +58,7 @@ class CommentColumn extends PureComponent {
   }
 
   render() {
+    const { commentText } = this.state;
     const { isAuthenticated, loading } = this.props;
 
     return (
@@ -77,8 +70,8 @@ class CommentColumn extends PureComponent {
                 Write a comment
               </div>
               <textarea
-                ref={ ref => this.commentTextArea = ref }
                 className="comments-box w-100"
+                value={ commentText }
                 type="text"
                 name="comments"
                 rows="4"
