@@ -12,6 +12,9 @@ export const TYPES = {
   SET_EDITING: 'SET_EDITING',
   SET_STATEMENT: 'SET_STATEMENT',
   SET_LIST: 'SET_LIST',
+  // GET_LIST_DATA: 'GET_LIST_DATA', these aren't changing state?
+  // GET_AFFINITIES: 'GET_AFFINITIES',
+  // GET_COMMENTS: 'GET_COMMENTS',
   SET_COMMENTS: 'SET_COMMENTS',
   POST_COMMENT: 'POST_COMMENT',
   ADD_TO_LIST: 'ADD_TO_LIST',
@@ -40,7 +43,7 @@ export const setNewUsers = users => ({
 export const setUpdateStatus = () => ({
   type: TYPES.SET_UPDATE_STATUS
 });
-
+// ! finish this idea
 export const onRouteChange = () => ({
   type: TYPES.CLEAR_ERRORS
 });
@@ -172,6 +175,18 @@ export const fetchList = () => (dispatch, getState) => {
     })
     .catch(err => console.error(err));
 };
+
+export const getVisitedListData = () => (dispatch, getState) => {
+
+}
+
+export const getAffinities = () => (dispatch, getState) => {
+
+}
+
+export const getComments = () => (dispatch, getState) => {
+
+}
 
 export const logoutUser = history => dispatch => {
   console.log('logging out...')
