@@ -4,6 +4,7 @@ import { Row } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../redux/actions';
 import { connect } from 'react-redux';
+import { clearErrors } from '../redux/actions';
 // import PasswordRevealer from '../PasswordRevealer/PasswordRevealer';
 
 class RegisterBox extends PureComponent {
@@ -31,7 +32,7 @@ class RegisterBox extends PureComponent {
       password: password.trim(),
       password2: password2.trim(),
     };
-
+    this.props.clearErrors();
     this.props.registerUser(user, this.props.history);
   };
 
@@ -157,6 +158,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   registerUser: (user, history) => dispatch(registerUser(user, history)),
+  clearErrors
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterBox));

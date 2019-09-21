@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   BrowserRouter,
   Route,
-  Switch,
+  Switch
 } from 'react-router-dom';
 import TopNav from './components/TopNav';
 import Home from './components/Home';
@@ -76,7 +76,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setNewUsers
+  setNewUsers,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

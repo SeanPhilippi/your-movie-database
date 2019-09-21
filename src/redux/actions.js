@@ -44,7 +44,7 @@ export const setUpdateStatus = () => ({
   type: TYPES.SET_UPDATE_STATUS
 });
 // ! finish this idea
-export const onRouteChange = () => ({
+export const clearErrors = () => ({
   type: TYPES.CLEAR_ERRORS
 });
 
