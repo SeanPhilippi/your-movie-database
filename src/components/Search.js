@@ -17,7 +17,7 @@ class Search extends PureComponent {
     const { addToList, items } = this.props;
     console.log('no here')
     // fetch call to grab movie from api by id, then grab director
-    fetch(`/api/movies/addMovie/${movie.imdbID}`)
+    fetch(`/api/movies/id/${movie.imdbID}`)
       .then(res => res.json())
       .then(data => {
         console.log('here')
