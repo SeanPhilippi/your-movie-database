@@ -9,11 +9,11 @@ const validateRegisterInput = data => {
   data.password = !isEmpty(data.password) ? data.password : '';
   data.password2 = !isEmpty(data.password2) ? data.password2 : '';
 
-  if (!Validator.isLength(data.username, {min: 4, max: 30})) {
-    errors.username = 'Name must be between 4 and 30 characters';
+  if (!Validator.isLength(data.username, {min: 4, max: 20})) {
+    errors.username = 'Name must be between 4 and 20 characters';
   }
   if (Validator.isEmpty(data.username)) {
-    errors.username = 'Name field is required' + data.username;
+    errors.username = 'Name field is required';
   }
   if (Validator.isEmpty(data.email)) {
     errors.email = 'Email field is required';
@@ -24,8 +24,8 @@ const validateRegisterInput = data => {
  if (Validator.isEmpty(data.password)) {
     errors.password = 'Password field is required';
  }
- if (!Validator.isLength(data.password, { min: 2, max: 30 })) {
-    errors.password = 'Password must be at least 6 characters';
+ if (!Validator.isLength(data.password, { min: 8, max: 30 })) {
+    errors.password = 'Password must be at least 8 characters';
  }
  if (Validator.isEmpty(data.password2)) {
     errors.password2 = 'Confirm Password field is required';

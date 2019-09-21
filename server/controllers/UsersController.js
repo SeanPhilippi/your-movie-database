@@ -2,20 +2,27 @@ const User = require('../models/UserModel');
 const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
-const validateRegisterInput = require('./validation/register');
+const validateRegisterInput = require('./validation/validateRegisterInput');
 const Validator = require('validator');
 const formatDate = require('./formatDate');
 const geoip = require('geoip-lite');
 
 exports.registerUser = (req, res) => {
   // takes newUser object created on front-end and runs through validating function
-  // destructuring object that is returned which contains errors and isValid. isValid return
+  // destructuring object that is returned which contains errors and isValid. isValid returns
   // a boolean and wants an empty errors object
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) return res.status(400).json(errors);
 
-  // ! figure out $or operator so I can give an error for finding a matching username as well
+  User.findOne({ username: req.body.username })
+    .then(user => {
+      if (user) {
+        errors.username = 'This username is already taken.';
+        return res.status(400).json(errors);
+      }
+  });
+
   User.findOne({ email: req.body.email })
     .then(user => {
       if (user) {
@@ -36,8 +43,8 @@ exports.registerUser = (req, res) => {
           email,
           password,
           register_date: formatDate(new Date()),
-          location: geo ?
-            `${geo.city ? geo.city : 'n/a'}, ${geo.region ? geo.region : 'n/a'}, ${geo.country}, (lat: ${geo.ll[0]}, long: ${geo.ll[1]})`
+          location: geo
+            ? `${geo.city ? geo.city : 'n/a'}, ${geo.region ? geo.region : 'n/a'}, ${geo.country}, (lat: ${geo.ll[0]}, long: ${geo.ll[1]})`
             : 'n/a'
         });
         // encrypting password before saving to mlab
@@ -60,8 +67,7 @@ exports.loginUser = (req, res) => {
   const errors = {};
   const { login, password } = req.body;
   let data;
-  //* for future, allow for login with username OR email, and then search by username, then by email
-  // ! check for login against email in database, then check against username
+  // check for login against email in database, then check against username
   if (Validator.isEmail(login)) {
     data = { email: login };
   } else {
