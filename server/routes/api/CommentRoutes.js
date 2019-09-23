@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Comment = require('../../models/CommentModel');
-const fetch = require('node-fetch');
 const commentsController = require('../../controllers/CommentsController');
 
-const { getComments, postComments } = commentsController
+const { getComments, postComment } = commentsController
 
 // @route   GET api/comments/:username
 // @desc    get comments to populate username's profile
@@ -12,8 +10,8 @@ const { getComments, postComments } = commentsController
 router.get('/:username', getComments);
 
 // @route   POST api/comments/
-// @desc    post comment on username's profile
+// @desc    post new comment document to mongodb
 // @access  Public
-router.post('/', postComments);
+router.post('/', postComment);
 
 module.exports = router;
