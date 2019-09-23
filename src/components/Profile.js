@@ -13,7 +13,7 @@ import ViewableList from './ViewableList';
 import Affinities from './Affinities';
 import Spinner from './Spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setListDataLoading, setCommentsLoading } from '../redux/actions';
+import { setListDataLoading, setCommentsLoading, getComments, setComments } from '../redux/actions';
 
 class Profile extends PureComponent  {
   state = {
@@ -101,7 +101,7 @@ class Profile extends PureComponent  {
     } else {
       user = username;
     }
-    this.getComments(user);
+    this.props.getComments(user);
   };
 
   componentDidUpdate(prevProps) {
@@ -109,7 +109,7 @@ class Profile extends PureComponent  {
     const { match, user } = this.props;
     if (prevProps.match.url !== match.url) {
       this.getListData();
-      this.getComments(match.params.username || user.username);
+      this.props.getComments(match.params.username || user.username);
     }
   };
 
@@ -240,7 +240,7 @@ class Profile extends PureComponent  {
           >
             <CommentColumn
               comments={ comments }
-              getComments={ this.getComments }
+              getComments={ this.props.getComments }
               loading={ commentsLoading }
             />
           </CardWrapper>
@@ -269,6 +269,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setListDataLoading,
   setCommentsLoading,
+  getComments: user => dispatch(getComments(user)),
+  setComments: comments => dispatch(setComments(comments)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));

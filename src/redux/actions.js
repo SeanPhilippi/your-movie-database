@@ -173,8 +173,8 @@ export const fetchCurrentUser = () => dispatch => {
     .then(({ data }) => {
       console.log('user in fetchCurrentUser', data.user)
       dispatch(setCurrentUser(data.user));
-    })
-}
+    });
+};
 
 export const fetchListData = username => dispatch => {
   axios(`api/movies/${ username }/list`)
@@ -191,7 +191,7 @@ export const postComment = comment => (dispatch, getState) => {
     type: TYPES.POST_COMMENT,
     payload: comment
   });
-  setComments(comments);
+  dispatch(setComments(comments));
   // post to mongo after updating redux state with new comment and setting comments with the
   // new comments array
   axios.post('/api/comments/', comment)
