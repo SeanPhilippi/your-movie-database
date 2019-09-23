@@ -31,13 +31,12 @@ class CommentColumn extends PureComponent {
     // axios.post('/api/comments/', newComment)
     //   .then(res => res.json)
     //   .then(() => {
-    //     this.props.getComments(match.params.username || user.username);
+    //     this.props.fetchComments(match.params.username || user.username);
     //   })
     //   .catch(console.log);
     this.setState({ commentText: '' });
   }
 
-  // ! find a differnt way to do this.  don't call this in the return!
   renderComments = () => {
     if (this.props.match.path !== '/movies') {
       return (
@@ -54,7 +53,7 @@ class CommentColumn extends PureComponent {
     const { username } = this.props.match.params;
     console.log('params username in comments', username)
     if (prevProps.match.params.username !== username) {
-      this.props.getComments(username);
+      this.props.fetchComments(username);
     }
   }
 

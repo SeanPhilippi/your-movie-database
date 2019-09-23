@@ -13,7 +13,7 @@ import ViewableList from './ViewableList';
 import Affinities from './Affinities';
 import Spinner from './Spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setListDataLoading, setCommentsLoading, getComments, setComments } from '../redux/actions';
+import { setListDataLoading, setCommentsLoading, fetchComments, setComments, fetchListData } from '../redux/actions';
 
 class Profile extends PureComponent  {
   state = {
@@ -22,65 +22,62 @@ class Profile extends PureComponent  {
       items: [],
       statement: ''
     },
-    listDataLoading: true,
-    commentsLoading: true,
     comments: [],
     matches: []
   };
 
-  getListData = username => {
-    let fetchedListData;
-    if (username) {
-      fetch(`/api/movies/${ username }/list`)
-        .then(res => res.json())
-        .then(data => {
-          if (data) {
-            fetchedListData = {
-              username: data.username,
-              items: data.items,
-              statement: data.statement
-            };
-            this.setState({
-              ...this.state,
-              listData: { ...fetchedListData },
-              listDataLoading: false
-            });
-          }
-        }) // fetch affinity data
-        .then(() => {
-          let movieIds;
-          // * Affinity Matching
-            if (username) {
-              movieIds = fetchedListData.items.map(item => item.id);
-            } else {
-              movieIds = this.props.items.map(item => item.id);
-            };
-            console.log('*****Affinity Data****')
-            console.log('username for movieIds: ', username)
-            this.getAffinities(movieIds)
-              .then(data => console.log('data in affinity', data))
-              .catch(console.log)
-        })
-      }
-  }
+  // fetchListData = username => {
+    // let fetchedListData;
+    // if (username) {
+    //   fetch(`/api/movies/${ username }/list`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       if (data) {
+    //         fetchedListData = {
+    //           username: data.username,
+    //           items: data.items,
+    //           statement: data.statement
+    //         };
+    //         this.setState({
+    //           ...this.state,
+    //           listData: { ...fetchedListData },
+    //           listDataLoading: false
+    //         });
+    //       }
+    //     }) // fetch affinity data
+    //     .then(() => {
+    //       let movieIds;
+    //       // * Affinity Matching
+    //         if (username) {
+    //           movieIds = fetchedListData.items.map(item => item.id);
+    //         } else {
+    //           movieIds = this.props.items.map(item => item.id);
+    //         };
+    //         console.log('*****Affinity Data****')
+    //         console.log('username for movieIds: ', username)
+    //         this.getAffinities(movieIds)
+    //           .then(data => console.log('data in affinity', data))
+    //           .catch(console.log)
+    //     })
+    //   }
+  // }
 
-  getAffinities = movieIds => {
-    console.log('getAffinities');
-    return fetch('/api/movies/affinities', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(movieIds)
-    }).then(res => res.json())
-      .then(matches => {
-      console.log('affinity matches', matches)
-      this.setState({ matches });
-      return matches;
-    });
-  };
+  // fetchAffinities = movieIds => {
+    // return fetch('/api/movies/affinities', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(movieIds)
+    // }).then(res => res.json())
+    //   .then(matches => {
+    //   console.log('affinity matches', matches)
+    //   this.setState({ matches });
+    //   return matches;
+    // });
+  // };
 
-  // getComments = username => {
+  // fetchComments = username => {
   //   return fetch(`/api/comments/${ username }`)
   //     .then(res => res.json())
   //     .then(data => {
@@ -93,7 +90,7 @@ class Profile extends PureComponent  {
 
   componentDidMount() {
     const { username } = this.props.match.params;
-    this.getListData(username);
+    this.props.fetchListData(username);
     // fetch comments
     let user;
     if (!username || username === this.props.user.username) {
@@ -101,15 +98,15 @@ class Profile extends PureComponent  {
     } else {
       user = username;
     }
-    this.props.getComments(user);
+    this.props.fetchComments(user);
   };
 
   componentDidUpdate(prevProps) {
     console.log('props in profile', prevProps, this.props)
-    const { match, user } = this.props;
+    const { match, user, fetchComments, fetchListData } = this.props;
     if (prevProps.match.url !== match.url) {
-      this.getListData();
-      this.props.getComments(match.params.username || user.username);
+      fetchListData(match.params.username || user.username);
+      fetchComments(match.params.username || user.username);
     }
   };
 
@@ -175,7 +172,7 @@ class Profile extends PureComponent  {
             </div>
             <ViewableList
               items={ listData.items }
-              getListData={ this.getListData }
+              fetchListData={ this.fetchListData }
             />
           </div>
         )
@@ -187,7 +184,7 @@ class Profile extends PureComponent  {
       : <UserStatement
           username={ match.params.username }
           statement={ listData.statement }
-          getListData={ this.getListData }
+          fetchListData={ this.fetchListData }
         />
 
     return (
@@ -240,7 +237,7 @@ class Profile extends PureComponent  {
           >
             <CommentColumn
               comments={ comments }
-              getComments={ this.props.getComments }
+              fetchComments={ this.props.fetchComments }
               loading={ commentsLoading }
             />
           </CardWrapper>
@@ -257,6 +254,14 @@ Profile.propTypes = {
   comments: PropTypes.array
 };
 
+const mapDispatchToProps = dispatch => ({
+  setListDataLoading: bool => dispatch(setListDataLoading(bool)),
+  setCommentsLoading: bool => dispatch(setCommentsLoading(bool)),
+  fetchComments: user => dispatch(fetchComments(user)),
+  setComments: comments => dispatch(setComments(comments)),
+  fetchListData: username => dispatch(fetchListData(username)),
+});
+
 const mapStateToProps = state => ({
   user: state.user,
   isAuthenticated: state.isAuthenticated,
@@ -264,13 +269,6 @@ const mapStateToProps = state => ({
   items: state.items,
   listDataLoading: state.listDataLoading,
   commentsLoading: state.commentsLoading
-});
-
-const mapDispatchToProps = dispatch => ({
-  setListDataLoading,
-  setCommentsLoading,
-  getComments: user => dispatch(getComments(user)),
-  setComments: comments => dispatch(setComments(comments)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));
