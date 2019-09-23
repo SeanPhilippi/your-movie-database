@@ -18,8 +18,8 @@ exports.getComments = (req, res) => {
   ).catch(console.log);
 };
 
-exports.postComments = (req, res) => {
-  console.log('inside post comments:', req.body)
+exports.postComment = (req, res) => {
+  console.log('inside post comment:', req.body)
   const { username, text, post_date, author } = req.body;
   const newComment = new Comment({
     username,

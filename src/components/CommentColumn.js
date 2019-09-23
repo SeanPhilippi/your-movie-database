@@ -5,7 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 import Comment from './Comment';
 import Spinner from './Spinner';
 import moment from 'moment';
-import axios from 'axios';
+import { postComment } from '../redux/actions';
 
 class CommentColumn extends PureComponent {
 
@@ -27,12 +27,13 @@ class CommentColumn extends PureComponent {
       post_date: moment().format('LL'),
       text: this.state.commentText
     };
-    axios.post('/api/comments/', newComment)
-      .then(res => res.json)
-      .then(() => {
-        this.props.getComments(match.params.username || user.username);
-      })
-      .catch(console.log);
+    postComment(newComment);
+    // axios.post('/api/comments/', newComment)
+    //   .then(res => res.json)
+    //   .then(() => {
+    //     this.props.getComments(match.params.username || user.username);
+    //   })
+    //   .catch(console.log);
     this.setState({ commentText: '' });
   }
 
@@ -101,7 +102,7 @@ CommentColumn.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-
+  postComment: comment => dispatch(postComment(comment)),
 });
 
 const mapStateToProps = state => ({

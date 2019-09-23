@@ -11,7 +11,7 @@ export const TYPES = {
   SET_UPDATE_STATUS: 'SET_UPDATE_STATUS',
   SET_EDITING: 'SET_EDITING',
   SET_STATEMENT: 'SET_STATEMENT',
-  SET_LIST: 'SET_LIST',
+  SET_LIST_DATA: 'SET_LIST_DATA',
   // GET_LIST_DATA: 'GET_LIST_DATA', these aren't changing state?
   // GET_AFFINITIES: 'GET_AFFINITIES',
   // GET_COMMENTS: 'GET_COMMENTS',
@@ -55,8 +55,8 @@ export const setStatement = text => ({
   }
 });
 
-export const setList = listData => ({
-  type: TYPES.SET_LIST,
+export const setListData = listData => ({
+  type: TYPES.SET_LIST_DATA,
   payload: {
     listData
   }
@@ -104,12 +104,12 @@ export const setCurrentUser = user => dispatch => {
   });
 
   if (user.email) {
-    dispatch(fetchList());
+    dispatch(fetchListData(user.username));
   } else {
     // setCurrentUser is called on logout, user should be set to an empty object
     // if empty object, clear user data
     dispatch(
-      setList({
+      setListData({
         username: '',
         items: [],
         statement: ''
@@ -166,14 +166,27 @@ export const fetchCurrentUser = () => dispatch => {
     })
 }
 
-export const fetchList = () => (dispatch, getState) => {
-  const { user } = getState();
-  axios(`api/movies/${user.username}/list`)
+export const fetchListData = username => dispatch => {
+  axios(`api/movies/${ username }/list`)
     .then(res => {
-      console.log('axios res in fetchList', res);
-      if (res.data) dispatch(setList(res.data));
+      console.log('axios res in fetchListData', res);
+      if (res.data) dispatch(setListData(res.data));
     })
     .catch(err => console.error(err));
+};
+// ! unfinished
+export const postComment = comment => (dispatch, getState) => {
+  const { comments } = getState;
+  dispatch({
+    type: TYPES.POST_COMMENT,
+    payload: comment
+  });
+  setComments(comments);
+  // post to mongo after updating redux state with new comment and setting comments with the
+  // new comments array
+  axios.post('/api/comments/', comment)
+    .then(res => res.json)
+    .catch(console.log);
 };
 
 export const getVisitedListData = () => (dispatch, getState) => {
