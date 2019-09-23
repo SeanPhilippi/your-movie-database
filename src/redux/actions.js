@@ -17,6 +17,8 @@ export const TYPES = {
   // GET_COMMENTS: 'GET_COMMENTS',
   SET_COMMENTS: 'SET_COMMENTS',
   POST_COMMENT: 'POST_COMMENT',
+  SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
+  SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
   ADD_TO_LIST: 'ADD_TO_LIST',
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
@@ -93,6 +95,14 @@ export const deleteMovie = movie => ({
 
 export const deleteList = () => ({
   type: TYPES.DELETE_LIST
+});
+
+export const setListDataLoading = () => ({
+  type: TYPES.SET_LIST_DATA_LOADING
+});
+
+export const setCommentsLoading = () => ({
+  type: TYPES.SET_COMMENTS_LOADING
 });
 
 //thunk actions
@@ -197,8 +207,16 @@ export const getAffinities = () => (dispatch, getState) => {
 
 }
 
-export const getComments = () => (dispatch, getState) => {
-
+export const getComments = username => dispatch => {
+  axios.get(`/api/comments/${ username }`)
+  .then(res => res.json())
+  .then(data => {
+    if (data) {
+      dispatch(setComments(data));
+    }
+    dispatch(setCommentsLoading(false));
+    // this.setState({ commentsLoading: false });
+  }).catch(console.log);
 }
 
 export const logoutUser = history => dispatch => {
