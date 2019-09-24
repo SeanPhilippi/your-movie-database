@@ -199,13 +199,11 @@ export const fetchListData = username => dispatch => {
 };
 
 // ! unfinished
-export const postComment = comment => (dispatch, getState) => {
-  const { comments } = getState;
+export const postComment = comment => dispatch => {
   dispatch({
     type: TYPES.POST_COMMENT,
     payload: comment
   });
-  dispatch(setComments(comments));
   // post to mongo after updating redux state with new comment and setting comments with the
   // new comments array
   axios.post('/api/comments/', comment)

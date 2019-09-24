@@ -28,12 +28,6 @@ class CommentColumn extends PureComponent {
       text: this.state.commentText
     };
     postComment(newComment);
-    // axios.post('/api/comments/', newComment)
-    //   .then(res => res.json)
-    //   .then(() => {
-    //     this.props.fetchComments(match.params.username || user.username);
-    //   })
-    //   .catch(console.log);
     this.setState({ commentText: '' });
   }
 
@@ -48,14 +42,6 @@ class CommentColumn extends PureComponent {
       )
     }
   }
-
-  // componentDidUpdate(prevProps) {
-  //   const { username } = this.props.match.params;
-  //   console.log('params username in comments', username)
-  //   if (prevProps.match.params.username !== username) {
-  //     this.props.fetchComments(username);
-  //   }
-  // }
 
   render() {
     const { commentText } = this.state;

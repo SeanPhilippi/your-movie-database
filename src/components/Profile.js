@@ -21,120 +21,13 @@ import {
 } from '../redux/actions';
 
 class Profile extends PureComponent  {
-  state = {
-    listData: {
-      username: '',
-      items: [],
-      statement: ''
-    },
-  };
-
-  // fetchListData = username => {
-    // let fetchedListData;
-    // if (username) {
-    //   fetch(`/api/movies/${ username }/list`)
-    //     .then(res => res.json())
-    //     .then(data => {
-    //       if (data) {
-    //         fetchedListData = {
-    //           username: data.username,
-    //           items: data.items,
-    //           statement: data.statement
-    //         };
-    //         this.setState({
-    //           ...this.state,
-    //           listData: { ...fetchedListData },
-    //           listDataLoading: false
-    //         });
-    //       }
-    //     }) // fetch affinity data
-    //     .then(() => {
-    //       let movieIds;
-    //       // * Affinity Matching
-    //         if (username) {
-    //           movieIds = fetchedListData.items.map(item => item.id);
-    //         } else {
-    //           movieIds = this.props.items.map(item => item.id);
-    //         };
-    //         console.log('*****Affinity Data****')
-    //         console.log('username for movieIds: ', username)
-    //         this.getAffinities(movieIds)
-    //           .then(data => console.log('data in affinity', data))
-    //           .catch(console.log)
-    //     })
-    //   }
-  // }
-
-  // fetchAffinities = movieIds => {
-    // return fetch('/api/movies/affinities', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(movieIds)
-    // }).then(res => res.json())
-    //   .then(matches => {
-    //   console.log('affinity matches', matches)
-    //   this.setState({ matches });
-    //   return matches;
-    // });
-  // };
-
-  // fetchComments = username => {
-  //   return fetch(`/api/comments/${ username }`)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       if (data) {
-  //         this.setState({ comments: data });
-  //       }
-  //       this.setState({ commentsLoading: false });
-  //     }).catch(console.log);
-  // };
 
   componentDidMount() {
-    const { fetchListData, fetchComments } = this.props;
+    const { fetchListData, fetchComments, user } = this.props;
     const { username } = this.props.match.params;
-    fetchListData(username);
-    // fetch comments
-    let user;
-    if (!username || username === this.props.user.username) {
-      user = this.props.user.username;
-    } else {
-      user = username;
-    }
-    fetchComments(user);
+    fetchListData(username || user.username);
+    fetchComments(username || user.username);
   };
-
-  // componentDidUpdate(prevProps) {
-  //   console.log('props in profile', prevProps, this.props)
-  //   const { match, user, fetchComments, fetchListData } = this.props;
-  //   if (prevProps.match.url !== match.url) {
-  //     fetchListData(match.params.username || user.username);
-  //     fetchComments(match.params.username || user.username);
-  //   }
-  // };
-
-  // componentDidUpdate(prevProps) {
-  //   const { open, match } = this.props;
-  //   if (prevProps.open !== open) {
-  //     fetch(`/api/movies/${ match.params.username }/list`)
-  //       .then(res => res.json())
-  //       .then(data => {
-  //         if (data) {
-  //           const fetchedListData = {
-  //             username: data.username,
-  //             items: data.items,
-  //             statement: data.statement
-  //           };
-  //           this.setState({
-  //             ...this.state,
-  //             listData: fetchedListData,
-  //             listDataLoading: false
-  //           });
-  //         }
-  //       })
-  //   }
-  // };
 
   handleEdit = () => {
     this.props.history.push('/profile');
@@ -152,9 +45,6 @@ class Profile extends PureComponent  {
       commentsLoading,
       affinitiesLoading
     } = this.props;
-    const {
-      listData,
-    } = this.state;
 
     const EditButton = () => (
       <button

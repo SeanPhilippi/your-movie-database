@@ -71,7 +71,7 @@ export default (state = initialState, { type, payload }) => {
     }
     case TYPES.POST_COMMENT: return {
       ...state,
-      comment: [payload, ...state.comments]
+      comments: [payload, ...state.comments]
     };
     case TYPES.SET_LIST_DATA_LOADING: return {
       ...state,
