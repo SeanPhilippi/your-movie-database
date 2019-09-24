@@ -8,7 +8,7 @@ class Affinities extends PureComponent {
       <div>
         <div className="bg-white">
           {
-            this.props.matches.slice(0, 5).map(
+            this.props.affinities.slice(0, 5).map(
               match => (
                 <div className="d-flex justify-content-between">
                   <div className="bd-light col-10">

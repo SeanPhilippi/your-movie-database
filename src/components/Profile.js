@@ -13,7 +13,12 @@ import ViewableList from './ViewableList';
 import Affinities from './Affinities';
 import Spinner from './Spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setListDataLoading, setCommentsLoading, getComments, setComments } from '../redux/actions';
+import {
+  setListDataLoading,
+  setCommentsLoading,
+  fetchComments,
+  fetchListData
+} from '../redux/actions';
 
 class Profile extends PureComponent  {
   state = {
@@ -22,65 +27,60 @@ class Profile extends PureComponent  {
       items: [],
       statement: ''
     },
-    listDataLoading: true,
-    commentsLoading: true,
-    comments: [],
-    matches: []
   };
 
-  getListData = username => {
-    let fetchedListData;
-    if (username) {
-      fetch(`/api/movies/${ username }/list`)
-        .then(res => res.json())
-        .then(data => {
-          if (data) {
-            fetchedListData = {
-              username: data.username,
-              items: data.items,
-              statement: data.statement
-            };
-            this.setState({
-              ...this.state,
-              listData: { ...fetchedListData },
-              listDataLoading: false
-            });
-          }
-        }) // fetch affinity data
-        .then(() => {
-          let movieIds;
-          // * Affinity Matching
-            if (username) {
-              movieIds = fetchedListData.items.map(item => item.id);
-            } else {
-              movieIds = this.props.items.map(item => item.id);
-            };
-            console.log('*****Affinity Data****')
-            console.log('username for movieIds: ', username)
-            this.getAffinities(movieIds)
-              .then(data => console.log('data in affinity', data))
-              .catch(console.log)
-        })
-      }
-  }
+  // fetchListData = username => {
+    // let fetchedListData;
+    // if (username) {
+    //   fetch(`/api/movies/${ username }/list`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       if (data) {
+    //         fetchedListData = {
+    //           username: data.username,
+    //           items: data.items,
+    //           statement: data.statement
+    //         };
+    //         this.setState({
+    //           ...this.state,
+    //           listData: { ...fetchedListData },
+    //           listDataLoading: false
+    //         });
+    //       }
+    //     }) // fetch affinity data
+    //     .then(() => {
+    //       let movieIds;
+    //       // * Affinity Matching
+    //         if (username) {
+    //           movieIds = fetchedListData.items.map(item => item.id);
+    //         } else {
+    //           movieIds = this.props.items.map(item => item.id);
+    //         };
+    //         console.log('*****Affinity Data****')
+    //         console.log('username for movieIds: ', username)
+    //         this.getAffinities(movieIds)
+    //           .then(data => console.log('data in affinity', data))
+    //           .catch(console.log)
+    //     })
+    //   }
+  // }
 
-  getAffinities = movieIds => {
-    console.log('getAffinities');
-    return fetch('/api/movies/affinities', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(movieIds)
-    }).then(res => res.json())
-      .then(matches => {
-      console.log('affinity matches', matches)
-      this.setState({ matches });
-      return matches;
-    });
-  };
+  // fetchAffinities = movieIds => {
+    // return fetch('/api/movies/affinities', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(movieIds)
+    // }).then(res => res.json())
+    //   .then(matches => {
+    //   console.log('affinity matches', matches)
+    //   this.setState({ matches });
+    //   return matches;
+    // });
+  // };
 
-  // getComments = username => {
+  // fetchComments = username => {
   //   return fetch(`/api/comments/${ username }`)
   //     .then(res => res.json())
   //     .then(data => {
@@ -92,8 +92,9 @@ class Profile extends PureComponent  {
   // };
 
   componentDidMount() {
+    const { fetchListData, fetchComments } = this.props;
     const { username } = this.props.match.params;
-    this.getListData(username);
+    fetchListData(username);
     // fetch comments
     let user;
     if (!username || username === this.props.user.username) {
@@ -101,17 +102,17 @@ class Profile extends PureComponent  {
     } else {
       user = username;
     }
-    this.props.getComments(user);
+    fetchComments(user);
   };
 
-  componentDidUpdate(prevProps) {
-    console.log('props in profile', prevProps, this.props)
-    const { match, user } = this.props;
-    if (prevProps.match.url !== match.url) {
-      this.getListData();
-      this.props.getComments(match.params.username || user.username);
-    }
-  };
+  // componentDidUpdate(prevProps) {
+  //   console.log('props in profile', prevProps, this.props)
+  //   const { match, user, fetchComments, fetchListData } = this.props;
+  //   if (prevProps.match.url !== match.url) {
+  //     fetchListData(match.params.username || user.username);
+  //     fetchComments(match.params.username || user.username);
+  //   }
+  // };
 
   // componentDidUpdate(prevProps) {
   //   const { open, match } = this.props;
@@ -140,8 +141,20 @@ class Profile extends PureComponent  {
   }
 
   render() {
-    const { match, user, items, listDataLoading, commentsLoading } = this.props;
-    const { listData, comments, matches } = this.state;
+    const {
+      match,
+      user,
+      comments,
+      items,
+      statement,
+      affinities,
+      listDataLoading,
+      commentsLoading,
+      affinitiesLoading
+    } = this.props;
+    const {
+      listData,
+    } = this.state;
 
     const EditButton = () => (
       <button
@@ -174,8 +187,7 @@ class Profile extends PureComponent  {
               }
             </div>
             <ViewableList
-              items={ listData.items }
-              getListData={ this.getListData }
+              items={ items }
             />
           </div>
         )
@@ -186,8 +198,7 @@ class Profile extends PureComponent  {
       ? <EditableStatement />
       : <UserStatement
           username={ match.params.username }
-          statement={ listData.statement }
-          getListData={ this.getListData }
+          statement={ statement }
         />
 
     return (
@@ -227,7 +238,11 @@ class Profile extends PureComponent  {
               title="affinities"
               color="tan"
             >
-              <Affinities matches={ matches }/>
+              {
+                affinitiesLoading
+                ? <Spinner />
+                : <Affinities affinities={ affinities }/>
+              }
             </CardWrapper>
           </div>
         </div>
@@ -238,11 +253,13 @@ class Profile extends PureComponent  {
             color="white"
             marginTopVal="0"
           >
-            <CommentColumn
-              comments={ comments }
-              getComments={ this.props.getComments }
-              loading={ commentsLoading }
-            />
+            {
+              commentsLoading
+              ? <Spinner />
+              : <CommentColumn
+                  comments={ comments }
+                />
+            }
           </CardWrapper>
         </div>
       </div>
@@ -257,20 +274,25 @@ Profile.propTypes = {
   comments: PropTypes.array
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
-  isAuthenticated: state.isAuthenticated,
-  open: state.open,
-  items: state.items,
-  listDataLoading: state.listDataLoading,
-  commentsLoading: state.commentsLoading
+const mapDispatchToProps = dispatch => ({
+  setListDataLoading: bool => dispatch(setListDataLoading(bool)),
+  setCommentsLoading: bool => dispatch(setCommentsLoading(bool)),
+  fetchComments: user => dispatch(fetchComments(user)),
+  fetchListData: username => dispatch(fetchListData(username)),
 });
 
-const mapDispatchToProps = dispatch => ({
-  setListDataLoading,
-  setCommentsLoading,
-  getComments: user => dispatch(getComments(user)),
-  setComments: comments => dispatch(setComments(comments)),
+const mapStateToProps = state => ({
+  user: state.user,
+  username: state.username,
+  isAuthenticated: state.isAuthenticated,
+  open: state.open,
+  comments: state.comments,
+  items: state.items,
+  statement: state.statement,
+  affinities: state.affinities,
+  listDataLoading: state.listDataLoading,
+  commentsLoading: state.commentsLoading,
+  affinitiesLoading: state.affinitiesLoading
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));

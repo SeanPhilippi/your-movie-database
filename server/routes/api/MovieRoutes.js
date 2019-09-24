@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const moviesController = require('../../controllers/MoviesController');
 
-const { getSearchResults, getMovieData, getList, saveList, deleteList, calcAffinities } = moviesController;
+const { getSearchResults, getMovieData, getListData, saveList, deleteList, calcAffinities } = moviesController;
 
 // @route   GET api/movies/search/:query/:num
 // @desc    get search results
@@ -15,9 +15,9 @@ router.get('/search/:query/:num', getSearchResults);
 router.get('/id/:id', getMovieData);
 
 // @route   GET api/movies/:username/list
-// @desc    fetch user's existing list
+// @desc    fetch user's existing list and user statement
 // @access  Public
-router.get('/:username/list', getList);
+router.get('/:username/list', getListData);
 
 // @route   PUT api/movies/save/:username
 // @desc    update existing list attached to username

@@ -37,7 +37,7 @@ class TopNav extends PureComponent {
           <FontAwesomeIcon icon={["far", "user"]}/> { username }
         </NavLink>
         <NavLink
-          onClick={this.handleLogout}
+          onClick={ this.handleLogout }
           className="text-white mx-2"
           to="/"
         >
@@ -145,7 +145,7 @@ class TopNav extends PureComponent {
 }
 
 TopNav.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
   isAuthenticated: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
 };

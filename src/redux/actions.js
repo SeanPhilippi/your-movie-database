@@ -12,13 +12,15 @@ export const TYPES = {
   SET_EDITING: 'SET_EDITING',
   SET_STATEMENT: 'SET_STATEMENT',
   SET_LIST_DATA: 'SET_LIST_DATA',
-  // GET_LIST_DATA: 'GET_LIST_DATA', these aren't changing state?
-  // GET_AFFINITIES: 'GET_AFFINITIES',
-  // GET_COMMENTS: 'GET_COMMENTS',
+  SET_AFFINITIES: 'SET_AFFINITIES',
+  // FETCH_LIST_DATA: 'FETCH_LIST_DATA', these aren't changing state?
+  // FETCH_AFFINITIES: 'FETCH_AFFINITIES',
+  // FETCH_COMMENTS: 'FETCH_COMMENTS',
   SET_COMMENTS: 'SET_COMMENTS',
   POST_COMMENT: 'POST_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
   SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
+  SET_AFFINITIES_LOADING: 'SET_AFFINITIES_LOADING',
   ADD_TO_LIST: 'ADD_TO_LIST',
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
@@ -59,16 +61,17 @@ export const setStatement = text => ({
 
 export const setListData = listData => ({
   type: TYPES.SET_LIST_DATA,
-  payload: {
-    listData
-  }
+  payload: listData
 });
 
 export const setComments = comments => ({
   type: TYPES.SET_COMMENTS,
-  payload: {
-    comments
-  }
+  payload: comments
+});
+
+export const setAffinities = affinities => ({
+  type: TYPES.SET_AFFINITIES,
+  payload: affinities
 });
 
 export const addToList = movie => ({
@@ -97,12 +100,19 @@ export const deleteList = () => ({
   type: TYPES.DELETE_LIST
 });
 
-export const setListDataLoading = () => ({
-  type: TYPES.SET_LIST_DATA_LOADING
+export const setListDataLoading = bool => ({
+  type: TYPES.SET_LIST_DATA_LOADING,
+  payload: bool
 });
 
-export const setCommentsLoading = () => ({
-  type: TYPES.SET_COMMENTS_LOADING
+export const setCommentsLoading = bool => ({
+  type: TYPES.SET_COMMENTS_LOADING,
+  payload: bool
+});
+
+export const setAffinitiesLoading = bool => ({
+  type: TYPES.SET_AFFINITIES_LOADING,
+  payload: bool
 });
 
 //thunk actions
@@ -129,7 +139,7 @@ export const setCurrentUser = user => dispatch => {
 };
 
 export const registerUser = (userData, history) => dispatch => {
-  axios.post('api/users/register', userData)
+  axios.post('/api/users/register', userData)
     .then(() => {
       history.push('/login')
     })
@@ -143,7 +153,7 @@ export const registerUser = (userData, history) => dispatch => {
 
 export const loginUser = (user, history) => dispatch => {
   console.log('logging in...')
-  axios.post('api/users/login', user)
+  axios.post('/api/users/login', user)
     .then(res => {
       console.log('/login post res', res)
       const { token, user } = res.data;
@@ -169,21 +179,33 @@ export const loginUser = (user, history) => dispatch => {
 };
 
 export const fetchCurrentUser = () => dispatch => {
-  axios('api/users/current')
+  axios('/api/users/current')
     .then(({ data }) => {
       console.log('user in fetchCurrentUser', data.user)
       dispatch(setCurrentUser(data.user));
     });
 };
 
-export const fetchListData = username => dispatch => {
-  axios(`api/movies/${ username }/list`)
-    .then(res => {
-      console.log('axios res in fetchListData', res);
-      if (res.data) dispatch(setListData(res.data));
+export const fetchListData = username => (dispatch, getState) => {
+  const { items, listDataLoading } = getState;
+  new Promise((resolve, reject) => {
+    dispatch
+  })
+  axios(`/api/movies/${ username }/list`)
+    .then(({ data }) => {
+      if (data) dispatch(setListData(data));
+      dispatch(setListDataLoading(false));
     })
-    .catch(err => console.error(err));
+    .then(() => {
+      // * Affinity Matching
+      let movieIds = items.map(item => item.id);
+      console.log('movieIds', movieIds)
+      dispatch(fetchAffinities(movieIds))
+        .then(data => console.log('data in affinity', data))
+        .catch(console.log)
+    }).catch(console.log);
 };
+
 // ! unfinished
 export const postComment = comment => (dispatch, getState) => {
   const { comments } = getState;
@@ -199,23 +221,23 @@ export const postComment = comment => (dispatch, getState) => {
     .catch(console.log);
 };
 
-export const getVisitedListData = () => (dispatch, getState) => {
-
+export const fetchAffinities = movieIds => (dispatch, getState) => {
+  console.log('fetchAffinities');
+  axios.post('/api/movies/affinities', movieIds)
+    .then(({ data }) => {
+      console.log('affinities', data)
+      dispatch(setAffinities(data));
+    });
 }
 
-export const getAffinities = () => (dispatch, getState) => {
-
-}
-
-export const getComments = username => dispatch => {
-  axios.get(`/api/comments/${ username }`)
-  .then(res => res.json())
-  .then(data => {
+export const fetchComments = username => dispatch => {
+  axios(`/api/comments/${ username }`)
+  .then(({ data }) => {
+    console.log('data in fetchComments', data)
     if (data) {
       dispatch(setComments(data));
     }
     dispatch(setCommentsLoading(false));
-    // this.setState({ commentsLoading: false });
   }).catch(console.log);
 }
 

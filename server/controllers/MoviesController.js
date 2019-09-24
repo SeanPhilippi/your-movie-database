@@ -24,8 +24,9 @@ exports.getMovieData = (req, res) => {
     .catch(console.log);
 };
 
-exports.getList = (req, res) => {
+exports.getListData = (req, res) => {
   List.findOne({ username: req.params.username }).exec().then(data => {
+    console.log('getlistdata', data)
     res.json(data);
   }).catch(console.log);
 };

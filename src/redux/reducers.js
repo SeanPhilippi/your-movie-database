@@ -5,15 +5,18 @@ import isEmpty from '../utils/helpers/is-empty';
 const initialState = {
   isAuthenticated: false,
   user_token: {},
-  user: {}, // object containing email, id, username
+  user: {}, // object containing email, id, username of authenticateds user
   authErrors: {},
+  username: '',
   statement: '',
   items: [],
   open: false,
   newUsers: [],
   comments: [],
+  affinities: [],
   listDataLoading: true,
   commentsLoading: true,
+  affinitiesLoading: true,
 }
 
 // destructured action parameter is desctructured and passed in to rootReducer function,
@@ -54,24 +57,33 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.SET_LIST_DATA: return {
       ...state,
-      user: { ...state.user, username: payload.listData.username },
-      statement: payload.listData.statement,
-      items: [...payload.listData.items]
+      username: payload.username,
+      statement: payload.statement,
+      items: [...payload.items]
     };
     case TYPES.SET_COMMENTS: return {
-
+      ...state,
+      comments: [...payload]
     };
+    case TYPES.SET_AFFINITIES: return {
+      ...state,
+      affinities: [...payload]
+    }
     case TYPES.POST_COMMENT: return {
       ...state,
       comment: [payload, ...state.comments]
     };
     case TYPES.SET_LIST_DATA_LOADING: return {
       ...state,
-      listDataLoading: !state.listDataLoading
+      listDataLoading: payload
     };
     case TYPES.SET_COMMENTS_LOADING: return {
       ...state,
-      commentsLoading: !state.commentsLoading
+      commentsLoading: payload
+    };
+    case TYPES.SET_AFFINITIES_LOADING: return {
+      ...state,
+      affinitiesLoading: payload
     };
     case TYPES.ADD_TO_LIST: return {
       ...state,

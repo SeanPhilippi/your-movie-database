@@ -57,9 +57,8 @@
   display: flex;
   font-size: 45px;
   font-weight: 900;
-  text-shadow: 0 0 4px #AF3211; /* horizontal-offset vertical-offset 'blur' colour */
-  -moz-text-shadow: 0 0 4px #AF3211;
-  -webkit-text-shadow: 0 0 4px #AF3211;
+  // -webkit-text-stroke-width: .1rem;
+  // -webkit-text-stroke-color: $red;
 }
 
 .subtitle {

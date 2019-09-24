@@ -75,8 +75,8 @@ const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
 });
 
-const mapDispatchToProps = {
-  setNewUsers,
-};
+const mapDispatchToProps = dispatch => ({
+  setNewUsers: users => dispatch(setNewUsers(users))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
