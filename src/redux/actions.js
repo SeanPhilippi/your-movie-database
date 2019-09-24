@@ -61,9 +61,7 @@ export const setStatement = text => ({
 
 export const setListData = listData => ({
   type: TYPES.SET_LIST_DATA,
-  payload: {
-    listData
-  }
+  payload: listData
 });
 
 export const setComments = comments => ({
@@ -104,7 +102,7 @@ export const deleteList = () => ({
 
 export const setListDataLoading = bool => ({
   type: TYPES.SET_LIST_DATA_LOADING,
-  paylod: bool
+  payload: bool
 });
 
 export const setCommentsLoading = bool => ({
@@ -189,22 +187,23 @@ export const fetchCurrentUser = () => dispatch => {
 };
 
 export const fetchListData = username => (dispatch, getState) => {
-  const { items } = getState;
+  const { items, listDataLoading } = getState;
+  new Promise((resolve, reject) => {
+    dispatch
+  })
   axios(`/api/movies/${ username }/list`)
     .then(({ data }) => {
-      console.log('axios res in fetchListData', data);
       if (data) dispatch(setListData(data));
       dispatch(setListDataLoading(false));
     })
     .then(() => {
       // * Affinity Matching
       let movieIds = items.map(item => item.id);
-      console.log('username for movieIds: ', username)
+      console.log('movieIds', movieIds)
       dispatch(fetchAffinities(movieIds))
         .then(data => console.log('data in affinity', data))
         .catch(console.log)
-    })
-    .catch(console.log);
+    }).catch(console.log);
 };
 
 // ! unfinished
@@ -226,16 +225,17 @@ export const fetchAffinities = movieIds => (dispatch, getState) => {
   console.log('fetchAffinities');
   axios.post('/api/movies/affinities', movieIds)
     .then(({ data }) => {
-      console.log('affinities', data.affinities)
-      dispatch(setAffinities(data.affinities));
+      console.log('affinities', data)
+      dispatch(setAffinities(data));
     });
 }
 
 export const fetchComments = username => dispatch => {
   axios(`/api/comments/${ username }`)
-  .then(data => {
+  .then(({ data }) => {
+    console.log('data in fetchComments', data)
     if (data) {
-      dispatch(setComments(data.comments));
+      dispatch(setComments(data));
     }
     dispatch(setCommentsLoading(false));
   }).catch(console.log);

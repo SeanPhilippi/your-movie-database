@@ -57,9 +57,9 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.SET_LIST_DATA: return {
       ...state,
-      username: payload.listData.username,
-      statement: payload.listData.statement,
-      items: [...payload.listData.items]
+      username: payload.username,
+      statement: payload.statement,
+      items: [...payload.items]
     };
     case TYPES.SET_COMMENTS: return {
       ...state,

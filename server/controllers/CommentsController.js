@@ -1,7 +1,6 @@
 const Comment = require('../models/CommentModel');
 
 exports.getComments = (req, res) => {
-  console.log('inside GET comments')
   Comment.aggregate([
     {
       $match: {
