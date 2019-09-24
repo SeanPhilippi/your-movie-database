@@ -118,6 +118,18 @@ export const setCurrentUser = user => dispatch => {
   }
 };
 
+export const postComment = comment => dispatch => {
+  dispatch({
+    type: TYPES.POST_COMMENT,
+    payload: comment
+  });
+  // post to mongo after updating redux state with new comment and setting comments with the
+  // new comments array
+  axios.post('/api/comments/', comment)
+    .then(res => res.json)
+    .catch(console.log);
+};
+
 export const registerUser = (userData, history) => dispatch => {
   axios.post('api/users/register', userData)
     .then(() => {
@@ -166,26 +178,41 @@ export const fetchCurrentUser = () => dispatch => {
     })
 }
 
-export const fetchList = () => (dispatch, getState) => {
-  const { user } = getState();
-  axios(`api/movies/${user.username}/list`)
-    .then(res => {
-      console.log('axios res in fetchList', res);
-      if (res.data) dispatch(setList(res.data));
+export const fetchListData = username => dispatch => {
+  axios(`/api/movies/${ username }/list`)
+    .then(({ data }) => {
+      if (data) {
+        let movieIds = data.items.map(item => item.id);
+        dispatch(fetchAffinities(movieIds))
+        dispatch(setListData(data));
+      } else {
+        dispatch(setListData([]));
+      }
+      dispatch(setListDataLoading(false));
     })
     .catch(err => console.error(err));
 };
 
-export const getVisitedListData = () => (dispatch, getState) => {
-
+export const fetchAffinities = movieIds => dispatch => {
+  console.log('fetchAffinities');
+  axios.post('/api/movies/affinities', movieIds)
+    .then(({ data }) => {
+      console.log('affinities', data)
+      dispatch(setAffinities(data));
+      dispatch(setAffinitiesLoading(false));
+    });
 }
 
-export const getAffinities = () => (dispatch, getState) => {
-
-}
-
-export const getComments = () => (dispatch, getState) => {
-
+export const fetchComments = username => dispatch => {
+  axios(`/api/comments/${ username }`)
+  .then(({ data }) => {
+    if (data) {
+      dispatch(setComments(data));
+    } else {
+      dispatch(setComments([]));
+    }
+    dispatch(setCommentsLoading(false));
+  }).catch(console.log);
 }
 
 export const logoutUser = history => dispatch => {

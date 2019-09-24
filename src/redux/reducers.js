@@ -51,9 +51,39 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.SET_LIST: return {
       ...state,
+<<<<<<< Updated upstream
       user: { ...state.user, username: payload.listData.username },
       statement: payload.listData.statement,
       items: [...payload.listData.items]
+=======
+      username: payload.username,
+      statement: payload.statement,
+      items: payload.items
+    };
+    case TYPES.SET_COMMENTS: return {
+      ...state,
+      comments: payload
+    };
+    case TYPES.SET_AFFINITIES: return {
+      ...state,
+      affinities: [...payload]
+    }
+    case TYPES.POST_COMMENT: return {
+      ...state,
+      comments: [payload, ...state.comments]
+    };
+    case TYPES.SET_LIST_DATA_LOADING: return {
+      ...state,
+      listDataLoading: payload
+    };
+    case TYPES.SET_COMMENTS_LOADING: return {
+      ...state,
+      commentsLoading: payload
+    };
+    case TYPES.SET_AFFINITIES_LOADING: return {
+      ...state,
+      affinitiesLoading: payload
+>>>>>>> Stashed changes
     };
     case TYPES.ADD_TO_LIST: return {
       ...state,
