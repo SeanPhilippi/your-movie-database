@@ -204,6 +204,7 @@ export const fetchListData = username => dispatch => {
         dispatch(setListData(data));
         dispatch(setListDataLoading(false));
       } else {
+        dispatch(setAffinities([]));
         dispatch(setListData([]));
         dispatch(setListDataLoading(false));
       }
