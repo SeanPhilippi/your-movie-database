@@ -29,9 +29,18 @@ class Profile extends PureComponent  {
     fetchComments(username || user.username);
   };
 
+  componentDidUpdate(prevProps) {
+    const { user, fetchListData, fetchComments } = this.props;
+    const { username } = this.props.match.params;
+    if (username !== prevProps.match.params.username) {
+      fetchListData(username || user.username);
+      fetchComments(username || user.username);
+    }
+  };
+
   handleEdit = () => {
     this.props.history.push('/profile');
-  }
+  };
 
   render() {
     const {
@@ -54,7 +63,7 @@ class Profile extends PureComponent  {
       >
         <FontAwesomeIcon icon={["far","edit"]} />
       </button>
-    )
+    );
 
     const List = () => {
       console.log('params username', match.params.username)
@@ -82,7 +91,7 @@ class Profile extends PureComponent  {
           </div>
         )
       }
-    }
+    };
 
     const Statement = () => !match.params.username
       ? <EditableStatement />
@@ -159,8 +168,6 @@ class Profile extends PureComponent  {
 
 Profile.propTypes = {
   user: PropTypes.object,
-  isAuthenticated: PropTypes.bool.isRequired,
-  open: PropTypes.bool.isRequired,
   comments: PropTypes.array
 };
 
@@ -174,8 +181,6 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   user: state.user,
   username: state.username,
-  isAuthenticated: state.isAuthenticated,
-  open: state.open,
   comments: state.comments,
   items: state.items,
   statement: state.statement,
