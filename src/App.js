@@ -27,7 +27,7 @@ class App extends PureComponent {
   componentDidMount() {
     http.users.get.newRegisters()
       .then(({ data }) => {
-        this.props.setNewUsers(data.reverse());
+        this.props.setNewUsers(data);
       })
       .catch(console.log);
   }

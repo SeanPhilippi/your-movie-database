@@ -150,14 +150,15 @@ export const postComment = comment => dispatch => {
 export const registerUser = (userData, history) => dispatch => {
   axios.post('/api/users/register', userData)
     .then(() => {
-      history.push('/login')
+      history.push('/login');
+      dispatch(fetchNewUsers());
     })
     .catch(err => {
       dispatch({
         type: TYPES.GET_ERRORS,
         payload: err.response.data
       })
-    })
+    });
 };
 
 export const loginUser = (user, history) => dispatch => {
@@ -195,6 +196,14 @@ export const fetchCurrentUser = () => dispatch => {
     });
 };
 
+export const fetchNewUsers = () => dispatch => {
+  axios('/api/users/new-registers')
+    .then(({ data }) => {
+      console.log('data in fetchNewUsers', data);
+      dispatch(setNewUsers(data));
+    });
+}
+
 export const fetchListData = username => dispatch => {
   axios(`/api/movies/${ username }/list`)
     .then(({ data }) => {
@@ -205,7 +214,12 @@ export const fetchListData = username => dispatch => {
         dispatch(setListDataLoading(false));
       } else {
         dispatch(setAffinities([]));
-        dispatch(setListData([]));
+        dispatch(setAffinitiesLoading(false));
+        dispatch(setListData({
+          username: username,
+          statement: '',
+          items: []
+        }));
         dispatch(setListDataLoading(false));
       }
     })

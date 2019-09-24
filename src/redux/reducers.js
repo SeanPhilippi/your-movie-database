@@ -30,7 +30,7 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.SET_NEW_USERS: return {
       ...state,
-      newUsers: payload.users
+      newUsers: payload.users.reverse()
     };
     case TYPES.GET_ERRORS: return {
       ...state,

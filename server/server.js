@@ -28,6 +28,7 @@ app.use(express.static('build'));
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => console.log('connected to MongoDB!'))
   .catch(console.log);
+mongoose.set('useCreateIndex', true);
 
 // Use routes
 app.use('/api/movies', movies);

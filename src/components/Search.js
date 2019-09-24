@@ -118,7 +118,7 @@ class Search extends PureComponent {
     const { searchText } = this.state;
 
     return (
-      <div className={`${ items.length > 19 ? 'd-none' : 'd=flex' } flex-column align-items-center mt-${ marginTopVal }`}>
+      <div className={`${ items.length > 19 ? 'd-none' : 'd-flex' } flex-column align-items-center mt-${ marginTopVal }`}>
         <input
           ref={ this.focusInput }
           autoComplete="off"
@@ -129,7 +129,6 @@ class Search extends PureComponent {
           value={ searchText }
           onChange={ this.onTextChange }
           onKeyUp={ this.onKeyUp }
-          // onBlur={ this.clearResults }
         >
         </input>
         { this.renderResults() }
