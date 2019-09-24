@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { } from '../redux/actions';
 
 class ViewableList extends PureComponent {
   dummyData = [
@@ -98,15 +96,6 @@ class ViewableList extends PureComponent {
     }
   ];
 
-  // componentDidUpdate = (prevProps) => {
-  //   console.log('props in viewablelist', prevProps, this.props)
-  //   const { username } = this.props.match.params;
-  //   console.log('params username in viewablelist', username)
-  //   if (prevProps.match.params.username !== username) {
-  //     this.props.getListData(username);
-  //   }
-  // }
-
   render() {
     const { items } = this.props;
 
@@ -153,20 +142,28 @@ class ViewableList extends PureComponent {
       </div>
     );
 
+    const DummyTopMovieList = () => {
+      return this.dummyData.slice(0, 10).map((item, idx) => <ViewableItem movie={item} idx={idx} key={item._id}/>)
+    };
+
+    const UserList = () => {
+      return items.map((item, idx) => <ViewableItem movie={item} idx={idx} key={item._id}/>)
+    };
+
+    const whatToShow = () => {
+      console.log('pathname', this.props.match.path)
+      if (!items && this.props.match.path === '/') {
+        return <DummyTopMovieList />
+      } else if (!items) {
+        return <NoList />
+      } else {
+        return <UserList />
+      }
+    }
+
     return (
       <div>
-        {
-          !items
-          ? this.dummyData.slice(0, 10).map((item, idx) => <ViewableItem movie={item} idx={idx} key={item._id}/>)
-          :
-          <div>
-            {
-              items.length
-              ? items.map((item, idx) => <ViewableItem movie={item} idx={idx} key={item._id}/>)
-              : <NoList />
-            }
-          </div>
-        }
+        { whatToShow() }
       </div>
     )
   }
@@ -176,12 +173,4 @@ ViewableList.propTypes = {
   items: PropTypes.array,
 };
 
-const mapStateToProps = state => ({
-
-});
-
-const mapDispatchToProps = dispatch => ({
-
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ViewableList));
+export default withRouter(ViewableList);

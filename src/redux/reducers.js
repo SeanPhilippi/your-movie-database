@@ -5,12 +5,18 @@ import isEmpty from '../utils/helpers/is-empty';
 const initialState = {
   isAuthenticated: false,
   user_token: {},
-  user: {}, // object containing email, id, username
+  user: {}, // object containing email, id, username of authenticateds user
   authErrors: {},
+  username: '',
   statement: '',
   items: [],
   open: false,
   newUsers: [],
+  comments: [],
+  affinities: [],
+  listDataLoading: true,
+  commentsLoading: true,
+  affinitiesLoading: true,
 }
 
 // destructured action parameter is desctructured and passed in to rootReducer function,
@@ -49,13 +55,8 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       statement: payload.text
     };
-    case TYPES.SET_LIST: return {
+    case TYPES.SET_LIST_DATA: return {
       ...state,
-<<<<<<< Updated upstream
-      user: { ...state.user, username: payload.listData.username },
-      statement: payload.listData.statement,
-      items: [...payload.listData.items]
-=======
       username: payload.username,
       statement: payload.statement,
       items: payload.items
@@ -66,7 +67,7 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.SET_AFFINITIES: return {
       ...state,
-      affinities: [...payload]
+      affinities: payload
     }
     case TYPES.POST_COMMENT: return {
       ...state,
@@ -83,7 +84,6 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_AFFINITIES_LOADING: return {
       ...state,
       affinitiesLoading: payload
->>>>>>> Stashed changes
     };
     case TYPES.ADD_TO_LIST: return {
       ...state,

@@ -11,12 +11,13 @@ export const TYPES = {
   SET_UPDATE_STATUS: 'SET_UPDATE_STATUS',
   SET_EDITING: 'SET_EDITING',
   SET_STATEMENT: 'SET_STATEMENT',
-  SET_LIST: 'SET_LIST',
-  // GET_LIST_DATA: 'GET_LIST_DATA', these aren't changing state?
-  // GET_AFFINITIES: 'GET_AFFINITIES',
-  // GET_COMMENTS: 'GET_COMMENTS',
+  SET_LIST_DATA: 'SET_LIST_DATA',
+  SET_AFFINITIES: 'SET_AFFINITIES',
   SET_COMMENTS: 'SET_COMMENTS',
   POST_COMMENT: 'POST_COMMENT',
+  SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
+  SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
+  SET_AFFINITIES_LOADING: 'SET_AFFINITIES_LOADING',
   ADD_TO_LIST: 'ADD_TO_LIST',
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
@@ -55,18 +56,19 @@ export const setStatement = text => ({
   }
 });
 
-export const setList = listData => ({
-  type: TYPES.SET_LIST,
-  payload: {
-    listData
-  }
+export const setListData = listData => ({
+  type: TYPES.SET_LIST_DATA,
+  payload: listData
 });
 
 export const setComments = comments => ({
   type: TYPES.SET_COMMENTS,
-  payload: {
-    comments
-  }
+  payload: comments
+});
+
+export const setAffinities = affinities => ({
+  type: TYPES.SET_AFFINITIES,
+  payload: affinities
 });
 
 export const addToList = movie => ({
@@ -95,6 +97,21 @@ export const deleteList = () => ({
   type: TYPES.DELETE_LIST
 });
 
+export const setListDataLoading = bool => ({
+  type: TYPES.SET_LIST_DATA_LOADING,
+  payload: bool
+});
+
+export const setCommentsLoading = bool => ({
+  type: TYPES.SET_COMMENTS_LOADING,
+  payload: bool
+});
+
+export const setAffinitiesLoading = bool => ({
+  type: TYPES.SET_AFFINITIES_LOADING,
+  payload: bool
+});
+
 //thunk actions
 export const setCurrentUser = user => dispatch => {
   console.log('setCurrentUser', user);
@@ -104,12 +121,12 @@ export const setCurrentUser = user => dispatch => {
   });
 
   if (user.email) {
-    dispatch(fetchList());
+    dispatch(fetchListData(user.username));
   } else {
     // setCurrentUser is called on logout, user should be set to an empty object
     // if empty object, clear user data
     dispatch(
-      setList({
+      setListData({
         username: '',
         items: [],
         statement: ''
@@ -131,7 +148,7 @@ export const postComment = comment => dispatch => {
 };
 
 export const registerUser = (userData, history) => dispatch => {
-  axios.post('api/users/register', userData)
+  axios.post('/api/users/register', userData)
     .then(() => {
       history.push('/login')
     })
@@ -145,7 +162,7 @@ export const registerUser = (userData, history) => dispatch => {
 
 export const loginUser = (user, history) => dispatch => {
   console.log('logging in...')
-  axios.post('api/users/login', user)
+  axios.post('/api/users/login', user)
     .then(res => {
       console.log('/login post res', res)
       const { token, user } = res.data;
@@ -171,12 +188,12 @@ export const loginUser = (user, history) => dispatch => {
 };
 
 export const fetchCurrentUser = () => dispatch => {
-  axios('api/users/current')
+  axios('/api/users/current')
     .then(({ data }) => {
       console.log('user in fetchCurrentUser', data.user)
       dispatch(setCurrentUser(data.user));
-    })
-}
+    });
+};
 
 export const fetchListData = username => dispatch => {
   axios(`/api/movies/${ username }/list`)
@@ -185,12 +202,12 @@ export const fetchListData = username => dispatch => {
         let movieIds = data.items.map(item => item.id);
         dispatch(fetchAffinities(movieIds))
         dispatch(setListData(data));
+        dispatch(setListDataLoading(false));
       } else {
         dispatch(setListData([]));
+        dispatch(setListDataLoading(false));
       }
-      dispatch(setListDataLoading(false));
     })
-    .catch(err => console.error(err));
 };
 
 export const fetchAffinities = movieIds => dispatch => {
@@ -207,11 +224,14 @@ export const fetchComments = username => dispatch => {
   axios(`/api/comments/${ username }`)
   .then(({ data }) => {
     if (data) {
+      console.log('there is comments data')
       dispatch(setComments(data));
+      dispatch(setCommentsLoading(false));
     } else {
+      console.log('there is not comments data')
       dispatch(setComments([]));
+      dispatch(setCommentsLoading(false));
     }
-    dispatch(setCommentsLoading(false));
   }).catch(console.log);
 }
 

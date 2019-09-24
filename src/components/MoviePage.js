@@ -24,7 +24,7 @@ class MoviePage extends PureComponent {
     // want a visible movie title slug in url for users
     // maybe don't need this for calls to server or calls to omdb api
     const { location: { state: { movie } } } = this.props;
-    fetch(`/api/movies/id/${movie.id}`)
+    fetch(`/api/movies/id/${ movie.id }`)
       .then(res => res.json())
       .then(data => {
         const fetchedMovie = {
@@ -99,20 +99,20 @@ class MoviePage extends PureComponent {
                   </div>
                   <div className="bg-white">
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light col-10">Overall Ranking:</div>
-                      <div className="bd-light col-2 text-right">rank</div>
+                      <div className="bd-light row-height col-10">Overall Ranking:</div>
+                      <div className="bd-light row-height col-2 text-right">rank</div>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light col-10">Number of points:</div>
-                      <div className="bd-light col-2 text-right">points</div>
+                      <div className="bd-light row-height col-10">Number of points:</div>
+                      <div className="bd-light row-height col-2 text-right">points</div>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light col-10">Number of users that ranked this movie:</div>
-                      <div className="bd-light col-2 text-right">number</div>
+                      <div className="bd-light row-height col-10">Number of users that ranked this movie:</div>
+                      <div className="bd-light row-height col-2 text-right">number</div>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light col-10">Average ranking in the user's list:</div>
-                      <div className="bd-light col-2 text-right">avgRank</div>
+                      <div className="bd-light row-height col-10">Average ranking in the user's list:</div>
+                      <div className="bd-light row-height col-2 text-right">avgRank</div>
                     </div>
                   </div>
                 </div>

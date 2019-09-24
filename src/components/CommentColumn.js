@@ -5,7 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 import Comment from './Comment';
 import Spinner from './Spinner';
 import moment from 'moment';
-import axios from 'axios';
+import { postComment } from '../redux/actions';
 
 class CommentColumn extends PureComponent {
 
@@ -27,16 +27,10 @@ class CommentColumn extends PureComponent {
       post_date: moment().format('LL'),
       text: this.state.commentText
     };
-    axios.post('/api/comments/', newComment)
-      .then(res => res.json)
-      .then(() => {
-        this.props.getComments(match.params.username || user.username);
-      })
-      .catch(console.log);
+    postComment(newComment);
     this.setState({ commentText: '' });
   }
 
-  // ! find a differnt way to do this.  don't call this in the return!
   renderComments = () => {
     if (this.props.match.path !== '/movies') {
       return (
@@ -46,14 +40,6 @@ class CommentColumn extends PureComponent {
           }
         </div>
       )
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { username } = this.props.match.params;
-    console.log('params username in comments', username)
-    if (prevProps.match.params.username !== username) {
-      this.props.getComments(username);
     }
   }
 
@@ -101,7 +87,7 @@ CommentColumn.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-
+  postComment: comment => dispatch(postComment(comment)),
 });
 
 const mapStateToProps = state => ({
