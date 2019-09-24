@@ -13,9 +13,6 @@ export const TYPES = {
   SET_STATEMENT: 'SET_STATEMENT',
   SET_LIST_DATA: 'SET_LIST_DATA',
   SET_AFFINITIES: 'SET_AFFINITIES',
-  // FETCH_LIST_DATA: 'FETCH_LIST_DATA', these aren't changing state?
-  // FETCH_AFFINITIES: 'FETCH_AFFINITIES',
-  // FETCH_COMMENTS: 'FETCH_COMMENTS',
   SET_COMMENTS: 'SET_COMMENTS',
   POST_COMMENT: 'POST_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
@@ -186,34 +183,24 @@ export const fetchCurrentUser = () => dispatch => {
     });
 };
 
-export const fetchListData = username => (dispatch, getState) => {
-  const { items, listDataLoading } = getState;
-  new Promise((resolve, reject) => {
-    dispatch
-  })
+export const fetchListData = username => dispatch => {
   axios(`/api/movies/${ username }/list`)
     .then(({ data }) => {
-      if (data) dispatch(setListData(data));
+      let movieIds = data.items.map(item => item.id);
+      dispatch(fetchAffinities(movieIds))
+        // .then(data => console.log('data in affinity', data))
+        // .catch(console.log)
+      dispatch(setListData(data));
       dispatch(setListDataLoading(false));
     })
-    .then(() => {
-      // * Affinity Matching
-      let movieIds = items.map(item => item.id);
-      console.log('movieIds', movieIds)
-      dispatch(fetchAffinities(movieIds))
-        .then(data => console.log('data in affinity', data))
-        .catch(console.log)
-    }).catch(console.log);
 };
 
 // ! unfinished
-export const postComment = comment => (dispatch, getState) => {
-  const { comments } = getState;
+export const postComment = comment => dispatch => {
   dispatch({
     type: TYPES.POST_COMMENT,
     payload: comment
   });
-  dispatch(setComments(comments));
   // post to mongo after updating redux state with new comment and setting comments with the
   // new comments array
   axios.post('/api/comments/', comment)
@@ -221,12 +208,13 @@ export const postComment = comment => (dispatch, getState) => {
     .catch(console.log);
 };
 
-export const fetchAffinities = movieIds => (dispatch, getState) => {
+export const fetchAffinities = movieIds => dispatch => {
   console.log('fetchAffinities');
   axios.post('/api/movies/affinities', movieIds)
     .then(({ data }) => {
       console.log('affinities', data)
       dispatch(setAffinities(data));
+      dispatch(setAffinitiesLoading(false));
     });
 }
 

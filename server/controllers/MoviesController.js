@@ -26,7 +26,6 @@ exports.getMovieData = (req, res) => {
 
 exports.getListData = (req, res) => {
   List.findOne({ username: req.params.username }).exec().then(data => {
-    console.log('getlistdata', data)
     res.json(data);
   }).catch(console.log);
 };
@@ -55,22 +54,19 @@ exports.deleteList = (req, res) => {
 
 exports.calcAffinities = (req, res) => {
   // store current user's movie ids from state.list in a variable
-  console.log('req body in affinity', req.body)
   const movieIds = req.body;
 
   List.aggregate(affinitiesQuery(movieIds))
     .then(result => {
       const matches = [];
-      console.log('docs', result.slice(1));
+      // removing 1st result since it is the compared list
       const docs = result.slice(1);
       // for each document with any matches
       for (let i = 0; i < docs.length; i++) {
         // count points for each matching movieId by getitng difference between indexes, adding 20
         const points = docs[i].matchingItems.map(item => {
-          console.log(item)
           return Math.abs(item.idx - item.idxInComparedList) + 20;
         });
-        console.log('pts', points);
         const score = (points.reduce((ac, cv) => ac + cv) / (movieIds.length * 20)) * 100;
         const match = {
           username: docs[i].username,
@@ -79,7 +75,6 @@ exports.calcAffinities = (req, res) => {
         matches.push(match);
       };
       const sortedMatches = matches.sort((a, b) => b.score - a.score);
-      console.log('sortedMatches', sortedMatches)
       return res.json(sortedMatches);
     })
     .catch(console.log);
