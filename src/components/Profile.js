@@ -133,6 +133,8 @@ class Profile extends PureComponent  {
           </div>
           <div className="px-4">
             <CardWrapper
+              icon="book"
+              rotate={ -5 }
               title="affinities"
               color="tan"
             >

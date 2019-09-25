@@ -9,7 +9,8 @@ import {
   faFileAlt as fasFileAlt,
   faFileContract,
   faAward,
-  faFilm
+  faFilm,
+  faBook
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faUserCircle,
@@ -34,7 +35,8 @@ const fontAwesome = library.add(
   fasFileAlt,
   faAward,
   faFilm,
-  faEdit
+  faEdit,
+  faBook
 );
 
 export default fontAwesome;

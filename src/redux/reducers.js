@@ -17,6 +17,7 @@ const initialState = {
   listDataLoading: true,
   commentsLoading: true,
   affinitiesLoading: true,
+  movieDataLoading: true
 }
 
 // destructured action parameter is desctructured and passed in to rootReducer function,

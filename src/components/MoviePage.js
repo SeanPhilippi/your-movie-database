@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import Comments from './Comments';
 import CardWrapper from './HOCs/CardWrapper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,9 +25,8 @@ class MoviePage extends PureComponent {
     // want a visible movie title slug in url for users
     // maybe don't need this for calls to server or calls to omdb api
     const { location: { state: { movie } } } = this.props;
-    fetch(`/api/movies/id/${ movie.id }`)
-      .then(res => res.json())
-      .then(data => {
+    axios(`/api/movies/id/${ movie.id }`)
+      .then(({ data }) => {
         const fetchedMovie = {
           title: data.Title,
           year: data.Year,

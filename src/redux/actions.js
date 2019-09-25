@@ -209,7 +209,7 @@ export const fetchNewUsers = () => dispatch => {
       console.log('data in fetchNewUsers', data);
       dispatch(setNewUsers(data));
     });
-}
+};
 
 export const fetchListData = username => dispatch => {
   dispatch(setListDataLoading(true));
@@ -219,7 +219,6 @@ export const fetchListData = username => dispatch => {
         let movieIds = data.items.map(item => item.id);
         dispatch(fetchAffinities(movieIds))
         dispatch(setListData(data));
-        dispatch(setListDataLoading(false));
       } else {
         dispatch(setAffinities([]));
         dispatch(setAffinitiesLoading(false));
@@ -228,8 +227,8 @@ export const fetchListData = username => dispatch => {
           statement: '',
           items: []
         }));
-        dispatch(setListDataLoading(false));
       }
+      dispatch(setListDataLoading(false));
     })
 };
 
@@ -242,7 +241,7 @@ export const fetchAffinities = movieIds => dispatch => {
       dispatch(setAffinities(data));
       dispatch(setAffinitiesLoading(false));
     });
-}
+};
 
 export const fetchComments = username => dispatch => {
   dispatch(setCommentsLoading(true));
@@ -250,14 +249,13 @@ export const fetchComments = username => dispatch => {
   .then(({ data }) => {
     if (data) {
       dispatch(setComments(data));
-      dispatch(setCommentsLoading(false));
     } else {
       console.log('there is not comments data')
       dispatch(setComments([]));
-      dispatch(setCommentsLoading(false));
     }
+    dispatch(setCommentsLoading(false));
   }).catch(console.log);
-}
+};
 
 export const logoutUser = history => dispatch => {
   console.log('logging out...')
