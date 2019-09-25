@@ -4,12 +4,17 @@ import { Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import { connect } from 'react-redux';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { deleteList, setUpdateStatus } from '../redux/actions';
+import {
+  deleteList,
+  setUpdateStatus,
+  setEditing
+} from '../redux/actions';
 
 class SaveDelete extends PureComponent {
   handleUpdate = () => {
     const {
       setUpdateStatus,
+      setEditing,
       user: {
         username,
       },
@@ -23,6 +28,7 @@ class SaveDelete extends PureComponent {
       statement
     }
     setUpdateStatus();
+    setEditing(false);
 
     fetch(`/api/movies/save/${ username }`, {
         method: 'PUT',
@@ -56,7 +62,7 @@ class SaveDelete extends PureComponent {
           <button
             className='alert-button green'
             onClick={() => {
-              this.performDelete();
+              this.handleDelete();
               onClose();
             }}
           >
@@ -74,25 +80,21 @@ class SaveDelete extends PureComponent {
     confirmAlert(this.alertOptions);
   };
 
-  performDelete = () => {
+  handleDelete = () => {
     const {
       deleteList,
       user: {
         username,
       },
     } = this.props;
-    // clearing redux list array
     deleteList();
-    // deleting list mlab document tied to user
-
-    return fetch(`/delete/${username}`, {
+    return fetch(`/delete/${ username }`, {
       method: 'DELETE'
     })
     .catch(console.error)
   };
 
   render() {
-    console.log('in save', this.props.user.username)
     return (
       <div className="save-delete d-flex justify-content-between">
         <div className="count">
@@ -102,14 +104,14 @@ class SaveDelete extends PureComponent {
           <Link to={`/profile/${ this.props.user.username }`}>
             <button
               className="save-list"
-              onClick={this.handleUpdate}
+              onClick={ this.handleUpdate }
             >
                 SAVE
             </button>
           </Link>
           <button
             className="delete-list"
-            onClick={this.handleDelete}
+            onClick={ this.handleDelete }
           >
             DELETE LIST
           </button>
@@ -122,20 +124,24 @@ class SaveDelete extends PureComponent {
 SaveDelete.propTypes = {
   deleteList: PropTypes.func.isRequired,
   setUpdateStatus: PropTypes.func.isRequired,
+  setEditing: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   items: PropTypes.array.isRequired,
-  statement: PropTypes.string.isRequired
+  statement: PropTypes.string.isRequired,
+  isEditing: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   user: state.user,
   items: state.items,
   statement: state.statement,
+  isEditing: state.isEditing,
 });
 
 const mapDispatchToProps = dispatch => ({
   deleteList: () => dispatch(deleteList()),
   setUpdateStatus: () => dispatch(setUpdateStatus()),
+  setEditing: bool => dispatch(setEditing(bool)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);

@@ -49,6 +49,11 @@ export const clearErrors = () => ({
   type: TYPES.CLEAR_ERRORS
 });
 
+export const setEditing = bool => ({
+  type: TYPES.SET_EDITING,
+  payload: bool
+});
+
 export const setStatement = text => ({
   type: TYPES.SET_STATEMENT,
   payload: {

@@ -17,7 +17,8 @@ import {
   setListDataLoading,
   setCommentsLoading,
   fetchComments,
-  fetchListData
+  fetchListData,
+  setEditing
 } from '../redux/actions';
 
 class Profile extends PureComponent  {
@@ -41,17 +42,19 @@ class Profile extends PureComponent  {
   };
 
   handleEdit = () => {
-    this.props.history.push('/profile');
+    this.props.setEditing(true);
   };
 
   render() {
     const {
       match,
       user,
+      username,
       comments,
       items,
       statement,
       affinities,
+      isEditing,
       listDataLoading,
       commentsLoading,
       affinitiesLoading
@@ -68,8 +71,7 @@ class Profile extends PureComponent  {
     );
 
     const List = () => {
-      console.log('params username', match.params.username)
-      if (!match.params.username) {
+      if (isEditing) {
         return (
           <div>
             <div className="search-btns-container">
@@ -84,7 +86,7 @@ class Profile extends PureComponent  {
           <div>
             <div className="d-flex justify-content-end">
               {
-                user.username === match.params.username && <EditButton />
+                user.username === username && <EditButton />
               }
             </div>
             <ViewableList
@@ -95,10 +97,10 @@ class Profile extends PureComponent  {
       }
     };
 
-    const Statement = () => !match.params.username
+    const Statement = () => isEditing
       ? <EditableStatement />
       : <UserStatement
-          username={ match.params.username }
+          username={ username }
           statement={ statement }
         />;
 
@@ -114,7 +116,7 @@ class Profile extends PureComponent  {
             <CardWrapper
               icon={["far", "list-alt"]}
               rotate={ -5 }
-              title={`${match.params.username || user.username}'s Top Movies`}
+              title={`${ username }'s Top Movies`}
               color="tan"
               marginTopVal='0'
             >
@@ -165,10 +167,24 @@ class Profile extends PureComponent  {
 
 Profile.propTypes = {
   user: PropTypes.object,
-  comments: PropTypes.array
+  username: PropTypes.string,
+  items: PropTypes.array,
+  statement: PropTypes.string,
+  comments: PropTypes.array,
+  affinities: PropTypes.array,
+  isEditing: PropTypes.bool.isRequired,
+  listDataLoading: PropTypes.bool.isRequired,
+  commentsLoading: PropTypes.bool.isRequired,
+  affinitiesLoading: PropTypes.bool.isRequired,
+  setEditing: PropTypes.func.isRequired,
+  setListDataLoading: PropTypes.func.isRequired,
+  setCommentsLoading: PropTypes.func.isRequired,
+  fetchComments: PropTypes.func.isRequired,
+  fetchListData: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
+  setEditing: bool => dispatch(setEditing(bool)),
   setListDataLoading: bool => dispatch(setListDataLoading(bool)),
   setCommentsLoading: bool => dispatch(setCommentsLoading(bool)),
   fetchComments: user => dispatch(fetchComments(user)),
@@ -182,6 +198,7 @@ const mapStateToProps = state => ({
   items: state.items,
   statement: state.statement,
   affinities: state.affinities,
+  isEditing: state.isEditing,
   listDataLoading: state.listDataLoading,
   commentsLoading: state.commentsLoading,
   affinitiesLoading: state.affinitiesLoading

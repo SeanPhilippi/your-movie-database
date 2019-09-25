@@ -14,6 +14,7 @@ const initialState = {
   newUsers: [],
   comments: [],
   affinities: [],
+  isEditing: false,
   listDataLoading: true,
   commentsLoading: true,
   affinitiesLoading: true,
@@ -51,6 +52,10 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_UPDATE_STATUS: return {
       ...state,
       open: !state.open
+    };
+    case TYPES.SET_EDITING: return {
+      ...state,
+      isEditing: payload
     };
     case TYPES.SET_STATEMENT: return {
       ...state,
