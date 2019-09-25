@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import CardWrapper from './CardWrapper';
+import CardWrapper from './HOCs/CardWrapper';
 import LoginBox from './LoginBox';
 import NewRegistersBox from './NewRegistersBox';
 import ViewableList from './ViewableList';

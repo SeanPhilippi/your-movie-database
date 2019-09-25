@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RegisterBox from './RegisterBox';
-import CardWrapper from './CardWrapper';
+import CardWrapper from './HOCs/CardWrapper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { clearErrors } from '../redux/actions';
 

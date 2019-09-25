@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import CardWrapper from './CardWrapper';
+import CardWrapper from './HOCs/CardWrapper';
 // import ReactPaginate from 'react-paginate';
 
 class TopMovieList extends PureComponent {

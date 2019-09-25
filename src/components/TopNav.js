@@ -7,7 +7,6 @@ import { Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { logoutUser } from '../redux/actions';
-import logo from '../images/icons/logo_header.gif';
 
 class TopNav extends PureComponent {
 
@@ -15,8 +14,6 @@ class TopNav extends PureComponent {
     e.preventDefault();
     this.props.logoutUser(this.props.history);
   };
-
-  handleLogin = () => { };
 
   render() {
     const {

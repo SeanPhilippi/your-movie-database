@@ -7,7 +7,7 @@ import Spinner from './Spinner';
 import moment from 'moment';
 import { postComment } from '../redux/actions';
 
-class CommentColumn extends PureComponent {
+class Comments extends PureComponent {
 
   state = {
     commentText: ''
@@ -81,7 +81,7 @@ class CommentColumn extends PureComponent {
   }
 }
 
-CommentColumn.propTypes = {
+Comments.propTypes = {
   user: PropTypes.object,
   isAuthenticated: PropTypes.bool.isRequired,
 };
@@ -95,4 +95,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CommentColumn));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Comments));

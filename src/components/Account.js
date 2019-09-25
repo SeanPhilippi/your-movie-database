@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'reactstrap';
-import CardWrapper from './CardWrapper';
+import CardWrapper from './HOCs/CardWrapper';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions';

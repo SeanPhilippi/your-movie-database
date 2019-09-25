@@ -2,16 +2,17 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import CommentColumn from './CommentColumn';
+import Comments from './Comments';
 import EditableStatement from './EditableStatement';
 import UserStatement from './UserStatement';
 import SaveDelete from './SaveDelete';
 import SortableList from './SortableList';
-import CardWrapper from './CardWrapper';
+import CardWrapper from './HOCs/CardWrapper';
 import Search from './Search';
 import ViewableList from './ViewableList';
 import Affinities from './Affinities';
 import Spinner from './Spinner';
+import WithLoading from './HOCs/WithLoading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   setListDataLoading,
@@ -98,7 +99,12 @@ class Profile extends PureComponent  {
       : <UserStatement
           username={ match.params.username }
           statement={ statement }
-        />
+        />;
+
+    const ListWithLoading = WithLoading(List);
+    const StatementWithLoading = WithLoading(Statement);
+    const AffinitiesWithLoading = WithLoading(Affinities);
+    const CommentsWithLoading = WithLoading(Comments);
 
     return (
       <div className="grid-container bg-light2 mt-4">
@@ -111,11 +117,7 @@ class Profile extends PureComponent  {
               color="tan"
               marginTopVal='0'
             >
-              {
-                match.params.username && listDataLoading
-                ? <Spinner />
-                : <List />
-              }
+              <ListWithLoading isLoading={ listDataLoading } />
             </CardWrapper>
           </div>
           <div className="px-4">
@@ -125,11 +127,7 @@ class Profile extends PureComponent  {
               title="user statement"
               color="tan"
             >
-              {
-                match.params.username && listDataLoading
-                ? <Spinner />
-                : <Statement />
-              }
+              <StatementWithLoading isLoading={ listDataLoading } />
             </CardWrapper>
           </div>
           <div className="px-4">
@@ -137,11 +135,10 @@ class Profile extends PureComponent  {
               title="affinities"
               color="tan"
             >
-              {
-                affinitiesLoading
-                ? <Spinner />
-                : <Affinities affinities={ affinities }/>
-              }
+              <AffinitiesWithLoading
+                isLoading={ affinitiesLoading }
+                affinities={ affinities }
+              />
             </CardWrapper>
           </div>
         </div>
@@ -152,13 +149,10 @@ class Profile extends PureComponent  {
             color="white"
             marginTopVal="0"
           >
-            {
-              commentsLoading
-              ? <Spinner />
-              : <CommentColumn
-                  comments={ comments }
-                />
-            }
+            <CommentsWithLoading
+              isLoading={ commentsLoading }
+              comments={ comments }
+            />
           </CardWrapper>
         </div>
       </div>

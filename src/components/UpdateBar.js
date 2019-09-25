@@ -19,7 +19,7 @@ class UpdateBar extends PureComponent {
           }}
           message={
             <span id="message-id">
-              List Updated!
+              Profile Updated!
             </span>
           }
         />

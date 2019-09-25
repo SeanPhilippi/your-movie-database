@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import CommentColumn from './CommentColumn';
-import CardWrapper from './CardWrapper';
+import Comments from './Comments';
+import CardWrapper from './HOCs/CardWrapper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class MoviePage extends PureComponent {
@@ -138,7 +138,7 @@ class MoviePage extends PureComponent {
                 title="comments"
                 color="white"
               >
-                <CommentColumn className="comments" />
+                <Comments className="comments" />
               </CardWrapper>
             </div>
           </div>
