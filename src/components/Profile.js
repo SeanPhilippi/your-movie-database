@@ -11,7 +11,6 @@ import CardWrapper from './HOCs/CardWrapper';
 import Search from './Search';
 import ViewableList from './ViewableList';
 import Affinities from './Affinities';
-import Spinner from './Spinner';
 import WithLoading from './HOCs/WithLoading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -23,19 +22,21 @@ import {
 
 class Profile extends PureComponent  {
 
-  componentDidMount() {
+  fetchData = () => {
     const { fetchListData, fetchComments, user } = this.props;
     const { username } = this.props.match.params;
     fetchListData(username || user.username);
     fetchComments(username || user.username);
+  }
+
+  componentDidMount() {
+    this.fetchData();
   };
 
   componentDidUpdate(prevProps) {
-    const { user, fetchListData, fetchComments } = this.props;
     const { username } = this.props.match.params;
     if (username !== prevProps.match.params.username) {
-      fetchListData(username || user.username);
-      fetchComments(username || user.username);
+      this.fetchData();
     }
   };
 
