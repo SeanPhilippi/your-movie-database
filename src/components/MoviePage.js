@@ -43,6 +43,7 @@ class MoviePage extends PureComponent {
   };
 
   render() {
+    console.log('movie', this.props.movie)
     // * how I was bringing in movie data for this page (via Link on SortableItem)
     // const { movie } = this.props.location.state;
     // * dummy data for development

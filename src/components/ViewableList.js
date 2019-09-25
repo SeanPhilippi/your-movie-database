@@ -151,7 +151,6 @@ class ViewableList extends PureComponent {
     };
 
     const whatToShow = () => {
-      console.log('pathname', this.props.match.path)
       if (this.props.match.path === '/') {
         return <DummyTopMovieList />
       } else if (!items.length) {

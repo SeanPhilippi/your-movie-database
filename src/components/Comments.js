@@ -33,6 +33,7 @@ class Comments extends PureComponent {
 
   renderComments = () => {
     if (this.props.match.path !== '/movies') {
+      console.log('comments', this.props.comments)
       return (
         <div>
           {

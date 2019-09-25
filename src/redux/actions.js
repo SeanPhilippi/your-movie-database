@@ -113,6 +113,13 @@ export const setAffinitiesLoading = bool => ({
 });
 
 //thunk actions
+// export const resetLoading = () => dispatch => {
+//   console.log('reset loading states')
+//   dispatch(setListDataLoading(true));
+//   dispatch(setCommentsLoading(true));
+//   dispatch(setAffinitiesLoading(true));
+// };
+
 export const setCurrentUser = user => dispatch => {
   console.log('setCurrentUser', user);
   dispatch({
@@ -205,6 +212,7 @@ export const fetchNewUsers = () => dispatch => {
 }
 
 export const fetchListData = username => dispatch => {
+  dispatch(setListDataLoading(true));
   axios(`/api/movies/${ username }/list`)
     .then(({ data }) => {
       if (data) {
@@ -227,6 +235,7 @@ export const fetchListData = username => dispatch => {
 
 export const fetchAffinities = movieIds => dispatch => {
   console.log('fetchAffinities');
+  dispatch(setAffinitiesLoading(true));
   axios.post('/api/movies/affinities', movieIds)
     .then(({ data }) => {
       console.log('affinities', data)
@@ -236,10 +245,10 @@ export const fetchAffinities = movieIds => dispatch => {
 }
 
 export const fetchComments = username => dispatch => {
+  dispatch(setCommentsLoading(true));
   axios(`/api/comments/${ username }`)
   .then(({ data }) => {
     if (data) {
-      console.log('there is comments data')
       dispatch(setComments(data));
       dispatch(setCommentsLoading(false));
     } else {
