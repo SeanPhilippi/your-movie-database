@@ -1,9 +1,13 @@
-.bg-light {
-  background: $light;
+body {
+  background-color: $gold;
 }
 
-body {
-  background-color: #AA925C;
+.left-col {
+  background-color: $light2;
+}
+
+.right-col {
+  background-color: $white;
 }
 
 .greeting {
@@ -36,8 +40,6 @@ body {
 
 @media only screen and (max-width: 600px) {
   .inner-container {
-    // display: grid;
-    // grid-template-columns: 1fr;
     display: flex;
     flex-wrap: wrap-reverse;
     margin-left: 0;

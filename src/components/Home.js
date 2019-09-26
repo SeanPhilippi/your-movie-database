@@ -31,9 +31,9 @@ class Home extends PureComponent {
     );
 
     return (
-      <div className="d-flex border-0 justify-content-center h-100">
+      <div className="d-flex border-0 justify-content-center">
         <div className="inner-container mt-4 p-0">
-          <div className="bg-white pt-2 col">
+          <div className="bg-white pt-2 col left-col">
             <Greeting addClass="greeting" />
             <CardWrapper
               icon={["far", "list-alt"]}
@@ -58,7 +58,7 @@ class Home extends PureComponent {
 
             </CardWrapper>
           </div>
-          <div className="pt-0 col">
+          <div className="pt-0 col right-col">
             <Greeting addClass="greeting-mobile mb-3" />
             {
               this.renderLoginBox()

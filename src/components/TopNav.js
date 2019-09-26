@@ -18,6 +18,8 @@ class TopNav extends PureComponent {
   render() {
     const {
       isAuthenticated,
+      history,
+      match,
       user: {
         username
       },
@@ -111,7 +113,7 @@ class TopNav extends PureComponent {
               className="text-white mx-2 nav-block"
               exact
               to={ isAuthenticated ? "/profile" : "/login" }
-              activeClassName={ isAuthenticated ? "active" : "" }
+              activeClassName={ isAuthenticated && (history.location.pathname === '/profile' || history.location.pathname === `/profile/${ username }`) ? "active" : "" }
             >
               YOUR TOP LIST
             </NavLink>

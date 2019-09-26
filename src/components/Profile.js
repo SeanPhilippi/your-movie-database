@@ -28,7 +28,7 @@ class Profile extends PureComponent  {
     const { username } = this.props.match.params;
     fetchListData(username || user.username);
     fetchComments(username || user.username);
-  }
+  };
 
   componentDidMount() {
     this.fetchData();
