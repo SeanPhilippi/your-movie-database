@@ -23,14 +23,18 @@ class Home extends PureComponent {
   }
 
   render() {
+    const Greeting = ({ addClass }) => (
+      <div className={`${ addClass } m-0 row`}>
+        Welcome to YMDb, Your Movie Database, the movie community where you can create your list of favorite movies,
+        discover other people's favorite movies, and discuss movies and favorite lists. YMDb is free and fun!
+      </div>
+    );
+
     return (
       <div className="d-flex border-0 justify-content-center h-100">
         <div className="inner-container mt-4 p-0">
           <div className="bg-white pt-2 col">
-            <div className="greeting m-0 row">
-              Welcome to YMDb, Your Movie Database, the movie community where you can create your list of favorite movies,
-              discover other people's favorite movies, and discuss movies and favorite lists. YMDb is free and fun!
-            </div>
+            <Greeting addClass="greeting" />
             <CardWrapper
               icon={["far", "list-alt"]}
               rotate={ -5 }
@@ -55,7 +59,10 @@ class Home extends PureComponent {
             </CardWrapper>
           </div>
           <div className="pt-0 col">
-            { this.renderLoginBox() }
+            <Greeting addClass="greeting-mobile mb-3" />
+            {
+              this.renderLoginBox()
+            }
             <CardWrapper
               title="spotlight on a user"
               color="white"
