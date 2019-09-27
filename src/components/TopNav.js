@@ -15,11 +15,15 @@ class TopNav extends PureComponent {
     this.props.logoutUser(this.props.history);
   };
 
+  yourTopListActive = () => {
+    const { history, isAuthenticated, user: { username } } = this.props;
+    const path = history.location.pathname;
+    return isAuthenticated && (path === "/profile" || path === `/profile/${ username }` ? "active" : "");
+  };
+
   render() {
     const {
       isAuthenticated,
-      history,
-      match,
       user: {
         username
       },
@@ -66,7 +70,7 @@ class TopNav extends PureComponent {
 
     return (
       <Navbar className="navbar mt-4">
-        {update && this.showStatus()}
+        { update && this.showStatus() }
         {/****** Logo *****/}
         <Navbar.Brand className="brand">
           <NavLink
@@ -111,9 +115,8 @@ class TopNav extends PureComponent {
 
             <NavLink
               className="text-white mx-2 nav-block"
-              exact
               to={ isAuthenticated ? "/profile" : "/login" }
-              activeClassName={ isAuthenticated && (history.location.pathname === '/profile' || history.location.pathname === `/profile/${ username }`) ? "active" : "" }
+              isActive={ this.yourTopListActive }
             >
               YOUR TOP LIST
             </NavLink>
