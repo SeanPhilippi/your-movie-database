@@ -19,17 +19,20 @@ class Comments extends PureComponent {
 
 
   handleComment = e => {
-    const { postComment, user, match } = this.props;
+    const { postComment, user: { username }, match } = this.props;
+    const { commentText } = this.state;
     e.preventDefault();
-    const newComment = {
-      username: match.params.username || user.username,
-      author: user.username,
-      post_date: moment().format('LL'),
-      text: this.state.commentText
-    };
-    postComment(newComment);
-    this.setState({ commentText: '' });
-  }
+    if (commentText.length) {
+      const newComment = {
+        username: match.params.username || username,
+        author: username,
+        post_date: moment().format('LL'),
+        text: commentText
+      };
+      postComment(newComment);
+      this.setState({ commentText: '' });
+    }
+  };
 
   renderComments = () => {
     if (this.props.match.path !== '/movies') {

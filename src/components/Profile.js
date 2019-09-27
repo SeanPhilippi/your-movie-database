@@ -47,7 +47,6 @@ class Profile extends PureComponent  {
 
   render() {
     const {
-      match,
       user,
       username,
       comments,
