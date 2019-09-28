@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { orderList, deleteMovie } from '../../redux/actions';
 import img from '../../images/grippy.png';
 
-class SortableList extends Component {
+class EditableList extends Component {
   render() {
     const { items, orderList, deleteMovie } = this.props;
 
@@ -115,7 +115,7 @@ class SortableList extends Component {
   }
 }
 
-SortableList.propTypes = {
+EditableList.propTypes = {
   items: PropTypes.array.isRequired,
   orderList: PropTypes.func.isRequired,
   deleteMovie: PropTypes.func.isRequired,
@@ -130,4 +130,4 @@ const mapDispatchToProps = dispatch => ({
   deleteMovie: (movie) => dispatch(deleteMovie(movie))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortableList);
+export default connect(mapStateToProps, mapDispatchToProps)(EditableList);

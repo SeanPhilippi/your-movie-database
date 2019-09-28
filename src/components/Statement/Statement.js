@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import EditableStatement from './EditableStatement';
-import UserStatement from './UserStatement';
+import ViewableStatement from './ViewableStatement';
 import withLoading from '../HOCs/withLoading';
 
 const Statement = withLoading(({ username, statement, isEditing }) => isEditing
   ? <EditableStatement />
-  : <UserStatement
+  : <ViewableStatement
       username={ username }
       statement={ statement }
     />

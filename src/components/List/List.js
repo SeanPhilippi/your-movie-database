@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SortableList from './SortableList';
+import EditableList from './EditableList';
 import ViewableList from './ViewableList';
 import SaveDelete from '../SaveDelete';
 import Search from '../Search';
@@ -15,7 +15,7 @@ const List = withLoading(({ isEditing, items, username, user }) => {
           <SaveDelete />
         </div>
         <Search itemsCount={ items.length }/>
-        <SortableList />
+        <EditableList />
       </div>
     )
   } else {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const UserStatement = ({ username, statement }) => (
+const ViewableStatement = ({ username, statement }) => (
   <div>
     <p className="font-weight-bold">
       { username }:
@@ -13,9 +13,9 @@ const UserStatement = ({ username, statement }) => (
 )
 
 
-UserStatement.propTypes = {
+ViewableStatement.propTypes = {
   username: PropTypes.string.isRequired,
   statement: PropTypes.string,
 };
 
-export default UserStatement;
+export default ViewableStatement;

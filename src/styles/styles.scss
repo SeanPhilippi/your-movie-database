@@ -6,9 +6,10 @@
 @import './components/affinities';
 @import './components/cardwrapper';
 @import './components/comments';
-@import './components/description';
 @import './components/footer';
 @import './components/home';
+@import './components/list/editablelist';
+@import './components/list/viewablelist';
 @import './components/login';
 @import './components/loginbox';
 @import './components/moviepage';
@@ -20,10 +21,10 @@
 @import './components/savedelete';
 @import './components/search';
 @import './components/searchresults';
-@import './components/sortablelist';
+@import './components/statement/editablestatement';
+@import './components/statement/viewablestatement';
 @import './components/topmovielist';
 @import './components/topnav';
 @import './components/underconstruction';
 @import './components/updatebar';
 @import './components/usersindex';
-@import './components/viewablelist';
