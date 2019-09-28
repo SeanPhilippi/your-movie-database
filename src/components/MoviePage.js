@@ -139,7 +139,7 @@ class MoviePage extends PureComponent {
                 title="comments"
                 color="white"
               >
-                <Comments className="comments" />
+                <Comments allowed={ false } className="comments" />
               </CardWrapper>
             </div>
           </div>

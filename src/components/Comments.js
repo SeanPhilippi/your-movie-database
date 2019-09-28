@@ -18,10 +18,10 @@ class Comments extends PureComponent {
   };
 
   handleComment = e => {
-    const { postComment, user: { username }, match } = this.props;
+    const { postComment, user: { username }, match, allowed } = this.props;
     const { commentText } = this.state;
     e.preventDefault();
-    if (commentText.length) {
+    if (commentText.length && allowed) {
       const newComment = {
         username: match.params.username || username,
         author: username,
