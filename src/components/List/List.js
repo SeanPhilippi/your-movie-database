@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SortableList from './SortableList';
 import ViewableList from './ViewableList';
 import SaveDelete from '../SaveDelete';
@@ -32,5 +33,12 @@ const List = withLoading(({ isEditing, items, username, user }) => {
     )
   }
 });
+
+List.propTypes = {
+  user: PropTypes.object,
+  username: PropTypes.string,
+  items: PropTypes.array,
+  isEditing: PropTypes.bool.isRequired,
+};
 
 export default List;

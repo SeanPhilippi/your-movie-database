@@ -15,8 +15,7 @@ class Comments extends PureComponent {
 
   handleFieldChange = e => {
     this.setState({ commentText: e.target.value });
-  }
-
+  };
 
   handleComment = e => {
     const { postComment, user: { username }, match } = this.props;
@@ -45,7 +44,7 @@ class Comments extends PureComponent {
         </div>
       )
     }
-  }
+  };
 
   render() {
     const { commentText } = this.state;
@@ -83,7 +82,7 @@ class Comments extends PureComponent {
       </div>
     )
   }
-}
+};
 
 Comments.propTypes = {
   user: PropTypes.object,
