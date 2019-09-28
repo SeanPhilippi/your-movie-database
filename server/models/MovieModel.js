@@ -37,7 +37,7 @@ const MovieSchema = new Schema({
   runtime: {
     type: String,
     required: true
-  }
+  },
   stats: {
     overall_ranking: {
       type: Number,

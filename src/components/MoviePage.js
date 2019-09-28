@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Comments from './Comments';
+import Rankings from './Rankings';
 import CardWrapper from './HOCs/CardWrapper';
+import withLoading from './HOCs/withLoading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const CommentsWithLoading = withLoading(Comments);
 
 class MoviePage extends PureComponent {
   state = {
@@ -52,6 +56,7 @@ class MoviePage extends PureComponent {
     return (
       <div className="d-flex border-0 justify-content-center">
         <div className="bg-light2 inner-container mt-4">
+          {/* Left Column */}
           <div className="left-col bg-white">
             <div className="px-4 pt-4 w-100">
               <CardWrapper
@@ -130,8 +135,20 @@ class MoviePage extends PureComponent {
                   </div>
                 </div>
               </CardWrapper>
+
+              {/* -------Rankings------- */}
+              <CardWrapper
+                icon="vote-yea"
+                title="Rankings"
+                color="tan"
+              >
+                <Rankings title={ title } />
+              </CardWrapper>
+
             </div>
           </div>
+
+          {/* Right Column */}
           <div className="right-col">
             <div className="m-4">
               <CardWrapper
@@ -139,7 +156,7 @@ class MoviePage extends PureComponent {
                 title="comments"
                 color="white"
               >
-                <Comments className="comments" />
+                <CommentsWithLoading className="comments" />
               </CardWrapper>
             </div>
           </div>
