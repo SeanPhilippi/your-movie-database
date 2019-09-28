@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-  BrowserRouter,
   Route,
-  Switch
+  Switch,
+  withRouter
 } from 'react-router-dom';
 import TopNav from './components/TopNav';
 import Home from './components/Home';
@@ -20,7 +20,7 @@ import NewRegisters from './components/NewRegisters';
 import PageNotFound from './components/PageNotFound';
 import UnderConstruction from './components/UnderConstruction';
 import Footer from './components/Footer';
-import { setNewUsers } from './redux/actions';
+import { setNewUsers, clearErrors } from './redux/actions';
 import http from './utils/http';
 
 class App extends PureComponent {
@@ -30,39 +30,50 @@ class App extends PureComponent {
         this.props.setNewUsers(data);
       })
       .catch(console.log);
-  }
+  };
+
+  componentWillMount() {
+    this.unlisten = this.props.history.listen(({ location, action }) => {
+      console.log("on route change", location, action);
+      this.props.clearErrors();
+    });
+    console.log("App didmount", this.unlisten)
+  };
+
+  componentWillUnmount() {
+    this.unlisten();
+    console.log("App did unmount");
+  };
 
   pageNotFound = () => <PageNotFound />;
 
   render() {
     return (
-      <BrowserRouter>
-        <div id="app">
-          <div className="container-scss px-0 border-0">
-            <TopNav/>
-            <UpdateBar/>
-            <Switch>
-              <Route exact path="/" component={ Home } />
-              <Route exact path="/login" component={ Login } />
-              <Route exact path="/register" component={ Register } />
-              <Route exact path="/account" component={ Account } />
-              <Route exact path="/top-movies" component={ UnderConstruction } />
-              <Route exact path="/profile" component={ Profile } />
-              {/* <Route exact path="/profile/edit=:edit/:username" component={ Profile } /> */}
-              {/* render conditionally only if user is found, else 404 page */}
-              <Route exact path="/profile/:username" component={ Profile } />
-              <Route exact path="/users-index" component={ UsersIndex } />
-              <Route exact path="/all-movies" component={ UnderConstruction } />
-              <Route exact path="/most-visited" component={ UnderConstruction } />
-              <Route exact path="/new-registers" component={ NewRegisters } />
-              <Route path="/movies" component={ MoviePage } />
-              {/* <Route path="/movies/:slug" component={ MoviePage } /> */}
-              <Route render={ this.pageNotFound } />
-            </Switch>
-            <Footer />
-          </div>
+      <div id="app">
+        <div className="container-scss px-0 border-0">
+          <TopNav/>
+          <UpdateBar/>
+          <Switch>
+            <Route exact path="/" component={ Home } />
+            <Route exact path="/login" component={ Login } />
+            <Route exact path="/register" component={ Register } />
+            <Route exact path="/account" component={ Account } />
+            <Route exact path="/top-movies" component={ UnderConstruction } />
+            <Route exact path="/profile" component={ Profile } />
+            {/* <Route exact path="/profile/edit=:edit/:username" component={ Profile } /> */}
+            {/* render conditionally only if user is found, else 404 page */}
+            <Route exact path="/profile/:username" component={ Profile } />
+            <Route exact path="/users-index" component={ UsersIndex } />
+            <Route exact path="/all-movies" component={ UnderConstruction } />
+            <Route exact path="/most-visited" component={ UnderConstruction } />
+            <Route exact path="/new-registers" component={ NewRegisters } />
+            <Route path="/movies" component={ MoviePage } />
+            {/* <Route path="/movies/:slug" component={ MoviePage } /> */}
+            <Route render={ this.pageNotFound } />
+          </Switch>
+          <Footer />
         </div>
-      </BrowserRouter>
+      </div>
     );
   }
 }
@@ -76,7 +87,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setNewUsers: users => dispatch(setNewUsers(users))
+  setNewUsers: users => dispatch(setNewUsers(users)),
+  clearErrors
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
