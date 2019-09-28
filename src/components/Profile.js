@@ -80,6 +80,7 @@ class Profile extends PureComponent  {
               color="tan"
             >
               <Statement
+                user={ user }
                 username={ username }
                 statement={ statement }
                 isEditing={ isEditing }
