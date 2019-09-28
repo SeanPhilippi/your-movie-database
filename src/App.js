@@ -30,11 +30,7 @@ class App extends PureComponent {
         this.props.setNewUsers(data);
       })
       .catch(console.log);
-  };
-
-  componentWillMount() {
-    this.unlisten = this.props.history.listen(({ location, action }) => {
-      console.log("on route change", location, action);
+    this.unlisten = this.props.history.listen((location, action) => {
       this.props.clearErrors();
     });
     console.log("App didmount", this.unlisten)
@@ -88,7 +84,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setNewUsers: users => dispatch(setNewUsers(users)),
-  clearErrors
+  clearErrors: () => dispatch(clearErrors()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

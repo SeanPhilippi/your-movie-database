@@ -44,7 +44,7 @@ export const setNewUsers = users => ({
 export const setUpdateStatus = () => ({
   type: TYPES.SET_UPDATE_STATUS
 });
-// ! finish this idea
+
 export const clearErrors = () => ({
   type: TYPES.CLEAR_ERRORS
 });

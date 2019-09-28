@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import RegisterBox from './RegisterBox';
 import CardWrapper from './HOCs/CardWrapper';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { clearErrors } from '../redux/actions';
 
 class Register extends PureComponent {
 
@@ -78,12 +77,8 @@ Register.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
 };
 
-const mapDispatchToProps = dispatch => ({
-  clearErrors,
-});
-
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register));
+export default withRouter(connect(mapStateToProps)(Register));

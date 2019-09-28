@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { loginUser, clearErrors } from '../redux/actions';
+import { loginUser } from '../redux/actions';
 import { connect } from 'react-redux';
 // import PasswordRevealer from '../PasswordRevealer/PasswordRevealer';
 
@@ -14,15 +14,10 @@ class LoginBox extends PureComponent {
     errors: {}
   };
 
-  componentDidMount() {
-    this.props.clearErrors();
-  }
-
   handleLogin = e => {
     const {
       loginUser,
       history,
-      clearErrors
     } = this.props;
 
     const {
@@ -36,7 +31,6 @@ class LoginBox extends PureComponent {
       login: login.trim(),
       password: password.trim(),
     };
-    clearErrors();
     loginUser(user, history);
   };
 
@@ -125,7 +119,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loginUser: (user, history) => dispatch(loginUser(user, history)),
-  clearErrors
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginBox));

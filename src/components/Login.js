@@ -4,7 +4,6 @@ import CardWrapper from './HOCs/CardWrapper';
 import { Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { clearErrors } from '../redux/actions';
 
 class Login extends PureComponent {
   render() {
@@ -30,12 +29,8 @@ Login.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
 };
 
-const mapDispatchToProps = dispatch => ({
-  clearErrors
-});
-
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps)(Login);

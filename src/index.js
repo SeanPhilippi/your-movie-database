@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import history from './utils/history';
 import dotenv from 'dotenv';
 import App from './App';
 import store from './redux/store';
