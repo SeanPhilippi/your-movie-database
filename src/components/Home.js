@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import CardWrapper from './HOCs/CardWrapper';
 import LoginBox from './LoginBox';
 import NewRegistersBox from './NewRegistersBox';
-import ViewableList from './ViewableList';
+import ViewableList from './List/ViewableList';
 // import TopMovieList from './TopMovieList';
 
 class Home extends PureComponent {

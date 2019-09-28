@@ -2,17 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import List from './List/List';
 import Comments from './Comments';
-import EditableStatement from './EditableStatement';
-import UserStatement from './UserStatement';
-import SaveDelete from './SaveDelete';
-import SortableList from './SortableList';
-import CardWrapper from './HOCs/CardWrapper';
-import Search from './Search';
-import ViewableList from './ViewableList';
+import Statement from './Statement/Statement';
 import Affinities from './Affinities';
-import WithLoading from './HOCs/WithLoading';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CardWrapper from './HOCs/CardWrapper';
+import withLoading from './HOCs/withLoading';
 import {
   setListDataLoading,
   setCommentsLoading,
@@ -20,6 +15,8 @@ import {
   fetchListData,
   setEditing
 } from '../redux/actions';
+
+const CommentsWithLoading = withLoading(Comments);
 
 class Profile extends PureComponent  {
 
@@ -41,10 +38,6 @@ class Profile extends PureComponent  {
     }
   };
 
-  handleEdit = () => {
-    this.props.setEditing(true);
-  };
-
   render() {
     const {
       user,
@@ -59,55 +52,6 @@ class Profile extends PureComponent  {
       affinitiesLoading
     } = this.props;
 
-    const EditButton = () => (
-      <button
-        className="edit-btn mb-2"
-        style={{ fontSize: '.9rem' }}
-        onClick={ this.handleEdit }
-      >
-        <FontAwesomeIcon icon={["far","edit"]} />
-      </button>
-    );
-
-    const List = () => {
-      if (isEditing) {
-        return (
-          <div>
-            <div className="search-btns-container">
-              <SaveDelete />
-            </div>
-            <Search itemsCount={ items.length }/>
-            <SortableList />
-          </div>
-        )
-      } else {
-        return (
-          <div>
-            <div className="d-flex justify-content-end">
-              {
-                user.username === username && <EditButton />
-              }
-            </div>
-            <ViewableList
-              items={ items }
-            />
-          </div>
-        )
-      }
-    };
-
-    const Statement = () => isEditing
-      ? <EditableStatement />
-      : <UserStatement
-          username={ username }
-          statement={ statement }
-        />;
-
-    const ListWithLoading = WithLoading(List);
-    const StatementWithLoading = WithLoading(Statement);
-    const AffinitiesWithLoading = WithLoading(Affinities);
-    const CommentsWithLoading = WithLoading(Comments);
-
     return (
       <div className="grid-container bg-light2 mt-4">
         <div className="bg-white">
@@ -119,7 +63,13 @@ class Profile extends PureComponent  {
               color="tan"
               marginTopVal='0'
             >
-              <ListWithLoading isLoading={ listDataLoading } />
+              <List
+                user={ user }
+                username={ username }
+                items={ items }
+                isEditing={ isEditing }
+                isLoading={ listDataLoading }
+              />
             </CardWrapper>
           </div>
           <div className="px-4">
@@ -129,7 +79,12 @@ class Profile extends PureComponent  {
               title="user statement"
               color="tan"
             >
-              <StatementWithLoading isLoading={ listDataLoading } />
+              <Statement
+                username={ username }
+                statement={ statement }
+                isEditing={ isEditing }
+                isLoading={ listDataLoading }
+              />
             </CardWrapper>
           </div>
           <div className="px-4">
@@ -139,7 +94,7 @@ class Profile extends PureComponent  {
               title="affinities"
               color="tan"
             >
-              <AffinitiesWithLoading
+              <Affinities
                 isLoading={ affinitiesLoading }
                 affinities={ affinities }
               />

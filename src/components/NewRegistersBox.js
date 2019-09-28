@@ -54,7 +54,7 @@ class NewRegistersBox extends PureComponent {
                   <hr/>
                   <span>
                     <Link to="/new-registers">
-                      Go to list of the last 50 users
+                      Go to the list of the last 50 users
                     </Link>
                   </span>
                 </div>

@@ -47,12 +47,6 @@ class ViewableList extends PureComponent {
       "id": "tt4062536"
     },
     {
-      "title": "Persona",
-      "year": "2005",
-      "director": "Russell James Hasenauer, Chad Newhall",
-      "id": "tt0445041"
-    },
-    {
       "title": "Seven Samurai",
       "year": "1954",
       "director": "Akira Kurosawa",

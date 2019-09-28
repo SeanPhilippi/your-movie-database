@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import withLoading from './HOCs/withLoading';
 
-const Affinities = ({ affinities }) => (
+const Affinities = withLoading(({ affinities }) => (
   <div className="bg-white">
     {
       affinities.slice(0, 5).map(
@@ -19,7 +20,7 @@ const Affinities = ({ affinities }) => (
       )
     }
   </div>
-)
+));
 
 Affinities.propTypes = {
   affinities: PropTypes.array

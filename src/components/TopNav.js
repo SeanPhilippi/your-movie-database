@@ -18,7 +18,7 @@ class TopNav extends PureComponent {
   yourTopListActive = () => {
     const { history, isAuthenticated, user: { username } } = this.props;
     const path = history.location.pathname;
-    return isAuthenticated && (path === "/profile" || path === `/profile/${ username }` ? "active" : "");
+    return isAuthenticated && (path === "/profile" || path === `/profile/${ username }`);
   };
 
   render() {
