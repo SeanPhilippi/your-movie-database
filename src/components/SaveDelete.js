@@ -62,7 +62,7 @@ class SaveDelete extends PureComponent {
           <button
             className='alert-button green'
             onClick={() => {
-              this.handleDelete();
+              this.performDelete();
               onClose();
             }}
           >
@@ -80,7 +80,7 @@ class SaveDelete extends PureComponent {
     confirmAlert(this.alertOptions);
   };
 
-  handleDelete = () => {
+  performDelete = () => {
     const {
       deleteList,
       user: {
