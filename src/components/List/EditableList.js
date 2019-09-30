@@ -18,7 +18,7 @@ class EditableList extends Component {
       return (
         <div
           className="grip d-flex align-items-center justify-content-between mr-2"
-          style={{ width: '3.3rem' }}
+          style={{ width: '3.1rem' }}
         >
           <img
             className="ml-2"
@@ -28,7 +28,7 @@ class EditableList extends Component {
           >
           </img>
           <div className="text-right">
-            { props.sortIndex + 1 } |
+            <span className="number">{ props.sortIndex + 1 }</span>
           </div>
         </div>
       )
@@ -60,7 +60,7 @@ class EditableList extends Component {
                 <Link
                   className="movie-link"
                   to={{
-                    pathname: '/movies',
+                    pathname: `/movies/${id}/${title.concat('-', year).split(' ').join('-')}`,
                     state: { movie }
                   }}
                 >

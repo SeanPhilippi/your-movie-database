@@ -6,7 +6,6 @@ import dotenv from 'dotenv';
 import App from './App';
 import store from './redux/store';
 import setJwtToken from './utils/auth/setJwtToken';
-import history from './utils/history';
 
 import './styles/styles.scss';
 import './index.css';
@@ -26,7 +25,7 @@ dotenv.config();
 setJwtToken();
 
 ReactDOM.render(
-  <BrowserRouter history={ history }>
+  <BrowserRouter>
     <Provider store={ store }>
       <App />
     </Provider>
