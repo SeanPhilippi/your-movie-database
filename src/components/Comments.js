@@ -11,7 +11,7 @@ class Comments extends PureComponent {
 
   state = {
     commentText: ''
-  }
+  };
 
   handleFieldChange = e => {
     this.setState({ commentText: e.target.value });
@@ -30,7 +30,7 @@ class Comments extends PureComponent {
         post_date: moment().format('LL'),
         text: commentText
       };
-    }
+    };
     if (commentText.length && history.location.pathname.includes('/profile')) {
       newComment = {
         username: match.params.username || username,
@@ -38,22 +38,20 @@ class Comments extends PureComponent {
         post_date: moment().format('LL'),
         text: commentText
       };
-    }
+    };
     postComment(newComment);
     this.setState({ commentText: '' });
   };
 
   renderComments = () => {
-    if (this.props.match.path !== '/movies') {
-      console.log('comments', this.props.comments)
-      return (
-        <div>
-          {
-            this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } />)
-          }
-        </div>
-      )
-    }
+    console.log('comments', this.props.comments)
+    return (
+      <div>
+        {
+          this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } />)
+        }
+      </div>
+    )
   };
 
   render() {
