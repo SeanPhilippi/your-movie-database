@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Comments from './Comments';
 import CardWrapper from './HOCs/CardWrapper';
-// import withLoading from './HOCS/withLoading';
+import withLoading from './HOCs/withLoading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchMovieComments } from '../redux/actions';
 
-// const CommentsWithLoading = withLoading(Comments);
+const CommentsWithLoading = withLoading(Comments);
 
 class MoviePage extends PureComponent {
   state = {
@@ -161,11 +161,11 @@ class MoviePage extends PureComponent {
                 title="comments"
                 color="white"
               >
-                <Comments/>
-                {/* <CommentsWithLoading
+                {/* <Comments/> */}
+                <CommentsWithLoading
                   isLoading={ commentsLoading }
                   comments={ comments }
-                /> */}
+                />
               </CardWrapper>
             </div>
           </div>
