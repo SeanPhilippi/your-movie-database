@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Comments from './Comments';
 import CardWrapper from './HOCs/CardWrapper';
+import withLoading from './HOCs/withLoading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fetchMovieComments } from '../redux/actions';
+
+const CommentsWithLoading = withLoading(Comments);
 
 class MoviePage extends PureComponent {
   state = {
@@ -24,7 +28,7 @@ class MoviePage extends PureComponent {
   componentDidMount() {
     // want a visible movie title slug in url for users
     // maybe don't need this for calls to server or calls to omdb api
-    const { location: { state: { movie } } } = this.props;
+    const { fetchMovieComments, location: { state: { movie } } } = this.props;
     axios(`/api/movies/id/${ movie.id }`)
       .then(({ data }) => {
         const fetchedMovie = {
@@ -40,6 +44,7 @@ class MoviePage extends PureComponent {
         }
         this.setState({ movie: fetchedMovie });
       });
+    fetchMovieComments(movie.id);
   };
 
   render() {
@@ -47,7 +52,8 @@ class MoviePage extends PureComponent {
     // * how I was bringing in movie data for this page (via Link on SortableItem)
     // const { movie } = this.props.location.state;
     // * dummy data for development
-    const { poster, title, director, year, country, runtime, plot } = this.state.movie
+    const { poster, title, director, year, country, runtime, plot } = this.state.movie;
+    const { comments, commentsLoading } = this.props;
 
     return (
       <div className="d-flex border-0 justify-content-center">
@@ -155,7 +161,11 @@ class MoviePage extends PureComponent {
                 title="comments"
                 color="white"
               >
-                <Comments allowed={ false } className="comments" />
+                {/* <Comments/> */}
+                <CommentsWithLoading
+                  isLoading={ commentsLoading }
+                  comments={ comments }
+                />
               </CardWrapper>
             </div>
           </div>
@@ -167,10 +177,18 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   movie: PropTypes.object.isRequired,
+  fetchMovieComments: PropTypes.func.isRequired,
+  commentsLoading: PropTypes.array,
+  comments: PropTypes.array
 }
 
-const mapStateToProps = state => ({
-
+const mapDispatchToProps = dispatch => ({
+  fetchMovieComments: movie_id => dispatch(fetchMovieComments(movie_id)),
 });
 
-export default connect(mapStateToProps)(MoviePage);
+const mapStateToProps = state => ({
+  commentsLoading: state.commentsLoading,
+  comments: state.comments
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

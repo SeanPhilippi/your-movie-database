@@ -255,7 +255,22 @@ export const fetchComments = username => dispatch => {
     if (data) {
       dispatch(setComments(data));
     } else {
-      console.log('there is not comments data')
+      console.log('there is no comments data')
+      dispatch(setComments([]));
+    }
+    dispatch(setCommentsLoading(false));
+  }).catch(console.log);
+};
+
+export const fetchMovieComments = movie_id => dispatch => {
+  console.log('fetch movie comments')
+  dispatch(setCommentsLoading(true));
+  axios(`/api/comments/movie/${ movie_id }`)
+  .then(({ data }) => {
+    if (data) {
+      dispatch(setComments(data));
+    } else {
+      console.log('there is no movie comments data')
       dispatch(setComments([]));
     }
     dispatch(setCommentsLoading(false));

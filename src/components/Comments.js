@@ -11,39 +11,47 @@ class Comments extends PureComponent {
 
   state = {
     commentText: ''
-  }
+  };
 
   handleFieldChange = e => {
     this.setState({ commentText: e.target.value });
   };
 
   handleComment = e => {
-    const { postComment, user: { username }, match, allowed } = this.props;
+    const { postComment, user: { username }, match, history, location } = this.props;
     const { commentText } = this.state;
     e.preventDefault();
-    if (commentText.length && allowed) {
-      const newComment = {
+    let newComment;
+    console.log('comment', location.state.movie.id)
+    if (commentText.length && history.location.pathname.includes('/movies')) {
+      newComment = {
+        movie_id: location.state.movie.id,
+        author: username,
+        post_date: moment().format('LL'),
+        text: commentText
+      };
+    };
+    if (commentText.length && history.location.pathname.includes('/profile')) {
+      newComment = {
         username: match.params.username || username,
         author: username,
         post_date: moment().format('LL'),
         text: commentText
       };
-      postComment(newComment);
-      this.setState({ commentText: '' });
-    }
+    };
+    postComment(newComment);
+    this.setState({ commentText: '' });
   };
 
   renderComments = () => {
-    if (this.props.match.path !== '/movies') {
-      console.log('comments', this.props.comments)
-      return (
-        <div>
-          {
-            this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } />)
-          }
-        </div>
-      )
-    }
+    console.log('comments', this.props.comments)
+    return (
+      <div>
+        {
+          this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } />)
+        }
+      </div>
+    )
   };
 
   render() {

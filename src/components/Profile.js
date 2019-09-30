@@ -112,7 +112,6 @@ class Profile extends PureComponent  {
             <CommentsWithLoading
               isLoading={ commentsLoading }
               comments={ comments }
-              allowed={ true }
             />
           </CardWrapper>
         </div>
