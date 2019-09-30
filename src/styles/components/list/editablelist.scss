@@ -58,3 +58,10 @@
   margin: auto;
   margin-left: 13px;
 }
+
+.number {
+  border-right: $gold solid 1px;
+  color: $red;
+  font-weight: 800;
+  padding-right: 4px;
+}

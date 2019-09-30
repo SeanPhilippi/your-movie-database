@@ -48,7 +48,7 @@ class MoviePage extends PureComponent {
   };
 
   render() {
-    console.log('movie', this.props.movie)
+    console.log('movie', this.props.location.state.movie)
     // * how I was bringing in movie data for this page (via Link on SortableItem)
     // const { movie } = this.props.location.state;
     // * dummy data for development
@@ -106,20 +106,36 @@ class MoviePage extends PureComponent {
                   </div>
                   <div className="bg-white">
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">Overall Ranking:</div>
-                      <div className="bd-light row-height col-2 text-right">rank</div>
+                      <div className="bd-light row-height col-10">
+                        Overall Ranking:
+                      </div>
+                      <div className="bd-light row-height col-2 text-right">
+                        {/* rank */}
+                      </div>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">Number of points:</div>
-                      <div className="bd-light row-height col-2 text-right">points</div>
+                      <div className="bd-light row-height col-10">
+                        Number of points:
+                      </div>
+                      <div className="bd-light row-height col-2 text-right">
+                        {/* points */}
+                      </div>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">Number of users that ranked this movie:</div>
-                      <div className="bd-light row-height col-2 text-right">number</div>
+                      <div className="bd-light row-height col-10">
+                        Number of users that ranked this movie:
+                      </div>
+                      <div className="bd-light row-height col-2 text-right">
+                        {/* number */}
+                      </div>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">Average ranking in the user's list:</div>
-                      <div className="bd-light row-height col-2 text-right">avgRank</div>
+                      <div className="bd-light row-height col-10">
+                        Average ranking in the user's list:
+                      </div>
+                      <div className="bd-light row-height col-2 text-right">
+                        {/* avgRank */}
+                      </div>
                     </div>
                   </div>
                 </div>

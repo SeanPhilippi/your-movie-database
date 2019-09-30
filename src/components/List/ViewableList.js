@@ -93,37 +93,37 @@ class ViewableList extends PureComponent {
   render() {
     const { items } = this.props;
 
-    const ViewableItem = ({ movie, idx }) => (
+    const ViewableItem = ({ movie: { _id, title, director, year, id }, movie, idx }) => (
       <div
-        key={ movie._id }
+        key={ _id }
         className="d-flex bg-white justify-content-between"
         style={{ lineHeight: '2rem' }}
       >
         <div className="d-flex overflow-hidden">
           <div
             className="text-right"
-            style={{ width: '2.4rem' }}
+            style={{ width: '2.6rem' }}
           >
-            { idx + 1 } |&nbsp;
+            <span className="number">{ idx + 1 }</span> &nbsp;
           </div>
           <div
-            tltle={`${ movie.title } (${ movie.director }, ${ movie.year })`}
+            tltle={`${ title } (${ director }, ${ year })`}
             className="d-inline-block text-truncate"
             style={{ maxWidth: '516px' }}
           >
             <Link
               to={{
-                pathname: '/movies',
+                pathname: `/movies/${id}/${title.concat('-', year).split(' ').join('-')}`,
                 state: { movie }
               }}
             >
-              { movie.title }&nbsp;
+              { title }&nbsp;
             </Link>
-            ({ movie.director }, { movie.year })
+            ({ director }, { year })
           </div>
         </div>
         <div className="align-self-end mr-2">
-          {/* <a href={`http://www.imdb.com/title/${movie._id}/`}>
+          {/* <a href={`http://www.imdb.com/title/${_id}/`}>
             IMDB
           </a> */}
         </div>
