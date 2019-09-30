@@ -272,6 +272,7 @@ export const logoutUser = history => dispatch => {
   dispatch(setToken({}));
   // set current user back to empty object
   dispatch(setCurrentUser({}));
+  dispatch(setEditing(false));
   if (history) {
     history.push('/');
   };
