@@ -44,7 +44,7 @@ export const setNewUsers = users => ({
 export const setUpdateStatus = () => ({
   type: TYPES.SET_UPDATE_STATUS
 });
-// ! finish this idea
+
 export const clearErrors = () => ({
   type: TYPES.CLEAR_ERRORS
 });
@@ -164,6 +164,7 @@ export const registerUser = (userData, history) => dispatch => {
     .then(() => {
       history.push('/login');
       dispatch(fetchNewUsers());
+      dispatch(setEditing(true));
     })
     .catch(err => {
       dispatch({
@@ -255,7 +256,22 @@ export const fetchComments = username => dispatch => {
     if (data) {
       dispatch(setComments(data));
     } else {
-      console.log('there is not comments data')
+      console.log('there is no comments data')
+      dispatch(setComments([]));
+    }
+    dispatch(setCommentsLoading(false));
+  }).catch(console.log);
+};
+
+export const fetchMovieComments = movie_id => dispatch => {
+  console.log('fetch movie comments')
+  dispatch(setCommentsLoading(true));
+  axios(`/api/comments/movie/${ movie_id }`)
+  .then(({ data }) => {
+    if (data) {
+      dispatch(setComments(data));
+    } else {
+      console.log('there is no movie comments data')
       dispatch(setComments([]));
     }
     dispatch(setCommentsLoading(false));
@@ -272,6 +288,7 @@ export const logoutUser = history => dispatch => {
   dispatch(setToken({}));
   // set current user back to empty object
   dispatch(setCurrentUser({}));
+  dispatch(setEditing(false));
   if (history) {
     history.push('/');
   };

@@ -12,7 +12,6 @@ const CommentSchema = new Schema({
   username: {
     type: String,
     lowercase: true,
-    required: true
   },
   text: {
     type: String,

@@ -18,13 +18,13 @@ class NewRegistersBox extends PureComponent {
           <div className="py-2 px-4">
             <div className="mb-2">
               {
-                !registerPage
-                ? 'Most recent registered users on YMDb:'
-                : <span>
+                registerPage
+                ? <span>
                     Last { newUsers.length > 50 ? 50 : newUsers.length } registered users on
                     YMDB out of { newUsers.length }.<br/>
                     {/* You can search for a user on the <Link to='/users-index'>User's Index Page</Link>. */}
                   </span>
+                : 'Most recent registered users on YMDb:'
               }
             </div>
             <div>

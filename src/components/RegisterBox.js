@@ -39,6 +39,9 @@ class RegisterBox extends PureComponent {
   onTextChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   };
+  onTextChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     const {

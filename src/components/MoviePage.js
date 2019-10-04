@@ -7,6 +7,7 @@ import Rankings from './Rankings';
 import CardWrapper from './HOCs/CardWrapper';
 import withLoading from './HOCs/withLoading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fetchMovieComments } from '../redux/actions';
 
 const CommentsWithLoading = withLoading(Comments);
 
@@ -28,7 +29,7 @@ class MoviePage extends PureComponent {
   componentDidMount() {
     // want a visible movie title slug in url for users
     // maybe don't need this for calls to server or calls to omdb api
-    const { location: { state: { movie } } } = this.props;
+    const { fetchMovieComments, location: { state: { movie } } } = this.props;
     axios(`/api/movies/id/${ movie.id }`)
       .then(({ data }) => {
         const fetchedMovie = {
@@ -44,14 +45,16 @@ class MoviePage extends PureComponent {
         }
         this.setState({ movie: fetchedMovie });
       });
+    fetchMovieComments(movie.id);
   };
 
   render() {
-    console.log('movie', this.props.movie)
+    console.log('movie', this.props.location.state.movie)
     // * how I was bringing in movie data for this page (via Link on SortableItem)
     // const { movie } = this.props.location.state;
     // * dummy data for development
-    const { poster, title, director, year, country, runtime, plot } = this.state.movie
+    const { poster, title, director, year, country, runtime, plot } = this.state.movie;
+    const { comments, commentsLoading } = this.props;
 
     return (
       <div className="d-flex border-0 justify-content-center">
@@ -105,20 +108,36 @@ class MoviePage extends PureComponent {
                   </div>
                   <div className="bg-white">
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">Overall Ranking:</div>
-                      <div className="bd-light row-height col-2 text-right">rank</div>
+                      <div className="bd-light row-height col-10">
+                        Overall Ranking:
+                      </div>
+                      <div className="bd-light row-height col-2 text-right">
+                        {/* rank */}
+                      </div>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">Number of points:</div>
-                      <div className="bd-light row-height col-2 text-right">points</div>
+                      <div className="bd-light row-height col-10">
+                        Number of points:
+                      </div>
+                      <div className="bd-light row-height col-2 text-right">
+                        {/* points */}
+                      </div>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">Number of users that ranked this movie:</div>
-                      <div className="bd-light row-height col-2 text-right">number</div>
+                      <div className="bd-light row-height col-10">
+                        Number of users that ranked this movie:
+                      </div>
+                      <div className="bd-light row-height col-2 text-right">
+                        {/* number */}
+                      </div>
                     </div>
                     <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">Average ranking in the user's list:</div>
-                      <div className="bd-light row-height col-2 text-right">avgRank</div>
+                      <div className="bd-light row-height col-10">
+                        Average ranking in the user's list:
+                      </div>
+                      <div className="bd-light row-height col-2 text-right">
+                        {/* avgRank */}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -156,7 +175,11 @@ class MoviePage extends PureComponent {
                 title="comments"
                 color="white"
               >
-                <CommentsWithLoading className="comments" />
+                {/* <Comments/> */}
+                <CommentsWithLoading
+                  isLoading={ commentsLoading }
+                  comments={ comments }
+                />
               </CardWrapper>
             </div>
           </div>
@@ -168,10 +191,18 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   movie: PropTypes.object.isRequired,
+  fetchMovieComments: PropTypes.func.isRequired,
+  commentsLoading: PropTypes.array,
+  comments: PropTypes.array
 }
 
-const mapStateToProps = state => ({
-
+const mapDispatchToProps = dispatch => ({
+  fetchMovieComments: movie_id => dispatch(fetchMovieComments(movie_id)),
 });
 
-export default connect(mapStateToProps)(MoviePage);
+const mapStateToProps = state => ({
+  commentsLoading: state.commentsLoading,
+  comments: state.comments
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

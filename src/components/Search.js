@@ -101,10 +101,6 @@ class Search extends PureComponent {
     }
   };
 
-
-
-
-
   clearResults = () => {
     this.setState(() => ({ searchResults: [] }));
   };

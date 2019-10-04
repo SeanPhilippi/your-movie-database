@@ -8,7 +8,7 @@ import EditButton from './EditButton';
 import withLoading from '../HOCs/withLoading';
 
 const List = withLoading(({ isEditing, items, username, user }) => {
-  if (isEditing) {
+  if (isEditing && user.username === username) {
     return (
       <div>
         <div className="search-btns-container">
