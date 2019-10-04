@@ -22,7 +22,6 @@ class Comments extends PureComponent {
     const { commentText } = this.state;
     e.preventDefault();
     let newComment;
-    console.log('comment', location.state.movie.id)
     if (commentText.length && history.location.pathname.includes('/movies')) {
       newComment = {
         movie_id: location.state.movie.id,

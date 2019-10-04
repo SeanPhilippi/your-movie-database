@@ -164,6 +164,7 @@ export const registerUser = (userData, history) => dispatch => {
     .then(() => {
       history.push('/login');
       dispatch(fetchNewUsers());
+      dispatch(setEditing(true));
     })
     .catch(err => {
       dispatch({
