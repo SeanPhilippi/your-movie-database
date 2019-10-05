@@ -37,7 +37,6 @@
     "react-icons": "^3.7.0",
     "react-ionicons": "^3.0.1",
     "react-redux": "^6.0.0",
-    "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^2.1.5",
     "react-sortable-hoc": "^1.4.0",

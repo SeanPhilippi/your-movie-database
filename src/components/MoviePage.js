@@ -46,6 +46,8 @@ class MoviePage extends PureComponent {
         this.setState({ movie: fetchedMovie });
       });
     fetchMovieComments(movie.id);
+    // fetch movie rankings
+    axios(`/api/movies/rankings/${ movie.id }`)
   };
 
   render() {

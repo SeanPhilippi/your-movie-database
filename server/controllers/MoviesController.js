@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const List = require('../models/ListModel');
 const affinitiesQuery = require('./queries/affinitiesQuery');
+const movieRankingsQuery = require('./queries/movieRankingsQuery');
 
 exports.getSearchResults = ({ params }, res) => {
   const apiKey = process.env.API_KEY;
@@ -50,6 +51,16 @@ exports.deleteList = (req, res) => {
   List.deleteOne({username: req.params.username})
     .then(res => console.log(res))
     .catch(console.log);
+};
+
+exports.getMovieRankings = (req, res) => {
+  const movieId = req.params.movieId;
+  console.log('movieId', movieId)
+
+  List.aggregate(movieRankingsQuery(movieId))
+    .then(result => {
+      console.log('movie rankings result:', result);
+    })
 };
 
 exports.calcAffinities = (req, res) => {
