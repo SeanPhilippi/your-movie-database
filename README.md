@@ -37,9 +37,9 @@ Concurrently: ```npm run both```
 
 ## Future Goals
 * Top Movie List aggregating rankings from all member lists.
-* Commenting system expanded to Movie Pages and the Top Movies Page.
+* Commenting system expanded to the Top Movies Page.
 * Users Index page with a search bar. This is partially done.
-* Flesh out movie pages: There will be an ability to add a movie to your list from the movie's page, as well as on the most recent lists the movie was added to and what rank it has in that list. Points and position in the Top Movies List will also be displayed.
+* Flesh out movie pages: There will be an ability to add a movie to your list from the movie's page. There will also be that movie's overall site ranking info in the form of total points, place in Top Movies List, and the average ranking.
 * IMDB links on Movie Pages.
 * Implement user visits and movie ranking data for display on home page preview windows.
 * Add pictures of website to this repo README.md.
