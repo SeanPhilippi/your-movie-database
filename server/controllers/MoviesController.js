@@ -58,9 +58,14 @@ exports.getMovieRankings = (req, res) => {
   console.log('movieId', movieId)
 
   List.aggregate(movieRankingsQuery(movieId))
-    .then(result => {
-      console.log('movie rankings result:', result);
-    })
+    .then(data => {
+      results = data.map(result => ({
+        _id: result._id,
+        username: result.username,
+        rank: result.rank += 1
+      }));
+      return res.json(results);
+    });
 };
 
 exports.calcAffinities = (req, res) => {

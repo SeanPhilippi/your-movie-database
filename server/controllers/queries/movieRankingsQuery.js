@@ -6,8 +6,12 @@ module.exports = (movieId) => [
   },
   {
     $project: {
-      username: '$username',
-      rank: '$indexOfArray'
+      'username': '$username',
+      'rank': {
+        '$indexOfArray': [
+          '$items.id', movieId
+        ]
+      }
     }
   }
 ];
