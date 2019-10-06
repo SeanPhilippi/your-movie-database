@@ -4,10 +4,14 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Comments from './Comments';
 import Rankings from './Rankings';
+import MovieStats from './MovieStats';
 import CardWrapper from './HOCs/CardWrapper';
 import withLoading from './HOCs/withLoading';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fetchMovieComments } from '../redux/actions';
+import {
+  fetchMovieComments,
+  setMovieStatsLoading
+} from '../redux/actions';
 
 const CommentsWithLoading = withLoading(Comments);
 
@@ -24,13 +28,15 @@ class MoviePage extends PureComponent {
       runtime: '',
       plot: '',
     },
-    voters: []
+    voters: [],
+    averageRanking: ''
   };
 
   componentDidMount() {
     // want a visible movie title slug in url for users
     // maybe don't need this for calls to server or calls to omdb api
-    const { fetchMovieComments, location: { state: { movie } } } = this.props;
+    const { fetchMovieComments, setMovieStatsLoading, location: { state: { movie } } } = this.props;
+    setMovieStatsLoading(true);
     axios(`/api/movies/id/${ movie.id }`)
       .then(({ data }) => {
         const fetchedMovie = {
@@ -49,8 +55,10 @@ class MoviePage extends PureComponent {
     fetchMovieComments(movie.id);
     // fetch movie rankings
     axios(`/api/movies/rankings/${ movie.id }`)
-      .then(({ data }) => {
-        this.setState({ voters: data.reverse() });
+      .then(({ data: { results, averageRanking } }) => {
+        this.setState({ voters: results.reverse() });
+        this.setState({ averageRanking });
+        setMovieStatsLoading(false);
       });
   };
 
@@ -61,6 +69,7 @@ class MoviePage extends PureComponent {
     // * dummy data for development
     const {
       voters,
+      averageRanking,
       movie: {
         poster,
         title,
@@ -73,7 +82,8 @@ class MoviePage extends PureComponent {
     } = this.state;
     const {
       comments,
-      commentsLoading
+      commentsLoading,
+      movieStatsLoading
     } = this.props;
 
     return (
@@ -122,45 +132,11 @@ class MoviePage extends PureComponent {
                     </div>
                   </div>
                 </div>
-                <div className="mt-4">
-                  <div className="font-weight-bold mb-1">
-                    Statistics
-                  </div>
-                  <div className="bg-white">
-                    <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">
-                        Overall Ranking:
-                      </div>
-                      <div className="bd-light row-height col-2 text-right">
-                        {/* rank */}
-                      </div>
-                    </div>
-                    <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">
-                        Number of points:
-                      </div>
-                      <div className="bd-light row-height col-2 text-right">
-                        {/* points */}
-                      </div>
-                    </div>
-                    <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">
-                        Number of users that ranked this movie:
-                      </div>
-                      <div className="bd-light row-height col-2 text-right">
-                        {/* number */}
-                      </div>
-                    </div>
-                    <div className="d-flex justify-content-between">
-                      <div className="bd-light row-height col-10">
-                        Average ranking in the user's list:
-                      </div>
-                      <div className="bd-light row-height col-2 text-right">
-                        {/* avgRank */}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <MovieStats
+                  voters={ voters }
+                  averageRanking={ averageRanking }
+                  isLoading={ movieStatsLoading }
+                />
                 {/* Review Box */}
                 <div>
                   <div className="font-weight-bold mt-2">
@@ -215,16 +191,19 @@ class MoviePage extends PureComponent {
 MoviePage.propTypes = {
   movie: PropTypes.object.isRequired,
   fetchMovieComments: PropTypes.func.isRequired,
-  commentsLoading: PropTypes.array,
+  commentsLoading: PropTypes.bool,
+  movieStatsLoading: PropTypes.bool,
   comments: PropTypes.array
 }
 
 const mapDispatchToProps = dispatch => ({
   fetchMovieComments: movie_id => dispatch(fetchMovieComments(movie_id)),
+  setMovieStatsLoading: bool => dispatch(setMovieStatsLoading(bool)),
 });
 
 const mapStateToProps = state => ({
   commentsLoading: state.commentsLoading,
+  movieStatsLoading: state.movieStatsLoading,
   comments: state.comments
 });
 

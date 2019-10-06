@@ -17,6 +17,7 @@ export const TYPES = {
   POST_COMMENT: 'POST_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
   SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
+  SET_MOVIE_STATS_LOADING: 'SET_MOVIE_STATS_LOADING',
   SET_AFFINITIES_LOADING: 'SET_AFFINITIES_LOADING',
   ADD_TO_LIST: 'ADD_TO_LIST',
   REORDER_LIST: 'REORDER_LIST',
@@ -109,6 +110,11 @@ export const setListDataLoading = bool => ({
 
 export const setCommentsLoading = bool => ({
   type: TYPES.SET_COMMENTS_LOADING,
+  payload: bool
+});
+
+export const setMovieStatsLoading = bool => ({
+  type: TYPES.SET_MOVIE_STATS_LOADING,
   payload: bool
 });
 

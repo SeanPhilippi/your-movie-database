@@ -10,7 +10,10 @@ const Rankings = ({ title, voters }) => (
     <div className="bg-white">
       {
         voters.map(user => (
-          <div className="d-flex justify-content-between">
+          <div
+            className="d-flex justify-content-between"
+            key={ user._id }
+          >
             <div className="bd-light row-height col-10">
               <Link to={`/profile/${ user.username }`}>
                 { user.username }
@@ -27,7 +30,6 @@ const Rankings = ({ title, voters }) => (
 );
 
 Rankings.propTypes = {
-  movie: PropTypes.object.isRequired,
   voters: PropTypes.array
 };
 

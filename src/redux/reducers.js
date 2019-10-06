@@ -18,7 +18,7 @@ const initialState = {
   listDataLoading: true,
   commentsLoading: true,
   affinitiesLoading: true,
-  movieDataLoading: true
+  movieStatsLoading: true
 }
 
 // destructured action parameter is desctructured and passed in to rootReducer function,
@@ -86,6 +86,10 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_COMMENTS_LOADING: return {
       ...state,
       commentsLoading: payload
+    };
+    case TYPES.SET_MOVIE_STATS_LOADING: return {
+      ...state,
+      movieStatsLoading: payload
     };
     case TYPES.SET_AFFINITIES_LOADING: return {
       ...state,

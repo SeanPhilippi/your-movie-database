@@ -55,17 +55,30 @@ exports.deleteList = (req, res) => {
 
 exports.getMovieRankings = (req, res) => {
   const movieId = req.params.movieId;
-  console.log('movieId', movieId)
+  let averageRanking;
 
   List.aggregate(movieRankingsQuery(movieId))
-    .then(data => {
-      results = data.map(result => ({
-        _id: result._id,
-        username: result.username,
+  .then(data => {
+    const results = data.map(result => ({
+      _id: result._id,
+      username: result.username,
         rank: result.rank += 1
-      }));
-      return res.json(results);
-    });
+    }));
+    if (results.length > 1) {
+      let rankings = results.map(result => result.rank);
+      averageRanking = Math.round(rankings.reduce((ac, cv) => ac + cv) / results.length);
+    } else if (results.length === 1) {
+      averageRanking = results[0].rank;
+    } else {
+      averageRanking = '';
+    }
+    const result = {
+      results,
+      averageRanking
+    }
+    return res.json(result);
+  })
+  .catch(console.log);
 };
 
 exports.calcAffinities = (req, res) => {
