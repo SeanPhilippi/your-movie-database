@@ -4,4 +4,8 @@ Vision:
 - number of users that ranked this movie
 - average ranking in the user's list
 
--
+Plan:
+- find all List docs with movie id in items array
+- grab those movies and get the index, + 1, and grab the username
+- project those back, have an array of objects containing rank (index of movie + 1) and username
+- map these objects into a list of usernames that link to their list and the movie ranking
