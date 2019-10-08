@@ -1,7 +1,11 @@
 import React from 'react';
 import withLoading from './HOCs/withLoading';
 
-const MovieStats = withLoading(({ voters, averageRanking }) => (
+const MovieStats = withLoading(({
+  voters,
+  averageRanking,
+  points
+}) => (
   <div className="mt-4">
     <div className="font-weight-bold mb-1">
       Statistics
@@ -9,7 +13,7 @@ const MovieStats = withLoading(({ voters, averageRanking }) => (
     <div className="bg-white">
       <div className="d-flex justify-content-between">
         <div className="bd-light row-height col-10">
-          Overall Ranking:
+          Overall ranking:
         </div>
         <div className="bd-light row-height col-2 text-right">
           {/* rank */}
@@ -20,7 +24,7 @@ const MovieStats = withLoading(({ voters, averageRanking }) => (
           Number of points:
         </div>
         <div className="bd-light row-height col-2 text-right">
-          {/* points */}
+         { points }
         </div>
       </div>
       <div className="d-flex justify-content-between">
@@ -33,7 +37,7 @@ const MovieStats = withLoading(({ voters, averageRanking }) => (
       </div>
       <div className="d-flex justify-content-between">
         <div className="bd-light row-height col-10">
-          Average ranking in the user's list:
+          Average user ranking:
         </div>
         <div className="bd-light row-height col-2 text-right">
           #{ averageRanking }

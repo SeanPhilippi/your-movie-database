@@ -29,7 +29,8 @@ class MoviePage extends PureComponent {
       plot: '',
     },
     voters: [],
-    averageRanking: ''
+    averageRanking: '',
+    points: '',
   };
 
   componentDidMount() {
@@ -55,9 +56,13 @@ class MoviePage extends PureComponent {
     fetchMovieComments(movie.id);
     // fetch movie rankings
     axios(`/api/movies/rankings/${ movie.id }`)
-      .then(({ data: { results, averageRanking } }) => {
-        this.setState({ voters: results.reverse() });
-        this.setState({ averageRanking });
+      .then(({ data: { results, averageRanking, points } }) => {
+        console.log('points', points)
+        this.setState({
+          voters: results.reverse(),
+          averageRanking,
+          points
+         });
         setMovieStatsLoading(false);
       });
   };
@@ -70,6 +75,7 @@ class MoviePage extends PureComponent {
     const {
       voters,
       averageRanking,
+      points,
       movie: {
         poster,
         title,
@@ -135,6 +141,7 @@ class MoviePage extends PureComponent {
                 <MovieStats
                   voters={ voters }
                   averageRanking={ averageRanking }
+                  points={ points }
                   isLoading={ movieStatsLoading }
                 />
                 {/* Review Box */}

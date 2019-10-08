@@ -56,6 +56,7 @@ exports.deleteList = (req, res) => {
 exports.getMovieRankings = (req, res) => {
   const movieId = req.params.movieId;
   let averageRanking;
+  let points;
 
   List.aggregate(movieRankingsQuery(movieId))
   .then(data => {
@@ -65,17 +66,21 @@ exports.getMovieRankings = (req, res) => {
         rank: result.rank += 1
     }));
     if (results.length > 1) {
-      let rankings = results.map(result => result.rank);
+      const rankings = results.map(result => result.rank);
       averageRanking = Math.round(rankings.reduce((ac, cv) => ac + cv) / results.length);
+      const pointsArr = results.map(result => 20 - result.rank);
+      points = pointsArr.reduce((ac, cv) => ac + cv);
     } else if (results.length === 1) {
       averageRanking = results[0].rank;
     } else {
       averageRanking = '';
-    }
+    };
+    console.log('points', points)
     const result = {
       results,
-      averageRanking
-    }
+      averageRanking,
+      points
+    };
     return res.json(result);
   })
   .catch(console.log);
