@@ -83,7 +83,6 @@ class Search extends PureComponent {
           if (data.Search) {
             console.log('data.Search', data.Search)
             this.setState((prevState) => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
-            // this.renderResults(); ! probably not doing anything, since this just returns jsx and jsx can't do anything outside render method's return
           }
         })
         .catch(console.log);

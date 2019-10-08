@@ -68,14 +68,15 @@ exports.getMovieRankings = (req, res) => {
     if (results.length > 1) {
       const rankings = results.map(result => result.rank);
       averageRanking = Math.round(rankings.reduce((ac, cv) => ac + cv) / results.length);
-      const pointsArr = results.map(result => 20 - result.rank);
+      const pointsArr = results.map(result => 21 - result.rank);
       points = pointsArr.reduce((ac, cv) => ac + cv);
     } else if (results.length === 1) {
       averageRanking = results[0].rank;
+      points = 21 - results[0].rank;
     } else {
       averageRanking = '';
+      points = '';
     };
-    console.log('points', points)
     const result = {
       results,
       averageRanking,

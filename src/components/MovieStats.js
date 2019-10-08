@@ -24,7 +24,7 @@ const MovieStats = withLoading(({
           Number of points:
         </div>
         <div className="bd-light row-height col-2 text-right">
-         { points }
+          { points }
         </div>
       </div>
       <div className="d-flex justify-content-between">

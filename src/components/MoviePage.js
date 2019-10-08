@@ -57,12 +57,11 @@ class MoviePage extends PureComponent {
     // fetch movie rankings
     axios(`/api/movies/rankings/${ movie.id }`)
       .then(({ data: { results, averageRanking, points } }) => {
-        console.log('points', points)
         this.setState({
           voters: results.reverse(),
           averageRanking,
           points
-         });
+        });
         setMovieStatsLoading(false);
       });
   };
