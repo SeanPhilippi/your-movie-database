@@ -14,6 +14,7 @@ export const TYPES = {
   SET_LIST_DATA: 'SET_LIST_DATA',
   SET_AFFINITIES: 'SET_AFFINITIES',
   SET_COMMENTS: 'SET_COMMENTS',
+  SET_TOP_MOVIES_LIST: 'SET_TOP_MOVIES_LIST',
   POST_COMMENT: 'POST_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
   SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
@@ -124,12 +125,6 @@ export const setAffinitiesLoading = bool => ({
 });
 
 //thunk actions
-// export const resetLoading = () => dispatch => {
-//   console.log('reset loading states')
-//   dispatch(setListDataLoading(true));
-//   dispatch(setCommentsLoading(true));
-//   dispatch(setAffinitiesLoading(true));
-// };
 
 export const setCurrentUser = user => dispatch => {
   console.log('setCurrentUser', user);
@@ -258,30 +253,30 @@ export const fetchAffinities = movieIds => dispatch => {
 export const fetchComments = username => dispatch => {
   dispatch(setCommentsLoading(true));
   axios(`/api/comments/${ username }`)
-  .then(({ data }) => {
-    if (data) {
-      dispatch(setComments(data));
-    } else {
-      console.log('there is no comments data')
-      dispatch(setComments([]));
-    }
-    dispatch(setCommentsLoading(false));
-  }).catch(console.log);
+    .then(({ data }) => {
+      if (data) {
+        dispatch(setComments(data));
+      } else {
+        console.log('there is no comments data')
+        dispatch(setComments([]));
+      }
+      dispatch(setCommentsLoading(false));
+    }).catch(console.log);
 };
 
 export const fetchMovieComments = movie_id => dispatch => {
   console.log('fetch movie comments')
   dispatch(setCommentsLoading(true));
   axios(`/api/comments/movie/${ movie_id }`)
-  .then(({ data }) => {
-    if (data) {
-      dispatch(setComments(data));
-    } else {
-      console.log('there is no movie comments data')
-      dispatch(setComments([]));
-    }
-    dispatch(setCommentsLoading(false));
-  }).catch(console.log);
+    .then(({ data }) => {
+      if (data) {
+        dispatch(setComments(data));
+      } else {
+        console.log('there is no movie comments data')
+        dispatch(setComments([]));
+      }
+      dispatch(setCommentsLoading(false));
+    }).catch(console.log);
 };
 
 export const logoutUser = history => dispatch => {
@@ -300,3 +295,15 @@ export const logoutUser = history => dispatch => {
   };
 };
 
+export const updateMovie = id => dispatch => {
+  axios.put(`/api/movies/update/${ id }`)
+    .then(({ data }) => {
+      // parse data if needed, prob better to parse on backend
+      dispatch(setTopMoviesList(data));
+    });
+};
+// ! left off here, make reducer
+export const setTopMoviesList = list => ({
+  type: TYPES.SET_TOP_MOVIES_LIST,
+  payload: list
+});

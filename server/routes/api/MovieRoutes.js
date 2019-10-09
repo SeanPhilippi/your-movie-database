@@ -2,7 +2,16 @@ const express = require('express');
 const router = express.Router();
 const moviesController = require('../../controllers/MoviesController');
 
-const { getSearchResults, getMovieData, getListData, saveList, deleteList, getMovieRankings, calcAffinities } = moviesController;
+const {
+  getSearchResults,
+  getMovieData,
+  getListData,
+  saveList,
+  deleteList,
+  createMovie,
+  getMovieRankings,
+  calcAffinities
+} = moviesController;
 
 // @route   GET api/movies/search/:query/:num
 // @desc    get search results
@@ -28,6 +37,11 @@ router.put('/save/:username', saveList);
 // @desc    delete list attached to username
 // @access  Public
 router.delete('/delete/:username', deleteList);
+
+// @route   PUT api/movies/update/:id
+// @desc    create or update movie model
+// @access  Public
+router.delete('/update/:id', createMovie);
 
 // @route   GET api/movies/rankings/:movieId
 // @desc    grab user rankings for specific movie

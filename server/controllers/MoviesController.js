@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const List = require('../models/ListModel');
+const Movie = require('../models/MovieModel');
 const affinitiesQuery = require('./queries/affinitiesQuery');
 const movieRankingsQuery = require('./queries/movieRankingsQuery');
 
@@ -32,7 +33,11 @@ exports.getListData = (req, res) => {
 };
 
 exports.saveList = req => {
-  const { username, items, statement } = req.body;
+  const {
+    username,
+    items,
+    statement
+  } = req.body;
   List.updateOne(
     { username: req.params.username },
     {
@@ -52,6 +57,37 @@ exports.deleteList = (req, res) => {
   List.deleteOne({ username: req.params.username })
     .then(res => console.log(res))
     .catch(console.log);
+};
+
+exports.createMovie = (req, res) => {
+  const {
+    id,
+    title,
+    year,
+    director,
+    averageRanking,
+    points,
+    voters,
+    overallRanking
+  } = req.body;
+  Movie.updateOne(
+    { id: req.params.id },
+    {
+      $set: {
+        id,
+        title,
+        year,
+        director,
+        averageRanking,
+        points,
+        numberOfLists: voters.length,
+        overallRanking,
+      }
+    },
+    {
+      upsert: 'true',
+    }
+  ).catch(console.log);
 };
 
 exports.getMovieRankings = (req, res) => {
