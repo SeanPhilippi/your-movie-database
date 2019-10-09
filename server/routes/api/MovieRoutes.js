@@ -41,7 +41,7 @@ router.delete('/delete/:username', deleteList);
 // @route   PUT api/movies/update/:id
 // @desc    create or update movie model
 // @access  Public
-router.delete('/update/:id', createMovie);
+router.put('/update/:id', createMovie);
 
 // @route   GET api/movies/rankings/:movieId
 // @desc    grab user rankings for specific movie

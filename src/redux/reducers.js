@@ -10,10 +10,12 @@ const initialState = {
   username: '',
   statement: '',
   items: [],
+  topMoviesList: [],
   open: false,
   newUsers: [],
   comments: [],
   affinities: [],
+  movieStats: {}, // voters, averageRanking, points, overallRanking(coming soon)
   isEditing: false,
   listDataLoading: true,
   commentsLoading: true,
@@ -67,13 +69,17 @@ export default (state = initialState, { type, payload }) => {
       statement: payload.statement,
       items: payload.items
     };
+    case TYPES.SET_AFFINITIES: return {
+      ...state,
+      affinities: payload
+    };
     case TYPES.SET_COMMENTS: return {
       ...state,
       comments: payload
     };
-    case TYPES.SET_AFFINITIES: return {
+    case TYPES.SET_MOVIE_STATS: return {
       ...state,
-      affinities: payload
+      movieStats: payload
     };
     case TYPES.POST_COMMENT: return {
       ...state,
@@ -110,6 +116,10 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.DELETE_LIST: return {
       ...state,
       items: []
+    };
+    case TYPES.SET_TOP_MOVIES_LIST: return {
+      ...state,
+      topMoviesList: payload
     };
     default: return state;
   }

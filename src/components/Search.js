@@ -17,7 +17,7 @@ class Search extends PureComponent {
     const { addToList, items } = this.props;
     console.log('no here')
     // fetch call to grab movie from api by id, then grab director
-    fetch(`/api/movies/id/${movie.imdbID}`)
+    fetch(`/api/movies/id/${ movie.imdbID }`)
       .then(res => res.json())
       .then(data => {
         console.log('here')
@@ -43,8 +43,8 @@ class Search extends PureComponent {
           this.clearResults();
           this.clearSearchText();
         };
-      })
-  }
+      });
+  };
 
   renderResults = () => {
     const { searchResults } = this.state;
@@ -59,8 +59,8 @@ class Search extends PureComponent {
             { searchResults.map(movie => <SearchResult movie={ movie } handleAdd={ this.handleAdd } key={ movie.imdbID } />) }
           </div>
       )
-    }
-  }
+    };
+  };
   // ! this is working, but need a timeout to also clear results if user pauses when typing
   // this way results don't continue to concatenate to results array
   // also maybe completely refresh search results as more characters are entered since
@@ -70,19 +70,19 @@ class Search extends PureComponent {
       this.clearResults();
       this.handleDelay();
     }
-  }
+  };
 
   handleSearch = () => {
     this.clearResults();
     const pageNums = [1, 2, 3];
     const { searchText } = this.state;
     pageNums.forEach(num => {
-      fetch(`api/movies/search/${searchText}/${num}`)
+      fetch(`api/movies/search/${ searchText }/${ num }`)
         .then(res => res.json())
         .then(data => {
           if (data.Search) {
             console.log('data.Search', data.Search)
-            this.setState((prevState) => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
+            this.setState(prevState => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
           }
         })
         .catch(console.log);
@@ -130,7 +130,7 @@ class Search extends PureComponent {
       </div>
     )
   }
-}
+};
 
 Search.propTypes = {
   addToList: PropTypes.func.isRequired

@@ -14,6 +14,7 @@ export const TYPES = {
   SET_LIST_DATA: 'SET_LIST_DATA',
   SET_AFFINITIES: 'SET_AFFINITIES',
   SET_COMMENTS: 'SET_COMMENTS',
+  SET_MOVIE_STATS: 'SET_MOVIE_STATS',
   SET_TOP_MOVIES_LIST: 'SET_TOP_MOVIES_LIST',
   POST_COMMENT: 'POST_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
@@ -78,11 +79,9 @@ export const setAffinities = affinities => ({
   payload: affinities
 });
 
-export const addToList = movie => ({
-  type: TYPES.ADD_TO_LIST,
-  payload: {
-    movie
-  }
+export const setTopMoviesList = list => ({
+  type: TYPES.SET_TOP_MOVIES_LIST,
+  payload: list
 });
 
 export const orderList = (oldIndex, newIndex) => ({
@@ -234,7 +233,7 @@ export const fetchListData = username => dispatch => {
           statement: '',
           items: []
         }));
-      }
+      };
       dispatch(setListDataLoading(false));
     })
 };
@@ -259,7 +258,7 @@ export const fetchComments = username => dispatch => {
       } else {
         console.log('there is no comments data')
         dispatch(setComments([]));
-      }
+      };
       dispatch(setCommentsLoading(false));
     }).catch(console.log);
 };
@@ -295,15 +294,40 @@ export const logoutUser = history => dispatch => {
   };
 };
 
-export const updateMovie = id => dispatch => {
-  axios.put(`/api/movies/update/${ id }`)
+export const setMovieStats = stats => ({
+  type: TYPES.SET_MOVIE_STATS,
+  payload: stats
+});
+
+export const fetchMovieStats = id => dispatch => {
+  console.log('fetching movie stats...')
+  // fetch movie rankings
+  dispatch(setMovieStatsLoading(true));
+  axios(`/api/movies/rankings/${ id }`)
+    .then(({ data, data: { results, averageRanking, points } }) => {
+      dispatch(setMovieStats({
+        voters: results.reverse(),
+        averageRanking,
+        points,
+      }));
+      dispatch(setMovieStatsLoading(false));
+    });
+};
+
+export const addToList = movie => dispatch => {
+  dispatch({
+    type: TYPES.ADD_TO_LIST,
+    payload: {
+      movie
+    }
+  });
+  dispatch(updateMovie(movie));
+};
+
+export const updateMovie = movie => dispatch => {
+  axios.put(`/api/movies/update/${ movie.id }`, movie)
     .then(({ data }) => {
       // parse data if needed, prob better to parse on backend
       dispatch(setTopMoviesList(data));
     });
 };
-// ! left off here, make reducer
-export const setTopMoviesList = list => ({
-  type: TYPES.SET_TOP_MOVIES_LIST,
-  payload: list
-});

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import withLoading from './HOCs/withLoading';
 import { Link } from 'react-router-dom';
 
-const Rankings = ({ title, voters }) => (
+const Rankings = withLoading(({ title, voters }) => (
   <div className="">
     <div className="font-weight-bold mb-1">
       User's that ranked { title }:
@@ -27,9 +28,10 @@ const Rankings = ({ title, voters }) => (
       }
     </div>
   </div>
-);
+));
 
 Rankings.propTypes = {
+  title: PropTypes.string,
   voters: PropTypes.array
 };
 

@@ -7,9 +7,10 @@ import Rankings from './Rankings';
 import MovieStats from './MovieStats';
 import CardWrapper from './HOCs/CardWrapper';
 import withLoading from './HOCs/withLoading';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   fetchMovieComments,
+  fetchMovieStats,
   setMovieStatsLoading
 } from '../redux/actions';
 
@@ -36,7 +37,13 @@ class MoviePage extends PureComponent {
   componentDidMount() {
     // want a visible movie title slug in url for users
     // maybe don't need this for calls to server or calls to omdb api
-    const { fetchMovieComments, setMovieStatsLoading, location: { state: { movie } } } = this.props;
+    const {
+      fetchMovieComments,
+      fetchMovieStats,
+      setMovieStatsLoading,
+      location: {
+        state: { movie } }
+    } = this.props;
     setMovieStatsLoading(true);
     axios(`/api/movies/id/${ movie.id }`)
       .then(({ data }) => {
@@ -54,16 +61,7 @@ class MoviePage extends PureComponent {
         this.setState({ movie: fetchedMovie });
       });
     fetchMovieComments(movie.id);
-    // fetch movie rankings
-    axios(`/api/movies/rankings/${ movie.id }`)
-      .then(({ data: { results, averageRanking, points } }) => {
-        this.setState({
-          voters: results.reverse(),
-          averageRanking,
-          points
-        });
-        setMovieStatsLoading(false);
-      });
+    fetchMovieStats(movie.id);
   };
 
   render() {
@@ -72,9 +70,6 @@ class MoviePage extends PureComponent {
     // const { movie } = this.props.location.state;
     // * dummy data for development
     const {
-      voters,
-      averageRanking,
-      points,
       movie: {
         poster,
         title,
@@ -88,7 +83,12 @@ class MoviePage extends PureComponent {
     const {
       comments,
       commentsLoading,
-      movieStatsLoading
+      movieStatsLoading,
+      stats: {
+        voters,
+        averageRanking,
+        points,
+      }
     } = this.props;
 
     return (
@@ -164,11 +164,11 @@ class MoviePage extends PureComponent {
                 color="tan"
               >
                 <Rankings
+                  isLoading={ movieStatsLoading }
                   title={ title }
                   voters={ voters }
                 />
               </CardWrapper>
-
             </div>
           </div>
 
@@ -190,9 +190,9 @@ class MoviePage extends PureComponent {
           </div>
         </div>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 MoviePage.propTypes = {
   movie: PropTypes.object.isRequired,
@@ -200,17 +200,19 @@ MoviePage.propTypes = {
   commentsLoading: PropTypes.bool,
   movieStatsLoading: PropTypes.bool,
   comments: PropTypes.array
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   fetchMovieComments: movie_id => dispatch(fetchMovieComments(movie_id)),
+  fetchMovieStats: id => dispatch(fetchMovieStats(id)),
   setMovieStatsLoading: bool => dispatch(setMovieStatsLoading(bool)),
 });
 
 const mapStateToProps = state => ({
   commentsLoading: state.commentsLoading,
   movieStatsLoading: state.movieStatsLoading,
-  comments: state.comments
+  comments: state.comments,
+  stats: state.movieStats
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

@@ -7,7 +7,10 @@ import {
   sortableHandle,
 } from 'react-sortable-hoc';
 import { Link } from 'react-router-dom';
-import { orderList, deleteMovie } from '../../redux/actions';
+import {
+  orderList,
+  deleteMovie
+} from '../../redux/actions';
 import img from '../../images/grippy.png';
 
 class EditableList extends Component {
@@ -81,7 +84,7 @@ class EditableList extends Component {
 
 
 
-    const SortableList = sortableContainer(({ items }) =>  (
+    const SortableList = sortableContainer(({ items }) => (
       <div>
         {
           items.map((movie, index) => {
