@@ -113,7 +113,7 @@ class ViewableList extends PureComponent {
           >
             <Link
               to={{
-                pathname: `/movies/${id}/${title.concat('-', year).split(' ').join('-')}`,
+                pathname: `/movies/${title.concat('-', year).split(' ').join('-')}`,
                 state: { movie }
               }}
             >

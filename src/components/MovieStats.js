@@ -40,6 +40,7 @@ const MovieStats = withLoading(({
           Average user ranking:
         </div>
         <div className="bd-light row-height col-2 text-right">
+          {/* eslint-disable-next-line */}
           #{ averageRanking }
         </div>
       </div>

@@ -1,14 +1,13 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const cors = require('cors');
 const movies = require('./routes/api/MovieRoutes');
 const users = require('./routes/api/UserRoutes');
 const comments = require('./routes/api/CommentRoutes');
 const app = express();
-const passport = require('passport');
-const cors = require('cors');
-// core nodejs file
-const path = require('path');
 // DB config
 const PORT = process.env.PORT || 4300;
 require('dotenv').config();
@@ -46,6 +45,6 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, err => {
-  err ? console.log(err) : console.log(`Server started on port ${PORT}`);
+  // eslint-disable-next-line no-unused-expressions
+  err ? console.log(err) : console.log(`Server started on port ${ PORT }`);
 });
-

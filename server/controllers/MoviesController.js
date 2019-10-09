@@ -31,60 +31,61 @@ exports.getListData = (req, res) => {
   }).catch(console.log);
 };
 
-exports.saveList = (req, res) => {
+exports.saveList = req => {
+  const { username, items, statement } = req.body;
   List.updateOne(
     { username: req.params.username },
     {
       $set: {
-        'username': req.body.username,
-        'items': req.body.items,
-        'statement': req.body.statement,
-      }
+        username,
+        items,
+        statement,
+      },
     },
     {
-      upsert: 'true'
-    }
+      upsert: 'true',
+    },
   ).catch(console.log);
 };
 
 exports.deleteList = (req, res) => {
-  List.deleteOne({username: req.params.username})
+  List.deleteOne({ username: req.params.username })
     .then(res => console.log(res))
     .catch(console.log);
 };
 
 exports.getMovieRankings = (req, res) => {
-  const movieId = req.params.movieId;
+  const { movieId } = req.params;
   let averageRanking;
   let points;
 
   List.aggregate(movieRankingsQuery(movieId))
-  .then(data => {
-    const results = data.map(result => ({
-      _id: result._id,
-      username: result.username,
-        rank: result.rank += 1
-    }));
-    if (results.length > 1) {
-      const rankings = results.map(result => result.rank);
-      averageRanking = Math.round(rankings.reduce((ac, cv) => ac + cv) / results.length);
-      const pointsArr = results.map(result => 21 - result.rank);
-      points = pointsArr.reduce((ac, cv) => ac + cv);
-    } else if (results.length === 1) {
-      averageRanking = results[0].rank;
-      points = 21 - results[0].rank;
-    } else {
-      averageRanking = '';
-      points = '';
-    };
-    const result = {
-      results,
-      averageRanking,
-      points
-    };
-    return res.json(result);
-  })
-  .catch(console.log);
+    .then(data => {
+      const results = data.map(({ _id, username, rank }) => ({
+        id: _id,
+        username,
+        rank: rank += 1
+      }));
+      if (results.length > 1) {
+        const rankings = results.map(result => result.rank);
+        averageRanking = Math.round(rankings.reduce((ac, cv) => ac + cv) / results.length);
+        const pointsArr = results.map(result => 21 - result.rank);
+        points = pointsArr.reduce((ac, cv) => ac + cv);
+      } else if (results.length === 1) {
+        averageRanking = results[0].rank;
+        points = 21 - results[0].rank;
+      } else {
+        averageRanking = '';
+        points = '';
+      }
+      const result = {
+        results,
+        averageRanking,
+        points
+      };
+      return res.json(result);
+    })
+    .catch(console.log);
 };
 
 exports.calcAffinities = (req, res) => {
@@ -108,7 +109,7 @@ exports.calcAffinities = (req, res) => {
           score: score.toFixed(2)
         };
         matches.push(match);
-      };
+      }
       const sortedMatches = matches.sort((a, b) => b.score - a.score);
       return res.json(sortedMatches);
     })

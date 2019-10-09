@@ -56,11 +56,10 @@ class EditableList extends Component {
                 className="d-inline-block text-truncate"
                 style={{ maxWidth: '510px' }}
               >
-                {/* paste this to end of pathname after debugging disappearing movie titles: /${movie.title.concat('-', movie.year).split(' ').join('-')} */}
                 <Link
                   className="movie-link"
                   to={{
-                    pathname: `/movies/${id}/${title.concat('-', year).split(' ').join('-')}`,
+                    pathname: `/movies/${title.concat('-', year).split(' ').join('-')}`,
                     state: { movie }
                   }}
                 >

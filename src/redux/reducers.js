@@ -1,11 +1,11 @@
-import { TYPES } from './actions';
 import { arrayMove } from 'react-sortable-hoc';
+import { TYPES } from './actions';
 import isEmpty from '../utils/helpers/is-empty';
 
 const initialState = {
   isAuthenticated: false,
   user_token: {},
-  user: {}, // object containing email, id, username of authenticateds user
+  user: {}, // object containing email, id, username of authenticated user
   authErrors: {},
   username: '',
   statement: '',
@@ -19,7 +19,7 @@ const initialState = {
   commentsLoading: true,
   affinitiesLoading: true,
   movieStatsLoading: true
-}
+};
 
 // destructured action parameter is desctructured and passed in to rootReducer function,
 // then state slices to return if type === <case>
@@ -74,7 +74,7 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_AFFINITIES: return {
       ...state,
       affinities: payload
-    }
+    };
     case TYPES.POST_COMMENT: return {
       ...state,
       comments: [payload, ...state.comments]
@@ -113,4 +113,4 @@ export default (state = initialState, { type, payload }) => {
     };
     default: return state;
   }
-}
+};

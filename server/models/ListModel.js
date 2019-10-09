@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema, model } = mongoose;
 
 const ListSchema = new Schema({
   username: {
@@ -29,22 +29,7 @@ const ListSchema = new Schema({
       type: String,
       required: true
     }
-  }],
-  // comments: [{
-  //   author: {
-  //     type: String,
-  //     lowercase: true,
-  //     required: true
-  //   },
-  //   text: {
-  //     type: String,
-  //     requried: true
-  //   },
-  //   post_date: {
-  //     type: String,
-  //     required: true
-  //   }
-  // }]
+  }]
 });
 
-module.exports = List = mongoose.model('List', ListSchema);
+module.exports = model('List', ListSchema);

@@ -20,15 +20,15 @@ const CommentsWithLoading = withLoading(Comments);
 
 class Profile extends PureComponent  {
 
+  componentDidMount() {
+    this.fetchData();
+  };
+
   fetchData = () => {
     const { fetchListData, fetchComments, user } = this.props;
     const { username } = this.props.match.params;
     fetchListData(username || user.username);
     fetchComments(username || user.username);
-  };
-
-  componentDidMount() {
-    this.fetchData();
   };
 
   componentDidUpdate(prevProps) {

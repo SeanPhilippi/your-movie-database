@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const { Schema, model } = mongoose;
 
 const CommentSchema = new Schema({
   movie_id: String,
@@ -23,4 +23,4 @@ const CommentSchema = new Schema({
   }
 });
 
-module.exports = Comment = mongoose.model("Comment", CommentSchema);
+module.exports = model('Comment', CommentSchema);

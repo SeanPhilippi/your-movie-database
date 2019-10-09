@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const { Schema, model } = mongoose;
 
 const MovieSchema = new Schema({
   title: {
@@ -79,7 +79,8 @@ const MovieSchema = new Schema({
     },
     strengths: {
       type: String,
-      // might change this, think of incentives, this might increase review quality if users have to consider this
+      // might change this, think of incentives, this might increase review quality if
+      // users have to consider this
       required: false
     },
     weaknesses: {
@@ -87,7 +88,6 @@ const MovieSchema = new Schema({
       required: false
     }
   }]
-
 });
 
-module.exports = Movie = mongoose.model("Movie", MovieSchema);
+module.exports = model('Movie', MovieSchema);
