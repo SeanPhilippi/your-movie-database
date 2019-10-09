@@ -23,10 +23,8 @@ const initialState = {
   movieStatsLoading: true
 };
 
-// destructured action parameter is desctructured and passed in to rootReducer function,
-// then state slices to return if type === <case>
 export default (state = initialState, { type, payload }) => {
-  console.log('reducer', type, payload);
+  // console.log('reducer', type, payload);
   switch (type) {
     case TYPES.SET_CURRENT_USER: return {
       ...state,

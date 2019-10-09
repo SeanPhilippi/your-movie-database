@@ -299,11 +299,11 @@ export const setMovieStats = stats => ({
   payload: stats
 });
 
-export const fetchMovieStats = id => dispatch => {
+export const fetchMovieStats = (movie, update) => dispatch => {
   console.log('fetching movie stats...')
   // fetch movie rankings
   dispatch(setMovieStatsLoading(true));
-  axios(`/api/movies/rankings/${ id }`)
+  axios(`/api/movies/rankings/${ movie.id }`)
     .then(({ data, data: { results, averageRanking, points } }) => {
       dispatch(setMovieStats({
         voters: results.reverse(),
@@ -311,6 +311,18 @@ export const fetchMovieStats = id => dispatch => {
         points,
       }));
       dispatch(setMovieStatsLoading(false));
+      if (update) {
+        const { id, title, year, director } = movie;
+        dispatch(updateMovie({
+          id,
+          title,
+          year,
+          director,
+          averageRanking,
+          points,
+          voters: results.reverse(),
+        }));
+      };
     });
 };
 
@@ -321,12 +333,14 @@ export const addToList = movie => dispatch => {
       movie
     }
   });
-  dispatch(updateMovie(movie));
+  dispatch(fetchMovieStats(movie, true));
 };
 
 export const updateMovie = movie => dispatch => {
+  console.log('updating movie')
   axios.put(`/api/movies/update/${ movie.id }`, movie)
     .then(({ data }) => {
+      console.log('updateMovie data', data)
       // parse data if needed, prob better to parse on backend
       dispatch(setTopMoviesList(data));
     });

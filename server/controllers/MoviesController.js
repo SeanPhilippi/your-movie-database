@@ -60,6 +60,7 @@ exports.deleteList = (req, res) => {
 };
 
 exports.createMovie = (req, res) => {
+  console.log('createMovie req body', req.body)
   const {
     id,
     title,

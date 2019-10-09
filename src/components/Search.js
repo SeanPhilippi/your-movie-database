@@ -15,14 +15,11 @@ class Search extends PureComponent {
 
   handleAdd = movie => {
     const { addToList, items } = this.props;
-    console.log('no here')
     // fetch call to grab movie from api by id, then grab director
     fetch(`/api/movies/id/${ movie.imdbID }`)
       .then(res => res.json())
       .then(data => {
-        console.log('here')
         let titles = items.map(item => item.title);
-        console.log('titles', titles)
         if (!titles.includes(movie.Title)) {
           if (items.length < 20) {
             addToList({

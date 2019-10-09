@@ -61,7 +61,7 @@ class MoviePage extends PureComponent {
         this.setState({ movie: fetchedMovie });
       });
     fetchMovieComments(movie.id);
-    fetchMovieStats(movie.id);
+    fetchMovieStats(movie);
   };
 
   render() {
@@ -156,7 +156,6 @@ class MoviePage extends PureComponent {
                   </div>
                 </div>
               </CardWrapper>
-
               {/* -------Rankings------- */}
               <CardWrapper
                 icon="vote-yea"
@@ -171,7 +170,6 @@ class MoviePage extends PureComponent {
               </CardWrapper>
             </div>
           </div>
-
           {/* Right Column */}
           <div className="right-col">
             <div className="m-4">
@@ -180,7 +178,6 @@ class MoviePage extends PureComponent {
                 title="comments"
                 color="white"
               >
-                {/* <Comments/> */}
                 <CommentsWithLoading
                   isLoading={ commentsLoading }
                   comments={ comments }
@@ -204,7 +201,7 @@ MoviePage.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   fetchMovieComments: movie_id => dispatch(fetchMovieComments(movie_id)),
-  fetchMovieStats: id => dispatch(fetchMovieStats(id)),
+  fetchMovieStats: (movie, update) => dispatch(fetchMovieStats(movie, update)),
   setMovieStatsLoading: bool => dispatch(setMovieStatsLoading(bool)),
 });
 

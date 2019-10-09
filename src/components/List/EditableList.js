@@ -34,7 +34,7 @@ class EditableList extends Component {
             <span className="number">{ props.sortIndex + 1 }</span>
           </div>
         </div>
-      )
+      );
     });
 
     const SortableItem = sortableElement(({ movie, sortIndex }) => {
@@ -62,7 +62,7 @@ class EditableList extends Component {
                 <Link
                   className="movie-link"
                   to={{
-                    pathname: `/movies/${title.concat('-', year).split(' ').join('-')}`,
+                    pathname: `/movies/${ title.concat('-', year).split(' ').join('-') }`,
                     state: { movie }
                   }}
                 >
@@ -79,10 +79,8 @@ class EditableList extends Component {
             </button>
           </div>
         </div>
-      )
+      );
     });
-
-
 
     const SortableList = sortableContainer(({ items }) => (
       <div>
@@ -114,8 +112,8 @@ class EditableList extends Component {
         />
       </div>
     );
-  }
-}
+  };
+};
 
 EditableList.propTypes = {
   items: PropTypes.array.isRequired,
@@ -129,7 +127,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   orderList: ({ oldIndex, newIndex }) => dispatch(orderList(oldIndex, newIndex)),
-  deleteMovie: (movie) => dispatch(deleteMovie(movie))
+  deleteMovie: movie => dispatch(deleteMovie(movie))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditableList);
