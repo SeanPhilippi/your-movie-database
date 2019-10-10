@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import { connect } from 'react-redux';
@@ -26,17 +27,11 @@ class SaveDelete extends PureComponent {
       username,
       items: [...items],
       statement
-    }
+    };
     setUpdateStatus();
     setEditing(false);
 
-    fetch(`/api/movies/save/${ username }`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(listObj)
-      })
+    axios.put(`/api/movies/save/${ username }`, listObj)
       .then(res => res.json())
       .catch(console.log);
   };
@@ -106,7 +101,7 @@ class SaveDelete extends PureComponent {
               className="save-list"
               onClick={ this.handleUpdate }
             >
-                SAVE
+              SAVE
             </button>
           </Link>
           <button

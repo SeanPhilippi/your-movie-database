@@ -7,16 +7,23 @@ import CardWrapper from './HOCs/CardWrapper';
 import LoginBox from './LoginBox';
 import NewRegistersBox from './NewRegistersBox';
 import ViewableList from './List/ViewableList';
-import { setTopMoviesList } from '../redux/actions';
+import {
+  setTopMoviesList,
+  fetchNewUsers
+} from '../redux/actions';
 
 class Home extends PureComponent {
 
   componentDidMount() {
-    const { setTopMoviesList } = this.props;
+    const {
+      setTopMoviesList,
+      fetchNewUsers
+    } = this.props;
     axios('/api/movies/top-movies-list')
       .then(({ data }) => {
         setTopMoviesList(data);
       });
+    fetchNewUsers();
   };
 
   renderLoginBox() {
@@ -93,6 +100,7 @@ Home.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
+  fetchNewUsers: () => dispatch(fetchNewUsers()),
   setTopMoviesList: movies => dispatch(setTopMoviesList(movies)),
 });
 

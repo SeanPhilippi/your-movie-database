@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import SearchResult from './SearchResult';
 import { connect } from 'react-redux';
 import debounce from '../utils/helpers/debounce.js';
@@ -66,7 +67,7 @@ class Search extends PureComponent {
     if (e.key === 'Backspace') {
       this.clearResults();
       this.handleDelay();
-    }
+    };
   };
 
   handleSearch = () => {
@@ -74,18 +75,18 @@ class Search extends PureComponent {
     const pageNums = [1, 2, 3];
     const { searchText } = this.state;
     pageNums.forEach(num => {
-      fetch(`api/movies/search/${ searchText }/${ num }`)
-        .then(res => res.json())
-        .then(data => {
+      axios(`/api/movies/search/${ searchText }/${ num }`)
+        .then(({ data }) => {
+          console.log('search data', data);
           if (data.Search) {
             this.setState(prevState => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
-          }
+          };
         })
         .catch(console.log);
       });
   };
 
-  handleDelay = debounce(this.handleSearch, 300);
+  handleDelay = debounce(this.handleSearch, 500);
 
   onTextChange = e => {
     this.setState({ searchText: e.target.value });
@@ -93,7 +94,7 @@ class Search extends PureComponent {
     if (this.state.searchText && this.state.searchText.length > 1) {
       // fire handle search through debounce function to reduce api calls with delay
       this.handleDelay();
-    }
+    };
   };
 
   clearResults = () => {

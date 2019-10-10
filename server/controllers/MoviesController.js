@@ -50,7 +50,8 @@ exports.saveList = req => {
     {
       upsert: 'true',
     },
-  ).catch(console.log);
+  )
+  .catch(console.log);
 };
 
 exports.deleteList = (req, res) => {
