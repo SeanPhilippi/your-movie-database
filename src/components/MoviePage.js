@@ -88,6 +88,7 @@ class MoviePage extends PureComponent {
         voters,
         averageRanking,
         points,
+        overallRanking,
       }
     } = this.props;
 
@@ -141,6 +142,7 @@ class MoviePage extends PureComponent {
                   voters={ voters }
                   averageRanking={ averageRanking }
                   points={ points }
+                  overallRanking={ overallRanking }
                   isLoading={ movieStatsLoading }
                 />
                 {/* Review Box */}
@@ -209,7 +211,7 @@ const mapStateToProps = state => ({
   commentsLoading: state.commentsLoading,
   movieStatsLoading: state.movieStatsLoading,
   comments: state.comments,
-  stats: state.movieStats
+  stats: state.movieStats,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);

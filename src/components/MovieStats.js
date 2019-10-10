@@ -4,7 +4,8 @@ import withLoading from './HOCs/withLoading';
 const MovieStats = withLoading(({
   voters,
   averageRanking,
-  points
+  points,
+  overallRanking
 }) => (
   <div className="mt-4">
     <div className="font-weight-bold mb-1">
@@ -16,7 +17,7 @@ const MovieStats = withLoading(({
           Overall ranking:
         </div>
         <div className="bd-light row-height col-2 text-right">
-          {/* rank */}
+          { overallRanking }
         </div>
       </div>
       <div className="d-flex justify-content-between">

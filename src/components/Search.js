@@ -78,7 +78,6 @@ class Search extends PureComponent {
         .then(res => res.json())
         .then(data => {
           if (data.Search) {
-            console.log('data.Search', data.Search)
             this.setState(prevState => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
           }
         })

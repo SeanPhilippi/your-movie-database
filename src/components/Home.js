@@ -13,10 +13,8 @@ class Home extends PureComponent {
 
   componentDidMount() {
     const { setTopMoviesList } = this.props;
-    console.log('mounting')
     axios('/api/movies/top-movies-list')
       .then(({ data }) => {
-        console.log('movies', data)
         setTopMoviesList(data);
       });
   };

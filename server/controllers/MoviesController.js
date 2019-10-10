@@ -59,8 +59,7 @@ exports.deleteList = (req, res) => {
     .catch(console.log);
 };
 
-exports.createMovie = (req, res) => {
-  console.log('createMovie req body', req.body)
+exports.updateMovie = (req, res) => {
   const {
     id,
     title,
@@ -130,7 +129,6 @@ exports.getTopMovies = (req, res) => {
   // * use .update() maybe or .count()
   Movie.find({}).sort('-points')
     .exec().then(data => {
-      console.log('data', data)
       res.json(data);
     }).catch(console.log);
 };

@@ -280,18 +280,18 @@ export const setMovieStats = stats => ({
   payload: stats
 });
 
-export const fetchMovieStats = (movie, update) => dispatch => {
-  console.log('fetching movie stats...')
-  // fetch movie rankings
+export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
+  const { topMoviesList } = getState();
   dispatch(setMovieStatsLoading(true));
-  console.log('movie in fetchMovieStats', movie)
   if (!Array.isArray(movie)) {
+    const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;
     axios(`/api/movies/rankings/${ movie.id }`)
       .then(({ data: { results, averageRanking, points } }) => {
         dispatch(setMovieStats({
           voters: results.reverse(),
           averageRanking,
           points,
+          overallRanking,
         }));
         dispatch(setMovieStatsLoading(false));
         if (update) {
@@ -304,6 +304,7 @@ export const fetchMovieStats = (movie, update) => dispatch => {
             averageRanking,
             points,
             voters: results,
+            overallRanking
           }));
         };
       });
@@ -311,12 +312,14 @@ export const fetchMovieStats = (movie, update) => dispatch => {
   if (Array.isArray(movie)) {
     const movies = movie;
     movies.forEach(movie => {
+      const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;
       axios(`/api/movies/rankings/${ movie.id }`)
         .then(({ data: { results, averageRanking, points } }) => {
           dispatch(setMovieStats({
             voters: results.reverse(),
             averageRanking,
             points,
+            overallRanking,
           }));
           dispatch(setMovieStatsLoading(false));
           if (update) {
@@ -329,6 +332,7 @@ export const fetchMovieStats = (movie, update) => dispatch => {
               averageRanking,
               points,
               voters: results.reverse(),
+              overallRanking,
             }));
           };
         });

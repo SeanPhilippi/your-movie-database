@@ -9,7 +9,6 @@ import {
 import TopNav from './components/TopNav';
 import Home from './components/Home';
 import Profile from './components/Profile';
-import TopMovieList from './components/TopMovieList';
 import MoviePage from './components/MoviePage';
 import UpdateBar from './components/UpdateBar';
 import Register from './components/Register';
@@ -33,12 +32,10 @@ class App extends PureComponent {
     this.unlisten = this.props.history.listen((location, action) => {
       this.props.clearErrors();
     });
-    console.log("App didmount", this.unlisten)
   };
 
   componentWillUnmount() {
     this.unlisten();
-    console.log("App did unmount");
   };
 
   pageNotFound = () => <PageNotFound />;
@@ -64,7 +61,6 @@ class App extends PureComponent {
             <Route exact path="/most-visited" component={ UnderConstruction } />
             <Route exact path="/new-registers" component={ NewRegisters } />
             <Route path="/movies" component={ MoviePage } />
-            {/* <Route path="/movies/:slug" component={ MoviePage } /> */}
             <Route render={ this.pageNotFound } />
           </Switch>
           <Footer />

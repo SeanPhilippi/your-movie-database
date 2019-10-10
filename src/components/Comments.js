@@ -43,7 +43,6 @@ class Comments extends PureComponent {
   };
 
   renderComments = () => {
-    console.log('comments', this.props.comments)
     return (
       <div>
         {

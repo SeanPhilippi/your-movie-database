@@ -8,7 +8,7 @@ const {
   getListData,
   saveList,
   deleteList,
-  createMovie,
+  updateMovie,
   getMovieRankings,
   getTopMovies,
   calcAffinities
@@ -47,7 +47,7 @@ router.get('/top-movies-list', getTopMovies);
 // @route   PUT api/movies/update/:id
 // @desc    create or update movie model
 // @access  Public
-router.put('/update/:id', createMovie);
+router.put('/update/:id', updateMovie);
 
 // @route   GET api/movies/rankings/:movieId
 // @desc    grab user rankings for specific movie
