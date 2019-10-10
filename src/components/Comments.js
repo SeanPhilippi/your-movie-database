@@ -18,8 +18,18 @@ class Comments extends PureComponent {
   };
 
   handleComment = e => {
-    const { postComment, user: { username }, match, history, location } = this.props;
-    const { commentText } = this.state;
+    const {
+      postComment,
+      user: {
+        username
+      },
+      match,
+      history,
+      location
+    } = this.props;
+    const {
+      commentText
+    } = this.state;
     e.preventDefault();
     let newComment;
     if (commentText.length && history.location.pathname.includes('/movies')) {

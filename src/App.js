@@ -9,6 +9,7 @@ import {
 import TopNav from './components/TopNav';
 import Home from './components/Home';
 import Profile from './components/Profile';
+import TopMoviesList from './components/TopMoviesList';
 import MoviePage from './components/MoviePage';
 import UpdateBar from './components/UpdateBar';
 import Register from './components/Register';
@@ -51,7 +52,7 @@ class App extends PureComponent {
             <Route exact path="/login" component={ Login } />
             <Route exact path="/register" component={ Register } />
             <Route exact path="/account" component={ Account } />
-            <Route exact path="/top-movies" component={ UnderConstruction } />
+            <Route exact path="/top-movies" component={ TopMoviesList } />
             <Route exact path="/profile" component={ Profile } />
             {/* <Route exact path="/profile/edit=:edit/:username" component={ Profile } /> */}
             {/* render conditionally only if user is found, else 404 page */}

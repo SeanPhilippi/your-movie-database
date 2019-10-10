@@ -8,21 +8,16 @@ import LoginBox from './LoginBox';
 import NewRegistersBox from './NewRegistersBox';
 import ViewableList from './List/ViewableList';
 import {
-  setTopMoviesList,
   fetchNewUsers
 } from '../redux/actions';
 
 class Home extends PureComponent {
 
   componentDidMount() {
+    console.log('home mounting');
     const {
-      setTopMoviesList,
       fetchNewUsers
     } = this.props;
-    axios('/api/movies/top-movies-list')
-      .then(({ data }) => {
-        setTopMoviesList(data);
-      });
     fetchNewUsers();
   };
 
@@ -57,12 +52,12 @@ class Home extends PureComponent {
               rotate={ -5 }
               color='tan'
               link='top-movies'
-              title='top movie list'
+              title='top movies list'
             >
               <div className='pb-2'>
                 Top movies based on the favorites of { this.props.newUsers.length } registered users.
               </div>
-              <ViewableList />
+              <ViewableList itemsPerPage={ 20 } />
               <hr className='mt-4'/>
               <Link to='/top-movies'>Go to the complete Top Movie List</Link>
             </CardWrapper>
@@ -101,7 +96,6 @@ Home.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   fetchNewUsers: () => dispatch(fetchNewUsers()),
-  setTopMoviesList: movies => dispatch(setTopMoviesList(movies)),
 });
 
 const mapStateToProps = state => ({

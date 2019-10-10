@@ -1,14 +1,33 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { connect } from 'react-redux';
+import { setTopMoviesList } from '../../redux/actions';
 import { Link, withRouter } from 'react-router-dom';
 
 class ViewableList extends PureComponent {
+  componentDidMount() {
+    const { setTopMoviesList } = this.props;
+    console.log('viewable list mounting')
+    axios('/api/movies/top-movies-list')
+      .then(({ data }) => {
+        setTopMoviesList(data);
+      });
+  };
 
   render() {
-    const { items } = this.props;
+    const { items, itemsPerPage } = this.props;
 
-    const ViewableItem = ({ movie: { _id, title, director, year, id }, movie, idx }) => (
+    const ViewableItem = ({
+      movie: {
+        _id,
+        title,
+        director,
+        year
+      },
+      movie,
+      idx
+    }) => (
       <div
         key={ _id }
         className="d-flex bg-white justify-content-between"
@@ -28,7 +47,7 @@ class ViewableList extends PureComponent {
           >
             <Link
               to={{
-                pathname: `/movies/${title.concat('-', year).split(' ').join('-')}`,
+                pathname: `/movies/${ title.concat('-', year).split(' ').join('-') }`,
                 state: { movie }
               }}
             >
@@ -51,19 +70,29 @@ class ViewableList extends PureComponent {
       </div>
     );
 
-    const TopMovieList = () => {
-      return this.props.topMoviesList.slice(0, 20).map(
-        (item, idx) => <ViewableItem movie={item} idx={idx} key={item._id}/>
+    const TopMoviesList = () => {
+      return this.props.topMoviesList.slice(0, itemsPerPage).map((item, idx) =>
+        <ViewableItem
+          movie={ item }
+          idx={ idx }
+          key={ item._id }
+        />
       );
     };
 
     const UserList = () => {
-      return items.map((item, idx) => <ViewableItem movie={item} idx={idx} key={item._id}/>)
+      return items.map((item, idx) =>
+        <ViewableItem
+          movie={ item }
+          idx={ idx }
+          key={ item._id }
+        />
+      )
     };
 
     const whatToShow = () => {
-      if (this.props.match.path === '/') {
-        return <TopMovieList />
+      if (this.props.match.path === '/' || this.props.match.path === '/top-movies') {
+        return <TopMoviesList />
       } else if (!items.length) {
         return <NoList />
       } else {
@@ -83,8 +112,12 @@ ViewableList.propTypes = {
   items: PropTypes.array,
 };
 
+const mapDispatchToProps = dispatch => ({
+  setTopMoviesList: movies => dispatch(setTopMoviesList(movies)),
+});
+
 const mapStateToProps = state => ({
   topMoviesList: state.topMoviesList,
 });
 
-export default withRouter(connect(mapStateToProps)(ViewableList));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ViewableList));

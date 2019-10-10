@@ -104,14 +104,14 @@ class TopNav extends PureComponent {
               HOME
             </NavLink>
 
-            {/* <NavLink
+            <NavLink
               className="text-white mx-2 nav-block"
               exact
               to="/top-movies"
               activeClassName="active"
             >
-              TOP MOVIE LIST
-            </NavLink> */}
+              TOP MOVIES
+            </NavLink>
 
             <NavLink
               className="text-white mx-2 nav-block"
