@@ -84,25 +84,6 @@ export const setTopMoviesList = list => ({
   payload: list
 });
 
-export const orderList = (oldIndex, newIndex) => ({
-  type: TYPES.REORDER_LIST,
-  payload: {
-    oldIndex,
-    newIndex
-  }
-});
-
-export const deleteMovie = movie => ({
-  type: TYPES.DELETE_MOVIE,
-  payload: {
-    movie
-  }
-});
-
-export const deleteList = () => ({
-  type: TYPES.DELETE_LIST
-});
-
 export const setListDataLoading = bool => ({
   type: TYPES.SET_LIST_DATA_LOADING,
   payload: bool
@@ -144,7 +125,7 @@ export const setCurrentUser = user => dispatch => {
         statement: ''
       })
     );
-  }
+  };
 };
 
 export const postComment = comment => dispatch => {
@@ -303,27 +284,56 @@ export const fetchMovieStats = (movie, update) => dispatch => {
   console.log('fetching movie stats...')
   // fetch movie rankings
   dispatch(setMovieStatsLoading(true));
-  axios(`/api/movies/rankings/${ movie.id }`)
-    .then(({ data, data: { results, averageRanking, points } }) => {
-      dispatch(setMovieStats({
-        voters: results.reverse(),
-        averageRanking,
-        points,
-      }));
-      dispatch(setMovieStatsLoading(false));
-      if (update) {
-        const { id, title, year, director } = movie;
-        dispatch(updateMovie({
-          id,
-          title,
-          year,
-          director,
+  console.log('movie in fetchMovieStats', movie)
+  if (!Array.isArray(movie)) {
+    axios(`/api/movies/rankings/${ movie.id }`)
+      .then(({ data: { results, averageRanking, points } }) => {
+        dispatch(setMovieStats({
+          voters: results.reverse(),
           averageRanking,
           points,
-          voters: results.reverse(),
         }));
-      };
+        dispatch(setMovieStatsLoading(false));
+        if (update) {
+          const { id, title, year, director } = movie;
+          dispatch(updateMovie({
+            id,
+            title,
+            year,
+            director,
+            averageRanking,
+            points,
+            voters: results.reverse(),
+          }));
+        };
+      });
+  };
+  if (Array.isArray(movie)) {
+    const movies = movie;
+    movies.forEach(movie => {
+      axios(`/api/movies/rankings/${ movie.id }`)
+        .then(({ data: { results, averageRanking, points } }) => {
+          dispatch(setMovieStats({
+            voters: results.reverse(),
+            averageRanking,
+            points,
+          }));
+          dispatch(setMovieStatsLoading(false));
+          if (update) {
+            const { id, title, year, director } = movie;
+            dispatch(updateMovie({
+              id,
+              title,
+              year,
+              director,
+              averageRanking,
+              points,
+              voters: results.reverse(),
+            }));
+          };
+        });
     });
+  }
 };
 
 export const addToList = movie => dispatch => {
@@ -332,6 +342,41 @@ export const addToList = movie => dispatch => {
     payload: {
       movie
     }
+  });
+  dispatch(fetchMovieStats(movie, true));
+};
+
+export const orderList = (oldIndex, newIndex) => (dispatch, getState) => {
+  const { items } = getState();
+  console.log('old', oldIndex, 'new', newIndex)
+  dispatch({
+    type: TYPES.REORDER_LIST,
+    payload: {
+      oldIndex,
+      newIndex
+    }
+  });
+  // find which index is lowest and highest and assign to variables
+  // grab all items from state items array at the lowest index, up to the highest index
+  const startIdx = Math.min(oldIndex, newIndex);
+  const endIdx = Math.max(oldIndex, newIndex) + 1;
+  const movies = [...items.slice(startIdx, endIdx)];
+  dispatch(fetchMovieStats(movies, true));
+};
+
+export const deleteMovie = movie => dispatch => {
+  dispatch({
+    type: TYPES.DELETE_MOVIE,
+    payload: {
+      movie
+    }
+  });
+  dispatch(fetchMovieStats(movie, true));
+};
+
+export const deleteList = movie => dispatch => {
+  dispatch({
+    type: TYPES.DELETE_LIST
   });
   dispatch(fetchMovieStats(movie, true));
 };

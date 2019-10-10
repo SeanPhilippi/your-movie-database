@@ -89,7 +89,7 @@ class EditableList extends Component {
             return (
               <SortableItem
                 className="sortable-item"
-                key={ `item-${movie.id}` }
+                key={ `item-${ movie.id }` }
                 sortIndex={ index }
                 index={ index }
                 movie={ movie }
@@ -126,7 +126,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  orderList: ({ oldIndex, newIndex }) => dispatch(orderList(oldIndex, newIndex)),
+  orderList: ({ oldIndex, newIndex, movies }) => dispatch(orderList(oldIndex, newIndex, movies)),
   deleteMovie: movie => dispatch(deleteMovie(movie))
 });
 
