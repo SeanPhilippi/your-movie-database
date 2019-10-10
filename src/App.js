@@ -20,7 +20,10 @@ import NewRegisters from './components/NewRegisters';
 import PageNotFound from './components/PageNotFound';
 import UnderConstruction from './components/UnderConstruction';
 import Footer from './components/Footer';
-import { setNewUsers, clearErrors } from './redux/actions';
+import {
+  setNewUsers,
+  clearErrors
+} from './redux/actions';
 import http from './utils/http';
 
 class App extends PureComponent {

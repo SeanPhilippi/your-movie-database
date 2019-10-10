@@ -32,6 +32,14 @@ class Comments extends PureComponent {
     } = this.state;
     e.preventDefault();
     let newComment;
+    if (commentText.length && history.location.pathname.includes('/profile')) {
+      newComment = {
+        username: match.params.username || username,
+        author: username,
+        post_date: moment().format('LL'),
+        text: commentText
+      };
+    };
     if (commentText.length && history.location.pathname.includes('/movies')) {
       newComment = {
         movie_id: location.state.movie.id,
@@ -40,9 +48,9 @@ class Comments extends PureComponent {
         text: commentText
       };
     };
-    if (commentText.length && history.location.pathname.includes('/profile')) {
+    if (commentText.length && history.location.pathname.includes('/top-movies')) {
       newComment = {
-        username: match.params.username || username,
+        top_movies_list: true,
         author: username,
         post_date: moment().format('LL'),
         text: commentText
@@ -59,7 +67,7 @@ class Comments extends PureComponent {
           this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } />)
         }
       </div>
-    )
+    );
   };
 
   render() {

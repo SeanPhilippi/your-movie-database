@@ -15,7 +15,7 @@ exports.getComments = (req, res) => {
         post_date: 1
       }
     }
-  ]).then(data =>  res.json(data.reverse())
+  ]).then(data => res.json(data.reverse())
   ).catch(console.log);
 };
 
@@ -34,24 +34,63 @@ exports.getMovieComments = (req, res) => {
         post_date: 1
       }
     }
-  ]).then(data =>  res.json(data.reverse())
+  ]).then(data => res.json(data.reverse())
   ).catch(console.log);
 };
 
+exports.getTopMoviesComments = (req, res) => {
+  console.log('in getTopMoviesComments')
+  Comment.aggregate([
+    {
+      $match: {
+        top_movies_list: true
+      }
+    },
+    {
+      $project: {
+        author: 1,
+        text: 1,
+        post_date: 1
+      }
+    }
+  ])
+  .then(data => {
+    console.log('data', data)
+    return res.json(data.reverse())
+  })
+  .catch(console.log);
+};
+
 exports.postComment = (req, res) => {
-  const { username, text, post_date, author, movie_id } = req.body;
+  const {
+    username,
+    text,
+    post_date,
+    author,
+    movie_id,
+    top_movies_list
+  } = req.body;
   let newComment;
   if (movie_id) {
     newComment = new Comment({
+      movie_id,
+      author,
+      text,
+      post_date
+    });
+  };
+  if (username) {
+    newComment = new Comment({
+      username,
       author,
       text,
       post_date,
       movie_id
     });
   };
-  if (username) {
+  if (top_movies_list) {
     newComment = new Comment({
-      username,
+      top_movies_list,
       author,
       text,
       post_date,

@@ -216,7 +216,7 @@ export const fetchListData = username => dispatch => {
         }));
       };
       dispatch(setListDataLoading(false));
-    })
+    });
 };
 
 export const fetchAffinities = movieIds => dispatch => {
@@ -254,7 +254,23 @@ export const fetchMovieComments = movie_id => dispatch => {
       } else {
         console.log('there is no movie comments data')
         dispatch(setComments([]));
-      }
+      };
+      dispatch(setCommentsLoading(false));
+    }).catch(console.log);
+};
+
+export const fetchTopMoviesComments = () => dispatch => {
+  console.log('fetch top movies comments')
+  dispatch(setCommentsLoading(true));
+  axios('/api/comments/top-movies')
+    .then(({ data }) => {
+      console.log('top movies comments data', data)
+      if (data) {
+        dispatch(setComments(data));
+      } else {
+        console.log('there is no movie comments data')
+        dispatch(setComments([]));
+      };
       dispatch(setCommentsLoading(false));
     }).catch(console.log);
 };
@@ -283,7 +299,7 @@ export const setMovieStats = stats => ({
 export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
   const { topMoviesList } = getState();
   dispatch(setMovieStatsLoading(true));
-  if (!Array.isArray(movie)) {
+  if (!movie.length) {
     const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;
     axios(`/api/movies/rankings/${ movie.id }`)
       .then(({ data: { results, averageRanking, points } }) => {
@@ -309,7 +325,7 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
         };
       });
   };
-  if (Array.isArray(movie)) {
+  if (movie.length) {
     const movies = movie;
     movies.forEach(movie => {
       const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;

@@ -3,7 +3,7 @@ const { Schema, model } = mongoose;
 
 const CommentSchema = new Schema({
   movie_id: String,
-  top_movie_list: Boolean,
+  top_movies_list: Boolean,
   author: {
     type: String,
     lowercase: true,

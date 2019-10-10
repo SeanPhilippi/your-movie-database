@@ -2,7 +2,12 @@ const express = require('express');
 const router = express.Router();
 const commentsController = require('../../controllers/CommentsController');
 
-const { getComments, getMovieComments, postComment } = commentsController
+const {
+  getComments,
+  getMovieComments,
+  getTopMoviesComments,
+  postComment
+} = commentsController
 
 // @route   GET api/comments/:username
 // @desc    get comments to populate username's profile
@@ -13,6 +18,11 @@ router.get('/:username', getComments);
 // @desc    get comments to populate MoviePage
 // @access  Public
 router.get('/movie/:movie_id', getMovieComments);
+
+// @route   GET api/comments/top-movies
+// @desc    get comments to populate TopMoviesPage
+// @access  Public
+router.get('/top-movies', getTopMoviesComments);
 
 // @route   POST api/comments/
 // @desc    post new comment document to mongodb

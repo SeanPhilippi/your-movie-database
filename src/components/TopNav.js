@@ -96,7 +96,7 @@ class TopNav extends PureComponent {
 
           <div className="main-links d-flex justify-content-end">
             <NavLink
-              className="text-white mx-2 nav-block"
+              className="text-white nav-block"
               exact
               to="/"
               activeClassName="active"
@@ -105,7 +105,7 @@ class TopNav extends PureComponent {
             </NavLink>
 
             <NavLink
-              className="text-white mx-2 nav-block"
+              className="text-white nav-block"
               exact
               to="/top-movies"
               activeClassName="active"
@@ -114,7 +114,7 @@ class TopNav extends PureComponent {
             </NavLink>
 
             <NavLink
-              className="text-white mx-2 nav-block"
+              className="text-white nav-block"
               to={ isAuthenticated ? "/profile" : "/login" }
               isActive={ this.yourTopListActive }
             >
@@ -122,7 +122,7 @@ class TopNav extends PureComponent {
             </NavLink>
 
             {/* <NavLink
-              className="text-white mx-2 nav-block"
+              className="text-white nav-block"
               exact
               to="/users-index"
               activeClassName="active"
@@ -131,7 +131,7 @@ class TopNav extends PureComponent {
             </NavLink> */}
 
             {/* <NavLink
-              className="text-white mx-2 nav-block"
+              className="text-white nav-block"
               exact
               to="/all-movies"
               activeClassName="active"

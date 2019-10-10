@@ -4,11 +4,17 @@ import ViewableList from './List/ViewableList';
 import CardWrapper from './HOCs/CardWrapper';
 import withLoading from './HOCs/withLoading';
 import Comments from './Comments';
+import { fetchTopMoviesComments } from '../redux/actions';
 // import ReactPaginate from 'react-paginate';
 
 const CommentsWithLoading = withLoading(Comments);
 
 class TopMoviesList extends PureComponent {
+
+  componentDidMount() {
+    const { fetchTopMoviesComments } = this.props;
+    fetchTopMoviesComments();
+  };
 
   render() {
     const { commentsLoading, comments } = this.props;
@@ -45,9 +51,13 @@ class TopMoviesList extends PureComponent {
   };
 };
 
+const mapDispatchToProps = dispatch => ({
+  fetchTopMoviesComments: () => dispatch(fetchTopMoviesComments()),
+});
+
 const mapStateToProps = state => ({
   commentsLoading: state.commentsLoading,
   comments: state.comments,
 });
 
-export default connect(mapStateToProps)(TopMoviesList);
+export default connect(mapStateToProps, mapDispatchToProps)(TopMoviesList);
