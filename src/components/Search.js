@@ -10,6 +10,7 @@ class Search extends PureComponent {
   state = {
     searchText: '',
     searchResults: [],
+    allowResults: false,
   };
 
   focusInput = React.createRef();
@@ -86,7 +87,13 @@ class Search extends PureComponent {
       });
   };
 
-  handleDelay = debounce(this.handleSearch, 500);
+  handleDelay = debounce(this.handleSearch, 300);
+
+  handleFocus = (bool, time = 0) => {
+    setTimeout(time => {
+      this.setState({ allowResults: bool });
+    }, time);
+  };
 
   onTextChange = e => {
     this.setState({ searchText: e.target.value });
@@ -107,7 +114,7 @@ class Search extends PureComponent {
 
   render() {
     const { marginTopVal, users, items } = this.props;
-    const { searchText } = this.state;
+    const { searchText, allowResults } = this.state;
 
     return (
       <div className={`${ items.length > 19 ? 'd-none' : 'd-flex' } flex-column align-items-center mt-${ marginTopVal }`}>
@@ -121,9 +128,11 @@ class Search extends PureComponent {
           value={ searchText }
           onChange={ this.onTextChange }
           onKeyUp={ this.onKeyUp }
+          onFocus={ () => this.handleFocus(true) }
+          onBlur={ () => this.handleFocus(false, 200) }
         >
         </input>
-        { this.renderResults() }
+        { allowResults && this.renderResults() }
       </div>
     )
   }
