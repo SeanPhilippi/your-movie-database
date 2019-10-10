@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -6,21 +7,32 @@ import CardWrapper from './HOCs/CardWrapper';
 import LoginBox from './LoginBox';
 import NewRegistersBox from './NewRegistersBox';
 import ViewableList from './List/ViewableList';
-// import TopMovieList from './TopMovieList';
+import { setTopMoviesList } from '../redux/actions';
 
 class Home extends PureComponent {
+
+  componentDidMount() {
+    const { setTopMoviesList } = this.props;
+    console.log('mounting')
+    axios('/api/movies/top-movies-list')
+      .then(({ data }) => {
+        console.log('movies', data)
+        setTopMoviesList(data);
+      });
+  };
+
   renderLoginBox() {
     return this.props.isAuthenticated
       ? null
       : <CardWrapper
-          icon="sign-in-alt"
-          title="login"
-          color="white"
+          icon='sign-in-alt'
+          title='login'
+          color='white'
           marginTopVal='0'
         >
           <LoginBox />
         </CardWrapper>;
-  }
+  };
 
   render() {
     const Greeting = ({ addClass }) => (
@@ -31,42 +43,42 @@ class Home extends PureComponent {
     );
 
     return (
-      <div className="d-flex border-0 justify-content-center">
-        <div className="inner-container mt-4 p-0">
-          <div className="bg-white pt-2 col left-col">
-            <Greeting addClass="greeting" />
+      <div className='d-flex border-0 justify-content-center'>
+        <div className='inner-container mt-4 p-0'>
+          <div className='bg-white pt-2 col left-col'>
+            <Greeting addClass='greeting' />
             <CardWrapper
-              icon={["far", "list-alt"]}
+              icon={['far', 'list-alt']}
               rotate={ -5 }
-              color="tan"
-              link="top-movies"
-              title="top movie list"
+              color='tan'
+              link='top-movies'
+              title='top movie list'
             >
-              <div className="pb-2">
+              <div className='pb-2'>
                 Top movies based on the favorites of { this.props.newUsers.length } registered users.
               </div>
               <ViewableList />
-              <hr className="mt-4"/>
-              <Link to="/top-movies">Go to the complete Top Movie List</Link>
+              <hr className='mt-4'/>
+              <Link to='/top-movies'>Go to the complete Top Movie List</Link>
             </CardWrapper>
             <CardWrapper
-              icon="shoe-prints"
+              icon='shoe-prints'
               rotate={ 30 }
-              color="tan"
-              title="most visited lists"
+              color='tan'
+              title='most visited lists'
             >
 
             </CardWrapper>
           </div>
-          <div className="pt-0 col right-col">
-            <Greeting addClass="greeting-mobile mb-3" />
+          <div className='pt-0 col right-col'>
+            <Greeting addClass='greeting-mobile mb-3' />
             {
               this.renderLoginBox()
             }
             <CardWrapper
-              title="spotlight on a user"
-              color="white"
-              link="new-registers"
+              title='spotlight on a user'
+              color='white'
+              link='new-registers'
               marginTopVal={ this.props.isAuthenticated ? '0' : null }
             >
               <NewRegistersBox num={10} />
@@ -74,17 +86,21 @@ class Home extends PureComponent {
           </div>
         </div>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 Home.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
 };
+
+const mapDispatchToProps = dispatch => ({
+  setTopMoviesList: movies => dispatch(setTopMoviesList(movies)),
+});
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
   newUsers: state.newUsers,
 });
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

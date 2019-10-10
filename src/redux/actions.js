@@ -303,7 +303,7 @@ export const fetchMovieStats = (movie, update) => dispatch => {
             director,
             averageRanking,
             points,
-            voters: results.reverse(),
+            voters: results,
           }));
         };
       });
@@ -333,7 +333,7 @@ export const fetchMovieStats = (movie, update) => dispatch => {
           };
         });
     });
-  }
+  };
 };
 
 export const addToList = movie => dispatch => {
@@ -356,8 +356,6 @@ export const orderList = (oldIndex, newIndex) => (dispatch, getState) => {
       newIndex
     }
   });
-  // find which index is lowest and highest and assign to variables
-  // grab all items from state items array at the lowest index, up to the highest index
   const startIdx = Math.min(oldIndex, newIndex);
   const endIdx = Math.max(oldIndex, newIndex) + 1;
   const movies = [...items.slice(startIdx, endIdx)];
@@ -387,6 +385,6 @@ export const updateMovie = movie => dispatch => {
     .then(({ data }) => {
       console.log('updateMovie data', data)
       // parse data if needed, prob better to parse on backend
-      dispatch(setTopMoviesList(data));
+      // dispatch(setTopMoviesList(data));
     });
 };

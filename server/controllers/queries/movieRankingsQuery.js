@@ -1,4 +1,4 @@
-module.exports = (movieId) => [
+module.exports = movieId => [
   {
     $match: {
       'items.id': movieId

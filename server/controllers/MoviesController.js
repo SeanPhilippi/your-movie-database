@@ -125,6 +125,16 @@ exports.getMovieRankings = (req, res) => {
     .catch(console.log);
 };
 
+exports.getTopMovies = (req, res) => {
+  // * modify all documents so they come back with their overallRanking as their index + 1 after the sort
+  // * use .update() maybe or .count()
+  Movie.find({}).sort('-points')
+    .exec().then(data => {
+      console.log('data', data)
+      res.json(data);
+    }).catch(console.log);
+};
+
 exports.calcAffinities = (req, res) => {
   // store current user's movie ids from state.list in a variable
   const movieIds = req.body;

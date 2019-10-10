@@ -10,6 +10,7 @@ const {
   deleteList,
   createMovie,
   getMovieRankings,
+  getTopMovies,
   calcAffinities
 } = moviesController;
 
@@ -37,6 +38,11 @@ router.put('/save/:username', saveList);
 // @desc    delete list attached to username
 // @access  Public
 router.delete('/delete/:username', deleteList);
+
+// @route   GET api/movies/top-movies-list
+// @desc    get all movies docs sorted by their points
+// @access  Public
+router.get('/top-movies-list', getTopMovies);
 
 // @route   PUT api/movies/update/:id
 // @desc    create or update movie model
