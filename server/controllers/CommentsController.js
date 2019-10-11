@@ -1,64 +1,25 @@
 const Comment = require('../models/CommentModel');
 
 exports.getComments = (req, res) => {
-  Comment.aggregate([
-    {
-      $match: {
-        username: req.params.username
-      }
-    },
-    {
-      $project: {
-        author: 1,
-        username: 1,
-        text: 1,
-        post_date: 1
-      }
-    }
-  ]).then(data => res.json(data.reverse())
-  ).catch(console.log);
+  Comment.find({ username: req.params.username })
+    .then(data => res.json(data.reverse()))
+    .catch(console.log);
 };
 
 exports.getMovieComments = (req, res) => {
-  Comment.aggregate([
-    {
-      $match: {
-        movie_id: req.params.movie_id
-      }
-    },
-    {
-      $project: {
-        author: 1,
-        movie_id: 1,
-        text: 1,
-        post_date: 1
-      }
-    }
-  ]).then(data => res.json(data.reverse())
-  ).catch(console.log);
+  Comment.find({ movie_id: req.params.movie_id })
+    .then(data => res.json(data.reverse()))
+    .catch(console.log);
 };
 
 exports.getTopMoviesComments = (req, res) => {
   console.log('in getTopMoviesComments')
-  Comment.aggregate([
-    {
-      $match: {
-        top_movies_list: true
-      }
-    },
-    {
-      $project: {
-        author: 1,
-        text: 1,
-        post_date: 1
-      }
-    }
-  ])
-  .then(data => {
-    console.log('data', data)
-    return res.json(data.reverse())
-  })
-  .catch(console.log);
+  Comment.find({ top_movies_list: true })
+    .then(data => {
+      console.log('data', data)
+      return res.json(data.reverse())
+    })
+    .catch(console.log);
 };
 
 exports.postComment = (req, res) => {
