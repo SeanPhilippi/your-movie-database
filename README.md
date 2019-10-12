@@ -26,22 +26,25 @@ Concurrently: ```npm run both```
 
 ## Current State
 
-* Authentication is fully functional with login and register errors.  Users can login using either their email or username.  * Users can add, remove, and reorder movies, as well as write a profile statement and everything persists for the user session and can be saved which posts it to a database.
+* Authentication is fully functional with login and register errors.  Users can login using either their email or username.  * Users can add, remove, and reorder movies, as well as write a user statement and everything persists for the user session and can be saved which posts it to a database.
 * Saving transitions to a presentation view smoothly, and clicking the edit button transitions back to an edit view.
-* User data is cleared upon log out and log out happens automatically after a certain amount of time due to an expiring session.
+* User data is cleared upon log out and log out happens automatically after a certain amount of time due to an expiring session token.
 * Member lists can be visited, pages populate with their saved data.
 * Newly registered users populate a dedicated component, that also has its own page.
-* Comment system is working smoothly on user profiles.  Comments render smoothly, post to database, and author of comment is a link that navigates to their profile.
+* Comment system is working smoothly on user profiles, top movies list, and movie pages.  Comments render smoothly, post to database, author of comment is a link that navigates to their profile, and correct comments are fetched depending on the page.
 * Site is mostly responsive, some minor bugs to work out.
 * Affinities stats now populate, showing the top 5 most similar user lists.
+* MoviePages have stats for overall ranking, average ranking, # of voters, and number of points. 
+* Voters and their rank for the movie can be viewed on the movie's page.  
+* Top Movies List aggregating rankings from all member lists.
 
 ## Future Goals
-* Top Movie List aggregating rankings from all member lists.
-* Commenting system expanded to the Top Movies Page.
 * Users Index page with a search bar. This is partially done.
-* Flesh out movie pages: There will be an ability to add a movie to your list from the movie's page. There will also be that movie's overall site ranking info in the form of total points, place in Top Movies List, and the average ranking.
+* Flesh out movie pages: There will be an ability to add a movie to your list from the movie's page. 
 * IMDB links on Movie Pages.
-* Implement user visits and movie ranking data for display on home page preview windows.
+* Track user list visits and display on home page.
+* Ability to delete comments.
+* Searchbar below nav where movies can be searched. Currently search is just visiblable when editing personal list.
 * Add pictures of website to this repo README.md.
 
 <!--
