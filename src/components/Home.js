@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import CardWrapper from './HOCs/CardWrapper';
 import LoginBox from './LoginBox';
 import NewRegistersBox from './NewRegistersBox';
+import MostVisited from './MostVisited';
 import ViewableList from './List/ViewableList';
 import {
   fetchNewUsers
@@ -42,7 +43,7 @@ class Home extends PureComponent {
     );
 
     return (
-      <div className='d-flex border-0 justify-content-center'>
+      <div className='d-flex border-0 justify-content-center' style={{ height: '100%' }}>
         <div className='inner-container mt-4 p-0'>
           <div className='bg-white pt-2 col left-col'>
             <Greeting addClass='greeting' />
@@ -60,14 +61,14 @@ class Home extends PureComponent {
               <hr className='mt-4'/>
               <Link to='/top-movies'>Go to the complete Top Movie List</Link>
             </CardWrapper>
-            {/* <CardWrapper
+            <CardWrapper
               icon='shoe-prints'
               rotate={ 30 }
               color='tan'
               title='most visited lists'
             >
-
-            </CardWrapper> */}
+              <MostVisited num={ 10 } />
+            </CardWrapper>
           </div>
           <div className='pt-0 col right-col'>
             <Greeting addClass='greeting-mobile mb-3' />

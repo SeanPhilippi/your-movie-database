@@ -37,7 +37,7 @@ class ViewableList extends PureComponent {
             <span className="number">{ idx + 1 }</span> &nbsp;
           </div>
           <div
-            tltle={`${ title } (${ director }, ${ year })`}
+            title={`${ title } (${ director }, ${ year })`}
             className="d-inline-block text-truncate"
             style={{ maxWidth: '516px' }}
           >
