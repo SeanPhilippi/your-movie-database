@@ -5,14 +5,44 @@ import { fetchTopMoviesList } from '../../redux/actions';
 import { Link, withRouter } from 'react-router-dom';
 
 class ViewableList extends PureComponent {
+  state = {
+    currentPage: 1,
+    moviesPerPage: 25,
+    currentTopMovies: [],
+  };
+
   componentDidMount() {
     console.log('viewablelist mounting')
     const { fetchTopMoviesList } = this.props;
     fetchTopMoviesList();
   };
 
+  setCurrentTopMovies = e => {
+    const { moviesPerPage, currentPage } = this.state;
+    this.setState({ currentPage: Number(e.target.name) });
+    // 1: 0-24, 2: 25-49, 3: 50-74
+    //
+    const startIdx = moviesPerPage * (currentPage - 1);
+    const endIdx = startIdx + moviesPerPage;
+    console.log('startIdx', startIdx, 'endIdx', endIdx)
+    const currentTopMovies = this.props.topMoviesList.slice(startIdx, endIdx);
+    console.log('current', currentTopMovies)
+    this.setState({ currentTopMovies });
+  };
+
+  setMoviesPerPage = num => {
+
+  };
+
   render() {
-    const { items, itemsPerPage } = this.props;
+    const {
+      items,
+      topMoviesList
+    } = this.props;
+    const {
+      moviesPerPage,
+      currentPage
+    } = this.state;
 
     const ViewableItem = ({
       movie: {
@@ -60,6 +90,26 @@ class ViewableList extends PureComponent {
       </div>
     );
 
+    const pages = [1,2,3,4,5];
+
+    const PageSelect = () => (
+      <div className="d-flex">
+        {
+          pages.map(page => (
+            <div className="mr-2">
+              <button
+                onClick={ this.setCurrentTopMovies }
+                name={ page }
+              >
+                { page }
+              </button>
+            </div>
+            )
+          )
+        }
+      </div>
+    );
+
     const NoList = () => (
       <div>
         This user hasn't added any movies yet.
@@ -67,7 +117,17 @@ class ViewableList extends PureComponent {
     );
 
     const TopMoviesList = () => {
-      return this.props.topMoviesList.slice(0, itemsPerPage).map((item, idx) =>
+      return this.state.currentTopMovies.map((item, idx) =>
+        <ViewableItem
+          movie={ item }
+          idx={ idx + (moviesPerPage * (currentPage - 1)) }
+          key={ item._id }
+        />
+      );
+    };
+
+    const TopMoviesListPreview = ({ itemsPerPage }) => {
+      return topMoviesList.slice(0, itemsPerPage).map((item, idx) =>
         <ViewableItem
           movie={ item }
           idx={ idx }
@@ -87,8 +147,15 @@ class ViewableList extends PureComponent {
     };
 
     const whatToShow = () => {
-      if (this.props.match.path === '/' || this.props.match.path === '/top-movies') {
-        return <TopMoviesList />
+      if (this.props.match.path === '/') {
+        return <TopMoviesListPreview itemsPerPage={ 25 } />
+      } else if (this.props.match.path === '/top-movies') {
+        return (
+          <>
+            <PageSelect />
+            <TopMoviesList />
+          </>
+        );
       } else if (!items.length) {
         return <NoList />
       } else {

@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import {
+  withRouter,
+  Link
+} from 'react-router-dom';
 import Comment from './Comment';
 import Spinner from './Spinner';
 import moment from 'moment';
@@ -72,13 +75,16 @@ class Comments extends PureComponent {
 
   render() {
     const { commentText } = this.state;
-    const { isAuthenticated, loading } = this.props;
+    const {
+      isAuthenticated,
+      loading
+    } = this.props;
 
     return (
       <div className="d-flex flex-column p-2">
         {
           isAuthenticated
-          ? <React.Fragment>
+          ? <>
               <div className="pb-1 font-weight-bold text-left">
                 Write a comment
               </div>
@@ -97,7 +103,7 @@ class Comments extends PureComponent {
               >
                 Send
               </button>
-            </React.Fragment>
+            </>
           : <div className="ml-1 mb-1">
               Create an account <Link to="/register">here</Link> or <Link to="/login">log in</Link> to make a comment.
             </div>

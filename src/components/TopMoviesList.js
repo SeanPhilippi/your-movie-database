@@ -5,7 +5,6 @@ import CardWrapper from './HOCs/CardWrapper';
 import withLoading from './HOCs/withLoading';
 import Comments from './Comments';
 import { fetchTopMoviesComments } from '../redux/actions';
-// import ReactPaginate from 'react-paginate';
 
 const CommentsWithLoading = withLoading(Comments);
 
@@ -17,7 +16,10 @@ class TopMoviesList extends PureComponent {
   };
 
   render() {
-    const { commentsLoading, comments } = this.props;
+    const {
+      commentsLoading,
+      comments
+    } = this.props;
     return (
       <div className='grid-container bg-light2 mt-4'>
         <div className='bg-white'>
