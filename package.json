@@ -68,7 +68,7 @@
   "heroku-run-build-script": true,
   "devDependencies": {
     "browserify-css": "^0.12.0",
-    "jquery": "^1.9.1",
+    "jquery": "^3.4.0",
     "typescript": "^3.6.4"
   }
 }
