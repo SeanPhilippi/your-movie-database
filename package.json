@@ -12,6 +12,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@material-ui/core": "^3.9.1",
+    "array-move": "^2.1.0",
     "axios": "^0.19.0",
     "bcrypt-nodejs": "0.0.3",
     "bcryptjs": "^2.4.3",
@@ -64,5 +65,10 @@
     "not op_mini all"
   ],
   "proxy": "http://localhost:4300",
-  "heroku-run-build-script": true
+  "heroku-run-build-script": true,
+  "devDependencies": {
+    "browserify-css": "^0.12.0",
+    "jquery": "^1.9.1",
+    "typescript": "^3.6.4"
+  }
 }

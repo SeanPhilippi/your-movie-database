@@ -1,4 +1,4 @@
-import { arrayMove } from 'react-sortable-hoc';
+import arrayMove from 'array-move';
 import { TYPES } from './actions';
 import isEmpty from '../utils/helpers/is-empty';
 

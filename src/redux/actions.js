@@ -84,6 +84,11 @@ export const setTopMoviesList = list => ({
   payload: list
 });
 
+export const setMovieStats = stats => ({
+  type: TYPES.SET_MOVIE_STATS,
+  payload: stats
+});
+
 export const setListDataLoading = bool => ({
   type: TYPES.SET_LIST_DATA_LOADING,
   payload: bool
@@ -219,6 +224,13 @@ export const fetchListData = username => dispatch => {
     });
 };
 
+export const fetchTopMoviesList = () => dispatch => {
+  axios('/api/movies/top-movies-list')
+  .then(({ data }) => {
+    dispatch(setTopMoviesList(data));
+  });
+};
+
 export const fetchAffinities = movieIds => dispatch => {
   console.log('fetchAffinities');
   dispatch(setAffinitiesLoading(true));
@@ -291,16 +303,17 @@ export const logoutUser = history => dispatch => {
   };
 };
 
-export const setMovieStats = stats => ({
-  type: TYPES.SET_MOVIE_STATS,
-  payload: stats
-});
-
 export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
   const { topMoviesList } = getState();
   dispatch(setMovieStatsLoading(true));
   if (!movie.length) {
-    const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;
+    let overallRanking;
+    let movieIdx = topMoviesList.findIndex(item => item.id === movie.id);
+    if (movieIdx > -1) {
+      overallRanking = movieIdx + 1;
+    } else {
+      overallRanking = '';
+    }
     axios(`/api/movies/rankings/${ movie.id }`)
       .then(({ data: { results, averageRanking, points } }) => {
         dispatch(setMovieStats({

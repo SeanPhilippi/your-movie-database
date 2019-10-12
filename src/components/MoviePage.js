@@ -35,14 +35,13 @@ class MoviePage extends PureComponent {
   };
 
   componentDidMount() {
-    // want a visible movie title slug in url for users
-    // maybe don't need this for calls to server or calls to omdb api
     const {
       fetchMovieComments,
       fetchMovieStats,
       setMovieStatsLoading,
       location: {
-        state: { movie } }
+        state: { movie }
+      }
     } = this.props;
     setMovieStatsLoading(true);
     axios(`/api/movies/id/${ movie.id }`)
@@ -57,15 +56,16 @@ class MoviePage extends PureComponent {
           imdb_id: data.imdbID,
           runtime: data.Runtime,
           plot: data.Plot
-        }
+        };
         this.setState({ movie: fetchedMovie });
       });
+      console.log('movie.id in MoviePage', movie.id)
     fetchMovieComments(movie.id);
     fetchMovieStats(movie);
   };
 
   render() {
-    console.log('movie', this.props.location.state.movie)
+    console.log('location.state.movie', this.props.location.state.movie)
     // * how I was bringing in movie data for this page (via Link on SortableItem)
     // const { movie } = this.props.location.state;
     // * dummy data for development

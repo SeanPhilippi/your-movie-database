@@ -13,10 +13,8 @@ exports.getMovieComments = (req, res) => {
 };
 
 exports.getTopMoviesComments = (req, res) => {
-  console.log('in getTopMoviesComments')
   Comment.find({ top_movies_list: true })
     .then(data => {
-      console.log('data', data)
       return res.json(data.reverse())
     })
     .catch(console.log);

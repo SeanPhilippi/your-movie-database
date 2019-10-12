@@ -1,18 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { setTopMoviesList } from '../../redux/actions';
+import { fetchTopMoviesList } from '../../redux/actions';
 import { Link, withRouter } from 'react-router-dom';
 
 class ViewableList extends PureComponent {
   componentDidMount() {
-    const { setTopMoviesList } = this.props;
-    console.log('viewable list mounting')
-    axios('/api/movies/top-movies-list')
-      .then(({ data }) => {
-        setTopMoviesList(data);
-      });
+    console.log('viewablelist mounting')
+    const { fetchTopMoviesList } = this.props;
+    fetchTopMoviesList();
   };
 
   render() {
@@ -113,7 +109,7 @@ ViewableList.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setTopMoviesList: movies => dispatch(setTopMoviesList(movies)),
+  fetchTopMoviesList: () => dispatch(fetchTopMoviesList()),
 });
 
 const mapStateToProps = state => ({
