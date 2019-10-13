@@ -105,6 +105,14 @@ class ViewableList extends PureComponent {
 
 ViewableList.propTypes = {
   items: PropTypes.array,
+  topMoviesList: PropTypes.array,
+  currentTopMovies: PropTypes.array,
+  moviesPerPage: PropTypes.number,
+  currentPage: PropTypes.number,
+  fetchTopMoviesList: PropTypes.func.isRequired,
+  setCurrentTopMovies: PropTypes.func.isRequired,
+  setCurrentPage: PropTypes.func.isRequired,
+  setMoviesPerPage: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

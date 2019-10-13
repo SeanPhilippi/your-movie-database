@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ViewableList from './List/ViewableList';
 import CardWrapper from './HOCs/CardWrapper';
@@ -61,5 +62,11 @@ const mapStateToProps = state => ({
   commentsLoading: state.commentsLoading,
   comments: state.comments,
 });
+
+TopMoviesList.propTypes = {
+  commentsLoading: PropTypes.bool.isRequired,
+  comments: PropTypes.array.isRequired,
+  fetchTopMoviesComments: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopMoviesList);

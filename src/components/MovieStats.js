@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import withLoading from './HOCs/withLoading';
 
 const MovieStats = withLoading(({
@@ -48,5 +49,12 @@ const MovieStats = withLoading(({
     </div>
   </div>
 ));
+
+MovieStats.propTypes = {
+  voters: PropTypes.array.isRequired,
+  averageRanking: PropTypes.number.isRequired,
+  points: PropTypes.number.isRequired,
+  overallRanking: PropTypes.number.isRequired,
+};
 
 export default MovieStats;

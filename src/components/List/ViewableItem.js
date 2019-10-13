@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const ViewableItem = ({
@@ -46,5 +47,10 @@ const ViewableItem = ({
     </div>
   </div>
 );
+
+ViewableItem.propTypes = {
+  movie: PropTypes.object.isRequired,
+  idx: PropTypes.number.isRequired,
+};
 
 export default ViewableItem;

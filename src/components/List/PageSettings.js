@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const pages = [1, 2, 3, 4];
 
@@ -44,5 +45,11 @@ const PageSettings = ({
     </div>
   </div>
 );
+
+PageSettings.propTypes = {
+  setCurrentPage: PropTypes.func.isRequired,
+  moviesPerPage: PropTypes.number.isRequired,
+  handleMoviesPerPage: PropTypes.func.isRequired,
+};
 
 export default PageSettings;
