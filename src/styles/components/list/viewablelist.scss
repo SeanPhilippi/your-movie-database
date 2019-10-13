@@ -1,0 +1,17 @@
+.page-settings {
+  position: relative;
+  bottom: .6rem;
+  font-weight: 600;
+}
+
+.pages {
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  color: $red;
+  font-weight: 900;
+}
+
+.pages:hover {
+  color: white;
+}

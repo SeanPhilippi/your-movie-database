@@ -135,6 +135,10 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       currentPage: payload
     };
+    case TYPES.SET_MOVIES_PER_PAGE: return {
+      ...state,
+      moviesPerPage: payload
+    };
     default: return state;
   }
 };

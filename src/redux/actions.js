@@ -19,6 +19,7 @@ export const TYPES = {
   SET_TOP_MOVIES_LIST: 'SET_TOP_MOVIES_LIST',
   SET_CURRENT_TOP_MOVIES: 'SET_CURRENT_TOP_MOVIES',
   SET_CURRENT_PAGE: 'SET_CURRENT_PAGE',
+  SET_MOVIES_PER_PAGE: 'SET_MOVIES_PER_PAGE',
   POST_COMMENT: 'POST_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
   SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
@@ -118,6 +119,11 @@ export const setAffinitiesLoading = bool => ({
 
 export const setCurrentPage = num => ({
   type: TYPES.SET_CURRENT_PAGE,
+  payload: num
+});
+
+export const setMoviesPerPage = num => ({
+  type: TYPES.SET_MOVIES_PER_PAGE,
   payload: num
 });
 
