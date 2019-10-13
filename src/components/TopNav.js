@@ -69,7 +69,7 @@ class TopNav extends PureComponent {
     );
 
     return (
-      <Navbar className="navbar mt-4">
+      <Navbar className="navbar mt-2">
         { update && this.showStatus() }
         {/****** Logo *****/}
         <Navbar.Brand className="brand">
