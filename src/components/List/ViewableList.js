@@ -17,11 +17,17 @@ class ViewableList extends PureComponent {
     fetchTopMoviesList();
   };
 
-  setCurrentTopMovies = e => {
-    const { moviesPerPage, currentPage } = this.state;
+  setCurrentPage = e => {
     this.setState({ currentPage: Number(e.target.name) });
+    this.setCurrentTopMovies();
+  };
+
+  setCurrentTopMovies = () => {
+    const {
+      moviesPerPage,
+      currentPage
+    } = this.state;
     // 1: 0-24, 2: 25-49, 3: 50-74
-    //
     const startIdx = moviesPerPage * (currentPage - 1);
     const endIdx = startIdx + moviesPerPage;
     console.log('startIdx', startIdx, 'endIdx', endIdx)
@@ -64,7 +70,7 @@ class ViewableList extends PureComponent {
             className="text-right"
             style={{ width: '2.6rem' }}
           >
-            <span className="number">{ idx + 1 }</span> &nbsp;
+            <span className="number">{ ++idx }</span> &nbsp;
           </div>
           <div
             title={`${ title } (${ director }, ${ year })`}
@@ -98,7 +104,7 @@ class ViewableList extends PureComponent {
           pages.map(page => (
             <div className="mr-2">
               <button
-                onClick={ this.setCurrentTopMovies }
+                onClick={ this.setCurrentPage }
                 name={ page }
               >
                 { page }

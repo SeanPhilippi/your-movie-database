@@ -15,7 +15,8 @@ const initialState = {
   newUsers: [],
   comments: [],
   affinities: [],
-  movieStats: {}, // voters, averageRanking, points, overallRanking(coming soon)
+  movie: {},
+  movieStats: {}, // voters, averageRanking, points, overallRanking
   isEditing: false,
   listDataLoading: true,
   commentsLoading: true,
@@ -74,6 +75,10 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_COMMENTS: return {
       ...state,
       comments: payload
+    };
+    case TYPES.SET_MOVIE: return {
+      ...state,
+      movie: payload
     };
     case TYPES.SET_MOVIE_STATS: return {
       ...state,

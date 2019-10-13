@@ -10,18 +10,18 @@ const Rankings = withLoading(({ title, voters }) => (
     </div>
     <div className="bg-white">
       {
-        voters.map(user => (
+        voters.map(({ _id, username, rank }) => (
           <div
             className="d-flex justify-content-between"
-            key={ user._id }
+            key={ _id }
           >
             <div className="bd-light row-height col-10">
-              <Link to={`/profile/${ user.username }`}>
-                { user.username }
+              <Link to={`/profile/${ username }`}>
+                { username }
               </Link>
             </div>
             <div className="bd-light row-height col-2 text-right">
-              #{ user.rank }
+              #{ rank }
             </div>
           </div>
         ))

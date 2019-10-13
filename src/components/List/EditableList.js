@@ -31,7 +31,7 @@ class EditableList extends Component {
           >
           </img>
           <div className="text-right">
-            <span className="number">{ props.sortIndex + 1 }</span>
+            <span className="number">{ ++props.sortIndex }</span>
           </div>
         </div>
       );

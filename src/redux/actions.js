@@ -14,6 +14,7 @@ export const TYPES = {
   SET_LIST_DATA: 'SET_LIST_DATA',
   SET_AFFINITIES: 'SET_AFFINITIES',
   SET_COMMENTS: 'SET_COMMENTS',
+  SET_MOVIE: 'SET_MOVIE',
   SET_MOVIE_STATS: 'SET_MOVIE_STATS',
   SET_TOP_MOVIES_LIST: 'SET_TOP_MOVIES_LIST',
   POST_COMMENT: 'POST_COMMENT',
@@ -82,6 +83,11 @@ export const setAffinities = affinities => ({
 export const setTopMoviesList = list => ({
   type: TYPES.SET_TOP_MOVIES_LIST,
   payload: list
+});
+
+export const setMovie = movie => ({
+  type: TYPES.SET_MOVIE,
+  payload: movie
 });
 
 export const setMovieStats = stats => ({
@@ -303,6 +309,36 @@ export const logoutUser = history => dispatch => {
   };
 };
 
+export const fetchMovie = id => dispatch => {
+  axios(`/api/movies/id/${ id }`)
+  .then(({
+    data: {
+      Title,
+      Year,
+      Poster,
+      Director,
+      Released,
+      Country,
+      imdbID,
+      Runtime,
+      Plot,
+    }
+  }) => {
+    const movie = {
+      title: Title,
+      year: Year,
+      poster: Poster,
+      director: Director,
+      release_date: Released,
+      country: Country,
+      imdbId: imdbID,
+      runtime: Runtime,
+      plot: Plot
+    };
+    dispatch(setMovie(movie));
+  });
+};
+
 export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
   const { topMoviesList } = getState();
   dispatch(setMovieStatsLoading(true));
@@ -310,7 +346,7 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
     let overallRanking;
     let movieIdx = topMoviesList.findIndex(item => item.id === movie.id);
     if (movieIdx > -1) {
-      overallRanking = movieIdx + 1;
+      overallRanking = ++movieIdx;
     } else {
       overallRanking = '';
     }
