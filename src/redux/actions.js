@@ -385,29 +385,29 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
     movies.forEach(movie => {
       const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;
       axios(`/api/movies/rankings/${ movie.id }`)
-        .then(({ data: { results, averageRanking, points } }) => {
-          dispatch(setMovieStats({
-            voters: results.reverse(),
+      .then(({ data: { results, averageRanking, points } }) => {
+        dispatch(setMovieStats({
+          voters: results.reverse(),
+          averageRanking,
+          points,
+          overallRanking,
+        }));
+        if (update) {
+          const { id, title, year, director } = movie;
+          dispatch(updateMovie({
+            id,
+            title,
+            year,
+            director,
             averageRanking,
             points,
+            voters: results.reverse(),
             overallRanking,
           }));
-          dispatch(setMovieStatsLoading(false));
-          if (update) {
-            const { id, title, year, director } = movie;
-            dispatch(updateMovie({
-              id,
-              title,
-              year,
-              director,
-              averageRanking,
-              points,
-              voters: results.reverse(),
-              overallRanking,
-            }));
-          };
-        });
+        };
+      });
     });
+    dispatch(setMovieStatsLoading(false));
   };
 };
 
@@ -434,6 +434,7 @@ export const orderList = (oldIndex, newIndex) => (dispatch, getState) => {
   const startIdx = Math.min(oldIndex, newIndex);
   const endIdx = Math.max(oldIndex, newIndex) + 1;
   const movies = [...items.slice(startIdx, endIdx)];
+  console.log(movies)
   dispatch(fetchMovieStats(movies, true));
 };
 

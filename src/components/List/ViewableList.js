@@ -9,7 +9,7 @@ import {
   setCurrentPage,
   setMoviesPerPage
 } from '../../redux/actions';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class ViewableList extends PureComponent {
 
