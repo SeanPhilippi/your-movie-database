@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import Comments from './Comments';
 import Rankings from './Rankings';
 import MovieStats from './MovieStats';
@@ -10,6 +9,7 @@ import withLoading from './HOCs/withLoading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   fetchMovieComments,
+  fetchMovie,
   fetchMovieStats,
   setMovieStatsLoading
 } from '../redux/actions';
@@ -17,26 +17,11 @@ import {
 const CommentsWithLoading = withLoading(Comments);
 
 class MoviePage extends PureComponent {
-  state = {
-    movie: {
-      title: '',
-      year: '',
-      poster: '',
-      director: '',
-      release_date: '',
-      country: '',
-      imdb_id: '',
-      runtime: '',
-      plot: '',
-    },
-    voters: [],
-    averageRanking: '',
-    points: '',
-  };
 
   componentDidMount() {
     const {
       fetchMovieComments,
+      fetchMovie,
       fetchMovieStats,
       setMovieStatsLoading,
       location: {
@@ -44,22 +29,7 @@ class MoviePage extends PureComponent {
       }
     } = this.props;
     setMovieStatsLoading(true);
-    axios(`/api/movies/id/${ movie.id }`)
-      .then(({ data }) => {
-        const fetchedMovie = {
-          title: data.Title,
-          year: data.Year,
-          poster: data.Poster,
-          director: data.Director,
-          release_date: data.Released,
-          country: data.Country,
-          imdb_id: data.imdbID,
-          runtime: data.Runtime,
-          plot: data.Plot
-        };
-        this.setState({ movie: fetchedMovie });
-      });
-      console.log('movie.id in MoviePage', movie.id)
+    fetchMovie(movie.id)
     fetchMovieComments(movie.id);
     fetchMovieStats(movie);
   };
@@ -68,8 +38,10 @@ class MoviePage extends PureComponent {
     console.log('location.state.movie', this.props.location.state.movie)
     // * how I was bringing in movie data for this page (via Link on SortableItem)
     // const { movie } = this.props.location.state;
-    // * dummy data for development
     const {
+      comments,
+      commentsLoading,
+      movieStatsLoading,
       movie: {
         poster,
         title,
@@ -77,13 +49,9 @@ class MoviePage extends PureComponent {
         year,
         country,
         runtime,
+        imdbId,
         plot
-      }
-    } = this.state;
-    const {
-      comments,
-      commentsLoading,
-      movieStatsLoading,
+      },
       stats: {
         voters,
         averageRanking,
@@ -195,6 +163,7 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   movie: PropTypes.object.isRequired,
+  stats: PropTypes.object.isRequired,
   fetchMovieComments: PropTypes.func.isRequired,
   commentsLoading: PropTypes.bool,
   movieStatsLoading: PropTypes.bool,
@@ -203,11 +172,13 @@ MoviePage.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   fetchMovieComments: movie_id => dispatch(fetchMovieComments(movie_id)),
+  fetchMovie: id => dispatch(fetchMovie(id)),
   fetchMovieStats: (movie, update) => dispatch(fetchMovieStats(movie, update)),
   setMovieStatsLoading: bool => dispatch(setMovieStatsLoading(bool)),
 });
 
 const mapStateToProps = state => ({
+  movie: state.movie,
   commentsLoading: state.commentsLoading,
   movieStatsLoading: state.movieStatsLoading,
   comments: state.comments,

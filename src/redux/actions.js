@@ -14,8 +14,12 @@ export const TYPES = {
   SET_LIST_DATA: 'SET_LIST_DATA',
   SET_AFFINITIES: 'SET_AFFINITIES',
   SET_COMMENTS: 'SET_COMMENTS',
+  SET_MOVIE: 'SET_MOVIE',
   SET_MOVIE_STATS: 'SET_MOVIE_STATS',
   SET_TOP_MOVIES_LIST: 'SET_TOP_MOVIES_LIST',
+  SET_CURRENT_TOP_MOVIES: 'SET_CURRENT_TOP_MOVIES',
+  SET_CURRENT_PAGE: 'SET_CURRENT_PAGE',
+  SET_MOVIES_PER_PAGE: 'SET_MOVIES_PER_PAGE',
   POST_COMMENT: 'POST_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
   SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
@@ -30,7 +34,6 @@ export const TYPES = {
 
 // action creators
 export const setToken = decoded => {
-  console.log('decoded in setToken action', decoded)
   return {
     type: TYPES.SET_TOKEN,
     payload: decoded
@@ -84,6 +87,11 @@ export const setTopMoviesList = list => ({
   payload: list
 });
 
+export const setMovie = movie => ({
+  type: TYPES.SET_MOVIE,
+  payload: movie
+});
+
 export const setMovieStats = stats => ({
   type: TYPES.SET_MOVIE_STATS,
   payload: stats
@@ -109,10 +117,19 @@ export const setAffinitiesLoading = bool => ({
   payload: bool
 });
 
+export const setCurrentPage = num => ({
+  type: TYPES.SET_CURRENT_PAGE,
+  payload: num
+});
+
+export const setMoviesPerPage = num => ({
+  type: TYPES.SET_MOVIES_PER_PAGE,
+  payload: num
+});
+
 //thunk actions
 
 export const setCurrentUser = user => dispatch => {
-  console.log('setCurrentUser', user);
   dispatch({
     type: TYPES.SET_CURRENT_USER,
     payload: user
@@ -190,7 +207,6 @@ export const loginUser = (user, history) => dispatch => {
 export const fetchCurrentUser = () => dispatch => {
   axios('/api/users/current')
     .then(({ data }) => {
-      console.log('user in fetchCurrentUser', data.user)
       dispatch(setCurrentUser(data.user));
     });
 };
@@ -232,11 +248,9 @@ export const fetchTopMoviesList = () => dispatch => {
 };
 
 export const fetchAffinities = movieIds => dispatch => {
-  console.log('fetchAffinities');
   dispatch(setAffinitiesLoading(true));
   axios.post('/api/movies/affinities', movieIds)
     .then(({ data }) => {
-      console.log('affinities', data)
       dispatch(setAffinities(data));
       dispatch(setAffinitiesLoading(false));
     });
@@ -272,11 +286,9 @@ export const fetchMovieComments = movie_id => dispatch => {
 };
 
 export const fetchTopMoviesComments = () => dispatch => {
-  console.log('fetch top movies comments')
   dispatch(setCommentsLoading(true));
   axios('/api/comments/top-movies')
     .then(({ data }) => {
-      console.log('top movies comments data', data)
       if (data) {
         dispatch(setComments(data));
       } else {
@@ -303,6 +315,36 @@ export const logoutUser = history => dispatch => {
   };
 };
 
+export const fetchMovie = id => dispatch => {
+  axios(`/api/movies/id/${ id }`)
+  .then(({
+    data: {
+      Title,
+      Year,
+      Poster,
+      Director,
+      Released,
+      Country,
+      imdbID,
+      Runtime,
+      Plot,
+    }
+  }) => {
+    const movie = {
+      title: Title,
+      year: Year,
+      poster: Poster,
+      director: Director,
+      release_date: Released,
+      country: Country,
+      imdbId: imdbID,
+      runtime: Runtime,
+      plot: Plot
+    };
+    dispatch(setMovie(movie));
+  });
+};
+
 export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
   const { topMoviesList } = getState();
   dispatch(setMovieStatsLoading(true));
@@ -310,7 +352,7 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
     let overallRanking;
     let movieIdx = topMoviesList.findIndex(item => item.id === movie.id);
     if (movieIdx > -1) {
-      overallRanking = movieIdx + 1;
+      overallRanking = ++movieIdx;
     } else {
       overallRanking = '';
     }
@@ -343,29 +385,29 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
     movies.forEach(movie => {
       const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;
       axios(`/api/movies/rankings/${ movie.id }`)
-        .then(({ data: { results, averageRanking, points } }) => {
-          dispatch(setMovieStats({
-            voters: results.reverse(),
+      .then(({ data: { results, averageRanking, points } }) => {
+        dispatch(setMovieStats({
+          voters: results.reverse(),
+          averageRanking,
+          points,
+          overallRanking,
+        }));
+        if (update) {
+          const { id, title, year, director } = movie;
+          dispatch(updateMovie({
+            id,
+            title,
+            year,
+            director,
             averageRanking,
             points,
+            voters: results.reverse(),
             overallRanking,
           }));
-          dispatch(setMovieStatsLoading(false));
-          if (update) {
-            const { id, title, year, director } = movie;
-            dispatch(updateMovie({
-              id,
-              title,
-              year,
-              director,
-              averageRanking,
-              points,
-              voters: results.reverse(),
-              overallRanking,
-            }));
-          };
-        });
+        };
+      });
     });
+    dispatch(setMovieStatsLoading(false));
   };
 };
 
@@ -392,6 +434,7 @@ export const orderList = (oldIndex, newIndex) => (dispatch, getState) => {
   const startIdx = Math.min(oldIndex, newIndex);
   const endIdx = Math.max(oldIndex, newIndex) + 1;
   const movies = [...items.slice(startIdx, endIdx)];
+  console.log(movies)
   dispatch(fetchMovieStats(movies, true));
 };
 
@@ -420,4 +463,15 @@ export const updateMovie = movie => dispatch => {
       // parse data if needed, prob better to parse on backend
       // dispatch(setTopMoviesList(data));
     });
+};
+
+export const setCurrentTopMovies = () => (dispatch, getState) => {
+  const { moviesPerPage, currentPage, topMoviesList } = getState();
+  const startIdx = moviesPerPage * (currentPage - 1);
+  const endIdx = startIdx + moviesPerPage;
+  const currentTopMovies = topMoviesList.slice(startIdx, endIdx);
+  dispatch({
+    type: TYPES.SET_CURRENT_TOP_MOVIES,
+    payload: currentTopMovies
+  });
 };

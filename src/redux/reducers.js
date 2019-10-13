@@ -10,12 +10,16 @@ const initialState = {
   username: '',
   statement: '',
   items: [],
+  currentPage: 1,
+  moviesPerPage: 25,
+  currentTopMovies: [],
   topMoviesList: [],
   open: false,
   newUsers: [],
   comments: [],
   affinities: [],
-  movieStats: {}, // voters, averageRanking, points, overallRanking(coming soon)
+  movie: {},
+  movieStats: {}, // voters, averageRanking, points, overallRanking
   isEditing: false,
   listDataLoading: true,
   commentsLoading: true,
@@ -75,6 +79,10 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       comments: payload
     };
+    case TYPES.SET_MOVIE: return {
+      ...state,
+      movie: payload
+    };
     case TYPES.SET_MOVIE_STATS: return {
       ...state,
       movieStats: payload
@@ -118,6 +126,18 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_TOP_MOVIES_LIST: return {
       ...state,
       topMoviesList: payload
+    };
+    case TYPES.SET_CURRENT_TOP_MOVIES: return {
+      ...state,
+      currentTopMovies: payload
+    };
+    case TYPES.SET_CURRENT_PAGE: return {
+      ...state,
+      currentPage: payload
+    };
+    case TYPES.SET_MOVIES_PER_PAGE: return {
+      ...state,
+      moviesPerPage: payload
     };
     default: return state;
   }
