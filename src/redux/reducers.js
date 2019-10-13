@@ -10,6 +10,9 @@ const initialState = {
   username: '',
   statement: '',
   items: [],
+  currentPage: 1,
+  moviesPerPage: 25,
+  currentTopMovies: [],
   topMoviesList: [],
   open: false,
   newUsers: [],
@@ -123,6 +126,14 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_TOP_MOVIES_LIST: return {
       ...state,
       topMoviesList: payload
+    };
+    case TYPES.SET_CURRENT_TOP_MOVIES: return {
+      ...state,
+      currentTopMovies: payload
+    };
+    case TYPES.SET_CURRENT_PAGE: return {
+      ...state,
+      currentPage: payload
     };
     default: return state;
   }

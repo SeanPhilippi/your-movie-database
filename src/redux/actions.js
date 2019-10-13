@@ -17,6 +17,8 @@ export const TYPES = {
   SET_MOVIE: 'SET_MOVIE',
   SET_MOVIE_STATS: 'SET_MOVIE_STATS',
   SET_TOP_MOVIES_LIST: 'SET_TOP_MOVIES_LIST',
+  SET_CURRENT_TOP_MOVIES: 'SET_CURRENT_TOP_MOVIES',
+  SET_CURRENT_PAGE: 'SET_CURRENT_PAGE',
   POST_COMMENT: 'POST_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
   SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
@@ -31,7 +33,6 @@ export const TYPES = {
 
 // action creators
 export const setToken = decoded => {
-  console.log('decoded in setToken action', decoded)
   return {
     type: TYPES.SET_TOKEN,
     payload: decoded
@@ -115,10 +116,14 @@ export const setAffinitiesLoading = bool => ({
   payload: bool
 });
 
+export const setCurrentPage = num => ({
+  type: TYPES.SET_CURRENT_PAGE,
+  payload: num
+});
+
 //thunk actions
 
 export const setCurrentUser = user => dispatch => {
-  console.log('setCurrentUser', user);
   dispatch({
     type: TYPES.SET_CURRENT_USER,
     payload: user
@@ -196,7 +201,6 @@ export const loginUser = (user, history) => dispatch => {
 export const fetchCurrentUser = () => dispatch => {
   axios('/api/users/current')
     .then(({ data }) => {
-      console.log('user in fetchCurrentUser', data.user)
       dispatch(setCurrentUser(data.user));
     });
 };
@@ -238,11 +242,9 @@ export const fetchTopMoviesList = () => dispatch => {
 };
 
 export const fetchAffinities = movieIds => dispatch => {
-  console.log('fetchAffinities');
   dispatch(setAffinitiesLoading(true));
   axios.post('/api/movies/affinities', movieIds)
     .then(({ data }) => {
-      console.log('affinities', data)
       dispatch(setAffinities(data));
       dispatch(setAffinitiesLoading(false));
     });
@@ -278,11 +280,9 @@ export const fetchMovieComments = movie_id => dispatch => {
 };
 
 export const fetchTopMoviesComments = () => dispatch => {
-  console.log('fetch top movies comments')
   dispatch(setCommentsLoading(true));
   axios('/api/comments/top-movies')
     .then(({ data }) => {
-      console.log('top movies comments data', data)
       if (data) {
         dispatch(setComments(data));
       } else {
@@ -456,4 +456,15 @@ export const updateMovie = movie => dispatch => {
       // parse data if needed, prob better to parse on backend
       // dispatch(setTopMoviesList(data));
     });
+};
+
+export const setCurrentTopMovies = () => (dispatch, getState) => {
+  const { moviesPerPage, currentPage, topMoviesList } = getState();
+  const startIdx = moviesPerPage * (currentPage - 1);
+  const endIdx = startIdx + moviesPerPage;
+  const currentTopMovies = topMoviesList.slice(startIdx, endIdx);
+  dispatch({
+    type: TYPES.SET_CURRENT_TOP_MOVIES,
+    payload: currentTopMovies
+  });
 };
