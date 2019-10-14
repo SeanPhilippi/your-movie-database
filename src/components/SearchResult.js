@@ -16,13 +16,13 @@ class SearchResult extends PureComponent {
         { movie ? movie.Title : user.username } { movie && `(${ movie.Year })` }
       </div>
     </div>
-    )
-  }
-}
+    );
+  };
+};
 
 SearchResult.propTypes = {
   movie: PropTypes.object.isRequired,
   handleAdd: PropTypes.func.isRequired
-}
+};
 
 export default SearchResult;

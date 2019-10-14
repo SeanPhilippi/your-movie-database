@@ -35,7 +35,9 @@ const List = withLoading(({ isEditing, items, username, user }) => {
 });
 
 List.propTypes = {
-  user: PropTypes.object,
+  user: PropTypes.shape({
+    username: PropTypes.string,
+  }),
   username: PropTypes.string,
   items: PropTypes.array,
   isEditing: PropTypes.bool.isRequired,

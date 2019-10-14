@@ -15,7 +15,11 @@ const Comment = ({ comment: { author, post_date, text } }) => (
 );
 
 Comment.propTypes = {
-  comment: PropTypes.object.isRequired,
+  comment: PropTypes.shape({
+    author: PropTypes.string.isRequired,
+    post_date: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  }),
 };
 
 export default Comment;

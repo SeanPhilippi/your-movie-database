@@ -115,7 +115,9 @@ class Comments extends PureComponent {
 };
 
 Comments.propTypes = {
-  user: PropTypes.object,
+  user: PropTypes.shape({
+    username: PropTypes.string
+  }),
   isAuthenticated: PropTypes.bool.isRequired,
 };
 

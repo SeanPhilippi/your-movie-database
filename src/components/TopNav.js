@@ -147,7 +147,9 @@ class TopNav extends PureComponent {
 }
 
 TopNav.propTypes = {
-  user: PropTypes.object,
+  user: PropTypes.shape({
+    username: PropTypes.string,
+  }),
   isAuthenticated: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
 };

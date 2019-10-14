@@ -110,7 +110,10 @@ class LoginBox extends PureComponent {
 
 LoginBox.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.shape({
+    login: PropTypes.string,
+    password: PropTypes.string
+  }).isRequired
 };
 
 const mapStateToProps = state => ({

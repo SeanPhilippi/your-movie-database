@@ -49,7 +49,12 @@ const ViewableItem = ({
 );
 
 ViewableItem.propTypes = {
-  movie: PropTypes.object.isRequired,
+  movie: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired,
+  }),
   idx: PropTypes.number.isRequired,
 };
 

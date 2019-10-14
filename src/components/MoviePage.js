@@ -121,8 +121,12 @@ class MoviePage extends PureComponent {
 };
 
 MoviePage.propTypes = {
-  movie: PropTypes.object.isRequired,
-  stats: PropTypes.object.isRequired,
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired
+  }).isRequired,
+  stats: PropTypes.shape({
+    voters: PropTypes.array
+  }).isRequired,
   fetchMovieComments: PropTypes.func.isRequired,
   commentsLoading: PropTypes.bool,
   comments: PropTypes.array
