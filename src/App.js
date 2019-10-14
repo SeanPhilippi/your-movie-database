@@ -22,7 +22,8 @@ import UnderConstruction from './components/UnderConstruction';
 import Footer from './components/Footer';
 import {
   setNewUsers,
-  clearErrors
+  clearErrors,
+  setCurrentPage
 } from './redux/actions';
 import http from './utils/http';
 
@@ -35,6 +36,7 @@ class App extends PureComponent {
       .catch(console.log);
     this.unlisten = this.props.history.listen((location, action) => {
       this.props.clearErrors();
+      this.props.setCurrentPage(1)
     });
   };
 
@@ -86,6 +88,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setNewUsers: users => dispatch(setNewUsers(users)),
   clearErrors: () => dispatch(clearErrors()),
+  setCurrentPage: num => dispatch(setCurrentPage(num)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

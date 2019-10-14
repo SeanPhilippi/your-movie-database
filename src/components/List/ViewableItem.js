@@ -19,8 +19,8 @@ const ViewableItem = ({
   >
     <div className="d-flex overflow-hidden">
       <div
-        className="text-right"
-        style={{ width: '2.6rem' }}
+        className="text-right pl-1"
+        style={{ display: 'inline-block', minWidth: '2.6rem' }}
       >
         <span className="number">{ ++idx }</span> &nbsp;
       </div>
