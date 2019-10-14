@@ -35,6 +35,7 @@ class ViewableList extends PureComponent {
       topMoviesList,
       currentTopMovies,
       moviesPerPage,
+      pages,
       currentPage
     } = this.props;
 
@@ -76,11 +77,12 @@ class ViewableList extends PureComponent {
 
     const whatToShow = () => {
       if (this.props.match.path === '/') {
-        return <TopMoviesListPreview itemsPerPage={ 25 } />
+        return <TopMoviesListPreview itemsPerPage={ 20 } />
       } else if (this.props.match.path === '/top-movies') {
         return (
           <>
             <PageSettings
+              pages={ pages }
               setCurrentPage={ this.setCurrentPage }
               handleMoviesPerPage={ this.handleMoviesPerPage }
               moviesPerPage={ moviesPerPage }
@@ -125,6 +127,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   topMoviesList: state.topMoviesList,
   currentPage: state.currentPage,
+  pages: state.pages,
   moviesPerPage: state.moviesPerPage,
   currentTopMovies: state.currentTopMovies,
 });

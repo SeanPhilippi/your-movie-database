@@ -11,6 +11,7 @@ const initialState = {
   statement: '',
   items: [],
   currentPage: 1,
+  pages: [1, 2, 3, 4, 5],
   moviesPerPage: 25,
   currentTopMovies: [],
   topMoviesList: [],
@@ -139,6 +140,10 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_CURRENT_PAGE: return {
       ...state,
       currentPage: payload
+    };
+    case TYPES.SET_NUM_OF_PAGES: return {
+      ...state,
+      pages: payload
     };
     case TYPES.SET_MOVIES_PER_PAGE: return {
       ...state,

@@ -20,6 +20,7 @@ export const TYPES = {
   SET_CURRENT_TOP_MOVIES: 'SET_CURRENT_TOP_MOVIES',
   SET_CURRENT_PAGE: 'SET_CURRENT_PAGE',
   SET_MOVIES_PER_PAGE: 'SET_MOVIES_PER_PAGE',
+  SET_NUM_OF_PAGES: 'SET_NUM_OF_PAGES',
   POST_COMMENT: 'POST_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
   SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
@@ -477,8 +478,16 @@ export const setCurrentTopMovies = () => (dispatch, getState) => {
   const startIdx = moviesPerPage * (currentPage - 1);
   const endIdx = startIdx + moviesPerPage;
   const currentTopMovies = topMoviesList.slice(startIdx, endIdx);
+  // determine # of pages
+  const numOfPages = Math.ceil(topMoviesList.length / moviesPerPage);
+  const pages = Array.from(Array(numOfPages + 1).keys()).slice(1);
+  console.log('pages', pages)
   dispatch({
     type: TYPES.SET_CURRENT_TOP_MOVIES,
     payload: currentTopMovies
+  });
+  dispatch({
+    type: TYPES.SET_NUM_OF_PAGES,
+    payload: pages
   });
 };

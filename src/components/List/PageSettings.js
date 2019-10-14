@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const pages = [1, 2, 3, 4];
-
 const PageSettings = ({
   setCurrentPage,
+  pages,
   moviesPerPage,
   handleMoviesPerPage
 }) => (
