@@ -63,6 +63,7 @@ class App extends PureComponent {
             <Route exact path="/users-index" component={ UsersIndex } />
             <Route exact path="/all-movies" component={ UnderConstruction } />
             <Route exact path="/most-visited" component={ UnderConstruction } />
+            <Route exact path="/reviews" component={ UnderConstruction } />
             <Route exact path="/new-registers" component={ NewRegisters } />
             <Route path="/movies" component={ MoviePage } />
             <Route render={ this.pageNotFound } />
@@ -71,8 +72,8 @@ class App extends PureComponent {
         </div>
       </div>
     );
-  }
-}
+  };
+};
 
 App.propTypes = {
   isAuthenicated: PropTypes.bool,

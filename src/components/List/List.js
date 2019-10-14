@@ -22,6 +22,9 @@ const List = withLoading(({ isEditing, items, username, user }) => {
     return (
       <div>
         <div className="d-flex justify-content-end">
+          {/* <div className="blurb">
+            this is my blurb
+          </div> */}
           {
             user.username === username && <EditButton />
           }

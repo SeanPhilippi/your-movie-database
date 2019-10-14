@@ -19,12 +19,11 @@ class Register extends PureComponent {
   render() {
     return (
       <div className="d-flex border-0 justify-content-center">
-        <div className="inner-container mt-4 p-0">
+        <div className="inner-container mt-4 p-0 d-flex flex-column flex-sm-row">
           <Col className="bg-white pt-2">
-            <p className="">
+            <p>
               To fully enjoy the YMDb site, you just have to register for free with the following form. This information
               will mainly be used to identify you within the user community but will not be used for commercial purposes.
-              If you want to know why we need specific data you can find <a href="">more detailed information here</a>.
             </p>
             <CardWrapper
               icon="signature"
@@ -34,14 +33,16 @@ class Register extends PureComponent {
               <RegisterBox />
             </CardWrapper>
           </Col>
-          <Col className="">
-            <div className="">
+          <Col>
+            <div>
               <CardWrapper
                 icon="award"
                 rotate={ -5 }
                 title="advantages"
                 color="white"
-                marginTopVal="0"
+                marginTopVal='0'
+                marginTopValMobile='3'
+                className="advantages-wrapper"
               >
                 <div className="advantages">
                   <div>

@@ -35,12 +35,12 @@ body {
   display: grid;
   grid-template-columns: 4fr 3fr;
   margin-left: 0;
-  height: 100% !important;
 }
 
 @media only screen and (max-width: 600px) {
   .inner-container {
     display: flex;
+    width: 95%;
     flex-wrap: wrap-reverse;
     margin-left: 0;
   }

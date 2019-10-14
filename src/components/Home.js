@@ -43,7 +43,7 @@ class Home extends PureComponent {
     );
 
     return (
-      <div className='d-flex border-0 justify-content-center' style={{ height: '100%' }}>
+      <div className='d-flex border-0 justify-content-center'>
         <div className='inner-container mt-4 p-0'>
           <div className='bg-white pt-2 col left-col'>
             <Greeting addClass='greeting' />

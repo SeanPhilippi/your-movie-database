@@ -81,7 +81,7 @@ class MoviePage extends PureComponent {
                     Currently there are no reviews for this movie.
                   </div>
                   <div>
-                    <FontAwesomeIcon icon="chevron-right" /> &nbsp;<a href="#">Click here to add a review.</a>
+                    <FontAwesomeIcon icon="chevron-right" /> &nbsp;<a href="/reviews">Click here to add a review.</a>
                   </div>
                 </div>
               </CardWrapper>

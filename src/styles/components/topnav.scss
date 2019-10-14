@@ -41,6 +41,20 @@
   box-shadow: .2rem .2rem black;
 }
 
+@media only screen and (max-width: 600px) {
+  .nav-block {
+    padding-left: .4rem;
+    height: 1.9rem;
+    line-height: 1.9rem;
+    text-shadow: .1rem .1rem black;
+    border-radius: .2rem;
+    background-color: $red;
+    background-image: url("https://www.transparenttextures.com/patterns/subtle-carbon.png");
+    margin: 0 .6rem .4rem 0;
+    box-shadow: .2rem .2rem black;
+  }
+}
+
 .nav-block:active,
 .nav-block.active {
   background-color: $light-orange;

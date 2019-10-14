@@ -94,7 +94,7 @@ class TopNav extends PureComponent {
               { isAuthenticated ? authLinks : guestLinks }
             </div>
 
-          <div className="main-links d-flex justify-content-end">
+          <div className="main-links d-flex flex-sm-row flex-column justify-content-end">
             <NavLink
               className="text-white nav-block"
               exact

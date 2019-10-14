@@ -220,7 +220,6 @@ export const fetchCurrentUser = () => dispatch => {
 export const fetchNewUsers = () => dispatch => {
   axios('/api/users/new-registers')
     .then(({ data }) => {
-      console.log('data in fetchNewUsers', data);
       dispatch(setNewUsers(data));
     });
 };
