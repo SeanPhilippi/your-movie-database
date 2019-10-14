@@ -23,6 +23,7 @@ export const TYPES = {
   POST_COMMENT: 'POST_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
   SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
+  SET_MOVIE_DETAILS_LOADING: 'SET_MOVIE_DETAILS_LOADING',
   SET_MOVIE_STATS_LOADING: 'SET_MOVIE_STATS_LOADING',
   SET_AFFINITIES_LOADING: 'SET_AFFINITIES_LOADING',
   ADD_TO_LIST: 'ADD_TO_LIST',
@@ -104,6 +105,11 @@ export const setListDataLoading = bool => ({
 
 export const setCommentsLoading = bool => ({
   type: TYPES.SET_COMMENTS_LOADING,
+  payload: bool
+});
+
+export const setMovieDetailsLoading = bool => ({
+  type: TYPES.SET_MOVIE_DETAILS_LOADING,
   payload: bool
 });
 
@@ -316,6 +322,7 @@ export const logoutUser = history => dispatch => {
 };
 
 export const fetchMovie = id => dispatch => {
+  dispatch(setMovieDetailsLoading(true));
   axios(`/api/movies/id/${ id }`)
   .then(({
     data: {
@@ -342,6 +349,7 @@ export const fetchMovie = id => dispatch => {
       plot: Plot
     };
     dispatch(setMovie(movie));
+    dispatch(setMovieDetailsLoading(false));
   });
 };
 

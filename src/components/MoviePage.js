@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import MovieDetails from './MovieDetails';
 import Comments from './Comments';
 import Rankings from './Rankings';
 import MovieStats from './MovieStats';
@@ -11,7 +12,6 @@ import {
   fetchMovieComments,
   fetchMovie,
   fetchMovieStats,
-  setMovieStatsLoading
 } from '../redux/actions';
 
 const CommentsWithLoading = withLoading(Comments);
@@ -23,13 +23,11 @@ class MoviePage extends PureComponent {
       fetchMovieComments,
       fetchMovie,
       fetchMovieStats,
-      setMovieStatsLoading,
       location: {
         state: { movie }
       }
     } = this.props;
-    setMovieStatsLoading(true);
-    fetchMovie(movie.id)
+    fetchMovie(movie.id);
     fetchMovieComments(movie.id);
     fetchMovieStats(movie);
   };
@@ -42,21 +40,14 @@ class MoviePage extends PureComponent {
       comments,
       commentsLoading,
       movieStatsLoading,
+      movieDetailsLoading,
+      movie,
       movie: {
-        poster,
         title,
-        director,
-        year,
-        country,
-        runtime,
-        imdbId,
-        plot
       },
+      stats,
       stats: {
-        voters,
-        averageRanking,
-        points,
-        overallRanking,
+        voters
       }
     } = this.props;
 
@@ -73,45 +64,13 @@ class MoviePage extends PureComponent {
                 color="tan"
                 marginTopVal="0"
               >
-                <div className="movie-page d-flex">
-                  <div className="poster">
-                    <img
-                      width={300}
-                      height={600}
-                      className="poster-img"
-                      src={ poster }
-                      alt={ title }
-                    />
-                  </div>
-                  {/* <div
-                    className="poster-img"
-                    style={{ backgroundImage: `url(${ poster })` }}
-                  >
-                  </div> */}
-                  <div>
-                    <div className="title">
-                      { title }
-                    </div>
-                    <div className="font-weight-bold">
-                      directed by <span className="director">{ director }</span>
-                    </div>
-                    <div>
-                      { country }, { year }
-                    </div>
-                    <div>
-                      { runtime }
-                    </div>
-                    <div>
-                      { plot }
-                    </div>
-                  </div>
-                </div>
+                <MovieDetails
+                  isLoading={ movieDetailsLoading }
+                  movie={ movie }
+                />
                 <MovieStats
-                  voters={ voters }
-                  averageRanking={ averageRanking }
-                  points={ points }
-                  overallRanking={ overallRanking }
                   isLoading={ movieStatsLoading }
+                  stats={ stats }
                 />
                 {/* Review Box */}
                 <div>
@@ -166,7 +125,6 @@ MoviePage.propTypes = {
   stats: PropTypes.object.isRequired,
   fetchMovieComments: PropTypes.func.isRequired,
   commentsLoading: PropTypes.bool,
-  movieStatsLoading: PropTypes.bool,
   comments: PropTypes.array
 };
 
@@ -174,12 +132,12 @@ const mapDispatchToProps = dispatch => ({
   fetchMovieComments: movie_id => dispatch(fetchMovieComments(movie_id)),
   fetchMovie: id => dispatch(fetchMovie(id)),
   fetchMovieStats: (movie, update) => dispatch(fetchMovieStats(movie, update)),
-  setMovieStatsLoading: bool => dispatch(setMovieStatsLoading(bool)),
 });
 
 const mapStateToProps = state => ({
   movie: state.movie,
   commentsLoading: state.commentsLoading,
+  movieDetailsLoading: state.movieDetailsLoading,
   movieStatsLoading: state.movieStatsLoading,
   comments: state.comments,
   stats: state.movieStats,

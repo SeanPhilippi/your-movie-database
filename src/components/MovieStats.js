@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import withLoading from './HOCs/withLoading';
 
 const MovieStats = withLoading(({
-  voters,
-  averageRanking,
-  points,
-  overallRanking
+  stats: {
+    averageRanking,
+    points,
+    overallRanking,
+    voters
+  },
 }) => (
   <div className="mt-4">
     <div className="font-weight-bold mb-1">
@@ -51,10 +53,12 @@ const MovieStats = withLoading(({
 ));
 
 MovieStats.propTypes = {
-  voters: PropTypes.array.isRequired,
-  averageRanking: PropTypes.number.isRequired,
-  points: PropTypes.number.isRequired,
-  overallRanking: PropTypes.number.isRequired,
+  movie: PropTypes.shape({
+    voters: PropTypes.array.isRequired,
+    averageRanking: PropTypes.number.isRequired,
+    points: PropTypes.number.isRequired,
+    overallRanking: PropTypes.number.isRequired,
+  })
 };
 
 export default MovieStats;

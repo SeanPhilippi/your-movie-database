@@ -24,6 +24,7 @@ const initialState = {
   listDataLoading: true,
   commentsLoading: true,
   affinitiesLoading: true,
+  movieDetailsLoading: true,
   movieStatsLoading: true
 };
 
@@ -98,6 +99,10 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_COMMENTS_LOADING: return {
       ...state,
       commentsLoading: payload
+    };
+    case TYPES.SET_MOVIE_DETAILS_LOADING: return {
+      ...state,
+      movieDetailsLoading: payload
     };
     case TYPES.SET_MOVIE_STATS_LOADING: return {
       ...state,
