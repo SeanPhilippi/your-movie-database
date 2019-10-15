@@ -249,7 +249,9 @@ export const fetchListData = username => dispatch => {
 export const fetchTopMoviesList = () => dispatch => {
   axios('/api/movies/top-movies-list')
   .then(({ data }) => {
-    dispatch(setTopMoviesList(data));
+    // filter movies without points
+    const filteredMovies = data.filter(movie => movie.points);
+    dispatch(setTopMoviesList(filteredMovies));
   });
 };
 
@@ -481,7 +483,6 @@ export const setCurrentTopMovies = () => (dispatch, getState) => {
   // determine # of pages
   const numOfPages = Math.ceil(topMoviesList.length / moviesPerPage);
   const pages = Array.from(Array(numOfPages + 1).keys()).slice(1);
-  console.log('pages', pages)
   dispatch({
     type: TYPES.SET_CURRENT_TOP_MOVIES,
     payload: currentTopMovies

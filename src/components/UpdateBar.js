@@ -11,9 +11,9 @@ class UpdateBar extends PureComponent {
       <div>
         <Snackbar
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-          open={open}
-          onClose={setUpdateStatus}
-          autoHideDuration={2000}
+          open={ open }
+          onClose={ setUpdateStatus }
+          autoHideDuration={ 2000 }
           ContentProps={{
             'aria-describedby': 'message-id',
           }}

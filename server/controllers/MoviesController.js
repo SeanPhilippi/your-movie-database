@@ -7,7 +7,7 @@ const movieRankingsQuery = require('./queries/movieRankingsQuery');
 exports.getSearchResults = ({ params }, res) => {
   const apiKey = process.env.API_KEY;
   const { query, num } = params;
-  fetch(`http://www.omdbapi.com?s=${query.trim()}&apikey=${apiKey}&page=${num}`)
+  fetch(`http://www.omdbapi.com?s=${ query.trim() }&apikey=${ apiKey }&page=${ num }`)
     .then(res => res.json())
     .then(data => {
       res.json(data);
@@ -18,7 +18,7 @@ exports.getSearchResults = ({ params }, res) => {
 exports.getMovieData = (req, res) => {
   const apiKey = process.env.API_KEY;
   const movieId = req.params.id;
-  fetch(`http://www.omdbapi.com/?i=${movieId}&apikey=${apiKey}`)
+  fetch(`http://www.omdbapi.com/?i=${ movieId }&apikey=${ apiKey }`)
     .then(res => res.json())
     .then(data => {
       res.json(data);
@@ -32,7 +32,7 @@ exports.getListData = (req, res) => {
   }).catch(console.log);
 };
 
-exports.saveList = req => {
+exports.saveList = (req, res) => {
   const {
     username,
     items,
@@ -50,7 +50,7 @@ exports.saveList = req => {
     {
       upsert: 'true',
     },
-  )
+  ).then(() => res.sendStatus(200))
   .catch(console.log);
 };
 
