@@ -14,20 +14,15 @@ const ViewableItem = ({
 }) => (
   <div
     key={ _id }
-    className="d-flex bg-white justify-content-between"
-    style={{ lineHeight: '2rem' }}
+    className="d-flex bg-white justify-content-between viewable-item"
   >
     <div className="d-flex overflow-hidden">
-      <div
-        className="text-right pl-1"
-        style={{ display: 'inline-block', minWidth: '2.6rem' }}
-      >
+      <div className="text-right pl-1 viewable-item-rank">
         <span className="number">{ ++idx }</span> &nbsp;
       </div>
       <div
         title={`${ title } (${ director }, ${ year })`}
-        className="d-inline-block text-truncate"
-        style={{ maxWidth: '516px' }}
+        className="d-inline-block text-truncate viewable-item-text"
       >
         <Link
           to={{

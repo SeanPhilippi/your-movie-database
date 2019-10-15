@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const PageSettings = ({
   setCurrentPage,
   pages,
+  currentPage,
   moviesPerPage,
   handleMoviesPerPage
 }) => (
@@ -31,7 +32,7 @@ const PageSettings = ({
           <div className="mr-2">
             <button
               key={ idx }
-              className="pages"
+              className={`pages ${ page === currentPage && 'active-page' }`}
               onClick={ setCurrentPage }
               name={ page }
             >

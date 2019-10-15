@@ -15,3 +15,20 @@
 .pages:hover {
   color: white;
 }
+
+.viewable-item {
+  line-height: 2rem;
+}
+
+.viewable-item-rank {
+  display: inline-block;
+  min-width: 2.6rem;
+}
+
+.viewable-item-text {
+  max-width: 516px;
+}
+
+.active-page {
+  color: white;
+}

@@ -83,6 +83,7 @@ class ViewableList extends PureComponent {
           <>
             <PageSettings
               pages={ pages }
+              currentPage={ currentPage }
               setCurrentPage={ this.setCurrentPage }
               handleMoviesPerPage={ this.handleMoviesPerPage }
               moviesPerPage={ moviesPerPage }
