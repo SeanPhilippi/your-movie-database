@@ -88,7 +88,8 @@ exports.updateMovie = (req, res) => {
     {
       upsert: 'true',
     }
-  ).catch(console.log);
+  ).then(() => res.sendStatus(200))
+  .catch(console.log);
 };
 
 exports.getMovieRankings = (req, res) => {

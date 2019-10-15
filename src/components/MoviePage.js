@@ -29,7 +29,7 @@ class MoviePage extends PureComponent {
     } = this.props;
     fetchMovie(movie.id);
     fetchMovieComments(movie.id);
-    fetchMovieStats(movie);
+    fetchMovieStats(movie, true);
   };
 
   render() {
