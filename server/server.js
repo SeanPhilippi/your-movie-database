@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const cors = require('cors');
+const list = require('./routes/api/ListRoutes');
 const movies = require('./routes/api/MovieRoutes');
 const users = require('./routes/api/UserRoutes');
 const comments = require('./routes/api/CommentRoutes');
@@ -30,6 +31,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 mongoose.set('useCreateIndex', true);
 
 // Use routes
+app.use('/api/list', list);
 app.use('/api/movies', movies);
 app.use('/api/users', users);
 app.use('/api/comments', comments);

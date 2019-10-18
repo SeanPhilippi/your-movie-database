@@ -5,7 +5,7 @@ const geoip = require('geoip-lite');
 const User = require('../models/UserModel');
 const keys = require('../config/keys');
 const validateRegisterInput = require('./validation/validateRegisterInput');
-const formatDate = require('./formatDate');
+const formatDate = require('../../src/utils/helpers/formatDate');
 
 exports.registerUser = (req, res) => {
   // takes newUser object created on front-end and runs through validating function

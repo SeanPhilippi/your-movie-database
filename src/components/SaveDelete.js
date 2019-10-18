@@ -31,7 +31,7 @@ class SaveDelete extends PureComponent {
     setUpdateStatus();
     setEditing(false);
 
-    axios.put(`/api/movies/save/${ username }`, listObj)
+    axios.put(`/api/list/save/${ username }`, listObj)
       .then(res => res.json())
       .catch(console.log);
   };

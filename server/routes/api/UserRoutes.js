@@ -3,7 +3,12 @@ const router = express.Router();
 const passport = require('passport');
 const usersController = require('../../controllers/UsersController');
 
-const { registerUser, loginUser, getNewRegisters, getCurrentUser } = usersController;
+const {
+  registerUser,
+  loginUser,
+  getNewRegisters,
+  getCurrentUser
+} = usersController;
 
 // @route   POST api/users/register
 // @desc    Register user

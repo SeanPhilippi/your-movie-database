@@ -227,7 +227,7 @@ export const fetchNewUsers = () => dispatch => {
 
 export const fetchListData = username => dispatch => {
   dispatch(setListDataLoading(true));
-  axios(`/api/movies/${ username }/list`)
+  axios(`/api/list/${ username }/list`)
     .then(({ data }) => {
       if (data) {
         let movieIds = data.items.map(item => item.id);
@@ -257,7 +257,7 @@ export const fetchTopMoviesList = () => dispatch => {
 
 export const fetchAffinities = movieIds => dispatch => {
   dispatch(setAffinitiesLoading(true));
-  axios.post('/api/movies/affinities', movieIds)
+  axios.post('/api/list/affinities', movieIds)
     .then(({ data }) => {
       dispatch(setAffinities(data));
       dispatch(setAffinitiesLoading(false));
@@ -366,7 +366,7 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
     } else {
       overallRanking = '';
     }
-    axios(`/api/movies/rankings/${ movie.id }`)
+    axios(`/api/list/rankings/${ movie.id }`)
       .then(({ data: { results, averageRanking, points } }) => {
         dispatch(setMovieStats({
           voters: results.reverse(),
@@ -394,7 +394,7 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
     const movies = movie;
     movies.forEach(movie => {
       const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;
-      axios(`/api/movies/rankings/${ movie.id }`)
+      axios(`/api/list/rankings/${ movie.id }`)
       .then(({ data: { results, averageRanking, points } }) => {
         dispatch(setMovieStats({
           voters: results.reverse(),
