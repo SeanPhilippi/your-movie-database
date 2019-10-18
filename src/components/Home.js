@@ -6,7 +6,7 @@ import CardWrapper from './HOCs/CardWrapper';
 import LoginBox from './LoginBox';
 import NewRegistersBox from './NewRegistersBox';
 import MostVisited from './MostVisited';
-import ViewableList from './List/ViewableList';
+import ViewableList from './List/ViewableList/ViewableList';
 import {
   fetchNewUsers
 } from '../redux/actions';

@@ -8,7 +8,7 @@ import {
   setCurrentTopMovies,
   setCurrentPage,
   setMoviesPerPage
-} from '../../redux/actions';
+} from '../../../redux/actions';
 import { withRouter } from 'react-router-dom';
 
 class ViewableList extends PureComponent {

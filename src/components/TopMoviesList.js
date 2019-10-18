@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ViewableList from './List/ViewableList';
+import ViewableList from './List/ViewableList/ViewableList';
 import CardWrapper from './HOCs/CardWrapper';
 import withLoading from './HOCs/withLoading';
 import Comments from './Comments';
