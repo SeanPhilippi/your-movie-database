@@ -99,9 +99,10 @@ exports.loginUser = (req, res) => {
 
 exports.getNewRegisters = (req, res) => {
   // switch to a limit of the 50 most recent eventually
-  User.find({}).exec().then(data => {
-    res.json(data);
-  }).catch(console.log);
+  User.find({}).sort({_id: 1})
+    .exec().then(data => {
+      res.json(data);
+    }).catch(console.log);
 };
 
 exports.getCurrentUser = (req, res) => {
