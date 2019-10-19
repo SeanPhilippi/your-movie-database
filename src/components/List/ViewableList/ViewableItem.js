@@ -45,7 +45,11 @@ const ViewableItem = ({
             { points } pts
           </div>
       }
-        <a href={`http://www.imdb.com/title/${ id }/`}>
+        <a
+          href={`http://www.imdb.com/title/${ id }/`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src={ imdbLogo } alt="imdb-link"/>
         </a>
     </div>

@@ -35,7 +35,11 @@ const MovieDetails = withLoading(({
         <div className="title">
           { title }
         </div>
-        <a href={`http://www.imdb.com/title/${ imdbId }/`}>
+        <a
+          href={`http://www.imdb.com/title/${ imdbId }/`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src={ imdbLogo } alt="imdb-link"/>
         </a>
       </div>
