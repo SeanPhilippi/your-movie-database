@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import imdbLogo from '../../../images/imdb-logo.gif';
 
 const ViewableItem = ({
   movie: {
     _id,
     title,
     director,
-    year
+    year,
+    points,
+    id
   },
   movie,
   idx
@@ -36,9 +39,9 @@ const ViewableItem = ({
       </div>
     </div>
     <div className="align-self-end mr-2">
-      {/* <a href={`http://www.imdb.com/title/${_id}/`}>
-        IMDB
-      </a> */}
+      <a href={`http://www.imdb.com/title/${ id }/`}>
+        <img src={ imdbLogo } alt="imdb-link"/>
+      </a>
     </div>
   </div>
 );

@@ -29,7 +29,7 @@ exports.registerUser = (req, res) => {
         errors.email = 'You already have an account. Click "Forgot password" if you need to reset your password.';
         // 400 error for validation related errors
         return res.status(400).json(errors);
-      }
+      };
       const { username, email, password } = req.body;
       // grab ip address from req header
       const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -69,13 +69,13 @@ exports.loginUser = (req, res) => {
     data = { email: login };
   } else {
     data = { username: login };
-  }
+  };
   User.findOne(data)
     .then(user => {
       if (!user) {
         errors.login = 'User not found';
         return res.status(404).json(errors);
-      }
+      };
       const { _id, email, username } = user;
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
@@ -92,7 +92,7 @@ exports.loginUser = (req, res) => {
         } else {
           errors.password = 'Password incorrect';
           return res.status(400).json(errors);
-        }
+        };
       });
     });
 };
