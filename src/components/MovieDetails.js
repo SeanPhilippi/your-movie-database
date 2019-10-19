@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withLoading from './HOCs/withLoading';
+import imdbLogo from '../images/imdb-logo.gif';
 
 const MovieDetails = withLoading(({
   movie: {
@@ -30,8 +31,13 @@ const MovieDetails = withLoading(({
     >
     </div> */}
     <div>
-      <div className="title">
-        { title }
+      <div className="d-flex justify-content-between">
+        <div className="title">
+          { title }
+        </div>
+        <a href={`http://www.imdb.com/title/${ imdbId }/`}>
+          <img src={ imdbLogo } alt="imdb-link"/>
+        </a>
       </div>
       <div className="font-weight-bold">
         directed by <span className="director">{ director }</span>
