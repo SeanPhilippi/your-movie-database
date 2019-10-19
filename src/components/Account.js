@@ -19,7 +19,7 @@ class Account extends PureComponent {
         <Col className="inner-container mt-4 p-0">
           <Col className="bg-white pt-2">
             <CardWrapper
-              icon="user-circle"
+              icon={['far', 'user-circle']}
               rotate={ 0 }
               title="my account"
               color="tan"
