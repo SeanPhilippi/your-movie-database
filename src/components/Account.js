@@ -36,7 +36,7 @@ class Account extends PureComponent {
                 </button>
               </div>
             </CardWrapper>
-            <div className="height-div">
+            <div className="height-div-account">
             </div>
           </Col>
         </Col>

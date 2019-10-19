@@ -29,10 +29,6 @@ class Search extends PureComponent {
               year: movie.Year,
               director: data.Director,
               id: data.imdbID,
-              runtime: data.Runtime,
-              country: data.Country,
-              plot: data.Plot,
-              poster: data.Poster
             });
             // refocuses selector in search bar after add
             if (this.focusInput.current) {

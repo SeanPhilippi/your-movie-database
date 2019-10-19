@@ -8,6 +8,12 @@
   border-radius: 5px;
 }
 
-.height-div {
-  height: 70vh;
+.height-div-account {
+  height: 65vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .height-div-account {
+    height: 66vh;
+  }
 }

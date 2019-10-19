@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import imdbLogo from '../../../images/imdb-logo.gif';
+import plusIcon from '../../../images/plus.png';
+import { addToList } from '../../../redux/actions';
 
 const ViewableItem = ({
   movie: {
@@ -13,7 +16,8 @@ const ViewableItem = ({
     id
   },
   movie,
-  idx
+  idx,
+  addToList
 }) => (
   <div
     key={ _id }
@@ -21,6 +25,15 @@ const ViewableItem = ({
   >
     <div className="d-flex overflow-hidden">
       <div className="text-right pl-1 viewable-item-rank">
+        <img
+          onClick={ movie => {
+            console.log('adding movie', movie)
+            addToList(movie)
+          } }
+          className="plus"
+          src={ plusIcon }
+          alt="add movie"
+        />
         <span className="number">{ ++idx }</span> &nbsp;
       </div>
       <div
@@ -64,6 +77,15 @@ ViewableItem.propTypes = {
     year: PropTypes.string.isRequired,
   }),
   idx: PropTypes.number.isRequired,
+  addToList: PropTypes.func.isRequired,
 };
 
-export default ViewableItem;
+const mapStateToProps = state => ({
+  items: state.items
+});
+
+const mapDispatchToProps = dispatch => ({
+  addToList: movie => dispatch(addToList(movie)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewableItem);

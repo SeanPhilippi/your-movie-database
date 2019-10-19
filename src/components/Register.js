@@ -66,6 +66,8 @@ class Register extends PureComponent {
                   </div>
                 </div>
               </CardWrapper>
+              <div className="height-div-register noshow-mobile">
+              </div>
             </div>
           </Col>
         </div>
