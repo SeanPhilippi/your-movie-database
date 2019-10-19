@@ -38,10 +38,16 @@ const ViewableItem = ({
         ({ director }, { year })
       </div>
     </div>
-    <div className="align-self-end mr-2">
-      <a href={`http://www.imdb.com/title/${ id }/`}>
-        <img src={ imdbLogo } alt="imdb-link"/>
-      </a>
+    <div className={`align-self-end d-flex ${ points ? 'justify-content-between' : 'justify-content-end' } mr-2 pts-container`}>
+      {
+        points &&
+          <div className="points">
+            { points } pts
+          </div>
+      }
+        <a href={`http://www.imdb.com/title/${ id }/`}>
+          <img src={ imdbLogo } alt="imdb-link"/>
+        </a>
     </div>
   </div>
 );
