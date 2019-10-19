@@ -41,7 +41,6 @@ Concurrently: ```npm run both```
 ## Future Goals
 * Users Index page with a search bar. This is partially done.
 * Flesh out movie pages: There will be an ability to add a movie to your list from the movie's page. 
-* IMDB links on Movie Pages.
 * Track user list visits and display on home page.
 * Ability to delete comments.
 * Searchbar below nav where movies can be searched. Currently search is just visiblable when editing personal list.
