@@ -26,10 +26,7 @@ const ViewableItem = ({
     <div className="d-flex overflow-hidden">
       <div className="text-right pl-1 viewable-item-rank">
         <img
-          onClick={ movie => {
-            console.log('adding movie', movie)
-            addToList(movie)
-          } }
+          onClick={ () => addToList(movie) }
           className="plus"
           src={ plusIcon }
           alt="add movie"

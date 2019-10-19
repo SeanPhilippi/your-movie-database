@@ -3,24 +3,16 @@ import PropTypes from 'prop-types';
 
 const SearchResult = ({
   movie,
-  movie: {
-    imdbId,
-    Title,
-    Year
-  },
-  user: {
-    username,
-    _id,
-  },
+  user,
   handleAdd
 }) => (
   <div
-    key={ movie ? imdbId : _id }
+    key={ movie ? movie.imdbId : user._id }
     className="result-item"
     onClick={ () => handleAdd(movie) }
   >
     <div className="result-info">
-      { movie ? Title : username } { movie && `(${ Year })` }
+      { movie ? movie.Title : user.username } { movie && `(${ movie.Year })` }
     </div>
   </div>
 );

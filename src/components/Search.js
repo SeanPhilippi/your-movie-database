@@ -16,29 +16,15 @@ class Search extends PureComponent {
   focusInput = React.createRef();
 
   handleAdd = movie => {
-    const { addToList, items } = this.props;
-    // fetch call to grab movie from api by id, then grab director
-    fetch(`/api/movies/id/${ movie.imdbID }`)
-      .then(res => res.json())
-      .then(data => {
-        let titles = items.map(item => item.title);
-        if (!titles.includes(movie.Title)) {
-          if (items.length < 20) {
-            addToList({
-              title: movie.Title,
-              year: movie.Year,
-              director: data.Director,
-              id: data.imdbID,
-            });
-            // refocuses selector in search bar after add
-            if (this.focusInput.current) {
-              this.focusInput.current.focus();
-            }
-          }
-          this.clearResults();
-          this.clearSearchText();
-        };
-      });
+    console.log('handleadd movie', movie)
+    const { addToList } = this.props;
+    addToList(movie).then(added => {
+      if (added && this.focusInput.current) {
+        this.focusInput.current.focus();
+      };
+      this.clearResults();
+      this.clearSearchText();
+    });
   };
 
   renderResults = () => {
@@ -109,11 +95,11 @@ class Search extends PureComponent {
   };
 
   render() {
-    const { marginTopVal, users, items } = this.props;
+    const { marginTopVal, users, itemsCount } = this.props;
     const { searchText, allowResults } = this.state;
 
     return (
-      <div className={`${ items.length > 19 ? 'd-none' : 'd-flex' } flex-column align-items-center mt-${ marginTopVal }`}>
+      <div className={`${ itemsCount > 19 ? 'd-none' : 'd-flex' } flex-column align-items-center mt-${ marginTopVal }`}>
         <input
           ref={ this.focusInput }
           autoComplete="off"
@@ -138,12 +124,8 @@ Search.propTypes = {
   addToList: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  items: state.items
-});
-
 const mapDispatchToProps = dispatch => ({
   addToList: movie => dispatch(addToList(movie)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(null, mapDispatchToProps)(Search);
