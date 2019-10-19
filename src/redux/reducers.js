@@ -115,7 +115,7 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.ADD_TO_LIST: return {
       ...state,
-      items: [payload.movie, ...state.items]
+      items: [payload, ...state.items]
     };
     case TYPES.REORDER_LIST: return {
       ...state,

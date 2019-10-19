@@ -423,29 +423,26 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
 
 export const addToList = movie => (dispatch, getState) => {
   const { items } = getState();
-  return axios(`/api/movies/id/${ movie.imdbID }`)
-    .then(data => {
-      const titles = items.map(item => item.title);
-      if (!titles.includes(movie.Title)) {
-        if (items.length < 20) {
-          const movieObj = {
-            title: movie.Title,
-            year: movie.Year,
-            director: data.Director,
-            id: data.imdbID,
-          };
-          dispatch({
-            type: TYPES.ADD_TO_LIST,
-            payload: {
-              movieObj
-            }
-          });
-          dispatch(fetchMovieStats(movie, true));
-          return true;
-      }
-    }
-    return false;
-  })
+  const titles = items.map(item => item.title);
+  if (!titles.includes(movie.Title) && items.length < 20) {
+    return axios(`/api/movies/id/${ movie.imdbID }`)
+      .then(({ data }) => {
+        const movieObj = {
+          title: movie.Title,
+          year: movie.Year,
+          director: data.Director,
+          id: data.imdbID,
+        };
+        dispatch({
+          type: TYPES.ADD_TO_LIST,
+          payload: movieObj
+        });
+        dispatch(fetchMovieStats(movie, true));
+        return true;
+      });
+  };
+  // dispatch snackbar message
+  return Promise.resolve(false);
 };
 
 export const orderList = (oldIndex, newIndex) => (dispatch, getState) => {
