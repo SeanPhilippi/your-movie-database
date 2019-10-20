@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import imdbLogo from '../../../images/imdb-logo.gif';
 import plusIcon from '../../../images/plus.png';
@@ -15,6 +15,11 @@ const ViewableItem = ({
     points,
     id
   },
+  history: {
+    location: {
+      pathname
+    }
+  },
   movie,
   idx,
   addToList
@@ -25,12 +30,15 @@ const ViewableItem = ({
   >
     <div className="d-flex overflow-hidden">
       <div className="text-right pl-1 viewable-item-rank">
-        <img
-          onClick={ () => addToList(movie, true) }
-          className="plus"
-          src={ plusIcon }
-          alt="add movie"
-        />
+        {
+          pathname !== '/profile' &&
+          <img
+            onClick={ () => addToList(movie, true) }
+            className="plus"
+            src={ plusIcon }
+            alt="add movie"
+          />
+        }
         <span className="number">{ ++idx }</span> &nbsp;
       </div>
       <div
@@ -85,4 +93,4 @@ const mapDispatchToProps = dispatch => ({
   addToList: (movie, viewableItem) => dispatch(addToList(movie, viewableItem)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewableItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ViewableItem));
