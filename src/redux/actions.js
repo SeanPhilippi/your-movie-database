@@ -438,9 +438,7 @@ export const addToList = (movie, viewableItem) => async (dispatch, getState) => 
     dispatch(setMessageStatus('Your list already has 20 items!'))
     return Promise.resolve(false);
   };
-  console.log('movie addtolist', movie)
   const { data } = await axios(`/api/movies/id/${ movie.imdbID || movie.id }`);
-  console.log('data addotlist', data)
   const movieObj = {
     title: data.Title,
     year: data.Year,
@@ -462,6 +460,7 @@ export const addToList = (movie, viewableItem) => async (dispatch, getState) => 
     axios.put(`/api/list/save/${ username }`, listObj)
       .then(res => res.json())
       .catch(console.log);
+    dispatch(setMessageStatus('Add successful!'));
   }
   dispatch(fetchMovieStats(movie, true));
   return true;
