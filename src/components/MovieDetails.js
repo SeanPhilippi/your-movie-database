@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import withLoading from './HOCs/withLoading';
 import imdbLogo from '../images/imdb-logo.gif';
+import plusIcon from '../images/plus-gold.png';
+import { addToList } from '../redux/actions';
 
 const MovieDetails = withLoading(({
+  movie,
   movie: {
     poster,
     title,
@@ -13,13 +17,14 @@ const MovieDetails = withLoading(({
     runtime,
     imdbId,
     plot
-  }
+  },
+  addToList
 }) => (
   <div className="movie-page d-flex">
     <div className="poster">
       <img
-        width={300}
-        height={600}
+        width={ 300 }
+        height={ 600 }
         className="poster-img"
         src={ poster }
         alt={ title }
@@ -43,8 +48,23 @@ const MovieDetails = withLoading(({
           <img src={ imdbLogo } alt="imdb-link"/>
         </a>
       </div>
-      <div className="font-weight-bold">
-        directed by <span className="director">{ director }</span>
+      <div className="d-flex justify-content-between">
+        <div className="font-weight-bold">
+          directed by <span className="director">{ director }</span>
+        </div>
+        <div
+          onClick={ () => addToList(movie) }
+          className="d-flex add-movie"
+        >
+          <p className="font-weight-bold mr-1">
+            Add to your list
+          </p>
+          <img
+            src={ plusIcon }
+            className="plus-gold"
+            alt="add movie"
+          />
+        </div>
       </div>
       <div>
         { country }, { year }
@@ -71,4 +91,8 @@ MovieDetails.propTypes = {
   }),
 };
 
-export default MovieDetails;
+const mapDispatchToProps = dispatch => ({
+  addToList: movie => dispatch(addToList(movie)),
+});
+
+export default connect(null, mapDispatchToProps)(MovieDetails);

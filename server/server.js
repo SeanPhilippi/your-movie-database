@@ -25,7 +25,10 @@ require('./config/passport')(passport);
 app.use(express.static('build'));
 
 // Connect to Mongo
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  // useUnifiedTopology: true
+})
   .then(() => console.log('connected to MongoDB!'))
   .catch(console.log);
 mongoose.set('useCreateIndex', true);
