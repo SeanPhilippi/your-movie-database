@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import {
   deleteList,
-  setUpdateStatus,
+  setMessageStatus,
   setEditing
 } from '../redux/actions';
 
 class SaveDelete extends PureComponent {
   handleUpdate = () => {
     const {
-      setUpdateStatus,
+      setMessageStatus,
       setEditing,
       user: {
         username,
@@ -28,7 +28,7 @@ class SaveDelete extends PureComponent {
       items: [...items],
       statement
     };
-    setUpdateStatus();
+    setMessageStatus('Profile Updated');
     setEditing(false);
 
     axios.put(`/api/list/save/${ username }`, listObj)
@@ -118,7 +118,7 @@ class SaveDelete extends PureComponent {
 
 SaveDelete.propTypes = {
   deleteList: PropTypes.func.isRequired,
-  setUpdateStatus: PropTypes.func.isRequired,
+  setMessageStatus: PropTypes.func.isRequired,
   setEditing: PropTypes.func.isRequired,
   user: PropTypes.shape({
     username: PropTypes.string.isRequired,
@@ -137,7 +137,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   deleteList: () => dispatch(deleteList()),
-  setUpdateStatus: () => dispatch(setUpdateStatus()),
+  setMessageStatus: message => dispatch(setMessageStatus(message)),
   setEditing: bool => dispatch(setEditing(bool)),
 });
 

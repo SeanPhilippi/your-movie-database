@@ -26,7 +26,7 @@ const ViewableItem = ({
     <div className="d-flex overflow-hidden">
       <div className="text-right pl-1 viewable-item-rank">
         <img
-          onClick={ () => addToList(movie) }
+          onClick={ () => addToList(movie, true) }
           className="plus"
           src={ plusIcon }
           alt="add movie"
@@ -82,7 +82,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addToList: movie => dispatch(addToList(movie)),
+  addToList: (movie, viewableItem) => dispatch(addToList(movie, viewableItem)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewableItem);

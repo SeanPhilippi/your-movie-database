@@ -8,7 +8,7 @@ export const TYPES = {
   SET_CURRENT_USER: 'SET_CURRENT_USER',
   SET_NEW_USERS: 'SET_NEW_USERS',
   SET_TOKEN: 'SET_TOKEN',
-  SET_UPDATE_STATUS: 'SET_UPDATE_STATUS',
+  SET_MESSAGE_STATUS: 'SET_MESSAGE_STATUS',
   SET_EDITING: 'SET_EDITING',
   SET_STATEMENT: 'SET_STATEMENT',
   SET_LIST_DATA: 'SET_LIST_DATA',
@@ -49,8 +49,9 @@ export const setNewUsers = users => ({
   }
 });
 
-export const setUpdateStatus = () => ({
-  type: TYPES.SET_UPDATE_STATUS
+export const setMessageStatus = message => ({
+  type: TYPES.SET_MESSAGE_STATUS,
+  payload: message
 });
 
 export const clearErrors = () => ({
@@ -421,28 +422,49 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
   };
 };
 
-export const addToList = movie => (dispatch, getState) => {
-  const { items } = getState();
-  const titles = items.map(item => item.title);
-  if (!titles.includes(movie.Title) && items.length < 20) {
-    return axios(`/api/movies/id/${ movie.imdbID }`)
-      .then(({ data }) => {
-        const movieObj = {
-          title: movie.Title,
-          year: movie.Year,
-          director: data.Director,
-          id: data.imdbID,
-        };
-        dispatch({
-          type: TYPES.ADD_TO_LIST,
-          payload: movieObj
-        });
-        dispatch(fetchMovieStats(movie, true));
-        return true;
-      });
+export const addToList = (movie, viewableItem) => async (dispatch, getState) => {
+  const { username, statement, items } = getState();
+  const listContainsMovie = (list, movie) => {
+    return list.map(item => item.title).includes(movie.Title);
   };
-  // dispatch snackbar message
-  return Promise.resolve(false);
+  const listIsFull = list => {
+    return list.length > 19;
+  };
+  if (listContainsMovie(items, movie)) {
+    dispatch(setMessageStatus('Your list already contains this movie!'))
+    return Promise.resolve(false);
+  };
+  if (listIsFull(items)) {
+    dispatch(setMessageStatus('Your list already has 20 items!'))
+    return Promise.resolve(false);
+  };
+  console.log('movie addtolist', movie)
+  const { data } = await axios(`/api/movies/id/${ movie.imdbID || movie.id }`);
+  console.log('data addotlist', data)
+  const movieObj = {
+    title: data.Title,
+    year: data.Year,
+    director: data.Director,
+    id: data.imdbID,
+  };
+  await dispatch({
+    type: TYPES.ADD_TO_LIST,
+    payload: movieObj
+  });
+  const { items: list } = getState();
+  if (viewableItem) {
+    console.log('items', items)
+    const listObj = {
+      username,
+      items: [...list],
+      statement
+    };
+    axios.put(`/api/list/save/${ username }`, listObj)
+      .then(res => res.json())
+      .catch(console.log);
+  }
+  dispatch(fetchMovieStats(movie, true));
+  return true;
 };
 
 export const orderList = (oldIndex, newIndex) => (dispatch, getState) => {

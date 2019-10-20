@@ -16,6 +16,7 @@ const initialState = {
   currentTopMovies: [],
   topMoviesList: [],
   open: false,
+  message: '',
   newUsers: [],
   comments: [],
   affinities: [],
@@ -55,9 +56,10 @@ export default (state = initialState, { type, payload }) => {
       // token
       user_token: payload
     };
-    case TYPES.SET_UPDATE_STATUS: return {
+    case TYPES.SET_MESSAGE_STATUS: return {
       ...state,
-      open: !state.open
+      open: !state.open,
+      message: payload
     };
     case TYPES.SET_EDITING: return {
       ...state,

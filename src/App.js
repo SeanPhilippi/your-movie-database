@@ -11,7 +11,7 @@ import Home from './components/Home';
 import Profile from './components/Profile';
 import TopMoviesList from './components/TopMoviesList';
 import MoviePage from './components/MoviePage';
-import UpdateBar from './components/UpdateBar';
+import MessageBar from './components/MessageBar';
 import Register from './components/Register';
 import Login from './components/Login';
 import Account from './components/Account';
@@ -51,7 +51,7 @@ class App extends PureComponent {
       <div id="app">
         <div className="container-scss px-0 border-0">
           <TopNav/>
-          <UpdateBar/>
+          <MessageBar/>
           <Switch>
             <Route exact path="/" component={ Home } />
             <Route exact path="/login" component={ Login } />

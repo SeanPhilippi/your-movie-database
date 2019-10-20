@@ -2,43 +2,48 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
 import { connect } from 'react-redux';
-import { setUpdateStatus } from '../redux/actions';
+import { setMessageStatus } from '../redux/actions';
 
-class UpdateBar extends PureComponent {
+class MessageBar extends PureComponent {
   render() {
-    const { open, setUpdateStatus } = this.props;
+    const {
+      open,
+      setMessageStatus,
+      message
+    } = this.props;
     return (
       <div>
         <Snackbar
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           open={ open }
-          onClose={ setUpdateStatus }
+          onClose={ setMessageStatus }
           autoHideDuration={ 2000 }
           ContentProps={{
             'aria-describedby': 'message-id',
           }}
           message={
-            <span id="message-id">
-              Profile Updated!
+            <span className="message">
+              { message }
             </span>
           }
         />
       </div>
     );
-  }
-}
+  };
+};
 
-UpdateBar.propTypes = {
+MessageBar.propTypes = {
   open: PropTypes.bool.isRequired,
-  setUpdateStatus: PropTypes.func.isRequired,
+  setMessageStatus: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   open: state.open,
+  message: state.message
 });
 
 const mapDispatchToProps = dispatch => ({
-  setUpdateStatus: () => dispatch(setUpdateStatus())
+  setMessageStatus: message => dispatch(setMessageStatus(message))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateBar);
+export default connect(mapStateToProps, mapDispatchToProps)(MessageBar);

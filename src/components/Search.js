@@ -16,9 +16,8 @@ class Search extends PureComponent {
   focusInput = React.createRef();
 
   handleAdd = movie => {
-    console.log('handleadd movie', movie)
     const { addToList } = this.props;
-    addToList(movie).then(added => {
+    addToList(movie, false).then(added => {
       if (added && this.focusInput.current) {
         this.focusInput.current.focus();
       };
@@ -125,7 +124,7 @@ Search.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  addToList: movie => dispatch(addToList(movie)),
+  addToList: (movie, viewableItem) => dispatch(addToList(movie, viewableItem)),
 });
 
 export default connect(null, mapDispatchToProps)(Search);
