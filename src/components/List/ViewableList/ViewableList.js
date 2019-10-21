@@ -51,6 +51,7 @@ class ViewableList extends PureComponent {
           movie={ item }
           idx={ idx + (moviesPerPage * (currentPage - 1)) }
           key={ item._id }
+          maxWidth='410px'
         />
       );
     };
@@ -61,6 +62,7 @@ class ViewableList extends PureComponent {
           movie={ item }
           idx={ idx }
           key={ item._id }
+          maxWidth='395px'
         />
       );
     };
@@ -71,6 +73,7 @@ class ViewableList extends PureComponent {
           movie={ item }
           idx={ idx }
           key={ item._id }
+          maxWidth='490px'
         />
       );
     };

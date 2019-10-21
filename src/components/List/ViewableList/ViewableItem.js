@@ -22,7 +22,8 @@ const ViewableItem = ({
   },
   movie,
   idx,
-  addToList
+  addToList,
+  maxWidth
 }) => (
   <div
     key={ _id }
@@ -43,7 +44,8 @@ const ViewableItem = ({
       </div>
       <div
         title={`${ title } (${ director }, ${ year })`}
-        className="d-inline-block text-truncate viewable-item-text"
+        className="d-inline-block text-truncate"
+        style={{ maxWidth }}
       >
         <Link
           to={{
@@ -56,7 +58,10 @@ const ViewableItem = ({
         ({ director }, { year })
       </div>
     </div>
-    <div className={`align-self-end d-flex ${ points ? 'justify-content-between' : 'justify-content-end' } mr-2 pts-container`}>
+    <div
+      className={`align-self-end d-flex ${ points ? 'justify-content-between' : 'justify-content-end' } mr-2`}
+      style={{ width: points ? '6rem' : '2.6rem' }}
+    >
       {
         points &&
           <div className="points">
