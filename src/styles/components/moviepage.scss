@@ -1,5 +1,17 @@
-.movie-page {
+.inner-container-movie {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 4fr 3fr;
+  margin-left: 0;
+}
 
+@media only screen and (max-width: 600px) {
+  .inner-container-movie {
+    display: flex;
+    width: 95%;
+    flex-wrap: wrap;
+    margin-left: 0;
+  }
 }
 
 .poster {

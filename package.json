@@ -25,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
+    "mongodb": "^3.3.3",
     "mongoose": "^5.3.16",
     "node-fetch": "^2.3.0",
     "node-sass": "^4.12.0",

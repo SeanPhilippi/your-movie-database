@@ -53,10 +53,10 @@ class MoviePage extends PureComponent {
 
     return (
       <div className="d-flex border-0 justify-content-center">
-        <div className="bg-light2 inner-container mt-4">
+        <div className="bg-light2 inner-container-movie mt-4">
           {/* Left Column */}
-          <div className="left-col bg-white">
-            <div className="px-4 pt-4 w-100">
+          <div className="left-col bg-white pb-3 pb-md-0">
+            <div className="px-4 pt-2 pt-md-4 w-100">
               <CardWrapper
                 icon="film"
                 rotate={ -5 }
@@ -100,7 +100,7 @@ class MoviePage extends PureComponent {
             </div>
           </div>
           {/* Right Column */}
-          <div className="right-col">
+          <div className="right-col w-100">
             <div className="m-4">
               <CardWrapper
                 icon="comments"
