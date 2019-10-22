@@ -7,7 +7,8 @@ import {
   fetchTopMoviesList,
   setCurrentTopMovies,
   setCurrentPage,
-  setMoviesPerPage
+  setMoviesPerPage,
+  addToList
 } from '../../../redux/actions';
 import { withRouter } from 'react-router-dom';
 
@@ -27,6 +28,15 @@ class ViewableList extends PureComponent {
   handleMoviesPerPage = e => {
     this.props.setMoviesPerPage(Number(e.target.value))
     this.props.setCurrentTopMovies();
+  };
+
+  handleAdd = (movie, viewableItem) => {
+    const { isAuthenticated, addToList, history } = this.props;
+    if (isAuthenticated) {
+      addToList(movie, viewableItem);
+    } else {
+      history.push('/login');
+    };
   };
 
   render() {
@@ -52,6 +62,7 @@ class ViewableList extends PureComponent {
           idx={ idx + (moviesPerPage * (currentPage - 1)) }
           key={ item._id }
           maxWidth='410px'
+          handleAdd={ this.handleAdd }
         />
       );
     };
@@ -63,6 +74,7 @@ class ViewableList extends PureComponent {
           idx={ idx }
           key={ item._id }
           maxWidth='395px'
+          handleAdd={ this.handleAdd }
         />
       );
     };
@@ -74,6 +86,7 @@ class ViewableList extends PureComponent {
           idx={ idx }
           key={ item._id }
           maxWidth='490px'
+          handleAdd={ this.handleAdd }
         />
       );
     };
@@ -110,6 +123,7 @@ class ViewableList extends PureComponent {
 };
 
 ViewableList.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
   items: PropTypes.array,
   topMoviesList: PropTypes.array,
   currentTopMovies: PropTypes.array,
@@ -122,6 +136,7 @@ ViewableList.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
+  addToList: (movie, viewableItem) => dispatch(addToList(movie, viewableItem)),
   fetchTopMoviesList: () => dispatch(fetchTopMoviesList()),
   setCurrentPage: num => dispatch(setCurrentPage(num)),
   setMoviesPerPage: num => dispatch(setMoviesPerPage(num)),
@@ -129,6 +144,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
+  isAuthenticated: state.isAuthenticated,
   topMoviesList: state.topMoviesList,
   currentPage: state.currentPage,
   pages: state.pages,

@@ -4,7 +4,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import imdbLogo from '../../../images/imdb-logo.gif';
 import plusIcon from '../../../images/plus.png';
-import { addToList } from '../../../redux/actions';
 
 const ViewableItem = ({
   movie: {
@@ -22,7 +21,7 @@ const ViewableItem = ({
   },
   movie,
   idx,
-  addToList,
+  handleAdd,
   maxWidth
 }) => (
   <div
@@ -34,7 +33,7 @@ const ViewableItem = ({
         {
           pathname !== '/profile' &&
           <img
-            onClick={ () => addToList(movie, true) }
+            onClick={ () => handleAdd(movie, true) }
             className="plus"
             src={ plusIcon }
             alt="add movie"
@@ -94,8 +93,4 @@ const mapStateToProps = state => ({
   items: state.items
 });
 
-const mapDispatchToProps = dispatch => ({
-  addToList: (movie, viewableItem) => dispatch(addToList(movie, viewableItem)),
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ViewableItem));
+export default withRouter(connect(mapStateToProps)(ViewableItem));

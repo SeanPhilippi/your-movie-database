@@ -425,7 +425,7 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
 export const addToList = (movie, viewableItem) => async (dispatch, getState) => {
   const { username, statement, items } = getState();
   const listContainsMovie = (list, movie) => {
-    return list.map(item => item.title).includes(movie.Title);
+    return list.map(item => item.title).includes(movie.title);
   };
   const listIsFull = list => {
     return list.length > 19;
