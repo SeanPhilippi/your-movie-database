@@ -49,11 +49,6 @@ export const setNewUsers = users => ({
   }
 });
 
-export const setMessageStatus = message => ({
-  type: TYPES.SET_MESSAGE_STATUS,
-  payload: message
-});
-
 export const clearErrors = () => ({
   type: TYPES.CLEAR_ERRORS
 });
@@ -136,6 +131,19 @@ export const setMoviesPerPage = num => ({
 });
 
 //thunk actions
+
+export const setMessageStatus = message => dispatch => {
+  dispatch({
+    type: TYPES.SET_MESSAGE_STATUS,
+    payload: message
+  });
+  setTimeout(() =>
+    dispatch({
+      type: TYPES.SET_MESSAGE_STATUS,
+      payload: message
+    }), 2400
+  );
+};
 
 export const setCurrentUser = user => dispatch => {
   dispatch({
