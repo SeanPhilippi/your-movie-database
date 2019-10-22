@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import MovieDetails from './MovieDetails';
 import Comments from './Comments';
 import Rankings from './Rankings';
@@ -12,6 +13,7 @@ import {
   fetchMovieComments,
   fetchMovie,
   fetchMovieStats,
+  addToList
 } from '../redux/actions';
 
 const CommentsWithLoading = withLoading(Comments);
@@ -30,6 +32,15 @@ class MoviePage extends PureComponent {
     fetchMovie(movie.id);
     fetchMovieComments(movie.id);
     fetchMovieStats(movie, true);
+  };
+
+  handleAdd = (movie, viewableItem) => {
+    const { isAuthenticated, addToList, history } = this.props;
+    if (isAuthenticated) {
+      addToList(movie, viewableItem);
+    } else {
+      history.push('/login');
+    };
   };
 
   render() {
@@ -67,6 +78,7 @@ class MoviePage extends PureComponent {
                 <MovieDetails
                   isLoading={ movieDetailsLoading }
                   movie={ movie }
+                  handleAdd={ this.handleAdd }
                 />
                 <MovieStats
                   isLoading={ movieStatsLoading }
@@ -121,6 +133,7 @@ class MoviePage extends PureComponent {
 };
 
 MoviePage.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired
   }).isRequired,
@@ -129,16 +142,19 @@ MoviePage.propTypes = {
   }).isRequired,
   fetchMovieComments: PropTypes.func.isRequired,
   commentsLoading: PropTypes.bool,
-  comments: PropTypes.array
+  comments: PropTypes.array,
+  addToList: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
+  addToList: movie => dispatch(addToList(movie)),
   fetchMovieComments: movie_id => dispatch(fetchMovieComments(movie_id)),
   fetchMovie: id => dispatch(fetchMovie(id)),
   fetchMovieStats: (movie, update) => dispatch(fetchMovieStats(movie, update)),
 });
 
 const mapStateToProps = state => ({
+  isAuthenticated: state.isAuthenticated,
   movie: state.movie,
   commentsLoading: state.commentsLoading,
   movieDetailsLoading: state.movieDetailsLoading,
@@ -147,4 +163,4 @@ const mapStateToProps = state => ({
   stats: state.movieStats,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MoviePage));
