@@ -17,7 +17,7 @@ class Search extends PureComponent {
 
   handleAdd = movie => {
     const { addToList } = this.props;
-    addToList(movie, false).then(added => {
+    addToList(movie).then(added => {
       if (added && this.focusInput.current) {
         this.focusInput.current.focus();
       };

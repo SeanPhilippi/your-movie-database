@@ -30,10 +30,10 @@ class ViewableList extends PureComponent {
     this.props.setCurrentTopMovies();
   };
 
-  handleAdd = (movie, viewableItem) => {
+  handleAdd = (movie, post) => {
     const { isAuthenticated, addToList, history } = this.props;
     if (isAuthenticated) {
-      addToList(movie, viewableItem);
+      addToList(movie, post);
     } else {
       history.push('/login');
     };
@@ -136,7 +136,7 @@ ViewableList.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  addToList: (movie, viewableItem) => dispatch(addToList(movie, viewableItem)),
+  addToList: (movie, post) => dispatch(addToList(movie, post)),
   fetchTopMoviesList: () => dispatch(fetchTopMoviesList()),
   setCurrentPage: num => dispatch(setCurrentPage(num)),
   setMoviesPerPage: num => dispatch(setMoviesPerPage(num)),

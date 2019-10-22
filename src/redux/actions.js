@@ -422,7 +422,7 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
   };
 };
 
-export const addToList = (movie, viewableItem) => async (dispatch, getState) => {
+export const addToList = (movie, post) => async (dispatch, getState) => {
   const { username, statement, items } = getState();
   const listContainsMovie = (list, movie) => {
     return list.map(item => item.title).includes(movie.title);
@@ -438,7 +438,7 @@ export const addToList = (movie, viewableItem) => async (dispatch, getState) => 
     dispatch(setMessageStatus('Your list already has 20 items!'))
     return Promise.resolve(false);
   };
-  const { data } = await axios(`/api/movies/id/${ movie.imdbID || movie.id }`);
+  const { data } = await axios(`/api/movies/id/${ movie.imdbId || movie.id }`);
   const movieObj = {
     title: data.Title,
     year: data.Year,
@@ -450,8 +450,7 @@ export const addToList = (movie, viewableItem) => async (dispatch, getState) => 
     payload: movieObj
   });
   const { items: list } = getState();
-  if (viewableItem) {
-    console.log('items', items)
+  if (post) {
     const listObj = {
       username,
       items: [...list],

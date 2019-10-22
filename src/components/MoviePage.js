@@ -34,10 +34,10 @@ class MoviePage extends PureComponent {
     fetchMovieStats(movie, true);
   };
 
-  handleAdd = (movie, viewableItem) => {
+  handleAdd = (movie, post) => {
     const { isAuthenticated, addToList, history } = this.props;
     if (isAuthenticated) {
-      addToList(movie, viewableItem);
+      addToList(movie, post);
     } else {
       history.push('/login');
     };
@@ -147,7 +147,7 @@ MoviePage.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  addToList: movie => dispatch(addToList(movie)),
+  addToList: (movie, post) => dispatch(addToList(movie, post)),
   fetchMovieComments: movie_id => dispatch(fetchMovieComments(movie_id)),
   fetchMovie: id => dispatch(fetchMovie(id)),
   fetchMovieStats: (movie, update) => dispatch(fetchMovieStats(movie, update)),

@@ -51,7 +51,7 @@ const MovieDetails = withLoading(({
           directed by <span className="director">{ director }</span>
         </div>
         <div
-          onClick={ () => handleAdd(movie) }
+          onClick={ () => handleAdd(movie, true) }
           className="d-flex add-movie"
         >
           <p className="font-weight-bold mr-1">
