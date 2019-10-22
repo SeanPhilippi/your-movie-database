@@ -88,7 +88,8 @@ yarn-error.log*
 TODO.txt
 stu-notes.txt
 omdb-movie-json-example
-keys.js
+server/config/keys.js
 aggregate-brainstorming.txt
 movie-aggregate-brainstorming.txt
 movie-stats-bugs-brainstorming.txt
+fetch-set-redux-brainstorming.txt
