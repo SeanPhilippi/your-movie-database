@@ -468,7 +468,7 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
       .then(res => res.json())
       .catch(console.log);
     dispatch(setMessageStatus('Add successful!'));
-  }
+  };
   dispatch(fetchMovieStats(movie, true));
   return true;
 };

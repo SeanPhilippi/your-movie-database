@@ -61,9 +61,9 @@ button:hover {
   cursor: pointer;
 }
 
-button:active {
+button:active:not(.edit-btn) {
   position: relative;
-  top: 2px;
+  top: 1px;
 }
 
 // width media query break points

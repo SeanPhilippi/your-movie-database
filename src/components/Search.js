@@ -17,7 +17,12 @@ class Search extends PureComponent {
 
   handleAdd = movie => {
     const { addToList } = this.props;
-    addToList(movie).then(added => {
+    const remappedMovie = {
+      title: movie.Title,
+      year: movie.Year,
+      id: movie.imdbID
+    };
+    addToList(remappedMovie).then(added => {
       if (added && this.focusInput.current) {
         this.focusInput.current.focus();
       };
@@ -36,7 +41,7 @@ class Search extends PureComponent {
             { users.map(user => <SearchResult user={ user } key={ user._id } />) }
           </div>
         : <div className="bg-white result-scroll">
-            { searchResults.map(movie => <SearchResult movie={ movie } handleAdd={ this.handleAdd } key={ movie.imdbID } />) }
+            { searchResults.map(movie => <SearchResult movie={ movie } handleAdd={ this.handleAdd } key={ movie.id } />) }
           </div>
       )
     };

@@ -8,7 +8,8 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import {
   deleteList,
   setMessageStatus,
-  setEditing
+  setEditing,
+  setListData
 } from '../redux/actions';
 
 class SaveDelete extends PureComponent {
@@ -16,6 +17,7 @@ class SaveDelete extends PureComponent {
     const {
       setMessageStatus,
       setEditing,
+      setListData,
       user: {
         username,
       },
@@ -25,9 +27,10 @@ class SaveDelete extends PureComponent {
 
     const listObj = {
       username,
-      items: [...items],
+      items,
       statement
     };
+    setListData(listObj);
     setMessageStatus('Profile Updated');
     setEditing(false);
 
@@ -96,10 +99,12 @@ class SaveDelete extends PureComponent {
           { this.props.items.length } / 20
         </div>
         <div>
-          <Link to={`/profile/${ this.props.user.username }`}>
+          <Link
+            to={`/profile/${ this.props.user.username }`}
+            onClick={ this.handleUpdate }
+          >
             <button
               className="save-list"
-              onClick={ this.handleUpdate }
             >
               SAVE
             </button>
@@ -120,6 +125,7 @@ SaveDelete.propTypes = {
   deleteList: PropTypes.func.isRequired,
   setMessageStatus: PropTypes.func.isRequired,
   setEditing: PropTypes.func.isRequired,
+  setListData: PropTypes.func.isRequired,
   user: PropTypes.shape({
     username: PropTypes.string.isRequired,
   }).isRequired,
@@ -139,6 +145,7 @@ const mapDispatchToProps = dispatch => ({
   deleteList: () => dispatch(deleteList()),
   setMessageStatus: message => dispatch(setMessageStatus(message)),
   setEditing: bool => dispatch(setEditing(bool)),
+  setListData: listData => dispatch(setListData(listData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);

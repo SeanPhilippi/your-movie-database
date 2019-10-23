@@ -7,7 +7,7 @@ const SearchResult = ({
   handleAdd
 }) => (
   <div
-    key={ movie ? movie.imdbId : user._id }
+    key={ movie ? movie.imdbID : user._id }
     className="result-item"
     onClick={ () => handleAdd(movie) }
   >
