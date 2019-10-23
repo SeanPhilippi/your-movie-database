@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withLoading from './HOCs/withLoading';
 import imdbLogo from '../images/imdb-logo.gif';
-import plusIcon from '../images/plus-gold.png';
+import plusIcon from '../images/plus-light-orange.png';
 
 const MovieDetails = withLoading(({
   movie,
@@ -54,12 +54,12 @@ const MovieDetails = withLoading(({
           onClick={ () => handleAdd(movie, true) }
           className="d-flex add-movie"
         >
-          <p className="font-weight-bold mr-1">
+          <p className="mr-1">
             Add to your list
           </p>
           <img
             src={ plusIcon }
-            className="plus-gold"
+            className="plus-movie-page"
             alt="add movie"
           />
         </div>
