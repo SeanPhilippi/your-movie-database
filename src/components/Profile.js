@@ -12,8 +12,9 @@ import {
   setListDataLoading,
   setCommentsLoading,
   fetchComments,
+  fetchAuthListData,
   fetchListData,
-  setEditing
+  setEditing,
 } from '../redux/actions';
 
 const CommentsWithLoading = withLoading(Comments);
@@ -25,10 +26,15 @@ class Profile extends PureComponent  {
   };
 
   fetchData = () => {
-    const { fetchListData, fetchComments, user } = this.props;
+    const { fetchListData, fetchAuthListData, fetchComments, user } = this.props;
     const { username } = this.props.match.params;
-    fetchListData(username || user.username);
-    fetchComments(username || user.username);
+    if (username) {
+      fetchListData(username);
+      fetchComments(username);
+    } else {
+      fetchAuthListData(user.username);
+      fetchComments(user.username)
+    }
   };
 
   componentDidUpdate(prevProps) {
@@ -147,6 +153,7 @@ const mapDispatchToProps = dispatch => ({
   setListDataLoading: bool => dispatch(setListDataLoading(bool)),
   setCommentsLoading: bool => dispatch(setCommentsLoading(bool)),
   fetchComments: user => dispatch(fetchComments(user)),
+  fetchAuthListData: username => dispatch(fetchAuthListData(username)),
   fetchListData: username => dispatch(fetchListData(username)),
 });
 

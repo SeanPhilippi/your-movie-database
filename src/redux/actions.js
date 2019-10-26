@@ -11,6 +11,7 @@ export const TYPES = {
   SET_MESSAGE_STATUS: 'SET_MESSAGE_STATUS',
   SET_EDITING: 'SET_EDITING',
   SET_STATEMENT: 'SET_STATEMENT',
+  SET_AUTH_LIST_DATA: 'SET_AUTH_LIST_DATA',
   SET_LIST_DATA: 'SET_LIST_DATA',
   SET_AFFINITIES: 'SET_AFFINITIES',
   SET_COMMENTS: 'SET_COMMENTS',
@@ -63,6 +64,11 @@ export const setStatement = text => ({
   payload: {
     text
   }
+});
+
+export const setAuthListData = listData => ({
+  type: TYPES.SET_AUTH_LIST_DATA,
+  payload: listData
 });
 
 export const setListData = listData => ({
@@ -137,12 +143,12 @@ export const setMessageStatus = message => dispatch => {
     type: TYPES.SET_MESSAGE_STATUS,
     payload: message
   });
+  // set state.open back to false
   setTimeout(() =>
     dispatch({
       type: TYPES.SET_MESSAGE_STATUS,
       payload: message
-    }), 2400
-  );
+    }), 2400);
 };
 
 export const setCurrentUser = user => dispatch => {
@@ -152,12 +158,12 @@ export const setCurrentUser = user => dispatch => {
   });
 
   if (user.email) {
-    dispatch(fetchListData(user.username));
+    dispatch(fetchAuthListData(user.username));
   } else {
     // setCurrentUser is called on logout, user should be set to an empty object
     // if empty object, clear user data
     dispatch(
-      setListData({
+      setAuthListData({
         username: '',
         items: [],
         statement: ''
@@ -234,18 +240,18 @@ export const fetchNewUsers = () => dispatch => {
     });
 };
 
-export const fetchListData = username => dispatch => {
+export const fetchAuthListData = username => (dispatch, getState) => {
   dispatch(setListDataLoading(true));
   axios(`/api/list/${ username }/list`)
     .then(({ data }) => {
       if (data) {
         let movieIds = data.items.map(item => item.id);
         dispatch(fetchAffinities(movieIds))
-        dispatch(setListData(data));
+        dispatch(setAuthListData(data));
       } else {
         dispatch(setAffinities([]));
         dispatch(setAffinitiesLoading(false));
-        dispatch(setListData({
+        dispatch(setAuthListData({
           username: username,
           statement: '',
           items: []
@@ -253,6 +259,51 @@ export const fetchListData = username => dispatch => {
       };
       dispatch(setListDataLoading(false));
     });
+};
+
+export const fetchListData = username => (dispatch, getState) => {
+  // ! address redundancy, also do a check so the fetch only happens once for an auth user,
+  // ! no need to fetch everytime, their listData will persist in Redux user object
+  const { user: { username: authUser, items } } = getState();
+  if (username === authUser) {
+    dispatch(setListDataLoading(true));
+    axios(`/api/list/${ username }/list`)
+      .then(({ data }) => {
+        if (data) {
+          const movieIds = data.items.map(item => item.id);
+          dispatch(fetchAffinities(movieIds));
+          dispatch(setAuthListData(data));
+        } else {
+          dispatch(setAffinities([]));
+          dispatch(setAffinitiesLoading(false));
+          dispatch(setAuthListData({
+            username: username,
+            statement: '',
+            items: []
+          }));
+        };
+        dispatch(setListDataLoading(false));
+      });
+  } else {
+    dispatch(setListDataLoading(true));
+    axios(`/api/list/${ username }/list`)
+      .then(({ data }) => {
+        if (data) {
+          const movieIds = data.items.map(item => item.id);
+          dispatch(fetchAffinities(movieIds));
+          dispatch(setListData(data));
+        } else {
+          dispatch(setAffinities([]));
+          dispatch(setAffinitiesLoading(false));
+          dispatch(setListData({
+            username: username,
+            statement: '',
+            items: []
+          }));
+        };
+        dispatch(setListDataLoading(false));
+      });
+  };
 };
 
 export const fetchTopMoviesList = () => dispatch => {

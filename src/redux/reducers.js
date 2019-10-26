@@ -5,7 +5,7 @@ import isEmpty from '../utils/helpers/is-empty';
 const initialState = {
   isAuthenticated: false,
   user_token: {},
-  user: {}, // object containing email, id, username of authenticated user
+  user: {}, // object containing email, id, username, statement, items of authenticated user
   authErrors: {},
   username: '',
   statement: '',
@@ -68,6 +68,13 @@ export default (state = initialState, { type, payload }) => {
     case TYPES.SET_STATEMENT: return {
       ...state,
       statement: payload.text
+    };
+    case TYPES.SET_AUTH_LIST_DATA: return {
+      ...state,
+      user: {
+        ...state.user,
+        ...payload
+      }
     };
     case TYPES.SET_LIST_DATA: return {
       ...state,
