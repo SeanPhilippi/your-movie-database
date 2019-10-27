@@ -246,7 +246,6 @@ export const fetchListData = username => (dispatch, getState) => {
   axios(`/api/list/${ username }/list`)
     .then(({ data }) => {
       if (data) {
-        console.log('data in fetchListData', data.items)
         const movieIds = data.items.map(item => item.id);
         dispatch(fetchAffinities(movieIds));
         if (username === authUser) {
@@ -451,7 +450,7 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
 };
 
 export const addToList = (movie, post) => async (dispatch, getState) => {
-  const { username, statement, items } = getState();
+  const { user: { username, statement, items } } = getState();
   const listContainsMovie = (list, movie) => {
     return list.map(item => item.title).includes(movie.title);
   };
@@ -477,7 +476,7 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
     type: TYPES.ADD_TO_LIST,
     payload: movieObj
   });
-  const { items: list } = getState();
+  const { user: { items: list }  } = getState();
   if (post) {
     const listObj = {
       username,
