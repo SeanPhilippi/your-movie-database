@@ -15,6 +15,7 @@ import { withRouter } from 'react-router-dom';
 class ViewableList extends PureComponent {
 
   componentDidMount() {
+    console.log('viewablelist mounting')
     const { fetchTopMoviesList, setCurrentTopMovies } = this.props;
     fetchTopMoviesList();
     setCurrentTopMovies();
@@ -107,7 +108,7 @@ class ViewableList extends PureComponent {
             <TopMoviesList />
           </>
         );
-      } else if (!items.length) {
+      } else if (items && !items.length) {
         return <NoList />
       } else {
         return <UserList />

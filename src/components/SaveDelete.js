@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import { connect } from 'react-redux';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -20,9 +20,10 @@ class SaveDelete extends PureComponent {
       setListData,
       user: {
         username,
+        statement,
+        items
       },
-      items,
-      statement
+      history
     } = this.props;
 
     const listObj = {
@@ -37,6 +38,7 @@ class SaveDelete extends PureComponent {
     axios.put(`/api/list/save/${ username }`, listObj)
       .then(res => res.json())
       .catch(console.log);
+    history.push('/profile');
   };
 
   alertOptions = {
@@ -99,16 +101,12 @@ class SaveDelete extends PureComponent {
           { this.props.user.items.length } / 20
         </div>
         <div>
-          <Link
-            to={`/profile/${ this.props.user.username }`}
+          <button
             onClick={ this.handleUpdate }
+            className="save-list"
           >
-            <button
-              className="save-list"
-            >
-              SAVE
-            </button>
-          </Link>
+            SAVE
+          </button>
           <button
             className="delete-list"
             onClick={ this.handleDelete }
@@ -147,4 +145,4 @@ const mapDispatchToProps = dispatch => ({
   setListData: listData => dispatch(setListData(listData)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SaveDelete));

@@ -61,9 +61,7 @@ export const setEditing = bool => ({
 
 export const setStatement = text => ({
   type: TYPES.SET_STATEMENT,
-  payload: {
-    text
-  }
+  payload: text
 });
 
 export const setAuthListData = listData => ({

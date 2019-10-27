@@ -73,7 +73,10 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.SET_STATEMENT: return {
       ...state,
-      statement: payload.text
+      user: {
+        ...state.user,
+        statement: payload
+      }
     };
     case TYPES.SET_AUTH_LIST_DATA: return {
       ...state,
