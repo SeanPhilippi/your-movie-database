@@ -246,6 +246,7 @@ export const fetchListData = username => (dispatch, getState) => {
   axios(`/api/list/${ username }/list`)
     .then(({ data }) => {
       if (data) {
+        console.log('data in fetchListData', data.items)
         const movieIds = data.items.map(item => item.id);
         dispatch(fetchAffinities(movieIds));
         if (username === authUser) {

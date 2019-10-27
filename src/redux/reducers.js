@@ -133,19 +133,31 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.ADD_TO_LIST: return {
       ...state,
-      items: [payload, ...state.items]
+      user: {
+        ...state.user,
+        items: [payload, ...state.user.items]
+      }
     };
     case TYPES.REORDER_LIST: return {
       ...state,
-      items: arrayMove(state.items, payload.oldIndex, payload.newIndex)
+      user: {
+        ...state.user,
+        items: arrayMove(state.user.items, payload.oldIndex, payload.newIndex)
+      }
     };
     case TYPES.DELETE_MOVIE: return {
       ...state,
-      items: [...state.items.filter(movie => movie.id !== payload.movie.id)]
+      user: {
+        ...state.user,
+        items: [...state.user.items.filter(movie => movie.id !== payload.movie.id)]
+      }
     };
     case TYPES.DELETE_LIST: return {
       ...state,
-      items: []
+      user: {
+        ...state.user,
+        items: []
+      }
     };
     case TYPES.SET_TOP_MOVIES_LIST: return {
       ...state,
