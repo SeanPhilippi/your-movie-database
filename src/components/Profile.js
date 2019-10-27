@@ -12,7 +12,6 @@ import {
   setListDataLoading,
   setCommentsLoading,
   fetchComments,
-  fetchAuthListData,
   fetchListData,
   setEditing,
 } from '../redux/actions';
@@ -21,27 +20,37 @@ const CommentsWithLoading = withLoading(Comments);
 
 class Profile extends PureComponent  {
 
-  componentDidMount() {
-    this.fetchData();
-  };
-
   fetchData = () => {
-    const { fetchListData, fetchAuthListData, fetchComments, user } = this.props;
+    console.log('fetching data in Profile')
+    const {
+      fetchListData,
+      fetchComments,
+      user,
+      history: {
+        location: {
+          pathname
+        }
+      }
+    } = this.props;
     const { username } = this.props.match.params;
-    if (username) {
+    if (pathname === '/profile') {
+      fetchListData(user.username);
+      fetchComments(user.username);
+    } else {
       fetchListData(username);
       fetchComments(username);
-    } else {
-      fetchAuthListData(user.username);
-      fetchComments(user.username)
-    }
+    };
+  };
+
+  componentDidMount() {
+    this.fetchData();
   };
 
   componentDidUpdate(prevProps) {
     const { username } = this.props.match.params;
     if (username !== prevProps.match.params.username) {
       this.fetchData();
-    }
+    };
   };
 
   render() {
@@ -55,7 +64,12 @@ class Profile extends PureComponent  {
       isEditing,
       listDataLoading,
       commentsLoading,
-      affinitiesLoading
+      affinitiesLoading,
+      history: {
+        location: {
+          pathname
+        }
+      }
     } = this.props;
 
     return (
@@ -65,7 +79,7 @@ class Profile extends PureComponent  {
             <CardWrapper
               icon={["far", "list-alt"]}
               rotate={ -5 }
-              title={`${ username }'s Top Movies`}
+              title={`${ pathname === '/profile' ? user.username : username }'s Top Movies`}
               color="tan"
               marginTopVal='0'
             >
@@ -87,8 +101,8 @@ class Profile extends PureComponent  {
             >
               <Statement
                 user={ user }
-                username={ username }
-                statement={ statement }
+                username={ pathname === '/profile' ? user.username : username }
+                statement={ pathname === '/profile' ? user.statement : statement }
                 isEditing={ isEditing }
                 isLoading={ listDataLoading }
               />
@@ -153,7 +167,6 @@ const mapDispatchToProps = dispatch => ({
   setListDataLoading: bool => dispatch(setListDataLoading(bool)),
   setCommentsLoading: bool => dispatch(setCommentsLoading(bool)),
   fetchComments: user => dispatch(fetchComments(user)),
-  fetchAuthListData: username => dispatch(fetchAuthListData(username)),
   fetchListData: username => dispatch(fetchListData(username)),
 });
 

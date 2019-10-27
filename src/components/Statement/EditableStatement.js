@@ -20,21 +20,17 @@ class EditableStatement extends Component {
         value={ statement }
       >
       </textarea>
-    )
-  }
-}
+    );
+  };
+};
 
 EditableStatement.propTypes = {
   statement: PropTypes.string.isRequired,
   setStatement: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  statement: state.statement,
-});
-
 const mapDispatchToProps = dispatch => ({
   setStatement: text => dispatch(setStatement(text)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditableStatement);
+export default connect(null, mapDispatchToProps)(EditableStatement);

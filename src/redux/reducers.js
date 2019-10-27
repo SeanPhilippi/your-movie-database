@@ -5,7 +5,13 @@ import isEmpty from '../utils/helpers/is-empty';
 const initialState = {
   isAuthenticated: false,
   user_token: {},
-  user: {}, // object containing email, id, username, statement, items of authenticated user
+  user: {
+    email: '',
+    id: '',
+    username: '',
+    statement: '',
+    items: []
+  }, // object containing email, id, username, statement, items of authenticated user
   authErrors: {},
   username: '',
   statement: '',

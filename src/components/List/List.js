@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import EditableList from './EditableList/EditableList';
 import ViewableList from './ViewableList/ViewableList';
 import SaveDelete from '../SaveDelete';
@@ -7,15 +8,26 @@ import Search from '../Search';
 import EditButton from './EditButton';
 import withLoading from '../HOCs/withLoading';
 
-const List = withLoading(({ isEditing, items, username, user }) => {
-  if (isEditing && user.username === username) {
+const List = withLoading(({
+  isEditing,
+  items,
+  history: {
+    location: {
+      pathname
+    }
+  },
+  user: {
+    items: authItems
+  }
+}) => {
+  if (isEditing && pathname === '/profile') {
     return (
       <div>
         <div className="search-btns-container">
           <SaveDelete />
         </div>
-        <Search itemsCount={ items.length }/>
-        <EditableList />
+        <Search itemsCount={ authItems.length } />
+        <EditableList items={ authItems } />
       </div>
     )
   } else {
@@ -25,12 +37,10 @@ const List = withLoading(({ isEditing, items, username, user }) => {
           {/* <div className="blurb">
             this is my blurb
           </div> */}
-          {
-            user.username === username && <EditButton />
-          }
+          { pathname === '/profile' && <EditButton /> }
         </div>
         <ViewableList
-          items={ items }
+          items={ pathname === '/profile' ? authItems : items }
         />
       </div>
     )
@@ -46,4 +56,4 @@ List.propTypes = {
   isEditing: PropTypes.bool.isRequired,
 };
 
-export default List;
+export default withRouter(List);

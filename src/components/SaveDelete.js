@@ -96,7 +96,7 @@ class SaveDelete extends PureComponent {
     return (
       <div className="save-delete d-flex justify-content-between">
         <div className="count">
-          { this.props.items.length } / 20
+          { this.props.user.items.length } / 20
         </div>
         <div>
           <Link
@@ -128,15 +128,14 @@ SaveDelete.propTypes = {
   setListData: PropTypes.func.isRequired,
   user: PropTypes.shape({
     username: PropTypes.string.isRequired,
+    items: PropTypes.array.isRequired
   }).isRequired,
-  items: PropTypes.array.isRequired,
   statement: PropTypes.string.isRequired,
   isEditing: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
   user: state.user,
-  items: state.items,
   statement: state.statement,
   isEditing: state.isEditing,
 });

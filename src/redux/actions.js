@@ -158,7 +158,7 @@ export const setCurrentUser = user => dispatch => {
   });
 
   if (user.email) {
-    dispatch(fetchAuthListData(user.username));
+    dispatch(fetchListData(user.username));
   } else {
     // setCurrentUser is called on logout, user should be set to an empty object
     // if empty object, clear user data
@@ -240,70 +240,40 @@ export const fetchNewUsers = () => dispatch => {
     });
 };
 
-export const fetchAuthListData = username => (dispatch, getState) => {
+export const fetchListData = username => (dispatch, getState) => {
+  // ! also do a check so the fetch only happens once for an auth user,
+  // ! no need to fetch everytime, their listData will persist in Redux user object
+  const { user: { username: authUser } } = getState();
   dispatch(setListDataLoading(true));
   axios(`/api/list/${ username }/list`)
     .then(({ data }) => {
       if (data) {
-        let movieIds = data.items.map(item => item.id);
-        dispatch(fetchAffinities(movieIds))
-        dispatch(setAuthListData(data));
+        const movieIds = data.items.map(item => item.id);
+        dispatch(fetchAffinities(movieIds));
+        if (username === authUser) {
+          dispatch(setAuthListData(data));
+        } else {
+          dispatch(setListData(data));
+        };
       } else {
         dispatch(setAffinities([]));
         dispatch(setAffinitiesLoading(false));
-        dispatch(setAuthListData({
-          username: username,
-          statement: '',
-          items: []
-        }));
-      };
-      dispatch(setListDataLoading(false));
-    });
-};
-
-export const fetchListData = username => (dispatch, getState) => {
-  // ! address redundancy, also do a check so the fetch only happens once for an auth user,
-  // ! no need to fetch everytime, their listData will persist in Redux user object
-  const { user: { username: authUser, items } } = getState();
-  if (username === authUser) {
-    dispatch(setListDataLoading(true));
-    axios(`/api/list/${ username }/list`)
-      .then(({ data }) => {
-        if (data) {
-          const movieIds = data.items.map(item => item.id);
-          dispatch(fetchAffinities(movieIds));
-          dispatch(setAuthListData(data));
-        } else {
-          dispatch(setAffinities([]));
-          dispatch(setAffinitiesLoading(false));
+        if (username === authUser) {
           dispatch(setAuthListData({
             username: username,
             statement: '',
             items: []
           }));
-        };
-        dispatch(setListDataLoading(false));
-      });
-  } else {
-    dispatch(setListDataLoading(true));
-    axios(`/api/list/${ username }/list`)
-      .then(({ data }) => {
-        if (data) {
-          const movieIds = data.items.map(item => item.id);
-          dispatch(fetchAffinities(movieIds));
-          dispatch(setListData(data));
         } else {
-          dispatch(setAffinities([]));
-          dispatch(setAffinitiesLoading(false));
           dispatch(setListData({
             username: username,
             statement: '',
             items: []
           }));
         };
-        dispatch(setListDataLoading(false));
-      });
-  };
+      };
+      dispatch(setListDataLoading(false));
+    });
 };
 
 export const fetchTopMoviesList = () => dispatch => {

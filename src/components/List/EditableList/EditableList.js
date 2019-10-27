@@ -47,18 +47,13 @@ class EditableList extends Component {
 };
 
 EditableList.propTypes = {
-  items: PropTypes.array.isRequired,
   orderList: PropTypes.func.isRequired,
   deleteMovie: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = state => ({
-  items: state.items,
-});
 
 const mapDispatchToProps = dispatch => ({
   orderList: ({ oldIndex, newIndex, movies }) => dispatch(orderList(oldIndex, newIndex, movies)),
   deleteMovie: movie => dispatch(deleteMovie(movie))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditableList);
+export default connect(null, mapDispatchToProps)(EditableList);

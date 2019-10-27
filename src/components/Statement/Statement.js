@@ -4,8 +4,10 @@ import EditableStatement from './EditableStatement';
 import ViewableStatement from './ViewableStatement';
 import withLoading from '../HOCs/withLoading';
 
-const Statement = withLoading(({ user, username, statement, isEditing }) => isEditing && user.username === username
-  ? <EditableStatement />
+const Statement = withLoading(({ user, username, statement, isEditing }) => isEditing
+  ? <EditableStatement
+      statement={ user.statement }
+    />
   : <ViewableStatement
       username={ username }
       statement={ statement }
