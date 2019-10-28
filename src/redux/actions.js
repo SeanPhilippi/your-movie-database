@@ -383,9 +383,10 @@ export const fetchMovie = id => dispatch => {
   });
 };
 
-export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
+export const fetchMovieStats = (movie, update) => async (dispatch, getState) => {
   const { topMoviesList } = getState();
   dispatch(setMovieStatsLoading(true));
+  // if movie is an object (single movie)
   if (!movie.length) {
     let overallRanking;
     let movieIdx = topMoviesList.findIndex(item => item.id === movie.id);
@@ -393,7 +394,7 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
       overallRanking = ++movieIdx;
     } else {
       overallRanking = '';
-    }
+    };
     axios(`/api/list/rankings/${ movie.id }`)
       .then(({ data: { results, averageRanking, points } }) => {
         dispatch(setMovieStats({
@@ -402,7 +403,6 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
           points,
           overallRanking,
         }));
-        dispatch(setMovieStatsLoading(false));
         if (update) {
           const { id, title, year, director } = movie;
           dispatch(updateMovie({
@@ -416,8 +416,11 @@ export const fetchMovieStats = (movie, update) => (dispatch, getState) => {
             overallRanking
           }));
         };
+      }).then(() => {
+        dispatch(setMovieStatsLoading(false));
       });
   };
+  // if multiple movies
   if (movie.length) {
     const movies = movie;
     movies.forEach(movie => {
@@ -458,11 +461,11 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
     return list.length > 19;
   };
   if (listContainsMovie(items, movie)) {
-    dispatch(setMessageStatus('Your list already contains this movie!'))
+    dispatch(setMessageStatus('Your list already contains this movie!'));
     return Promise.resolve(false);
   };
   if (listIsFull(items)) {
-    dispatch(setMessageStatus('Your list already has 20 items!'))
+    dispatch(setMessageStatus('Your list already has 20 items!'));
     return Promise.resolve(false);
   };
   const { data } = await axios(`/api/movies/id/${ movie.imdbId || movie.id }`);
@@ -476,7 +479,7 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
     type: TYPES.ADD_TO_LIST,
     payload: movieObj
   });
-  const { user: { items: list }  } = getState();
+  const { user: { items: list } } = getState();
   if (post) {
     const listObj = {
       username,
@@ -488,7 +491,7 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
       .catch(console.log);
     dispatch(setMessageStatus('Add successful!'));
   };
-  dispatch(fetchMovieStats(movie, true));
+  dispatch(fetchMovieStats(movieObj, true));
   return true;
 };
 
@@ -505,7 +508,6 @@ export const orderList = (oldIndex, newIndex) => (dispatch, getState) => {
   const startIdx = Math.min(oldIndex, newIndex);
   const endIdx = Math.max(oldIndex, newIndex) + 1;
   const movies = [...items.slice(startIdx, endIdx)];
-  console.log(movies)
   dispatch(fetchMovieStats(movies, true));
 };
 
@@ -529,10 +531,8 @@ export const deleteList = movie => dispatch => {
 export const updateMovie = movie => dispatch => {
   console.log('updating movie')
   axios.put(`/api/movies/update/${ movie.id }`, movie)
-    .then(({ data }) => {
-      console.log('updateMovie data', data)
-      // parse data if needed, prob better to parse on backend
-      // dispatch(setTopMoviesList(data));
+    .then(() => {
+      dispatch(fetchTopMoviesList());
     });
 };
 
