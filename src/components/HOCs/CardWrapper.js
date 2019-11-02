@@ -48,7 +48,7 @@ CardWrapper.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array
-  ]),
+  ]).isRequired,
   rotate: PropTypes.number,
   marginTopVal: PropTypes.string,
   link: PropTypes.string

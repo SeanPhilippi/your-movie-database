@@ -143,13 +143,18 @@ class RegisterBox extends PureComponent {
           </form>
         </div>
       </Row>
-    )
-  }
-}
+    );
+  };
+};
 
 RegisterBox.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string,
+    password2: PropTypes.string,
+    username: PropTypes.string,
+  }).isRequired
 };
 
 const mapStateToProps = state => ({

@@ -397,13 +397,13 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
     };
     axios(`/api/list/rankings/${ movie.id }`)
       .then(({ data: { results, averageRanking, points } }) => {
-        dispatch(setMovieStats({
-          voters: results.reverse(),
-          averageRanking,
-          points,
-          overallRanking,
-        }));
         if (update) {
+          dispatch(setMovieStats({
+            voters: results.reverse(),
+            averageRanking,
+            points,
+            overallRanking,
+          }));
           const { id, title, year, director } = movie;
           dispatch(updateMovie({
             id,

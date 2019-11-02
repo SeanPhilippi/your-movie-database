@@ -18,7 +18,15 @@ const SearchResult = ({
 );
 
 SearchResult.propTypes = {
-  movie: PropTypes.object.isRequired,
+  movie: PropTypes.shape({
+    Title: PropTypes.string,
+    Year: PropTypes.string,
+    imdbID: PropTypes.string
+  }),
+  user: PropTypes.shape({
+    username: PropTypes.string,
+    _id: PropTypes.string,
+  }),
   handleAdd: PropTypes.func.isRequired
 };
 
