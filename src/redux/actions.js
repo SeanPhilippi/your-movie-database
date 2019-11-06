@@ -1,6 +1,5 @@
 import jwt_decode from 'jwt-decode';
-import http from '../utils/http';
-import axios from 'axios';
+import http from '../utils/http/api';
 import setAuthToken from '../utils/auth/setAuthToken';
 
 export const TYPES = {
@@ -177,7 +176,7 @@ export const postComment = comment => dispatch => {
   });
   // post to mongo after updating redux state with new comment and setting comments with the
   // new comments array
-  axios.post('/api/comments/', comment)
+  http.comments.post.comment(comment)
     .then(res => res.json)
     .catch(console.log);
 };
@@ -294,7 +293,7 @@ export const fetchAffinities = movieIds => dispatch => {
 
 export const fetchComments = username => dispatch => {
   dispatch(setCommentsLoading(true));
-  axios(`/api/comments/${ username }`)
+  http.comments.get.profileComments(username)
     .then(({ data }) => {
       if (data) {
         dispatch(setComments(data));
@@ -306,10 +305,10 @@ export const fetchComments = username => dispatch => {
     }).catch(console.log);
 };
 
-export const fetchMovieComments = movie_id => dispatch => {
+export const fetchMovieComments = movieId => dispatch => {
   console.log('fetch movie comments')
   dispatch(setCommentsLoading(true));
-  axios(`/api/comments/movie/${ movie_id }`)
+  http.comments.get.movieComments(movieId)
     .then(({ data }) => {
       if (data) {
         dispatch(setComments(data));
@@ -323,7 +322,7 @@ export const fetchMovieComments = movie_id => dispatch => {
 
 export const fetchTopMoviesComments = () => dispatch => {
   dispatch(setCommentsLoading(true));
-  axios('/api/comments/top-movies')
+  http.comments.get.topMoviesComments()
     .then(({ data }) => {
       if (data) {
         dispatch(setComments(data));
