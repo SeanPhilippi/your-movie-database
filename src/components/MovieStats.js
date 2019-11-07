@@ -16,36 +16,35 @@ const MovieStats = withLoading(({
     </div>
     <div className="bg-white">
       <div className="d-flex justify-content-between">
-        <div className="bd-light row-height col-10">
+        <div className="bd-light row-height col-9">
           Overall ranking:
         </div>
-        <div className="bd-light row-height col-2 text-right">
-          { overallRanking }
+        <div className="bd-light row-height col-3 text-right">
+          { overallRanking ? `#${ overallRanking }` : 'Not yet ranked.' }
         </div>
       </div>
       <div className="d-flex justify-content-between">
-        <div className="bd-light row-height col-10">
+        <div className="bd-light row-height col-9">
           Number of points:
         </div>
-        <div className="bd-light row-height col-2 text-right">
-          { points }
+        <div className="bd-light row-height col-3 text-right">
+          { points || 0 }
         </div>
       </div>
       <div className="d-flex justify-content-between">
-        <div className="bd-light row-height col-10">
+        <div className="bd-light row-height col-9">
           Number of users that ranked this movie:
         </div>
-        <div className="bd-light row-height col-2 text-right">
-          { voters.length }
+        <div className="bd-light row-height col-3 text-right">
+          { voters.length || 0 }
         </div>
       </div>
       <div className="d-flex justify-content-between">
-        <div className="bd-light row-height col-10">
+        <div className="bd-light row-height col-9">
           Average user ranking:
         </div>
-        <div className="bd-light row-height col-2 text-right">
-          {/* eslint-disable-next-line */}
-          #{ averageRanking }
+        <div className="bd-light row-height col-3 text-right">
+          { averageRanking ? `#${ averageRanking }` : 'Not yet ranked.' }
         </div>
       </div>
     </div>
