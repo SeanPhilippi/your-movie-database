@@ -34,10 +34,10 @@ class Profile extends PureComponent  {
     } = this.props;
     const { username } = this.props.match.params;
     if (pathname === '/profile') {
-      fetchListData(user.username);
+      fetchListData(user.username, true);
       fetchComments(user.username);
     } else {
-      fetchListData(username);
+      fetchListData(username, false);
       fetchComments(username);
     };
   };
@@ -79,7 +79,7 @@ class Profile extends PureComponent  {
             <CardWrapper
               icon={["far", "list-alt"]}
               rotate={ -5 }
-              title={`${ pathname === '/profile' ? user.username : username }'s Top Movies`}
+              title={`${ pathname === '/profile' || pathname === `/profile/${ user.username }` ? user.username : username }'s Top Movies`}
               color="tan"
               marginTopVal='0'
             >
@@ -101,8 +101,8 @@ class Profile extends PureComponent  {
             >
               <Statement
                 user={ user }
-                username={ pathname === '/profile' ? user.username : username }
-                statement={ pathname === '/profile' ? user.statement : statement }
+                username={ pathname === '/profile' || pathname === `/profile/${ user.username }` ? user.username : username }
+                statement={ pathname === '/profile' || pathname === `/profile/${ user.username }` ? user.statement : statement }
                 isEditing={ isEditing }
                 isLoading={ listDataLoading }
               />

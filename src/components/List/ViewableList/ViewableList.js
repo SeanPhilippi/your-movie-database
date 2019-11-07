@@ -15,7 +15,6 @@ import { withRouter } from 'react-router-dom';
 class ViewableList extends PureComponent {
 
   componentDidMount() {
-    console.log('viewablelist mounting')
     const { fetchTopMoviesList, setCurrentTopMovies } = this.props;
     fetchTopMoviesList();
     setCurrentTopMovies();
@@ -43,6 +42,10 @@ class ViewableList extends PureComponent {
   render() {
     const {
       items,
+      user,
+      match: {
+        url
+      },
       topMoviesList,
       currentTopMovies,
       moviesPerPage,
@@ -81,7 +84,13 @@ class ViewableList extends PureComponent {
     };
 
     const UserList = () => {
-      return items.map((item, idx) =>
+      let movies;
+      if (url === '/profile' || url === `/profile/${ user.username }`) {
+        movies = user.items;
+      } else {
+        movies = items;
+      }
+      return movies.map((item, idx) =>
         <ViewableItem
           movie={ item }
           idx={ idx }
@@ -93,9 +102,9 @@ class ViewableList extends PureComponent {
     };
 
     const whatToShow = () => {
-      if (this.props.match.path === '/') {
+      if (url === '/') {
         return <TopMoviesListPreview itemsPerPage={ 20 } />
-      } else if (this.props.match.path === '/top-movies') {
+      } else if (url === '/top-movies') {
         return (
           <>
             <PageSettings
@@ -146,6 +155,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
+  user: state.user,
   topMoviesList: state.topMoviesList,
   currentPage: state.currentPage,
   pages: state.pages,

@@ -7,5 +7,5 @@ export const get = {
 };
 
 export const post = {
-  comment: comment => axios('/api/comments', comment),
+  comment: comment => axios.post('/api/comments', comment),
 };

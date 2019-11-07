@@ -1,5 +1,6 @@
 import jwt_decode from 'jwt-decode';
 import http from '../utils/http/api';
+import axios from 'axios';
 import setAuthToken from '../utils/auth/setAuthToken';
 
 export const TYPES = {
@@ -237,7 +238,7 @@ export const fetchNewUsers = () => dispatch => {
     });
 };
 
-export const fetchListData = username => (dispatch, getState) => {
+export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
   // ! also do a check so the fetch only happens once for an auth user,
   // ! no need to fetch everytime, their listData will persist in Redux user object
   const { user: { username: authUser } } = getState();
