@@ -62,9 +62,9 @@ class NewRegistersBox extends PureComponent {
           </div>
         </div>
       </Row>
-    )
-  }
-}
+    );
+  };
+};
 
 NewRegistersBox.propTypes = {
   newUsers: PropTypes.array.isRequired

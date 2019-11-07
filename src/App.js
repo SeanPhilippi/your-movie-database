@@ -25,7 +25,7 @@ import {
   clearErrors,
   setCurrentPage
 } from './redux/actions';
-import http from './utils/http';
+import http from './utils/http/api';
 
 class App extends PureComponent {
   componentDidMount() {
