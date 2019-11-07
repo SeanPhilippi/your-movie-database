@@ -1,6 +1,5 @@
 import jwt_decode from 'jwt-decode';
 import http from '../utils/http/api';
-import axios from 'axios';
 import setAuthToken from '../utils/auth/setAuthToken';
 
 export const TYPES = {
@@ -183,7 +182,7 @@ export const postComment = comment => dispatch => {
 };
 
 export const registerUser = (userData, history) => dispatch => {
-  axios.post('/api/users/register', userData)
+  http.users.post.newUser(userData)
     .then(() => {
       history.push('/login');
       dispatch(fetchNewUsers());
@@ -198,8 +197,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 export const loginUser = (user, history) => dispatch => {
-  console.log('logging in...')
-  axios.post('/api/users/login', user)
+  http.users.post.login(user)
     .then(res => {
       console.log('/login post res', res)
       const { token, user } = res.data;
@@ -225,14 +223,14 @@ export const loginUser = (user, history) => dispatch => {
 };
 
 export const fetchCurrentUser = () => dispatch => {
-  axios('/api/users/current')
+  http.users.get.currentUser()
     .then(({ data }) => {
       dispatch(setCurrentUser(data.user));
     });
 };
 
 export const fetchNewUsers = () => dispatch => {
-  axios('/api/users/new-registers')
+  http.users.get.newRegisters()
     .then(({ data }) => {
       dispatch(setNewUsers(data));
     });
@@ -243,7 +241,7 @@ export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
   // ! no need to fetch everytime, their listData will persist in Redux user object
   const { user: { username: authUser } } = getState();
   dispatch(setListDataLoading(true));
-  axios(`/api/list/${ username }/list`)
+  http.list.get.userList(username)
     .then(({ data }) => {
       if (data) {
         const movieIds = data.items.map(item => item.id);
@@ -275,7 +273,7 @@ export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
 };
 
 export const fetchTopMoviesList = () => dispatch => {
-  axios('/api/movies/top-movies-list')
+  http.movies.get.topMoviesList()
   .then(({ data }) => {
     // filter movies without points
     const filteredMovies = data.filter(movie => movie.points);
@@ -285,7 +283,7 @@ export const fetchTopMoviesList = () => dispatch => {
 
 export const fetchAffinities = movieIds => dispatch => {
   dispatch(setAffinitiesLoading(true));
-  axios.post('/api/list/affinities', movieIds)
+  http.list.post.affinities(movieIds)
     .then(({ data }) => {
       dispatch(setAffinities(data));
       dispatch(setAffinitiesLoading(false));
@@ -353,34 +351,34 @@ export const logoutUser = history => dispatch => {
 
 export const fetchMovie = id => dispatch => {
   dispatch(setMovieDetailsLoading(true));
-  axios(`/api/movies/id/${ id }`)
-  .then(({
-    data: {
-      Title,
-      Year,
-      Poster,
-      Director,
-      Released,
-      Country,
-      imdbID,
-      Runtime,
-      Plot,
-    }
-  }) => {
-    const movie = {
-      title: Title,
-      year: Year,
-      poster: Poster,
-      director: Director,
-      release_date: Released,
-      country: Country,
-      imdbId: imdbID,
-      runtime: Runtime,
-      plot: Plot
-    };
-    dispatch(setMovie(movie));
-    dispatch(setMovieDetailsLoading(false));
-  });
+  http.movies.get.movie(id)
+    .then(({
+      data: {
+        Title,
+        Year,
+        Poster,
+        Director,
+        Released,
+        Country,
+        imdbID,
+        Runtime,
+        Plot,
+      }
+    }) => {
+      const movie = {
+        title: Title,
+        year: Year,
+        poster: Poster,
+        director: Director,
+        release_date: Released,
+        country: Country,
+        imdbId: imdbID,
+        runtime: Runtime,
+        plot: Plot
+      };
+      dispatch(setMovie(movie));
+      dispatch(setMovieDetailsLoading(false));
+    });
 };
 
 export const fetchMovieStats = (movie, update) => async (dispatch, getState) => {
@@ -395,7 +393,7 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
     } else {
       overallRanking = '';
     };
-    axios(`/api/list/rankings/${ movie.id }`)
+    http.list.get.rankings(movie.id)
       .then(({ data: { results, averageRanking, points } }) => {
         if (update) {
           dispatch(setMovieStats({
@@ -425,28 +423,28 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
     const movies = movie;
     movies.forEach(movie => {
       const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;
-      axios(`/api/list/rankings/${ movie.id }`)
-      .then(({ data: { results, averageRanking, points } }) => {
-        dispatch(setMovieStats({
-          voters: results.reverse(),
-          averageRanking,
-          points,
-          overallRanking,
-        }));
-        if (update) {
-          const { id, title, year, director } = movie;
-          dispatch(updateMovie({
-            id,
-            title,
-            year,
-            director,
+      http.list.get.rankings(movie.id)
+        .then(({ data: { results, averageRanking, points } }) => {
+          dispatch(setMovieStats({
+            voters: results.reverse(),
             averageRanking,
             points,
-            voters: results.reverse(),
             overallRanking,
           }));
-        };
-      });
+          if (update) {
+            const { id, title, year, director } = movie;
+            dispatch(updateMovie({
+              id,
+              title,
+              year,
+              director,
+              averageRanking,
+              points,
+              voters: results.reverse(),
+              overallRanking,
+            }));
+          };
+        });
     });
     dispatch(setMovieStatsLoading(false));
   };
@@ -468,7 +466,7 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
     dispatch(setMessageStatus('Your list already has 20 items!'));
     return Promise.resolve(false);
   };
-  const { data } = await axios(`/api/movies/id/${ movie.imdbId || movie.id }`);
+  const { data } = await http.movies.get.movie(movie.imdbId || movie.id);
   const movieObj = {
     title: data.Title,
     year: data.Year,
@@ -486,7 +484,7 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
       items: [...list],
       statement
     };
-    axios.put(`/api/list/save/${ username }`, listObj)
+    http.list.put.saveList(username, listObj)
       .then(res => res.json())
       .catch(console.log);
     dispatch(setMessageStatus('Add successful!'));
@@ -530,7 +528,7 @@ export const deleteList = movie => dispatch => {
 
 export const updateMovie = movie => dispatch => {
   console.log('updating movie')
-  axios.put(`/api/movies/update/${ movie.id }`, movie)
+  http.movies.put.movie(movie.id, movie)
     .then(() => {
       dispatch(fetchTopMoviesList());
     });
