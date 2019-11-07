@@ -199,7 +199,6 @@ export const registerUser = (userData, history) => dispatch => {
 export const loginUser = (user, history) => dispatch => {
   http.users.post.login(user)
     .then(res => {
-      console.log('/login post res', res)
       const { token, user } = res.data;
       // set token in localStorage
       localStorage.setItem('jwtToken', token);
@@ -297,7 +296,6 @@ export const fetchComments = username => dispatch => {
       if (data) {
         dispatch(setComments(data));
       } else {
-        console.log('there is no comments data')
         dispatch(setComments([]));
       };
       dispatch(setCommentsLoading(false));
@@ -305,14 +303,12 @@ export const fetchComments = username => dispatch => {
 };
 
 export const fetchMovieComments = movieId => dispatch => {
-  console.log('fetch movie comments')
   dispatch(setCommentsLoading(true));
   http.comments.get.movieComments(movieId)
     .then(({ data }) => {
       if (data) {
         dispatch(setComments(data));
       } else {
-        console.log('there is no movie comments data')
         dispatch(setComments([]));
       };
       dispatch(setCommentsLoading(false));
@@ -326,7 +322,6 @@ export const fetchTopMoviesComments = () => dispatch => {
       if (data) {
         dispatch(setComments(data));
       } else {
-        console.log('there is no movie comments data')
         dispatch(setComments([]));
       };
       dispatch(setCommentsLoading(false));
@@ -334,7 +329,6 @@ export const fetchTopMoviesComments = () => dispatch => {
 };
 
 export const logoutUser = history => dispatch => {
-  console.log('logging out...')
   // remove JWT token from localStorage
   localStorage.removeItem('jwtToken');
   // remove JWT token from axios Authorization headers
@@ -495,7 +489,6 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
 
 export const orderList = (oldIndex, newIndex) => (dispatch, getState) => {
   const { items } = getState();
-  console.log('old', oldIndex, 'new', newIndex)
   dispatch({
     type: TYPES.REORDER_LIST,
     payload: {
@@ -527,7 +520,6 @@ export const deleteList = movie => dispatch => {
 };
 
 export const updateMovie = movie => dispatch => {
-  console.log('updating movie')
   http.movies.put.movie(movie.id, movie)
     .then(() => {
       dispatch(fetchTopMoviesList());
