@@ -26,7 +26,8 @@ Concurrently: ```npm run both```
 
 ## Current State
 
-* Authentication is fully functional with login and register errors.  Users can login using either their email or username.  * Users can add, remove, and reorder movies, as well as write a user statement and everything persists for the user session and can be saved which posts it to a database.
+* Authentication is fully functional with login and register errors.  Users can login using either their email or username.
+* Users can add, remove, and reorder movies, as well as write a user statement and everything persists for the user session and can be saved which posts it to a database.
 * Saving transitions to a presentation view smoothly, and clicking the edit button transitions back to an edit view.
 * User data is cleared upon log out and log out happens automatically after a certain amount of time due to an expiring session token.
 * Member lists can be visited, pages populate with their saved data.
@@ -41,8 +42,10 @@ Concurrently: ```npm run both```
 ## Future Goals
 * Users Index page with a search bar. This is partially done.
 * Track user list visits and display on home page.
+* Ability to post reviews to movie pages. 
+* Easy inclusion of emojis in comments. 
 * Ability to delete comments.
-* Searchbar below nav where movies can be searched. Currently search is just visible when editing personal list.
+* Search bar below nav where movies can be searched. Currently search is just visible when editing personal list.
 * Add pictures of website to this repo README.md.
 
 <!--
