@@ -372,7 +372,7 @@ export const fetchMovie = id => dispatch => {
       };
       dispatch(setMovie(movie));
       dispatch(setMovieDetailsLoading(false));
-    });
+    }).catch(console.log);
 };
 
 export const fetchMovieStats = (movie, update) => async (dispatch, getState) => {
@@ -389,13 +389,13 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
     };
     api.list.get.rankings(movie.id)
       .then(({ data: { results, averageRanking, points } }) => {
-        if (update) {
           dispatch(setMovieStats({
             voters: results.reverse(),
             averageRanking,
             points,
             overallRanking,
           }));
+        if (update) {
           const { id, title, year, director } = movie;
           dispatch(updateMovie({
             id,

@@ -19,7 +19,10 @@ class MovieSearch extends PureComponent {
       year: movie.Year,
       id: movie.imdbID
     };
-    history.push(`/movies/${ movie.Title.split(' ').concat([movie.Year]).join('-') }`, { movie: remappedMovie });
+    history.push(
+      `/movies/${ movie.Title.split(' ').concat([movie.Year]).join('-') }`,
+      { movie: remappedMovie }
+    );
   };
 
   renderResults = () => {
@@ -27,7 +30,15 @@ class MovieSearch extends PureComponent {
     if (searchResults) {
       return (
         <div className="bg-white movie-result-scroll">
-          { searchResults.map(movie => <SearchResult movie={ movie } handleRedirect={ this.handleRedirect } key={ movie.id } />) }
+          {
+            searchResults.map(movie =>
+              <SearchResult
+                movie={ movie }
+                handleRedirect={ this.handleRedirect }
+                key={ movie.id }
+              />
+            )
+          }
         </div>
       );
     };
