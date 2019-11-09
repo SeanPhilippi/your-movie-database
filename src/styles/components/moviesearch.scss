@@ -1,0 +1,41 @@
+.movie-search-container {
+
+}
+
+.movie-search-text {
+  height: 3.5rem;
+  line-height: 3.1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.movie-result-scroll {
+  max-width: 85rem;
+  width: 100%;
+  z-index: 200;
+  position: absolute;
+  max-height: 24rem;
+  overflow: auto;
+}
+
+// movie search result item
+.movie-result-item {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  border-bottom: lightgrey solid 1px;
+  height: 3.1rem;
+  line-height: 2.9rem;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.movie-result-item:hover {
+  background-color: white;
+}
+
+.movie-result-info {
+  margin-left: 1rem;
+  text-align: left;
+  line-height: 2.1rem;
+}

@@ -8,10 +8,10 @@ const SearchResult = ({
 }) => (
   <div
     key={ movie ? movie.imdbID : user._id }
-    className="result-item"
+    className={ window.location.pathname === '/' ? "movie-result-item" : "result-item" }
     onClick={ () => handleAdd(movie) }
   >
-    <div className="result-info">
+    <div className={ window.location.pathname === '/' ? "movie-result-info" : "result-info" }>
       { movie ? movie.Title : user.username } { movie && `(${ movie.Year })` }
     </div>
   </div>

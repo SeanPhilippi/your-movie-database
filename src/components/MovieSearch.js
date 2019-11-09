@@ -8,10 +8,8 @@ class MovieSearch extends PureComponent {
   state = {
     searchText: '',
     searchResults: [],
-    allowResults: false,
+    allowResults: true,
   };
-
-  focusInput = React.createRef();
 
   renderResults = () => {
     const { searchResults } = this.state;
@@ -19,10 +17,10 @@ class MovieSearch extends PureComponent {
     if (searchResults) {
       return (
         users
-        ? <div className="bg-white result-scroll">
+        ? <div className="bg-white movie-result-scroll">
             { users.map(user => <SearchResult user={ user } key={ user._id } />) }
           </div>
-        : <div className="bg-white result-scroll">
+        : <div className="bg-white movie-result-scroll">
             { searchResults.map(movie => <SearchResult movie={ movie } handleAdd={ this.handleAdd } key={ movie.id } />) }
           </div>
       )
@@ -55,13 +53,29 @@ class MovieSearch extends PureComponent {
       });
   };
 
+  handleSearch = () => {
+    this.clearResults();
+    const pageNums = [1, 2, 3];
+    const { searchText } = this.state;
+    pageNums.forEach(num => {
+      axios(`/api/movies/search/${ searchText }/${ num }`)
+        .then(({ data }) => {
+          console.log('search data', data);
+          if (data.Search) {
+            this.setState(prevState => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
+          };
+        })
+        .catch(console.log);
+      });
+  };
+
   handleDelay = debounce(this.handleSearch, 300);
 
-  handleFocus = (bool, time = 0) => {
-    setTimeout(() => {
-      this.setState({ allowResults: bool });
-    }, time);
-  };
+  // handleFocus = (bool, time = 0) => {
+  //   setTimeout(() => {
+  //     this.setState({ allowResults: bool });
+  //   }, time);
+  // };
 
   onTextChange = e => {
     this.setState({ searchText: e.target.value });
@@ -85,19 +99,18 @@ class MovieSearch extends PureComponent {
     const { searchText, allowResults } = this.state;
 
     return (
-      <div className={`${ itemsCount > 19 ? 'd-none' : 'd-flex' } flex-column align-items-center mt-${ marginTopVal }`}>
+      <div className={`${ itemsCount > 19 ? 'd-none' : 'd-flex' } flex-column movie-search-container align-items-center mt-${ marginTopVal }`}>
         <input
-          ref={ this.focusInput }
           autoComplete="off"
           autoFocus
           name="searchText"
-          className="search-text pl-3 w-100"
+          className="movie-search-text pl-3 w-100"
           placeholder={ !users ? "Search for films..." : "Type a member's name..." }
           value={ searchText }
           onChange={ this.onTextChange }
           onKeyUp={ this.onKeyUp }
-          onFocus={ () => this.handleFocus(true) }
-          onBlur={ () => this.handleFocus(false, 200) }
+          // onFocus={ () => this.handleFocus(true) }
+          // onBlur={ () => this.handleFocus(false, 200) }
         >
         </input>
         { allowResults && this.renderResults() }
