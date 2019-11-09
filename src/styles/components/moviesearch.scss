@@ -16,11 +16,18 @@
   position: absolute;
 }
 
-.movie-search-text {
+.movie-search-input {
+  background-color: $light2;
+  border: none;
+  border-bottom: solid white 1px;
   height: 3.5rem;
   line-height: 3.1rem;
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+.movie-search-input-focused {
+  background-color: lighten($light2, 10)
 }
 
 .movie-result-scroll {
@@ -35,6 +42,7 @@
 
 // movie search result item
 .movie-result-item {
+  background-color: lighten($light2, 10);
   display: flex;
   align-items: center;
   font-size: 1rem;

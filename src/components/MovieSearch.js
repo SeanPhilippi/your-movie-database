@@ -12,6 +12,7 @@ class MovieSearch extends PureComponent {
     searchText: '',
     searchResults: [],
     allowResults: true,
+    inputColorChange: false
   };
 
   handleRedirect = movie => {
@@ -64,22 +65,6 @@ class MovieSearch extends PureComponent {
     };
   };
 
-  handleMovie = () => {
-    this.clearResults();
-    const pageNums = [1, 2, 3];
-    const { searchText } = this.state;
-    pageNums.forEach(num => {
-      axios(`/api/movies/search/${ searchText }/${ num }`)
-        .then(({ data }) => {
-          console.log('search data', data);
-          if (data.Search) {
-            this.setState(prevState => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
-          };
-        })
-        .catch(console.log);
-      });
-  };
-
   handleSearch = () => {
     this.clearResults();
     const pageNums = [1, 2, 3];
@@ -100,7 +85,10 @@ class MovieSearch extends PureComponent {
 
   handleFocus = (bool, time = 0) => {
     setTimeout(() => {
-      this.setState({ allowResults: bool });
+      this.setState({
+        allowResults: bool,
+        inputColorChange: bool,
+      });
     }, time);
   };
 
@@ -121,9 +109,14 @@ class MovieSearch extends PureComponent {
     this.setState(() => ({ searchText: '' }));
   };
 
+  clear = () => {
+    this.clearSearchText();
+    this.clearResults();
+  };
+
   render() {
     const { marginTopVal, itemsCount } = this.props;
-    const { searchText, allowResults } = this.state;
+    const { searchText, allowResults, inputColorChange } = this.state;
 
     return (
       <div className={`${ itemsCount > 19 ? 'd-none' : 'd-flex' } flex-column movie-search-container mt-${ marginTopVal }`}>
@@ -132,7 +125,7 @@ class MovieSearch extends PureComponent {
             autoComplete="off"
             autoFocus
             name="searchText"
-            className="movie-search-text pl-3 w-100"
+            className={`movie-search-input pl-3 w-100 ${ inputColorChange && 'movie-search-input-focused' }`}
             placeholder="Search for films..."
             value={ searchText }
             onChange={ this.onTextChange }
@@ -142,7 +135,7 @@ class MovieSearch extends PureComponent {
           >
           </input>
           <div
-            onClick={ this.clearSearchText }
+            onClick={ this.clear }
             className="clear-search"
           >
             ✕
