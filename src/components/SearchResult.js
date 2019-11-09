@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isPropertyAccessExpression } from 'typescript';
 
 const SearchResult = ({
   movie,
   user,
-  handleAdd
+  handleAdd,
+  handleRedirect
 }) => (
   <div
     key={ movie ? movie.imdbID : user._id }
     className={ window.location.pathname === '/' ? "movie-result-item" : "result-item" }
-    onClick={ () => handleAdd(movie) }
+    onClick={ handleAdd ? () => handleAdd(movie) : () => handleRedirect(movie) }
   >
     <div className={ window.location.pathname === '/' ? "movie-result-info" : "result-info" }>
       { movie ? movie.Title : user.username } { movie && `(${ movie.Year })` }
@@ -27,7 +29,8 @@ SearchResult.propTypes = {
     username: PropTypes.string,
     _id: PropTypes.string,
   }),
-  handleAdd: PropTypes.func.isRequired
+  handleAdd: PropTypes.func,
+  handleRedirect: PropTypes.func,
 };
 
 export default SearchResult;

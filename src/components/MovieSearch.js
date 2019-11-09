@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import SearchResult from './SearchResult';
 import debounce from '../utils/helpers/debounce.js';
@@ -11,19 +12,25 @@ class MovieSearch extends PureComponent {
     allowResults: true,
   };
 
+  handleRedirect = movie => {
+    const { history } = this.props;
+    const remappedMovie = {
+      title: movie.Title,
+      year: movie.Year,
+      id: movie.imdbID
+    };
+    history.push(`/movies/${ movie.Title.split(' ').concat([movie.Year]).join('-') }`, { movie: remappedMovie });
+  };
+
   renderResults = () => {
     const { searchResults } = this.state;
     const { users } = this.props;
     if (searchResults) {
       return (
-        users
-        ? <div className="bg-white movie-result-scroll">
-            { users.map(user => <SearchResult user={ user } key={ user._id } />) }
-          </div>
-        : <div className="bg-white movie-result-scroll">
-            { searchResults.map(movie => <SearchResult movie={ movie } handleAdd={ this.handleAdd } key={ movie.id } />) }
-          </div>
-      )
+        <div className="bg-white movie-result-scroll">
+          { searchResults.map(movie => <SearchResult movie={ movie } handleRedirect={ this.handleRedirect } key={ movie.id } />) }
+        </div>
+      );
     };
   };
   // ! this is working, but need a timeout to also clear results if user pauses when typing
@@ -71,11 +78,11 @@ class MovieSearch extends PureComponent {
 
   handleDelay = debounce(this.handleSearch, 300);
 
-  // handleFocus = (bool, time = 0) => {
-  //   setTimeout(() => {
-  //     this.setState({ allowResults: bool });
-  //   }, time);
-  // };
+  handleFocus = (bool, time = 0) => {
+    setTimeout(() => {
+      this.setState({ allowResults: bool });
+    }, time);
+  };
 
   onTextChange = e => {
     this.setState({ searchText: e.target.value });
@@ -109,8 +116,8 @@ class MovieSearch extends PureComponent {
           value={ searchText }
           onChange={ this.onTextChange }
           onKeyUp={ this.onKeyUp }
-          // onFocus={ () => this.handleFocus(true) }
-          // onBlur={ () => this.handleFocus(false, 200) }
+          onFocus={ () => this.handleFocus(true) }
+          onBlur={ () => this.handleFocus(false, 200) }
         >
         </input>
         { allowResults && this.renderResults() }
@@ -123,4 +130,4 @@ MovieSearch.propTypes = {
 
 };
 
-export default MovieSearch;
+export default withRouter(MovieSearch);

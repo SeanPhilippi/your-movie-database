@@ -44,9 +44,6 @@ class MoviePage extends PureComponent {
   };
 
   render() {
-    console.log('location.state.movie', this.props.location.state.movie)
-    // * how I was bringing in movie data for this page (via Link on SortableItem)
-    // const { movie } = this.props.location.state;
     const {
       comments,
       commentsLoading,
@@ -137,7 +134,7 @@ class MoviePage extends PureComponent {
 MoviePage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
-    title: PropTypes.string.isRequired
+    title: PropTypes.string
   }).isRequired,
   stats: PropTypes.shape({
     voters: PropTypes.array

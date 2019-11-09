@@ -82,11 +82,11 @@ ViewableItem.propTypes = {
   movie: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
+    director: PropTypes.string,
     year: PropTypes.string.isRequired,
   }),
   idx: PropTypes.number.isRequired,
-  addToList: PropTypes.func.isRequired,
+  addToList: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
