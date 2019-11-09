@@ -24,7 +24,6 @@ class MovieSearch extends PureComponent {
 
   renderResults = () => {
     const { searchResults } = this.state;
-    const { users } = this.props;
     if (searchResults) {
       return (
         <div className="bg-white movie-result-scroll">
@@ -102,7 +101,7 @@ class MovieSearch extends PureComponent {
   };
 
   render() {
-    const { marginTopVal, users, itemsCount } = this.props;
+    const { marginTopVal, itemsCount } = this.props;
     const { searchText, allowResults } = this.state;
 
     return (
@@ -112,7 +111,7 @@ class MovieSearch extends PureComponent {
           autoFocus
           name="searchText"
           className="movie-search-text pl-3 w-100"
-          placeholder={ !users ? "Search for films..." : "Type a member's name..." }
+          placeholder="Search for films..."
           value={ searchText }
           onChange={ this.onTextChange }
           onKeyUp={ this.onKeyUp }
