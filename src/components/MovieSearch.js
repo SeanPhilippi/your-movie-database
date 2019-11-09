@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import SearchResult from './SearchResult';
+import { fetchMovie, fetchMovieStats, fetchMovieComments } from '../redux/actions';
 import debounce from '../utils/helpers/debounce.js';
 
 class MovieSearch extends PureComponent {
@@ -13,12 +15,20 @@ class MovieSearch extends PureComponent {
   };
 
   handleRedirect = movie => {
-    const { history } = this.props;
+    const {
+      history,
+      fetchMovie,
+      fetchMovieComments,
+      fetchMovieStats,
+    } = this.props;
     const remappedMovie = {
       title: movie.Title,
       year: movie.Year,
       id: movie.imdbID
     };
+    fetchMovie(movie.imdbId);
+    fetchMovieComments(movie.imdbId);
+    fetchMovieStats(remappedMovie, false);
     history.push(
       `/movies/${ movie.Title.split(' ').concat([movie.Year]).join('-') }`,
       { movie: remappedMovie }
@@ -132,12 +142,18 @@ class MovieSearch extends PureComponent {
         </input>
         { allowResults && this.renderResults() }
       </div>
-    )
-  }
+    );
+  };
 };
 
 MovieSearch.propTypes = {
 
 };
 
-export default withRouter(MovieSearch);
+const mapDispatchToProps = dispatch => ({
+  fetchMovie: id => dispatch(fetchMovie(id)),
+  fetchMovieStats: (movie, update) => dispatch(fetchMovieStats(movie, update)),
+  fetchMovieComments: id => dispatch(fetchMovieComments(id)),
+});
+
+export default withRouter(connect(null, mapDispatchToProps)(MovieSearch));

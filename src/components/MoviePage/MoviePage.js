@@ -147,7 +147,7 @@ MoviePage.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   addToList: (movie, post) => dispatch(addToList(movie, post)),
-  fetchMovieComments: movie_id => dispatch(fetchMovieComments(movie_id)),
+  fetchMovieComments: id => dispatch(fetchMovieComments(id)),
   fetchMovie: id => dispatch(fetchMovie(id)),
   fetchMovieStats: (movie, update) => dispatch(fetchMovieStats(movie, update)),
 });

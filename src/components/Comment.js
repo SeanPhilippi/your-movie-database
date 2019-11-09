@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const Comment = ({ user, comment: { author, post_date, text } }) => (
+const Comment = ({
+  user,
+  comment: {
+    author,
+    post_date,
+    text
+  }
+}) => (
   <div className="border my-1 px-2 py-1">
     <div>
       {/* eslint-disable-next-line */}
