@@ -43,6 +43,7 @@ const ViewableItem = ({
       </div>
       <div
         title={`${ title } (${ director }, ${ year })`}
+        alt={`${ title } (${ director }, ${ year })`}
         className="d-inline-block text-truncate"
         style={{ maxWidth }}
       >

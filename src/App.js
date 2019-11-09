@@ -11,7 +11,7 @@ import MovieSearch from './components/MovieSearch';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import TopMoviesList from './components/TopMoviesList';
-import MoviePage from './components/MoviePage';
+import MoviePage from './components/MoviePage/MoviePage';
 import MessageBar from './components/MessageBar';
 import Register from './components/Register';
 import Login from './components/Login';

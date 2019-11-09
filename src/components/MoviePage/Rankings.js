@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withLoading from './HOCs/withLoading';
+import withLoading from '../HOCs/withLoading';
 import { Link } from 'react-router-dom';
 
 const Rankings = withLoading(({ title, voters }) => (

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import SearchResult from './SearchResult';
@@ -13,8 +13,7 @@ class Search extends PureComponent {
     allowResults: false,
   };
 
-  focusInput = React.createRef();
-
+  focusInput = createRef();
   handleAdd = movie => {
     const { addToList } = this.props;
     const remappedMovie = {

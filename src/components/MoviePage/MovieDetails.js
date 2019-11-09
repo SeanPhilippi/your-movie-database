@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withLoading from './HOCs/withLoading';
-import imdbLogo from '../images/imdb-logo.gif';
-import plusIcon from '../images/plus-light-orange.png';
+import withLoading from '../HOCs/withLoading';
+import imdbLogo from '../../images/imdb-logo.gif';
+import plusIcon from '../../images/plus-light-orange.png';
 
 const MovieDetails = withLoading(({
   movie,
@@ -19,14 +19,12 @@ const MovieDetails = withLoading(({
   handleAdd
 }) => (
   <div className="movie-page d-flex">
-    <div className="poster">
-      <img
-        width={ 300 }
-        height={ 600 }
-        className="poster-img"
-        src={ poster }
-        alt={ title }
-      />
+    <div
+      className="poster"
+      alt={ `${ title } (${ year })` }
+      title={ `${ title } (${ year })` }
+      style={{ backgroundImage: `url(${ poster })` }}
+    >
     </div>
     {/* <div
       className="poster-img"

@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import MovieDetails from './MovieDetails';
-import Comments from './Comments';
+import Comments from '../Comments';
 import Rankings from './Rankings';
 import MovieStats from './MovieStats';
-import CardWrapper from './HOCs/CardWrapper';
-import withLoading from './HOCs/withLoading';
+import CardWrapper from '../HOCs/CardWrapper';
+import withLoading from '../HOCs/withLoading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   fetchMovieComments,
   fetchMovie,
   fetchMovieStats,
   addToList
-} from '../redux/actions';
+} from '../../redux/actions';
 
 const CommentsWithLoading = withLoading(Comments);
 

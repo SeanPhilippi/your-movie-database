@@ -15,15 +15,12 @@
 }
 
 .poster {
-  width: 14rem;
+  min-width: 11rem;
+  height: 16rem;
   margin-right: 1.5rem;
   margin-bottom: 1.5rem;
-}
-
-.poster-img {
-  display: block;
-  width: 100%;
-  height: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .title {
