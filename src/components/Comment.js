@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Comment = ({ comment: { author, post_date, text } }) => (
+const Comment = ({ user, comment: { author, post_date, text } }) => (
   <div className="border my-1 px-2 py-1">
     <div>
       {/* eslint-disable-next-line */}
-      <Link to={`/profile/${ author }`}>{ author }</Link> wrote on { post_date }
+      <Link to={`/profile${ author === user.username ? '' : `/${ author }`}`}>{ author }</Link> wrote on { post_date }
     </div>
     <p className="comment">
       { text }
@@ -22,4 +23,8 @@ Comment.propTypes = {
   }),
 };
 
-export default Comment;
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps)(Comment);

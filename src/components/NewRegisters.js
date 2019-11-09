@@ -21,9 +21,9 @@ class NewRegisters extends PureComponent {
           </div>
         </div>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 NewRegisters.propTypes = {
   newUsers: PropTypes.array.isRequired

@@ -7,13 +7,14 @@ class MostVisitedList extends PureComponent {
   render() {
     const {
       newUsers,
-      num
+      num,
+      user,
     } = this.props;
 
     const User = ({
       username,
       _id,
-      visits
+      visits,
     }) => (
       <div
         key={ _id }
@@ -28,7 +29,7 @@ class MostVisitedList extends PureComponent {
           >
             <Link
               className="ml-3"
-              to={`/profile/${ username }`}
+              to={`/profile${ username === user.username ? '' : `/${ username }` }`}
             >
               { username }
             </Link>
@@ -58,6 +59,7 @@ class MostVisitedList extends PureComponent {
 
 const mapStateToProps = state => ({
   newUsers: state.newUsers,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(MostVisitedList);
