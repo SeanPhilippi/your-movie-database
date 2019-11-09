@@ -126,20 +126,28 @@ class MovieSearch extends PureComponent {
     const { searchText, allowResults } = this.state;
 
     return (
-      <div className={`${ itemsCount > 19 ? 'd-none' : 'd-flex' } flex-column movie-search-container align-items-center mt-${ marginTopVal }`}>
-        <input
-          autoComplete="off"
-          autoFocus
-          name="searchText"
-          className="movie-search-text pl-3 w-100"
-          placeholder="Search for films..."
-          value={ searchText }
-          onChange={ this.onTextChange }
-          onKeyUp={ this.onKeyUp }
-          onFocus={ () => this.handleFocus(true) }
-          onBlur={ () => this.handleFocus(false, 200) }
-        >
-        </input>
+      <div className={`${ itemsCount > 19 ? 'd-none' : 'd-flex' } flex-column movie-search-container mt-${ marginTopVal }`}>
+        <div className="d-flex search-bar">
+          <input
+            autoComplete="off"
+            autoFocus
+            name="searchText"
+            className="movie-search-text pl-3 w-100"
+            placeholder="Search for films..."
+            value={ searchText }
+            onChange={ this.onTextChange }
+            onKeyUp={ this.onKeyUp }
+            onFocus={ () => this.handleFocus(true) }
+            onBlur={ () => this.handleFocus(false, 200) }
+          >
+          </input>
+          <div
+            onClick={ this.clearSearchText }
+            className="clear-search"
+          >
+            ✕
+          </div>
+        </div>
         { allowResults && this.renderResults() }
       </div>
     );

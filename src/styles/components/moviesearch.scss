@@ -2,6 +2,20 @@
 
 }
 
+.search-bar {
+  position: relative;
+}
+
+.clear-search {
+  width: 2rem;
+  font-size: 1.5rem;
+  right: 1rem;
+  top: 14.5%;
+  cursor: pointer;
+  z-index: 100;
+  position: absolute;
+}
+
 .movie-search-text {
   height: 3.5rem;
   line-height: 3.1rem;
