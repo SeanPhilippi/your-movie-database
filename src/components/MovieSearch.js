@@ -26,8 +26,8 @@ class MovieSearch extends PureComponent {
       year: movie.Year,
       id: movie.imdbID
     };
-    fetchMovie(movie.imdbId);
-    fetchMovieComments(movie.imdbId);
+    fetchMovie(movie.imdbID);
+    fetchMovieComments(movie.imdbID);
     fetchMovieStats(remappedMovie, false);
     history.push(
       `/movies/${ movie.Title.split(' ').concat([movie.Year]).join('-') }`,

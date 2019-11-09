@@ -29,6 +29,7 @@ class MoviePage extends PureComponent {
         state: { movie }
       }
     } = this.props;
+    console.log('movie on mount', movie)
     fetchMovie(movie.id);
     fetchMovieComments(movie.id);
     fetchMovieStats(movie, false);
