@@ -7,6 +7,7 @@ import {
   withRouter
 } from 'react-router-dom';
 import TopNav from './components/TopNav';
+import MovieSearch from './components/MovieSearch';
 import Home from './components/Home';
 import Profile from './components/Profile';
 import TopMoviesList from './components/TopMoviesList';
@@ -25,11 +26,11 @@ import {
   clearErrors,
   setCurrentPage
 } from './redux/actions';
-import http from './utils/http/api';
+import api from './utils/api/api';
 
 class App extends PureComponent {
   componentDidMount() {
-    http.users.get.newRegisters()
+    api.users.get.newRegisters()
       .then(({ data }) => {
         this.props.setNewUsers(data);
       })
@@ -50,8 +51,9 @@ class App extends PureComponent {
     return (
       <div id="app">
         <div className="container-scss px-0 border-0">
-          <TopNav/>
-          <MessageBar/>
+          <TopNav />
+          <MessageBar />
+          <MovieSearch />
           <Switch>
             <Route exact path="/" component={ Home } />
             <Route exact path="/login" component={ Login } />

@@ -2,11 +2,9 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import SearchResult from './SearchResult';
-import { connect } from 'react-redux';
 import debounce from '../utils/helpers/debounce.js';
-import { addToList } from '../redux/actions';
 
-class Search extends PureComponent {
+class MovieSearch extends PureComponent {
   state = {
     searchText: '',
     searchResults: [],
@@ -14,22 +12,6 @@ class Search extends PureComponent {
   };
 
   focusInput = React.createRef();
-
-  handleAdd = movie => {
-    const { addToList } = this.props;
-    const remappedMovie = {
-      title: movie.Title,
-      year: movie.Year,
-      id: movie.imdbID
-    };
-    addToList(remappedMovie).then(added => {
-      if (added && this.focusInput.current) {
-        this.focusInput.current.focus();
-      };
-      this.clearResults();
-      this.clearSearchText();
-    });
-  };
 
   renderResults = () => {
     const { searchResults } = this.state;
@@ -57,7 +39,7 @@ class Search extends PureComponent {
     };
   };
 
-  handleSearch = () => {
+  handleMovie = () => {
     this.clearResults();
     const pageNums = [1, 2, 3];
     const { searchText } = this.state;
@@ -124,12 +106,8 @@ class Search extends PureComponent {
   }
 };
 
-Search.propTypes = {
-  addToList: PropTypes.func.isRequired
+MovieSearch.propTypes = {
+
 };
 
-const mapDispatchToProps = dispatch => ({
-  addToList: (movie, viewableItem) => dispatch(addToList(movie, viewableItem)),
-});
-
-export default connect(null, mapDispatchToProps)(Search);
+export default MovieSearch;

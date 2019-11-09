@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const listsController = require('../../controllers/ListsController');
+const listsController = require('../controllers/ListsController');
 
 const {
   getListData,

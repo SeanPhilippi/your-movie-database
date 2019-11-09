@@ -1,5 +1,5 @@
 import jwt_decode from 'jwt-decode';
-import http from '../utils/http/api';
+import api from '../utils/api/api';
 import setAuthToken from '../utils/auth/setAuthToken';
 
 export const TYPES = {
@@ -176,13 +176,13 @@ export const postComment = comment => dispatch => {
   });
   // post to mongo after updating redux state with new comment and setting comments with the
   // new comments array
-  http.comments.post.comment(comment)
+  api.comments.post.comment(comment)
     .then(res => res.json)
     .catch(console.log);
 };
 
 export const registerUser = (userData, history) => dispatch => {
-  http.users.post.newUser(userData)
+  api.users.post.newUser(userData)
     .then(() => {
       history.push('/login');
       dispatch(fetchNewUsers());
@@ -197,7 +197,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 export const loginUser = (user, history) => dispatch => {
-  http.users.post.login(user)
+  api.users.post.login(user)
     .then(res => {
       const { token, user } = res.data;
       // set token in localStorage
@@ -222,14 +222,14 @@ export const loginUser = (user, history) => dispatch => {
 };
 
 export const fetchCurrentUser = () => dispatch => {
-  http.users.get.currentUser()
+  api.users.get.currentUser()
     .then(({ data }) => {
       dispatch(setCurrentUser(data.user));
     });
 };
 
 export const fetchNewUsers = () => dispatch => {
-  http.users.get.newRegisters()
+  api.users.get.newRegisters()
     .then(({ data }) => {
       dispatch(setNewUsers(data));
     });
@@ -240,7 +240,7 @@ export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
   // ! no need to fetch everytime, their listData will persist in Redux user object
   const { user: { username: authUser } } = getState();
   dispatch(setListDataLoading(true));
-  http.list.get.userList(username)
+  api.list.get.userList(username)
     .then(({ data }) => {
       if (data) {
         const movieIds = data.items.map(item => item.id);
@@ -272,7 +272,7 @@ export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
 };
 
 export const fetchTopMoviesList = () => dispatch => {
-  http.movies.get.topMoviesList()
+  api.movies.get.topMoviesList()
   .then(({ data }) => {
     // filter movies without points
     const filteredMovies = data.filter(movie => movie.points);
@@ -282,7 +282,7 @@ export const fetchTopMoviesList = () => dispatch => {
 
 export const fetchAffinities = movieIds => dispatch => {
   dispatch(setAffinitiesLoading(true));
-  http.list.post.affinities(movieIds)
+  api.list.post.affinities(movieIds)
     .then(({ data }) => {
       dispatch(setAffinities(data));
       dispatch(setAffinitiesLoading(false));
@@ -291,7 +291,7 @@ export const fetchAffinities = movieIds => dispatch => {
 
 export const fetchComments = username => dispatch => {
   dispatch(setCommentsLoading(true));
-  http.comments.get.profileComments(username)
+  api.comments.get.profileComments(username)
     .then(({ data }) => {
       if (data) {
         dispatch(setComments(data));
@@ -304,7 +304,7 @@ export const fetchComments = username => dispatch => {
 
 export const fetchMovieComments = movieId => dispatch => {
   dispatch(setCommentsLoading(true));
-  http.comments.get.movieComments(movieId)
+  api.comments.get.movieComments(movieId)
     .then(({ data }) => {
       if (data) {
         dispatch(setComments(data));
@@ -317,7 +317,7 @@ export const fetchMovieComments = movieId => dispatch => {
 
 export const fetchTopMoviesComments = () => dispatch => {
   dispatch(setCommentsLoading(true));
-  http.comments.get.topMoviesComments()
+  api.comments.get.topMoviesComments()
     .then(({ data }) => {
       if (data) {
         dispatch(setComments(data));
@@ -345,7 +345,7 @@ export const logoutUser = history => dispatch => {
 
 export const fetchMovie = id => dispatch => {
   dispatch(setMovieDetailsLoading(true));
-  http.movies.get.movie(id)
+  api.movies.get.movie(id)
     .then(({
       data: {
         Title,
@@ -387,7 +387,7 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
     } else {
       overallRanking = '';
     };
-    http.list.get.rankings(movie.id)
+    api.list.get.rankings(movie.id)
       .then(({ data: { results, averageRanking, points } }) => {
         if (update) {
           dispatch(setMovieStats({
@@ -417,7 +417,7 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
     const movies = movie;
     movies.forEach(movie => {
       const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;
-      http.list.get.rankings(movie.id)
+      api.list.get.rankings(movie.id)
         .then(({ data: { results, averageRanking, points } }) => {
           dispatch(setMovieStats({
             voters: results.reverse(),
@@ -460,7 +460,7 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
     dispatch(setMessageStatus('Your list already has 20 items!'));
     return Promise.resolve(false);
   };
-  const { data } = await http.movies.get.movie(movie.imdbId || movie.id);
+  const { data } = await api.movies.get.movie(movie.imdbId || movie.id);
   const movieObj = {
     title: data.Title,
     year: data.Year,
@@ -478,7 +478,7 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
       items: [...list],
       statement
     };
-    http.list.put.saveList(username, listObj)
+    api.list.put.saveList(username, listObj)
       .then(res => res.json())
       .catch(console.log);
     dispatch(setMessageStatus('Add successful!'));
@@ -520,7 +520,7 @@ export const deleteList = movie => dispatch => {
 };
 
 export const updateMovie = movie => dispatch => {
-  http.movies.put.movie(movie.id, movie)
+  api.movies.put.movie(movie.id, movie)
     .then(() => {
       dispatch(fetchTopMoviesList());
     });
