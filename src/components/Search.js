@@ -63,7 +63,6 @@ class Search extends PureComponent {
     pageNums.forEach(num => {
       axios(`/api/movies/search/${ searchText }/${ num }`)
         .then(({ data }) => {
-          console.log('search data', data);
           if (data.Search) {
             this.setState(prevState => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
           };
