@@ -108,7 +108,7 @@ class Search extends PureComponent {
           autoComplete="off"
           autoFocus
           name="searchText"
-          className="search-text pl-3 w-100"
+          className="search-input pl-3 w-100"
           placeholder={ !users ? "Search for films..." : "Type a member's name..." }
           value={ searchText }
           onChange={ this.onTextChange }

@@ -15,49 +15,28 @@ class MovieSearch extends PureComponent {
     inputColorChange: false
   };
 
-  handleRedirect = movie => {
-    const {
-      history,
-      fetchMovie,
-      fetchMovieComments,
-      fetchMovieStats,
-    } = this.props;
-    const remappedMovie = {
-      title: movie.Title,
-      year: movie.Year,
-      id: movie.imdbID
+  onTextChange = e => {
+    this.setState({ searchText: e.target.value });
+    // ! temp solution, prob not ideal, look up best practices
+    if (this.state.searchText && this.state.searchText.length > 1) {
+      // fire handle search through debounce function to reduce api calls with delay
+      this.handleDelay();
     };
-    fetchMovie(movie.imdbID);
-    fetchMovieComments(movie.imdbID);
-    fetchMovieStats(remappedMovie, false);
-    history.push(
-      `/movies/${ movie.Title.split(' ').concat([movie.Year]).join('-') }`,
-      { movie: remappedMovie }
-    );
   };
 
-  renderResults = () => {
-    const { searchResults } = this.state;
-    if (searchResults) {
-      return (
-        <div className="bg-white movie-result-scroll">
-          {
-            searchResults.map(movie =>
-              <SearchResult
-                movie={ movie }
-                handleRedirect={ this.handleRedirect }
-                key={ movie.id }
-              />
-            )
-          }
-        </div>
-      );
-    };
+  clearResults = () => {
+    this.setState(() => ({ searchResults: [] }));
   };
-  // ! this is working, but need a timeout to also clear results if user pauses when typing
-  // this way results don't continue to concatenate to results array
-  // also maybe completely refresh search results as more characters are entered since
-  // a search should continuously filter out more as the input query value length increases
+
+  clearSearchText = () => {
+    this.setState(() => ({ searchText: '' }));
+  };
+
+  clear = () => {
+    this.clearSearchText();
+    this.clearResults();
+  };
+
   onKeyUp = e => {
     if (e.key === 'Backspace') {
       this.clearResults();
@@ -92,26 +71,45 @@ class MovieSearch extends PureComponent {
     }, time);
   };
 
-  onTextChange = e => {
-    this.setState({ searchText: e.target.value });
-    // ! temp solution, prob not ideal, look up best practices
-    if (this.state.searchText && this.state.searchText.length > 1) {
-      // fire handle search through debounce function to reduce api calls with delay
-      this.handleDelay();
+  handleRedirect = movie => {
+    const {
+      history,
+      fetchMovie,
+      fetchMovieComments,
+      fetchMovieStats,
+    } = this.props;
+    const remappedMovie = {
+      title: movie.Title,
+      year: movie.Year,
+      id: movie.imdbID
     };
+    fetchMovie(movie.imdbID);
+    fetchMovieComments(movie.imdbID);
+    fetchMovieStats(remappedMovie, false);
+    history.push(
+      `/movies/${ movie.Title.split(' ').concat([movie.Year]).join('-') }`,
+      { movie: remappedMovie }
+    );
+    this.clear();
   };
 
-  clearResults = () => {
-    this.setState(() => ({ searchResults: [] }));
-  };
-
-  clearSearchText = () => {
-    this.setState(() => ({ searchText: '' }));
-  };
-
-  clear = () => {
-    this.clearSearchText();
-    this.clearResults();
+  renderResults = () => {
+    const { searchResults } = this.state;
+    if (searchResults) {
+      return (
+        <div className="bg-white movie-result-scroll">
+          {
+            searchResults.map(movie =>
+              <SearchResult
+                movie={ movie }
+                handleRedirect={ this.handleRedirect }
+                key={ movie.id }
+              />
+            )
+          }
+        </div>
+      );
+    };
   };
 
   render() {
@@ -136,7 +134,8 @@ class MovieSearch extends PureComponent {
           </input>
           <div
             onClick={ this.clear }
-            className="clear-search"
+            title="clear search text"
+            className={`clear-search ${ !inputColorChange ? 'd-none' : 'd-block' }`}
           >
             ✕
           </div>

@@ -17,7 +17,7 @@
 }
 
 .movie-search-input {
-  background-color: $light2;
+  background-color: transparent;
   border: none;
   border-bottom: solid white 1px;
   height: 3.5rem;
@@ -27,7 +27,8 @@
 }
 
 .movie-search-input-focused {
-  background-color: lighten($light2, 10)
+  background-color: lighten($light2, 10);
+  border-top: 1px solid black;
 }
 
 .movie-result-scroll {

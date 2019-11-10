@@ -9,10 +9,10 @@ const SearchResult = ({
 }) => (
   <div
     key={ movie ? movie.imdbID : user._id }
-    className={ window.location.pathname === '/' ? "movie-result-item" : "result-item" }
+    className={ handleRedirect ? "movie-result-item" : "result-item" }
     onClick={ handleAdd ? () => handleAdd(movie) : () => handleRedirect(movie) }
   >
-    <div className={ window.location.pathname === '/' ? "movie-result-info" : "result-info" }>
+    <div className={ handleRedirect ? "movie-result-info" : "result-info" }>
       { movie ? movie.Title : user.username } { movie && `(${ movie.Year })` }
     </div>
   </div>
