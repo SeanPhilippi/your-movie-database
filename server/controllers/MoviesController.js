@@ -9,7 +9,7 @@ exports.getSearchResults = ({ params }, res) => {
     .then(data => {
       res.json(data);
     })
-    .catch(console.log);
+    .catch((console.log));
 };
 
 exports.getMovieData = (req, res) => {
@@ -18,9 +18,9 @@ exports.getMovieData = (req, res) => {
   fetch(`http://www.omdbapi.com/?i=${ movieId }&apikey=${ apiKey }`)
     .then(res => res.json())
     .then(data => {
-      res.json(data);
+      res.status(200).json(data);
     })
-    .catch(console.log);
+    .catch(() => res.status(400).json({ movieDataError: 'Failed to get movie data' }));
 };
 
 exports.updateMovie = (req, res) => {
@@ -60,6 +60,6 @@ exports.getTopMovies = (req, res) => {
   // * use .update() maybe or .count()
   Movie.find({}).sort('-points')
     .exec().then(data => {
-      res.json(data);
-    }).catch(console.log);
+      res.status(200).json(data);
+    }).catch(() => res.status(400).json({ topMoviesError: 'Failed to get Top Movies' }));
 };
