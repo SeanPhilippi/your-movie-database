@@ -1,0 +1,65 @@
+.movie-search-container {
+
+}
+
+.search-bar {
+  position: relative;
+}
+
+.clear-search {
+  width: 2rem;
+  font-size: 1.5rem;
+  right: 1rem;
+  top: 14.5%;
+  cursor: pointer;
+  z-index: 100;
+  position: absolute;
+}
+
+.movie-search-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: solid white 1px;
+  height: 3.5rem;
+  line-height: 3.1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.movie-search-input-focused {
+  background-color: lighten($light2, 10);
+  border-top: 1px solid black;
+}
+
+.movie-result-scroll {
+  max-width: 85rem;
+  width: 100%;
+  z-index: 200;
+  position: absolute;
+  top: 12.2rem;
+  max-height: 24rem;
+  overflow: auto;
+}
+
+// movie search result item
+.movie-result-item {
+  background-color: lighten($light2, 10);
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  border-bottom: lightgrey solid 1px;
+  height: 3.1rem;
+  line-height: 2.9rem;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.movie-result-item:hover {
+  background-color: white;
+}
+
+.movie-result-info {
+  margin-left: 1rem;
+  text-align: left;
+  line-height: 2.1rem;
+}

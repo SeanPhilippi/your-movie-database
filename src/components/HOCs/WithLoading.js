@@ -6,7 +6,7 @@ const withLoading = Component => {
   return function withLoadingComponent({ isLoading, ...props }) {
     if (!isLoading) return <Component {...props} />;
     return <Spinner />
-  }
+  };
 };
 
 withLoading.propTypes = {

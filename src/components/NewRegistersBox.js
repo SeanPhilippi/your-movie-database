@@ -9,7 +9,8 @@ class NewRegistersBox extends PureComponent {
     const {
       newUsers,
       num,
-      registerPage
+      user,
+      registerPage,
     } = this.props;
 
     return (
@@ -36,7 +37,7 @@ class NewRegistersBox extends PureComponent {
                       key={ _id }
                     >
                       <div>
-                        <Link to={`/profile/${ username }`}>
+                        <Link to={`/profile${ username === user.username ? '' : `/${ username }` }`}>
                           { username }
                         </Link>
                       </div>
@@ -71,7 +72,8 @@ NewRegistersBox.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  newUsers: state.newUsers
+  newUsers: state.newUsers,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(NewRegistersBox);

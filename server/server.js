@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const cors = require('cors');
-const list = require('./routes/api/ListRoutes');
-const movies = require('./routes/api/MovieRoutes');
-const users = require('./routes/api/UserRoutes');
-const comments = require('./routes/api/CommentRoutes');
+const list = require('./routes/ListRoutes');
+const movies = require('./routes/MovieRoutes');
+const users = require('./routes/UserRoutes');
+const comments = require('./routes/CommentRoutes');
 const app = express();
 // DB config
 const PORT = process.env.PORT || 4300;

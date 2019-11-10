@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withLoading from './HOCs/withLoading';
+import withLoading from '../HOCs/withLoading';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Rankings = withLoading(({ title, voters }) => (
+const Rankings = withLoading(({ title, voters, user }) => (
   <div className="">
     <div className="font-weight-bold mb-1">
       User's that ranked { title }:
@@ -16,7 +17,7 @@ const Rankings = withLoading(({ title, voters }) => (
             key={ _id }
           >
             <div className="bd-light row-height col-10">
-              <Link to={`/profile/${ username }`}>
+              <Link to={`/profile${ username === user.username ? '' : `/${ username }` }`}>
                 { username }
               </Link>
             </div>
@@ -35,4 +36,8 @@ Rankings.propTypes = {
   voters: PropTypes.array
 };
 
-export default Rankings;
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps)(Rankings);

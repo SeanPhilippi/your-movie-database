@@ -5,12 +5,12 @@
   cursor: pointer;
 }
 
+.result-item:hover {
+  background-color: white;
+}
+
 .result-info {
   margin-left: 1rem;
   text-align: left;
   line-height: 2.1rem;
-}
-
-.result-item:hover {
-  background-color: white;
 }

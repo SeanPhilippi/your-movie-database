@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 const SearchResult = ({
   movie,
   user,
-  handleAdd
+  handleAdd,
+  handleRedirect
 }) => (
   <div
     key={ movie ? movie.imdbID : user._id }
-    className="result-item"
-    onClick={ () => handleAdd(movie) }
+    className={ handleRedirect ? "movie-result-item" : "result-item" }
+    onClick={ handleAdd ? () => handleAdd(movie) : () => handleRedirect(movie) }
   >
-    <div className="result-info">
+    <div className={ handleRedirect ? "movie-result-info" : "result-info" }>
       { movie ? movie.Title : user.username } { movie && `(${ movie.Year })` }
     </div>
   </div>
@@ -27,7 +28,8 @@ SearchResult.propTypes = {
     username: PropTypes.string,
     _id: PropTypes.string,
   }),
-  handleAdd: PropTypes.func.isRequired
+  handleAdd: PropTypes.func,
+  handleRedirect: PropTypes.func,
 };
 
 export default SearchResult;

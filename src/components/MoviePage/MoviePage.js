@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import MovieDetails from './MovieDetails';
-import Comments from './Comments';
+import Comments from '../Comments';
 import Rankings from './Rankings';
 import MovieStats from './MovieStats';
-import CardWrapper from './HOCs/CardWrapper';
-import withLoading from './HOCs/withLoading';
+import CardWrapper from '../HOCs/CardWrapper';
+import withLoading from '../HOCs/withLoading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   fetchMovieComments,
   fetchMovie,
   fetchMovieStats,
   addToList
-} from '../redux/actions';
+} from '../../redux/actions';
 
 const CommentsWithLoading = withLoading(Comments);
 
@@ -29,9 +29,10 @@ class MoviePage extends PureComponent {
         state: { movie }
       }
     } = this.props;
+    console.log('movie on mount', movie)
     fetchMovie(movie.id);
     fetchMovieComments(movie.id);
-    fetchMovieStats(movie, true);
+    fetchMovieStats(movie, false);
   };
 
   handleAdd = (movie, post) => {
@@ -44,9 +45,6 @@ class MoviePage extends PureComponent {
   };
 
   render() {
-    console.log('location.state.movie', this.props.location.state.movie)
-    // * how I was bringing in movie data for this page (via Link on SortableItem)
-    // const { movie } = this.props.location.state;
     const {
       comments,
       commentsLoading,
@@ -137,7 +135,7 @@ class MoviePage extends PureComponent {
 MoviePage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   movie: PropTypes.shape({
-    title: PropTypes.string.isRequired
+    title: PropTypes.string
   }).isRequired,
   stats: PropTypes.shape({
     voters: PropTypes.array
@@ -150,7 +148,7 @@ MoviePage.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   addToList: (movie, post) => dispatch(addToList(movie, post)),
-  fetchMovieComments: movie_id => dispatch(fetchMovieComments(movie_id)),
+  fetchMovieComments: id => dispatch(fetchMovieComments(id)),
   fetchMovie: id => dispatch(fetchMovie(id)),
   fetchMovieStats: (movie, update) => dispatch(fetchMovieStats(movie, update)),
 });

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import SearchResult from './SearchResult';
@@ -13,8 +13,7 @@ class Search extends PureComponent {
     allowResults: false,
   };
 
-  focusInput = React.createRef();
-
+  focusInput = createRef();
   handleAdd = movie => {
     const { addToList } = this.props;
     const remappedMovie = {
@@ -76,7 +75,7 @@ class Search extends PureComponent {
   handleDelay = debounce(this.handleSearch, 300);
 
   handleFocus = (bool, time = 0) => {
-    setTimeout(time => {
+    setTimeout(() => {
       this.setState({ allowResults: bool });
     }, time);
   };
@@ -109,7 +108,7 @@ class Search extends PureComponent {
           autoComplete="off"
           autoFocus
           name="searchText"
-          className="search-text pl-3 w-100"
+          className="search-input pl-3 w-100"
           placeholder={ !users ? "Search for films..." : "Type a member's name..." }
           value={ searchText }
           onChange={ this.onTextChange }
