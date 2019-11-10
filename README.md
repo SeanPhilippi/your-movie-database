@@ -45,7 +45,6 @@ Concurrently: ```npm run both```
 * Ability to post reviews to movie pages. 
 * Easy inclusion of emojis in comments. 
 * Ability to delete comments.
-* Search bar below nav where movies can be searched. Currently search is just visible when editing personal list.
 * Add pictures of website to this repo README.md.
 
 <!--
