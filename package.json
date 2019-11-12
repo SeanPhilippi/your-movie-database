@@ -1,6 +1,6 @@
 {
-  "name": "aca-final-project",
-  "homepage": "http://seanphilippi.github.io",
+  "name": "YMDB",
+  "homepage": "yourmoviedatabase.herokuapp.com",
   "version": "0.1.0",
   "engines": {
     "node": "8.12.0"

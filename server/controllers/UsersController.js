@@ -42,7 +42,7 @@ exports.registerUser = (req, res) => {
         password,
         register_date: formatDate(new Date()),
         location: geo
-          ? `${geo.city ? geo.city : 'n/a'}, ${geo.region ? geo.region : 'n/a'}, ${geo.country}, (lat: ${geo.ll[0]}, long: ${geo.ll[1]})`
+          ? `${ geo.city ? geo.city : 'n/a' }, ${ geo.region ? geo.region : 'n/a' }, ${ geo.country }, (lat: ${ geo.ll[0] }, long: ${ geo.ll[1] })`
           : 'n/a'
       });
       // encrypting password before saving to mlab
@@ -53,8 +53,8 @@ exports.registerUser = (req, res) => {
           // assigning newUser password to hash
           newUser.password = hash;
           newUser.save()
-            .then(user => res.json(user))
-            .catch(console.log);
+            .then(user => res.status(200).json(user))
+            .catch(() => res.status(400).json({ registerUserError: 'Failed to save user' }));
         });
       });
     });
@@ -101,12 +101,12 @@ exports.getNewRegisters = (req, res) => {
   // switch to a limit of the 50 most recent eventually
   User.find({}).sort({_id: 1})
     .exec().then(data => {
-      res.json(data);
+      res.status(200).json(data);
     }).catch(console.log);
 };
 
 exports.getCurrentUser = (req, res) => {
-  res.json({
+  res.status(200).json({
     user: { email: req.user.email, id: req.user._id, username: req.user.username }
-  });
+  }).catch(() => res.status(400).json({ currentUserError: 'Failed to get current user' }))
 };
