@@ -51,7 +51,6 @@ class MovieSearch extends PureComponent {
     pageNums.forEach(num => {
       axios(`/api/movies/search/${ searchText }/${ num }`)
         .then(({ data }) => {
-          console.log('search data', data);
           if (data.Search) {
             this.setState(prevState => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
           };
@@ -121,7 +120,6 @@ class MovieSearch extends PureComponent {
         <div className="d-flex search-bar">
           <input
             autoComplete="off"
-            autoFocus
             name="searchText"
             className={`movie-search-input pl-3 w-100 ${ inputColorChange && 'movie-search-input-focused' }`}
             placeholder="Search for films..."

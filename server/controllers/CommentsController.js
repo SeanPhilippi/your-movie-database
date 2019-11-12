@@ -3,21 +3,19 @@ const Comment = require('../models/CommentModel');
 exports.getComments = (req, res) => {
   Comment.find({ username: req.params.username })
     .then(data => res.json(data.reverse()))
-    .catch(console.log);
+    .catch(() => res.status(400).json({ profileCommentsError: 'Failed to find profile comments' }));
 };
 
 exports.getMovieComments = (req, res) => {
   Comment.find({ movie_id: req.params.movie_id })
     .then(data => res.json(data.reverse()))
-    .catch(console.log);
+    .catch(() => res.status(400).json({ movieCommentsError: 'Failed to find movie comments' }));
 };
 
 exports.getTopMoviesComments = (req, res) => {
   Comment.find({ top_movies_list: true })
-    .then(data => {
-      return res.json(data.reverse())
-    })
-    .catch(console.log);
+    .then(data => res.json(data.reverse()))
+    .catch(() => res.status(400).json({ topMoviesCommentsError: 'Failed to find top movies comments' }));
 };
 
 exports.postComment = (req, res) => {
@@ -57,6 +55,6 @@ exports.postComment = (req, res) => {
     });
   };
   newComment.save()
-    .then(comment => res.json(comment))
-    .catch(console.log);
+    .then(comment => res.status(200).json(comment))
+    .catch(() => res.status(400).json({ postCommentError: 'Failed to post comment' }));
 };

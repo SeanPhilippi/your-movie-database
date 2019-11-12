@@ -4,8 +4,8 @@ const List = require('../models/ListModel');
 
 exports.getListData = (req, res) => {
   List.findOne({ username: req.params.username }).exec().then(data => {
-    res.json(data);
-  }).catch(console.log);
+    res.status(200).json(data);
+  }).catch(() => res.status(404).json({ listDataError: 'Failed to find list data' }));
 };
 
 exports.saveList = (req, res) => {
@@ -27,13 +27,13 @@ exports.saveList = (req, res) => {
       upsert: 'true',
     },
   ).then(() => res.sendStatus(200))
-  .catch(console.log);
+  .catch(() => res.status(400).json({ failedToUpdate: 'List update failed' }));
 };
 
 exports.deleteList = (req, res) => {
   List.deleteOne({ username: req.params.username })
-    .then(res => console.log(res))
-    .catch(console.log);
+    .then(() => res.sendStatus(200))
+    .catch(() => res.status(400).json({ failedToDelete: 'Failed to delete list' }));
 };
 
 exports.getMovieRankings = (req, res) => {
@@ -65,9 +65,9 @@ exports.getMovieRankings = (req, res) => {
         averageRanking,
         points
       };
-      return res.json(result);
+      return res.status(200).json(result);
     })
-    .catch(console.log);
+    .catch(() => res.status(400).json({ movieRankingsError: 'Failed to collect rankings' }));
 };
 
 exports.calcAffinities = (req, res) => {
@@ -95,5 +95,5 @@ exports.calcAffinities = (req, res) => {
       const sortedMatches = matches.sort((a, b) => b.score - a.score);
       return res.json(sortedMatches);
     })
-    .catch(console.log);
+    .catch(() => res.status(400).json({ affinitiesError: 'Failed to calculate affinities' }));
 };
