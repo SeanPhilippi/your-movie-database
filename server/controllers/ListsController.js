@@ -27,7 +27,7 @@ exports.saveList = (req, res) => {
       upsert: 'true',
     },
   ).then(() => res.sendStatus(200))
-  .catch(() => res.status.json({ failedToUpdate: 'List update failed' }));
+  .catch(() => res.status(400).json({ failedToUpdate: 'List update failed' }));
 };
 
 exports.deleteList = (req, res) => {
