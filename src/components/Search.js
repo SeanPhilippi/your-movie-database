@@ -21,13 +21,14 @@ class Search extends PureComponent {
       year: movie.Year,
       id: movie.imdbID
     };
-    addToList(remappedMovie).then(added => {
-      if (added && this.focusInput.current) {
-        this.focusInput.current.focus();
-      };
-      this.clearResults();
-      this.clearSearchText();
-    });
+    addToList(remappedMovie)
+      .then(added => {
+        if (added && this.focusInput.current) {
+          this.focusInput.current.focus();
+        };
+        this.clearResults();
+        this.clearSearchText();
+      });
   };
 
   renderResults = () => {
@@ -127,7 +128,7 @@ Search.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  addToList: (movie, viewableItem) => dispatch(addToList(movie, viewableItem)),
+  addToList: (movie, post) => dispatch(addToList(movie, post)),
 });
 
 export default connect(null, mapDispatchToProps)(Search);

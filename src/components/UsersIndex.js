@@ -10,7 +10,7 @@ class UsersIndex extends PureComponent {
   render() {
     return (
       <div className="d-flex border-0 justify-content-center">
-        <div className="inner-container mt-4 mx-4 p-0">
+        <div className="inner-container mx-4">
           <Col className="bg-white pt-2">
             <CardWrapper
               title="search for a user"
