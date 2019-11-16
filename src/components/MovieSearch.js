@@ -133,7 +133,7 @@ class MovieSearch extends PureComponent {
           <div
             onClick={ this.clear }
             title="clear search text"
-            className={`clear-search ${ !inputColorChange ? 'd-none' : 'd-block' }`}
+            className={`clear-search ${ !searchText ? 'd-none' : 'd-block' }`}
           >
             ✕
           </div>
