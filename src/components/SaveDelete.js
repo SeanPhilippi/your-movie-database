@@ -13,7 +13,7 @@ import {
 } from '../redux/actions';
 
 class SaveDelete extends PureComponent {
-  handleUpdate = () => {
+  handleUpdate = async () => {
     const {
       setMessageStatus,
       setEditing,
@@ -34,10 +34,11 @@ class SaveDelete extends PureComponent {
     setListData(listObj);
     setMessageStatus('Profile Updated');
     setEditing(false);
-
-    axios.put(`/api/list/save/${ username }`, listObj)
-      .then(res => res.json())
-      .catch(console.log);
+    try {
+      await axios.put(`/api/list/save/${ username }`, listObj);
+    } catch(err) {
+      console.error(err);
+    }
     history.push('/profile');
   };
 
