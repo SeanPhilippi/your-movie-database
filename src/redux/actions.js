@@ -391,12 +391,12 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
     api.list.get.rankings(movie.id)
       .then(({ data: { results, averageRanking, points } }) => {
         console.log('points', points)
-          dispatch(setMovieStats({
-            voters: results.reverse(),
-            averageRanking,
-            points,
-            overallRanking,
-          }));
+        dispatch(setMovieStats({
+          voters: results.reverse(),
+          averageRanking,
+          points,
+          overallRanking,
+        }));
         if (update) {
           console.log('points in update', points)
           const { id, title, year, director } = movie;
@@ -422,6 +422,7 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
       const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;
       api.list.get.rankings(movie.id)
         .then(({ data: { results, averageRanking, points } }) => {
+          console.log('points', points)
           dispatch(setMovieStats({
             voters: results.reverse(),
             averageRanking,
@@ -429,6 +430,7 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
             overallRanking,
           }));
           if (update) {
+            console.log('points in update', points)
             const { id, title, year, director } = movie;
             dispatch(updateMovie({
               id,
