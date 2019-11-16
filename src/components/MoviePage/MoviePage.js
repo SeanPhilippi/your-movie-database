@@ -34,7 +34,7 @@ class MoviePage extends PureComponent {
     fetchMovieStats(movie, true);
   };
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     const {
       fetchMovieStats,
       location: {
@@ -45,7 +45,11 @@ class MoviePage extends PureComponent {
   };
 
   handleAdd = (movie, post) => {
-    const { isAuthenticated, addToList, history } = this.props;
+    const {
+      isAuthenticated,
+      addToList,
+      history
+    } = this.props;
     if (isAuthenticated) {
       addToList(movie, post);
     } else {
@@ -143,15 +147,34 @@ class MoviePage extends PureComponent {
 
 MoviePage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      movie: PropTypes.shape({
+        averageRanking: PropTypes.number,
+        director: PropTypes.string,
+        id: PropTypes.string,
+        overallRanking: PropTypes.number,
+        points: PropTypes.number,
+        title: PropTypes.string,
+        year: PropTypes.string,
+        __v: PropTypes.number,
+        _id: PropTypes.string,
+      })
+    })
+  }),
   movie: PropTypes.shape({
     title: PropTypes.string
-  }).isRequired,
+  }),
   stats: PropTypes.shape({
     voters: PropTypes.array
-  }).isRequired,
+  }),
   fetchMovieComments: PropTypes.func.isRequired,
+  fetchMovieStats: PropTypes.func.isRequired,
+  fetchMovie: PropTypes.func.isRequired,
   commentsLoading: PropTypes.bool,
   comments: PropTypes.array,
+  movieStatsLoading: PropTypes.bool,
+  movieDetailsLoading: PropTypes.bool,
   addToList: PropTypes.func.isRequired,
 };
 
