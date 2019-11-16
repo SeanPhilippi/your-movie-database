@@ -73,7 +73,7 @@ class Profile extends PureComponent  {
     } = this.props;
 
     return (
-      <div className="grid-container bg-light2 mt-4">
+      <div className="grid-container bg-light2">
         <div className="bg-white">
           <div className="px-4 pt-4 w-100">
             <CardWrapper

@@ -273,11 +273,12 @@ export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
 
 export const fetchTopMoviesList = () => dispatch => {
   api.movies.get.topMoviesList()
-  .then(({ data }) => {
-    // filter movies without points
-    const filteredMovies = data.filter(movie => movie.points);
-    dispatch(setTopMoviesList(filteredMovies));
-  });
+    .then(({ data }) => {
+      console.log('setting new top movies')
+      // filter movies without points
+      const filteredMovies = data.filter(movie => movie.points);
+      dispatch(setTopMoviesList(filteredMovies));
+    });
 };
 
 export const fetchAffinities = movieIds => dispatch => {
@@ -389,13 +390,15 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
     };
     api.list.get.rankings(movie.id)
       .then(({ data: { results, averageRanking, points } }) => {
-          dispatch(setMovieStats({
-            voters: results.reverse(),
-            averageRanking,
-            points,
-            overallRanking,
-          }));
+        console.log('points', points)
+        dispatch(setMovieStats({
+          voters: results.reverse(),
+          averageRanking,
+          points,
+          overallRanking,
+        }));
         if (update) {
+          console.log('points in update', points)
           const { id, title, year, director } = movie;
           dispatch(updateMovie({
             id,
@@ -419,6 +422,7 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
       const overallRanking = topMoviesList.findIndex(item => item.id === movie.id) + 1;
       api.list.get.rankings(movie.id)
         .then(({ data: { results, averageRanking, points } }) => {
+          console.log('points', points)
           dispatch(setMovieStats({
             voters: results.reverse(),
             averageRanking,
@@ -426,6 +430,7 @@ export const fetchMovieStats = (movie, update) => async (dispatch, getState) => 
             overallRanking,
           }));
           if (update) {
+            console.log('points in update', points)
             const { id, title, year, director } = movie;
             dispatch(updateMovie({
               id,
@@ -488,7 +493,7 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
 };
 
 export const orderList = (oldIndex, newIndex) => (dispatch, getState) => {
-  const { items } = getState();
+  const { user: { items } } = getState();
   dispatch({
     type: TYPES.REORDER_LIST,
     payload: {
@@ -520,6 +525,7 @@ export const deleteList = movie => dispatch => {
 };
 
 export const updateMovie = movie => dispatch => {
+  console.log('movie updating')
   api.movies.put.movie(movie.id, movie)
     .then(() => {
       dispatch(fetchTopMoviesList());

@@ -8,7 +8,7 @@ class NewRegisters extends PureComponent {
   render() {
     return (
       <div className="d-flex border-0 justify-content-center">
-        <div className="inner-container mt-4 mx-4 p-0">
+        <div className="inner-container mx-4">
           <div className="bg-white pt-2 col">
             <CardWrapper
               title="new registers"
