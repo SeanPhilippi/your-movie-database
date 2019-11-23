@@ -1,14 +1,17 @@
 .container-scss {
+  // display: flex;
+  // flex-flow: column;
+  position: relative;
   max-width: 85rem;
   background-color: $light2;
   margin: 0 auto;
   padding: 0 1rem;
   min-height: 100vh;
-  flex-flow: column;
 }
 
 @media only screen and (max-width: 600px) {
   .container-scss {
+    position: relative;
     max-width: 98%;
   }
 }

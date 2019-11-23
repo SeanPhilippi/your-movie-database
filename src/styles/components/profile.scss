@@ -1,6 +1,7 @@
 .grid-container {
   display: grid;
   grid-template-columns: 60% 40%;
+  flex: 1;
 }
 
 @media only screen and (max-width: 600px) {
