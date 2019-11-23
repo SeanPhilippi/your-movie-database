@@ -123,8 +123,6 @@ class MoviePage extends PureComponent {
                 />
               </CardWrapper>
             </div>
-            <div className="height-div-movie-page">
-            </div>
           </div>
         </div>
       </div>

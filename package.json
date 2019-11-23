@@ -1,6 +1,6 @@
 {
-  "name": "YMDB",
-  "homepage": "yourmoviedatabase.herokuapp.com",
+  "name": "your-movie-database",
+  "homepage": "http://seanphilippi.github.io",
   "version": "0.1.0",
   "engines": {
     "node": "8.12.0"
