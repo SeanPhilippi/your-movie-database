@@ -145,7 +145,9 @@ class MovieSearch extends PureComponent {
 };
 
 MovieSearch.propTypes = {
-
+  fetchMovie: PropTypes.func.isRequired,
+  fetchMovieComments: PropTypes.func.isRequired,
+  fetchMovieStats: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

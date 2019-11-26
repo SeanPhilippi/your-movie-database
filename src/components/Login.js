@@ -18,8 +18,6 @@ class Login extends PureComponent {
             >
               <LoginBox />
             </CardWrapper>
-            <div className="height-div-login">
-            </div>
           </Col>
         </div>
       </div>

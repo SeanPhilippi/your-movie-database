@@ -11,6 +11,9 @@ html {
 body {
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
   font-size: $m-size;
   background: $gold;
   font-weight: 500;

@@ -1,4 +1,9 @@
 footer {
+  position: absolute;
+  width: 100%;
+  bottom: -25px;
+  min-height: 2rem;
+  z-index: 99;
   border: lightgrey solid 1px;
   box-shadow: 0 2px 2px 0 black;
   color: white;
