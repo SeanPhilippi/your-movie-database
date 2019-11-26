@@ -109,6 +109,10 @@ export default (state = initialState, { type, payload }) => {
     };
     case TYPES.POST_COMMENT: return {
       ...state,
+      comments: this.state.comments.filter(comment => comment.id !== payload)
+    };
+    case TYPES.DELETE_COMMENT: return {
+      ...state,
       comments: [payload, ...state.comments]
     };
     case TYPES.SET_LIST_DATA_LOADING: return {

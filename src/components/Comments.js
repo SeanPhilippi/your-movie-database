@@ -5,6 +5,7 @@ import {
   withRouter,
   Link
 } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
 import Comment from './Comment';
 import Spinner from './Spinner';
 import moment from 'moment';
@@ -63,8 +64,57 @@ class Comments extends PureComponent {
     this.setState({ commentText: '' });
   };
 
+  alertOptions = {
+    title: 'Are you sure?',
+    message: 'You are about to permanently delete this comment.',
+    customUI: ({ onClose, title, message }) => {
+      return (
+        <div className='custom-ui'>
+          <h2>
+            { title }
+          </h2>
+          <p>
+            { message }
+          </p>
+          <button
+            className='alert-button red'
+            onClick={onClose}
+          >
+            No
+          </button>
+          <button
+            className='alert-button green'
+            onClick={() => {
+              this.performDelete();
+              onClose();
+            }}
+          >
+            Yes, delete it!
+          </button>
+        </div>
+      )
+    },
+    PureUnmount: () => {},
+    onClickOutside: () => {},
+    onKeypressEscape: () => {}
+  };
+
   handleDeleteComment = e => {
-    console.log('delete')
+    confirmAlert(this.alertOptions);
+  };
+
+  performDelete = () => {
+    const {
+      deleteComment,
+      user: {
+        username,
+      },
+    } = this.props;
+    deleteComment();
+    return fetch(`/delete/${ username }`, {
+      method: 'DELETE'
+    })
+    .catch(console.error)
   };
 
   renderComments = () => {

@@ -22,6 +22,7 @@ export const TYPES = {
   SET_MOVIES_PER_PAGE: 'SET_MOVIES_PER_PAGE',
   SET_NUM_OF_PAGES: 'SET_NUM_OF_PAGES',
   POST_COMMENT: 'POST_COMMENT',
+  DELETE_COMMENT: 'DELETE_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
   SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
   SET_MOVIE_DETAILS_LOADING: 'SET_MOVIE_DETAILS_LOADING',
@@ -179,6 +180,16 @@ export const postComment = comment => dispatch => {
   api.comments.post.comment(comment)
     .then(res => res.json)
     .catch(console.log);
+};
+
+export const deleteComment = id => dispatch => {
+  dispatch({
+    type: TYPES.DELETE_COMMENT,
+    payload: id
+  });
+  // api.comments.delete.comment(id)
+  //   .then(res => res.json)
+  //   .catch(console.log);
 };
 
 export const registerUser = (userData, history) => dispatch => {
