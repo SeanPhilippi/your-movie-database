@@ -10,14 +10,21 @@ const Comment = ({
     author,
     post_date,
     text
-  }
+  },
+  deleteComment
 }) => (
-  <div className="border my-1 px-2 py-1">
+  <div className="border my-1 px-2 py-1 d-flex flex-column">
     <div>
       {/* eslint-disable-next-line */}
       <Link to={`/profile${ author === user.username ? '' : `/${ author }`}`}>{ author }</Link> wrote on { post_date }
     </div>
     <Emojione className="comment" text={`${ text }`} />
+    <div
+      className="comment-footer text-right small"
+      onClick={ deleteComment }
+    >
+      delete
+    </div>
   </div>
 );
 

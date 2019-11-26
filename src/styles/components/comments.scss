@@ -21,3 +21,17 @@
 .comment {
   white-space: pre-line;
 }
+
+.comment-footer {
+  cursor: pointer;
+  color: $dark-orange;
+}
+
+.comment-footer:hover {
+  color: $red;
+  text-decoration: none;
+}
+
+.comment-footer:active {
+  color: $red;
+}

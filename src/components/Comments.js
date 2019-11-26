@@ -63,11 +63,15 @@ class Comments extends PureComponent {
     this.setState({ commentText: '' });
   };
 
+  handleDeleteComment = e => {
+    console.log('delete')
+  };
+
   renderComments = () => {
     return (
       <div>
         {
-          this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } />)
+          this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } deleteComment={ this.handleDeleteComment }/>)
         }
       </div>
     );
