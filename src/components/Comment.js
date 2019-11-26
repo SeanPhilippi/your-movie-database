@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Emoji from 'react-emoji-render';
 
 const Comment = ({
   user,
@@ -16,9 +17,7 @@ const Comment = ({
       {/* eslint-disable-next-line */}
       <Link to={`/profile${ author === user.username ? '' : `/${ author }`}`}>{ author }</Link> wrote on { post_date }
     </div>
-    <p className="comment">
-      { text }
-    </p>
+    <Emoji className="comment" text={`${ text }`} />
   </div>
 );
 

@@ -70,9 +70,9 @@ class Register extends PureComponent {
           </Col>
         </div>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 Register.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
