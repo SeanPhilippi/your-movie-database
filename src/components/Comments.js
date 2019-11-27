@@ -9,7 +9,10 @@ import { confirmAlert } from 'react-confirm-alert';
 import Comment from './Comment';
 import Spinner from './Spinner';
 import moment from 'moment';
-import { postComment } from '../redux/actions';
+import {
+  postComment,
+  deleteComment
+} from '../redux/actions';
 
 class Comments extends PureComponent {
 
@@ -64,53 +67,54 @@ class Comments extends PureComponent {
     this.setState({ commentText: '' });
   };
 
-  alertOptions = {
-    title: 'Are you sure?',
-    message: 'You are about to permanently delete this comment.',
-    customUI: ({ onClose, title, message }) => {
-      return (
-        <div className='custom-ui'>
-          <h2>
-            { title }
-          </h2>
-          <p>
-            { message }
-          </p>
-          <button
-            className='alert-button red'
-            onClick={onClose}
-          >
-            No
-          </button>
-          <button
-            className='alert-button green'
-            onClick={() => {
-              this.performDelete();
-              onClose();
-            }}
-          >
-            Yes, delete it!
-          </button>
-        </div>
-      )
-    },
-    PureUnmount: () => {},
-    onClickOutside: () => {},
-    onKeypressEscape: () => {}
+
+  handleDeleteComment = id => {
+    confirmAlert(
+      {
+        title: 'Are you sure?',
+        message: 'You are about to permanently delete this comment.',
+        customUI: ({ onClose, title, message }) => {
+          return (
+            <div className='custom-ui'>
+              <h2>
+                { title }
+              </h2>
+              <p>
+                { message }
+              </p>
+              <button
+                className='alert-button red'
+                onClick={onClose}
+              >
+                No
+              </button>
+              <button
+                className='alert-button green'
+                onClick={() => {
+                  this.performDelete(id);
+                  onClose();
+                }}
+              >
+                Yes, delete it!
+              </button>
+            </div>
+          )
+        },
+        PureUnmount: () => {},
+        onClickOutside: () => {},
+        onKeypressEscape: () => {}
+      }
+    );
   };
 
-  handleDeleteComment = e => {
-    confirmAlert(this.alertOptions);
-  };
-
-  performDelete = () => {
+  performDelete = id => {
     const {
       deleteComment,
       user: {
         username,
       },
     } = this.props;
-    deleteComment();
+    deleteComment(id);
     return fetch(`/delete/${ username }`, {
       method: 'DELETE'
     })
@@ -162,7 +166,9 @@ class Comments extends PureComponent {
               Create an account <Link to="/register">here</Link> or <Link to="/login">log in</Link> to make a comment.
             </div>
         }
-        { loading ? <Spinner /> : this.renderComments() }
+        {
+          loading ? <Spinner /> : this.renderComments()
+        }
       </div>
     )
   }
@@ -177,6 +183,7 @@ Comments.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   postComment: comment => dispatch(postComment(comment)),
+  deleteComment: id => dispatch(deleteComment(id)),
 });
 
 const mapStateToProps = state => ({

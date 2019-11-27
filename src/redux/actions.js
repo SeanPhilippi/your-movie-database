@@ -183,6 +183,7 @@ export const postComment = comment => dispatch => {
 };
 
 export const deleteComment = id => dispatch => {
+  console.log('comment id', id)
   dispatch({
     type: TYPES.DELETE_COMMENT,
     payload: id
@@ -306,6 +307,7 @@ export const fetchComments = username => dispatch => {
   api.comments.get.profileComments(username)
     .then(({ data }) => {
       if (data) {
+        console.log('comment data', data)
         dispatch(setComments(data));
       } else {
         dispatch(setComments([]));

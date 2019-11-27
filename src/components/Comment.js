@@ -9,7 +9,8 @@ const Comment = ({
   comment: {
     author,
     post_date,
-    text
+    text,
+    _id
   },
   deleteComment
 }) => (
@@ -21,7 +22,7 @@ const Comment = ({
     <Emojione className="comment" text={`${ text }`} />
     <div
       className="comment-footer text-right small"
-      onClick={ deleteComment }
+      onClick={ () => deleteComment(_id) }
     >
       delete
     </div>
