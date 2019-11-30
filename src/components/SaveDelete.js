@@ -45,33 +45,31 @@ class SaveDelete extends PureComponent {
   alertOptions = {
     title: 'Are you sure?',
     message: 'You are about to permanently delete your list.',
-    customUI: ({ onClose, title, message }) => {
-      return (
-        <div className='custom-ui'>
-          <h2>
-            { title }
-          </h2>
-          <p>
-            { message }
-          </p>
-          <button
-            className='alert-button red'
-            onClick={onClose}
-          >
-            No
-          </button>
-          <button
-            className='alert-button green'
-            onClick={() => {
-              this.performDelete();
-              onClose();
-            }}
-          >
-            Yes, delete it!
-          </button>
-        </div>
-      )
-    },
+    customUI: ({ onClose, title, message }) => (
+      <div className='confirm-modal bg-white shadow'>
+        <h2 className='mb-3'>
+          { title }
+        </h2>
+        <p className='mb-4'>
+          { message }
+        </p>
+        <button
+          className='cancel-button'
+          onClick={onClose}
+        >
+          No
+        </button>
+        <button
+          className='confirm-button'
+          onClick={() => {
+            this.performDelete();
+            onClose();
+          }}
+        >
+          Yes, delete it!
+        </button>
+      </div>
+    ),
     PureUnmount: () => {},
     onClickOutside: () => {},
     onKeypressEscape: () => {}

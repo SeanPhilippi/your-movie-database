@@ -16,6 +16,7 @@
 .delete-list {
   color: $red;
   font-size: .7rem;
+  font-weight: 700;
   margin: 0.2rem 0 .2rem .2rem;
   border-radius: 3px;
   line-height: 16px;
@@ -29,7 +30,8 @@
 .save-list {
   color: rgba(0, 58, 0, 0.996);
   font-size: .7rem;
-  margin: .2rem .2rem;
+  font-weight: 700;
+  margin-right: .5rem;
   border-radius: 3px;
   background-color: white;
   line-height: 16px;
@@ -40,24 +42,41 @@
   color: green;
 }
 
-.custom-ui {
-  border: grey 1px solid;
-  padding: 2rem 2.5rem 2.5rem 2.5rem;
-  border-radius: 4px;
+.react-confirm-alert-overlay {
+  background-color: rgba(232,232,232, .8);
 }
 
-.alert-button {
-  margin-right: .7rem;
-  border-radius: 4px;
-  font-weight: 600;
-  color: white;
-  border: black 1px solid;
+.confirm-modal {
+  font-weight: 700;
+  // border: grey 1px solid;
+  padding: 3rem 3.5rem 3.5rem 3.5rem;
+  border-radius: 5px;
 }
 
-.red {
-  background-color: #FF5F31;
+.cancel-button {
+  color: $red;
+  font-size: .9rem;
+  font-weight: 700;
+  margin-right: .5rem;
+  border-radius: 3px;
+  line-height: 16px;
+  height: 20px;
 }
 
-.green {
-  background-color: #4CAE51;
+.cancel-button:hover {
+  color: red;
+}
+
+.confirm-button {
+  color: rgba(0, 58, 0, 0.996);
+  font-size: .9rem;
+  font-weight: 700;
+  border-radius: 3px;
+  background-color: white;
+  line-height: 16px;
+  height: 20px;
+}
+
+.confirm-button:hover {
+  color: green;
 }
