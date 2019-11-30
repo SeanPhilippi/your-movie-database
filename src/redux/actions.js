@@ -21,7 +21,7 @@ export const TYPES = {
   SET_CURRENT_PAGE: 'SET_CURRENT_PAGE',
   SET_MOVIES_PER_PAGE: 'SET_MOVIES_PER_PAGE',
   SET_NUM_OF_PAGES: 'SET_NUM_OF_PAGES',
-  POST_COMMENT: 'POST_COMMENT',
+  DELETE_COMMENT: 'DELETE_COMMENT',
   SET_COMMENTS_LOADING: 'SET_COMMENTS_LOADING',
   SET_LIST_DATA_LOADING: 'SET_LIST_DATA_LOADING',
   SET_MOVIE_DETAILS_LOADING: 'SET_MOVIE_DETAILS_LOADING',
@@ -169,14 +169,30 @@ export const setCurrentUser = user => dispatch => {
   };
 };
 
-export const postComment = comment => dispatch => {
-  dispatch({
-    type: TYPES.POST_COMMENT,
-    payload: comment
-  });
-  // post to mongo after updating redux state with new comment and setting comments with the
-  // new comments array
+export const postComment = comment => (dispatch, getState) => {
+  const { username } = getState();
+  // posting to mongodb, then fetching updated comments array to get mongo assigned ids on
+  // movie objects for comment deletion accuracy
   api.comments.post.comment(comment)
+    .then(({ data }) => {
+      // different comment fetching depending on where the comment was made
+      if (data.top_movies_list) {
+        dispatch(fetchTopMoviesComments());
+      } else if (data.movie_id) {
+        dispatch(fetchMovieComments(data.movie_id));
+      } else {
+        dispatch(fetchComments(username));
+      }
+    })
+    .catch(console.log);
+};
+
+export const deleteComment = id => dispatch => {
+  dispatch({
+    type: TYPES.DELETE_COMMENT,
+    payload: id
+  });
+  api.comments.remove.comment(id)
     .then(res => res.json)
     .catch(console.log);
 };

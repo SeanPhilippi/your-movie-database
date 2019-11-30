@@ -83,7 +83,8 @@ export default (state = initialState, { type, payload }) => {
       user: {
         ...state.user,
         ...payload
-      }
+      },
+      username: payload.username
     };
     case TYPES.SET_LIST_DATA: return {
       ...state,
@@ -107,9 +108,9 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       movieStats: payload
     };
-    case TYPES.POST_COMMENT: return {
+    case TYPES.DELETE_COMMENT: return {
       ...state,
-      comments: [payload, ...state.comments]
+      comments: state.comments.filter(comment => comment._id !== payload)
     };
     case TYPES.SET_LIST_DATA_LOADING: return {
       ...state,

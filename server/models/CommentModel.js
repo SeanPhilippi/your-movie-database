@@ -20,7 +20,8 @@ const CommentSchema = new Schema({
   post_date: {
     type: String,
     required: true
-  }
+  },
+  disabled: Boolean,
 });
 
 module.exports = model('Comment', CommentSchema);

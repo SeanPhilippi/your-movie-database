@@ -5,10 +5,14 @@ import {
   withRouter,
   Link
 } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
 import Comment from './Comment';
 import Spinner from './Spinner';
 import moment from 'moment';
-import { postComment } from '../redux/actions';
+import {
+  postComment,
+  deleteComment
+} from '../redux/actions';
 
 class Comments extends PureComponent {
 
@@ -63,11 +67,54 @@ class Comments extends PureComponent {
     this.setState({ commentText: '' });
   };
 
+
+  handleDeleteComment = id => {
+    confirmAlert(
+      {
+        title: 'Are you sure?',
+        message: 'You are about to permanently delete this comment.',
+        customUI: ({ onClose, title, message }) => (
+          <div className='confirm-modal bg-white shadow'>
+            <h2 className='mb-3'>
+              { title }
+            </h2>
+            <p className='mb-4'>
+              { message }
+            </p>
+            <button
+              className='cancel-button'
+              onClick={onClose}
+            >
+              No
+            </button>
+            <button
+              className='confirm-button'
+              onClick={() => {
+                this.performDelete(id);
+                onClose();
+              }}
+            >
+              Yes, delete it!
+            </button>
+          </div>
+        ),
+        PureUnmount: () => {},
+        onClickOutside: () => {},
+        onKeypressEscape: () => {}
+      }
+    );
+  };
+
+  performDelete = id => {
+    const { deleteComment } = this.props;
+    deleteComment(id);
+  };
+
   renderComments = () => {
     return (
       <div>
         {
-          this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } />)
+          this.props.comments.map(comment => <Comment key={ comment._id } comment={ comment } deleteComment={ this.handleDeleteComment }/>)
         }
       </div>
     );
@@ -108,7 +155,9 @@ class Comments extends PureComponent {
               Create an account <Link to="/register">here</Link> or <Link to="/login">log in</Link> to make a comment.
             </div>
         }
-        { loading ? <Spinner /> : this.renderComments() }
+        {
+          loading ? <Spinner /> : this.renderComments()
+        }
       </div>
     )
   }
@@ -123,6 +172,7 @@ Comments.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   postComment: comment => dispatch(postComment(comment)),
+  deleteComment: id => dispatch(deleteComment(id)),
 });
 
 const mapStateToProps = state => ({
