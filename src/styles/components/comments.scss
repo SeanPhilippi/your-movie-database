@@ -22,16 +22,23 @@
   white-space: pre-line;
 }
 
-.comment-footer {
-  cursor: pointer;
+.comment-footer-auth {
   color: $dark-orange;
 }
 
-.comment-footer:hover {
+.comment-footer-auth:hover {
   color: $red;
   text-decoration: none;
 }
 
-.comment-footer:active {
+.comment-footer-auth:active {
   color: $red;
+}
+
+.delete-comment {
+  cursor: pointer;
+}
+
+.comment-footer {
+  height: 1.3rem;
 }

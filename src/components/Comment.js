@@ -19,13 +19,17 @@ const Comment = ({
       {/* eslint-disable-next-line */}
       <Link to={`/profile${ author === user.username ? '' : `/${ author }`}`}>{ author }</Link> wrote on { post_date }
     </div>
-    <Emojione className="comment" text={`${ text }`} />
-    <div
-      className="comment-footer text-right small"
-      onClick={ () => deleteComment(_id) }
-    >
-      delete
-    </div>
+    <Emojione className="comment mt-2" text={`${ text }`} />
+    {
+      author === user.username ?
+        <div
+          className="comment-footer-auth text-right small"
+          onClick={ () => deleteComment(_id) }
+        >
+          <span className="delete-comment">delete</span>
+        </div> :
+        <div className="comment-footer"/>
+    }
   </div>
 );
 
