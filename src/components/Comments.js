@@ -108,17 +108,8 @@ class Comments extends PureComponent {
   };
 
   performDelete = id => {
-    const {
-      deleteComment,
-      user: {
-        username,
-      },
-    } = this.props;
+    const { deleteComment } = this.props;
     deleteComment(id);
-    return fetch(`/delete/${ username }`, {
-      method: 'DELETE'
-    })
-    .catch(console.error)
   };
 
   renderComments = () => {

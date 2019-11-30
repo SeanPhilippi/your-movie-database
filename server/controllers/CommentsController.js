@@ -1,19 +1,19 @@
 const Comment = require('../models/CommentModel');
 
 exports.getComments = (req, res) => {
-  Comment.find({ username: req.params.username })
+  Comment.find({ username: req.params.username, disabled: undefined })
     .then(data => res.json(data.reverse()))
     .catch(() => res.status(400).json({ profileCommentsError: 'Failed to find profile comments' }));
 };
 
 exports.getMovieComments = (req, res) => {
-  Comment.find({ movie_id: req.params.movie_id })
+  Comment.find({ movie_id: req.params.movie_id, disabled: undefined })
     .then(data => res.json(data.reverse()))
     .catch(() => res.status(400).json({ movieCommentsError: 'Failed to find movie comments' }));
 };
 
 exports.getTopMoviesComments = (req, res) => {
-  Comment.find({ top_movies_list: true })
+  Comment.find({ top_movies_list: true, disabled: undefined })
     .then(data => res.json(data.reverse()))
     .catch(() => res.status(400).json({ topMoviesCommentsError: 'Failed to find top movies comments' }));
 };
@@ -57,4 +57,11 @@ exports.postComment = (req, res) => {
   newComment.save()
     .then(comment => res.status(200).json(comment))
     .catch(() => res.status(400).json({ postCommentError: 'Failed to post comment' }));
+};
+
+exports.deleteComment = (req, res) => {
+  const { id } = req.params;
+  Comment.updateOne({ _id: id }, { $set: { disabled: true } })
+    .then(() => res.sendStatus(200))
+    .catch(() => res.status(400).json({ failedToDelete: 'Failed to delete comment' }));
 };

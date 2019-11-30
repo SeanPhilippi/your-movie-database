@@ -9,3 +9,7 @@ export const get = {
 export const post = {
   comment: comment => axios.post('/api/comments', comment),
 };
+
+export const remove = {
+  comment: id => axios.put(`/api/comments/${ id }`),
+};

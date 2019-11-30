@@ -188,9 +188,9 @@ export const deleteComment = id => dispatch => {
     type: TYPES.DELETE_COMMENT,
     payload: id
   });
-  // api.comments.delete.comment(id)
-  //   .then(res => res.json)
-  //   .catch(console.log);
+  api.comments.remove.comment(id)
+    .then(res => res.json)
+    .catch(console.log);
 };
 
 export const registerUser = (userData, history) => dispatch => {

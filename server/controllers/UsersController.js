@@ -53,11 +53,9 @@ exports.registerUser = (req, res) => {
           // assigning newUser password to hash
           newUser.password = hash;
           newUser.save()
-            .then(user => res.status(200).json(user))
-            .catch(() => res.status(400).json({ registerUserError: 'Failed to save user' }));
         });
-      });
-    });
+      }).then(user => res.status(200).json(user))
+    }).catch(() => res.status(400).json({ registerUserError: 'Failed to save user' }));
 };
 
 exports.loginUser = (req, res) => {

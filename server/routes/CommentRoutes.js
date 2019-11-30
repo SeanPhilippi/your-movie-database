@@ -6,7 +6,8 @@ const {
   getComments,
   getMovieComments,
   getTopMoviesComments,
-  postComment
+  postComment,
+  deleteComment,
 } = commentsController
 
 // @route   GET api/comments/top-movies
@@ -28,5 +29,10 @@ router.get('/movie/:movie_id', getMovieComments);
 // @desc    post new comment document to mongodb
 // @access  Public
 router.post('/', postComment);
+
+// @route   PUT api/comments/
+// @desc    update comment with disabled prop
+// @access  Public
+router.put('/:id', deleteComment);
 
 module.exports = router;
