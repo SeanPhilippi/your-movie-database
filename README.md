@@ -44,7 +44,6 @@ Concurrently: ```npm run both```
 * Track user list visits and display on home page.
 * Ability to post reviews to movie pages. 
 * Easy inclusion of emojis in comments. 
-* Ability to delete comments.
 * Add pictures of website to this repo README.md.
 
 <!--
