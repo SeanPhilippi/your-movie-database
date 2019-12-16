@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 class PageNotFound extends PureComponent {
   render() {
     return (
-      <div className="page-not-found d-flex align-items-center justify-content-center">
+      <div className="page-not-found w-100 d-flex align-items-center justify-content-center" style={{ flex: 1 }}>
         <div className="img-404">
         </div>
         <div className="page-not-found-text pb-4">

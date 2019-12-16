@@ -18,7 +18,7 @@ class Register extends PureComponent {
 
   render() {
     return (
-      <div className="d-flex border-0 justify-content-center">
+      <div className="d-flex border-0 justify-content-center" style={{ flex: 1 }}>
         <div className="inner-container d-flex flex-column flex-sm-row">
           <Col className="bg-white pt-2">
             <p>
