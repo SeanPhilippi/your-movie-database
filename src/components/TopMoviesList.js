@@ -22,7 +22,7 @@ class TopMoviesList extends PureComponent {
       comments
     } = this.props;
     return (
-      <div className='grid-container bg-light2'>
+      <div className='grid-container bg-light2 vw-95 mx-auto'>
         <div className='bg-white'>
           <div className='px-4 pt-4 w-100'>
             <CardWrapper
