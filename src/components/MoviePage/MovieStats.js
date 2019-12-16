@@ -19,8 +19,8 @@ const MovieStats = withLoading(({
         <div className="bd-light row-height col-9">
           Overall ranking:
         </div>
-        <div className="bd-light row-height col-3 text-right">
-          { overallRanking ? `#${ overallRanking }` : 'Not yet ranked.' }
+        <div className="bd-light row-height col-3 text-right pl-0">
+          { overallRanking ? `#${ overallRanking }` : 'Not ranked.' }
         </div>
       </div>
       <div className="d-flex justify-content-between">
@@ -43,8 +43,8 @@ const MovieStats = withLoading(({
         <div className="bd-light row-height col-9">
           Average user ranking:
         </div>
-        <div className="bd-light row-height col-3 text-right">
-          { averageRanking ? `#${ averageRanking }` : 'Not yet ranked.' }
+        <div className="bd-light row-height col-3 text-right pl-0">
+          { averageRanking ? `#${ averageRanking }` : 'Not ranked.' }
         </div>
       </div>
     </div>

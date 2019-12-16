@@ -1,5 +1,6 @@
 module.exports = {
-  "extends": "react-app",
+  "parser":"babel-eslint",
+  "extends": ["react-app", "prettier"],
   "rules": {
     "arrow-parens": ["error", "as-needed"],
     "no-return-assign": "off",
