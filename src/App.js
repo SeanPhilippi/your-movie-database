@@ -50,7 +50,7 @@ class App extends PureComponent {
   render() {
     return (
       <div id="app">
-        <div className="container-scss px-0 border-0">
+        <div className="container-scss mt-2 px-0 border-0">
           <TopNav />
           <MessageBar />
           <MovieSearch />

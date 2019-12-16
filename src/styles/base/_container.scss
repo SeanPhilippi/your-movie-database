@@ -1,6 +1,8 @@
 .container-scss {
-  // display: flex;
-  // flex-flow: column;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   position: relative;
   max-width: 85rem;
   background-color: $light2;

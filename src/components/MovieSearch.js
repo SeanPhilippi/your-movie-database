@@ -116,7 +116,7 @@ class MovieSearch extends PureComponent {
     const { searchText, allowResults, inputColorChange } = this.state;
 
     return (
-      <div className={`${ itemsCount > 19 ? 'd-none' : 'd-flex' } flex-column movie-search-container mt-${ marginTopVal }`}>
+      <div className={`${ itemsCount > 19 ? 'd-none' : 'd-flex' } flex-column movie-search-container w-100 mt-${ marginTopVal }`}>
         <div className="d-flex search-bar">
           <input
             autoComplete="off"

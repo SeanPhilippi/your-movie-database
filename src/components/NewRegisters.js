@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 class NewRegisters extends PureComponent {
   render() {
     return (
-      <div className="d-flex border-0 justify-content-center">
+      <div className="d-flex border-0 justify-content-center w-100">
         <div className="inner-container mx-4">
           <div className="bg-white pt-2 col">
             <CardWrapper
