@@ -169,6 +169,9 @@ button:active:not(.edit-btn) {
 }
 
 @media (min-width: 768px) {
+  .vw-md-95 {
+    width: 95vw;
+  }
   .w-md-25 {
     width: 25% !important;
   }
