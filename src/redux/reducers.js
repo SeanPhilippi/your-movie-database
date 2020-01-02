@@ -35,6 +35,45 @@ const initialState = {
   movieDetailsLoading: true,
   movieStatsLoading: true
 };
+// default state is user object
+const userData = (state = {}, { type, payload }) => {
+  switch (type) {
+    case TYPES.SET_CURRENT_USER:
+      return payload;
+    case TYPES.SET_STATEMENT:
+      return {
+        ...state,
+        statement: payload
+      }
+    case TYPES.SET_AUTH_LIST_DATA:
+      return {
+        ...state,
+        ...payload
+      }
+    case TYPES.ADD_TO_LIST:
+      return {
+        ...state,
+        items: [payload, ...state.items]
+      }
+    case TYPES.REORDER_LIST:
+      return {
+        ...state,
+        items: arrayMove(state.items, payload.oldIndex, payload.newIndex)
+      }
+    case TYPES.DELETE_MOVIE:
+      return {
+        ...state,
+        items: [...state.items.filter(movie => movie.id !== payload.movie.id)]
+      }
+    case TYPES.DELETE_LIST:
+      return {
+        ...state,
+        items: []
+      }
+    default:
+      return state;
+  }
+}
 
 export default (state = initialState, { type, payload }) => {
   // console.log('reducer', type, payload);
@@ -84,7 +123,7 @@ export default (state = initialState, { type, payload }) => {
         ...state.user,
         ...payload
       },
-      username: payload.username
+      username: payload.username // ! is this necessary?  shouldn't be...
     };
     case TYPES.SET_LIST_DATA: return {
       ...state,
