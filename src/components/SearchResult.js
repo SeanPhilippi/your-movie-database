@@ -13,7 +13,7 @@ const SearchResult = ({
     onClick={ handleAdd ? () => handleAdd(movie) : () => handleRedirect(movie) }
   >
     <div className={ handleRedirect ? "movie-result-info" : "result-info" }>
-      { movie ? movie.Title : user.username } { movie && `(${ movie.Year })` }
+      { movie }
     </div>
   </div>
 );

@@ -34,9 +34,8 @@ class Search extends PureComponent {
   };
 
   renderResults = () => {
-    const { searchResults } = this.state;
+    const searchResults = this.fuzzyMatch();
     console.log(searchResults)
-    // const searchResults = this.fuzzyMatch();
     const { users } = this.props;
     if (searchResults) {
       return (
@@ -63,10 +62,11 @@ class Search extends PureComponent {
 
   fuzzyMatch = () => {
     const { searchText, searchResults } = this.state;
-    console.log('search results', searchResults)
-    // const results = fuzzy.filter(searchText, searchResults, { pre: '<strong>', post: '</strong>' });
-    // console.log('fuzzy results', results)
-    // return results;
+    const results = searchResults.map(obj => `${ obj.Title } (${ obj.Year })`);
+    console.log('results', results)
+    const fuzzyResults = fuzzy.filter(searchText, results, { pre: '<b>', post: '</b>' });
+    console.log('fuzzy results', results)
+    return fuzzyResults.map(result => result.string);
   };
 
   handleSearch = () => {
