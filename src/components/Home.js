@@ -43,7 +43,7 @@ class Home extends PureComponent {
     );
 
     return (
-      <div className='d-flex border-0 justify-content-center vw-95 w-md-100 mx-auto'>
+      <div className='d-flex border-0 justify-content-center flex-grow-1 vw-95 w-md-100 mx-auto'>
         <div className='inner-container'>
           <div className='bg-white pt-2 col left-col'>
             <Greeting addClass='greeting' />

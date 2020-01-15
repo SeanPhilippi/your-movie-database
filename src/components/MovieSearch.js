@@ -6,6 +6,7 @@ import axios from 'axios';
 import SearchResult from './SearchResult';
 import { fetchMovie, fetchMovieStats, fetchMovieComments } from '../redux/actions';
 import debounce from '../utils/helpers/debounce.js';
+import fuzzy from 'fuzzy';
 
 class MovieSearch extends PureComponent {
   state = {

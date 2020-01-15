@@ -5,6 +5,7 @@ import SearchResult from './SearchResult';
 import { connect } from 'react-redux';
 import debounce from '../utils/helpers/debounce.js';
 import { addToList } from '../redux/actions';
+import fuzzy from 'fuzzy';
 
 class Search extends PureComponent {
   state = {
@@ -14,6 +15,7 @@ class Search extends PureComponent {
   };
 
   focusInput = createRef();
+
   handleAdd = movie => {
     const { addToList } = this.props;
     const remappedMovie = {
@@ -33,6 +35,8 @@ class Search extends PureComponent {
 
   renderResults = () => {
     const { searchResults } = this.state;
+    console.log(searchResults)
+    // const searchResults = this.fuzzyMatch();
     const { users } = this.props;
     if (searchResults) {
       return (
@@ -55,6 +59,14 @@ class Search extends PureComponent {
       this.clearResults();
       this.handleDelay();
     };
+  };
+
+  fuzzyMatch = () => {
+    const { searchText, searchResults } = this.state;
+    console.log('search results', searchResults)
+    // const results = fuzzy.filter(searchText, searchResults, { pre: '<strong>', post: '</strong>' });
+    // console.log('fuzzy results', results)
+    // return results;
   };
 
   handleSearch = () => {
