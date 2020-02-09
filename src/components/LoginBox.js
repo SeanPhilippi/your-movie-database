@@ -11,7 +11,8 @@ class LoginBox extends PureComponent {
   state = {
     login: '',
     password: '',
-    errors: {}
+    errors: {},
+    shown: false,
   };
 
   handleLogin = e => {
@@ -38,6 +39,10 @@ class LoginBox extends PureComponent {
     this.setState({
       [name]: value
     });
+  };
+
+  setShown = () => {
+    this.setState({ shown: !this.state.shown });
   };
 
   render() {
@@ -74,10 +79,13 @@ class LoginBox extends PureComponent {
                 <div>Password: </div>
                 <input
                   autoComplete="off"
+                  type={this.state.shown ? "text" : "password"}
                   name="password"
                   onChange={this.onTextChange}
-                  type="password"
                 />
+                <button onClick={() => this.setShown()}>
+                    Show/Hide
+                </button>
                 <div className="errors">
                   { passwordErrors }
                 </div>
