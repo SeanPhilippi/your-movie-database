@@ -32,7 +32,7 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => console.log('connected to MongoDB!'))
-  .catch(console.log);
+  .catch(err => console.log(err));
 mongoose.set('useCreateIndex', true);
 
 // Use routes
