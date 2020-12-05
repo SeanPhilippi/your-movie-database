@@ -28,7 +28,7 @@
     "mongodb": "^3.3.3",
     "mongoose": "^5.7.5",
     "node-fetch": "^2.3.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "nodemon": "^1.18.7",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
