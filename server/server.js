@@ -27,10 +27,11 @@ app.use(express.static('build'));
 // Connect to Mongo
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false,
 })
   .then(() => console.log('connected to MongoDB!'))
-  .catch(console.log);
+  .catch(err => console.log(err));
 mongoose.set('useCreateIndex', true);
 
 // Use routes
