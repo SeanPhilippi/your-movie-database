@@ -7,38 +7,34 @@ import LoginBox from './LoginBox';
 import NewRegistersBox from './NewRegistersBox';
 import MostVisited from './MostVisited';
 import ViewableList from './List/ViewableList/ViewableList';
-import {
-  fetchNewUsers
-} from '../redux/actions';
+import { fetchNewUsers } from '../redux/actions';
 
 class Home extends PureComponent {
-
   componentDidMount() {
     console.log('home mounting');
-    const {
-      fetchNewUsers
-    } = this.props;
+    const { fetchNewUsers } = this.props;
     fetchNewUsers();
-  };
+  }
 
   renderLoginBox() {
-    return this.props.isAuthenticated
-      ? null
-      : <CardWrapper
-          icon='sign-in-alt'
-          title='login'
-          color='white'
-          marginTopVal='0'
-        >
-          <LoginBox />
-        </CardWrapper>;
-  };
+    return this.props.isAuthenticated ? null : (
+      <CardWrapper
+        icon='sign-in-alt'
+        title='login'
+        color='white'
+        marginTopVal='0'
+      >
+        <LoginBox />
+      </CardWrapper>
+    );
+  }
 
   render() {
     const Greeting = ({ addClass }) => (
-      <div className={`${ addClass } m-0 row`}>
-        Welcome to YMDb, Your Movie Database, the movie community where you can create your list of favorite movies,
-        discover other people's favorite movies, and discuss movies and favorite lists. YMDb is free and fun!
+      <div className={`${addClass} m-0 row`}>
+        Welcome to YMDb, Your Movie Database, the movie community where you can
+        create your list of favorite movies, discover other people's favorite
+        movies, and discuss movies and favorite lists. YMDb is free and fun!
       </div>
     );
 
@@ -49,37 +45,36 @@ class Home extends PureComponent {
             <Greeting addClass='greeting' />
             <CardWrapper
               icon={['far', 'list-alt']}
-              rotate={ -5 }
+              rotate={-5}
               color='tan'
               link='top-movies'
               title='top movies list'
             >
               <div className='pb-2'>
-                Top movies based on the favorites of { this.props.newUsers.length } registered users.
+                Top movies based on the favorites of{' '}
+                {this.props.newUsers.length} registered users.
               </div>
-              <ViewableList itemsPerPage={ 20 } />
-              <hr className='mt-4'/>
+              <ViewableList itemsPerPage={20} />
+              <hr className='mt-4' />
               <Link to='/top-movies'>Go to the complete Top Movie List</Link>
             </CardWrapper>
             <CardWrapper
               icon='shoe-prints'
-              rotate={ 30 }
+              rotate={30}
               color='tan'
               title='most visited lists'
             >
-              <MostVisited num={ 10 } />
+              <MostVisited num={10} />
             </CardWrapper>
           </div>
           <div className='pt-0 col right-col'>
             <Greeting addClass='greeting-mobile mb-3' />
-            {
-              this.renderLoginBox()
-            }
+            {this.renderLoginBox()}
             <CardWrapper
               title='spotlight on a user'
               color='white'
               link='new-registers'
-              marginTopVal={ this.props.isAuthenticated ? '0' : null }
+              marginTopVal={this.props.isAuthenticated ? '0' : null}
             >
               <NewRegistersBox num={10} />
             </CardWrapper>
@@ -87,11 +82,11 @@ class Home extends PureComponent {
         </div>
       </div>
     );
-  };
-};
+  }
+}
 
 Home.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -8,14 +8,12 @@ const PasswordRevealer = ({ value }) => {
   return (
     <div>
       <input
-        autoComplete="off"
-        type={shown ? "text" : "password"}
+        autoComplete='off'
+        type={shown ? 'text' : 'password'}
         value={value}
         onChange={() => {}}
       />
-      <button onClick={() => setShown(!shown)}>
-        Show/Hide
-      </button>
+      <button onClick={() => setShown(!shown)}>Show/Hide</button>
     </div>
   );
 };

@@ -25,10 +25,12 @@ require('./config/passport')(passport);
 app.use(express.static('build'));
 
 // Connect to Mongo
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
   .then(() => console.log('connected to MongoDB!'))
   .catch(console.log);
 mongoose.set('useCreateIndex', true);
@@ -40,7 +42,7 @@ app.use('/api/users', users);
 app.use('/api/comments', comments);
 
 app.get('/express', (req, res) => {
-  res.send({ express: 'Your express backend is connected to React!' })
+  res.send({ express: 'Your express backend is connected to React!' });
 });
 
 // Express serve up index.html file if it doesn't recognize route this needs to be
@@ -51,5 +53,5 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, err => {
   // eslint-disable-next-line no-unused-expressions
-  err ? console.log(err) : console.log(`Server started on port ${ PORT }`);
+  err ? console.log(err) : console.log(`Server started on port ${PORT}`);
 });

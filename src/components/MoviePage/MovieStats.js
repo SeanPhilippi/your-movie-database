@@ -2,49 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withLoading from '../HOCs/withLoading';
 
-const MovieStats = withLoading(({
+const MovieStats = withLoading(({ // prettier-ignore
   stats: {
     averageRanking,
     points,
     overallRanking,
     voters
-  },
-}) => (
-  <div className="mt-4">
-    <div className="font-weight-bold mb-1">
-      Statistics
-    </div>
-    <div className="bg-white">
-      <div className="d-flex justify-content-between">
-        <div className="bd-light row-height col-9">
-          Overall ranking:
-        </div>
-        <div className="bd-light row-height col-3 text-right pl-0">
-          { overallRanking ? `#${ overallRanking }` : 'Not ranked.' }
+  } }) => (
+  <div className='mt-4'>
+    <div className='font-weight-bold mb-1'>Statistics</div>
+    <div className='bg-white'>
+      <div className='d-flex justify-content-between'>
+        <div className='bd-light row-height col-9'>Overall ranking:</div>
+        <div className='bd-light row-height col-3 text-right pl-0'>
+          {overallRanking ? `#${overallRanking}` : 'Not ranked.'}
         </div>
       </div>
-      <div className="d-flex justify-content-between">
-        <div className="bd-light row-height col-9">
-          Number of points:
-        </div>
-        <div className="bd-light row-height col-3 text-right">
-          { points || 0 }
+      <div className='d-flex justify-content-between'>
+        <div className='bd-light row-height col-9'>Number of points:</div>
+        <div className='bd-light row-height col-3 text-right'>
+          {points || 0}
         </div>
       </div>
-      <div className="d-flex justify-content-between">
-        <div className="bd-light row-height col-9">
+      <div className='d-flex justify-content-between'>
+        <div className='bd-light row-height col-9'>
           Number of users that ranked this movie:
         </div>
-        <div className="bd-light row-height col-3 text-right">
-          { voters.length || 0 }
+        <div className='bd-light row-height col-3 text-right'>
+          {voters.length || 0}
         </div>
       </div>
-      <div className="d-flex justify-content-between">
-        <div className="bd-light row-height col-9">
-          Average user ranking:
-        </div>
-        <div className="bd-light row-height col-3 text-right pl-0">
-          { averageRanking ? `#${ averageRanking }` : 'Not ranked.' }
+      <div className='d-flex justify-content-between'>
+        <div className='bd-light row-height col-9'>Average user ranking:</div>
+        <div className='bd-light row-height col-3 text-right pl-0'>
+          {averageRanking ? `#${averageRanking}` : 'Not ranked.'}
         </div>
       </div>
     </div>
@@ -57,7 +48,7 @@ MovieStats.propTypes = {
     averageRanking: PropTypes.number.isRequired,
     points: PropTypes.number.isRequired,
     overallRanking: PropTypes.number.isRequired,
-  })
+  }),
 };
 
 export default MovieStats;

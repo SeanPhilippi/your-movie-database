@@ -8,17 +8,16 @@ import {
   setCurrentTopMovies,
   setCurrentPage,
   setMoviesPerPage,
-  addToList
+  addToList,
 } from '../../../redux/actions';
 import { withRouter } from 'react-router-dom';
 
 class ViewableList extends PureComponent {
-
   componentDidMount() {
     const { fetchTopMoviesList, setCurrentTopMovies } = this.props;
     fetchTopMoviesList();
     setCurrentTopMovies();
-  };
+  }
 
   setCurrentPage = e => {
     this.props.setCurrentPage(Number(e.target.name));
@@ -26,7 +25,7 @@ class ViewableList extends PureComponent {
   };
 
   handleMoviesPerPage = e => {
-    this.props.setMoviesPerPage(Number(e.target.value))
+    this.props.setMoviesPerPage(Number(e.target.value));
     this.props.setCurrentTopMovies();
   };
 
@@ -36,101 +35,93 @@ class ViewableList extends PureComponent {
       addToList(movie, post);
     } else {
       history.push('/login');
-    };
+    }
   };
 
   render() {
     const {
       items,
       user,
-      match: {
-        url
-      },
+      match: { url },
       topMoviesList,
       currentTopMovies,
       moviesPerPage,
       pages,
-      currentPage
+      currentPage,
     } = this.props;
 
-    const NoList = () => (
-      <div>
-        This user hasn't added any movies yet.
-      </div>
-    );
+    const NoList = () => <div>This user hasn't added any movies yet.</div>;
 
     const TopMoviesList = () => {
-      return currentTopMovies.map((item, idx) =>
+      return currentTopMovies.map((item, idx) => (
         <ViewableItem
-          movie={ item }
-          idx={ idx + (moviesPerPage * (currentPage - 1)) }
-          key={ item._id }
+          movie={item}
+          idx={idx + moviesPerPage * (currentPage - 1)}
+          key={item._id}
           maxWidth='410px'
-          handleAdd={ this.handleAdd }
+          handleAdd={this.handleAdd}
         />
-      );
+      ));
     };
 
     const TopMoviesListPreview = ({ itemsPerPage }) => {
-      return topMoviesList.slice(0, itemsPerPage).map((item, idx) =>
-        <ViewableItem
-          movie={ item }
-          idx={ idx }
-          key={ item._id }
-          maxWidth='390px'
-          handleAdd={ this.handleAdd }
-        />
-      );
+      return topMoviesList
+        .slice(0, itemsPerPage)
+        .map((item, idx) => (
+          <ViewableItem
+            movie={item}
+            idx={idx}
+            key={item._id}
+            maxWidth='390px'
+            handleAdd={this.handleAdd}
+          />
+        ));
     };
 
     const UserList = () => {
       let movies;
-      if (url === '/profile' || url === `/profile/${ user.username }`) {
+      if (url === '/profile' || url === `/profile/${user.username}`) {
         movies = user.items;
       } else {
         movies = items;
       }
-      return movies.map((item, idx) =>
+      return movies.map((item, idx) => (
         <ViewableItem
-          movie={ item }
-          idx={ idx }
-          key={ item._id }
+          movie={item}
+          idx={idx}
+          key={item._id}
           maxWidth='490px'
-          handleAdd={ this.handleAdd }
+          handleAdd={this.handleAdd}
         />
-      );
+      ));
     };
 
     const whatToShow = () => {
       if (url === '/') {
-        return <TopMoviesListPreview itemsPerPage={ 20 } />
+        return <TopMoviesListPreview itemsPerPage={20} />;
       } else if (url === '/top-movies') {
         return (
           <>
             <PageSettings
-              pages={ pages }
-              currentPage={ currentPage }
-              setCurrentPage={ this.setCurrentPage }
-              handleMoviesPerPage={ this.handleMoviesPerPage }
-              moviesPerPage={ moviesPerPage }
+              pages={pages}
+              currentPage={currentPage}
+              setCurrentPage={this.setCurrentPage}
+              handleMoviesPerPage={this.handleMoviesPerPage}
+              moviesPerPage={moviesPerPage}
             />
             <TopMoviesList />
           </>
         );
       } else if (items && !items.length) {
-        return <NoList />
+        return <NoList />;
       } else {
-        return <UserList />
-      };
+        return <UserList />;
+      }
     };
 
-    return (
-      <div>
-        { whatToShow() }
-      </div>
-    );
-  };
-};
+    return <div>{whatToShow()}</div>;
+  }
+}
 
 ViewableList.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
@@ -163,4 +154,6 @@ const mapStateToProps = state => ({
   currentTopMovies: state.currentTopMovies,
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ViewableList));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ViewableList)
+);

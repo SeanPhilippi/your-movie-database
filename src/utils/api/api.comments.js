@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export const get = {
   topMoviesComments: () => axios('/api/comments/top-movies'),
-  profileComments: username => axios(`/api/comments/${ username }`),
-  movieComments: movieId => axios(`/api/comments/movie/${ movieId }`),
+  profileComments: username => axios(`/api/comments/${username}`),
+  movieComments: movieId => axios(`/api/comments/movie/${movieId}`),
 };
 
 export const post = {
@@ -11,5 +11,5 @@ export const post = {
 };
 
 export const remove = {
-  comment: id => axios.put(`/api/comments/${ id }`),
+  comment: id => axios.put(`/api/comments/${id}`),
 };

@@ -1,14 +1,14 @@
-module.exports = (movieIds) => [
+module.exports = movieIds => [
   {
     $match: {
       items: {
         $elemMatch: {
           id: {
-            $in: movieIds
-          }
-        }
-      }
-    }
+            $in: movieIds,
+          },
+        },
+      },
+    },
   },
   {
     $project: {
@@ -21,16 +21,16 @@ module.exports = (movieIds) => [
               as: 'item',
               cond: {
                 $in: ['$$item.id', movieIds],
-              }
-            }
+              },
+            },
           },
           as: 'item',
           in: {
             id: '$$item.id',
             idx: { $indexOfArray: ['$items.id', '$$item.id'] },
-            idxInComparedList: { $indexOfArray: [movieIds, '$$item.id'] }
-          }
-        }
+            idxInComparedList: { $indexOfArray: [movieIds, '$$item.id'] },
+          },
+        },
       },
       numberOfMatches: {
         $size: {
@@ -38,19 +38,19 @@ module.exports = (movieIds) => [
             input: '$items',
             as: 'item',
             cond: {
-              $in: ['$$item.id', movieIds]
-            }
-          }
-        }
-      }
-    }
+              $in: ['$$item.id', movieIds],
+            },
+          },
+        },
+      },
+    },
   },
   {
     $sort: {
       numberOfMatches: -1,
-    }
+    },
   },
   {
-    $limit: 15
-  }
+    $limit: 15,
+  },
 ];

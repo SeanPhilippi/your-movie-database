@@ -5,43 +5,34 @@ import { sortableElement } from 'react-sortable-hoc';
 import DragHandle from './DragHandle';
 
 const SortableItem = sortableElement(({ movie, sortIndex, deleteMovie }) => {
-  const {
-    id,
-    title,
-    director,
-    year,
-  } = movie;
+  const { id, title, director, year } = movie;
 
   return (
-    <div
-      key={ id }
-      className="bg-white"
-      style={{ lineHeight: '2rem' }}
-    >
-      <div className="d-flex justify-content-between">
-        <div className="d-flex overflow-hidden">
-          <DragHandle sortIndex={ sortIndex } />
+    <div key={id} className='bg-white' style={{ lineHeight: '2rem' }}>
+      <div className='d-flex justify-content-between'>
+        <div className='d-flex overflow-hidden'>
+          <DragHandle sortIndex={sortIndex} />
           <div
-            title={`${ title } (${ director }, ${ year })`}
-            className="d-inline-block text-truncate"
+            title={`${title} (${director}, ${year})`}
+            className='d-inline-block text-truncate'
             style={{ maxWidth: '510px' }}
           >
             <Link
-              className="movie-link"
+              className='movie-link'
               to={{
-                pathname: `/movies/${ title.concat('-', year).split(' ').join('-') }`,
-                state: { movie }
+                pathname: `/movies/${title
+                  .concat('-', year)
+                  .split(' ')
+                  .join('-')}`,
+                state: { movie },
               }}
             >
-              { title }&nbsp;
+              {title}&nbsp;
             </Link>
-            ({ director }, { year })
+            ({director}, {year})
           </div>
         </div>
-        <button
-          onClick={ () => deleteMovie(movie) }
-          className="delete"
-        >
+        <button onClick={() => deleteMovie(movie)} className='delete'>
           ✕
         </button>
       </div>

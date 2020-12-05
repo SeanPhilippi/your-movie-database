@@ -17,12 +17,7 @@ class RegisterBox extends PureComponent {
   };
 
   handleRegister = e => {
-    const {
-      username,
-      email,
-      password,
-      password2,
-    } = this.state;
+    const { username, email, password, password2 } = this.state;
 
     e.preventDefault();
 
@@ -51,91 +46,76 @@ class RegisterBox extends PureComponent {
     } = this.props;
 
     return (
-      <Row className="register-box d-flex flex-column">
+      <Row className='register-box d-flex flex-column'>
         <div>
-          <span className="font-weight-bold px-4 py-2">
+          <span className='font-weight-bold px-4 py-2'>
             <span style={{ color: 'red' }}>* = mandatory</span>
           </span>
-          <form
-            className="py-2 px-4"
-            noValidate
-            onSubmit={this.handleRegister}
-          >
+          <form className='py-2 px-4' noValidate onSubmit={this.handleRegister}>
             <div>
               {/* username */}
-              <div className="mb-2">
-                <div className="your-login font-weight-bold">
+              <div className='mb-2'>
+                <div className='your-login font-weight-bold'>
                   Login/Username&nbsp;<span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
-                  autoComplete="off"
+                  autoComplete='off'
                   autoFocus
-                  name="username"
+                  name='username'
                   onChange={this.onTextChange}
-                  className="w-75 w-md-50"
-                  type="text"
+                  className='w-75 w-md-50'
+                  type='text'
                 />
-                <div style={{ color: 'red' }}>
-                  { usernameErrors }
-                </div>
+                <div style={{ color: 'red' }}>{usernameErrors}</div>
               </div>
               {/* email */}
-              <div className="email mb-2">
-                <div className="email-label font-weight-bold">
+              <div className='email mb-2'>
+                <div className='email-label font-weight-bold'>
                   Email <span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
-                  autoComplete="off"
-                  name="email"
+                  autoComplete='off'
+                  name='email'
                   onChange={this.onTextChange}
-                  className="w-75 w-md-50"
-                  type="text"
+                  className='w-75 w-md-50'
+                  type='text'
                 />
-                <div style={{ color: 'red' }}>
-                  { emailErrors }
-                </div>
+                <div style={{ color: 'red' }}>{emailErrors}</div>
               </div>
               {/* password */}
-              <div className="register-password mb-2">
-                <div className="password-label font-weight-bold">
+              <div className='register-password mb-2'>
+                <div className='password-label font-weight-bold'>
                   Password <span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
-                  autoComplete="off"
-                  name="password"
+                  autoComplete='off'
+                  name='password'
                   onChange={this.onTextChange}
-                  className="w-75 w-md-50"
-                  type="password"
+                  className='w-75 w-md-50'
+                  type='password'
                 />
-                <div style={{ color: 'red' }}>
-                  { passwordErrors }
-                </div>
+                <div style={{ color: 'red' }}>{passwordErrors}</div>
               </div>
               {/* confirm password */}
               <div>
-                <div className="password2-label font-weight-bold">
+                <div className='password2-label font-weight-bold'>
                   Retype Password <span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
-                  autoComplete="off"
-                  name="password2"
+                  autoComplete='off'
+                  name='password2'
                   onChange={this.onTextChange}
-                  className="w-75 w-md-50"
-                  type="password"
+                  className='w-75 w-md-50'
+                  type='password'
                 />
-                <div style={{ color: 'red' }}>
-                  { password2Errors }
-                </div>
+                <div style={{ color: 'red' }}>{password2Errors}</div>
               </div>
             </div>
             {/* send btn */}
-            <div className="">
+            <div className=''>
               <div></div>
-              <div className="">
-                <button
-                  className="register-btn my-3"
-                  type="submit"
-                >
+              <div className=''>
+                <button className='register-btn my-3' type='submit'>
                   Register
                 </button>
               </div>
@@ -144,8 +124,8 @@ class RegisterBox extends PureComponent {
         </div>
       </Row>
     );
-  };
-};
+  }
+}
 
 RegisterBox.propTypes = {
   registerUser: PropTypes.func.isRequired,
@@ -154,16 +134,18 @@ RegisterBox.propTypes = {
     password: PropTypes.string,
     password2: PropTypes.string,
     username: PropTypes.string,
-  }).isRequired
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({
-  errors: state.authErrors
+  errors: state.authErrors,
 });
 
 const mapDispatchToProps = dispatch => ({
   registerUser: (user, history) => dispatch(registerUser(user, history)),
-  clearErrors
+  clearErrors,
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RegisterBox));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(RegisterBox)
+);

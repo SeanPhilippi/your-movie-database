@@ -7,7 +7,7 @@ const CommentSchema = new Schema({
   author: {
     type: String,
     lowercase: true,
-    required: true
+    required: true,
   },
   username: {
     type: String,
@@ -15,11 +15,11 @@ const CommentSchema = new Schema({
   },
   text: {
     type: String,
-    requried: true
+    requried: true,
   },
   post_date: {
     type: String,
-    required: true
+    required: true,
   },
   disabled: Boolean,
 });

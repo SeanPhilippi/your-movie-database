@@ -11,14 +11,14 @@ import {
   faAward,
   faFilm,
   faBook,
-  faVoteYea
+  faVoteYea,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faUserCircle,
   faUser,
   faFileAlt,
   faListAlt,
-  faEdit
+  faEdit,
 } from '@fortawesome/free-regular-svg-icons';
 
 const fontAwesome = library.add(

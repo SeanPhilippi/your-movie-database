@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions';
 
 class Account extends PureComponent {
-
   handleLogout = e => {
     e.preventDefault();
     this.props.logoutUser(this.props.history);
@@ -15,23 +14,18 @@ class Account extends PureComponent {
 
   render() {
     return (
-      <div className="d-flex border-0 justify-content-center">
-        <Col className="inner-container">
-          <Col className="bg-white pt-2">
+      <div className='d-flex border-0 justify-content-center'>
+        <Col className='inner-container'>
+          <Col className='bg-white pt-2'>
             <CardWrapper
               icon={['far', 'user-circle']}
-              rotate={ 0 }
-              title="my account"
-              color="tan"
+              rotate={0}
+              title='my account'
+              color='tan'
             >
-              <div className="d-flex justify-content-between">
-                <p>
-                  You are logged in as { this.props.user.username }
-                </p>
-                <button
-                  className="log-out-btn"
-                  onClick={ this.handleLogout }
-                >
+              <div className='d-flex justify-content-between'>
+                <p>You are logged in as {this.props.user.username}</p>
+                <button className='log-out-btn' onClick={this.handleLogout}>
                   Log out
                 </button>
               </div>
@@ -39,12 +33,12 @@ class Account extends PureComponent {
           </Col>
         </Col>
       </div>
-    )
+    );
   }
 }
 
 Account.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -56,4 +50,6 @@ const mapDispatchToProps = dispatch => ({
   logoutUser: history => dispatch(logoutUser(history)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Account));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Account)
+);

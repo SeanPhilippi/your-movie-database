@@ -4,7 +4,11 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import SearchResult from './SearchResult';
-import { fetchMovie, fetchMovieStats, fetchMovieComments } from '../redux/actions';
+import {
+  fetchMovie,
+  fetchMovieStats,
+  fetchMovieComments,
+} from '../redux/actions';
 import debounce from '../utils/helpers/debounce.js';
 
 class MovieSearch extends PureComponent {
@@ -12,7 +16,7 @@ class MovieSearch extends PureComponent {
     searchText: '',
     searchResults: [],
     allowResults: true,
-    inputColorChange: false
+    inputColorChange: false,
   };
 
   onTextChange = e => {
@@ -21,7 +25,7 @@ class MovieSearch extends PureComponent {
     if (this.state.searchText && this.state.searchText.length > 1) {
       // fire handle search through debounce function to reduce api calls with delay
       this.handleDelay();
-    };
+    }
   };
 
   clearResults = () => {
@@ -41,7 +45,7 @@ class MovieSearch extends PureComponent {
     if (e.key === 'Backspace') {
       this.clearResults();
       this.handleDelay();
-    };
+    }
   };
 
   handleSearch = () => {
@@ -49,14 +53,16 @@ class MovieSearch extends PureComponent {
     const pageNums = [1, 2, 3];
     const { searchText } = this.state;
     pageNums.forEach(num => {
-      axios(`/api/movies/search/${ searchText }/${ num }`)
+      axios(`/api/movies/search/${searchText}/${num}`)
         .then(({ data }) => {
           if (data.Search) {
-            this.setState(prevState => ({ searchResults: [...data.Search, ...prevState.searchResults] }));
-          };
+            this.setState(prevState => ({
+              searchResults: [...data.Search, ...prevState.searchResults],
+            }));
+          }
         })
         .catch(console.log);
-      });
+    });
   };
 
   handleDelay = debounce(this.handleSearch, 300);
@@ -80,13 +86,13 @@ class MovieSearch extends PureComponent {
     const remappedMovie = {
       title: movie.Title,
       year: movie.Year,
-      id: movie.imdbID
+      id: movie.imdbID,
     };
     fetchMovie(movie.imdbID);
     fetchMovieComments(movie.imdbID);
     fetchMovieStats(remappedMovie, false);
     history.push(
-      `/movies/${ movie.Title.split(' ').concat([movie.Year]).join('-') }`,
+      `/movies/${movie.Title.split(' ').concat([movie.Year]).join('-')}`,
       { movie: remappedMovie }
     );
     this.clear();
@@ -96,19 +102,17 @@ class MovieSearch extends PureComponent {
     const { searchResults } = this.state;
     if (searchResults) {
       return (
-        <div className="bg-white movie-result-scroll">
-          {
-            searchResults.map(movie =>
-              <SearchResult
-                movie={ movie }
-                handleRedirect={ this.handleRedirect }
-                key={ movie.id }
-              />
-            )
-          }
+        <div className='bg-white movie-result-scroll'>
+          {searchResults.map(movie => (
+            <SearchResult
+              movie={movie}
+              handleRedirect={this.handleRedirect}
+              key={movie.id}
+            />
+          ))}
         </div>
       );
-    };
+    }
   };
 
   render() {
@@ -116,33 +120,38 @@ class MovieSearch extends PureComponent {
     const { searchText, allowResults, inputColorChange } = this.state;
 
     return (
-      <div className={`${ itemsCount > 19 ? 'd-none' : 'd-flex' } flex-column movie-search-container w-100 mt-${ marginTopVal }`}>
-        <div className="d-flex search-bar">
+      <div
+        className={`${
+          itemsCount > 19 ? 'd-none' : 'd-flex'
+        } flex-column movie-search-container w-100 mt-${marginTopVal}`}
+      >
+        <div className='d-flex search-bar'>
           <input
-            autoComplete="off"
-            name="searchText"
-            className={`movie-search-input pl-3 w-100 ${ inputColorChange && 'movie-search-input-focused' }`}
-            placeholder="Search for films..."
-            value={ searchText }
-            onChange={ this.onTextChange }
-            onKeyUp={ this.onKeyUp }
-            onFocus={ () => this.handleFocus(true) }
-            onBlur={ () => this.handleFocus(false, 200) }
-          >
-          </input>
+            autoComplete='off'
+            name='searchText'
+            className={`movie-search-input pl-3 w-100 ${
+              inputColorChange && 'movie-search-input-focused'
+            }`}
+            placeholder='Search for films...'
+            value={searchText}
+            onChange={this.onTextChange}
+            onKeyUp={this.onKeyUp}
+            onFocus={() => this.handleFocus(true)}
+            onBlur={() => this.handleFocus(false, 200)}
+          ></input>
           <div
-            onClick={ this.clear }
-            title="clear search text"
-            className={`clear-search ${ !searchText ? 'd-none' : 'd-block' }`}
+            onClick={this.clear}
+            title='clear search text'
+            className={`clear-search ${!searchText ? 'd-none' : 'd-block'}`}
           >
             ✕
           </div>
         </div>
-        { allowResults && this.renderResults() }
+        {allowResults && this.renderResults()}
       </div>
     );
-  };
-};
+  }
+}
 
 MovieSearch.propTypes = {
   fetchMovie: PropTypes.func.isRequired,

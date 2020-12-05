@@ -6,25 +6,24 @@ import img from '../../../images/grippy.png';
 const DragHandle = sortableHandle(({ sortIndex }) => {
   return (
     <div
-      className="grip d-flex align-items-center justify-content-between mr-2"
+      className='grip d-flex align-items-center justify-content-between mr-2'
       style={{ width: '3.1rem' }}
     >
       <img
-        className="ml-2"
-        alt="grip handle"
+        className='ml-2'
+        alt='grip handle'
         style={{ width: '.4rem', height: '1.2rem' }}
-        src={ img }
-      >
-      </img>
-      <div className="text-right">
-        <span className="number">{ sortIndex + 1 }</span>
+        src={img}
+      ></img>
+      <div className='text-right'>
+        <span className='number'>{sortIndex + 1}</span>
       </div>
     </div>
   );
 });
 
 DragHandle.propTypes = {
-  sortIndex: PropTypes.number.isRequired
+  sortIndex: PropTypes.number.isRequired,
 };
 
 export default DragHandle;

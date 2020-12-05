@@ -14,8 +14,8 @@ import WebFont from 'webfontloader';
 
 WebFont.load({
   google: {
-    families: ['Michroma']
-  }
+    families: ['Michroma'],
+  },
 });
 
 dotenv.config();
@@ -26,7 +26,7 @@ setJwtToken();
 
 ReactDOM.render(
   <BrowserRouter>
-    <Provider store={ store }>
+    <Provider store={store}>
       <App />
     </Provider>
   </BrowserRouter>,

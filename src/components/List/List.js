@@ -8,44 +8,40 @@ import Search from '../Search';
 import EditButton from './EditButton';
 import withLoading from '../HOCs/withLoading';
 
-const List = withLoading(({
-  isEditing,
-  items,
-  history: {
-    location: {
-      pathname
-    }
-  },
-  user: {
-    items: authItems
-  }
-}) => {
-  if (isEditing && pathname === '/profile') {
-    return (
-      <div>
-        <div className="search-btns-container">
-          <SaveDelete />
+const List = withLoading(
+  ({
+    isEditing,
+    items,
+    history: {
+      location: { pathname },
+    },
+    user: { items: authItems },
+  }) => {
+    if (isEditing && pathname === '/profile') {
+      return (
+        <div>
+          <div className='search-btns-container'>
+            <SaveDelete />
+          </div>
+          <Search itemsCount={authItems.length} />
+          <EditableList items={authItems} />
         </div>
-        <Search itemsCount={ authItems.length } />
-        <EditableList items={ authItems } />
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <div className="d-flex justify-content-end">
-          {/* <div className="blurb">
+      );
+    } else {
+      return (
+        <div>
+          <div className='d-flex justify-content-end'>
+            {/* <div className="blurb">
             this is my blurb
           </div> */}
-          { pathname === '/profile' && <EditButton /> }
+            {pathname === '/profile' && <EditButton />}
+          </div>
+          <ViewableList items={pathname === '/profile' ? authItems : items} />
         </div>
-        <ViewableList
-          items={ pathname === '/profile' ? authItems : items }
-        />
-      </div>
-    )
+      );
+    }
   }
-});
+);
 
 List.propTypes = {
   user: PropTypes.shape({

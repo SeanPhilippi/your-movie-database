@@ -9,7 +9,7 @@ import {
   deleteList,
   setMessageStatus,
   setEditing,
-  setListData
+  setListData,
 } from '../redux/actions';
 
 class SaveDelete extends PureComponent {
@@ -18,25 +18,21 @@ class SaveDelete extends PureComponent {
       setMessageStatus,
       setEditing,
       setListData,
-      user: {
-        username,
-        statement,
-        items
-      },
-      history
+      user: { username, statement, items },
+      history,
     } = this.props;
 
     const listObj = {
       username,
       items,
-      statement
+      statement,
     };
     setListData(listObj);
     setMessageStatus('Profile Updated');
     setEditing(false);
     try {
-      await axios.put(`/api/list/save/${ username }`, listObj);
-    } catch(err) {
+      await axios.put(`/api/list/save/${username}`, listObj);
+    } catch (err) {
       console.error(err);
     }
     history.push('/profile');
@@ -47,16 +43,9 @@ class SaveDelete extends PureComponent {
     message: 'You are about to permanently delete your list.',
     customUI: ({ onClose, title, message }) => (
       <div className='confirm-modal bg-white shadow'>
-        <h2 className='mb-3'>
-          { title }
-        </h2>
-        <p className='mb-4'>
-          { message }
-        </p>
-        <button
-          className='cancel-button'
-          onClick={onClose}
-        >
+        <h2 className='mb-3'>{title}</h2>
+        <p className='mb-4'>{message}</p>
+        <button className='cancel-button' onClick={onClose}>
           No
         </button>
         <button
@@ -72,7 +61,7 @@ class SaveDelete extends PureComponent {
     ),
     PureUnmount: () => {},
     onClickOutside: () => {},
-    onKeypressEscape: () => {}
+    onKeypressEscape: () => {},
   };
 
   handleDelete = () => {
@@ -82,39 +71,28 @@ class SaveDelete extends PureComponent {
   performDelete = () => {
     const {
       deleteList,
-      user: {
-        username,
-      },
+      user: { username },
     } = this.props;
     deleteList();
-    return fetch(`/delete/${ username }`, {
-      method: 'DELETE'
-    })
-    .catch(console.error)
+    return fetch(`/delete/${username}`, {
+      method: 'DELETE',
+    }).catch(console.error);
   };
 
   render() {
     return (
-      <div className="save-delete d-flex justify-content-between">
-        <div className="count">
-          { this.props.user.items.length } / 20
-        </div>
+      <div className='save-delete d-flex justify-content-between'>
+        <div className='count'>{this.props.user.items.length} / 20</div>
         <div>
-          <button
-            onClick={ this.handleUpdate }
-            className="save-list"
-          >
+          <button onClick={this.handleUpdate} className='save-list'>
             SAVE
           </button>
-          <button
-            className="delete-list"
-            onClick={ this.handleDelete }
-          >
+          <button className='delete-list' onClick={this.handleDelete}>
             DELETE LIST
           </button>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -125,7 +103,7 @@ SaveDelete.propTypes = {
   setListData: PropTypes.func.isRequired,
   user: PropTypes.shape({
     username: PropTypes.string.isRequired,
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
   }).isRequired,
   statement: PropTypes.string.isRequired,
   isEditing: PropTypes.bool.isRequired,
@@ -144,4 +122,6 @@ const mapDispatchToProps = dispatch => ({
   setListData: listData => dispatch(setListData(listData)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SaveDelete));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SaveDelete)
+);

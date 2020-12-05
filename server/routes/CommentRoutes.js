@@ -8,7 +8,7 @@ const {
   getTopMoviesComments,
   postComment,
   deleteComment,
-} = commentsController
+} = commentsController;
 
 // @route   GET api/comments/top-movies
 // @desc    get comments to populate TopMoviesPage

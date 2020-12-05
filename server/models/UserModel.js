@@ -7,25 +7,25 @@ const UserSchema = new Schema({
     // converts string to lowercase so different capitalization is not considered unique
     lowercase: true,
     unique: true,
-    required: true
+    required: true,
   },
   email: {
     type: String,
     lowercase: true,
     unique: true,
-    requried: true
+    requried: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   register_date: {
     type: String,
-    required: true
+    required: true,
   },
   location: {
-    type: String
-  }
+    type: String,
+  },
 });
 
 module.exports = model('User', UserSchema);

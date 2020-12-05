@@ -7,29 +7,33 @@ import { Emojione } from 'react-emoji-render';
 const Comment = ({
   user,
   comment: {
+    // prettier-ignore
     author,
     post_date,
     text,
-    _id
+    _id,
   },
-  deleteComment
+  deleteComment,
 }) => (
-  <div className="border my-1 px-2 py-1 d-flex flex-column">
+  <div className='border my-1 px-2 py-1 d-flex flex-column'>
     <div>
       {/* eslint-disable-next-line */}
-      <Link to={`/profile${ author === user.username ? '' : `/${ author }`}`}>{ author }</Link> wrote on { post_date }
+      <Link to={`/profile${author === user.username ? '' : `/${author}`}`}>
+        {author}
+      </Link>{' '}
+      wrote on {post_date}
     </div>
-    <Emojione className="comment mt-2" text={`${ text }`} />
-    {
-      author === user.username ?
-        <div
-          className="comment-footer-auth text-right small"
-          onClick={ () => deleteComment(_id) }
-        >
-          <span className="delete-comment">delete</span>
-        </div> :
-        <div className="comment-footer"/>
-    }
+    <Emojione className='comment mt-2' text={`${text}`} />
+    {author === user.username ? (
+      <div
+        className='comment-footer-auth text-right small'
+        onClick={() => deleteComment(_id)}
+      >
+        <span className='delete-comment'>delete</span>
+      </div>
+    ) : (
+      <div className='comment-footer' />
+    )}
   </div>
 );
 

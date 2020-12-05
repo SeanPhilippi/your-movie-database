@@ -7,7 +7,7 @@ const {
   registerUser,
   loginUser,
   getNewRegisters,
-  getCurrentUser
+  getCurrentUser,
 } = usersController;
 
 // @route   POST api/users/register

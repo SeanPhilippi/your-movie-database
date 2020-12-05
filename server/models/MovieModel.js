@@ -4,36 +4,36 @@ const { Schema, model } = mongoose;
 const MovieSchema = new Schema({
   id: {
     type: String,
-    required: true
+    required: true,
   },
   title: {
     type: String,
-    required: true
+    required: true,
   },
   year: {
     type: String,
-    required: true
+    required: true,
   },
   director: {
     type: String,
-    required: true
+    required: true,
   },
   averageRanking: {
     type: Number,
-    required: true
+    required: true,
   },
   points: {
     type: Number,
-    required: true
+    required: true,
   },
   numberOFLists: {
     type: Number,
-    required: true
+    required: true,
   },
   overallRanking: {
     type: Number,
-    required: true
-  }
+    required: true,
+  },
 });
 
 // const MovieSchema = new Schema({

@@ -18,19 +18,16 @@ import {
 
 const CommentsWithLoading = withLoading(Comments);
 
-class Profile extends PureComponent  {
-
+class Profile extends PureComponent {
   fetchData = () => {
-    console.log('fetching data in Profile')
+    console.log('fetching data in Profile');
     const {
       fetchListData,
       fetchComments,
       user,
       history: {
-        location: {
-          pathname
-        }
-      }
+        location: { pathname },
+      },
     } = this.props;
     const { username } = this.props.match.params;
     if (pathname === '/profile') {
@@ -39,19 +36,19 @@ class Profile extends PureComponent  {
     } else {
       fetchListData(username, false);
       fetchComments(username);
-    };
+    }
   };
 
   componentDidMount() {
     this.fetchData();
-  };
+  }
 
   componentDidUpdate(prevProps) {
     const { username } = this.props.match.params;
     if (username !== prevProps.match.params.username) {
       this.fetchData();
-    };
-  };
+    }
+  }
 
   render() {
     const {
@@ -66,72 +63,80 @@ class Profile extends PureComponent  {
       commentsLoading,
       affinitiesLoading,
       history: {
-        location: {
-          pathname
-        }
-      }
+        location: { pathname },
+      },
     } = this.props;
 
     return (
-      <div className="grid-container bg-light2 vw-95 w-md-100 mx-auto">
-        <div className="bg-white">
-          <div className="px-4 pt-4 w-100">
+      <div className='grid-container bg-light2 vw-95 w-md-100 mx-auto'>
+        <div className='bg-white'>
+          <div className='px-4 pt-4 w-100'>
             <CardWrapper
-              icon={["far", "list-alt"]}
-              rotate={ -5 }
-              title={`${ pathname === '/profile' || pathname === `/profile/${ user.username }` ? user.username : username }'s Top Movies`}
-              color="tan"
+              icon={['far', 'list-alt']}
+              rotate={-5}
+              title={`${
+                pathname === '/profile' ||
+                pathname === `/profile/${user.username}`
+                  ? user.username
+                  : username
+              }'s Top Movies`}
+              color='tan'
               marginTopVal='0'
             >
               <List
-                user={ user }
-                username={ username }
-                items={ items }
-                isEditing={ isEditing }
-                isLoading={ listDataLoading }
+                user={user}
+                username={username}
+                items={items}
+                isEditing={isEditing}
+                isLoading={listDataLoading}
               />
             </CardWrapper>
           </div>
-          <div className="px-4">
+          <div className='px-4'>
             <CardWrapper
-              icon={["fas", "file-alt"]}
-              rotate={ -5 }
-              title="user statement"
-              color="tan"
+              icon={['fas', 'file-alt']}
+              rotate={-5}
+              title='user statement'
+              color='tan'
             >
               <Statement
-                user={ user }
-                username={ pathname === '/profile' || pathname === `/profile/${ user.username }` ? user.username : username }
-                statement={ pathname === '/profile' || pathname === `/profile/${ user.username }` ? user.statement : statement }
-                isEditing={ isEditing }
-                isLoading={ listDataLoading }
+                user={user}
+                username={
+                  pathname === '/profile' ||
+                  pathname === `/profile/${user.username}`
+                    ? user.username
+                    : username
+                }
+                statement={
+                  pathname === '/profile' ||
+                  pathname === `/profile/${user.username}`
+                    ? user.statement
+                    : statement
+                }
+                isEditing={isEditing}
+                isLoading={listDataLoading}
               />
             </CardWrapper>
           </div>
-          <div className="px-4">
-            <CardWrapper
-              icon="book"
-              rotate={ -5 }
-              title="affinities"
-              color="tan"
-            >
+          <div className='px-4'>
+            <CardWrapper icon='book' rotate={-5} title='affinities' color='tan'>
               <Affinities
-                isLoading={ affinitiesLoading }
-                affinities={ affinities }
+                isLoading={affinitiesLoading}
+                affinities={affinities}
               />
             </CardWrapper>
           </div>
         </div>
-        <div className="m-4">
+        <div className='m-4'>
           <CardWrapper
-            icon="comments"
-            title="comments"
-            color="white"
-            marginTopVal="0"
+            icon='comments'
+            title='comments'
+            color='white'
+            marginTopVal='0'
           >
             <CommentsWithLoading
-              isLoading={ commentsLoading }
-              comments={ comments }
+              isLoading={commentsLoading}
+              comments={comments}
             />
           </CardWrapper>
         </div>
@@ -180,7 +185,9 @@ const mapStateToProps = state => ({
   isEditing: state.isEditing,
   listDataLoading: state.listDataLoading,
   commentsLoading: state.commentsLoading,
-  affinitiesLoading: state.affinitiesLoading
+  affinitiesLoading: state.affinitiesLoading,
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Profile));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Profile)
+);

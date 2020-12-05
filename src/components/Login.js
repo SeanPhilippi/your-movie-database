@@ -6,14 +6,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const Login = () => (
-  <div className="d-flex border-0 justify-content-center" style={{ flex: 1 }}>
-    <div className="inner-container">
-      <Col className="bg-white pt-2">
-        <CardWrapper
-          icon="sign-in-alt"
-          title="Login"
-          color="tan"
-        >
+  <div className='d-flex border-0 justify-content-center' style={{ flex: 1 }}>
+    <div className='inner-container'>
+      <Col className='bg-white pt-2'>
+        <CardWrapper icon='sign-in-alt' title='Login' color='tan'>
           <LoginBox />
         </CardWrapper>
       </Col>
@@ -22,7 +18,7 @@ const Login = () => (
 );
 
 Login.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({

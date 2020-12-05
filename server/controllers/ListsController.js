@@ -3,17 +3,18 @@ const movieRankingsQuery = require('./queries/movieRankingsQuery');
 const List = require('../models/ListModel');
 
 exports.getListData = (req, res) => {
-  List.findOne({ username: req.params.username }).exec().then(data => {
-    res.status(200).json(data);
-  }).catch(() => res.status(404).json({ listDataError: 'Failed to find list data' }));
+  List.findOne({ username: req.params.username })
+    .exec()
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(() =>
+      res.status(404).json({ listDataError: 'Failed to find list data' })
+    );
 };
 
 exports.saveList = (req, res) => {
-  const {
-    username,
-    items,
-    statement
-  } = req.body;
+  const { username, items, statement } = req.body;
   List.updateOne(
     { username: req.params.username },
     {
@@ -25,15 +26,20 @@ exports.saveList = (req, res) => {
     },
     {
       upsert: 'true',
-    },
-  ).then(() => res.sendStatus(200))
-  .catch(() => res.status(400).json({ failedToUpdate: 'List update failed' }));
+    }
+  )
+    .then(() => res.sendStatus(200))
+    .catch(() =>
+      res.status(400).json({ failedToUpdate: 'List update failed' })
+    );
 };
 
 exports.deleteList = (req, res) => {
   List.deleteOne({ username: req.params.username })
     .then(() => res.sendStatus(200))
-    .catch(() => res.status(400).json({ failedToDelete: 'Failed to delete list' }));
+    .catch(() =>
+      res.status(400).json({ failedToDelete: 'Failed to delete list' })
+    );
 };
 
 exports.getMovieRankings = (req, res) => {
@@ -46,11 +52,13 @@ exports.getMovieRankings = (req, res) => {
       const results = data.map(({ _id, username, rank }) => ({
         id: _id,
         username,
-        rank: rank += 1
+        rank: (rank += 1),
       }));
       if (results.length > 1) {
         const rankings = results.map(result => result.rank);
-        averageRanking = Math.round(rankings.reduce((ac, cv) => ac + cv) / results.length);
+        averageRanking = Math.round(
+          rankings.reduce((ac, cv) => ac + cv) / results.length
+        );
         const pointsArr = results.map(result => 21 - result.rank);
         points = pointsArr.reduce((ac, cv) => ac + cv);
       } else if (results.length === 1) {
@@ -63,11 +71,13 @@ exports.getMovieRankings = (req, res) => {
       const result = {
         results,
         averageRanking,
-        points
+        points,
       };
       return res.status(200).json(result);
     })
-    .catch(() => res.status(400).json({ movieRankingsError: 'Failed to collect rankings' }));
+    .catch(() =>
+      res.status(400).json({ movieRankingsError: 'Failed to collect rankings' })
+    );
 };
 
 exports.calcAffinities = (req, res) => {
@@ -85,15 +95,20 @@ exports.calcAffinities = (req, res) => {
         const points = docs[i].matchingItems.map(item => {
           return Math.abs(item.idx - item.idxInComparedList) + 20;
         });
-        const score = (points.reduce((ac, cv) => ac + cv) / (movieIds.length * 20)) * 100;
+        const score =
+          (points.reduce((ac, cv) => ac + cv) / (movieIds.length * 20)) * 100;
         const match = {
           username: docs[i].username,
-          score: score.toFixed(2)
+          score: score.toFixed(2),
         };
         matches.push(match);
       }
       const sortedMatches = matches.sort((a, b) => b.score - a.score);
       return res.json(sortedMatches);
     })
-    .catch(() => res.status(400).json({ affinitiesError: 'Failed to calculate affinities' }));
+    .catch(() =>
+      res
+        .status(400)
+        .json({ affinitiesError: 'Failed to calculate affinities' })
+    );
 };

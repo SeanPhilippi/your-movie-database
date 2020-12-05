@@ -6,11 +6,11 @@ import { setEditing } from '../../redux/actions';
 
 const EditButton = ({ setEditing }) => (
   <button
-    className="edit-btn mb-2 page-settings"
+    className='edit-btn mb-2 page-settings'
     style={{ fontSize: '.9rem' }}
-    onClick={ () => setEditing(true) }
+    onClick={() => setEditing(true)}
   >
-    <FontAwesomeIcon icon={["far","edit"]} />
+    <FontAwesomeIcon icon={['far', 'edit']} />
   </button>
 );
 

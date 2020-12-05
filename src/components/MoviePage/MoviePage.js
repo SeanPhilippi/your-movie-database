@@ -13,48 +13,43 @@ import {
   fetchMovieComments,
   fetchMovie,
   fetchMovieStats,
-  addToList
+  addToList,
 } from '../../redux/actions';
 
 const CommentsWithLoading = withLoading(Comments);
 
 class MoviePage extends PureComponent {
-
   componentDidMount() {
     const {
       fetchMovieComments,
       fetchMovie,
       fetchMovieStats,
       location: {
-        state: { movie }
-      }
+        state: { movie },
+      },
     } = this.props;
     fetchMovie(movie.id);
     fetchMovieComments(movie.id);
     fetchMovieStats(movie, true);
-  };
+  }
 
   componentWillUnmount() {
     const {
       fetchMovieStats,
       location: {
-        state: { movie }
-      }
+        state: { movie },
+      },
     } = this.props;
     fetchMovieStats(movie, true);
-  };
+  }
 
   handleAdd = (movie, post) => {
-    const {
-      isAuthenticated,
-      addToList,
-      history
-    } = this.props;
+    const { isAuthenticated, addToList, history } = this.props;
     if (isAuthenticated) {
       addToList(movie, post);
     } else {
       history.push('/login');
-    };
+    }
   };
 
   render() {
@@ -64,75 +59,57 @@ class MoviePage extends PureComponent {
       movieStatsLoading,
       movieDetailsLoading,
       movie,
-      movie: {
-        title,
-      },
+      movie: { title },
       stats,
-      stats: {
-        voters
-      }
+      stats: { voters },
     } = this.props;
 
     return (
-      <div className="d-flex border-0 justify-content-center">
-        <div className="bg-light2 inner-container-movie mt-4">
+      <div className='d-flex border-0 justify-content-center'>
+        <div className='bg-light2 inner-container-movie mt-4'>
           {/* Left Column */}
-          <div className="left-col bg-white pb-3 pb-md-0">
-            <div className="px-4 pt-2 pt-md-4 w-100">
+          <div className='left-col bg-white pb-3 pb-md-0'>
+            <div className='px-4 pt-2 pt-md-4 w-100'>
               <CardWrapper
-                icon="film"
-                rotate={ -5 }
-                title="Movie Details"
-                color="tan"
-                marginTopVal="0"
+                icon='film'
+                rotate={-5}
+                title='Movie Details'
+                color='tan'
+                marginTopVal='0'
               >
                 <MovieDetails
-                  isLoading={ movieDetailsLoading }
-                  movie={ movie }
-                  handleAdd={ this.handleAdd }
+                  isLoading={movieDetailsLoading}
+                  movie={movie}
+                  handleAdd={this.handleAdd}
                 />
-                <MovieStats
-                  isLoading={ movieStatsLoading }
-                  stats={ stats }
-                />
+                <MovieStats isLoading={movieStatsLoading} stats={stats} />
                 {/* Review Box */}
                 <div>
-                  <div className="font-weight-bold mt-2">
-                    Reviews
-                  </div>
+                  <div className='font-weight-bold mt-2'>Reviews</div>
+                  <div>Currently there are no reviews for this movie.</div>
                   <div>
-                    Currently there are no reviews for this movie.
-                  </div>
-                  <div>
-                    <FontAwesomeIcon icon="chevron-right" /> &nbsp;<a href="/reviews">Click here to add a review.</a>
+                    <FontAwesomeIcon icon='chevron-right' /> &nbsp;
+                    <a href='/reviews'>Click here to add a review.</a>
                   </div>
                 </div>
               </CardWrapper>
               {/* -------Rankings------- */}
-              <CardWrapper
-                icon="vote-yea"
-                title="Rankings"
-                color="tan"
-              >
+              <CardWrapper icon='vote-yea' title='Rankings' color='tan'>
                 <Rankings
-                  isLoading={ movieStatsLoading }
-                  title={ title }
-                  voters={ voters }
+                  isLoading={movieStatsLoading}
+                  title={title}
+                  voters={voters}
                 />
               </CardWrapper>
             </div>
           </div>
           {/* Right Column */}
-          <div className="right-col w-100">
-            <div className="m-4">
-              <CardWrapper
-                icon="comments"
-                title="comments"
-                color="white"
-              >
+          <div className='right-col w-100'>
+            <div className='m-4'>
+              <CardWrapper icon='comments' title='comments' color='white'>
                 <CommentsWithLoading
-                  isLoading={ commentsLoading }
-                  comments={ comments }
+                  isLoading={commentsLoading}
+                  comments={comments}
                 />
               </CardWrapper>
             </div>
@@ -140,8 +117,8 @@ class MoviePage extends PureComponent {
         </div>
       </div>
     );
-  };
-};
+  }
+}
 
 MoviePage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
@@ -157,14 +134,14 @@ MoviePage.propTypes = {
         year: PropTypes.string,
         __v: PropTypes.number,
         _id: PropTypes.string,
-      })
-    })
+      }),
+    }),
   }),
   movie: PropTypes.shape({
-    title: PropTypes.string
+    title: PropTypes.string,
   }),
   stats: PropTypes.shape({
-    voters: PropTypes.array
+    voters: PropTypes.array,
   }),
   fetchMovieComments: PropTypes.func.isRequired,
   fetchMovieStats: PropTypes.func.isRequired,
@@ -193,4 +170,6 @@ const mapStateToProps = state => ({
   stats: state.movieStats,
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MoviePage));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MoviePage)
+);
