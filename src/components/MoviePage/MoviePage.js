@@ -65,7 +65,7 @@ class MoviePage extends PureComponent {
     } = this.props;
 
     return (
-      <div className='d-flex border-0 justify-content-center'>
+      <div className='d-flex border-0 justify-content-center' style={{ flex: '1 1'}}>
         <div className='bg-light2 inner-container-movie mt-4'>
           {/* Left Column */}
           <div className='left-col bg-white pb-3 pb-md-0'>

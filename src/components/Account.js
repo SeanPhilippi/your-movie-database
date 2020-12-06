@@ -14,7 +14,7 @@ class Account extends PureComponent {
 
   render() {
     return (
-      <div className='d-flex border-0 justify-content-center'>
+      <div className='d-flex border-0 justify-content-center w-100' style={{ flex: '1 1' }}>
         <Col className='inner-container'>
           <Col className='bg-white pt-2'>
             <CardWrapper
