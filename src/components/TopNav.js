@@ -138,8 +138,12 @@ class TopNav extends PureComponent {
 
 TopNav.propTypes = {
   user: PropTypes.shape({
-    username: PropTypes.string,
-  }),
+    email: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    statement: PropTypes.string,
+    items: PropTypes.array,
+  }).isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired,
 };

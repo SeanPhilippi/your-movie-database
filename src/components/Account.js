@@ -39,6 +39,13 @@ class Account extends PureComponent {
 
 Account.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    statement: PropTypes.string,
+    items: PropTypes.array,
+  }),
 };
 
 const mapStateToProps = state => ({

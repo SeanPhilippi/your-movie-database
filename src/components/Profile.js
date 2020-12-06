@@ -147,10 +147,12 @@ class Profile extends PureComponent {
 
 Profile.propTypes = {
   user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-  }).isRequired,
+    statement: PropTypes.string,
+    items: PropTypes.array,
+  }),
   username: PropTypes.string,
   items: PropTypes.array,
   statement: PropTypes.string,

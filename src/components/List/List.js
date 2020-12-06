@@ -45,8 +45,12 @@ const List = withLoading(
 
 List.propTypes = {
   user: PropTypes.shape({
-    username: PropTypes.string,
-  }),
+    email: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    statement: PropTypes.string,
+    items: PropTypes.array,
+  }).isRequired,
   username: PropTypes.string,
   items: PropTypes.array,
   isEditing: PropTypes.bool.isRequired,

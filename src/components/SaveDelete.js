@@ -102,8 +102,11 @@ SaveDelete.propTypes = {
   setEditing: PropTypes.func.isRequired,
   setListData: PropTypes.func.isRequired,
   user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
-    items: PropTypes.array.isRequired,
+    statement: PropTypes.string,
+    items: PropTypes.array,
   }).isRequired,
   statement: PropTypes.string.isRequired,
   isEditing: PropTypes.bool.isRequired,
