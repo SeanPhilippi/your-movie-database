@@ -11,6 +11,7 @@ import './styles/styles.scss';
 import './index.css';
 import './utils/fontAwesome';
 import WebFont from 'webfontloader';
+import Root from './Root';
 
 WebFont.load({
   google: {
@@ -25,10 +26,8 @@ dotenv.config();
 setJwtToken();
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>,
+  <Root>
+    <App />
+  </Root>,
   document.getElementById('root')
 );

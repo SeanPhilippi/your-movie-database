@@ -4,7 +4,6 @@ module.exports = {
   rules: {
     'arrow-parens': ['error', 'as-needed'],
     'no-return-assign': 'off',
-    'no-underscore-dangle': ['error', { allow: ['_id'] }],
     'import/newline-after-import': 'off',
     'comma-dangle': 'off',
     'eol-last': ['error', 'never'],
