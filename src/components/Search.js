@@ -21,6 +21,7 @@ class Search extends PureComponent {
       year: movie.Year,
       id: movie.imdbID,
     };
+
     addToList(remappedMovie).then(added => {
       if (added && this.focusInput.current) {
         this.focusInput.current.focus();

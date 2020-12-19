@@ -19,6 +19,8 @@
     "bootstrap": "^4.5.3",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
     "eslint-config-prettier": "^6.15.0",
     "express": "^4.16.4",
     "geoip-lite": "^1.4.2",
@@ -55,7 +57,7 @@
     "both": "concurrently --kill-others \"react-scripts start\" \"nodemon server/server.js\"",
     "server": "nodemon server/server.js",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test src/__tests__",
     "eject": "react-scripts eject",
     "postinstall": "npm run build",
     "deploy": "git push heroku master && heroku open"
