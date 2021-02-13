@@ -12,7 +12,7 @@ module.exports = {
     'consistent-return': 'off',
     'react/jsx-filename-extension': [0],
     'import/extensions': 'off',
-    'template-curly-spacing': ['error', 'always'],
+    // 'template-curly-spacing': ['error', 'always'],
     'no-plusplus': 'off',
   },
 };
