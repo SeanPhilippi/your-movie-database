@@ -2,7 +2,7 @@ import React from 'react';
 
 const UnderConstruction = () => {
   return (
-    <div className='d-flex justify-content-center'>
+    <div className='d-flex w-100 align-items-center' style={{ flex: 1 }}>
       <div className='under-construction'></div>
     </div>
   );
