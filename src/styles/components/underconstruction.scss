@@ -2,7 +2,14 @@
   background-image: url('../images/under-construction.png');
   background-size: 100%;
   background-position: center;
-  width: 60rem;
+  width: 100%;
   height: 50rem;
   background-repeat: no-repeat;
+  margin-bottom: 10%;
+}
+
+@media (max-width: 576px) {
+  .under-construction {
+    background-size: 170%;
+  }
 }
