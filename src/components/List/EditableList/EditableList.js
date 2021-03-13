@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { sortableContainer } from 'react-sortable-hoc';
 import SortableItem from './SortableItem';
 import { orderList, deleteMovie } from '../../../redux/actions';
 
-class EditableList extends Component {
+class EditableList extends PureComponent {
   render() {
     const { items, orderList, deleteMovie } = this.props;
 

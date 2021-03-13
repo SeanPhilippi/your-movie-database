@@ -11,7 +11,6 @@ import { fetchNewUsers } from '../redux/actions';
 
 class Home extends PureComponent {
   componentDidMount() {
-    console.log('home mounting');
     const { fetchNewUsers } = this.props;
     fetchNewUsers();
   }
@@ -74,7 +73,7 @@ class Home extends PureComponent {
               title='spotlight on a user'
               color='white'
               link='new-registers'
-              marginTopVal={this.props.isAuthenticated ? '0' : null}
+              marginTopVal={this.props.isAuthenticated && '0'}
             >
               <NewRegistersBox num={10} />
             </CardWrapper>

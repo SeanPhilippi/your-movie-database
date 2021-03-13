@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-export default class Footer extends Component {
-  render() {
-    return (
+const Footer = () => (
       <footer className='bg-dark-orange py-1 pl-4'>Sean Philippi © 2019</footer>
-    );
-  }
-}
+);
+
+export default Footer;
