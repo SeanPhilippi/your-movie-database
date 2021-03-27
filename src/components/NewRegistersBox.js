@@ -39,7 +39,7 @@ const NewRegistersBox = ({ newUsers, num, user, registerPage }) => (
               );
             })}
         </div>
-        {!this.props.registerPage && (
+        {!registerPage && (
           <div>
             <hr />
             <span>

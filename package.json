@@ -11,6 +11,10 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.13",
+    "@types/jest": "^26.0.22",
+    "@types/node": "^14.14.37",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
     "array-move": "^2.2.2",
     "axios": "^0.19.2",
     "bcrypt-nodejs": "0.0.3",
@@ -69,8 +73,9 @@
   "proxy": "http://localhost:4300",
   "heroku-run-build-script": true,
   "devDependencies": {
-    "browserify-css": "^0.12.1",
+    "browserify-css": "^0.12.0",
     "jquery": "^1.12.4",
-    "typescript": "^3.9.7"
+    "popper.js": "^1.16.1",
+    "typescript": "^3.9.9"
   }
 }

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'reactstrap';
 import CardWrapper from './HOCs/CardWrapper';
@@ -6,34 +6,32 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions';
 
-class Account extends PureComponent {
-  handleLogout = e => {
+const Account = ({ history, user, logoutUser }) => {
+  const handleLogout = e => {
     e.preventDefault();
-    this.props.logoutUser(this.props.history);
+    logoutUser(history);
   };
 
-  render() {
-    return (
-      <div className='d-flex border-0 justify-content-center w-100' style={{ flex: '1 1' }}>
-        <Col className='inner-container'>
-          <Col className='bg-white pt-2'>
-            <CardWrapper
-              icon={['far', 'user-circle']}
-              title='my account'
-              color='tan'
-            >
-              <div className='d-flex justify-content-between'>
-                <p>You are logged in as {this.props.user.username}</p>
-                <button className='log-out-btn' onClick={this.handleLogout}>
-                  Log out
-                </button>
-              </div>
-            </CardWrapper>
-          </Col>
+  return (
+    <div className='d-flex border-0 justify-content-center w-100' style={{ flex: '1 1' }}>
+      <Col className='inner-container'>
+        <Col className='bg-white pt-2'>
+          <CardWrapper
+            icon={['far', 'user-circle']}
+            title='my account'
+            color='tan'
+          >
+            <div className='d-flex justify-content-between'>
+              <p>You are logged in as {user.username}</p>
+              <button className='log-out-btn' onClick={handleLogout}>
+                Log out
+              </button>
+            </div>
+          </CardWrapper>
         </Col>
-      </div>
-    );
-  }
+      </Col>
+    </div>
+  );
 }
 
 Account.propTypes = {

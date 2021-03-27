@@ -5,7 +5,7 @@ import Search from './Search';
 import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-const UsersIndex = ({ users }) => {
+const UsersIndex = ({ users }) => (
   <div className='d-flex border-0 justify-content-center'>
     <div className='inner-container mx-4'>
       <Col className='bg-white pt-2'>
