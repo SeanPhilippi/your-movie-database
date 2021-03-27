@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -8,18 +8,20 @@ import { Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { logoutUser } from '../redux/actions';
 
-class TopNav extends PureComponent {
-  handleLogout = e => {
+const TopNav = ({
+  history,
+  logoutUser,
+  isAuthenticated,
+  user: {
+    username,
+  },
+}) => {
+  const handleLogout = e => {
     e.preventDefault();
-    this.props.logoutUser(this.props.history);
+    logoutUser(history);
   };
 
-  yourTopListActive = () => {
-    const {
-      history,
-      isAuthenticated,
-      user: { username },
-    } = this.props;
+  const yourTopListActive = () => {
     const path = history.location.pathname;
     return (
       isAuthenticated &&
@@ -27,113 +29,104 @@ class TopNav extends PureComponent {
     );
   };
 
-  render() {
-    const {
-      isAuthenticated,
-      user: { username },
-      update,
-    } = this.props;
+  const authLinks = (
+    <Nav className='login-register-links p-0'>
+      <NavLink
+        className='text-white font-weight-bold'
+        to='/account'
+        activeClassName='active'
+      >
+        <FontAwesomeIcon icon={['far', 'user']} /> {username}
+      </NavLink>
+      <NavLink onClick={handleLogout} className='text-white mx-2' to='/'>
+        | {'\u00a0'}
+        <FontAwesomeIcon icon='sign-out-alt' /> LOGOUT
+      </NavLink>
+    </Nav>
+  );
 
-    const authLinks = (
-      <Nav className='login-register-links p-0'>
-        <NavLink
-          className='text-white font-weight-bold'
-          to='/account'
-          activeClassName='active'
-        >
-          <FontAwesomeIcon icon={['far', 'user']} /> {username}
+  const guestLinks = (
+    <Nav className='login-register-links text-white'>
+      <NavLink
+        className='text-white mx-2'
+        to='/register'
+        activeClassName='active'
+      >
+        REGISTER
+      </NavLink>
+      {' | '}
+      <NavLink className='text-white mx-2' to='/login'>
+        LOGIN
+      </NavLink>
+    </Nav>
+  );
+
+  return (
+    <Navbar className='navbar'>
+      {/****** Logo *****/}
+      <Navbar.Brand className='brand'>
+        <NavLink style={{ textDecoration: 'none' }} to='/'>
+          <div className='site-title m-0 p-0 ml-4'>YMDB</div>
+          <div className='subtitle m-0 p-0 ml-4'>Your Movie Database</div>
         </NavLink>
-        <NavLink onClick={this.handleLogout} className='text-white mx-2' to='/'>
-          | {'\u00a0'}
-          <FontAwesomeIcon icon='sign-out-alt' /> LOGOUT
-        </NavLink>
-      </Nav>
-    );
+      </Navbar.Brand>
+      {/****** End Logo *****/}
+      <Navbar.Toggle aria-controls='basic-navbar-nav' />
+      <Navbar.Collapse id='basic-navbar-nav'>
+        <Nav className='d-flex flex-column ml-auto'>
+          <div className='ml-auto'>
+            {isAuthenticated ? authLinks : guestLinks}
+          </div>
 
-    const guestLinks = (
-      <Nav className='login-register-links text-white'>
-        <NavLink
-          className='text-white mx-2'
-          to='/register'
-          activeClassName='active'
-        >
-          REGISTER
-        </NavLink>
-        {' | '}
-        <NavLink className='text-white mx-2' to='/login'>
-          LOGIN
-        </NavLink>
-      </Nav>
-    );
-
-    return (
-      <Navbar className='navbar'>
-        {update && this.showStatus()}
-        {/****** Logo *****/}
-        <Navbar.Brand className='brand'>
-          <NavLink style={{ textDecoration: 'none' }} to='/'>
-            <div className='site-title m-0 p-0 ml-4'>YMDB</div>
-            <div className='subtitle m-0 p-0 ml-4'>Your Movie Database</div>
-          </NavLink>
-        </Navbar.Brand>
-        {/****** End Logo *****/}
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='d-flex flex-column ml-auto'>
-            <div className='ml-auto'>
-              {isAuthenticated ? authLinks : guestLinks}
-            </div>
-
-            <div className='main-links d-flex flex-sm-row flex-column justify-content-end'>
-              <NavLink
-                className='text-white nav-block'
-                exact
-                to='/'
-                activeClassName='active'
-              >
-                HOME
-              </NavLink>
-
-              <NavLink
-                className='text-white nav-block'
-                exact
-                to='/top-movies'
-                activeClassName='active'
-              >
-                TOP MOVIES
-              </NavLink>
-
-              <NavLink
-                className='text-white nav-block'
-                to={isAuthenticated ? '/profile' : '/login'}
-                isActive={this.yourTopListActive}
-              >
-                YOUR TOP LIST
-              </NavLink>
-
-              {/* <NavLink
-              className="text-white nav-block"
+          <div className='main-links d-flex flex-sm-row flex-column justify-content-end'>
+            <NavLink
+              className='text-white nav-block'
               exact
-              to="/users-index"
-              activeClassName="active"
+              to='/'
+              activeClassName='active'
             >
-              USERS' INDEX
-            </NavLink> */}
+              HOME
+            </NavLink>
 
-              {/* <NavLink
-              className="text-white nav-block"
+            <NavLink
+              className='text-white nav-block'
               exact
-              to="/all-movies"
-              activeClassName="active"
+              to='/top-movies'
+              activeClassName='active'
             >
-              ALL THE MOVIES
-            </NavLink> */}
-            </div>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    );
-  }
+              TOP MOVIES
+            </NavLink>
+
+            <NavLink
+              className='text-white nav-block'
+              to={isAuthenticated ? '/profile' : '/login'}
+              isActive={yourTopListActive}
+            >
+              YOUR TOP LIST
+            </NavLink>
+
+            {/* <NavLink
+            className="text-white nav-block"
+            exact
+            to="/users-index"
+            activeClassName="active"
+          >
+            USERS' INDEX
+          </NavLink> */}
+
+            {/* <NavLink
+            className="text-white nav-block"
+            exact
+            to="/all-movies"
+            activeClassName="active"
+          >
+            ALL THE MOVIES
+          </NavLink> */}
+          </div>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
 }
 
 TopNav.propTypes = {

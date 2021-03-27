@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 const Footer = () => (
-      <footer className='bg-dark-orange py-1 pl-4'>Sean Philippi © 2019</footer>
+  <footer className='bg-dark-orange py-1 pl-4'>Sean Philippi © 2019</footer>
 );
 
 export default Footer;
