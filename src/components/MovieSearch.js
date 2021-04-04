@@ -69,9 +69,9 @@ class MovieSearch extends PureComponent {
                 searchResults: [...data.Search, ...prevState.searchResults],
               }));
             } else {
-              this.setState(() => ({
+              this.setState({
                 searchResults: [data],
-              }));
+              });
             }
           }
         })
@@ -121,13 +121,17 @@ class MovieSearch extends PureComponent {
     if (searchResults) {
       return (
         <div className='bg-white movie-result-scroll'>
-          {searchResults.map(movie => (
-            <SearchResult
-              movie={movie}
-              handleRedirect={this.handleRedirect}
-              key={movie.id}
-            />
-          ))}
+          {searchResults.map(movie => {
+            if (!JSON.stringify(movie).includes('Movie not found')) {
+              return (
+                <SearchResult
+                  movie={movie}
+                  handleRedirect={this.handleRedirect}
+                  key={movie.id}
+                />
+              )
+            }
+          })}
         </div>
       );
     }
