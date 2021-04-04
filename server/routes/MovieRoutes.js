@@ -9,10 +9,10 @@ const {
   getTopMovies,
 } = moviesController;
 
-// @route   GET api/movies/search/:query/:num
+// @route   GET api/movies/search/:searchType/:query/:num
 // @desc    get search results
 // @access  Public
-router.get('/search/:query/:num', getSearchResults);
+router.get('/search/:searchType/:query/:num', getSearchResults);
 
 // @route   GET api/movies/id/:id
 // @desc    fetch movie details by imdb id

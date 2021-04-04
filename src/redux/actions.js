@@ -299,7 +299,6 @@ export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
 
 export const fetchTopMoviesList = () => dispatch => {
   api.movies.get.topMoviesList().then(({ data }) => {
-    console.log('setting new top movies');
     // filter movies without points
     const filteredMovies = data.filter(movie => movie.points);
     dispatch(setTopMoviesList(filteredMovies));

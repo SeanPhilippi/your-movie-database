@@ -14,6 +14,7 @@ class Search extends PureComponent {
   };
 
   focusInput = createRef();
+
   handleAdd = movie => {
     const { addToList } = this.props;
     const remappedMovie = {
@@ -21,6 +22,7 @@ class Search extends PureComponent {
       year: movie.Year,
       id: movie.imdbID,
     };
+
     addToList(remappedMovie).then(added => {
       if (added && this.focusInput.current) {
         this.focusInput.current.focus();
@@ -33,6 +35,7 @@ class Search extends PureComponent {
   renderResults = () => {
     const { searchResults } = this.state;
     const { users } = this.props;
+
     if (searchResults) {
       return users ? (
         <div className='bg-white result-scroll'>
@@ -64,6 +67,8 @@ class Search extends PureComponent {
     }
   };
 
+  handleDelay = debounce(this.handleSearch, 300);
+
   handleSearch = () => {
     this.clearResults();
     const pageNums = [1, 2, 3];
@@ -80,8 +85,6 @@ class Search extends PureComponent {
         .catch(console.log);
     });
   };
-
-  handleDelay = debounce(this.handleSearch, 300);
 
   handleFocus = (bool, time = 0) => {
     setTimeout(() => {

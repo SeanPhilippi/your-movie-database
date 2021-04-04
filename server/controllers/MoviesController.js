@@ -3,8 +3,8 @@ const Movie = require('../models/MovieModel');
 
 exports.getSearchResults = ({ params }, res) => {
   const apiKey = process.env.API_KEY;
-  const { query, num } = params;
-  fetch(`http://www.omdbapi.com?s=${query.trim()}&apikey=${apiKey}&page=${num}`)
+  const { query, num, searchType } = params;
+  fetch(`http://www.omdbapi.com?${searchType}=${query.trim()}&apikey=${apiKey}&page=${num}`)
     .then(res => res.json())
     .then(data => res.status(200).json(data))
     .catch(() =>

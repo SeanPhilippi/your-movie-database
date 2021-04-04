@@ -14,15 +14,21 @@ import debounce from '../utils/helpers/debounce.js';
 class MovieSearch extends PureComponent {
   state = {
     searchText: '',
+    searchType: 'substring',
     searchResults: [],
     allowResults: true,
     inputColorChange: false,
   };
 
-  onTextChange = e => {
-    this.setState({ searchText: e.target.value });
+  onTextChange = async e => {
+    await this.setState({ searchText: e.target.value });
     // ! temp solution, prob not ideal, look up best practices
-    if (this.state.searchText && this.state.searchText.length > 1) {
+    if (this.state.searchText && this.state.searchText.length) {
+      if (this.state.searchText.length > 2) {
+        await this.setState({ searchType: 'substring' });
+      } else {
+        await this.setState({ searchType: 'exact' });
+      }
       // fire handle search through debounce function to reduce api calls with delay
       this.handleDelay();
     }
@@ -44,21 +50,29 @@ class MovieSearch extends PureComponent {
   onKeyUp = e => {
     if (e.key === 'Backspace') {
       this.clearResults();
-      this.handleDelay();
+      if (this.state.searchText.length) {
+        this.handleDelay();
+      }
     }
   };
 
   handleSearch = () => {
     this.clearResults();
     const pageNums = [1, 2, 3];
-    const { searchText } = this.state;
+    const { searchText, searchType } = this.state;
     pageNums.forEach(num => {
-      axios(`/api/movies/search/${searchText}/${num}`)
+      axios(`/api/movies/search/${searchType === 'exact' ? 't' : 's'}/${searchText}/${num}`)
         .then(({ data }) => {
-          if (data.Search) {
-            this.setState(prevState => ({
-              searchResults: [...data.Search, ...prevState.searchResults],
-            }));
+          if (data) {
+            if (data.Search) {
+              this.setState(prevState => ({
+                searchResults: [...data.Search, ...prevState.searchResults],
+              }));
+            } else {
+              this.setState(() => ({
+                searchResults: [data],
+              }));
+            }
           }
         })
         .catch(console.log);
@@ -83,18 +97,22 @@ class MovieSearch extends PureComponent {
       fetchMovieComments,
       fetchMovieStats,
     } = this.props;
+
     const remappedMovie = {
       title: movie.Title,
       year: movie.Year,
       id: movie.imdbID,
     };
+
     fetchMovie(movie.imdbID);
     fetchMovieComments(movie.imdbID);
     fetchMovieStats(remappedMovie, false);
+
     history.push(
       `/movies/${movie.Title.split(' ').concat([movie.Year]).join('-')}`,
       { movie: remappedMovie }
     );
+
     this.clear();
   };
 
