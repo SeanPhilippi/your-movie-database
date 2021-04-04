@@ -26,10 +26,6 @@ const MovieSchema = new Schema({
     type: Number,
     required: true,
   },
-  numberOFLists: {
-    type: Number,
-    required: true,
-  },
   overallRanking: {
     type: Number,
     required: true,

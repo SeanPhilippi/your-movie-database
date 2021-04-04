@@ -1,5 +1,5 @@
-import React, { MouseEvent, MouseEventHandler, FunctionalComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { MouseEvent, SyntheticEvent, MouseEventHandler, FC } from 'react';
+// import PropTypes from 'prop-types';
 import { connect, ConnectedProps } from 'react-redux';
 import { bindActionCreators, AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk'
@@ -9,28 +9,28 @@ import { Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { logoutUser } from '../redux/actions';
+import { ReduxState } from '../redux/reducers.js';
 
-interface Props {
-  history: RouteComponentProps;
-  logoutUser: (e: MouseEvent) => History;
+interface Props extends RouteComponentProps<any> {
+  logoutUser: (history: History) => void;
   isAuthenticated: boolean;
   user: {
     username: string;
   }
 }
 
-interface StateProps {
-  isAuthenticated: boolean;
-  user: {
-    username: string;
-  }
-}
+// interface StateProps {
+//   isAuthenticated: boolean;
+//   user: {
+//     username: string;
+//   }
+// }
 
-interface DispatchProps {
-  logoutUser: (history: History) => () => History,
-}
+// interface DispatchProps {
+//   logoutUser: (history: History) => () => History,
+// }
 
-const TopNav: FunctionalComponent = ({
+const TopNav: FC<Props> = ({
   history,
   logoutUser,
   isAuthenticated,
@@ -38,7 +38,7 @@ const TopNav: FunctionalComponent = ({
     username,
   },
 }: Props) => {
-  const handleLogout = e => {
+  const handleLogout = (e: SyntheticEvent) => {
     e.preventDefault();
     logoutUser(history);
   };
@@ -151,27 +151,30 @@ const TopNav: FunctionalComponent = ({
   );
 }
 
-TopNav.propTypes = {
-  user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    statement: PropTypes.string,
-    items: PropTypes.array,
-  }).isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  logoutUser: PropTypes.func.isRequired,
-};
+// TopNav.propTypes = {
+//   user: PropTypes.shape({
+//     email: PropTypes.string.isRequired,
+//     id: PropTypes.string.isRequired,
+//     username: PropTypes.string.isRequired,
+//     statement: PropTypes.string,
+//     items: PropTypes.array,
+//   }).isRequired,
+//   isAuthenticated: PropTypes.bool.isRequired,
+//   logoutUser: PropTypes.func.isRequired,
+// };
 
-const mapStateToProps = (state: StateProps) => ({
+const mapStateToProps = (state: ReduxState) => ({
   isAuthenticated: state.isAuthenticated,
   user: state.user,
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
-    logoutUser => dispatch(logoutUser(history: History)),
+    logoutUser: (history: History) => dispatch(logoutUser(history)),
   }
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TopNav));
+
+// Pick, except
+// Pick<Todo, "title" | "completed">;
