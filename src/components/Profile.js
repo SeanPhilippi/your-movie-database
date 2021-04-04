@@ -19,26 +19,6 @@ import {
 const CommentsWithLoading = withLoading(Comments);
 
 class Profile extends PureComponent {
-  fetchData = () => {
-    console.log('fetching data in Profile');
-    const {
-      fetchListData,
-      fetchComments,
-      user,
-      history: {
-        location: { pathname },
-      },
-    } = this.props;
-    const { username } = this.props.match.params;
-    if (pathname === '/profile') {
-      fetchListData(user.username, true);
-      fetchComments(user.username);
-    } else {
-      fetchListData(username, false);
-      fetchComments(username);
-    }
-  };
-
   componentDidMount() {
     this.fetchData();
   }
@@ -49,6 +29,26 @@ class Profile extends PureComponent {
       this.fetchData();
     }
   }
+
+  fetchData = () => {
+    const {
+      fetchListData,
+      fetchComments,
+      user,
+      history: {
+        location: { pathname },
+      },
+    } = this.props;
+    const { username } = this.props.match.params;
+
+    if (pathname === '/profile') {
+      fetchListData(user.username, true);
+      fetchComments(user.username);
+    } else {
+      fetchListData(username, false);
+      fetchComments(username);
+    }
+  };
 
   render() {
     const {

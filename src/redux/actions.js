@@ -427,7 +427,6 @@ export const fetchMovieStats = (movie, update) => async (
     api.list.get
       .rankings(movie.id)
       .then(({ data: { results, averageRanking, points } }) => {
-        console.log('points', points);
         dispatch(
           setMovieStats({
             voters: results.reverse(),
@@ -437,7 +436,6 @@ export const fetchMovieStats = (movie, update) => async (
           })
         );
         if (update) {
-          console.log('points in update', points);
           const { id, title, year, director } = movie;
           dispatch(
             updateMovie({
@@ -580,7 +578,6 @@ export const deleteList = movie => dispatch => {
 };
 
 export const updateMovie = movie => dispatch => {
-  console.log('movie updating');
   api.movies.put.movie(movie.id, movie).then(() => {
     dispatch(fetchTopMoviesList());
   });

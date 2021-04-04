@@ -15,7 +15,7 @@ const CardWrapper = ({
   marginTopValMobile,
 }) => (
   <div
-    className={`card-wrapper mb-3 shadow bg-${color} mt-sm-${marginTopVal} mt-${marginTopValMobile}`}
+    className={`card-wrapper mb-3 shadow bg-${color} mt-sm-${marginTopVal || 0} mt-${marginTopValMobile}`}
   >
     <div className='wrapper-header d-flex align-items-center'>
       {!(title === 'spotlight on a user') ? (

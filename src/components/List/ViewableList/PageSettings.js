@@ -26,7 +26,7 @@ const PageSettings = ({
     </div>
     <div className='d-flex justify-content-end'>
       {pages.map((page, idx) => (
-        <div className='mr-2'>
+        <div className='mr-2' key={`${page}-${idx}`}>
           <button
             key={idx}
             className={`pages ${page === currentPage && 'active-page'}`}

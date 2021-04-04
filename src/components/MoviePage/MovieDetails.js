@@ -19,61 +19,62 @@ const MovieDetails = withLoading(
       plot,
     },
     handleAdd,
-  }) => (
-    <div className='movie-page d-flex'>
-      <div
-        className='poster'
-        alt={`${title} (${year})`}
-        title={`${title} (${year})`}
-        style={{ backgroundImage: `url(${poster})` }}
-      ></div>
-      {/* <div
-      className="poster-img"
-      style={{ backgroundImage: `url(${ poster })` }}
-    >
-    </div> */}
-      <div>
-        <div className='d-flex justify-content-between'>
-          <div className='title'>{title}</div>
-          <a
-            href={`http://www.imdb.com/title/${imdbId}/`}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <img src={imdbLogo} alt='imdb-link' />
-          </a>
-        </div>
-        <div className='d-flex justify-content-between'>
-          <div className='font-weight-bold'>
-            directed by <span className='director'>{director}</span>
-          </div>
-          <div
-            onClick={() => handleAdd(movie, true)}
-            className='d-flex add-movie'
-          >
-            <p className='mr-1'>Add to your list</p>
-            <img src={plusIcon} className='plus-movie-page' alt='add movie' />
-          </div>
-        </div>
+  }) => {
+    return (
+      <div className='movie-page d-flex'>
+        <div
+          className='poster'
+          alt={`${title} (${year})`}
+          title={`${title} (${year})`}
+          style={{ backgroundImage: `url(${poster})` }}
+        ></div>
+        {/* <div
+        className="poster-img"
+        style={{ backgroundImage: `url(${ poster })` }}
+      >
+      </div> */}
         <div>
-          {country}, {year}
+          <div className='d-flex justify-content-between'>
+            <div className='title'>{title}</div>
+            <a
+              href={`http://www.imdb.com/title/${imdbId}/`}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <img src={imdbLogo} alt='imdb-link' />
+            </a>
+          </div>
+          <div className='d-flex justify-content-between'>
+            <div className='font-weight-bold'>
+              directed by <span className='director'>{director}</span>
+            </div>
+            <div
+              onClick={() => handleAdd(movie, true)}
+              className='d-flex add-movie'
+            >
+              <p className='mr-1'>Add to your list</p>
+              <img src={plusIcon} className='plus-movie-page' alt='add movie' />
+            </div>
+          </div>
+          <div>
+            {country}, {year}
+          </div>
+          <div>{runtime}</div>
+          <div>{plot}</div>
         </div>
-        <div>{runtime}</div>
-        <div>{plot}</div>
       </div>
-    </div>
-  )
-);
+    )
+});
 
 MovieDetails.propTypes = {
   movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    director: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
-    runtime: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    director: PropTypes.string,
+    year: PropTypes.string,
+    country: PropTypes.string,
+    runtime: PropTypes.string,
     imdbId: PropTypes.string,
-    plot: PropTypes.string.isRequired,
+    plot: PropTypes.string,
   }),
   handleAdd: PropTypes.func.isRequired,
 };

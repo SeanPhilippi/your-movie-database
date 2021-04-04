@@ -7,7 +7,7 @@ import withLoading from './HOCs/withLoading';
 const Affinities = withLoading(({ affinities, user }) => (
   <div className='bg-white'>
     {affinities.slice(0, 5).map(match => (
-      <div className='d-flex justify-content-between'>
+      <div className='d-flex justify-content-between' key={JSON.stringify(match)}>
         <div className='bd-light row-height col-10'>
           <Link
             to={`/profile${
