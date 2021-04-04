@@ -6,7 +6,7 @@ import imdbLogo from '../../../images/imdb-logo.gif';
 import plusIcon from '../../../images/plus.png';
 
 const ViewableItem = ({
-  movie: { _id, title, director, year, points, id },
+  movie: { title, director, year, points, id },
   history: {
     location: { pathname },
   },
@@ -16,7 +16,7 @@ const ViewableItem = ({
   maxWidth,
 }) => (
   <div
-    key={_id}
+    key={id}
     className='d-flex bg-white justify-content-between viewable-item'
   >
     <div className='d-flex overflow-hidden'>
@@ -68,7 +68,7 @@ const ViewableItem = ({
 
 ViewableItem.propTypes = {
   movie: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     director: PropTypes.string,
     year: PropTypes.string.isRequired,

@@ -67,25 +67,6 @@ class Search extends PureComponent {
     }
   };
 
-  handleDelay = debounce(this.handleSearch, 300);
-
-  handleSearch = () => {
-    this.clearResults();
-    const pageNums = [1, 2, 3];
-    const { searchText } = this.state;
-    pageNums.forEach(num => {
-      axios(`/api/movies/search/${searchText}/${num}`)
-        .then(({ data }) => {
-          if (data.Search) {
-            this.setState(prevState => ({
-              searchResults: [...data.Search, ...prevState.searchResults],
-            }));
-          }
-        })
-        .catch(console.log);
-    });
-  };
-
   handleFocus = (bool, time = 0) => {
     setTimeout(() => {
       this.setState({ allowResults: bool });
@@ -108,6 +89,25 @@ class Search extends PureComponent {
   clearSearchText = () => {
     this.setState(() => ({ searchText: '' }));
   };
+
+  handleSearch = () => {
+    this.clearResults();
+    const pageNums = [1, 2, 3];
+    const { searchText } = this.state;
+    pageNums.forEach(num => {
+      axios(`/api/movies/search/${'s'}/${searchText}/${num}`)
+        .then(({ data }) => {
+          if (data.Search) {
+            this.setState(prevState => ({
+              searchResults: [...data.Search, ...prevState.searchResults],
+            }));
+          }
+        })
+        .catch(console.log);
+    });
+  };
+
+  handleDelay = debounce(this.handleSearch, 300);
 
   render() {
     const { marginTopVal, users, itemsCount } = this.props;
