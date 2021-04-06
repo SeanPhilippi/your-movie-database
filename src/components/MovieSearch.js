@@ -26,19 +26,6 @@ class MovieSearch extends PureComponent {
     this.handleSearch();
   };
 
-  clearResults = () => {
-    this.setState(() => ({ searchResults: [] }));
-  };
-
-  clearSearchText = () => {
-    this.setState(() => ({ searchText: '' }));
-  };
-
-  clear = () => {
-    this.clearSearchText();
-    this.clearResults();
-  };
-
   handleSearch = debounce(() => {
     const { searchText } = this.state;
     if (searchText.length) {
@@ -71,6 +58,19 @@ class MovieSearch extends PureComponent {
       }
     }
   }, 300);
+
+  clearResults = () => {
+    this.setState(() => ({ searchResults: [] }));
+  };
+
+  clearSearchText = () => {
+    this.setState(() => ({ searchText: '' }));
+  };
+
+  clear = () => {
+    this.clearSearchText();
+    this.clearResults();
+  };
 
   handleFocus = (bool, time = 0) => {
     setTimeout(() => {

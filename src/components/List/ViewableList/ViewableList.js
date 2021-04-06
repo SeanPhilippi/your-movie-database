@@ -89,7 +89,7 @@ class ViewableList extends PureComponent {
         <ViewableItem
           movie={item}
           idx={idx}
-          key={item._id}
+          key={item.id}
           maxWidth='490px'
           handleAdd={this.handleAdd}
         />
