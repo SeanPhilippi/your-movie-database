@@ -10,29 +10,54 @@ import {
   fetchMovieComments,
 } from '../redux/actions';
 import debounce from '../utils/helpers/debounce.js';
+import removeDupes from '../utils/helpers/removeDupes.js';
 
 class MovieSearch extends PureComponent {
   state = {
     searchText: '',
-    searchType: 'substring',
     searchResults: [],
     allowResults: true,
     inputColorChange: false,
   };
 
   onTextChange = async e => {
+    this.clearResults();
     await this.setState({ searchText: e.target.value });
-    // ! temp solution, prob not ideal, look up best practices
-    if (this.state.searchText && this.state.searchText.length) {
-      if (this.state.searchText.length > 2) {
-        await this.setState({ searchType: 'substring' });
-      } else {
-        await this.setState({ searchType: 'exact' });
-      }
-      // fire handle search through debounce function to reduce api calls with delay
-      this.handleDelay();
-    }
+    this.handleSearch();
   };
+
+  handleSearch = debounce(() => {
+    const { searchText } = this.state;
+    if (searchText.length) {
+      if (searchText.length > 2) {
+        const pageNums = [1, 2, 3];
+        pageNums.forEach(num => {
+          // /s/ is substring search, requires query of at least 3 characters
+          axios(`/api/movies/search/s/${searchText}/${num}`)
+            .then(({ data }) => {
+              if (data && data.Search) {
+                const results = removeDupes(data.Search, 'imdbID');
+                this.setState(prevState => ({
+                  searchResults: [...results, ...prevState.searchResults],
+                }));
+              }
+            })
+            .catch(console.log);
+        });
+        // if searchText.length is 1-2
+      } else {
+        // /t/ is exact search, use for queries under 3 characters, so movies like 'Pi' can still get a result
+        // only returns a single result unfortunately, omdb limitation
+        axios(`/api/movies/search/t/${searchText}/1`)
+          .then(({ data }) => {
+            if (data) {
+              this.setState({ searchResults: [data] });
+            }
+          })
+          .catch(console.log);
+      }
+    }
+  }, 300);
 
   clearResults = () => {
     this.setState(() => ({ searchResults: [] }));
@@ -46,40 +71,6 @@ class MovieSearch extends PureComponent {
     this.clearSearchText();
     this.clearResults();
   };
-
-  onKeyUp = e => {
-    if (e.key === 'Backspace') {
-      this.clearResults();
-      if (this.state.searchText.length) {
-        this.handleDelay();
-      }
-    }
-  };
-
-  handleSearch = () => {
-    this.clearResults();
-    const pageNums = [1, 2, 3];
-    const { searchText, searchType } = this.state;
-    pageNums.forEach(num => {
-      axios(`/api/movies/search/${searchType === 'exact' ? 't' : 's'}/${searchText}/${num}`)
-        .then(({ data }) => {
-          if (data) {
-            if (data.Search) {
-              this.setState(prevState => ({
-                searchResults: [...data.Search, ...prevState.searchResults],
-              }));
-            } else {
-              this.setState({
-                searchResults: [data],
-              });
-            }
-          }
-        })
-        .catch(console.log);
-    });
-  };
-
-  handleDelay = debounce(this.handleSearch, 300);
 
   handleFocus = (bool, time = 0) => {
     setTimeout(() => {
@@ -127,7 +118,7 @@ class MovieSearch extends PureComponent {
                 <SearchResult
                   movie={movie}
                   handleRedirect={this.handleRedirect}
-                  key={movie.id}
+                  key={movie.imdbID}
                 />
               )
             }
