@@ -30,6 +30,7 @@ class SaveDelete extends PureComponent {
     setListData(listObj);
     setMessageStatus('Profile Updated');
     setEditing(false);
+
     try {
       await axios.put(`/api/list/save/${username}`, listObj);
     } catch (err) {

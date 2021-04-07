@@ -18,7 +18,7 @@ const initialState = {
   items: [],
   currentPage: 1,
   pages: [1, 2, 3, 4, 5],
-  moviesPerPage: 25,
+  moviesPerPage: 30,
   currentTopMovies: [],
   topMoviesList: [],
   open: false,
