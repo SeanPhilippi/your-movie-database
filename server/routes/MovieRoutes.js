@@ -24,9 +24,9 @@ router.get('/id/:id', getMovieData);
 // @access  Public
 router.get('/top-movies-list', getTopMovies);
 
-// @route   PUT api/movies/update/:id
+// @route   PUT api/movies/update
 // @desc    create or update movie model
 // @access  Public
-router.put('/update/:id', updateMovie);
+router.put('/update', updateMovie);
 
 module.exports = router;

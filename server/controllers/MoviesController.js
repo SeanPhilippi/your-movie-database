@@ -35,7 +35,7 @@ exports.updateMovie = (req, res) => {
     overallRanking,
   } = req.body;
   Movie.updateOne(
-    { id: req.params.id },
+    { id },
     {
       $set: {
         id,

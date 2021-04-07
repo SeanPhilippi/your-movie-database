@@ -576,7 +576,7 @@ export const deleteList = movie => dispatch => {
 };
 
 export const updateMovie = movie => dispatch => {
-  api.movies.put.movie(movie.id, movie).then(() => {
+  api.movies.put.movie(movie).then(() => {
     dispatch(fetchTopMoviesList());
   });
 };

@@ -126,7 +126,7 @@ class Comments extends PureComponent {
               rows='4'
               onChange={this.handleFieldChange}
             ></textarea>
-            <button onClick={this.handleComment} className='send mt-3'>
+            <button onClick={this.handleComment} className='send my-2 ml-auto'>
               Send
             </button>
           </>

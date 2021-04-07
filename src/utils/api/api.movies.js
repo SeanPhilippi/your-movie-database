@@ -6,5 +6,5 @@ export const get = {
 };
 
 export const put = {
-  movie: (movieId, movie) => axios.put(`/api/movies/update/${movieId}`, movie),
+  movie: movie => axios.put(`/api/movies/update`, movie),
 };

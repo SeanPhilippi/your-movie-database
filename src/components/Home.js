@@ -30,7 +30,7 @@ class Home extends PureComponent {
 
   render() {
     const Greeting = ({ addClass }) => (
-      <div className={`${addClass} m-0 row`}>
+      <div className={`${addClass} mx-0 my-2 row`}>
         Welcome to YMDb, Your Movie Database, the movie community where you can
         create your list of favorite movies, discover other people's favorite
         movies, and discuss movies and favorite lists. YMDb is free and fun!
