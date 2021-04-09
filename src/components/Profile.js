@@ -9,11 +9,8 @@ import Affinities from './Affinities';
 import CardWrapper from './HOCs/CardWrapper';
 import withLoading from './HOCs/withLoading';
 import {
-  setListDataLoading,
-  setCommentsLoading,
   fetchComments,
   fetchListData,
-  setEditing,
 } from '../redux/actions';
 
 const CommentsWithLoading = withLoading(Comments);
@@ -162,17 +159,11 @@ Profile.propTypes = {
   listDataLoading: PropTypes.bool.isRequired,
   commentsLoading: PropTypes.bool.isRequired,
   affinitiesLoading: PropTypes.bool.isRequired,
-  setEditing: PropTypes.func.isRequired,
-  setListDataLoading: PropTypes.func.isRequired,
-  setCommentsLoading: PropTypes.func.isRequired,
   fetchComments: PropTypes.func.isRequired,
   fetchListData: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  setEditing: bool => dispatch(setEditing(bool)),
-  setListDataLoading: bool => dispatch(setListDataLoading(bool)),
-  setCommentsLoading: bool => dispatch(setCommentsLoading(bool)),
   fetchComments: user => dispatch(fetchComments(user)),
   fetchListData: username => dispatch(fetchListData(username)),
 });

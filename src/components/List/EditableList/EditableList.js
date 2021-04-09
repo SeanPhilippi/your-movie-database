@@ -29,7 +29,7 @@ class EditableList extends PureComponent {
     return (
       <div className='list-container'>
         <SortableList
-          helperClass='sortableHelper'
+          helperClass='sortable-helper'
           items={items}
           useDragHandle
           onSortEnd={orderList}
@@ -47,8 +47,8 @@ EditableList.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  orderList: ({ oldIndex, newIndex, movies }) =>
-    dispatch(orderList(oldIndex, newIndex, movies)),
+  orderList: ({ oldIndex, newIndex }) =>
+    dispatch(orderList(oldIndex, newIndex)),
   deleteMovie: movie => dispatch(deleteMovie(movie)),
 });
 

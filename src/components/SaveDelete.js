@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import { connect } from 'react-redux';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -13,13 +12,12 @@ import {
 } from '../redux/actions';
 
 class SaveDelete extends PureComponent {
-  handleUpdate = async () => {
+  handleUpdate = () => {
     const {
       setMessageStatus,
       setEditing,
       setListData,
       user: { username, statement, items },
-      history,
     } = this.props;
 
     const listObj = {
@@ -32,11 +30,10 @@ class SaveDelete extends PureComponent {
     setEditing(false);
 
     try {
-      await axios.put(`/api/list/save/${username}`, listObj);
+      axios.put(`/api/list/save/${username}`, listObj);
     } catch (err) {
       console.error(err);
     }
-    history.push('/profile');
   };
 
   alertOptions = {
@@ -126,6 +123,4 @@ const mapDispatchToProps = dispatch => ({
   setListData: listData => dispatch(setListData(listData)),
 });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SaveDelete)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);

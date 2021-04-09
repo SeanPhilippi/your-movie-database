@@ -133,7 +133,7 @@ export const setMoviesPerPage = num => ({
   payload: num,
 });
 
-//thunk actions
+// thunk actions
 
 export const setMessageStatus = message => dispatch => {
   dispatch({
@@ -278,7 +278,7 @@ export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
       if (username === authUser) {
         dispatch(
           setAuthListData({
-            username: username,
+            username,
             statement: '',
             items: [],
           })
@@ -286,7 +286,7 @@ export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
       } else {
         dispatch(
           setListData({
-            username: username,
+            username,
             statement: '',
             items: [],
           })
