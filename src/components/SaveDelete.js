@@ -8,15 +8,13 @@ import {
   deleteList,
   setMessageStatus,
   setEditing,
-  setListData,
 } from '../redux/actions';
 
 class SaveDelete extends PureComponent {
-  handleUpdate = () => {
+  handleUpdate = async () => {
     const {
       setMessageStatus,
       setEditing,
-      setListData,
       user: { username, statement, items },
     } = this.props;
 
@@ -25,13 +23,14 @@ class SaveDelete extends PureComponent {
       items,
       statement,
     };
-    setListData(listObj);
-    setMessageStatus('Profile Updated');
-    setEditing(false);
 
     try {
-      axios.put(`/api/list/save/${username}`, listObj);
+      await axios.put(`/api/list/save/${username}`, listObj);
+      setMessageStatus('Profile Updated');
+      setEditing(false);
+      // ! update site statistics here, update topMoviesList and currentTopMoviesList
     } catch (err) {
+      setMessageStatus('There was an error saving your profile');
       console.error(err);
     }
   };
@@ -98,7 +97,6 @@ SaveDelete.propTypes = {
   deleteList: PropTypes.func.isRequired,
   setMessageStatus: PropTypes.func.isRequired,
   setEditing: PropTypes.func.isRequired,
-  setListData: PropTypes.func.isRequired,
   user: PropTypes.shape({
     email: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
@@ -120,7 +118,6 @@ const mapDispatchToProps = dispatch => ({
   deleteList: () => dispatch(deleteList()),
   setMessageStatus: message => dispatch(setMessageStatus(message)),
   setEditing: bool => dispatch(setEditing(bool)),
-  setListData: listData => dispatch(setListData(listData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);

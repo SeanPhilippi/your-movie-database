@@ -20,12 +20,15 @@ class Profile extends PureComponent {
     this.fetchData();
   }
 
-  componentDidUpdate(prevProps) {
-    const { username } = this.props.match.params;
-    if (username !== prevProps.match.params.username) {
-      this.fetchData();
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   console.log('comp update props', this.props.match.params)
+  //   console.log('this.props.match.params', this.props.match.params.username)
+  //   const { username } = this.props.match.params;
+  //   if (username !== prevProps.match.params.username) {
+  //     console.log('fetch update')
+  //     this.fetchData();
+  //   }
+  // }
 
   fetchData = () => {
     const {
@@ -35,8 +38,12 @@ class Profile extends PureComponent {
       history: {
         location: { pathname },
       },
+      match: {
+        params: {
+          username
+        },
+      }
     } = this.props;
-    const { username } = this.props.match.params;
 
     if (pathname === '/profile') {
       fetchListData(user.username, true);
