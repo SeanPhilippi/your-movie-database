@@ -9,11 +9,8 @@ import Affinities from './Affinities';
 import CardWrapper from './HOCs/CardWrapper';
 import withLoading from './HOCs/withLoading';
 import {
-  setListDataLoading,
-  setCommentsLoading,
   fetchComments,
   fetchListData,
-  setEditing,
 } from '../redux/actions';
 
 const CommentsWithLoading = withLoading(Comments);
@@ -23,12 +20,15 @@ class Profile extends PureComponent {
     this.fetchData();
   }
 
-  componentDidUpdate(prevProps) {
-    const { username } = this.props.match.params;
-    if (username !== prevProps.match.params.username) {
-      this.fetchData();
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   console.log('comp update props', this.props.match.params)
+  //   console.log('this.props.match.params', this.props.match.params.username)
+  //   const { username } = this.props.match.params;
+  //   if (username !== prevProps.match.params.username) {
+  //     console.log('fetch update')
+  //     this.fetchData();
+  //   }
+  // }
 
   fetchData = () => {
     const {
@@ -38,8 +38,12 @@ class Profile extends PureComponent {
       history: {
         location: { pathname },
       },
+      match: {
+        params: {
+          username
+        },
+      }
     } = this.props;
-    const { username } = this.props.match.params;
 
     if (pathname === '/profile') {
       fetchListData(user.username, true);
@@ -162,17 +166,11 @@ Profile.propTypes = {
   listDataLoading: PropTypes.bool.isRequired,
   commentsLoading: PropTypes.bool.isRequired,
   affinitiesLoading: PropTypes.bool.isRequired,
-  setEditing: PropTypes.func.isRequired,
-  setListDataLoading: PropTypes.func.isRequired,
-  setCommentsLoading: PropTypes.func.isRequired,
   fetchComments: PropTypes.func.isRequired,
   fetchListData: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  setEditing: bool => dispatch(setEditing(bool)),
-  setListDataLoading: bool => dispatch(setListDataLoading(bool)),
-  setCommentsLoading: bool => dispatch(setCommentsLoading(bool)),
   fetchComments: user => dispatch(fetchComments(user)),
   fetchListData: username => dispatch(fetchListData(username)),
 });

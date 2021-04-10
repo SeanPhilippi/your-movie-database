@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import SearchResult from './SearchResult';
 import { connect } from 'react-redux';
-import { addToList } from '../redux/actions';
+import { addToList, setMessageStatus } from '../redux/actions';
 import debounce from '../utils/helpers/debounce.js';
 import removeDupes from '../utils/helpers/removeDupes.js';
 
@@ -69,7 +69,7 @@ class Search extends PureComponent {
     }, time);
   };
 
-  handleAdd = movie => {
+  handleAdd = async movie => {
     const { addToList } = this.props;
     const remappedMovie = {
       title: movie.Title,
@@ -77,13 +77,12 @@ class Search extends PureComponent {
       id: movie.imdbID,
     };
 
-    addToList(remappedMovie).then(added => {
-      if (added && this.focusInput.current) {
-        this.focusInput.current.focus();
-      }
-      this.clearResults();
-      this.clearSearchText();
-    });
+    const added = await addToList(remappedMovie, false);
+    if (added && this.focusInput.current) {
+      this.focusInput.current.focus();
+    }
+    this.clearResults();
+    this.clearSearchText();
   };
 
   renderResults = () => {

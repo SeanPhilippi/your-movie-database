@@ -80,7 +80,7 @@ class MoviePage extends PureComponent {
                 <MovieDetails
                   isLoading={movieDetailsLoading}
                   movie={movie}
-                  handleAdd={this.handleAdd}
+                  handleAdd={() => this.handleAdd(movie, true)}
                 />
                 <MovieStats isLoading={movieStatsLoading} stats={stats} />
                 {/* Review Box */}

@@ -11,7 +11,11 @@ const initialState = {
     username: '',
     statement: '',
     items: [],
-  }, // object containing email, id, username, statement, items of authenticated user
+  },
+  listOrdering: {
+    oldIndex: null,
+    newIndex: null,
+  },
   authErrors: {},
   username: '',
   statement: '',
@@ -161,15 +165,20 @@ export default (state = initialState, { type, payload }) => {
         },
       };
     case TYPES.REORDER_LIST:
+      const { oldIndex, newIndex } = payload;
       return {
         ...state,
         user: {
           ...state.user,
           items: arrayMove(
             state.user.items,
-            payload.oldIndex,
-            payload.newIndex
+            oldIndex,
+            newIndex
           ),
+        },
+        listOrdering: {
+          oldIndex,
+          newIndex,
         },
       };
     case TYPES.DELETE_MOVIE:
