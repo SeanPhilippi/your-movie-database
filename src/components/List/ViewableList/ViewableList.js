@@ -61,7 +61,7 @@ class ViewableList extends PureComponent {
           idx={idx + moviesPerPage * (currentPage - 1)}
           key={item._id}
           maxWidth='410px'
-          handleAdd={this.handleAdd}
+          handleAdd={() => this.handleAdd(item, true)}
         />
       ));
     };
@@ -75,7 +75,7 @@ class ViewableList extends PureComponent {
             idx={idx}
             key={item._id}
             maxWidth='390px'
-            handleAdd={this.handleAdd}
+            handleAdd={() => this.handleAdd(item, true)}
           />
         ));
     };

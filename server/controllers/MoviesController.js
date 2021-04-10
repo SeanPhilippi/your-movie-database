@@ -30,13 +30,17 @@ exports.getMovieRankings = (req, res) => {
   let averageRanking;
   let points;
 
+  // for movieId, get the ranking info from the database (averageRanking, points, voters)
+  // voters is a list of movie voter objects with id, username, and rank in their list for that movie
   List.aggregate(movieRankingsQuery(movieId))
     .then(data => {
       const voters = data.map(({ _id, username, rank }) => ({
         id: _id,
         username,
+        // 1 is being added to rank because the movieRankingsQuery just assigns the index to rank
         rank: (rank += 1),
       }));
+
       if (voters.length > 1) {
         const rankings = voters.map(result => result.rank);
         // get rounded average of sum of rankings divided by # of rankings
@@ -56,13 +60,13 @@ exports.getMovieRankings = (req, res) => {
         averageRanking = '';
         points = '';
       }
+
       const rankingData = {
         voters,
         averageRanking,
         points,
       };
 
-      console.log('voters', rankingData.voters)
       return res.status(200).json(rankingData);
     })
     .catch(() =>
@@ -71,6 +75,9 @@ exports.getMovieRankings = (req, res) => {
 };
 
 exports.updateMovie = (req, res) => {
+  // ! the movie currently is not being updated with the newest averageRanking, points, voters, overallRanking
+  // they are just being grabbed from redux state, making this method pointless unless a movie is being newly
+  // added?
   const {
     id,
     title,
@@ -99,7 +106,8 @@ exports.updateMovie = (req, res) => {
       upsert: 'true',
     }
   )
-    .then(() => res.sendStatus(200))
+    // ! in progress, data.message is 'OK' on front-end...
+    .then(() => res.status(200).json({ updateMovieMessage: 'Add successful' }))
     .catch(() =>
       res.status(400).json({ updateMovieError: 'Failed to update movie' })
     );

@@ -409,25 +409,87 @@ export const fetchMovie = id => dispatch => {
     .catch(console.log);
 };
 
+// fetchs stats (# of voters, points, overallRanking, averageRanking) from database for a movie or movies
+// and if update === true, do some math to update that movie or movies' stats and save to the database
 export const fetchMovieStats = (movie, update) => async (
   dispatch,
   getState
 ) => {
   const { topMoviesList } = getState();
-  dispatch(setMovieStatsLoading(true));
   // if movie is an object (single movie)
   if (!movie.length) {
+    dispatch(setMovieStatsLoading(true));
     let overallRanking;
-    let movieIdx = topMoviesList.findIndex(item => item.id === movie.id);
+    const movieIdx = topMoviesList.findIndex(item => item.id === movie.id);
     if (movieIdx > -1) {
-      overallRanking = ++movieIdx;
+      overallRanking = movieIdx + 1;
     } else {
       overallRanking = '';
     }
-    api.movies.get
-      .rankings(movie.id)
-      .then(({ data: { voters, averageRanking, points } }) => {
-        dispatch(
+
+    const { data: { voters, averageRanking, points } } = await api.movies.get.rankings(movie.id);
+    dispatch(
+      setMovieStats({
+        voters: voters.reverse(),
+        averageRanking,
+        points,
+        overallRanking,
+      })
+    );
+
+    if (update) {
+      const { id, title, year, director } = movie;
+      dispatch(
+        updateMovie({
+          id,
+          title,
+          year,
+          director,
+          averageRanking,
+          points,
+          voters,
+          overallRanking,
+        })
+      );
+    }
+    dispatch(setMovieStatsLoading(false));
+  }
+  // if multiple movies
+  if (movie.length) {
+    dispatch(setMovieStatsLoading(true));
+    const movies = movie;
+    movies.forEach(async movie => {
+      // get movie's overallRanking by finding index in topMoviesList and adding 1
+      const overallRanking =
+        topMoviesList.findIndex(item => item.id === movie.id) + 1;
+      // for each movie, get the rankings info from the database (averageRanking, points, voters)
+      // voters is a list of movie voter objects with id, username, and rank
+      const { data: { voters, averageRanking, points } } = await api.movies.get.rankings(movie.id);
+
+      if (update) {
+        await dispatch(
+          setMovieStats({
+            voters: voters.reverse(),
+            averageRanking,
+            points,
+          })
+        );
+        // update topMoviesList and determine new overallRanking for movie
+        const { id, title, year, director } = movie;
+        await dispatch(
+          updateMovie({
+            id,
+            title,
+            year,
+            director,
+            averageRanking,
+            points,
+            voters: voters.reverse(),
+            overallRanking,
+          })
+        );
+      } else {
+        await dispatch(
           setMovieStats({
             voters: voters.reverse(),
             averageRanking,
@@ -435,63 +497,9 @@ export const fetchMovieStats = (movie, update) => async (
             overallRanking,
           })
         );
-        if (update) {
-          const { id, title, year, director } = movie;
-          dispatch(
-            updateMovie({
-              id,
-              title,
-              year,
-              director,
-              averageRanking,
-              points,
-              voters,
-              overallRanking,
-            })
-          );
-        }
-      })
-      .then(() => {
-        dispatch(setMovieStatsLoading(false));
-      });
-  }
-  // if multiple movies
-  if (movie.length) {
-    const movies = movie;
-    movies.forEach(movie => {
-      const overallRanking =
-        topMoviesList.findIndex(item => item.id === movie.id) + 1;
-      // for each movie, get the rankings info from the database (averageRanking, points, voters)
-      // voters is a list of movie voter objects with id, username, and rank
-      api.movies.get
-        .rankings(movie.id)
-        .then(({ data: { voters, averageRanking, points } }) => {
-          dispatch(
-            setMovieStats({
-              voters: voters.reverse(),
-              averageRanking,
-              points,
-              overallRanking,
-            })
-          );
-          if (update) {
-            const { id, title, year, director } = movie;
-            dispatch(
-              updateMovie({
-                id,
-                title,
-                year,
-                director,
-                averageRanking,
-                points,
-                voters: voters.reverse(),
-                overallRanking,
-              })
-            );
-          }
-        });
+      }
+      dispatch(setMovieStatsLoading(false));
     });
-    dispatch(setMovieStatsLoading(false));
   }
 };
 
@@ -505,6 +513,7 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
   const listIsFull = list => {
     return list.length > 19;
   };
+
   if (listContainsMovie(items, movie)) {
     dispatch(setMessageStatus('Your list already contains this movie!'));
     return Promise.resolve(false);
@@ -513,6 +522,8 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
     dispatch(setMessageStatus('Your list already has 20 items!'));
     return Promise.resolve(false);
   }
+
+  // imdbId or id because key is imdbId if movie is added from MoviePage, else key is id
   const { data } = await api.movies.get.movie(movie.imdbId || movie.id);
   const movieObj = {
     title: data.Title,
@@ -520,33 +531,38 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
     director: data.Director,
     id: data.imdbID,
   };
+
   await dispatch({
     type: TYPES.ADD_TO_LIST,
     payload: movieObj,
   });
-  const {
-    user: { items: list },
-  } = getState();
+
+  // destructuring items from getState() call again, and renaming to list
+  // since items was destructured higher up in this function but it was
+  // recently updated by the above dispatch of ADD_TO_LIST
+  const { user: { items: list }} = getState();
+
   if (post) {
     const listObj = {
       username,
-      items: [...list],
+      items: list,
       statement,
     };
     api.list.put
       .saveList(username, listObj)
-      .then(res => res.json())
+      .then(res => {
+        console.log('res', res)
+        const successMessage = res.data;
+        console.log('successMessage', successMessage)
+        dispatch(setMessageStatus(successMessage));
+      })
       .catch(console.log);
-    dispatch(setMessageStatus('Add successful!'));
+    dispatch(fetchMovieStats(movieObj, true));
   }
-  dispatch(fetchMovieStats(movieObj, true));
   return true;
 };
 
 export const orderList = (oldIndex, newIndex) => (dispatch, getState) => {
-  const {
-    user: { items },
-  } = getState();
   dispatch({
     type: TYPES.REORDER_LIST,
     payload: {
@@ -554,10 +570,6 @@ export const orderList = (oldIndex, newIndex) => (dispatch, getState) => {
       newIndex,
     },
   });
-  const startIdx = Math.min(oldIndex, newIndex);
-  const endIdx = Math.max(oldIndex, newIndex) + 1;
-  const movies = [...items.slice(startIdx, endIdx)];
-  dispatch(fetchMovieStats(movies, true));
 };
 
 export const deleteMovie = movie => dispatch => {
@@ -567,7 +579,6 @@ export const deleteMovie = movie => dispatch => {
       movie,
     },
   });
-  dispatch(fetchMovieStats(movie, true));
 };
 
 export const deleteList = movie => dispatch => {
@@ -577,6 +588,8 @@ export const deleteList = movie => dispatch => {
   dispatch(fetchMovieStats(movie, true));
 };
 
+// updates a movie's stats, which if successful, requires another fetch and
+// calculation of what the new top movies are
 export const updateMovie = movie => dispatch => {
   api.movies.put.movie(movie).then(() => {
     dispatch(fetchTopMoviesList());

@@ -8,14 +8,19 @@ import {
   deleteList,
   setMessageStatus,
   setEditing,
+  fetchMovieStats,
 } from '../redux/actions';
 
 class SaveDelete extends PureComponent {
+  // ! consider making this a redux action
   handleUpdate = async () => {
     const {
       setMessageStatus,
       setEditing,
+      fetchMovieStats,
       user: { username, statement, items },
+      oldIndex,
+      newIndex,
     } = this.props;
 
     const listObj = {
@@ -28,7 +33,11 @@ class SaveDelete extends PureComponent {
       await axios.put(`/api/list/save/${username}`, listObj);
       setMessageStatus('Profile Updated');
       setEditing(false);
-      // ! update site statistics here, update topMoviesList and currentTopMoviesList
+      // updating any effected movies' rankings, and then updating topMoviesList
+      const startIdx = Math.min(oldIndex, newIndex);
+      const endIdx = Math.max(oldIndex, newIndex) + 1;
+      const movies = items.slice(startIdx, endIdx);
+      fetchMovieStats(movies, true);
     } catch (err) {
       setMessageStatus('There was an error saving your profile');
       console.error(err);
@@ -97,6 +106,7 @@ SaveDelete.propTypes = {
   deleteList: PropTypes.func.isRequired,
   setMessageStatus: PropTypes.func.isRequired,
   setEditing: PropTypes.func.isRequired,
+  fetchMovieStats: PropTypes.func.isRequired,
   user: PropTypes.shape({
     email: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
@@ -112,12 +122,15 @@ const mapStateToProps = state => ({
   user: state.user,
   statement: state.statement,
   isEditing: state.isEditing,
+  newIndex: state.listOrdering.newIndex,
+  oldIndex: state.listOrdering.oldIndex,
 });
 
 const mapDispatchToProps = dispatch => ({
   deleteList: () => dispatch(deleteList()),
   setMessageStatus: message => dispatch(setMessageStatus(message)),
   setEditing: bool => dispatch(setEditing(bool)),
+  fetchMovieStats: (movie, update) => dispatch(fetchMovieStats(movie, update)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveDelete);
