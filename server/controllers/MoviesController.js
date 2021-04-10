@@ -32,36 +32,38 @@ exports.getMovieRankings = (req, res) => {
 
   List.aggregate(movieRankingsQuery(movieId))
     .then(data => {
-      const results = data.map(({ _id, username, rank }) => ({
+      const voters = data.map(({ _id, username, rank }) => ({
         id: _id,
         username,
         rank: (rank += 1),
       }));
-      if (results.length > 1) {
-        const rankings = results.map(result => result.rank);
+      if (voters.length > 1) {
+        const rankings = voters.map(result => result.rank);
         // get rounded average of sum of rankings divided by # of rankings
         averageRanking = Math.round(
-          rankings.reduce((ac, cv) => ac + cv) / results.length
+          rankings.reduce((ac, cv) => ac + cv) / voters.length
         );
         // for each ranking of that movie from the movieRankingsQuery aggregation result, subtract that rank
         // from 21 to determine the points from that particular ranking in a user's list
         const pointsArr = rankings.map(rank => 21 - rank);
         // get the sum of all these points for a total
         points = pointsArr.reduce((ac, cv) => ac + cv);
-      } else if (results.length === 1) {
-        averageRanking = results[0].rank;
-        points = 21 - results[0].rank;
-        // else no results
+      } else if (voters.length === 1) {
+        averageRanking = voters[0].rank;
+        points = 21 - voters[0].rank;
+        // else no voters
       } else {
         averageRanking = '';
         points = '';
       }
-      const result = {
-        results,
+      const rankingData = {
+        voters,
         averageRanking,
         points,
       };
-      return res.status(200).json(result);
+
+      console.log('voters', rankingData.voters)
+      return res.status(200).json(rankingData);
     })
     .catch(() =>
       res.status(400).json({ movieRankingsError: 'Failed to collect rankings' })

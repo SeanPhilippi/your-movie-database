@@ -426,10 +426,10 @@ export const fetchMovieStats = (movie, update) => async (
     }
     api.movies.get
       .rankings(movie.id)
-      .then(({ data: { results, averageRanking, points } }) => {
+      .then(({ data: { voters, averageRanking, points } }) => {
         dispatch(
           setMovieStats({
-            voters: results.reverse(),
+            voters: voters.reverse(),
             averageRanking,
             points,
             overallRanking,
@@ -445,7 +445,7 @@ export const fetchMovieStats = (movie, update) => async (
               director,
               averageRanking,
               points,
-              voters: results,
+              voters,
               overallRanking,
             })
           );
@@ -461,12 +461,14 @@ export const fetchMovieStats = (movie, update) => async (
     movies.forEach(movie => {
       const overallRanking =
         topMoviesList.findIndex(item => item.id === movie.id) + 1;
+      // for each movie, get the rankings info from the database (averageRanking, points, voters)
+      // voters is a list of movie voter objects with id, username, and rank
       api.movies.get
         .rankings(movie.id)
-        .then(({ data: { results, averageRanking, points } }) => {
+        .then(({ data: { voters, averageRanking, points } }) => {
           dispatch(
             setMovieStats({
-              voters: results.reverse(),
+              voters: voters.reverse(),
               averageRanking,
               points,
               overallRanking,
@@ -482,7 +484,7 @@ export const fetchMovieStats = (movie, update) => async (
                 director,
                 averageRanking,
                 points,
-                voters: results.reverse(),
+                voters: voters.reverse(),
                 overallRanking,
               })
             );
