@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const get = {
-  rankings: movieId => axios(`/api/list/rankings/${movieId}`),
   userList: username => axios(`/api/list/${username}/list`),
 };
 

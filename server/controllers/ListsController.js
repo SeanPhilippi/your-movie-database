@@ -1,5 +1,4 @@
 const affinitiesQuery = require('./queries/affinitiesQuery');
-const movieRankingsQuery = require('./queries/movieRankingsQuery');
 const List = require('../models/ListModel');
 
 exports.getListData = (req, res) => {
@@ -39,49 +38,6 @@ exports.deleteList = (req, res) => {
     .then(() => res.sendStatus(200))
     .catch(() =>
       res.status(400).json({ failedToDelete: 'Failed to delete list' })
-    );
-};
-
-exports.getMovieRankings = (req, res) => {
-  const { movieId } = req.params;
-  let averageRanking;
-  let points;
-
-  List.aggregate(movieRankingsQuery(movieId))
-    .then(data => {
-      const results = data.map(({ _id, username, rank }) => ({
-        id: _id,
-        username,
-        rank: (rank += 1),
-      }));
-      if (results.length > 1) {
-        const rankings = results.map(result => result.rank);
-        // get rounded average of sum of rankings divided by # of rankings
-        averageRanking = Math.round(
-          rankings.reduce((ac, cv) => ac + cv) / results.length
-        );
-        // for each ranking of that movie from the movieRankingsQuery aggregation result, subtract that rank
-        // from 21 to determine the points from that particular ranking in a user's list
-        const pointsArr = rankings.map(rank => 21 - rank);
-        // get the sum of all these points for a total
-        points = pointsArr.reduce((ac, cv) => ac + cv);
-      } else if (results.length === 1) {
-        averageRanking = results[0].rank;
-        points = 21 - results[0].rank;
-        // else no results
-      } else {
-        averageRanking = '';
-        points = '';
-      }
-      const result = {
-        results,
-        averageRanking,
-        points,
-      };
-      return res.status(200).json(result);
-    })
-    .catch(() =>
-      res.status(400).json({ movieRankingsError: 'Failed to collect rankings' })
     );
 };
 

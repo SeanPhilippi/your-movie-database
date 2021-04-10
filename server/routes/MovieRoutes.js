@@ -6,6 +6,7 @@ const {
   getSearchResults,
   getMovieData,
   updateMovie,
+  getMovieRankings,
   getTopMovies,
 } = moviesController;
 
@@ -18,6 +19,11 @@ router.get('/search/:searchType/:query/:num', getSearchResults);
 // @desc    fetch movie details by imdb id
 // @access  Public
 router.get('/id/:id', getMovieData);
+
+// @route   GET api/movies/rankings/:movieId
+// @desc    grab user rankings for specific movie
+// @access  Public
+router.get('/rankings/:movieId', getMovieRankings);
 
 // @route   GET api/movies/top-movies-list
 // @desc    get all movies docs sorted by their points

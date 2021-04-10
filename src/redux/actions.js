@@ -424,7 +424,7 @@ export const fetchMovieStats = (movie, update) => async (
     } else {
       overallRanking = '';
     }
-    api.list.get
+    api.movies.get
       .rankings(movie.id)
       .then(({ data: { results, averageRanking, points } }) => {
         dispatch(
@@ -461,7 +461,7 @@ export const fetchMovieStats = (movie, update) => async (
     movies.forEach(movie => {
       const overallRanking =
         topMoviesList.findIndex(item => item.id === movie.id) + 1;
-      api.list.get
+      api.movies.get
         .rankings(movie.id)
         .then(({ data: { results, averageRanking, points } }) => {
           dispatch(

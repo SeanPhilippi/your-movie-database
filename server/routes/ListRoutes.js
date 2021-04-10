@@ -6,7 +6,6 @@ const {
   getListData,
   saveList,
   deleteList,
-  getMovieRankings,
   calcAffinities,
 } = listsController;
 
@@ -25,12 +24,7 @@ router.put('/save/:username', saveList);
 // @access  Public
 router.delete('/delete/:username', deleteList);
 
-// @route   GET api/movies/rankings/:movieId
-// @desc    grab user rankings for specific movie
-// @access  Public
-router.get('/rankings/:movieId', getMovieRankings);
-
-// @route   POST api/movies/affinities/:username
+// @route   POST api/list/affinities/:username
 // @desc    grab lists, calculate similarity to current user list
 // @access  Public
 router.post('/affinities', calcAffinities);
