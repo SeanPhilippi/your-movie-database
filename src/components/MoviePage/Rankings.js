@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 const Rankings = withLoading(({ title, voters, user }) => (
   <div className=''>
-    <div className='font-weight-bold mb-1'>User's that ranked {title}:</div>
+    <div className='font-weight-bold mb-1'>{voters.length ? `Users that ranked ${title}:` : 'No users have ranked this movie yet.'}</div>
     <div className='bg-white'>
       {voters.map(({ id, username, rank }) => (
         <div className='d-flex justify-content-between' key={id}>

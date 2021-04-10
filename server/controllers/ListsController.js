@@ -56,14 +56,19 @@ exports.getMovieRankings = (req, res) => {
       }));
       if (results.length > 1) {
         const rankings = results.map(result => result.rank);
+        // get rounded average of sum of rankings divided by # of rankings
         averageRanking = Math.round(
           rankings.reduce((ac, cv) => ac + cv) / results.length
         );
-        const pointsArr = results.map(result => 21 - result.rank);
+        // for each ranking of that movie from the movieRankingsQuery aggregation result, subtract that rank
+        // from 21 to determine the points from that particular ranking in a user's list
+        const pointsArr = rankings.map(rank => 21 - rank);
+        // get the sum of all these points for a total
         points = pointsArr.reduce((ac, cv) => ac + cv);
       } else if (results.length === 1) {
         averageRanking = results[0].rank;
         points = 21 - results[0].rank;
+        // else no results
       } else {
         averageRanking = '';
         points = '';

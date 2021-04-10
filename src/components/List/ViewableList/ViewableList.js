@@ -14,9 +14,11 @@ import { withRouter } from 'react-router-dom';
 
 class ViewableList extends PureComponent {
   componentDidMount() {
-    const { fetchTopMoviesList, setCurrentTopMovies } = this.props;
-    fetchTopMoviesList();
-    setCurrentTopMovies();
+    const { fetchTopMoviesList, setCurrentTopMovies, history: { location: { pathname }} } = this.props;
+    if (pathname === '/top-movies' || pathname === '/') {
+      fetchTopMoviesList();
+      setCurrentTopMovies();
+    }
   }
 
   setCurrentPage = e => {
