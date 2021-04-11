@@ -38,10 +38,11 @@ class RegisterBox extends PureComponent {
   render() {
     const {
       errors: {
-        email: emailErrors,
-        password: passwordErrors,
-        password2: password2Errors,
-        username: usernameErrors,
+        email: emailError,
+        password: passwordError,
+        password2: password2Error,
+        username: usernameError,
+        general: generalError,
       },
     } = this.props;
 
@@ -66,7 +67,7 @@ class RegisterBox extends PureComponent {
                   className='w-75 w-md-50'
                   type='text'
                 />
-                <div style={{ color: 'red' }}>{usernameErrors}</div>
+                <div style={{ color: 'red' }}>{usernameError}</div>
               </div>
               {/* email */}
               <div className='email mb-2'>
@@ -80,7 +81,7 @@ class RegisterBox extends PureComponent {
                   className='w-75 w-md-50'
                   type='text'
                 />
-                <div style={{ color: 'red' }}>{emailErrors}</div>
+                <div style={{ color: 'red' }}>{emailError}</div>
               </div>
               {/* password */}
               <div className='register-password mb-2'>
@@ -94,7 +95,7 @@ class RegisterBox extends PureComponent {
                   className='w-75 w-md-50'
                   type='password'
                 />
-                <div style={{ color: 'red' }}>{passwordErrors}</div>
+                <div style={{ color: 'red' }}>{passwordError}</div>
               </div>
               {/* confirm password */}
               <div>
@@ -108,17 +109,15 @@ class RegisterBox extends PureComponent {
                   className='w-75 w-md-50'
                   type='password'
                 />
-                <div style={{ color: 'red' }}>{password2Errors}</div>
+                <div style={{ color: 'red' }}>{password2Error}</div>
               </div>
             </div>
             {/* send btn */}
             <div className=''>
-              <div></div>
-              <div className=''>
-                <button className='register-btn my-3' type='submit'>
-                  Register
-                </button>
-              </div>
+              <button className='register-btn my-3' type='submit'>
+                Register
+              </button>
+              <div style={{ color: 'red' }}>{generalError}</div>
             </div>
           </form>
         </div>
@@ -134,6 +133,7 @@ RegisterBox.propTypes = {
     password: PropTypes.string,
     password2: PropTypes.string,
     username: PropTypes.string,
+    general: PropTypes.string,
   }).isRequired,
 };
 

@@ -23,7 +23,7 @@ exports.registerUser = (req, res) => {
   });
 
   User.findOne({ email: req.body.email })
-    .then(user => {
+    .then(async user => {
       if (user) {
         errors.email =
           'You already have an account. Click "Forgot password" if you need to reset your password.';
@@ -47,8 +47,8 @@ exports.registerUser = (req, res) => {
             }, ${geo.country}, (lat: ${geo.ll[0]}, long: ${geo.ll[1]})`
           : 'n/a',
       });
-      // encrypting password before saving to mlab
-      bcrypt
+
+      await bcrypt
         .genSalt(10, (err, salt) => {
           // throw salt in with password for hash
           bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -57,12 +57,13 @@ exports.registerUser = (req, res) => {
             newUser.password = hash;
             newUser.save();
           });
-        })
-        .then(user => res.status(200).json(user));
+        });
+      return res.status(200).json({ message: `New user ${newUser.username} successfully saved` });
     })
-    .catch(() =>
-      res.status(400).json({ registerUserError: 'Failed to save user' })
-    );
+    .catch(() => {
+      errors.general = 'An error was encountered when trying to save user';
+      res.status(400).json(errors);
+    });
 };
 
 exports.loginUser = (req, res) => {
@@ -117,16 +118,17 @@ exports.getNewRegisters = (req, res) => {
 };
 
 exports.getCurrentUser = (req, res) => {
-  res
-    .status(200)
-    .json({
-      user: {
-        email: req.user.email,
-        id: req.user._id,
-        username: req.user.username,
-      },
-    })
-    .catch(() =>
-      res.status(400).json({ currentUserError: 'Failed to get current user' })
-    );
+  try {
+    res
+      .status(200)
+      .json({
+        user: {
+          email: req.user.email,
+          id: req.user._id,
+          username: req.user.username,
+        },
+      })
+  } catch {
+    res.status(400).json({ currentUserError: 'Failed to get current user' })
+  }
 };
