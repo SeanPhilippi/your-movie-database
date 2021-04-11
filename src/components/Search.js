@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import SearchResult from './SearchResult';
 import { connect } from 'react-redux';
-import { addToList, setMessageStatus } from '../redux/actions';
+import { addToList } from '../redux/actions';
 import debounce from '../utils/helpers/debounce.js';
 import removeDupes from '../utils/helpers/removeDupes.js';
 
@@ -107,6 +107,8 @@ class Search extends PureComponent {
                   key={movie.imdbID}
                 />
               )
+            } else {
+              return null;
             }
           })}
         </div>

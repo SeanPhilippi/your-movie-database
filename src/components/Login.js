@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import LoginBox from './LoginBox';
 import CardWrapper from './HOCs/CardWrapper';
 import { Col } from 'reactstrap';

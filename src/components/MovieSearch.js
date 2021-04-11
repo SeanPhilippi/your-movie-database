@@ -121,6 +121,8 @@ class MovieSearch extends PureComponent {
                   key={movie.imdbID}
                 />
               )
+            } else {
+              return null;
             }
           })}
         </div>
