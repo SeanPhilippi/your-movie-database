@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { addToList } from '../redux/actions';
 import debounce from '../utils/helpers/debounce.js';
 import removeDupes from '../utils/helpers/removeDupes.js';
+const similar = require('string-similarity');
 
 class Search extends PureComponent {
   state = {
@@ -22,25 +23,30 @@ class Search extends PureComponent {
     this.handleSearch();
   };
 
-  handleSearch = debounce(() => {
+  handleSearch = debounce(async () => {
     const { searchText } = this.state;
     if (searchText.length) {
       if (searchText.length > 2) {
         const pageNums = [1, 2, 3];
-        pageNums.forEach(num => {
-          // /s/ is substring search, requires query of at least 3 characters
-          axios(`/api/movies/search/s/${searchText}/${num}`)
+        const results = [];
+        for (const num of pageNums) {
+          await axios(`/api/movies/search/s/${searchText}/${num}`)
             .then(({ data }) => {
               if (data && data.Search) {
-                const results = removeDupes(data.Search, 'imdbID');
-                this.setState(prevState => ({
-                  searchResults: [...results, ...prevState.searchResults],
-                }));
+                results.push(...data.Search);
               }
             })
             .catch(console.log);
+        }
+        results.forEach(result => {
+          const match = similar.compareTwoStrings(result.Title, searchText);
+          result.match = match;
         });
-        // if searchText.length is 1-2
+        const orderedResults = results.sort((a, b) => b.match - a.match);
+        const searchResults = removeDupes(orderedResults, 'imdbID');
+        this.setState({ searchResults });
+
+      // if searchText.length is 1-2
       } else {
         // /t/ is exact search, use for queries under 3 characters, so movies like 'Pi' can still get a result
         // only returns a single result unfortunately, omdb limitation
