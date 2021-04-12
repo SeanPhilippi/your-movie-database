@@ -128,7 +128,8 @@ exports.getCurrentUser = (req, res) => {
           username: req.user.username,
         },
       })
-  } catch {
+  } catch(err) {
+    console.error(err);
     res.status(400).json({ currentUserError: 'Failed to get current user' })
   }
 };
