@@ -74,7 +74,7 @@ ViewableItem.propTypes = {
     year: PropTypes.string.isRequired,
   }),
   idx: PropTypes.number.isRequired,
-  addToList: PropTypes.func,
+  handleAdd: PropTypes.func,
 };
 
 const mapStateToProps = state => ({

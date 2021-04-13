@@ -10,7 +10,7 @@ exports.getSearchResults = ({ params }, res) => {
     .then(res => res.json())
     .then(data => res.status(200).json(data))
     .catch(() =>
-      res.status(400).json({ searchResultsError: 'Failed to fetch results' })
+      res.status(400).json({ searchResultsError: 'Failed to fetch search results' })
     );
 };
 

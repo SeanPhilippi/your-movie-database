@@ -30,17 +30,7 @@ class MoviePage extends PureComponent {
     } = this.props;
     fetchMovie(movie.id);
     fetchMovieComments(movie.id);
-    fetchMovieStats(movie, true);
-  }
-
-  componentWillUnmount() {
-    const {
-      fetchMovieStats,
-      location: {
-        state: { movie },
-      },
-    } = this.props;
-    fetchMovieStats(movie, true);
+    fetchMovieStats(movie, false);
   }
 
   handleAdd = (movie, post) => {

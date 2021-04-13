@@ -38,7 +38,7 @@ class SaveDelete extends PureComponent {
       const endIdx = Math.max(oldIndex, newIndex) + 1;
       const movies = items.slice(startIdx, endIdx);
       fetchMovieStats(movies, true);
-    } catch (err) {
+    } catch(err) {
       setMessageStatus('There was an error saving your profile');
       console.error(err);
     }

@@ -25,6 +25,7 @@ class Search extends PureComponent {
 
   handleSearch = debounce(async () => {
     const { searchText } = this.state;
+    // prevents function from firing if someone backspaces and the searchText is an empty string
     if (searchText.length) {
       if (searchText.length > 2) {
         const pageNums = [1, 2, 3];
