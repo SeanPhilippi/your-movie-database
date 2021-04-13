@@ -40,7 +40,7 @@ class Search extends PureComponent {
             .catch(console.log);
         }
         results.forEach(result => {
-          const match = similar.compareTwoStrings(result.Title, searchText);
+          const match = similar.compareTwoStrings(result.Title.toLowerCase().trim(), searchText.toLowerCase().trim());
           result.match = match;
         });
         const orderedResults = results.sort((a, b) => b.match - a.match);
@@ -94,16 +94,9 @@ class Search extends PureComponent {
 
   renderResults = () => {
     const { searchResults } = this.state;
-    const { users } = this.props;
 
-    if (searchResults) {
-      return users ? (
-        <div className='bg-white result-scroll'>
-          {users.map(user => (
-            <SearchResult user={user} key={user._id} />
-          ))}
-        </div>
-      ) : (
+    if (searchResults.length) {
+      return (
         <div className='bg-white result-scroll'>
           {searchResults.map(movie => {
             if (!JSON.stringify(movie).includes('Movie not found')) {
@@ -124,7 +117,7 @@ class Search extends PureComponent {
   };
 
   render() {
-    const { marginTopVal, users, itemsCount } = this.props;
+    const { marginTopVal, itemsCount } = this.props;
     const { searchText, allowResults } = this.state;
 
     return (
@@ -139,16 +132,14 @@ class Search extends PureComponent {
           autoFocus
           name='searchText'
           className='search-input pl-3 w-100'
-          placeholder={
-            !users ? 'Search for films...' : "Type a member's name..."
-          }
+          placeholder='Search for films...'
           value={searchText}
           onChange={this.onTextChange}
           onKeyUp={this.onKeyUp}
           onFocus={() => this.handleFocus(true)}
           onBlur={() => this.handleFocus(false, 200)}
-        ></input>
-        {allowResults && this.renderResults()}
+        />
+        {allowResults && searchText && this.renderResults()}
       </div>
     );
   }
