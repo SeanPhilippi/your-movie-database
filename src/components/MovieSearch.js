@@ -1,14 +1,7 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 import axios from 'axios';
 import SearchResult from './SearchResult';
-import {
-  fetchMovie,
-  fetchMovieStats,
-  fetchMovieComments,
-} from '../redux/actions';
 import debounce from '../utils/helpers/debounce.js';
 import removeDupes from '../utils/helpers/removeDupes.js';
 const similar = require('string-similarity');
@@ -44,7 +37,7 @@ class MovieSearch extends PureComponent {
             .catch(console.log);
         };
         results.forEach(result => {
-          const match = similar.compareTwoStrings(result.Title, searchText);
+          const match = similar.compareTwoStrings(result.Title.toLowerCase().trim(), searchText.toLowerCase().trim());
           result.match = match;
         });
         const orderedResults = results.sort((a, b) => b.match - a.match);
@@ -90,9 +83,6 @@ class MovieSearch extends PureComponent {
   handleRedirect = movie => {
     const {
       history,
-      fetchMovie,
-      fetchMovieComments,
-      fetchMovieStats,
     } = this.props;
 
     const remappedMovie = {
@@ -100,10 +90,6 @@ class MovieSearch extends PureComponent {
       year: movie.Year,
       id: movie.imdbID,
     };
-
-    fetchMovie(movie.imdbID);
-    fetchMovieComments(movie.imdbID);
-    fetchMovieStats(remappedMovie, false);
 
     history.push(
       `/movies/${movie.Title.split(' ').concat([movie.Year]).join('-')}`,
@@ -115,7 +101,7 @@ class MovieSearch extends PureComponent {
 
   renderResults = () => {
     const { searchResults } = this.state;
-    if (searchResults) {
+    if (searchResults.length) {
       return (
         <div className='bg-white movie-result-scroll'>
           {searchResults.map(movie => {
@@ -159,7 +145,7 @@ class MovieSearch extends PureComponent {
             onKeyUp={this.onKeyUp}
             onFocus={() => this.handleFocus(true)}
             onBlur={() => this.handleFocus(false, 200)}
-          ></input>
+          />
           <div
             onClick={this.clear}
             title='clear search text'
@@ -168,22 +154,10 @@ class MovieSearch extends PureComponent {
             ✕
           </div>
         </div>
-        {allowResults && this.renderResults()}
+        {allowResults && searchText && this.renderResults()}
       </div>
     );
   }
 }
 
-MovieSearch.propTypes = {
-  fetchMovie: PropTypes.func.isRequired,
-  fetchMovieComments: PropTypes.func.isRequired,
-  fetchMovieStats: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = dispatch => ({
-  fetchMovie: id => dispatch(fetchMovie(id)),
-  fetchMovieStats: (movie, update) => dispatch(fetchMovieStats(movie, update)),
-  fetchMovieComments: id => dispatch(fetchMovieComments(id)),
-});
-
-export default withRouter(connect(null, mapDispatchToProps)(MovieSearch));
+export default withRouter(MovieSearch);

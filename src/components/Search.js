@@ -25,6 +25,7 @@ class Search extends PureComponent {
 
   handleSearch = debounce(async () => {
     const { searchText } = this.state;
+    // prevents function from firing if someone backspaces and the searchText is an empty string
     if (searchText.length) {
       if (searchText.length > 2) {
         const pageNums = [1, 2, 3];
@@ -39,7 +40,7 @@ class Search extends PureComponent {
             .catch(console.log);
         }
         results.forEach(result => {
-          const match = similar.compareTwoStrings(result.Title, searchText);
+          const match = similar.compareTwoStrings(result.Title.toLowerCase().trim(), searchText.toLowerCase().trim());
           result.match = match;
         });
         const orderedResults = results.sort((a, b) => b.match - a.match);
@@ -95,7 +96,7 @@ class Search extends PureComponent {
     const { searchResults } = this.state;
     const { users } = this.props;
 
-    if (searchResults) {
+    if (searchResults.length) {
       return users ? (
         <div className='bg-white result-scroll'>
           {users.map(user => (
@@ -146,8 +147,8 @@ class Search extends PureComponent {
           onKeyUp={this.onKeyUp}
           onFocus={() => this.handleFocus(true)}
           onBlur={() => this.handleFocus(false, 200)}
-        ></input>
-        {allowResults && this.renderResults()}
+        />
+        {allowResults && searchText && this.renderResults()}
       </div>
     );
   }

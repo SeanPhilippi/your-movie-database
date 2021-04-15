@@ -27,12 +27,7 @@ const MovieDetails = withLoading(
           alt={`${title} (${year})`}
           title={`${title} (${year})`}
           style={{ backgroundImage: `url(${poster})` }}
-        ></div>
-        {/* <div
-        className="poster-img"
-        style={{ backgroundImage: `url(${ poster })` }}
-      >
-      </div> */}
+        />
         <div>
           <div className='d-flex justify-content-between'>
             <div className='title'>{title}</div>
