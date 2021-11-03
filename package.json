@@ -49,7 +49,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "string-similarity": "^4.0.4",
-    "validator": "^10.11.0",
+    "validator": "^13.7.0",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
