@@ -24,7 +24,7 @@
     "geoip-lite": "^1.4.2",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongodb": "^3.3.3",
     "mongoose": "^5.7.5",
     "node-fetch": "^2.3.0",
