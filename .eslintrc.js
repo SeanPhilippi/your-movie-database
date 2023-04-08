@@ -7,7 +7,6 @@ module.exports = {
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
     'import/newline-after-import': 'off',
     'comma-dangle': 'off',
-    'eol-last': ['error', 'never'],
     'no-shadow': 'off',
     'consistent-return': 'off',
     'react/jsx-filename-extension': [0],
