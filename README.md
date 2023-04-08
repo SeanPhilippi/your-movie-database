@@ -42,9 +42,10 @@ Concurrently: ```npm run both```
 ## Future Goals
 * Users Index page with a search bar. This is partially done.
 * Track user list visits and display on home page.
-* Ability to post reviews to movie pages. 
-* Easy inclusion of emojis in comments. 
+* Ability to post reviews to movie pages.
+* Easy inclusion of emojis in comments.
 * Add pictures of website to this repo README.md.
+* Password reset.
 
 <!--
 Home Page

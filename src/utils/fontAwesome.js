@@ -1,4 +1,4 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { library } from '@fortawesome/fontawesome-svg-core/v6';
 import {
   faShoePrints,
   faSignInAlt,
@@ -21,6 +21,7 @@ import {
   faEdit,
 } from '@fortawesome/free-regular-svg-icons';
 
+library.config.autoAddCss = false;
 const fontAwesome = library.add(
   faUserCircle,
   faShoePrints,
