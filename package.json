@@ -59,7 +59,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postinstall": "npm run build",
-    "deploy": "git push heroku master && heroku open"
+    "deploy": "git push heroku master"
   },
   "browserslist": [
     ">0.2%",
