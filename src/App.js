@@ -10,6 +10,7 @@ import TopMoviesList from './components/TopMoviesList';
 import MoviePage from './components/MoviePage/MoviePage';
 import MessageBar from './components/MessageBar';
 import Register from './components/Register';
+import ForgotPassword from './components/ForgotPassword';
 import Login from './components/Login';
 import Account from './components/Account';
 import UsersIndex from './components/UsersIndex';
@@ -42,31 +43,30 @@ class App extends PureComponent {
 
   render() {
     return (
-      <div id='app'>
-        <div className='container-scss mt-2 px-0 border-0'>
-          <TopNav />
-          <MessageBar />
-          <MovieSearch />
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/account' component={Account} />
-            <Route exact path='/top-movies' component={TopMoviesList} />
-            <Route exact path='/profile' component={Profile} />
-            {/* <Route exact path="/profile/edit=:edit/:username" component={ Profile } /> */}
-            {/* render conditionally only if user is found, else 404 page */}
-            <Route exact path='/profile/:username' component={Profile} />
-            <Route exact path='/users-index' component={UsersIndex} />
-            <Route exact path='/all-movies' component={UnderConstruction} />
-            <Route exact path='/most-visited' component={UnderConstruction} />
-            <Route exact path='/reviews' component={UnderConstruction} />
-            <Route exact path='/new-registers' component={NewRegisters} />
-            <Route path='/movies' component={MoviePage} />
-            <Route render={this.pageNotFound} />
-          </Switch>
-          <Footer />
-        </div>
+      <div id='app' className='container-scss mt-2 px-0 border-0'>
+        <TopNav />
+        <MessageBar />
+        <MovieSearch />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/forgot-password' component={ForgotPassword} />
+          <Route exact path='/account' component={Account} />
+          <Route exact path='/top-movies' component={TopMoviesList} />
+          <Route exact path='/profile' component={Profile} />
+          {/* <Route exact path="/profile/edit=:edit/:username" component={ Profile } /> */}
+          {/* render conditionally only if user is found, else 404 page */}
+          <Route exact path='/profile/:username' component={Profile} />
+          <Route exact path='/users-index' component={UsersIndex} />
+          <Route exact path='/all-movies' component={UnderConstruction} />
+          <Route exact path='/most-visited' component={UnderConstruction} />
+          <Route exact path='/reviews' component={UnderConstruction} />
+          <Route exact path='/new-registers' component={NewRegisters} />
+          <Route path='/movies' component={MoviePage} />
+          <Route render={this.pageNotFound} />
+        </Switch>
+        <Footer />
       </div>
     );
   }

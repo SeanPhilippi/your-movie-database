@@ -12,6 +12,17 @@
   grid-template-columns: 2fr 5fr 3fr;
 }
 
+.forgot-password {
+  font-size: .9rem;
+}
+
+.reset-pw-btn {
+  width: 11rem;
+  border-radius: 5px;
+  font-size: .8rem;
+  font-weight: 600;
+}
+
 .errors {
   color: red;
   text-align: center;
