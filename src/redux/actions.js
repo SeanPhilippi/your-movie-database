@@ -32,6 +32,7 @@ export const TYPES = {
   DELETE_MOVIE: 'DELETE_MOVIE',
   DELETE_LIST: 'DELETE_LIST',
   CLEAR_ERRORS: 'CLEAR_ERRORS',
+  SET_RESET_PASSWORD_SUCCESS: 'SET_RESET_PASSWORD_SUCCESS',
 };
 
 // action creators
@@ -356,6 +357,43 @@ export const fetchTopMoviesComments = () => dispatch => {
       dispatch(setCommentsLoading(false));
     })
     .catch(console.log);
+};
+
+export const clearResetPasswordSuccess = () => ({
+  type: TYPES.SET_RESET_PASSWORD_SUCCESS,
+  payload: '',
+});
+
+export const forgotPassword = email => dispatch => {
+  api.users.post
+    .forgotPassword({ email })
+    .then(() => {
+      dispatch({
+        type: TYPES.SET_RESET_PASSWORD_SUCCESS,
+        payload: 'If that email is registered, reset instructions have been sent.',
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: TYPES.GET_ERRORS,
+        payload: err.response.data,
+      });
+    });
+};
+
+export const resetPassword = (token, passwordData, history) => dispatch => {
+  api.users.post
+    .resetPassword(token, passwordData)
+    .then(() => {
+      history.push('/login');
+      dispatch(setMessageStatus('Password updated! Please log in.'));
+    })
+    .catch(err => {
+      dispatch({
+        type: TYPES.GET_ERRORS,
+        payload: err.response.data,
+      });
+    });
 };
 
 export const logoutUser = history => dispatch => {

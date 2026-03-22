@@ -26,6 +26,12 @@ const UserSchema = new Schema({
   location: {
     type: String,
   },
+  resetPasswordToken: {
+    type: String,
+  },
+  resetPasswordExpires: {
+    type: Date,
+  },
 });
 
 module.exports = model('User', UserSchema);

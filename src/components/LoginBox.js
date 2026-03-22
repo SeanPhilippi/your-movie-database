@@ -72,12 +72,14 @@ class LoginBox extends PureComponent {
             </div>
             <div className='btn-container'>
               <div></div>
-              <div className='d-flex justify-content-end'>
+              <div className='d-flex justify-content-between align-items-center'>
+                <Link className='forgot-password' to='/forgot-password'>
+                  Forgot Password?
+                </Link>
                 <button className='send-btn my-3' type='submit'>
                   Send
                 </button>
               </div>
-              <div></div>
             </div>
           </form>
           <p className='px-4'>

@@ -10,7 +10,7 @@ YMDb is a full stack website built with React and Redux on the front-end, MongoD
 
 ## Project Links
 
-Heroku deployment: https://yourmoviedatabase.herokuapp.com
+Deployment: https://yourmoviedatabase.com
 
 Github repo: https://github.com/SeanPhilippi/your-movie-database
 
@@ -42,9 +42,11 @@ Concurrently: ```npm run both```
 ## Future Goals
 * Users Index page with a search bar. This is partially done.
 * Track user list visits and display on home page.
-* Ability to post reviews to movie pages. 
-* Easy inclusion of emojis in comments. 
+* Ability to post reviews to movie pages.
+* Easy inclusion of emojis in comments.
+* Add notifications within site and email notifications and settings to turn off email notifications.
 * Add pictures of website to this repo README.md.
+* Add contact form
 
 <!--
 Home Page

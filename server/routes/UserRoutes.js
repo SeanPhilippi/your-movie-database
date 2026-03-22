@@ -8,6 +8,8 @@ const {
   loginUser,
   getNewRegisters,
   getCurrentUser,
+  forgotPassword,
+  resetPassword,
 } = usersController;
 
 // @route   POST api/users/register
@@ -33,5 +35,8 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   getCurrentUser
 );
+
+router.post('/forgot-password', forgotPassword);
+router.post('/reset-password/:token', resetPassword);
 
 module.exports = router;
