@@ -88,3 +88,8 @@ yarn-error.log*
 TODO.txt
 /brainstorming
 server/config/keys.js
+
+# claude files
+CLAUDE.md
+/plans
+/memory

@@ -1,7 +1,9 @@
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const Validator = require('validator');
 const geoip = require('geoip-lite');
+const fetch = require('node-fetch');
 const User = require('../models/UserModel');
 const keys = require('../config/keys');
 const validateRegisterInput = require('./validation/validateRegisterInput');
@@ -115,6 +117,90 @@ exports.getNewRegisters = (req, res) => {
       res.status(200).json(data);
     })
     .catch(console.log);
+};
+
+exports.forgotPassword = async (req, res) => {
+  const genericResponse = () =>
+    res.status(200).json({ message: 'If that email is registered, reset instructions have been sent.' });
+
+  try {
+    const user = await User.findOne({ email: req.body.email.toLowerCase() });
+    if (!user) return genericResponse();
+
+    const rawToken = crypto.randomBytes(32).toString('hex');
+    const hashedToken = crypto.createHash('sha256').update(rawToken).digest('hex');
+
+    user.resetPasswordToken = hashedToken;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    await user.save();
+
+    const resetUrl = `https://www.yourmoviedatabase.com/reset-password/${rawToken}`;
+
+    const emailRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'YMDB <noreply@yourmoviedatabase.com>',
+        to: process.env.NODE_ENV === 'production' ? user.email : 'sean.philippi@protonmail.com',
+        subject: 'Reset your YMDB password',
+        html: `
+          <p>You requested a password reset for your YMDB account.</p>
+          <p>Click the link below to reset your password. This link expires in 1 hour.</p>
+          <p><a href="${resetUrl}">${resetUrl}</a></p>
+          <p>If you didn't request this, you can safely ignore this email.</p>
+        `,
+      }),
+    });
+
+    if (!emailRes.ok) {
+      const errBody = await emailRes.json().catch(() => ({}));
+      console.error('[Resend] email send failed:', emailRes.status, errBody);
+    }
+
+    genericResponse();
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ general: 'Something went wrong. Please try again.' });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  const { token } = req.params;
+  const { password, password2 } = req.body;
+
+  if (!password || password.length < 6) {
+    return res.status(400).json({ password: 'Password must be at least 6 characters.' });
+  }
+  if (password !== password2) {
+    return res.status(400).json({ password2: 'Passwords do not match.' });
+  }
+
+  const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
+
+  try {
+    const user = await User.findOne({
+      resetPasswordToken: hashedToken,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ general: 'Reset link is invalid or has expired.' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.status(200).json({ message: 'Password updated successfully. You can now log in.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ general: 'Something went wrong. Please try again.' });
+  }
 };
 
 exports.getCurrentUser = (req, res) => {

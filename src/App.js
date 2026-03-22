@@ -11,6 +11,7 @@ import MoviePage from './components/MoviePage/MoviePage';
 import MessageBar from './components/MessageBar';
 import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
 import Login from './components/Login';
 import Account from './components/Account';
 import UsersIndex from './components/UsersIndex';
@@ -52,6 +53,7 @@ class App extends PureComponent {
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/forgot-password' component={ForgotPassword} />
+          <Route exact path='/reset-password/:token' component={ResetPassword} />
           <Route exact path='/account' component={Account} />
           <Route exact path='/top-movies' component={TopMoviesList} />
           <Route exact path='/profile' component={Profile} />

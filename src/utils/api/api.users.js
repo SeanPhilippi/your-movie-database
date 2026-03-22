@@ -8,4 +8,6 @@ export const get = {
 export const post = {
   newUser: user => axios.post('/api/users/register', user),
   login: user => axios.post('api/users/login', user),
+  forgotPassword: data => axios.post('/api/users/forgot-password', data),
+  resetPassword: (token, data) => axios.post(`/api/users/reset-password/${token}`, data),
 };

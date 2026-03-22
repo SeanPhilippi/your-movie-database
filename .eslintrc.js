@@ -1,5 +1,9 @@
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false,
+    babelOptions: { presets: ['@babel/preset-react'] },
+  },
   extends: ['react-app', 'prettier'],
   rules: {
     'arrow-parens': ['error', 'as-needed'],
@@ -13,5 +17,6 @@ module.exports = {
     'import/extensions': 'off',
     // 'template-curly-spacing': ['error', 'always'],
     'no-plusplus': 'off',
+    'import/no-anonymous-default-export': 'off',
   },
 };

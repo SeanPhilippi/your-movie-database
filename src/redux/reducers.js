@@ -38,6 +38,7 @@ const initialState = {
   affinities: [],
   movie: {},
   movieStats: {}, // voters, averageRanking, points, overallRanking
+  resetPasswordSuccess: '',
   isEditing: false,
   listDataLoading: true,
   commentsLoading: true,
@@ -68,6 +69,11 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         authErrors: {},
+      };
+    case TYPES.SET_RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        resetPasswordSuccess: payload,
       };
     case TYPES.SET_TOKEN:
       return {

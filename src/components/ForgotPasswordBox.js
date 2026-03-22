@@ -2,66 +2,71 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
-// import { loginUser } from '../redux/actions';
 import { connect } from 'react-redux';
-// import PasswordRevealer from '../PasswordRevealer/PasswordRevealer';
+import { forgotPassword, clearResetPasswordSuccess } from '../redux/actions';
 
 class ForgotPasswordBox extends PureComponent {
   state = {
-    login: '',
-    errors: {},
+    email: '',
+    submitting: false,
   };
 
-  handleLogin = e => {
-    const { loginUser, history } = this.props;
+  componentDidMount() {
+    this.props.clearResetPasswordSuccess();
+  }
 
-    const { login } = this.state;
-
+  handleSubmit = e => {
     e.preventDefault();
-
-    const user = {
-      login: login.trim(),
-    };
-    loginUser(user, history);
+    this.setState({ submitting: true });
+    this.props.forgotPassword(this.state.email.trim());
   };
 
   onTextChange = ({ target: { name, value } }) => {
-    this.setState({
-      [name]: value,
-    });
+    this.setState({ [name]: value });
   };
 
   render() {
-    const {
-      errors: { login: loginErrors },
-    } = this.props;
+    const { errors, resetPasswordSuccess } = this.props;
+    const { submitting } = this.state;
+
+    if (resetPasswordSuccess) {
+      return (
+        <Row className='d-flex flex-column'>
+          <p className='py-2 px-4'>{resetPasswordSuccess}</p>
+        </Row>
+      );
+    }
 
     return (
       <Row className='d-flex flex-column'>
         <form
           className='py-2 px-4 w-100'
           noValidate
-          onSubmit={this.handleLogin}
+          onSubmit={this.handleSubmit}
         >
           <div>
             <div className='login mb-2'>
-              <div>Your login: </div>
+              <div>Your email: </div>
               <input
                 autoComplete='off'
                 autoFocus
-                name='login'
+                name='email'
                 onChange={this.onTextChange}
-                type='text'
+                type='email'
               />
-              <div className='errors'>{loginErrors}</div>
+              <div className='errors'>{errors.email}</div>
+              <div className='errors'>{errors.general}</div>
             </div>
           </div>
           <div className='btn-container'>
             <div></div>
             <div className='d-flex justify-content-between align-items-center'>
-              <button className='reset-pw-btn my-3' type='submit'>
-                Send Reset Instructions
+              <button
+                className='reset-pw-btn my-3'
+                type='submit'
+                disabled={submitting}
+              >
+                {submitting ? 'Sending...' : 'Send Reset Instructions'}
               </button>
             </div>
           </div>
@@ -72,19 +77,23 @@ class ForgotPasswordBox extends PureComponent {
 }
 
 ForgotPasswordBox.propTypes = {
-  loginUser: PropTypes.func.isRequired,
+  forgotPassword: PropTypes.func.isRequired,
+  clearResetPasswordSuccess: PropTypes.func.isRequired,
   errors: PropTypes.shape({
-    login: PropTypes.string,
+    email: PropTypes.string,
+    general: PropTypes.string,
   }).isRequired,
+  resetPasswordSuccess: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   errors: state.authErrors,
+  resetPasswordSuccess: state.resetPasswordSuccess,
 });
 
 const mapDispatchToProps = dispatch => ({
-  // ! left off here, not created resetPassword action creator yet
-  // resetPassword: (user, history) => dispatch(resetPassword(user, history)),
+  forgotPassword: email => dispatch(forgotPassword(email)),
+  clearResetPasswordSuccess: () => dispatch(clearResetPasswordSuccess()),
 });
 
 export default withRouter(
