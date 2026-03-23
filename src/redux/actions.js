@@ -303,6 +303,7 @@ export const fetchTopMoviesList = () => dispatch => {
     // filter movies without points
     const filteredMovies = data.filter(movie => movie.points);
     dispatch(setTopMoviesList(filteredMovies));
+    dispatch(setCurrentTopMovies());
   });
 };
 

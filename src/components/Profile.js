@@ -20,15 +20,14 @@ class Profile extends PureComponent {
     this.fetchData();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   console.log('comp update props', this.props.match.params)
-  //   console.log('this.props.match.params', this.props.match.params.username)
-  //   const { username } = this.props.match.params;
-  //   if (username !== prevProps.match.params.username) {
-  //     console.log('fetch update')
-  //     this.fetchData();
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    const { username } = this.props.match.params;
+    const routeChanged = username !== prevProps.match.params.username;
+    const userJustLoaded = !prevProps.user.username && this.props.user.username;
+    if (routeChanged || userJustLoaded) {
+      this.fetchData();
+    }
+  }
 
   fetchData = () => {
     const {
