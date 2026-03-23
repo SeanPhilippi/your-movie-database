@@ -10,7 +10,7 @@ YMDb is a full stack website built with React and Redux on the front-end, MongoD
 
 ## Project Links
 
-Deployment: https://yourmoviedatabase.com
+Deployment: https://www.yourmoviedatabase.com
 
 Github repo: https://github.com/SeanPhilippi/your-movie-database
 
