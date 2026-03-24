@@ -75,7 +75,7 @@ class RegisterBox extends PureComponent {
                   Email <span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
-                  autoComplete='off'
+                  autoComplete='email'
                   name='email'
                   onChange={this.onTextChange}
                   className='w-75 w-md-50'
@@ -89,7 +89,7 @@ class RegisterBox extends PureComponent {
                   Password <span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
-                  autoComplete='off'
+                  autoComplete='new-password'
                   name='password'
                   onChange={this.onTextChange}
                   className='w-75 w-md-50'
@@ -103,7 +103,7 @@ class RegisterBox extends PureComponent {
                   Retype Password <span style={{ color: 'red' }}>*</span>
                 </div>
                 <input
-                  autoComplete='off'
+                  autoComplete='new-password'
                   name='password2'
                   onChange={this.onTextChange}
                   className='w-75 w-md-50'

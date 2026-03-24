@@ -48,7 +48,7 @@ class ForgotPasswordBox extends PureComponent {
             <div className='login mb-2'>
               <div>Your email: </div>
               <input
-                autoComplete='off'
+                autoComplete='email'
                 autoFocus
                 name='email'
                 onChange={this.onTextChange}
