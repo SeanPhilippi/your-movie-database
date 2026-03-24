@@ -8,6 +8,12 @@ html {
   }
 }
 
+#root {
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+}
+
 body {
   margin: 0;
   padding: 0;
