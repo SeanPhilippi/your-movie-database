@@ -1,4 +1,4 @@
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import api from '../utils/api/api';
 import setAuthToken from '../utils/auth/setAuthToken';
 
@@ -229,7 +229,7 @@ export const loginUser = (user, history) => dispatch => {
       // set token to be in all axios headers
       setAuthToken(token);
       // decode the token
-      const decoded = jwt_decode(token);
+      const decoded = jwtDecode(token);
       // set current user
       dispatch(setToken(decoded));
       // dispatch setUser

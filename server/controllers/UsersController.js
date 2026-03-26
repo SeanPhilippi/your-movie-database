@@ -3,69 +3,62 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const Validator = require('validator');
 const geoip = require('geoip-lite');
-const fetch = require('node-fetch');
 const User = require('../models/UserModel');
 const keys = require('../config/keys');
 const validateRegisterInput = require('./validation/validateRegisterInput');
 const formatDate = require('../../src/utils/helpers/formatDate');
 
-exports.registerUser = (req, res) => {
+exports.registerUser = async (req, res) => {
   // takes newUser object created on front-end and runs through validating function
-  // destructuring object that is returned which contains errors and isValid. isValid returns
-  // a boolean and wants an empty errors object
+  // destructuring object that is returned which contains errors and isValid.
+  // isValid returns a boolean and wants an empty errors object
   const { errors, isValid } = validateRegisterInput(req.body);
-
   if (!isValid) return res.status(400).json(errors);
 
-  User.findOne({ username: req.body.username }).then(user => {
-    if (user) {
+  try {
+    const existingUsername = await User.findOne({ username: req.body.username });
+    if (existingUsername) {
       errors.username = 'This username is already taken.';
       return res.status(400).json(errors);
     }
-  });
 
-  User.findOne({ email: req.body.email })
-    .then(async user => {
-      if (user) {
-        errors.email =
-          'You already have an account. Click "Forgot password" if you need to reset your password.';
-        // 400 error for validation related errors
-        return res.status(400).json(errors);
-      }
-      const { username, email, password } = req.body;
-      // grab ip address from req header
-      const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-      // look up location via ip
-      const geo = geoip.lookup(ip);
-      // create new user document to be posted to mlab
-      const newUser = new User({
-        username,
-        email,
-        password,
-        register_date: formatDate(new Date()),
-        location: geo
-          ? `${geo.city ? geo.city : 'n/a'}, ${
-              geo.region ? geo.region : 'n/a'
-            }, ${geo.country}, (lat: ${geo.ll[0]}, long: ${geo.ll[1]})`
-          : 'n/a',
-      });
+    // 400 error for validation related errors
+    const existingEmail = await User.findOne({ email: req.body.email });
+    if (existingEmail) {
+      errors.email =
+        'You already have an account. Click "Forgot password" if you need to reset your password.';
+      return res.status(400).json(errors);
+    }
 
-      await bcrypt
-        .genSalt(10, (err, salt) => {
-          // throw salt in with password for hash
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            // assigning newUser password to hash
-            newUser.password = hash;
-            newUser.save();
-          });
-        });
-      return res.status(200).json({ message: `New user ${newUser.username} successfully saved` });
-    })
-    .catch(() => {
-      errors.general = 'An error was encountered when trying to save user';
-      res.status(400).json(errors);
+    const { username, email, password } = req.body;
+    // grab ip address from req header
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    // look up location via ip
+    const geo = geoip.lookup(ip);
+    // create new user document to be posted to db
+    const newUser = new User({
+      username,
+      email,
+      password,
+      register_date: formatDate(new Date()),
+      location: geo
+        ? `${geo.city ? geo.city : 'n/a'}, ${
+            geo.region ? geo.region : 'n/a'
+          }, ${geo.country}, (lat: ${geo.ll[0]}, long: ${geo.ll[1]})`
+        : 'n/a',
     });
+
+    // hash password before saving
+    const salt = await bcrypt.genSalt(10);
+    newUser.password = await bcrypt.hash(newUser.password, salt);
+    await newUser.save();
+
+    return res.status(200).json({ message: `New user ${newUser.username} successfully saved` });
+  } catch (err) {
+    console.error(err);
+    errors.general = 'An error was encountered when trying to save user';
+    res.status(400).json(errors);
+  }
 };
 
 exports.loginUser = (req, res) => {

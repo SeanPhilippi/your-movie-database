@@ -1,4 +1,3 @@
-const fetch = require('node-fetch');
 const Movie = require('../models/MovieModel');
 const List = require('../models/ListModel');
 const movieRankingsQuery = require('./queries/movieRankingsQuery');
