@@ -13,6 +13,14 @@ const app = express();
 const PORT = process.env.PORT || 4300;
 require('dotenv').config();
 
+// Redirect naked domain to www
+app.use((req, res, next) => {
+  if (req.hostname === 'yourmoviedatabase.com') {
+    return res.redirect(301, `https://www.yourmoviedatabase.com${req.url}`);
+  }
+  next();
+});
+
 app.use(bodyParser.json());
 app.use(cors());
 // Passport middleware
