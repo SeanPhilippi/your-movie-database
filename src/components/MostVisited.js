@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { MostVisitedSkeleton } from './skeletons/HomeSkeletons';
 
-const MostVisitedList = ({ newUsers, num, user }) => {
+const MostVisitedList = ({ newUsers, num, user, newUsersLoading }) => {
   const User = ({ username, _id, visits }) => (
     <div key={_id} className='bg-white' style={{ lineHeight: '2rem' }}>
       <div className='d-flex justify-content-between overflow-hidden'>
@@ -22,6 +23,10 @@ const MostVisitedList = ({ newUsers, num, user }) => {
       </div>
     </div>
   );
+
+  if (newUsersLoading) {
+    return <MostVisitedSkeleton count={num} />;
+  }
 
   return (
     <div className='top-movies-container'>
@@ -43,6 +48,7 @@ const MostVisitedList = ({ newUsers, num, user }) => {
 const mapStateToProps = state => ({
   newUsers: state.newUsers,
   user: state.user,
+  newUsersLoading: state.newUsersLoading,
 });
 
 export default connect(mapStateToProps)(MostVisitedList);

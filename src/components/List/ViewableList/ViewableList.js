@@ -10,6 +10,7 @@ import {
   setMoviesPerPage,
   addToList,
 } from '../../../redux/actions';
+import { ViewableListSkeleton } from '../../skeletons/HomeSkeletons';
 import { withRouter } from 'react-router-dom';
 
 class ViewableList extends PureComponent {
@@ -100,7 +101,9 @@ class ViewableList extends PureComponent {
 
     const whatToShow = () => {
       if (url === '/') {
-        return <TopMoviesListPreview itemsPerPage={20} />;
+        return this.props.topMoviesLoading
+          ? <ViewableListSkeleton count={20} />
+          : <TopMoviesListPreview itemsPerPage={20} />;
       } else if (url === '/top-movies') {
         return (
           <>
@@ -154,6 +157,7 @@ const mapStateToProps = state => ({
   pages: state.pages,
   moviesPerPage: state.moviesPerPage,
   currentTopMovies: state.currentTopMovies,
+  topMoviesLoading: state.topMoviesLoading,
 });
 
 export default withRouter(

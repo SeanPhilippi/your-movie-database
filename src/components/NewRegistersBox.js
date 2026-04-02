@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { NewRegistersBoxSkeleton } from './skeletons/HomeSkeletons';
 
-const NewRegistersBox = ({ newUsers, num, user, registerPage }) => (
+const NewRegistersBox = ({ newUsers, num, user, registerPage, newUsersLoading }) => (
   <Row className='login-box d-flex flex-column'>
     <div>
       <div className='py-2 px-4'>
@@ -20,7 +21,9 @@ const NewRegistersBox = ({ newUsers, num, user, registerPage }) => (
           )}
         </div>
         <div>
-          {newUsers
+          {newUsersLoading ? (
+            <NewRegistersBoxSkeleton count={num} />
+          ) : newUsers
             .slice(0, num)
             .map(({ _id, username, register_date }) => {
               return (
@@ -61,6 +64,7 @@ NewRegistersBox.propTypes = {
 const mapStateToProps = state => ({
   newUsers: state.newUsers,
   user: state.user,
+  newUsersLoading: state.newUsersLoading,
 });
 
 export default connect(mapStateToProps)(NewRegistersBox);

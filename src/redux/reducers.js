@@ -45,6 +45,8 @@ const initialState = {
   affinitiesLoading: true,
   movieDetailsLoading: true,
   movieStatsLoading: true,
+  topMoviesLoading: true,
+  newUsersLoading: true,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -167,6 +169,16 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         affinitiesLoading: payload,
+      };
+    case TYPES.SET_TOP_MOVIES_LOADING:
+      return {
+        ...state,
+        topMoviesLoading: payload,
+      };
+    case TYPES.SET_NEW_USERS_LOADING:
+      return {
+        ...state,
+        newUsersLoading: payload,
       };
     case TYPES.ADD_TO_LIST:
       return {
