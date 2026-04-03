@@ -45,6 +45,8 @@ const initialState = {
   affinitiesLoading: true,
   movieDetailsLoading: true,
   movieStatsLoading: true,
+  topMoviesLoading: true,
+  newUsersLoading: true,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -82,6 +84,17 @@ export default (state = initialState, { type, payload }) => {
         isAuthenticated: !isEmpty(payload),
         // token
         user_token: payload,
+        // immediately populate basic user fields from the decoded JWT so
+        // state.user.username is never empty while isAuthenticated is true
+        // (fetchCurrentUser is async and may not have resolved yet)
+        ...(isEmpty(payload) ? {} : {
+          user: {
+            ...state.user,
+            id: payload.id,
+            username: payload.username,
+            email: payload.email,
+          },
+        }),
       };
     case TYPES.SET_MESSAGE_STATUS:
       return {
@@ -167,6 +180,16 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         affinitiesLoading: payload,
+      };
+    case TYPES.SET_TOP_MOVIES_LOADING:
+      return {
+        ...state,
+        topMoviesLoading: payload,
+      };
+    case TYPES.SET_NEW_USERS_LOADING:
+      return {
+        ...state,
+        newUsersLoading: payload,
       };
     case TYPES.ADD_TO_LIST:
       return {

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withLoading from '../HOCs/withLoading';
+import { MovieStatsSkeleton } from '../skeletons/ContentSkeletons';
 
 const MovieStats = withLoading(({ // prettier-ignore
   stats: {
@@ -40,7 +41,7 @@ const MovieStats = withLoading(({ // prettier-ignore
       </div>
     </div>
   </div>
-));
+), MovieStatsSkeleton);
 
 MovieStats.propTypes = {
   movie: PropTypes.shape({

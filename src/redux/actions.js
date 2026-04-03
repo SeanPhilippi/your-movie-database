@@ -33,6 +33,8 @@ export const TYPES = {
   DELETE_LIST: 'DELETE_LIST',
   CLEAR_ERRORS: 'CLEAR_ERRORS',
   SET_RESET_PASSWORD_SUCCESS: 'SET_RESET_PASSWORD_SUCCESS',
+  SET_TOP_MOVIES_LOADING: 'SET_TOP_MOVIES_LOADING',
+  SET_NEW_USERS_LOADING: 'SET_NEW_USERS_LOADING',
 };
 
 // action creators
@@ -121,6 +123,16 @@ export const setMovieStatsLoading = bool => ({
 
 export const setAffinitiesLoading = bool => ({
   type: TYPES.SET_AFFINITIES_LOADING,
+  payload: bool,
+});
+
+export const setTopMoviesLoading = bool => ({
+  type: TYPES.SET_TOP_MOVIES_LOADING,
+  payload: bool,
+});
+
+export const setNewUsersLoading = bool => ({
+  type: TYPES.SET_NEW_USERS_LOADING,
   payload: bool,
 });
 
@@ -248,12 +260,16 @@ export const loginUser = (user, history) => dispatch => {
 export const fetchCurrentUser = () => dispatch => {
   api.users.get.currentUser().then(({ data }) => {
     dispatch(setCurrentUser(data.user));
+  }).catch(err => {
+    console.error('fetchCurrentUser failed:', err);
   });
 };
 
 export const fetchNewUsers = () => dispatch => {
+  dispatch(setNewUsersLoading(true));
   api.users.get.newRegisters().then(({ data }) => {
     dispatch(setNewUsers(data));
+    dispatch(setNewUsersLoading(false));
   });
 };
 
@@ -299,11 +315,13 @@ export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
 };
 
 export const fetchTopMoviesList = () => dispatch => {
+  dispatch(setTopMoviesLoading(true));
   api.movies.get.topMoviesList().then(({ data }) => {
     // filter movies without points
     const filteredMovies = data.filter(movie => movie.points);
     dispatch(setTopMoviesList(filteredMovies));
     dispatch(setCurrentTopMovies());
+    dispatch(setTopMoviesLoading(false));
   });
 };
 

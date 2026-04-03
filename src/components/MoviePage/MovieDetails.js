@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import withLoading from '../HOCs/withLoading';
 import imdbLogo from '../../images/imdb-logo.gif';
 import plusIcon from '../../images/plus-light-orange.png';
+import { MovieDetailsSkeleton } from '../skeletons/ContentSkeletons';
 
 const MovieDetails = withLoading(
   ({
@@ -59,7 +60,7 @@ const MovieDetails = withLoading(
         </div>
       </div>
     )
-});
+}, MovieDetailsSkeleton);
 
 MovieDetails.propTypes = {
   movie: PropTypes.shape({

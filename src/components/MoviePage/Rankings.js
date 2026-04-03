@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import withLoading from '../HOCs/withLoading';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { RankingsSkeleton } from '../skeletons/ContentSkeletons';
 
 const Rankings = withLoading(({ title, voters, user }) => (
   <div className=''>
@@ -22,7 +23,7 @@ const Rankings = withLoading(({ title, voters, user }) => (
       ))}
     </div>
   </div>
-));
+), RankingsSkeleton);
 
 Rankings.propTypes = {
   title: PropTypes.string,

@@ -7,7 +7,7 @@ import Comments from '../Comments';
 import Rankings from './Rankings';
 import MovieStats from './MovieStats';
 import CardWrapper from '../HOCs/CardWrapper';
-import withLoading from '../HOCs/withLoading';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   fetchMovieComments,
@@ -15,8 +15,6 @@ import {
   fetchMovieStats,
   addToList,
 } from '../../redux/actions';
-
-const CommentsWithLoading = withLoading(Comments);
 
 class MoviePage extends PureComponent {
   componentDidMount() {
@@ -45,7 +43,6 @@ class MoviePage extends PureComponent {
   render() {
     const {
       comments,
-      commentsLoading,
       movieStatsLoading,
       movieDetailsLoading,
       movie,
@@ -97,8 +94,7 @@ class MoviePage extends PureComponent {
           <div className='right-col w-100'>
             <div className='m-4'>
               <CardWrapper icon='comments' title='comments' color='white'>
-                <CommentsWithLoading
-                  isLoading={commentsLoading}
+                <Comments
                   comments={comments}
                 />
               </CardWrapper>
@@ -136,7 +132,6 @@ MoviePage.propTypes = {
   fetchMovieComments: PropTypes.func.isRequired,
   fetchMovieStats: PropTypes.func.isRequired,
   fetchMovie: PropTypes.func.isRequired,
-  commentsLoading: PropTypes.bool,
   comments: PropTypes.array,
   movieStatsLoading: PropTypes.bool,
   movieDetailsLoading: PropTypes.bool,
@@ -153,7 +148,6 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   isAuthenticated: state.isAuthenticated,
   movie: state.movie,
-  commentsLoading: state.commentsLoading,
   movieDetailsLoading: state.movieDetailsLoading,
   movieStatsLoading: state.movieStatsLoading,
   comments: state.comments,

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import withLoading from './HOCs/withLoading';
+import { AffinitiesSkeleton } from './skeletons/ContentSkeletons';
 
 const Affinities = withLoading(({ affinities, user }) => (
   <div className='bg-white'>
@@ -23,7 +24,7 @@ const Affinities = withLoading(({ affinities, user }) => (
       </div>
     ))}
   </div>
-));
+), AffinitiesSkeleton);
 
 Affinities.propTypes = {
   affinities: PropTypes.array,
