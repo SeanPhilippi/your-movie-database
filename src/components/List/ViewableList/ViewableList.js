@@ -105,6 +105,9 @@ class ViewableList extends PureComponent {
           ? <ViewableListSkeleton count={20} />
           : <TopMoviesListPreview itemsPerPage={20} />;
       } else if (url === '/top-movies') {
+        if (this.props.topMoviesLoading) {
+          return <ViewableListSkeleton count={moviesPerPage} />;
+        }
         return (
           <>
             <PageSettings

@@ -8,12 +8,13 @@ import Statement from './Statement/Statement';
 import Affinities from './Affinities';
 import CardWrapper from './HOCs/CardWrapper';
 import withLoading from './HOCs/withLoading';
+import { CommentsSkeleton } from './skeletons/ContentSkeletons';
 import {
   fetchComments,
   fetchListData,
 } from '../redux/actions';
 
-const CommentsWithLoading = withLoading(Comments);
+const CommentsWithLoading = withLoading(Comments, CommentsSkeleton);
 
 class Profile extends PureComponent {
   componentDidMount() {

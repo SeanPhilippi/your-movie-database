@@ -5,9 +5,10 @@ import ViewableList from './List/ViewableList/ViewableList';
 import CardWrapper from './HOCs/CardWrapper';
 import withLoading from './HOCs/withLoading';
 import Comments from './Comments';
+import { CommentsSkeleton } from './skeletons/ContentSkeletons';
 import { fetchTopMoviesComments } from '../redux/actions';
 
-const CommentsWithLoading = withLoading(Comments);
+const CommentsWithLoading = withLoading(Comments, CommentsSkeleton);
 
 class TopMoviesList extends PureComponent {
   componentDidMount() {

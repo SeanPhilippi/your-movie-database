@@ -8,6 +8,7 @@ import Rankings from './Rankings';
 import MovieStats from './MovieStats';
 import CardWrapper from '../HOCs/CardWrapper';
 import withLoading from '../HOCs/withLoading';
+import { CommentsSkeleton } from '../skeletons/ContentSkeletons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   fetchMovieComments,
@@ -16,7 +17,7 @@ import {
   addToList,
 } from '../../redux/actions';
 
-const CommentsWithLoading = withLoading(Comments);
+const CommentsWithLoading = withLoading(Comments, CommentsSkeleton);
 
 class MoviePage extends PureComponent {
   componentDidMount() {

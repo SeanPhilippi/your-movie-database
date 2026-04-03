@@ -84,6 +84,17 @@ export default (state = initialState, { type, payload }) => {
         isAuthenticated: !isEmpty(payload),
         // token
         user_token: payload,
+        // immediately populate basic user fields from the decoded JWT so
+        // state.user.username is never empty while isAuthenticated is true
+        // (fetchCurrentUser is async and may not have resolved yet)
+        ...(isEmpty(payload) ? {} : {
+          user: {
+            ...state.user,
+            id: payload.id,
+            username: payload.username,
+            email: payload.email,
+          },
+        }),
       };
     case TYPES.SET_MESSAGE_STATUS:
       return {

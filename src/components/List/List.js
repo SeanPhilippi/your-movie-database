@@ -7,6 +7,9 @@ import SaveDelete from '../SaveDelete';
 import Search from '../Search';
 import EditButton from './EditButton';
 import withLoading from '../HOCs/withLoading';
+import { ViewableListSkeleton } from '../skeletons/HomeSkeletons';
+
+const ListSkeleton = () => <ViewableListSkeleton count={10} />;
 
 const List = withLoading(
   ({
@@ -40,7 +43,8 @@ const List = withLoading(
         </div>
       );
     }
-  }
+  },
+  ListSkeleton
 );
 
 List.propTypes = {

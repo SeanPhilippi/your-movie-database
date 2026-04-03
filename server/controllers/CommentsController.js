@@ -69,9 +69,10 @@ exports.postComment = (req, res) => {
   newComment
     .save()
     .then(comment => res.status(200).json(comment))
-    .catch(() =>
-      res.status(400).json({ postCommentError: 'Failed to post comment' })
-    );
+    .catch(err => {
+      console.error('postComment error:', err);
+      res.status(400).json({ postCommentError: 'Failed to post comment' });
+    });
 };
 
 exports.deleteComment = (req, res) => {

@@ -260,6 +260,8 @@ export const loginUser = (user, history) => dispatch => {
 export const fetchCurrentUser = () => dispatch => {
   api.users.get.currentUser().then(({ data }) => {
     dispatch(setCurrentUser(data.user));
+  }).catch(err => {
+    console.error('fetchCurrentUser failed:', err);
   });
 };
 

@@ -5,23 +5,25 @@ const movieRankingsQuery = require('./queries/movieRankingsQuery');
 exports.getSearchResults = ({ params }, res) => {
   const apiKey = process.env.API_KEY;
   const { query, num, searchType } = params;
-  fetch(`http://www.omdbapi.com?${searchType}=${query.trim()}&apikey=${apiKey}&page=${num}`)
+  fetch(`https://www.omdbapi.com?${searchType}=${query.trim()}&apikey=${apiKey}&page=${num}`)
     .then(res => res.json())
     .then(data => res.status(200).json(data))
-    .catch(() =>
-      res.status(400).json({ searchResultsError: 'Failed to fetch search results' })
-    );
+    .catch(err => {
+      console.error('getSearchResults error:', err);
+      res.status(400).json({ searchResultsError: 'Failed to fetch search results' });
+    });
 };
 
 exports.getMovieData = (req, res) => {
   const apiKey = process.env.API_KEY;
   const movieId = req.params.id;
-  fetch(`http://www.omdbapi.com/?i=${movieId}&apikey=${apiKey}`)
+  fetch(`https://www.omdbapi.com/?i=${movieId}&apikey=${apiKey}`)
     .then(res => res.json())
     .then(data => res.status(200).json(data))
-    .catch(() =>
-      res.status(400).json({ movieDataError: 'Failed to get movie data' })
-    );
+    .catch(err => {
+      console.error('getMovieData error:', err);
+      res.status(400).json({ movieDataError: 'Failed to get movie data' });
+    });
 };
 
 exports.getMovieRankings = (req, res) => {
