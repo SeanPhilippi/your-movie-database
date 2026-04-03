@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import EditableStatement from './EditableStatement';
 import ViewableStatement from './ViewableStatement';
 import withLoading from '../HOCs/withLoading';
+import { StatementSkeleton } from '../skeletons/ContentSkeletons';
 
 const Statement = withLoading(({ user, username, statement, isEditing }) =>
   isEditing ? (
@@ -10,7 +11,7 @@ const Statement = withLoading(({ user, username, statement, isEditing }) =>
   ) : (
     <ViewableStatement username={username} statement={statement} />
   )
-);
+, StatementSkeleton);
 
 Statement.propTypes = {
   username: PropTypes.string,

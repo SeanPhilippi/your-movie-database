@@ -74,6 +74,13 @@ export const MovieDetailsSkeleton = () => (
   </div>
 );
 
+export const StatementSkeleton = () => (
+  <div>
+    <Skeleton width={100} className='font-weight-bold' />
+    <Skeleton count={3} />
+  </div>
+);
+
 export const CommentsSkeleton = () => (
   <div>
     {Array.from({ length: 3 }).map((_, i) => (

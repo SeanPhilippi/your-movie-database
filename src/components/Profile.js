@@ -7,14 +7,10 @@ import Comments from './Comments';
 import Statement from './Statement/Statement';
 import Affinities from './Affinities';
 import CardWrapper from './HOCs/CardWrapper';
-import withLoading from './HOCs/withLoading';
-import { CommentsSkeleton } from './skeletons/ContentSkeletons';
 import {
   fetchComments,
   fetchListData,
 } from '../redux/actions';
-
-const CommentsWithLoading = withLoading(Comments, CommentsSkeleton);
 
 class Profile extends PureComponent {
   componentDidMount() {
@@ -64,7 +60,6 @@ class Profile extends PureComponent {
       affinities,
       isEditing,
       listDataLoading,
-      commentsLoading,
       affinitiesLoading,
       history: {
         location: { pathname },
@@ -138,8 +133,7 @@ class Profile extends PureComponent {
             color='white'
             marginTopVal='0'
           >
-            <CommentsWithLoading
-              isLoading={commentsLoading}
+            <Comments
               comments={comments}
             />
           </CardWrapper>
@@ -164,7 +158,6 @@ Profile.propTypes = {
   affinities: PropTypes.array,
   isEditing: PropTypes.bool.isRequired,
   listDataLoading: PropTypes.bool.isRequired,
-  commentsLoading: PropTypes.bool.isRequired,
   affinitiesLoading: PropTypes.bool.isRequired,
   fetchComments: PropTypes.func.isRequired,
   fetchListData: PropTypes.func.isRequired,
@@ -184,7 +177,6 @@ const mapStateToProps = state => ({
   affinities: state.affinities,
   isEditing: state.isEditing,
   listDataLoading: state.listDataLoading,
-  commentsLoading: state.commentsLoading,
   affinitiesLoading: state.affinitiesLoading,
 });
 

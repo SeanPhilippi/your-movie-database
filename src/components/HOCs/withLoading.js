@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Spinner from '../Spinner';
 
 const withLoading = (Component, Skeleton) => {
   return function withLoadingComponent({ isLoading, ...props }) {
     if (!isLoading) return <Component {...props} />;
-    return Skeleton ? <Skeleton /> : <Spinner />;
+    return <Skeleton />;
   };
 };
 

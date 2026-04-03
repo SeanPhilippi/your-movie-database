@@ -3,12 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ViewableList from './List/ViewableList/ViewableList';
 import CardWrapper from './HOCs/CardWrapper';
-import withLoading from './HOCs/withLoading';
 import Comments from './Comments';
-import { CommentsSkeleton } from './skeletons/ContentSkeletons';
 import { fetchTopMoviesComments } from '../redux/actions';
-
-const CommentsWithLoading = withLoading(Comments, CommentsSkeleton);
 
 class TopMoviesList extends PureComponent {
   componentDidMount() {
@@ -17,7 +13,7 @@ class TopMoviesList extends PureComponent {
   }
 
   render() {
-    const { commentsLoading, comments } = this.props;
+    const { comments } = this.props;
     return (
       <div className='grid-container bg-light2 vw-95 w-md-100 mx-auto'>
         <div className='bg-white'>
@@ -40,8 +36,7 @@ class TopMoviesList extends PureComponent {
             color='white'
             marginTopVal='0'
           >
-            <CommentsWithLoading
-              isLoading={commentsLoading}
+            <Comments
               comments={comments}
             />
           </CardWrapper>
@@ -56,12 +51,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  commentsLoading: state.commentsLoading,
   comments: state.comments,
 });
 
 TopMoviesList.propTypes = {
-  commentsLoading: PropTypes.bool.isRequired,
   comments: PropTypes.array.isRequired,
   fetchTopMoviesComments: PropTypes.func.isRequired,
 };

@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import Comment from './Comment';
-import Spinner from './Spinner';
 import moment from 'moment';
 import { postComment, deleteComment } from '../redux/actions';
+import { CommentsSkeleton } from './skeletons/ContentSkeletons';
 
 class Comments extends PureComponent {
   state = {
@@ -109,7 +109,9 @@ class Comments extends PureComponent {
 
   render() {
     const { commentText } = this.state;
-    const { isAuthenticated, loading } = this.props;
+    const { isAuthenticated, commentsLoading } = this.props;
+
+    if (commentsLoading) return <CommentsSkeleton />;
 
     return (
       <div className='d-flex flex-column p-2'>
@@ -136,7 +138,7 @@ class Comments extends PureComponent {
             <Link to='/login'>log in</Link> to make a comment.
           </div>
         )}
-        {loading ? <Spinner /> : this.renderComments()}
+        {this.renderComments()}
       </div>
     );
   }
@@ -161,8 +163,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   user: state.user,
   isAuthenticated: state.isAuthenticated,
+  commentsLoading: state.commentsLoading,
 });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Comments)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Comments));
