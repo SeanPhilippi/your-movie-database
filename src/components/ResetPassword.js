@@ -5,6 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CardWrapper from './HOCs/CardWrapper';
 import { resetPassword } from '../redux/actions';
+import PasswordRevealer from './PasswordRevealer';
 
 class ResetPassword extends PureComponent {
   state = {
@@ -65,20 +66,18 @@ class ResetPassword extends PureComponent {
                     >
                       <div className='login mb-2'>
                         <div>New password: </div>
-                        <input
+                        <PasswordRevealer
                           autoFocus
                           name='password'
                           onChange={this.onTextChange}
-                          type='password'
                         />
                         <div className='errors'>{errors.password}</div>
                       </div>
                       <div className='login mb-2'>
                         <div>Confirm password: </div>
-                        <input
+                        <PasswordRevealer
                           name='password2'
                           onChange={this.onTextChange}
-                          type='password'
                         />
                         <div className='errors'>{errors.password2}</div>
                       </div>

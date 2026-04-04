@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { registerUser } from '../redux/actions';
 import { connect } from 'react-redux';
 import { clearErrors } from '../redux/actions';
-// import PasswordRevealer from '../PasswordRevealer/PasswordRevealer';
+import PasswordRevealer from './PasswordRevealer';
 
 class RegisterBox extends PureComponent {
   state = {
@@ -88,12 +88,11 @@ class RegisterBox extends PureComponent {
                 <div className='password-label font-weight-bold'>
                   Password <span style={{ color: 'red' }}>*</span>
                 </div>
-                <input
+                <PasswordRevealer
                   autoComplete='new-password'
                   name='password'
                   onChange={this.onTextChange}
                   className='w-75 w-md-50'
-                  type='password'
                 />
                 <div style={{ color: 'red' }}>{passwordError}</div>
               </div>
@@ -102,12 +101,11 @@ class RegisterBox extends PureComponent {
                 <div className='password2-label font-weight-bold'>
                   Retype Password <span style={{ color: 'red' }}>*</span>
                 </div>
-                <input
+                <PasswordRevealer
                   autoComplete='new-password'
                   name='password2'
                   onChange={this.onTextChange}
                   className='w-75 w-md-50'
-                  type='password'
                 />
                 <div style={{ color: 'red' }}>{password2Error}</div>
               </div>

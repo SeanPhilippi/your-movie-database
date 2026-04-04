@@ -1,19 +1,36 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import './PasswordRevealer.css';
-
-const PasswordRevealer = ({ value }) => {
+const PasswordRevealer = ({ className, ...inputProps }) => {
   const [shown, setShown] = useState(false);
 
   return (
-    <div>
+    <div style={{ position: 'relative', display: 'block' }} className={className}>
       <input
-        autoComplete='off'
+        {...inputProps}
         type={shown ? 'text' : 'password'}
-        value={value}
-        onChange={() => {}}
+        style={{ width: '100%', paddingRight: '1.8rem' }}
       />
-      <button onClick={() => setShown(!shown)}>Show/Hide</button>
+      <button
+        type='button'
+        onMouseDown={() => setShown(true)}
+        onMouseUp={() => setShown(false)}
+        onMouseLeave={() => setShown(false)}
+        style={{
+          position: 'absolute',
+          right: '4px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          padding: '0 2px',
+          color: '#777',
+          lineHeight: 1,
+        }}
+      >
+        <FontAwesomeIcon icon={shown ? 'eye' : 'eye-slash'} />
+      </button>
     </div>
   );
 };

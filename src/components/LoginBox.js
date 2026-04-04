@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { loginUser } from '../redux/actions';
 import { connect } from 'react-redux';
-// import PasswordRevealer from '../PasswordRevealer/PasswordRevealer';
+import PasswordRevealer from './PasswordRevealer';
 
 class LoginBox extends PureComponent {
   state = {
@@ -61,11 +61,10 @@ class LoginBox extends PureComponent {
               </div>
               <div className='password'>
                 <div>Password: </div>
-                <input
+                <PasswordRevealer
                   autoComplete='current-password'
                   name='password'
                   onChange={this.onTextChange}
-                  type='password'
                 />
                 <div className='errors'>{passwordErrors}</div>
               </div>
