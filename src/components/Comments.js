@@ -109,7 +109,7 @@ class Comments extends PureComponent {
 
   render() {
     const { commentText } = this.state;
-    const { isAuthenticated, commentsLoading } = this.props;
+    const { isAuthenticated, commentsLoading, location } = this.props;
 
     if (commentsLoading) return <CommentsSkeleton />;
 
@@ -135,7 +135,7 @@ class Comments extends PureComponent {
         ) : (
           <div className='ml-1 mb-1'>
             Create an account <Link to='/register'>here</Link> or{' '}
-            <Link to='/login'>log in</Link> to make a comment.
+            <Link to={{ pathname: '/login', state: { from: location.pathname } }}>log in</Link> to make a comment.
           </div>
         )}
         {this.renderComments()}

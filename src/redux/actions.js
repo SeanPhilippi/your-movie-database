@@ -246,7 +246,8 @@ export const loginUser = (user, history) => dispatch => {
       dispatch(setToken(decoded));
       // dispatch setUser
       dispatch(setCurrentUser(user));
-      history.push('/profile');
+      const from = history.location.state && history.location.state.from;
+      history.push(from || '/profile');
     })
     .catch(err => {
       console.log('err', err.response.data);

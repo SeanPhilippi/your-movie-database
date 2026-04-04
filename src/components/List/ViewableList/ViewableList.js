@@ -37,7 +37,7 @@ class ViewableList extends PureComponent {
     if (isAuthenticated) {
       addToList(movie, post);
     } else {
-      history.push('/login');
+      history.push({ pathname: '/login', state: { from: history.location.pathname } });
     }
   };
 
