@@ -40,7 +40,6 @@ Concurrently: ```npm run both```
 * Top Movies List aggregating rankings from all member lists.
 
 ## Future Goals
-* Users Index page with a search bar. This is partially done.
 * Ability to post reviews to movie pages.
 * Easy inclusion of emojis in comments.
 * Add notifications within site and email notifications and settings to turn off email notifications.
