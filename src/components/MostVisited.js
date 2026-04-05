@@ -1,54 +1,58 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { fetchMostVisited } from '../redux/actions';
 import { MostVisitedSkeleton } from './skeletons/HomeSkeletons';
 
-const MostVisitedList = ({ newUsers, num, user, newUsersLoading }) => {
-  const User = ({ username, _id, visits }) => (
-    <div key={_id} className='bg-white' style={{ lineHeight: '2rem' }}>
-      <div className='d-flex justify-content-between overflow-hidden'>
-        <div
-          tltle={`${username})`}
-          className='d-inline-block text-truncate'
-          style={{ maxWidth: '516px' }}
-        >
-          <Link
-            className='ml-3'
-            to={`/profile${username === user.username ? '' : `/${username}`}`}
-          >
-            {username}
-          </Link>
-        </div>
-        <div className='mr-3'>{/* { visits } visits */}</div>
-      </div>
-    </div>
-  );
+const MostVisited = ({ mostVisited, mostVisitedLoading, user, num, fullPage, fetchMostVisited }) => {
+  useEffect(() => {
+    fetchMostVisited(num);
+  }, []);
 
-  if (newUsersLoading) {
+  if (mostVisitedLoading) {
     return <MostVisitedSkeleton count={num} />;
   }
 
+  if (!mostVisited.length) {
+    return <div className='ml-3'>No visits recorded yet.</div>;
+  }
+
   return (
-    <div className='top-movies-container'>
-      {newUsers
-        .slice()
-        .reverse()
-        .slice(0, num)
-        .map(user => (
-          <User
-            key={user._id}
-            username={user.username}
-            // visits={ user.visits }
-          />
+    <div>
+      <div className='top-movies-container'>
+        {mostVisited.map(({ _id, username }, i) => (
+          <div key={_id} className='d-flex bg-white justify-content-between viewable-item'>
+            <div className='d-flex overflow-hidden'>
+              <div className='text-right pl-1 viewable-item-rank'>
+                <span className='number'>{i + 1}</span> &nbsp;
+              </div>
+              <Link
+                to={`/profile${username === user.username ? '' : `/${username}`}`}
+              >
+                {username}
+              </Link>
+            </div>
+          </div>
         ))}
+      </div>
+      {!fullPage && (
+        <div>
+          <hr className='mt-4' />
+          <Link to='/most-visited'>Go to the list of the top 50 most visited</Link>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 const mapStateToProps = state => ({
-  newUsers: state.newUsers,
+  mostVisited: state.mostVisited,
+  mostVisitedLoading: state.mostVisitedLoading,
   user: state.user,
-  newUsersLoading: state.newUsersLoading,
 });
 
-export default connect(mapStateToProps)(MostVisitedList);
+const mapDispatchToProps = dispatch => ({
+  fetchMostVisited: limit => dispatch(fetchMostVisited(limit)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MostVisited);

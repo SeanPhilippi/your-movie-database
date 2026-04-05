@@ -7,6 +7,8 @@ const {
   saveList,
   deleteList,
   calcAffinities,
+  getMostVisited,
+  incrementVisits,
 } = listsController;
 
 // @route   GET api/list/:username/list
@@ -28,5 +30,15 @@ router.delete('/delete/:username', deleteList);
 // @desc    grab lists, calculate similarity to current user list
 // @access  Public
 router.post('/affinities', calcAffinities);
+
+// @route   GET api/list/most-visited
+// @desc    fetch lists sorted by visit count descending
+// @access  Public
+router.get('/most-visited', getMostVisited);
+
+// @route   POST api/list/:username/visit
+// @desc    increment profile visit count
+// @access  Public
+router.post('/:username/visit', incrementVisits);
 
 module.exports = router;

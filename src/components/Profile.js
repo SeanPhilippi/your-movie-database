@@ -10,6 +10,7 @@ import CardWrapper from './HOCs/CardWrapper';
 import {
   fetchComments,
   fetchListData,
+  recordVisit,
 } from '../redux/actions';
 
 class Profile extends PureComponent {
@@ -30,6 +31,7 @@ class Profile extends PureComponent {
     const {
       fetchListData,
       fetchComments,
+      recordVisit,
       user,
       history: {
         location: { pathname },
@@ -47,6 +49,10 @@ class Profile extends PureComponent {
     } else {
       fetchListData(username, false);
       fetchComments(username);
+
+      if (username !== user.username) {
+        recordVisit(username);
+      }
     }
   };
 
@@ -166,6 +172,7 @@ Profile.propTypes = {
 const mapDispatchToProps = dispatch => ({
   fetchComments: user => dispatch(fetchComments(user)),
   fetchListData: username => dispatch(fetchListData(username)),
+  recordVisit: username => dispatch(recordVisit(username)),
 });
 
 const mapStateToProps = state => ({

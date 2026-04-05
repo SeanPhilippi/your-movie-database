@@ -16,6 +16,7 @@ import Login from './components/Login';
 import Account from './components/Account';
 import UsersIndex from './components/UsersIndex';
 import NewRegisters from './components/NewRegisters';
+import MostVisitedPage from './components/MostVisitedPage';
 import PageNotFound from './components/PageNotFound';
 import UnderConstruction from './components/UnderConstruction';
 import Footer from './components/Footer';
@@ -62,7 +63,7 @@ class App extends PureComponent {
           <Route exact path='/profile/:username' component={Profile} />
           <Route exact path='/users-index' component={UsersIndex} />
           <Route exact path='/all-movies' component={UnderConstruction} />
-          <Route exact path='/most-visited' component={UnderConstruction} />
+          <Route exact path='/most-visited' component={MostVisitedPage} />
           <Route exact path='/reviews' component={UnderConstruction} />
           <Route exact path='/new-registers' component={NewRegisters} />
           <Route path='/movies' component={MoviePage} />

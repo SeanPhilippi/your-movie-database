@@ -35,6 +35,8 @@ export const TYPES = {
   SET_RESET_PASSWORD_SUCCESS: 'SET_RESET_PASSWORD_SUCCESS',
   SET_TOP_MOVIES_LOADING: 'SET_TOP_MOVIES_LOADING',
   SET_NEW_USERS_LOADING: 'SET_NEW_USERS_LOADING',
+  SET_MOST_VISITED: 'SET_MOST_VISITED',
+  SET_MOST_VISITED_LOADING: 'SET_MOST_VISITED_LOADING',
 };
 
 // action creators
@@ -266,12 +268,36 @@ export const fetchCurrentUser = () => dispatch => {
   });
 };
 
+export const setMostVisited = data => ({
+  type: TYPES.SET_MOST_VISITED,
+  payload: data,
+});
+
+export const setMostVisitedLoading = bool => ({
+  type: TYPES.SET_MOST_VISITED_LOADING,
+  payload: bool,
+});
+
+export const fetchMostVisited = limit => dispatch => {
+  dispatch(setMostVisitedLoading(true));
+  api.list.get.mostVisited(limit)
+    .then(({ data }) => {
+      dispatch(setMostVisited(data));
+      dispatch(setMostVisitedLoading(false));
+    })
+    .catch(console.log);
+};
+
 export const fetchNewUsers = () => dispatch => {
   dispatch(setNewUsersLoading(true));
   api.users.get.newRegisters().then(({ data }) => {
     dispatch(setNewUsers(data));
     dispatch(setNewUsersLoading(false));
   });
+};
+
+export const recordVisit = username => () => {
+  api.list.post.recordVisit(username).catch(console.log);
 };
 
 export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {

@@ -34,6 +34,8 @@ const initialState = {
   open: false,
   message: '',
   newUsers: [],
+  mostVisited: [],
+  mostVisitedLoading: true,
   comments: [],
   affinities: [],
   movie: {},
@@ -190,6 +192,16 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         newUsersLoading: payload,
+      };
+    case TYPES.SET_MOST_VISITED:
+      return {
+        ...state,
+        mostVisited: payload,
+      };
+    case TYPES.SET_MOST_VISITED_LOADING:
+      return {
+        ...state,
+        mostVisitedLoading: payload,
       };
     case TYPES.ADD_TO_LIST:
       return {

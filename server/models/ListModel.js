@@ -9,6 +9,10 @@ const ListSchema = new Schema({
   statement: {
     type: String,
   },
+  visits: {
+    type: Number,
+    default: 0,
+  },
   items: [
     {
       // array of movie objects

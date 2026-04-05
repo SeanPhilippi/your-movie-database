@@ -41,6 +41,26 @@ exports.deleteList = (req, res) => {
     );
 };
 
+exports.getMostVisited = (req, res) => {
+  const limit = parseInt(req.query.limit) || 10;
+
+  List.find({ visits: { $gt: 0 } })
+    .sort({ visits: -1 })
+    .limit(limit)
+    .select('username visits')
+    .then(data => res.status(200).json(data))
+    .catch(() => res.status(400).json({ error: 'Failed to fetch most visited' }));
+};
+
+exports.incrementVisits = (req, res) => {
+  List.updateOne(
+    { username: req.params.username },
+    { $inc: { visits: 1 } }
+  )
+    .then(() => res.sendStatus(200))
+    .catch(() => res.status(400).json({ error: 'Failed to record visit' }));
+};
+
 exports.calcAffinities = (req, res) => {
   // store current user's movie ids from state.list in a variable
   const movieIds = req.body;

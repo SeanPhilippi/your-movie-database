@@ -62,6 +62,7 @@ class Home extends PureComponent {
               rotate={30}
               color='tan'
               title='most visited lists'
+              link='most-visited'
             >
               <MostVisited num={10} />
             </CardWrapper>
