@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import SearchResult from './SearchResult';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { addToList } from '../redux/actions';
 import debounce from '../utils/helpers/debounce.js';
 import removeDupes from '../utils/helpers/removeDupes.js';
@@ -25,6 +26,8 @@ class Search extends PureComponent {
 
   handleSearch = debounce(async () => {
     const { searchText } = this.state;
+    // user search is a local filter — no API call needed
+    if (this.props.users) return;
     // prevents function from firing if someone backspaces and the searchText is an empty string
     if (searchText.length) {
       if (searchText.length > 2) {
@@ -93,17 +96,29 @@ class Search extends PureComponent {
   };
 
   renderResults = () => {
-    const { searchResults } = this.state;
+    const { searchResults, searchText } = this.state;
     const { users } = this.props;
 
-    if (searchResults.length) {
-      return users ? (
+    if (users) {
+      const filtered = users.filter(u =>
+        u.username.toLowerCase().includes(searchText.toLowerCase())
+      );
+      if (!filtered.length) return null;
+      return (
         <div className='bg-white result-scroll'>
-          {users.map(user => (
-            <SearchResult user={user} key={user._id} />
+          {filtered.slice(0, 10).map(user => (
+            <SearchResult
+              user={user}
+              key={user._id}
+              handleRedirect={u => this.props.history.push(`/profile/${u.username}`)}
+            />
           ))}
         </div>
-      ) : (
+      );
+    }
+
+    if (searchResults.length) {
+      return (
         <div className='bg-white result-scroll'>
           {searchResults.map(movie => {
             if (!JSON.stringify(movie).includes('Movie not found')) {
@@ -113,7 +128,7 @@ class Search extends PureComponent {
                   handleAdd={this.handleAdd}
                   key={movie.imdbID}
                 />
-              )
+              );
             } else {
               return null;
             }
@@ -162,4 +177,4 @@ const mapDispatchToProps = dispatch => ({
   addToList: (movie, post) => dispatch(addToList(movie, post)),
 });
 
-export default connect(null, mapDispatchToProps)(Search);
+export default withRouter(connect(null, mapDispatchToProps)(Search));

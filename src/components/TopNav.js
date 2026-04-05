@@ -111,14 +111,14 @@ class TopNav extends PureComponent {
                 YOUR TOP LIST
               </NavLink>
 
-              {/* <NavLink
-              className="text-white nav-block"
-              exact
-              to="/users-index"
-              activeClassName="active"
-            >
-              USERS' INDEX
-            </NavLink> */}
+              <NavLink
+                className='text-white nav-block'
+                exact
+                to='/users-index'
+                activeClassName='active'
+              >
+                USERS' INDEX
+              </NavLink>
 
               {/* <NavLink
               className="text-white nav-block"

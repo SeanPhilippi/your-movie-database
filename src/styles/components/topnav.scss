@@ -55,6 +55,12 @@
   }
 }
 
+.nav-block:hover {
+  background-color: darken($red, 10%);
+  color: white;
+  text-decoration: none;
+}
+
 .nav-block:active,
 .nav-block.active {
   background-color: $light-orange;

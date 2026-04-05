@@ -5,7 +5,7 @@ const SearchResult = ({ movie, user, handleAdd, handleRedirect }) => (
   <div
     key={movie ? movie.imdbID : user._id}
     className={handleRedirect ? 'movie-result-item' : 'result-item'}
-    onClick={handleAdd ? () => handleAdd(movie) : () => handleRedirect(movie)}
+    onClick={handleAdd ? () => handleAdd(movie) : () => handleRedirect(user || movie)}
   >
     <div className={handleRedirect ? 'movie-result-info' : 'result-info'}>
       {movie ? movie.Title : user.username} {movie && `(${movie.Year})`}
