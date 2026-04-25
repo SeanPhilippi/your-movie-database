@@ -21,8 +21,33 @@
 }
 
 .viewable-item-rank {
-  display: inline-block;
-  min-width: 2.6rem;
+  display: flex;
+  align-items: center;
+  width: 3.6rem;
+  flex-shrink: 0;
+  margin-right: 0.4rem;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background-color: $gold;
+  }
+
+  .number {
+    flex: 1;
+    text-align: center;
+    border-right: none;
+    padding-right: 0;
+  }
+}
+
+.viewable-item-rank.no-plus {
+  width: 2rem;
 }
 
 .active-page {
@@ -41,7 +66,7 @@
   width: 1rem;
   position: relative;
   bottom: .1rem;
-  margin-right: .4rem;
-  margin-left: .1rem;
+  margin-right: .2rem;
+  margin-left: .3rem;
   cursor: pointer;
 }

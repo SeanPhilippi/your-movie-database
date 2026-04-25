@@ -27,11 +27,11 @@ const UsersIndex = ({ users, user }) => {
             rotate={-5}
             color='tan'
           >
-            <div className='py-2 px-4'>
-              <div className='mb-2'>{users.length} registered users</div>
+            <div className='py-2 bg-white'>
+              <div className='mb-2 mx-3 pl-3 registered-users-count'>{users.length} registered users</div>
               <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
                 {sorted.map(({ _id, username }) => (
-                  <div key={_id} className='py-1'>
+                  <div key={_id} className='py-1 pl-3'>
                     <Link to={`/profile${username === user.username ? '' : `/${username}`}`}>
                       {username}
                     </Link>

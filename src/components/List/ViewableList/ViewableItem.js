@@ -20,7 +20,7 @@ const ViewableItem = ({
     className='d-flex bg-white justify-content-between viewable-item'
   >
     <div className='d-flex overflow-hidden'>
-      <div className='text-right pl-1 viewable-item-rank'>
+      <div className={`viewable-item-rank${pathname === '/profile' ? ' no-plus' : ''}`}>
         {pathname !== '/profile' && (
           <img
             onClick={() => handleAdd(movie, true)}

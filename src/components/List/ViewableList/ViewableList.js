@@ -93,7 +93,7 @@ class ViewableList extends PureComponent {
           movie={item}
           idx={idx}
           key={item.id}
-          maxWidth='490px'
+          maxWidth='460px'
           handleAdd={this.handleAdd}
         />
       ));

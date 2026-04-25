@@ -23,7 +23,7 @@ const MostVisited = ({ mostVisited, mostVisitedLoading, user, num, fullPage, fet
         {mostVisited.map(({ _id, username }, i) => (
           <div key={_id} className='d-flex bg-white justify-content-between viewable-item'>
             <div className='d-flex overflow-hidden'>
-              <div className='text-right pl-1 viewable-item-rank'>
+              <div className='viewable-item-rank no-plus'>
                 <span className='number'>{i + 1}</span> &nbsp;
               </div>
               <Link
