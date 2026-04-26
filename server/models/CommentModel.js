@@ -22,6 +22,6 @@ const CommentSchema = new Schema({
     required: true,
   },
   disabled: Boolean,
-});
+}, { timestamps: true });
 
 module.exports = model('Comment', CommentSchema);

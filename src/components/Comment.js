@@ -4,12 +4,26 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Emojione } from 'react-emoji-render';
 
+const formatCommentDate = (createdAt, postDate) => {
+  if (!createdAt) {
+    return postDate;
+  }
+  const date = new Date(createdAt);
+  const day = date.getUTCDate();
+  const month = date.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' });
+  const year = date.getUTCFullYear();
+  const hours = String(date.getUTCHours()).padStart(2, '0');
+  const mins = String(date.getUTCMinutes()).padStart(2, '0');
+  return `${day} ${month} ${year} ${hours}:${mins} GMT`;
+};
+
 const Comment = ({
   user,
   comment: {
     // prettier-ignore
     author,
     post_date,
+    createdAt,
     text,
     _id,
   },
@@ -21,7 +35,7 @@ const Comment = ({
       <Link to={`/profile${author === user.username ? '' : `/${author}`}`}>
         {author}
       </Link>{' '}
-      wrote on {post_date}
+      wrote on {formatCommentDate(createdAt, post_date)}
     </div>
     <Emojione className='comment mt-2' text={`${text}`} />
     {author === user.username ? (
@@ -40,7 +54,8 @@ const Comment = ({
 Comment.propTypes = {
   comment: PropTypes.shape({
     author: PropTypes.string.isRequired,
-    post_date: PropTypes.string.isRequired,
+    post_date: PropTypes.string,
+    createdAt: PropTypes.string,
     text: PropTypes.string.isRequired,
   }),
 };

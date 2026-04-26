@@ -100,21 +100,27 @@
 .unsubscribe-page {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   padding: 3rem 1rem;
 }
 
 .unsubscribe-container {
   max-width: 500px;
+  width: 100%;
   text-align: center;
-  color: $light;
+  background: #fff;
+  border-radius: .4rem;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .15);
 
   h3 {
     font-family: $michroma;
     margin-bottom: 1rem;
+    color: #222;
   }
 
   p {
-    color: #bbb;
+    color: #555;
     margin-bottom: .75rem;
   }
 
@@ -122,7 +128,7 @@
     color: $orange;
 
     &:hover {
-      color: $light-orange;
+      color: $dark-orange;
     }
   }
 }

@@ -16,6 +16,7 @@ import {
   faEyeSlash,
   faBell,
   faCog,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faUserCircle,
@@ -46,7 +47,8 @@ const fontAwesome = library.add(
   faEye,
   faEyeSlash,
   faBell,
-  faCog
+  faCog,
+  faSearch
 );
 
 export default fontAwesome;
