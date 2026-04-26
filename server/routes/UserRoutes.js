@@ -10,6 +10,9 @@ const {
   getCurrentUser,
   forgotPassword,
   resetPassword,
+  getSettings,
+  updatePreferences,
+  unsubscribe,
 } = usersController;
 
 // @route   POST api/users/register
@@ -38,5 +41,28 @@ router.get(
 
 router.post('/forgot-password', forgotPassword);
 router.post('/reset-password/:token', resetPassword);
+
+// @route   GET api/users/settings
+// @desc    Fetch current user's notification preferences
+// @access  Private
+router.get(
+  '/settings',
+  passport.authenticate('jwt', { session: false }),
+  getSettings
+);
+
+// @route   PUT api/users/settings/preferences
+// @desc    Update email + in-app notification preferences
+// @access  Private
+router.put(
+  '/settings/preferences',
+  passport.authenticate('jwt', { session: false }),
+  updatePreferences
+);
+
+// @route   POST api/users/unsubscribe/:token
+// @desc    One-click unsubscribe from email notifications (no auth required)
+// @access  Public
+router.post('/unsubscribe/:token', unsubscribe);
 
 module.exports = router;

@@ -8,6 +8,7 @@ const list = require('./routes/ListRoutes');
 const movies = require('./routes/MovieRoutes');
 const users = require('./routes/UserRoutes');
 const comments = require('./routes/CommentRoutes');
+const notifications = require('./routes/NotificationRoutes');
 const app = express();
 // DB config
 const PORT = process.env.PORT || 4300;
@@ -43,6 +44,7 @@ app.use('/api/list', list);
 app.use('/api/movies', movies);
 app.use('/api/users', users);
 app.use('/api/comments', comments);
+app.use('/api/notifications', notifications);
 
 app.get('/express', (req, res) => {
   res.send({ express: 'Your express backend is connected to React!' });

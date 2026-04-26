@@ -7,6 +7,7 @@ const User = require('../models/UserModel');
 const keys = require('../config/keys');
 const validateRegisterInput = require('./validation/validateRegisterInput');
 const formatDate = require('../../src/utils/helpers/formatDate');
+const { verifyUnsubscribeToken } = require('./utils/unsubscribeToken');
 
 exports.registerUser = async (req, res) => {
   // takes newUser object created on front-end and runs through validating function
@@ -127,7 +128,10 @@ exports.forgotPassword = async (req, res) => {
     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
     await user.save();
 
-    const resetUrl = `https://www.yourmoviedatabase.com/reset-password/${rawToken}`;
+    const baseUrl = process.env.NODE_ENV === 'production'
+      ? 'https://www.yourmoviedatabase.com'
+      : 'http://localhost:3000';
+    const resetUrl = `${baseUrl}/reset-password/${rawToken}`;
 
     const emailRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -136,7 +140,9 @@ exports.forgotPassword = async (req, res) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'YMDB <noreply@yourmoviedatabase.com>',
+        from: process.env.NODE_ENV === 'production'
+          ? 'YMDB <noreply@yourmoviedatabase.com>'
+          : 'YMDB <onboarding@resend.dev>',
         to: process.env.NODE_ENV === 'production' ? user.email : 'sean.philippi@protonmail.com',
         subject: 'Reset your YMDB password',
         html: `
@@ -210,5 +216,58 @@ exports.getCurrentUser = (req, res) => {
   } catch(err) {
     console.error(err);
     res.status(400).json({ currentUserError: 'Failed to get current user' })
+  }
+};
+
+exports.getSettings = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select(
+      'emailPreferences inAppPreferences hideVisitCount'
+    );
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch settings' });
+  }
+};
+
+exports.updatePreferences = async (req, res) => {
+  try {
+    const { emailPreferences, inAppPreferences } = req.body;
+    await User.findByIdAndUpdate(req.user._id, {
+      $set: { emailPreferences, inAppPreferences },
+    });
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update preferences' });
+  }
+};
+
+exports.unsubscribe = async (req, res) => {
+  const { token } = req.params;
+  const { category } = req.query;
+
+  const parsed = verifyUnsubscribeToken(token);
+  if (!parsed) {
+    return res.status(400).json({ error: 'Invalid or tampered unsubscribe link.' });
+  }
+
+  // Use category from query string if provided, fall back to token's category
+  const cat = category || parsed.category;
+  const allowedCategories = ['profileComments', 'announcements'];
+  if (!allowedCategories.includes(cat)) {
+    return res.status(400).json({ error: 'Unknown notification category.' });
+  }
+
+  try {
+    await User.findOneAndUpdate(
+      { username: parsed.username },
+      { $set: { [`emailPreferences.${cat}`]: false } }
+    );
+    res.status(200).json({ username: parsed.username, category: cat });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to unsubscribe.' });
   }
 };

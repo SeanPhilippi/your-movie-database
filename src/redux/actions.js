@@ -37,6 +37,11 @@ export const TYPES = {
   SET_NEW_USERS_LOADING: 'SET_NEW_USERS_LOADING',
   SET_MOST_VISITED: 'SET_MOST_VISITED',
   SET_MOST_VISITED_LOADING: 'SET_MOST_VISITED_LOADING',
+  SET_NOTIFICATIONS: 'SET_NOTIFICATIONS',
+  SET_NOTIFICATIONS_LOADING: 'SET_NOTIFICATIONS_LOADING',
+  MARK_ALL_NOTIFICATIONS_READ: 'MARK_ALL_NOTIFICATIONS_READ',
+  MARK_NOTIFICATION_READ: 'MARK_NOTIFICATION_READ',
+  SET_USER_PREFERENCES: 'SET_USER_PREFERENCES',
 };
 
 // action creators
@@ -678,6 +683,64 @@ export const updateMovie = movie => dispatch => {
   api.movies.put.movie(movie).then(() => {
     dispatch(fetchTopMoviesList());
   });
+};
+
+export const setNotifications = notifications => ({
+  type: TYPES.SET_NOTIFICATIONS,
+  payload: notifications,
+});
+
+export const setNotificationsLoading = bool => ({
+  type: TYPES.SET_NOTIFICATIONS_LOADING,
+  payload: bool,
+});
+
+export const fetchNotifications = () => dispatch => {
+  dispatch(setNotificationsLoading(true));
+  api.notifications.get
+    .all()
+    .then(({ data }) => {
+      dispatch(setNotifications(data));
+      dispatch(setNotificationsLoading(false));
+    })
+    .catch(err => {
+      console.error('fetchNotifications failed:', err);
+      dispatch(setNotificationsLoading(false));
+    });
+};
+
+export const markAllNotificationsRead = () => dispatch => {
+  dispatch({ type: TYPES.MARK_ALL_NOTIFICATIONS_READ });
+  api.notifications.put.markAllRead().catch(console.error);
+};
+
+export const markNotificationRead = id => dispatch => {
+  dispatch({ type: TYPES.MARK_NOTIFICATION_READ, payload: id });
+  api.notifications.put.markRead(id).catch(console.error);
+};
+
+export const setUserPreferences = prefs => ({
+  type: TYPES.SET_USER_PREFERENCES,
+  payload: prefs,
+});
+
+export const fetchUserSettings = () => dispatch => {
+  api.users.get
+    .settings()
+    .then(({ data }) => {
+      dispatch(setUserPreferences({
+        emailPreferences: data.emailPreferences,
+        inAppPreferences: data.inAppPreferences,
+      }));
+    })
+    .catch(console.error);
+};
+
+export const saveUserPreferences = prefs => dispatch => {
+  dispatch(setUserPreferences(prefs));
+  api.users.put
+    .preferences(prefs)
+    .catch(console.error);
 };
 
 export const setCurrentTopMovies = () => (dispatch, getState) => {

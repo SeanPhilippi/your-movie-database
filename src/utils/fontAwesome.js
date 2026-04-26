@@ -14,6 +14,8 @@ import {
   faVoteYea,
   faEye,
   faEyeSlash,
+  faBell,
+  faCog,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faUserCircle,
@@ -42,7 +44,9 @@ const fontAwesome = library.add(
   faBook,
   faVoteYea,
   faEye,
-  faEyeSlash
+  faEyeSlash,
+  faBell,
+  faCog
 );
 
 export default fontAwesome;

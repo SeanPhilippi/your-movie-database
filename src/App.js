@@ -14,6 +14,8 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import Login from './components/Login';
 import Account from './components/Account';
+import Settings from './components/Settings/Settings';
+import Unsubscribe from './components/Unsubscribe';
 import UsersIndex from './components/UsersIndex';
 import NewRegisters from './components/NewRegisters';
 import MostVisitedPage from './components/MostVisitedPage';
@@ -56,6 +58,8 @@ class App extends PureComponent {
           <Route exact path='/forgot-password' component={ForgotPassword} />
           <Route exact path='/reset-password/:token' component={ResetPassword} />
           <Route exact path='/account' component={Account} />
+          <Route exact path='/settings' component={Settings} />
+          <Route exact path='/unsubscribe/:token' component={Unsubscribe} />
           <Route exact path='/top-movies' component={TopMoviesList} />
           <Route exact path='/profile' component={Profile} />
           {/* <Route exact path="/profile/edit=:edit/:username" component={ Profile } /> */}

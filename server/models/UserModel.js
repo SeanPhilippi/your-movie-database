@@ -32,6 +32,15 @@ const UserSchema = new Schema({
   resetPasswordExpires: {
     type: Date,
   },
+  emailPreferences: {
+    profileComments: { type: Boolean, default: true },
+    announcements:   { type: Boolean, default: true },
+  },
+  inAppPreferences: {
+    profileComments: { type: Boolean, default: true },
+  },
+  hideVisitCount: { type: Boolean, default: false },
+  isAdmin:        { type: Boolean, default: false },
 });
 
 module.exports = model('User', UserSchema);

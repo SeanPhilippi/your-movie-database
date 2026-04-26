@@ -51,6 +51,7 @@
   "scripts": {
     "start": "react-scripts start",
     "both": "concurrently --kill-others \"react-scripts start\" \"nodemon server/server.js\"",
+    "preserver": "lsof -ti :4300 | xargs kill -9 2>/dev/null || true",
     "server": "nodemon server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",

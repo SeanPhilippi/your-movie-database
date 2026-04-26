@@ -7,6 +7,7 @@ import { Navbar } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { logoutUser } from '../redux/actions';
+import NotificationBell from './Notifications/NotificationBell';
 
 class TopNav extends PureComponent {
   handleLogout = e => {
@@ -36,13 +37,24 @@ class TopNav extends PureComponent {
 
     const authLinks = (
       <Nav className='login-register-links p-0'>
+        <NotificationBell />
         <NavLink
-          className='text-white font-weight-bold'
+          className='text-white font-weight-bold mx-2'
           to='/account'
           activeClassName='active'
         >
           <FontAwesomeIcon icon={['far', 'user']} /> {username}
         </NavLink>
+        {/* Settings page not yet ready for production
+        <NavLink
+          className='text-white mx-1'
+          to='/settings'
+          activeClassName='active'
+          title='Settings'
+        >
+          <FontAwesomeIcon icon='cog' />
+        </NavLink>
+        */}
         <NavLink onClick={this.handleLogout} className='text-white mx-2' to='/'>
           | {'\u00a0'}
           <FontAwesomeIcon icon='sign-out-alt' /> LOGOUT

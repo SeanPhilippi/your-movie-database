@@ -49,6 +49,17 @@ const initialState = {
   movieStatsLoading: true,
   topMoviesLoading: true,
   newUsersLoading: true,
+  notifications: [],
+  notificationsLoading: true,
+  userPreferences: {
+    emailPreferences: {
+      profileComments: true,
+      announcements: true,
+    },
+    inAppPreferences: {
+      profileComments: true,
+    },
+  },
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -270,6 +281,36 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         moviesPerPage: payload,
+      };
+    case TYPES.SET_NOTIFICATIONS:
+      return {
+        ...state,
+        notifications: payload,
+      };
+    case TYPES.SET_NOTIFICATIONS_LOADING:
+      return {
+        ...state,
+        notificationsLoading: payload,
+      };
+    case TYPES.MARK_ALL_NOTIFICATIONS_READ:
+      return {
+        ...state,
+        notifications: state.notifications.map(notification => ({ ...notification, read: true })),
+      };
+    case TYPES.MARK_NOTIFICATION_READ:
+      return {
+        ...state,
+        notifications: state.notifications.map(notification =>
+          notification._id === payload ? { ...notification, read: true } : notification
+        ),
+      };
+    case TYPES.SET_USER_PREFERENCES:
+      return {
+        ...state,
+        userPreferences: {
+          ...state.userPreferences,
+          ...payload,
+        },
       };
     default:
       return state;
