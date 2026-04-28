@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const listsController = require('../controllers/ListsController');
+const attachUser = require('../middleware/attachUser');
 
 const {
   getListData,
@@ -39,6 +40,6 @@ router.get('/most-visited', getMostVisited);
 // @route   POST api/list/:username/visit
 // @desc    increment profile visit count
 // @access  Public
-router.post('/:username/visit', incrementVisits);
+router.post('/:username/visit', attachUser, incrementVisits);
 
 module.exports = router;

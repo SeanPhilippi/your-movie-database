@@ -40,21 +40,11 @@ class TopNav extends PureComponent {
         <NotificationBell />
         <NavLink
           className='text-white font-weight-bold mx-2'
-          to='/account'
+          to='/settings'
           activeClassName='active'
         >
           <FontAwesomeIcon icon={['far', 'user']} /> {username}
         </NavLink>
-        {/* Settings page not yet ready for production
-        <NavLink
-          className='text-white mx-1'
-          to='/settings'
-          activeClassName='active'
-          title='Settings'
-        >
-          <FontAwesomeIcon icon='cog' />
-        </NavLink>
-        */}
         <NavLink onClick={this.handleLogout} className='text-white mx-2' to='/'>
           | {'\u00a0'}
           <FontAwesomeIcon icon='sign-out-alt' /> LOGOUT

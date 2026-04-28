@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import TopNav from './components/TopNav';
 import MovieSearch from './components/MovieSearch';
 import Home from './components/Home';
@@ -13,7 +13,6 @@ import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import Login from './components/Login';
-import Account from './components/Account';
 import Settings from './components/Settings/Settings';
 import Unsubscribe from './components/Unsubscribe';
 import UsersIndex from './components/UsersIndex';
@@ -57,7 +56,7 @@ class App extends PureComponent {
           <Route exact path='/register' component={Register} />
           <Route exact path='/forgot-password' component={ForgotPassword} />
           <Route exact path='/reset-password/:token' component={ResetPassword} />
-          <Route exact path='/account' component={Account} />
+          <Redirect exact from='/account' to='/settings' />
           <Route exact path='/settings' component={Settings} />
           <Route exact path='/unsubscribe/:token' component={Unsubscribe} />
           <Route exact path='/top-movies' component={TopMoviesList} />

@@ -1,99 +1,80 @@
-.settings-page {
-  display: flex;
-  justify-content: center;
-  padding: 2rem 1rem;
-}
-
-.settings-container {
-  width: 100%;
-  max-width: 600px;
-}
-
-.settings-title {
-  color: $light;
-  font-family: $michroma;
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid #333;
-  padding-bottom: .75rem;
-}
-
-.settings-section {
-  margin-bottom: 2rem;
-}
-
-.settings-section__title {
-  color: $light;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: .25rem;
-}
-
-.settings-section__desc {
-  color: #888;
-  font-size: .85rem;
-  margin-bottom: 1rem;
-}
-
-.settings-toggle-row {
+.settings-account-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: .6rem 0;
-  border-bottom: 1px solid #2a2a2a;
+  border-bottom: 1px solid #ddd;
+}
 
-  &:last-child {
+.settings-account-label {
+  font-size: .78rem;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.settings-account-value {
+  font-size: .9rem;
+  color: #444;
+}
+
+.settings-account-coming-soon {
+  font-size: .8rem;
+  color: #aaa;
+  font-style: italic;
+}
+
+.settings-account-logout {
+  margin-top: 1rem;
+}
+
+.settings-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    padding: .4rem 1rem .75rem;
+    font-size: .78rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    text-align: center;
+
+    &:first-child {
+      text-align: left;
+      padding-left: 0;
+    }
+  }
+
+  td {
+    padding: .6rem 0;
+    border-bottom: 1px solid #ddd;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  tr:last-child td {
     border-bottom: none;
   }
 }
 
-.settings-toggle-label {
-  color: #ccc;
+.settings-row-label {
   font-size: .9rem;
-  margin: 0;
-  cursor: pointer;
+  color: #444;
 }
 
-.settings-switch {
-  position: relative;
-  display: inline-block;
-  width: 42px;
-  height: 22px;
-  flex-shrink: 0;
+.settings-cell {
+  text-align: center;
 
-  input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-
-    &:checked + .settings-switch__slider {
-      background-color: $orange;
-    }
-
-    &:checked + .settings-switch__slider::before {
-      transform: translateX(20px);
-    }
-  }
-}
-
-.settings-switch__slider {
-  position: absolute;
-  cursor: pointer;
-  inset: 0;
-  background-color: #444;
-  border-radius: 22px;
-  transition: background-color .2s;
-
-  &::before {
-    content: '';
-    position: absolute;
-    height: 16px;
-    width: 16px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    border-radius: 50%;
-    transition: transform .2s;
+  input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    accent-color: $orange;
+    cursor: pointer;
   }
 }
 

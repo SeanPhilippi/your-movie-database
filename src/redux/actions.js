@@ -257,7 +257,6 @@ export const loginUser = (user, history) => dispatch => {
       history.push(from || '/profile');
     })
     .catch(err => {
-      console.log('err', err.response.data);
       dispatch({
         type: TYPES.GET_ERRORS,
         payload: err.response.data,
@@ -640,9 +639,7 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
     api.list.put
       .saveList(username, listObj)
       .then(res => {
-        console.log('res', res)
         const successMessage = res.data;
-        console.log('successMessage', successMessage)
         dispatch(setMessageStatus(successMessage));
       })
       .catch(console.log);
@@ -729,8 +726,10 @@ export const fetchUserSettings = () => dispatch => {
     .settings()
     .then(({ data }) => {
       dispatch(setUserPreferences({
-        emailPreferences: data.emailPreferences,
-        inAppPreferences: data.inAppPreferences,
+        emailPreferences:    data.emailPreferences,
+        inAppPreferences:    data.inAppPreferences,
+        hideVisitCount:      data.hideVisitCount      ?? false,
+        hideFromMostVisited: data.hideFromMostVisited ?? false,
       }));
     })
     .catch(console.error);

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'reactstrap';
 import CardWrapper from './HOCs/CardWrapper';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions';
 
@@ -27,6 +27,9 @@ class Account extends PureComponent {
                 <button className='log-out-btn' onClick={this.handleLogout}>
                   Log out
                 </button>
+              </div>
+              <div className='mt-2'>
+                <Link to='/settings'>Notification settings</Link>
               </div>
             </CardWrapper>
           </Col>

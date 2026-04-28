@@ -2,6 +2,16 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserSettings, saveUserPreferences } from '../../redux/actions';
 
+const DEFAULTS = {
+  emailPreferences:  { profileComments: true,  announcements: true  },
+  inAppPreferences:  { profileComments: true,  announcements: false },
+};
+
+const ROWS = [
+  { label: 'Profile comments',   key: 'profileComments' },
+  { label: 'Site announcements', key: 'announcements'   },
+];
+
 const SettingsNotifications = ({ userPreferences, fetchUserSettings, saveUserPreferences }) => {
   useEffect(() => {
     fetchUserSettings();
@@ -12,48 +22,48 @@ const SettingsNotifications = ({ userPreferences, fetchUserSettings, saveUserPre
       ...userPreferences,
       [section]: {
         ...userPreferences[section],
-        [key]: !userPreferences[section][key],
+        [key]: !userPreferences[section]?.[key],
       },
     };
     saveUserPreferences(updated);
   };
 
-  const renderToggle = (label, section, key) => {
-    const checked = userPreferences[section]?.[key] ?? true;
-    const id = `${section}-${key}`;
-    return (
-      <div className='settings-toggle-row' key={id}>
-        <label htmlFor={id} className='settings-toggle-label'>
-          {label}
-        </label>
-        <label className='settings-switch'>
-          <input
-            type='checkbox'
-            id={id}
-            checked={checked}
-            onChange={() => handleToggle(section, key)}
-          />
-          <span className='settings-switch__slider' />
-        </label>
-      </div>
-    );
-  };
+  const getValue = (section, key) =>
+    userPreferences[section]?.[key] ?? DEFAULTS[section][key];
 
   return (
-    <div className='settings-section'>
-      <h4 className='settings-section__title'>Email Notifications</h4>
-      <p className='settings-section__desc'>
-        Choose which emails YMDB sends you.
-      </p>
-      {renderToggle('Profile comments', 'emailPreferences', 'profileComments')}
-      {renderToggle('Site announcements', 'emailPreferences', 'announcements')}
-
-      <h4 className='settings-section__title mt-4'>In-App Notifications</h4>
-      <p className='settings-section__desc'>
-        Choose which bell notifications you receive.
-      </p>
-      {renderToggle('Profile comments', 'inAppPreferences', 'profileComments')}
-    </div>
+    <table className='settings-table'>
+      <thead>
+        <tr>
+          <th />
+          <th>Email</th>
+          <th>In-App</th>
+        </tr>
+      </thead>
+      <tbody>
+        {ROWS.map(({ label, key }) => (
+          <tr key={key}>
+            <td className='settings-row-label'>{label}</td>
+            <td className='settings-cell'>
+              <input
+                type='checkbox'
+                checked={getValue('emailPreferences', key)}
+                onChange={() => handleToggle('emailPreferences', key)}
+                aria-label={`${label} email`}
+              />
+            </td>
+            <td className='settings-cell'>
+              <input
+                type='checkbox'
+                checked={getValue('inAppPreferences', key)}
+                onChange={() => handleToggle('inAppPreferences', key)}
+                aria-label={`${label} in-app`}
+              />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 

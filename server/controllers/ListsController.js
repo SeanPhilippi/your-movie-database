@@ -1,5 +1,6 @@
 const affinitiesQuery = require('./queries/affinitiesQuery');
 const List = require('../models/ListModel');
+const User = require('../models/UserModel');
 
 exports.getListData = (req, res) => {
   List.findOne({ username: req.params.username })
@@ -41,18 +42,28 @@ exports.deleteList = (req, res) => {
     );
 };
 
-exports.getMostVisited = (req, res) => {
+exports.getMostVisited = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
-
-  List.find({ visits: { $gt: 0 } })
-    .sort({ visits: -1 })
-    .limit(limit)
-    .select('username visits')
-    .then(data => res.status(200).json(data))
-    .catch(() => res.status(400).json({ error: 'Failed to fetch most visited' }));
+  try {
+    const excluded = await User.find({ hideFromMostVisited: true }).select('username');
+    const excludedUsernames = excluded.map(user => user.username);
+    const data = await List.find({
+      visits: { $gt: 0 },
+      username: { $nin: excludedUsernames },
+    })
+      .sort({ visits: -1 })
+      .limit(limit)
+      .select('username visits');
+    res.status(200).json(data);
+  } catch {
+    res.status(400).json({ error: 'Failed to fetch most visited' });
+  }
 };
 
 exports.incrementVisits = (req, res) => {
+  if (req.user && req.user.username === req.params.username) {
+    return res.sendStatus(200);
+  }
   List.updateOne(
     { username: req.params.username },
     { $inc: { visits: 1 } }

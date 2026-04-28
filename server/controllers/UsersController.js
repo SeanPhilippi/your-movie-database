@@ -222,7 +222,7 @@ exports.getCurrentUser = (req, res) => {
 exports.getSettings = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select(
-      'emailPreferences inAppPreferences hideVisitCount'
+      'emailPreferences inAppPreferences hideVisitCount hideFromMostVisited'
     );
     res.status(200).json(user);
   } catch (err) {
@@ -233,9 +233,9 @@ exports.getSettings = async (req, res) => {
 
 exports.updatePreferences = async (req, res) => {
   try {
-    const { emailPreferences, inAppPreferences } = req.body;
+    const { emailPreferences, inAppPreferences, hideVisitCount, hideFromMostVisited } = req.body;
     await User.findByIdAndUpdate(req.user._id, {
-      $set: { emailPreferences, inAppPreferences },
+      $set: { emailPreferences, inAppPreferences, hideVisitCount, hideFromMostVisited },
     });
     res.sendStatus(200);
   } catch (err) {
