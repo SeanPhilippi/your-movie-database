@@ -94,13 +94,18 @@ class Comments extends PureComponent {
   };
 
   renderComments = () => {
+    const { comments, user, match, history } = this.props;
+    const profileOwner = history.location.pathname.includes('/profile')
+      ? (match.params.username || user.username)
+      : null;
     return (
       <div>
-        {this.props.comments.map(comment => (
+        {comments.map(comment => (
           <Comment
             key={comment._id}
             comment={comment}
             deleteComment={this.handleDeleteComment}
+            profileOwner={profileOwner}
           />
         ))}
       </div>

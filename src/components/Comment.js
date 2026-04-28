@@ -28,6 +28,7 @@ const Comment = ({
     _id,
   },
   deleteComment,
+  profileOwner,
 }) => (
   <div className='border my-1 px-2 py-1 d-flex flex-column'>
     <div>
@@ -38,7 +39,7 @@ const Comment = ({
       wrote on {formatCommentDate(createdAt, post_date)}
     </div>
     <Emojione className='comment mt-2' text={`${text}`} />
-    {author === user.username ? (
+    {(author === user.username || (profileOwner && user.username === profileOwner)) ? (
       <div
         className='comment-footer-auth text-right small'
         onClick={() => deleteComment(_id)}
