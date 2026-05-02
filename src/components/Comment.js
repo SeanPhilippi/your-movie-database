@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Emojione } from 'react-emoji-render';
 
 const formatCommentDate = (createdAt, postDate) => {
   if (!createdAt) {
@@ -38,7 +37,7 @@ const Comment = ({
       </Link>{' '}
       wrote on {formatCommentDate(createdAt, post_date)}
     </div>
-    <Emojione className='comment mt-2' text={`${text}`} />
+    <p className='comment mt-2 mb-0'>{text}</p>
     {(author === user.username || (profileOwner && user.username === profileOwner)) ? (
       <div
         className='comment-footer-auth text-right small'

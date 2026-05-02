@@ -2,6 +2,37 @@
   width: 85%;
 }
 
+.comment-toolbar {
+  display: flex;
+  align-items: center;
+  margin-top: .25rem;
+}
+
+.emoji-picker-wrapper {
+  position: relative;
+}
+
+.emoji-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #ccc;
+  font-size: 1.1rem;
+  line-height: 1;
+
+  &:hover {
+    color: #999;
+  }
+}
+
+.emoji-picker-popover {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  z-index: 100;
+}
+
 .comments-label {
   height: 36px;
   line-height: 36px;

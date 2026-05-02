@@ -24,6 +24,7 @@ import {
   faFileAlt,
   faListAlt,
   faEdit,
+  faFaceSmile,
 } from '@fortawesome/free-regular-svg-icons';
 
 const fontAwesome = library.add(
@@ -48,7 +49,8 @@ const fontAwesome = library.add(
   faEyeSlash,
   faBell,
   faCog,
-  faSearch
+  faSearch,
+  faFaceSmile
 );
 
 export default fontAwesome;

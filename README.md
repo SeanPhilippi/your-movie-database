@@ -42,7 +42,6 @@ Concurrently: ```npm run both```
 ## Future Goals
 * Ability to post reviews to movie pages.
 * Easy inclusion of emojis in comments.
-* Add notifications within site and email notifications and settings to turn off email notifications.
 * Add pictures of website to this repo README.md.
 * Add contact form
 * Add user avatars
