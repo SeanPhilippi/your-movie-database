@@ -54,7 +54,9 @@ class Comments extends PureComponent {
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
     const updated = commentText.slice(0, start) + emoji.native + commentText.slice(end);
-    this.setState({ commentText: updated, pickerOpen: false }, () => {
+    // strip react-mentions markup to keep plainText in sync (used for submission)
+    const updatedPlain = updated.replace(/@\[([^\]]+)\]\([^)]+\)/g, '@$1');
+    this.setState({ commentText: updated, plainText: updatedPlain, pickerOpen: false }, () => {
       textarea.focus();
       const pos = start + emoji.native.length;
       textarea.setSelectionRange(pos, pos);
