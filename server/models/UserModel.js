@@ -34,10 +34,12 @@ const UserSchema = new Schema({
   },
   emailPreferences: {
     profileComments: { type: Boolean, default: true },
+    mentions:        { type: Boolean, default: true },
     announcements:   { type: Boolean, default: true },
   },
   inAppPreferences: {
     profileComments: { type: Boolean, default: true  },
+    mentions:        { type: Boolean, default: true  },
     announcements:   { type: Boolean, default: false },
   },
   hideVisitCount:       { type: Boolean, default: false },

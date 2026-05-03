@@ -2,6 +2,81 @@
   width: 85%;
 }
 
+.mentions-input {
+  width: 100%;
+
+  &__control {
+    min-height: 82px;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+
+  &__highlighter {
+    padding: .375rem .75rem;
+    border: 1px solid transparent;
+    min-height: 82px;
+    font-size: 1rem;
+    font-family: inherit;
+    line-height: 1.5;
+  }
+
+  &__input {
+    padding: .375rem .75rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    font-size: 1rem;
+    font-family: inherit;
+    line-height: 1.5;
+    outline: none;
+    resize: vertical;
+
+    &:focus {
+      border-color: #80bdff;
+      box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
+    }
+  }
+
+  &__suggestions {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: .25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+    z-index: 200;
+
+    &__list {
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    &__item {
+      padding: .4rem .75rem;
+      cursor: pointer;
+      font-size: .9rem;
+
+      &--focused {
+        background: $light;
+      }
+    }
+  }
+}
+
+.mention-highlight {
+  color: $orange;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.mention-link {
+  color: $orange;
+  font-weight: 600;
+
+  &:hover {
+    color: $dark-orange;
+  }
+}
+
 .comment-toolbar {
   display: flex;
   align-items: center;

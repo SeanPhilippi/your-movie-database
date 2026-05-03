@@ -244,6 +244,21 @@ exports.updatePreferences = async (req, res) => {
   }
 };
 
+exports.searchUsers = async (req, res) => {
+  const query = (req.query.q || '').trim();
+  if (!query) {
+    return res.json([]);
+  }
+  try {
+    const users = await User.find({
+      username: { $regex: new RegExp(q, 'i') },
+    }).select('username').limit(10);
+    res.json(users.map(user => ({ id: user.username, display: user.username })));
+  } catch (err) {
+    res.status(400).json({ error: 'Search failed' });
+  }
+};
+
 exports.unsubscribe = async (req, res) => {
   const { token } = req.params;
   const { category } = req.query;

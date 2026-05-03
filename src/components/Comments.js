@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
+import { MentionsInput, Mention } from 'react-mentions';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,10 +11,12 @@ import Comment from './Comment';
 import moment from 'moment';
 import { postComment, deleteComment } from '../redux/actions';
 import { CommentsSkeleton } from './skeletons/ContentSkeletons';
+import api from '../utils/api/api';
 
 class Comments extends PureComponent {
   state = {
     commentText: '',
+    plainText: '',
     pickerOpen: false,
   };
 
@@ -34,8 +37,15 @@ class Comments extends PureComponent {
     }
   };
 
-  handleFieldChange = event => {
-    this.setState({ commentText: event.target.value });
+  handleFieldChange = (event, newValue, newPlainTextValue) => {
+    this.setState({ commentText: newValue, plainText: newPlainTextValue });
+  };
+
+  fetchUsers = (query, callback) => {
+    if (!query) {
+      return;
+    }
+    api.users.get.searchUsers(query).then(({ data: results }) => callback(results));
   };
 
   handleEmojiSelect = emoji => {
@@ -64,41 +74,41 @@ class Comments extends PureComponent {
       history,
       location,
     } = this.props;
-    const { commentText } = this.state;
+    const { plainText } = this.state;
     event.preventDefault();
     let newComment;
 
-    if (commentText.length && history.location.pathname.includes('/profile')) {
+    if (plainText.length && history.location.pathname.includes('/profile')) {
       newComment = {
         username: match.params.username || username,
         author: username,
         post_date: moment().format('LL'),
-        text: commentText,
+        text: plainText,
       };
     }
 
-    if (commentText.length && history.location.pathname.includes('/movies')) {
+    if (plainText.length && history.location.pathname.includes('/movies')) {
       newComment = {
         movie_id: location.state.movie.id,
         author: username,
         post_date: moment().format('LL'),
-        text: commentText,
+        text: plainText,
       };
     }
 
     if (
-      commentText.length &&
+      plainText.length &&
       history.location.pathname.includes('/top-movies')
     ) {
       newComment = {
         top_movies_list: true,
         author: username,
         post_date: moment().format('LL'),
-        text: commentText,
+        text: plainText,
       };
     }
     postComment(newComment);
-    this.setState({ commentText: '' });
+    this.setState({ commentText: '', plainText: '' });
   };
 
   handleDeleteComment = id => {
@@ -167,15 +177,19 @@ class Comments extends PureComponent {
             <div className='pb-1 font-weight-bold text-left'>
               Write a comment
             </div>
-            <textarea
-              ref={this.textareaRef}
-              className='comments-box w-100'
+            <MentionsInput
+              inputRef={this.textareaRef}
+              className='mentions-input'
               value={commentText}
-              type='text'
-              name='comments'
-              rows='4'
               onChange={this.handleFieldChange}
-            />
+            >
+              <Mention
+                trigger='@'
+                data={this.fetchUsers}
+                className='mention-highlight'
+                appendSpaceOnAdd
+              />
+            </MentionsInput>
             <div className='comment-toolbar'>
               <div className='emoji-picker-wrapper' ref={this.emojiWrapperRef}>
                 <button

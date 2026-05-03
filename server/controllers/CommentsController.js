@@ -78,6 +78,19 @@ exports.postComment = async (req, res) => {
     if (username && author && author !== username) {
       sendProfileCommentNotification({ recipient: username, actor: author, comment, text });
     }
+
+    // Notify @mentioned users (skip the profile owner — already notified above)
+    const mentionedUsernames = extractMentions(text).filter(
+      user => user !== author && user !== username
+    ).slice(0, 10);
+    const commentLink = username
+      ? `/profile/${username}`
+      : top_movies_list
+      ? '/top-movies'
+      : '/';
+    for (const recipient of mentionedUsernames) {
+      sendMentionNotification({ recipient, actor: author, comment, text, link: commentLink });
+    }
   } catch (err) {
     console.error('postComment error:', err);
     res.status(400).json({ postCommentError: 'Failed to post comment' });
@@ -151,7 +164,71 @@ const sendProfileCommentNotification = async ({ recipient, actor, comment, text 
   } catch (err) {
     console.error('[sendProfileCommentNotification] error:', err);
   }
-}
+};
+
+const extractMentions = text => {
+  const matches = text.match(/@(\w+)/g) || [];
+  return [...new Set(matches.map(mention => mention.slice(1)))];
+};
+
+const sendMentionNotification = async ({ recipient, actor, link }) => {
+  try {
+    const user = await User.findOne({ username: recipient.toLowerCase() }).select(
+      'email emailPreferences inAppPreferences'
+    );
+    if (!user) {
+      return;
+    }
+
+    if (!user.inAppPreferences || user.inAppPreferences.mentions !== false) {
+      await Notification.create({
+        recipient,
+        type: 'mention',
+        actor,
+        link,
+      });
+    }
+
+    if (!user.emailPreferences || user.emailPreferences.mentions === false) {
+      return;
+    }
+
+    const baseUrl = process.env.NODE_ENV === 'production'
+      ? 'https://www.yourmoviedatabase.com'
+      : 'http://localhost:3000';
+    const profileUrl = `${baseUrl}${link}`;
+
+    const emailRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: process.env.NODE_ENV === 'production'
+          ? 'YMDB <noreply@yourmoviedatabase.com>'
+          : 'YMDB <onboarding@resend.dev>',
+        to: user.email,
+        subject: `[YMDB] ${actor} mentioned you in a comment`,
+        html: `
+          <p><strong>${actor}</strong> mentioned you in a comment on YMDB.</p>
+          <p><a href="${profileUrl}">View comment →</a></p>
+          <hr style="margin-top: 2em;" />
+          <p style="font-size: 0.8em; color: #999;">
+            <a href="${baseUrl}/settings">Manage email preferences</a>
+          </p>
+        `,
+      }),
+    });
+
+    if (!emailRes.ok) {
+      const errBody = await emailRes.json().catch(() => ({}));
+      console.error('[Resend] mention email failed:', emailRes.status, errBody);
+    }
+  } catch (err) {
+    console.error('[sendMentionNotification] error:', err);
+  }
+};
 
 exports.deleteComment = (req, res) => {
   const { id } = req.params;

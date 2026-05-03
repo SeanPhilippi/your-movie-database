@@ -3,6 +3,19 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+const linkifyMentions = text =>
+  text.split(/(@\w+)/g).map((part, index) => {
+    if (/^@\w+$/.test(part)) {
+      const username = part.slice(1);
+      return (
+        <Link key={index} to={`/profile/${username}`} className='mention-link'>
+          {part}
+        </Link>
+      );
+    }
+    return part;
+  });
+
 const formatCommentDate = (createdAt, postDate) => {
   if (!createdAt) {
     return postDate;
@@ -37,7 +50,7 @@ const Comment = ({
       </Link>{' '}
       wrote on {formatCommentDate(createdAt, post_date)}
     </div>
-    <p className='comment mt-2 mb-0'>{text}</p>
+    <p className='comment mt-2 mb-0'>{linkifyMentions(text)}</p>
     {(author === user.username || (profileOwner && user.username === profileOwner)) ? (
       <div
         className='comment-footer-auth text-right small'

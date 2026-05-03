@@ -4,6 +4,7 @@ export const get = {
   newRegisters: () => axios('api/users/new-registers'),
   currentUser: () => axios('api/users/current'),
   settings: () => axios.get('/api/users/settings'),
+  searchUsers: query => axios.get(`/api/users/search?q=${encodeURIComponent(query)}`),
 };
 
 export const post = {

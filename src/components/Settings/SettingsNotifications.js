@@ -3,13 +3,31 @@ import { connect } from 'react-redux';
 import { fetchUserSettings, saveUserPreferences } from '../../redux/actions';
 
 const DEFAULTS = {
-  emailPreferences:  { profileComments: true,  announcements: true  },
-  inAppPreferences:  { profileComments: true,  announcements: false },
+  emailPreferences: {
+    profileComments: true,
+    mentions: true,
+    announcements: true,
+  },
+  inAppPreferences: {
+    profileComments: true,
+    mentions: true,
+    announcements: false,
+  },
 };
 
 const ROWS = [
-  { label: 'Profile comments',   key: 'profileComments' },
-  { label: 'Site announcements', key: 'announcements'   },
+  {
+    label: 'Profile comments',
+    key: 'profileComments',
+  },
+  {
+    label: 'Mentions',
+    key: 'mentions',
+  },
+  {
+    label: 'Site announcements',
+    key: 'announcements',
+  },
 ];
 
 const SettingsNotifications = ({ userPreferences, fetchUserSettings, saveUserPreferences }) => {

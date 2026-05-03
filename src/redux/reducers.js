@@ -52,9 +52,17 @@ const initialState = {
   notifications: [],
   notificationsLoading: true,
   userPreferences: {
-    emailPreferences:    { profileComments: true, announcements: true  },
-    inAppPreferences:    { profileComments: true, announcements: false },
-    hideVisitCount:      false,
+    emailPreferences: {
+      profileComments: true,
+      mentions: true,
+      announcements: true,
+    },
+    inAppPreferences: {
+      profileComments: true,
+      mentions: true,
+      announcements: false,
+    },
+    hideVisitCount: false,
     hideFromMostVisited: false,
   },
 };

@@ -13,7 +13,13 @@ const {
   getSettings,
   updatePreferences,
   unsubscribe,
+  searchUsers,
 } = usersController;
+
+// @route   GET api/users/search
+// @desc    Search users by username prefix for @mentions
+// @access  Public
+router.get('/search', searchUsers);
 
 // @route   POST api/users/register
 // @desc    Register user
