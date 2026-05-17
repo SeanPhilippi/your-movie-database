@@ -312,6 +312,15 @@ export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
   } = getState();
   dispatch(setListDataLoading(true));
   api.list.get.userList(username).then(({ data }) => {
+    // ignore stale responses from a profile the user has already navigated away from
+    const currentPath = window.location.pathname;
+    const isStillOnThisProfile =
+      currentPath === `/profile/${username}` ||
+      (username === authUser && currentPath === '/profile');
+    if (!isStillOnThisProfile) {
+      dispatch(setListDataLoading(false));
+      return;
+    }
     if (data) {
       const movieIds = data.items.map(item => item.id);
       dispatch(fetchAffinities(movieIds));

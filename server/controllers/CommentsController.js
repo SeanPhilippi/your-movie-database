@@ -189,7 +189,7 @@ const sendMentionNotification = async ({ recipient, actor, link }) => {
       });
     }
 
-    if (!user.emailPreferences || user.emailPreferences.mentions === false) {
+    if (user.emailPreferences && user.emailPreferences.mentions === false) {
       return;
     }
 
@@ -208,7 +208,7 @@ const sendMentionNotification = async ({ recipient, actor, link }) => {
         from: process.env.NODE_ENV === 'production'
           ? 'YMDB <noreply@yourmoviedatabase.com>'
           : 'YMDB <onboarding@resend.dev>',
-        to: user.email,
+        to: process.env.NODE_ENV === 'production' ? user.email : 'sean.philippi@protonmail.com',
         subject: `[YMDB] ${actor} mentioned you in a comment`,
         html: `
           <p><strong>${actor}</strong> mentioned you in a comment on YMDB.</p>

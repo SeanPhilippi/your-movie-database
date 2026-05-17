@@ -251,7 +251,7 @@ exports.searchUsers = async (req, res) => {
   }
   try {
     const users = await User.find({
-      username: { $regex: new RegExp(q, 'i') },
+      username: { $regex: new RegExp(query, 'i') },
     }).select('username').limit(10);
     res.json(users.map(user => ({ id: user.username, display: user.username })));
   } catch (err) {
