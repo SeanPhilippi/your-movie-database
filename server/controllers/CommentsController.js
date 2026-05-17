@@ -2,6 +2,7 @@ const Comment = require('../models/CommentModel');
 const User = require('../models/UserModel');
 const Notification = require('../models/NotificationModel');
 const { createUnsubscribeToken } = require('./utils/unsubscribeToken');
+const { sendAdminEmail } = require('./utils/sendAdminEmail');
 
 exports.getComments = (req, res) => {
   Comment.find({ username: req.params.username, disabled: undefined })
@@ -73,6 +74,18 @@ exports.postComment = async (req, res) => {
   try {
     const comment = await newComment.save();
     res.status(200).json(comment);
+
+    const location = username
+      ? `${author}'s profile (/profile/${username})`
+      : top_movies_list
+      ? 'Top Movies list'
+      : `movie page (id: ${movie_id})`;
+    const snippet = text.length > 200 ? text.slice(0, 200) + '…' : text;
+    sendAdminEmail({
+      subject: `[YMDB] New comment by ${author}`,
+      html: `<p><strong>${author}</strong> posted a comment on ${location}:</p>
+             <blockquote style="border-left:3px solid #EB5018;padding-left:1em;color:#555;">${snippet}</blockquote>`,
+    });
 
     // Only notify for profile comments, and never notify when commenting on own profile
     if (username && author && author !== username) {

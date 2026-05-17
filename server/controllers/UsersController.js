@@ -8,6 +8,7 @@ const keys = require('../config/keys');
 const validateRegisterInput = require('./validation/validateRegisterInput');
 const formatDate = require('../../src/utils/helpers/formatDate');
 const { verifyUnsubscribeToken } = require('./utils/unsubscribeToken');
+const { sendAdminEmail } = require('./utils/sendAdminEmail');
 
 exports.registerUser = async (req, res) => {
   // takes newUser object created on front-end and runs through validating function
@@ -53,6 +54,13 @@ exports.registerUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     newUser.password = await bcrypt.hash(newUser.password, salt);
     await newUser.save();
+
+    sendAdminEmail({
+      subject: `[YMDB] New registration: ${newUser.username}`,
+      html: `<p><strong>${newUser.username}</strong> just registered.</p>
+             <p>Email: ${newUser.email}</p>
+             <p>Location: ${newUser.location}</p>`,
+    });
 
     return res.status(200).json({ message: `New user ${newUser.username} successfully saved` });
   } catch (err) {
