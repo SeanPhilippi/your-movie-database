@@ -37,15 +37,18 @@ class Comments extends PureComponent {
     }
   };
 
-  handleFieldChange = (event, newValue, newPlainTextValue) => {
-    this.setState({ commentText: newValue, plainText: newPlainTextValue });
+  handleFieldChange = (event, newValue) => {
+    const plainText = newValue.replace(/@\[([^\]]+)\]\([^)]+\)/g, '$1');
+    this.setState({ commentText: newValue, plainText });
   };
 
   fetchUsers = (query, callback) => {
     if (!query) {
       return;
     }
-    api.users.get.searchUsers(query).then(({ data: results }) => callback(results));
+    api.users.get.searchUsers(query).then(({ data: results }) =>
+      callback(results.map(r => ({ ...r, display: '@' + r.display })))
+    );
   };
 
   handleEmojiSelect = emoji => {
@@ -55,7 +58,7 @@ class Comments extends PureComponent {
     const end = textarea.selectionEnd;
     const updated = commentText.slice(0, start) + emoji.native + commentText.slice(end);
     // strip react-mentions markup to keep plainText in sync (used for submission)
-    const updatedPlain = updated.replace(/@\[([^\]]+)\]\([^)]+\)/g, '@$1');
+    const updatedPlain = updated.replace(/@\[([^\]]+)\]\([^)]+\)/g, '$1');
     this.setState({ commentText: updated, plainText: updatedPlain, pickerOpen: false }, () => {
       textarea.focus();
       const pos = start + emoji.native.length;

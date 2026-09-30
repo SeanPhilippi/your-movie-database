@@ -14,9 +14,10 @@ const app = express();
 const PORT = process.env.PORT || 4300;
 require('dotenv').config();
 
-// Redirect naked domain to www
+// Redirect naked domain to www (except ACME HTTP-01 challenges, which Heroku's
+// certificate manager must be able to reach directly on the apex domain to renew its cert)
 app.use((req, res, next) => {
-  if (req.hostname === 'yourmoviedatabase.com') {
+  if (req.hostname === 'yourmoviedatabase.com' && !req.url.startsWith('/.well-known/acme-challenge/')) {
     return res.redirect(301, `https://www.yourmoviedatabase.com${req.url}`);
   }
   next();

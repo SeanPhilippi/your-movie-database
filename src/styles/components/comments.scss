@@ -9,6 +9,8 @@
     min-height: 82px;
     font-size: 1rem;
     font-family: inherit;
+    background: #fff;
+    border-radius: .25rem;
   }
 
   &__highlighter {
@@ -18,6 +20,10 @@
     font-size: 1rem;
     font-family: inherit;
     line-height: 1.5;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
+    box-sizing: border-box;
   }
 
   &__input {
@@ -29,6 +35,7 @@
     line-height: 1.5;
     outline: none;
     resize: vertical;
+    box-sizing: border-box;
 
     &:focus {
       border-color: #80bdff;
@@ -61,19 +68,19 @@
 }
 
 .mention-highlight {
-  color: $orange;
-  font-weight: 600;
-  position: relative;
-  z-index: 1;
+  background-color: rgba(239, 124, 45, 0.2);
+  border-radius: 3px;
   pointer-events: none;
 }
 
 .mention-link {
   color: $orange;
   font-weight: 600;
+  text-decoration: underline;
 
   &:hover {
     color: $dark-orange;
+    text-decoration: underline;
   }
 }
 
