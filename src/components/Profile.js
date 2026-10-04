@@ -27,15 +27,25 @@ class Profile extends PureComponent {
     }
   }
 
+  isOwnProfile = () => {
+    const {
+      user,
+      history: {
+        location: { pathname },
+      },
+      match: {
+        params: { username },
+      },
+    } = this.props;
+    return pathname === '/profile' || username === user.username;
+  };
+
   fetchData = () => {
     const {
       fetchListData,
       fetchComments,
       recordVisit,
       user,
-      history: {
-        location: { pathname },
-      },
       match: {
         params: {
           username
@@ -43,16 +53,13 @@ class Profile extends PureComponent {
       }
     } = this.props;
 
-    if (pathname === '/profile') {
+    if (this.isOwnProfile()) {
       fetchListData(user.username, true);
       fetchComments(user.username);
     } else {
       fetchListData(username, false);
       fetchComments(username);
-
-      if (username !== user.username) {
-        recordVisit(username);
-      }
+      recordVisit(username);
     }
   };
 
@@ -67,10 +74,9 @@ class Profile extends PureComponent {
       isEditing,
       listDataLoading,
       affinitiesLoading,
-      history: {
-        location: { pathname },
-      },
     } = this.props;
+
+    const ownProfile = this.isOwnProfile();
 
     return (
       <div className='grid-container bg-light2 vw-95 w-md-100 mx-auto'>
@@ -79,19 +85,14 @@ class Profile extends PureComponent {
             <CardWrapper
               icon={['far', 'list-alt']}
               rotate={-5}
-              title={`${
-                pathname === '/profile' ||
-                pathname === `/profile/${user.username}`
-                  ? user.username
-                  : username
-              }'s Top Movies`}
+              title={`${ownProfile ? user.username : username}'s Top Movies`}
               color='tan'
               marginTopVal='0'
             >
               <List
                 user={user}
-                username={username}
-                items={items}
+                username={ownProfile ? user.username : username}
+                items={ownProfile ? user.items : items}
                 isEditing={isEditing}
                 isLoading={listDataLoading}
               />
@@ -106,18 +107,8 @@ class Profile extends PureComponent {
             >
               <Statement
                 user={user}
-                username={
-                  pathname === '/profile' ||
-                  pathname === `/profile/${user.username}`
-                    ? user.username
-                    : username
-                }
-                statement={
-                  pathname === '/profile' ||
-                  pathname === `/profile/${user.username}`
-                    ? user.statement
-                    : statement
-                }
+                username={ownProfile ? user.username : username}
+                statement={ownProfile ? user.statement : statement}
                 isEditing={isEditing}
                 isLoading={listDataLoading}
               />

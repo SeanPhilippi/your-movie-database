@@ -81,11 +81,13 @@ exports.postComment = async (req, res) => {
       ? 'Top Movies list'
       : `movie page (id: ${movie_id})`;
     const snippet = text.length > 200 ? text.slice(0, 200) + '…' : text;
-    sendAdminEmail({
-      subject: `[YMDB] New comment by ${author}`,
-      html: `<p><strong>${author}</strong> posted a comment on ${location}:</p>
-             <blockquote style="border-left:3px solid #EB5018;padding-left:1em;color:#555;">${snippet}</blockquote>`,
-    });
+    if (author.toLowerCase() !== 'kesto') {
+      sendAdminEmail({
+        subject: `[YMDB] New comment by ${author}`,
+        html: `<p><strong>${author}</strong> posted a comment on ${location}:</p>
+               <blockquote style="border-left:3px solid #EB5018;padding-left:1em;color:#555;">${snippet}</blockquote>`,
+      });
+    }
 
     // Only notify for profile comments, and never notify when commenting on own profile
     if (username && author && author !== username) {
