@@ -162,7 +162,7 @@ Profile.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   fetchComments: user => dispatch(fetchComments(user)),
-  fetchListData: username => dispatch(fetchListData(username)),
+  fetchListData: (username, isAuthUser) => dispatch(fetchListData(username, isAuthUser)),
   recordVisit: username => dispatch(recordVisit(username)),
 });
 

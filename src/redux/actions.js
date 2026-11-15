@@ -178,7 +178,7 @@ export const setCurrentUser = user => dispatch => {
   });
 
   if (user.email) {
-    dispatch(fetchListData(user.username));
+    dispatch(fetchListData(user.username, true));
   } else {
     // setCurrentUser is called on logout, user should be set to an empty object
     // if empty object, clear user data
@@ -312,9 +312,12 @@ export const fetchListData = (username, isAuthUser) => (dispatch, getState) => {
   } = getState();
   dispatch(setListDataLoading(true));
   api.list.get.userList(username).then(({ data }) => {
-    // ignore stale responses from a profile the user has already navigated away from
+    // ignore stale responses from a profile the user has already navigated away from;
+    // skip this check for isAuthUser, since that call loads the logged-in user's own
+    // list globally on login/page-load, regardless of which page they're currently on
     const currentPath = window.location.pathname;
     const isStillOnThisProfile =
+      isAuthUser ||
       currentPath === `/profile/${username}` ||
       (username === authUser && currentPath === '/profile');
     if (!isStillOnThisProfile) {
@@ -604,6 +607,15 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
   const {
     user: { username, statement, items },
   } = getState();
+
+  // items is undefined while the user's list is still being fetched after
+  // login/page-load (see SET_CURRENT_USER); bail instead of treating that
+  // as an empty list, which would overwrite the real saved list on save
+  if (!items) {
+    dispatch(setMessageStatus('Still loading your list, please try again in a moment.'));
+    return Promise.resolve(false);
+  }
+
   const listContainsMovie = (list, movie) => {
     return list.map(item => item.title).includes(movie.title);
   };
@@ -647,9 +659,8 @@ export const addToList = (movie, post) => async (dispatch, getState) => {
     };
     api.list.put
       .saveList(username, listObj)
-      .then(res => {
-        const successMessage = res.data;
-        dispatch(setMessageStatus(successMessage));
+      .then(() => {
+        dispatch(setMessageStatus('Movie successfully added!'));
       })
       .catch(console.log);
     dispatch(fetchMovieStats(movieObj, true));

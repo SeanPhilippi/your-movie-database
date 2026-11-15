@@ -10,33 +10,22 @@
   position: fixed;
   z-index: 1;
   left: 50%;
-  top: 10px;
+  top: 0px;
   font-size: 1.2rem;
   font-weight: 700;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition:
+    transform .15s cubic-bezier(.4, 0, 1, 1),
+    opacity .15s cubic-bezier(.4, 0, 1, 1),
+    visibility 0s linear .15s;
 }
 
 .messagebar-open {
   visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2s;
-  animation: fadein 0.5s, fadeout 0.5s 2s;
-}
-
-@-webkit-keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 10px; opacity: 1;}
-}
-
-@keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 10px; opacity: 1;}
-}
-
-@-webkit-keyframes fadeout {
-  from {top: 10px; opacity: 1;}
-  to {top: 0; opacity: 0;}
-}
-
-@keyframes fadeout {
-  from {top: 10px; opacity: 1;}
-  to {top: 0; opacity: 0;}
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    transform .25s cubic-bezier(0, 0, .2, 1),
+    opacity .25s cubic-bezier(0, 0, .2, 1);
 }

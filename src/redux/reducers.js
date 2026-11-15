@@ -224,7 +224,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         user: {
           ...state.user,
-          items: [payload, ...state.user.items],
+          items: [payload, ...(state.user.items || [])],
         },
       };
     case TYPES.REORDER_LIST:

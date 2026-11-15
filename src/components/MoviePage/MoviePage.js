@@ -18,18 +18,24 @@ import {
 
 class MoviePage extends PureComponent {
   componentDidMount() {
-    const {
-      fetchMovieComments,
-      fetchMovie,
-      fetchMovieStats,
-      location: {
-        state: { movie },
-      },
-    } = this.props;
+    const { movie } = this.props.location.state;
+    this.fetchData(movie);
+  }
+
+  componentDidUpdate(prevProps) {
+    const movie = this.props.location.state && this.props.location.state.movie;
+    const prevMovie = prevProps.location.state && prevProps.location.state.movie;
+    if (movie && (!prevMovie || prevMovie.id !== movie.id)) {
+      this.fetchData(movie);
+    }
+  }
+
+  fetchData = movie => {
+    const { fetchMovieComments, fetchMovie, fetchMovieStats } = this.props;
     fetchMovie(movie.id);
     fetchMovieComments(movie.id);
     fetchMovieStats(movie, false);
-  }
+  };
 
   handleAdd = (movie, post) => {
     const { isAuthenticated, addToList, history } = this.props;
