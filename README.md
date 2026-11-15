@@ -6,7 +6,7 @@ This site aims to be a minimalist competitor to sites like Mubi and Letterboxd w
 
 ## Build Tools
 
-YMDb is a full stack website built with React and Redux on the front-end, MongoDb and Express for the back-end.  Authentication is done using Bcrypt, JSON web tokens, and Passport.js.  All passwords are hashed before being saved to the database, and user sessions last 3 hours.
+YMDb is a full stack website built with React and Redux on the front-end, MongoDb and Express for the back-end.  Authentication is done using Bcrypt, JSON web tokens, and Passport.js.  All passwords are hashed before being saved to the database, and user sessions last 4 weeks.
 
 ## Project Links
 
@@ -23,6 +23,18 @@ Front-end: ```npm start```
 Server: ```npm run server```
 
 Concurrently: ```npm run both```
+
+## Recent Updates
+
+* **@ Mentions** - Comments support tagging other users with @username (autocomplete dropdown, with the mention rendering as a clickable link to their profile).
+* **Notifications** - Users get notified, both in-app and via email, when someone comments on their profile or @mentions them in a comment. Notification preferences are configurable per-category, and every notification email includes a one-click unsubscribe link.
+* **Emoji Picker** - Comments have a searchable emoji picker.
+* **Comment Management** - Comments display a timestamp, and profile/list owners can delete any comment on their own page.
+* **Account Settings** - Notification and account preferences are consolidated under a single `/settings` page.
+* **Users Index** - A browsable, searchable directory of all registered users.
+* **Most Visited** - A page ranking member lists by profile visit count.
+* **Password Reveal** - Hold the eye icon on any password field to reveal it while typing.
+* Assorted stability fixes, including a crash when refreshing a user's profile page and incorrect/duplicate notification emails.
 
 ## Current State
 

@@ -74,14 +74,17 @@ class TopNav extends PureComponent {
         {/****** Logo *****/}
         <Navbar.Brand className='brand'>
           <NavLink style={{ textDecoration: 'none' }} to='/'>
-            <div className='site-title m-0 p-0 ml-4'>YMDB</div>
-            <div className='subtitle m-0 p-0 ml-4'>Your Movie Database</div>
+            <img
+              src='/ymdb-logo.png'
+              alt='YMDB - Your Movie Database'
+              className='site-logo'
+            />
           </NavLink>
         </Navbar.Brand>
         {/****** End Logo *****/}
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='d-flex flex-column ml-auto'>
+          <Nav className='d-flex flex-column ml-auto nav-stack'>
             <div className='ml-auto'>
               {isAuthenticated ? authLinks : guestLinks}
             </div>

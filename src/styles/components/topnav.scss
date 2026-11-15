@@ -6,17 +6,31 @@
 
 .navbar {
   width: 100%;
-  height: 8rem;
-  border: lightgrey solid 1px;
-  box-shadow: 0 2px 2px 0 black;
+  height: 10rem;
+  border-bottom: lightgrey solid 1px;
+  box-shadow: 0 2px 2px -2px black;
   padding: 0;
   justify-content: flex-end;
-  background-color: #EB5018;
+  background: linear-gradient(
+    to bottom,
+    $gold 0, $gold 2.875rem,
+    white 2.875rem, white 2.9375rem,
+    rgba(0, 0, 0, .3) 2.9375rem, rgba(0, 0, 0, .3) 3.0625rem,
+    $dark-orange 3.0625rem, $dark-orange 5.875rem,
+    white 5.875rem, white 5.9375rem,
+    rgba(0, 0, 0, .3) 5.9375rem, rgba(0, 0, 0, .3) 6.0625rem,
+    $light2 6.0625rem, $light2 7.5rem,
+    white 7.5rem, white 7.625rem,
+    rgba(0, 0, 0, .3) 7.625rem, rgba(0, 0, 0, .3) 7.75rem,
+    $light-orange 7.75rem, $light-orange 9rem,
+    white 9rem, white 9.125rem,
+    rgba(0, 0, 0, .3) 9.125rem, rgba(0, 0, 0, .3) 9.25rem,
+    $light2 9.25rem, $light2 10rem
+  );
 }
 
 .login-register-links {
   font-size: .8rem;
-  margin-bottom: .4rem;
   font-weight: 600;
 }
 
@@ -31,8 +45,9 @@
   border: 1px solid lightgrey;
   width: 9rem;
   padding-left: .4rem;
-  height: 4rem;
-  line-height: 5.8rem;
+  height: 3.75rem;
+  align-self: flex-start;
+  line-height: 5.4375rem;
   text-shadow: .1rem .1rem black;
   border-radius: .2rem;
   background-color: $red;
@@ -72,20 +87,17 @@
   box-shadow: none;
 }
 
-.site-title {
-  color: white;
-  display: flex;
-  font-size: 45px;
-  font-weight: 900;
-  // -webkit-text-stroke-width: .1rem;
-  // -webkit-text-stroke-color: $red;
+.nav-stack {
+  margin-top: 1.25rem;
 }
 
-.subtitle {
-  color: white;
-  font-size: 14px;
+.site-logo {
   position: relative;
-  bottom: 10px;
+  height: 13.5rem;
+  width: auto;
+  z-index: 1;
+  margin-left: -3rem;
+  margin-bottom: .5rem;
 }
 
 .nav-links {

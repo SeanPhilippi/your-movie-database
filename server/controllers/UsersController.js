@@ -95,7 +95,7 @@ exports.loginUser = (req, res) => {
           email,
         };
         // Sign token
-        jwt.sign(payload, keys.secret, { expiresIn: 10800 }, (err, token) => {
+        jwt.sign(payload, keys.secret, { expiresIn: '28d' }, (err, token) => {
           res.json({
             success: true,
             token: `Bearer ${token}`,
