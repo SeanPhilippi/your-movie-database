@@ -16,6 +16,8 @@ const initialState = {
     oldIndex: null,
     newIndex: null,
   },
+  deletedMovies: [],
+  addedMovies: [],
   authErrors: {
     email: null,
     username: null,
@@ -226,6 +228,10 @@ export default (state = initialState, { type, payload }) => {
           ...state.user,
           items: [payload, ...(state.user.items || [])],
         },
+        // tracked so a newly added movie's cached stats get recomputed once
+        // the list is actually persisted (see saveUserList); harmless no-op
+        // if it was also recomputed immediately via the "+" icon's own save
+        addedMovies: [...state.addedMovies, payload],
       };
     case TYPES.REORDER_LIST:
       const { oldIndex, newIndex } = payload;
@@ -253,6 +259,27 @@ export default (state = initialState, { type, payload }) => {
             ...state.user.items.filter(movie => movie.id !== payload.movie.id),
           ],
         },
+        // tracked so the removed movie's cached stats can be recomputed
+        // once the list is actually persisted (see SaveDelete.js)
+        deletedMovies: [...state.deletedMovies, payload.movie],
+      };
+    case TYPES.CLEAR_DELETED_MOVIES:
+      return {
+        ...state,
+        deletedMovies: [],
+      };
+    case TYPES.CLEAR_ADDED_MOVIES:
+      return {
+        ...state,
+        addedMovies: [],
+      };
+    case TYPES.RESET_LIST_ORDERING:
+      return {
+        ...state,
+        listOrdering: {
+          oldIndex: null,
+          newIndex: null,
+        },
       };
     case TYPES.DELETE_LIST:
       return {
@@ -260,6 +287,12 @@ export default (state = initialState, { type, payload }) => {
         user: {
           ...state.user,
           items: [],
+        },
+        deletedMovies: [],
+        addedMovies: [],
+        listOrdering: {
+          oldIndex: null,
+          newIndex: null,
         },
       };
     case TYPES.SET_TOP_MOVIES_LIST:

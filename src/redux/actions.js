@@ -31,6 +31,9 @@ export const TYPES = {
   REORDER_LIST: 'REORDER_LIST',
   DELETE_MOVIE: 'DELETE_MOVIE',
   DELETE_LIST: 'DELETE_LIST',
+  CLEAR_DELETED_MOVIES: 'CLEAR_DELETED_MOVIES',
+  CLEAR_ADDED_MOVIES: 'CLEAR_ADDED_MOVIES',
+  RESET_LIST_ORDERING: 'RESET_LIST_ORDERING',
   CLEAR_ERRORS: 'CLEAR_ERRORS',
   SET_RESET_PASSWORD_SUCCESS: 'SET_RESET_PASSWORD_SUCCESS',
   SET_TOP_MOVIES_LOADING: 'SET_TOP_MOVIES_LOADING',
@@ -687,11 +690,65 @@ export const deleteMovie = movie => dispatch => {
   });
 };
 
-export const deleteList = movie => dispatch => {
+export const clearDeletedMovies = () => ({
+  type: TYPES.CLEAR_DELETED_MOVIES,
+});
+
+export const deleteList = movies => dispatch => {
   dispatch({
     type: TYPES.DELETE_LIST,
   });
-  dispatch(fetchMovieStats(movie, true));
+  // recompute cached stats for every movie that was in the list, now that
+  // this user's vote for each of them is gone
+  if (movies && movies.length) {
+    dispatch(fetchMovieStats(movies, true));
+  }
+};
+
+export const clearAddedMovies = () => ({
+  type: TYPES.CLEAR_ADDED_MOVIES,
+});
+
+export const resetListOrdering = () => ({
+  type: TYPES.RESET_LIST_ORDERING,
+});
+
+// persists the current list edit (reorder/add/delete) and recomputes cached
+// stats for every movie affected since the last save
+export const saveUserList = () => async (dispatch, getState) => {
+  const {
+    user: { username, statement, items },
+    listOrdering: { oldIndex, newIndex },
+    deletedMovies,
+    addedMovies,
+  } = getState();
+
+  try {
+    await api.list.put.saveList(username, { username, items, statement });
+    dispatch(setMessageStatus('Profile Updated'));
+    dispatch(setEditing(false));
+
+    // only recompute the reordered range if a reorder actually happened
+    // this session; otherwise stale indices from an earlier session would
+    // recompute an unrelated movie
+    if (oldIndex !== null && newIndex !== null) {
+      const startIdx = Math.min(oldIndex, newIndex);
+      const endIdx = Math.max(oldIndex, newIndex) + 1;
+      dispatch(fetchMovieStats(items.slice(startIdx, endIdx), true));
+    }
+    if (addedMovies.length) {
+      dispatch(fetchMovieStats(addedMovies, true));
+      dispatch(clearAddedMovies());
+    }
+    if (deletedMovies.length) {
+      dispatch(fetchMovieStats(deletedMovies, true));
+      dispatch(clearDeletedMovies());
+    }
+    dispatch(resetListOrdering());
+  } catch (err) {
+    dispatch(setMessageStatus('There was an error saving your profile'));
+    console.error(err);
+  }
 };
 
 // updates a movie's stats, which if successful, requires another fetch and
