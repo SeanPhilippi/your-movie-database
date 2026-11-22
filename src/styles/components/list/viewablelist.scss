@@ -16,6 +16,11 @@
   color: black;
 }
 
+.pages-ellipsis {
+  color: $red;
+  font-weight: 900;
+}
+
 .viewable-item {
   line-height: 2rem;
 }
@@ -50,8 +55,9 @@
   width: 2rem;
 }
 
-.active-page {
+.pages-current {
   color: black;
+  font-weight: 900;
 }
 
 .points {

@@ -29,6 +29,8 @@ class ViewableList extends PureComponent {
 
   handleMoviesPerPage = e => {
     this.props.setMoviesPerPage(Number(e.target.value));
+    // old page might not exist anymore with the new page size, so just reset to page 1
+    this.props.setCurrentPage(1);
     this.props.setCurrentTopMovies();
   };
 
