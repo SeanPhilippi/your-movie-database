@@ -13,9 +13,10 @@ const CardWrapper = ({
   rotate,
   marginTopVal,
   marginTopValMobile,
+  fill,
 }) => (
   <div
-    className={`card-wrapper mb-3 shadow bg-${color} mt-sm-${marginTopVal || 0} mt-${marginTopValMobile}`}
+    className={`card-wrapper mb-3 shadow bg-${color} mt-sm-${marginTopVal || 0} mt-${marginTopValMobile}${fill ? ' card-wrapper-fill' : ''}`}
   >
     <div className='wrapper-header d-flex align-items-center'>
       {!(title === 'spotlight on a user') ? (
@@ -35,7 +36,7 @@ const CardWrapper = ({
         <div>{title}</div>
       )}
     </div>
-    <div className='wrapper-body w-100'>{children}</div>
+    <div className={`wrapper-body w-100${fill ? ' wrapper-body-fill' : ''}`}>{children}</div>
   </div>
 );
 
@@ -47,6 +48,7 @@ CardWrapper.propTypes = {
   rotate: PropTypes.number,
   marginTopVal: PropTypes.string,
   link: PropTypes.string,
+  fill: PropTypes.bool,
 };
 
 export default CardWrapper;

@@ -97,9 +97,9 @@ class MoviePage extends PureComponent {
             </div>
           </div>
           {/* Right Column */}
-          <div className='right-col w-100'>
+          <div className='right-col'>
             <div className='m-4'>
-              <CardWrapper icon='comments' title='comments' color='white'>
+              <CardWrapper icon='comments' title='comments' color='white' fill>
                 <Comments
                   comments={comments}
                 />

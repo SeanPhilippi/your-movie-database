@@ -123,12 +123,13 @@ class Profile extends PureComponent {
             </CardWrapper>
           </div>
         </div>
-        <div className='m-4'>
+        <div className='m-4 comments-column'>
           <CardWrapper
             icon='comments'
             title='comments'
             color='white'
             marginTopVal='0'
+            fill
           >
             <Comments
               comments={comments}

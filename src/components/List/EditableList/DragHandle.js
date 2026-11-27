@@ -7,7 +7,7 @@ const DragHandle = sortableHandle(({ sortIndex }) => {
   return (
     <div
       className='grip d-flex align-items-center justify-content-between mr-2'
-      style={{ width: '3.1rem' }}
+      style={{ width: '3.1rem', flexShrink: 0 }}
     >
       <img
         className='ml-2'

@@ -13,7 +13,6 @@ const ViewableItem = ({
   movie,
   idx,
   handleAdd,
-  maxWidth,
 }) => (
   <div
     key={id}
@@ -34,8 +33,7 @@ const ViewableItem = ({
       <div
         title={`${title} (${director}, ${year})`}
         alt={`${title} (${director}, ${year})`}
-        className='d-inline-block text-truncate'
-        style={{ maxWidth }}
+        className='viewable-item-title text-truncate'
       >
         <Link
           to={{
@@ -52,7 +50,7 @@ const ViewableItem = ({
       className={`align-self-end d-flex ${
         points ? 'justify-content-between' : 'justify-content-end'
       } mr-2`}
-      style={{ width: points ? '6rem' : '2.6rem' }}
+      style={{ width: points ? '6rem' : '2.6rem', flexShrink: 0 }}
     >
       {points && <div className='points'>{points} pts</div>}
       <a
@@ -60,7 +58,7 @@ const ViewableItem = ({
         target='_blank'
         rel='noopener noreferrer'
       >
-        <img src={imdbLogo} alt='imdb-link' />
+        <img className='imdb-icon' src={imdbLogo} alt='imdb-link' />
       </a>
     </div>
   </div>

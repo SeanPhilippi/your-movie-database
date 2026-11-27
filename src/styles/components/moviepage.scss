@@ -3,6 +3,16 @@
   display: grid;
   grid-template-columns: 4fr 3fr;
   margin-left: 0;
+  position: relative;
+}
+
+// left: 57.1429% matches the 3fr column's start out of 4fr+3fr
+.inner-container-movie > .right-col {
+  position: absolute;
+  top: 0;
+  left: 57.1429%;
+  right: 0;
+  bottom: 0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -11,6 +21,11 @@
     width: 95%;
     flex-wrap: wrap;
     margin-left: 0;
+  }
+
+  .inner-container-movie > .right-col {
+    position: static;
+    width: 100%;
   }
 }
 

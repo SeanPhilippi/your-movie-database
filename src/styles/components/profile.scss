@@ -1,8 +1,17 @@
 .grid-container {
   margin-top: .5rem;
   display: grid;
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 50% 50%;
   flex: 1;
+  position: relative;
+}
+
+.comments-column {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 0;
+  bottom: 0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -10,6 +19,10 @@
     margin-top: .5rem;
     display: grid;
     grid-template-columns: 100%;
+  }
+
+  .comments-column {
+    position: static;
   }
 }
 
