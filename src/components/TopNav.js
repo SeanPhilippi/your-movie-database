@@ -8,6 +8,7 @@ import { Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { logoutUser } from '../redux/actions';
 import NotificationBell from './Notifications/NotificationBell';
+import ymdbLogo from '../images/ymdb-logo.png';
 
 class TopNav extends PureComponent {
   handleLogout = e => {
@@ -75,7 +76,7 @@ class TopNav extends PureComponent {
         <Navbar.Brand className='brand'>
           <NavLink style={{ textDecoration: 'none' }} to='/'>
             <img
-              src='/ymdb-logo.png'
+              src={ymdbLogo}
               alt='YMDB - Your Movie Database'
               className='site-logo'
             />

@@ -156,7 +156,7 @@ class Comments extends PureComponent {
       : null;
 
     return (
-      <div>
+      <div className='comment-list'>
         {comments.map(comment => (
           <Comment
             key={comment._id}
@@ -176,7 +176,7 @@ class Comments extends PureComponent {
     if (commentsLoading) return <CommentsSkeleton />;
 
     return (
-      <div className='d-flex flex-column p-2'>
+      <div className='d-flex flex-column p-2 comments-root'>
         {isAuthenticated ? (
           <>
             <div className='pb-1 font-weight-bold text-left'>

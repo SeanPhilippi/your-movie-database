@@ -14,8 +14,7 @@ const SortableItem = sortableElement(({ movie, sortIndex, deleteMovie }) => {
           <DragHandle sortIndex={sortIndex} />
           <div
             title={`${title} (${director}, ${year})`}
-            className='d-inline-block text-truncate'
-            style={{ maxWidth: '510px' }}
+            className='viewable-item-title text-truncate'
           >
             <Link
               className='movie-link'

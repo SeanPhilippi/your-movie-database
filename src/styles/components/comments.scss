@@ -2,6 +2,19 @@
   width: 85%;
 }
 
+.comments-root {
+  flex: 1;
+  min-height: 0;
+}
+
+.comment-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
 .mentions-input {
   width: 100%;
 

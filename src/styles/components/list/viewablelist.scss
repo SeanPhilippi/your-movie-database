@@ -55,6 +55,11 @@
   width: 2rem;
 }
 
+.viewable-item-title {
+  flex: 1;
+  min-width: 0;
+}
+
 .pages-current {
   color: black;
   font-weight: 900;

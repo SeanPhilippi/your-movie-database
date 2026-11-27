@@ -37,3 +37,18 @@
   color: black;
   padding: 1.4rem 1.4rem 1rem 1.4rem;
 }
+
+// caps height instead of forcing it, so content can still shrink-to-fit
+.card-wrapper-fill {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.wrapper-body-fill {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  max-height: 100%;
+}

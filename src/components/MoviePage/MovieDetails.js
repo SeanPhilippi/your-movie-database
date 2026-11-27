@@ -37,7 +37,7 @@ const MovieDetails = withLoading(
               target='_blank'
               rel='noopener noreferrer'
             >
-              <img src={imdbLogo} alt='imdb-link' />
+              <img className='imdb-icon' src={imdbLogo} alt='imdb-link' />
             </a>
           </div>
           <div className='d-flex justify-content-between'>

@@ -25,16 +25,17 @@ class TopMoviesList extends PureComponent {
               color='tan'
               marginTopVal='0'
             >
-              <ViewableList itemsPerPage={25} />
+              <ViewableList itemsPerPage={30} />
             </CardWrapper>
           </div>
         </div>
-        <div className='m-4'>
+        <div className='m-4 comments-column'>
           <CardWrapper
             icon='comments'
             title='comments'
             color='white'
             marginTopVal='0'
+            fill
           >
             <Comments
               comments={comments}

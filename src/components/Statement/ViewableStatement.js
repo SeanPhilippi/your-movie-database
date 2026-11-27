@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 const ViewableStatement = ({ username, statement }) => (
   <div>
     <p className='font-weight-bold'>{username}:</p>
-    <p className='textarea'>{statement}</p>
+    <div className='statement-box'>
+      <p className='textarea'>{statement}</p>
+    </div>
   </div>
 );
 
